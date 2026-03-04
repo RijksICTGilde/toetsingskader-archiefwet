@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="normen-overzicht">
+  <h1>{{ .Title }}</h1>
+
+  {{ .Content }}
+
+  <div class="norm-cards">
+    {{ range .Pages.ByWeight }}
+    <a href="{{ .RelPermalink }}" class="norm-card">
+      <div class="norm-card__header">
+        <span class="norm-card__id">Norm {{ .Params.norm_id }}</span>
+        <h2 class="norm-card__title">{{ .Params.norm_titel }}</h2>
+      </div>
+      {{ with .Params.kern }}
+      <p class="norm-card__kern">{{ . }}</p>
+      {{ end }}
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
