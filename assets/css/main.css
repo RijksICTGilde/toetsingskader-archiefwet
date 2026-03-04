@@ -1,295 +1,146 @@
-/* Import MOx design system styles */
-@import "mox/style.css";
-
-/* Custom styles for Toetsingskader Archiefwet */
-
-body {
-  font-family: var(--mox-font-family, "RO Sans", sans-serif);
-  line-height: 1.6;
-  color: var(--mox-color-text, #333);
-  margin: 0;
+/* Font-pad fix: overschrijf de foute paden uit MOx style.css */
+@font-face {
+  font-family: "RijksSansVF";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("../fonts/RijksSansVF-Regular.ttf") format("truetype");
 }
 
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 1rem;
+@font-face {
+  font-family: "RijksSansVF";
+  font-style: italic;
+  font-weight: 100 900;
+  src: url("../fonts/RijksSansVF-Italic.ttf") format("truetype");
 }
 
-/* Header */
-.site-header {
-  background-color: var(--mox-color-primary, #154273);
-  color: #fff;
-  padding: 1rem 0;
-}
-
-.site-header a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.site-header__title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0;
-}
-
-/* Navigation */
-.site-nav {
-  background-color: var(--mox-color-secondary, #01689b);
-}
-
-.site-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0;
-}
-
-.site-nav li a {
+/* Layout overrides: geen sidebar grid, geen decoratief blokje */
+main {
   display: block;
-  padding: 0.75rem 1rem;
-  color: #fff;
-  text-decoration: none;
+  padding-inline: var(--mox-space-padding-md);
 }
 
-.site-nav li a:hover,
-.site-nav li a:focus {
-  background-color: rgba(255, 255, 255, 0.15);
+main::after {
+  display: none;
 }
 
-/* Main content */
-.site-main {
-  padding: 2rem 0;
-  min-height: 60vh;
+main > article,
+main > div {
+  margin-inline: auto;
+  max-inline-size: var(--mox-page-max-inline-size);
+  margin-block-end: var(--mox-space-margin-lg);
+  padding-inline: var(--mox-space-padding-md);
 }
 
-/* Footer */
-.site-footer {
-  background-color: var(--mox-color-primary, #154273);
-  color: #fff;
-  padding: 2rem 0;
-  margin-top: 3rem;
-}
+/* Toetsingskader-specifieke styling */
 
-.site-footer a {
-  color: #fff;
-}
-
-.site-footer ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 1.5rem;
-}
-
-/* Norm page specifics */
-.norm-meta {
-  background-color: #f3f3f3;
-  border-left: 4px solid var(--mox-color-primary, #154273);
-  padding: 1rem 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.norm-meta__id {
-  font-size: 0.875rem;
-  color: #666;
-  margin-bottom: 0.25rem;
-}
-
+/* Norm page: kern */
 .norm-kern {
-  background-color: #e8f0f7;
-  border-left: 4px solid var(--mox-color-primary, #154273);
-  padding: 1rem 1.5rem;
-  margin: 1.5rem 0;
-  border-radius: 0 4px 4px 0;
+  background-color: var(--mox-color-feedback-info-subtle, #e8f0f7);
+  border-inline-start: 4px solid var(--mox-color-accent-default, #154273);
+  padding: var(--mox-space-padding-md) var(--mox-space-padding-lg);
+  margin-block: var(--mox-space-margin-sm);
+  border-radius: 0 var(--mox-border-radius-md) var(--mox-border-radius-md) 0;
 }
 
 .norm-kern h2 {
-  font-size: 1.1rem;
-  margin-top: 0;
+  margin-block-start: 0;
 }
 
+/* Norm page: toelichting */
 .norm-toelichting {
-  margin: 1.5rem 0;
-  padding: 1rem 1.5rem;
-  background-color: #f9f9f9;
-  border-radius: 4px;
+  margin-block: var(--mox-space-margin-sm);
+  padding: var(--mox-space-padding-md) var(--mox-space-padding-lg);
+  background-color: var(--mox-color-background-subtle, #f9f9f9);
+  border-radius: var(--mox-border-radius-md);
 }
 
 .norm-toelichting h2 {
-  font-size: 1.1rem;
-  margin-top: 0;
+  margin-block-start: 0;
 }
 
+/* Norm page: synoniemen */
 .norm-synoniemen {
-  margin: 1.5rem 0;
-  color: #555;
-}
-
-.norm-synoniemen h2 {
-  font-size: 1.1rem;
+  margin-block: var(--mox-space-margin-sm);
 }
 
 .norm-synoniemen p {
   font-style: italic;
 }
 
-/* Normuitleg */
+/* Norm page: normuitleg */
 .norm-uitleg {
-  margin: 2rem 0;
+  margin-block: var(--mox-space-margin-md);
 }
 
 .norm-uitleg > h2 {
-  font-size: 1.25rem;
-  border-bottom: 2px solid var(--mox-color-primary, #154273);
-  padding-bottom: 0.5rem;
+  border-block-end: 2px solid var(--mox-color-accent-default, #154273);
+  padding-block-end: var(--mox-space-padding-xs);
 }
 
 .norm-uitleg__item {
-  margin: 1.5rem 0;
-  padding: 1rem 1.5rem;
-  background-color: #fafafa;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  margin-block: var(--mox-space-margin-sm);
+  padding: var(--mox-space-padding-md) var(--mox-space-padding-lg);
+  background-color: var(--mox-color-background-subtle, #fafafa);
+  border: var(--mox-border-default);
+  border-radius: var(--mox-border-radius-md);
 }
 
 .norm-uitleg__item h3 {
-  font-size: 1.1rem;
-  margin-top: 0;
-  color: var(--mox-color-primary, #154273);
+  margin-block-start: 0;
+  color: var(--mox-color-accent-default, #154273);
 }
 
-.norm-voorschrift {
-  margin: 1rem 0;
-}
-
-.norm-voorschrift h4 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-
+.norm-voorschrift,
 .norm-criterium,
-.norm-indicator {
-  margin: 1rem 0;
-}
-
-.norm-criterium h4,
-.norm-indicator h4 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-
-.norm-criterium ul,
-.norm-indicator ul {
-  padding-left: 1.25rem;
-  margin-top: 0.25rem;
-}
-
-.norm-criterium li,
-.norm-indicator li {
-  margin-bottom: 0.35rem;
-}
-
-.norm-reikwijdte {
-  margin: 1rem 0;
-}
-
-.norm-reikwijdte h4 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-
+.norm-indicator,
+.norm-reikwijdte,
 .norm-gerelateerd {
-  margin: 1rem 0;
-}
-
-.norm-gerelateerd h4 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-
-.norm-gerelateerd ul {
-  padding-left: 1.25rem;
-  margin-top: 0.25rem;
-}
-
-.norm-gerelateerd a {
-  color: var(--mox-color-primary, #154273);
+  margin-block: var(--mox-space-margin-xs);
 }
 
 /* Norm cards (introduction page) */
 .norm-cards {
   display: grid;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: var(--mox-space-margin-xs);
+  margin-block-start: var(--mox-space-margin-md);
 }
 
 .norm-card {
   display: block;
-  padding: 1.25rem 1.5rem;
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-left: 4px solid var(--mox-color-primary, #154273);
-  border-radius: 0 4px 4px 0;
+  padding: var(--mox-space-padding-md) var(--mox-space-padding-lg);
+  background-color: var(--mox-color-background-default, #fff);
+  border: var(--mox-border-default);
+  border-inline-start: 4px solid var(--mox-color-accent-default, #154273);
+  border-radius: 0 var(--mox-border-radius-md) var(--mox-border-radius-md) 0;
   text-decoration: none;
   color: inherit;
   transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .norm-card:hover,
-.norm-card:focus {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-left-color: var(--mox-color-secondary, #01689b);
+.norm-card:focus-visible {
+  box-shadow: var(--mox-box-shadow-default);
 }
 
 .norm-card__header {
   display: flex;
   align-items: baseline;
-  gap: 0.75rem;
+  gap: var(--mox-space-padding-sm);
 }
 
 .norm-card__id {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #666;
+  font-size: var(--mox-text-size-body-sm);
+  font-weight: var(--mox-text-font-weight-bold);
   white-space: nowrap;
 }
 
 .norm-card__title {
-  font-size: 1.1rem;
   margin: 0;
-  color: var(--mox-color-primary, #154273);
+  color: var(--mox-color-interactive-default-text, #154273);
 }
 
 .norm-card__kern {
-  font-size: 0.9rem;
-  color: #555;
-  margin: 0.5rem 0 0;
-}
-
-/* Page list */
-.page-list {
-  list-style: none;
-  padding: 0;
-}
-
-.page-list li {
-  margin-bottom: 0.75rem;
-}
-
-.page-list a {
-  color: var(--mox-color-primary, #154273);
-}
-
-/* 404 */
-.error-page {
-  text-align: center;
-  padding: 4rem 0;
+  font-size: var(--mox-text-size-body-sm);
+  color: var(--mox-color-text-subtle-1);
+  margin: var(--mox-space-padding-xs) 0 0;
 }

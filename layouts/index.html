@@ -1,13 +1,11 @@
-{{ define "main" }}
-<div class="homepage">
-  {{ .Content }}
-  <div class="homepage-sections">
-    <h2>Onderdelen</h2>
-    <ul class="page-list">
-      {{ range site.Menus.main }}
-      <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-      {{ end }}
-    </ul>
-  </div>
-</div>
-{{ end }}
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url={{ "normen/" | relURL }}">
+  <title>Toetsingskader Archiefwet</title>
+</head>
+<body>
+  <p>U wordt doorgestuurd naar het <a href="{{ "normen/" | relURL }}">normenoverzicht</a>.</p>
+</body>
+</html>

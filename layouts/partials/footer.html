@@ -1,12 +1,3 @@
-<footer class="site-footer">
-  <div class="container">
-    <nav aria-label="Footer navigatie">
-      <ul>
-        {{ range site.Menus.footer }}
-        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-        {{ end }}
-      </ul>
-    </nav>
-    <p>&copy; {{ now.Year }} Toetsingskader Archiefwet</p>
-  </div>
+<footer>
+  <p>&copy; {{ now.Year }} {{ site.Title }}</p>
 </footer>
