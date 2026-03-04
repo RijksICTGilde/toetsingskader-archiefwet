@@ -1,0 +1,39 @@
+baseURL: https://minbzk.github.io/toetsingskader-archiefwet/
+title: Toetsingskader Archiefwet
+languageCode: nl
+defaultContentLanguage: nl
+
+enableRobotsTXT: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: false
+    extensions:
+      table: true
+  tableOfContents:
+    startLevel: 2
+    endLevel: 4
+
+menu:
+  main:
+    - name: Normen
+      pageRef: /normen
+      weight: 10
+
+module:
+  mounts:
+    - source: content
+      target: content
+    - source: layouts
+      target: layouts
+    - source: assets
+      target: assets
+    - source: MOx/style
+      target: assets/css/mox
+    - source: MOx/assets/fonts
+      target: static/fonts
+    - source: MOx/assets/icons
+      target: static/icons
+    - source: MOx/assets/favicon
+      target: static/favicon

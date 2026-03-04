@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div class="homepage">
+  {{ .Content }}
+  <div class="homepage-sections">
+    <h2>Onderdelen</h2>
+    <ul class="page-list">
+      {{ range site.Menus.main }}
+      <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
+</div>
+{{ end }}

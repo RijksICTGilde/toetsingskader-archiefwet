@@ -1,0 +1,19 @@
+# Hugo build output
+public/
+resources/
+.hugo_build.lock
+
+# Node.js
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Claude Code
+CLAUDE.md

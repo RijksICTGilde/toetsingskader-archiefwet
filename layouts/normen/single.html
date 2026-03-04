@@ -1,0 +1,90 @@
+{{ define "main" }}
+<article class="norm-page">
+  {{ with .Params.norm_id }}
+  <div class="norm-meta">
+    <p class="norm-meta__id">Norm {{ . }}{{ with $.Params.norm_titel }}: {{ . }}{{ end }}</p>
+  </div>
+  {{ end }}
+
+  <h1>{{ .Title }}</h1>
+
+  {{ with .Params.kern }}
+  <div class="norm-kern">
+    <h2>Kern van de norm</h2>
+    <p>{{ . }}</p>
+  </div>
+  {{ end }}
+
+  {{ with .Params.toelichting }}
+  <div class="norm-toelichting">
+    <h2>Toelichting</h2>
+    <p>{{ . }}</p>
+  </div>
+  {{ end }}
+
+  {{ with .Params.synoniemen }}
+  <div class="norm-synoniemen">
+    <h2>Synoniemen</h2>
+    <p>{{ delimit . ", " }}</p>
+  </div>
+  {{ end }}
+
+  {{ with .Params.normuitleg }}
+  <div class="norm-uitleg">
+    <h2>Normuitleg</h2>
+    {{ range . }}
+    <div class="norm-uitleg__item">
+      {{ with .titel }}
+      <h3>{{ . }}</h3>
+      {{ end }}
+
+      <div class="norm-voorschrift">
+        <h4>Voorschrift</h4>
+        <p>{{ .voorschrift }}</p>
+      </div>
+
+      {{ with .criterium }}
+      <div class="norm-criterium">
+        <h4>Criterium</h4>
+        <ul>
+          {{ range . }}
+          <li>{{ . }}</li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+
+      {{ with .indicator }}
+      <div class="norm-indicator">
+        <h4>Indicator</h4>
+        <ul>
+          {{ range . }}
+          <li>{{ . }}</li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+
+      <div class="norm-reikwijdte">
+        <h4>Reikwijdte</h4>
+        <p>{{ .reikwijdte }}</p>
+      </div>
+
+      {{ with .gerelateerde_onderwerpen }}
+      <div class="norm-gerelateerd">
+        <h4>Gerelateerde onderwerpen</h4>
+        <ul>
+          {{ range . }}
+          <li><a href="{{ .url }}">{{ .titel }}</a></li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{ .Content }}
+</article>
+{{ end }}
