@@ -1,77 +1,64 @@
 # Toetsingskader Archiefwet
 
-Het Toetsingskader Archiefwet biedt een gestructureerd raamwerk voor het toetsen van de naleving van de Archiefwet door overheidsorganisaties. Deze website presenteert de normen, beoordelingsmethodiek en het juridisch kader op een toegankelijke manier.
+Het Toetsingskader Archiefwet biedt een gestructureerd raamwerk voor het toetsen van de naleving van de Archiefwet 2026 door overheidsorganisaties. Deze website presenteert de normen op een toegankelijke manier.
+
+## Architectuur
+
+Dit project gebruikt [hugo-theme-ro](https://github.com/RijksICTGilde/hugo-theme-ro) als Hugo module. De theme levert de Rijksoverheid huisstijl (via MOx design system), basistemplates, navigatie en header/footer. Dit project bevat alleen de content en project-specifieke templates en styling.
 
 ## Lokale ontwikkeling
 
 ### Vereisten
 
 - [Hugo](https://gohugo.io/installation/) (extended edition)
-- [Node.js](https://nodejs.org/) (voor MOx design system)
+- [Go](https://go.dev/dl/) (voor Hugo modules)
 - [Git](https://git-scm.com/)
 
 ### Installatie
 
 ```bash
-# Clone de repository met submodules
-git clone --recurse-submodules https://github.com/MinBZK/toetsingskader-archiefwet.git
+git clone https://github.com/RijksICTGilde/toetsingskader-archiefwet.git
 cd toetsingskader-archiefwet
-
-# Genereer MOx CSS
-cd MOx
-npm ci
-npm run tokens
-cd ..
 
 # Start de ontwikkelserver
 hugo server
 ```
 
+Hugo haalt automatisch de theme module op bij de eerste keer draaien.
+
 De site is beschikbaar op `http://localhost:1313/`.
-
-### Bestaande checkout
-
-Als je de repository al hebt gecloned zonder submodules:
-
-```bash
-git submodule update --init --recursive
-```
 
 ### Pre-commit hooks
 
 Dit project gebruikt [pre-commit](https://pre-commit.com/) voor code-kwaliteitscontroles.
 
 ```bash
-# Installeer pre-commit (eenmalig)
 pip install pre-commit
-
-# Activeer de hooks
 pre-commit install
 ```
 
-### Lokaal testen
+### Handige commando's
 
 ```bash
 # Bouw de site (controleert op fouten)
 hugo --minify
 
-# Of draai de ontwikkelserver met live reload
-hugo server --buildDrafts --buildFuture
+# Valideer normpagina's front matter
+python3 scripts/validate-norms.py
 
-# Open http://localhost:1313/ in je browser
+# Update de theme naar de nieuwste versie
+hugo mod get -u
 ```
-
-Hugo's ontwikkelserver herlaadt automatisch bij wijzigingen in content, layouts of assets.
 
 ## Structuur
 
 | Map | Beschrijving |
 |---|---|
-| `content/` | Markdown content per sectie |
-| `layouts/` | Hugo templates |
-| `assets/` | CSS en andere assets |
-| `MOx/` | MOx design system (submodule) |
-| `.github/` | CI/CD workflows en templates |
+| `content/normen/` | Normpagina's (7 normen + introductiepagina) |
+| `layouts/normen/` | Project-specifieke templates voor normpagina's |
+| `assets/css/` | Project-specifieke CSS |
+| `scripts/` | Validatie- en hulpscripts |
+| `.github/` | CI/CD workflows |
 
 ## Licentie
 
