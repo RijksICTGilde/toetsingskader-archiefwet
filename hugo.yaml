@@ -22,20 +22,5 @@ menu:
       weight: 10
 
 module:
-  mounts:
-    - source: content
-      target: content
-    - source: layouts
-      target: layouts
-    - source: assets
-      target: assets
-    - source: MOx/style
-      target: assets/css/mox
-    - source: MOx/assets/fonts
-      target: static/fonts
-    - source: MOx/assets/icons
-      target: static/icons
-    - source: MOx/assets/favicon
-      target: static/favicon
-    - source: MOx/assets/images
-      target: static/images
+  imports:
+    - path: github.com/RijksICTGilde/hugo-theme-ro

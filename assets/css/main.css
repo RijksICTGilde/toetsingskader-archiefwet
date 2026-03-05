@@ -1,44 +1,40 @@
-/* Font-pad fix: overschrijf de foute paden uit MOx style.css */
-@font-face {
-  font-family: "RijksSansVF";
-  font-style: normal;
-  font-weight: 100 900;
-  src: url("../fonts/RijksSansVF-Regular.ttf") format("truetype");
+/* Content markup: herstel list-styling die MOx reset verwijdert */
+.markup-content ul,
+.markup-content ol {
+  padding-inline-start: 1.5em;
+  margin-block: 0.5em;
 }
 
-@font-face {
-  font-family: "RijksSansVF";
-  font-style: italic;
-  font-weight: 100 900;
-  src: url("../fonts/RijksSansVF-Italic.ttf") format("truetype");
+.markup-content ul {
+  list-style-type: disc;
 }
 
-/* Layout overrides: geen sidebar grid, geen decoratief blokje */
-main {
-  display: block;
-  padding-inline: var(--mox-space-padding-md);
+.markup-content ul ul {
+  list-style-type: circle;
 }
 
-main::after {
-  display: none;
+.markup-content ol {
+  list-style-type: decimal;
 }
 
-main > article,
-main > div {
-  margin-inline: auto;
-  max-inline-size: var(--mox-page-max-inline-size);
-  margin-block-end: var(--mox-space-margin-lg);
-  padding-inline: var(--mox-space-padding-md);
+.markup-content li {
+  display: list-item;
+  margin-block: 0.25em;
+}
+
+.markup-content h2 {
+  margin-block-start: 1.5em;
+  margin-block-end: 0.5em;
 }
 
 /* Toetsingskader-specifieke styling */
 
 /* Norm page: kern */
 .norm-kern {
-  background-color: var(--mox-color-feedback-info-subtle, #e8f0f7);
-  border-inline-start: 4px solid var(--mox-color-accent-default, #154273);
-  padding: var(--mox-space-padding-md) var(--mox-space-padding-lg);
-  margin-block: var(--mox-space-margin-sm);
+  background-color: var(--mox-color-info-subtle, #e8f0f7);
+  border-inline-start: 4px solid var(--mox-color-primary, #154273);
+  padding: var(--mox-space-md) var(--mox-space-lg);
+  margin-block: var(--mox-space-sm);
   border-radius: 0 var(--mox-border-radius-md) var(--mox-border-radius-md) 0;
 }
 
@@ -48,9 +44,9 @@ main > div {
 
 /* Norm page: toelichting */
 .norm-toelichting {
-  margin-block: var(--mox-space-margin-sm);
-  padding: var(--mox-space-padding-md) var(--mox-space-padding-lg);
-  background-color: var(--mox-color-background-subtle, #f9f9f9);
+  margin-block: var(--mox-space-sm);
+  padding: var(--mox-space-md) var(--mox-space-lg);
+  background-color: var(--mox-color-neutral-subtle, #f9f9f9);
   border-radius: var(--mox-border-radius-md);
 }
 
@@ -60,7 +56,7 @@ main > div {
 
 /* Norm page: synoniemen */
 .norm-synoniemen {
-  margin-block: var(--mox-space-margin-sm);
+  margin-block: var(--mox-space-sm);
 }
 
 .norm-synoniemen p {
@@ -69,25 +65,25 @@ main > div {
 
 /* Norm page: normuitleg */
 .norm-uitleg {
-  margin-block: var(--mox-space-margin-md);
+  margin-block: var(--mox-space-md);
 }
 
 .norm-uitleg > h2 {
-  border-block-end: 2px solid var(--mox-color-accent-default, #154273);
-  padding-block-end: var(--mox-space-padding-xs);
+  border-block-end: 2px solid var(--mox-color-primary, #154273);
+  padding-block-end: var(--mox-space-xs);
 }
 
 .norm-uitleg__item {
-  margin-block: var(--mox-space-margin-sm);
-  padding: var(--mox-space-padding-md) var(--mox-space-padding-lg);
-  background-color: var(--mox-color-background-subtle, #fafafa);
-  border: var(--mox-border-default);
+  margin-block: var(--mox-space-sm);
+  padding: var(--mox-space-md) var(--mox-space-lg);
+  background-color: var(--mox-color-neutral-subtle, #fafafa);
+  border: var(--mox-border-width-sm) solid var(--mox-color-cool-grey-200, #ccc);
   border-radius: var(--mox-border-radius-md);
 }
 
 .norm-uitleg__item h3 {
   margin-block-start: 0;
-  color: var(--mox-color-accent-default, #154273);
+  color: var(--mox-color-primary, #154273);
 }
 
 .norm-voorschrift,
@@ -95,22 +91,22 @@ main > div {
 .norm-indicator,
 .norm-reikwijdte,
 .norm-gerelateerd {
-  margin-block: var(--mox-space-margin-xs);
+  margin-block: var(--mox-space-xs);
 }
 
 /* Norm cards (introduction page) */
 .norm-cards {
   display: grid;
-  gap: var(--mox-space-margin-xs);
-  margin-block-start: var(--mox-space-margin-md);
+  gap: var(--mox-space-xs);
+  margin-block-start: var(--mox-space-md);
 }
 
 .norm-card {
   display: block;
-  padding: var(--mox-space-padding-md) var(--mox-space-padding-lg);
-  background-color: var(--mox-color-background-default, #fff);
-  border: var(--mox-border-default);
-  border-inline-start: 4px solid var(--mox-color-accent-default, #154273);
+  padding: var(--mox-space-md) var(--mox-space-lg);
+  background-color: var(--mox-color-wit, #fff);
+  border: var(--mox-border-width-sm) solid var(--mox-color-cool-grey-200, #ccc);
+  border-inline-start: 4px solid var(--mox-color-primary, #154273);
   border-radius: 0 var(--mox-border-radius-md) var(--mox-border-radius-md) 0;
   text-decoration: none;
   color: inherit;
@@ -119,28 +115,28 @@ main > div {
 
 .norm-card:hover,
 .norm-card:focus-visible {
-  box-shadow: var(--mox-box-shadow-default);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .norm-card__header {
   display: flex;
   align-items: baseline;
-  gap: var(--mox-space-padding-sm);
+  gap: var(--mox-space-sm);
 }
 
 .norm-card__id {
-  font-size: var(--mox-text-size-body-sm);
-  font-weight: var(--mox-text-font-weight-bold);
+  font-size: var(--mox-space-sm);
+  font-weight: 700;
   white-space: nowrap;
 }
 
 .norm-card__title {
   margin: 0;
-  color: var(--mox-color-interactive-default-text, #154273);
+  color: var(--mox-color-primary, #154273);
 }
 
 .norm-card__kern {
-  font-size: var(--mox-text-size-body-sm);
-  color: var(--mox-color-text-subtle-1);
-  margin: var(--mox-space-padding-xs) 0 0;
+  font-size: var(--mox-space-sm);
+  color: var(--mox-color-cool-grey-600, #666);
+  margin: var(--mox-space-xs) 0 0;
 }
