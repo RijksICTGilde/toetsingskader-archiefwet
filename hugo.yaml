@@ -15,6 +15,27 @@ markup:
     startLevel: 2
     endLevel: 4
 
+params:
+  breadcrumbs:
+    enable: true
+  search:
+    enable: true
+  footer:
+    variant: dark
+    description: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."
+    service:
+      - name: Contact
+        url: /contact
+      - name: Sitemap
+        url: /sitemap.xml
+    about:
+      - name: Privacy
+        url: /privacy
+      - name: Toegankelijkheid
+        url: /toegankelijkheid
+      - name: Cookies
+        url: /cookies
+
 menu:
   main:
     - name: Normen

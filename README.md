@@ -1,6 +1,6 @@
 # Toetsingskader Archiefwet
 
-Het Toetsingskader Archiefwet biedt een gestructureerd raamwerk voor het toetsen van de naleving van de Archiefwet 2026 door overheidsorganisaties. Deze website presenteert de normen op een toegankelijke manier.
+Het Toetsingskader Archiefwet van de [Inspectie Overheidsinformatie en Erfgoed](https://www.inspectie-oe.nl) biedt een gestructureerd raamwerk voor het toetsen van de naleving van de Archiefwet 2026 door overheidsorganisaties. Deze website presenteert de normen op een toegankelijke manier.
 
 ## Architectuur
 

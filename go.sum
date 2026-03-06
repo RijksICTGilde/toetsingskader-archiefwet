@@ -6,3 +6,7 @@ github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260305075105-00ba14eb30b9 h1:B+D
 github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260305075105-00ba14eb30b9/go.mod h1:hrJIcLHsXrRtsUtnZg0TT64mCd90wkqS/UAFNrRvyR8=
 github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260305075806-892722ec016f h1:GGbjnTnAMYpsveEUG0mXcl+uUHx7V5yhMqp3GQO3CMg=
 github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260305075806-892722ec016f/go.mod h1:hrJIcLHsXrRtsUtnZg0TT64mCd90wkqS/UAFNrRvyR8=
+github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260306103921-0423a7c5f651 h1:H5nHjopfj5yw8Cat6i2cf3VYNgiysQ+65AcMr0rQUP8=
+github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260306103921-0423a7c5f651/go.mod h1:hrJIcLHsXrRtsUtnZg0TT64mCd90wkqS/UAFNrRvyR8=
+github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260306111200-001ff7a3fc5e h1:rTkvcI5Lt49b4iS2ohVMvoPFX5PxMX95zYUH8CwyKWI=
+github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260306111200-001ff7a3fc5e/go.mod h1:hrJIcLHsXrRtsUtnZg0TT64mCd90wkqS/UAFNrRvyR8=
