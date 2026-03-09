@@ -27,12 +27,60 @@
   margin-block-end: 0.5em;
 }
 
+/* Inspectie OE: hemelblauw als accentkleur i.p.v. lintblauw */
+:root {
+  --mox-color-background-inverse: #007bc7;
+  --mox-color-accent-default: #007bc7;
+  --mox-color-interactive-default-background: #007bc7;
+  --mox-color-interactive-default-text: #007bc7;
+  --mox-color-interactive-hover-background: #005e9a;
+  --mox-color-interactive-active-background: #007bc7;
+  --mox-color-interactive-hover-text: #005e9a;
+  --mox-color-logo-background: #007bc7;
+  --mox-color-component-footer-background: #007bc7;
+}
+
+/* Geen sidebar: content volle breedte */
+main > article,
+main > .normen-overzicht {
+  grid-column: 1 / -1;
+}
+
+/* Navigatiebalk */
+.main-nav {
+  color: var(--mox-color-text-inverse);
+}
+
+.footer-payoff {
+  font-family: var(--mox-text-font-family-serif, Georgia, "Times New Roman", serif);
+  font-style: italic;
+  font-size: var(--mox-text-size-title-lg, 1.25rem);
+  line-height: 1.4;
+  max-inline-size: 50ch;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.footer-links {
+  gap: var(--mox-space-padding-lg);
+}
+
+footer nav li::before {
+  content: ">";
+  margin-inline-end: var(--mox-space-padding-xs);
+}
+
+.footer-links > nav:first-child {
+  flex: 1 1 50%;
+}
+
 /* Toetsingskader-specifieke styling */
 
 /* Norm page: kern */
 .norm-kern {
-  background-color: var(--mox-color-info-subtle, #e8f0f7);
-  border-inline-start: 4px solid var(--mox-color-primary, #154273);
+  background-color: var(--mox-color-feedback-info-subtle, #e8f0f7);
+  border-inline-start: 4px solid var(--mox-color-accent-default, #007bc7);
   padding: var(--mox-space-md) var(--mox-space-lg);
   margin-block: var(--mox-space-sm);
   border-radius: 0 var(--mox-border-radius-md) var(--mox-border-radius-md) 0;
@@ -46,7 +94,7 @@
 .norm-toelichting {
   margin-block: var(--mox-space-sm);
   padding: var(--mox-space-md) var(--mox-space-lg);
-  background-color: var(--mox-color-neutral-subtle, #f9f9f9);
+  background-color: var(--mox-color-feedback-neutral-subtle, #f9f9f9);
   border-radius: var(--mox-border-radius-md);
 }
 
@@ -69,21 +117,21 @@
 }
 
 .norm-uitleg > h2 {
-  border-block-end: 2px solid var(--mox-color-primary, #154273);
+  border-block-end: 2px solid var(--mox-color-accent-default, #007bc7);
   padding-block-end: var(--mox-space-xs);
 }
 
 .norm-uitleg__item {
   margin-block: var(--mox-space-sm);
   padding: var(--mox-space-md) var(--mox-space-lg);
-  background-color: var(--mox-color-neutral-subtle, #fafafa);
-  border: var(--mox-border-width-sm) solid var(--mox-color-cool-grey-200, #ccc);
+  background-color: var(--mox-color-feedback-neutral-subtle, #fafafa);
+  border: var(--mox-border-width-xs) solid var(--mox-color-border-subtle, #ccc);
   border-radius: var(--mox-border-radius-md);
 }
 
 .norm-uitleg__item h3 {
   margin-block-start: 0;
-  color: var(--mox-color-primary, #154273);
+  color: var(--mox-color-accent-default, #007bc7);
 }
 
 .norm-voorschrift,
@@ -104,9 +152,9 @@
 .norm-card {
   display: block;
   padding: var(--mox-space-md) var(--mox-space-lg);
-  background-color: var(--mox-color-wit, #fff);
-  border: var(--mox-border-width-sm) solid var(--mox-color-cool-grey-200, #ccc);
-  border-inline-start: 4px solid var(--mox-color-primary, #154273);
+  background-color: var(--mox-color-text-inverse, #fff);
+  border: var(--mox-border-width-xs) solid var(--mox-color-border-subtle, #ccc);
+  border-inline-start: 4px solid var(--mox-color-accent-default, #007bc7);
   border-radius: 0 var(--mox-border-radius-md) var(--mox-border-radius-md) 0;
   text-decoration: none;
   color: inherit;
@@ -125,18 +173,18 @@
 }
 
 .norm-card__id {
-  font-size: var(--mox-space-sm);
+  font-size: var(--mox-space-lg);
   font-weight: 700;
   white-space: nowrap;
 }
 
 .norm-card__title {
   margin: 0;
-  color: var(--mox-color-primary, #154273);
+  color: var(--mox-color-accent-default, #007bc7);
 }
 
 .norm-card__kern {
-  font-size: var(--mox-space-sm);
-  color: var(--mox-color-cool-grey-600, #666);
+  font-size: var(--mox-space-m);
+  color: var(--mox-color-text-subtle-2, #666);
   margin: var(--mox-space-xs) 0 0;
 }

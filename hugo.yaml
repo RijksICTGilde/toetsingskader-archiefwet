@@ -1,5 +1,4 @@
 baseURL: https://minbzk.github.io/toetsingskader-archiefwet/
-title: Toetsingskader Archiefwet
 languageCode: nl
 defaultContentLanguage: nl
 
@@ -16,25 +15,40 @@ markup:
     endLevel: 4
 
 params:
-  breadcrumbs:
-    enable: true
   search:
-    enable: true
+    enable: false
   footer:
-    variant: dark
     description: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."
     service:
       - name: Contact
-        url: /contact
+        url: https://www.inspectie-oe.nl/service/contact
+      - name: RSS
+        url: https://www.inspectie-oe.nl/service/rss
+      - name: Abboneren
+        url: https://www.inspectie-oe.nl/abonneren/abonnementen?context=inschrijven%2Denkele%2Dnieuwsbrief&titel=nieuwsberichten&nieuwsbrief%2Did=9f325d39%2D354b%2D462a%2D8e76%2D187599df19f6
       - name: Sitemap
-        url: /sitemap.xml
+        url: https://www.inspectie-oe.nl/sitemap
+      - name: Help
+        url: https://www.inspectie-oe.nl/service/help
+      - name: Archief
+        url: https://www.inspectie-oe.nl/service/archief
+      - name: Bereikbaarheid
+        url: https://www.inspectie-oe.nl/bereikbaarheid
+      - name: Vacatures
+        url: https://www.inspectie-oe.nl/de-inspectie-overheidsinformatie-en-erfgoed/vacatures
+
+
     about:
+      - name: Copyright
+        url: https://www.inspectie-oe.nl/service/copyright
       - name: Privacy
-        url: /privacy
-      - name: Toegankelijkheid
-        url: /toegankelijkheid
+        url: https://www.inspectie-oe.nl/service/privacy
       - name: Cookies
-        url: /cookies
+        url: https://www.inspectie-oe.nl/service/cookies
+      - name: Toegankelijkheid
+        url: https://www.inspectie-oe.nl/service/toegankelijkheid
+      - name: Kwetsbaarheid melden
+        url: https://www.inspectie-oe.nl/service/kwetsbaarheid-melden
 
 menu:
   main:
