@@ -1,3 +1,15 @@
+/* Disclaimer banner */
+.disclaimer-banner {
+  background-color: var(--rijkshuisstijl-color-donkergeel-500);
+  padding: var(--mox-space-padding-sm) var(--mox-space-padding-md);
+  text-align: center;
+}
+
+.disclaimer-banner p {
+  margin: 0;
+  color: var(--mox-color-text-default);
+}
+
 /* Content markup: herstel list-styling die MOx reset verwijdert */
 .markup-content ul,
 .markup-content ol {
@@ -40,9 +52,24 @@
   --mox-color-component-footer-background: #007bc7;
 }
 
+/* Voetnoten na de norm-cards plaatsen */
+.normen-overzicht {
+  display: flex;
+  flex-direction: column;
+}
+
+.normen-overzicht .footnotes {
+  order: 99;
+}
+
 /* Geen sidebar: content volle breedte */
 main > article,
 main > .normen-overzicht {
+  grid-column: 1 / -1;
+}
+
+/* Hero: volle breedte buiten grid */
+main > .hero {
   grid-column: 1 / -1;
 }
 
@@ -134,12 +161,45 @@ footer nav li::before {
   color: var(--mox-color-accent-default, #007bc7);
 }
 
-.norm-voorschrift,
+.norm-voorschrift {
+  margin-block: var(--mox-space-sm);
+  padding-block-start: var(--mox-space-sm);
+  border-block-start: 1px solid var(--mox-color-border-subtle, #ccc);
+}
+
+.norm-voorschrift:first-child {
+  border-block-start: none;
+  padding-block-start: 0;
+}
+
+.norm-voorschrift > h4 {
+  color: var(--mox-color-accent-default, #007bc7);
+}
+
 .norm-criterium,
-.norm-indicator,
+.norm-indicator {
+  margin-block: var(--mox-space-margin-2xs);
+  padding-inline-start: var(--mox-space-padding-md);
+}
+
 .norm-reikwijdte,
 .norm-gerelateerd {
-  margin-block: var(--mox-space-xs);
+  margin-block: var(--mox-space-sm);
+}
+
+/* Referenties (voetnoten) */
+.referenties {
+  margin-block-start: var(--mox-space-margin-md);
+  padding-block-start: var(--mox-space-padding-md);
+  border-block-start: 1px solid var(--mox-color-border-subtle, #ccc);
+}
+
+.referenties ol {
+  padding-inline-start: 1.5em;
+}
+
+.referenties li {
+  margin-block-end: var(--mox-space-margin-2xs);
 }
 
 /* Norm cards (introduction page) */
@@ -187,4 +247,10 @@ footer nav li::before {
   font-size: var(--mox-space-m);
   color: var(--mox-color-text-subtle-2, #666);
   margin: var(--mox-space-xs) 0 0;
+}
+
+.norm-card sup a {
+  color: var(--mox-color-interactive-default-text, #007bc7);
+  text-decoration: none;
+  font-size: 0.75rem;
 }

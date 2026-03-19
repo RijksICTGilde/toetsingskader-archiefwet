@@ -1,0 +1,21 @@
+{{- /*
+  Render voetnotenlijst op basis van .Params.referenties.
+  Elke referentie heeft: tekst (verplicht), url (optioneel).
+  Gebruik: {{ partial "referenties.html" . }}
+*/ -}}
+{{- with .Params.referenties -}}
+<section class="referenties" aria-label="Referenties">
+  <h2>Referenties</h2>
+  <ol>
+    {{- range $i, $ref := . -}}
+    {{- $num := add $i 1 }}
+    <li id="ref-{{ $num }}">
+      {{- with $ref.url }}<a href="{{ . }}">{{ end -}}
+      {{- $ref.tekst -}}
+      {{- with $ref.url }}</a>{{ end }}
+      <a href="#refback-{{ $num }}" class="ref-back" aria-label="Terug naar tekst">&uarr;</a>
+    </li>
+    {{- end }}
+  </ol>
+</section>
+{{- end -}}

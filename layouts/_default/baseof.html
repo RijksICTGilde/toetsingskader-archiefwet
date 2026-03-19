@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang | default "nl" }}">
+  <head>
+    {{- partial "head.html" . -}}
+  </head>
+  <body>
+    <div class="disclaimer-banner" role="status">
+      <p><strong>Let op:</strong> Dit is versie 0.8 van het toetsingskader. De inhoud is nog in ontwikkeling en kan wijzigen.</p>
+    </div>
+    <a class="skip-link" href="#main-content">Ga direct naar inhoud</a>
+    {{- partial "header.html" . -}}
+    {{- if site.Params.breadcrumbs.enable -}}
+      {{- partial "breadcrumbs.html" . -}}
+    {{- end -}}
+    <main id="main-content">
+      {{- block "main" . }}{{ end -}}
+    </main>
+    {{- partial "footer.html" . -}}
+  </body>
+</html>

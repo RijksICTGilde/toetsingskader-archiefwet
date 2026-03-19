@@ -11,8 +11,6 @@ except ImportError:
     sys.exit(1)
 
 REQUIRED_FIELDS = ["title", "norm_id", "norm_titel", "kern", "toelichting", "synoniemen", "normuitleg"]
-REQUIRED_NORMUITLEG_FIELDS = ["voorschrift", "reikwijdte", "gerelateerde_onderwerpen"]
-OPTIONAL_NORMUITLEG_FIELDS = ["titel", "criterium", "indicator"]
 
 
 def extract_front_matter(filepath):
@@ -42,6 +40,16 @@ def validate_norm(filepath):
         if not isinstance(fm["synoniemen"], list):
             errors.append(f"{filepath.name}: 'synoniemen' moet een lijst zijn")
 
+    if "gerelateerde_onderwerpen" in fm and fm["gerelateerde_onderwerpen"] is not None:
+        if not isinstance(fm["gerelateerde_onderwerpen"], list):
+            errors.append(f"{filepath.name}: 'gerelateerde_onderwerpen' moet een lijst zijn")
+        else:
+            for j, onderwerp in enumerate(fm["gerelateerde_onderwerpen"], 1):
+                if not isinstance(onderwerp, dict):
+                    errors.append(f"{filepath.name}: gerelateerd onderwerp {j}: moet een object zijn")
+                elif "titel" not in onderwerp:
+                    errors.append(f"{filepath.name}: gerelateerd onderwerp {j}: 'titel' is verplicht")
+
     if "normuitleg" in fm and fm["normuitleg"] is not None:
         if not isinstance(fm["normuitleg"], list):
             errors.append(f"{filepath.name}: 'normuitleg' moet een lijst zijn")
@@ -50,21 +58,19 @@ def validate_norm(filepath):
                 if not isinstance(item, dict):
                     errors.append(f"{filepath.name}: normuitleg item {i} moet een object zijn")
                     continue
-                for field in REQUIRED_NORMUITLEG_FIELDS:
-                    if field not in item or item[field] is None:
-                        errors.append(f"{filepath.name}: normuitleg item {i}: verplicht veld '{field}' ontbreekt")
-                if "gerelateerde_onderwerpen" in item and item["gerelateerde_onderwerpen"] is not None:
-                    if not isinstance(item["gerelateerde_onderwerpen"], list):
-                        errors.append(f"{filepath.name}: normuitleg item {i}: 'gerelateerde_onderwerpen' moet een lijst zijn")
-                    else:
-                        for j, onderwerp in enumerate(item["gerelateerde_onderwerpen"], 1):
-                            if not isinstance(onderwerp, dict):
-                                errors.append(f"{filepath.name}: normuitleg item {i}, onderwerp {j}: moet een object zijn")
-                            elif "titel" not in onderwerp or "url" not in onderwerp:
-                                errors.append(f"{filepath.name}: normuitleg item {i}, onderwerp {j}: 'titel' en 'url' zijn verplicht")
-                for field in ["criterium", "indicator"]:
-                    if field in item and item[field] is not None and not isinstance(item[field], list):
-                        errors.append(f"{filepath.name}: normuitleg item {i}: '{field}' moet een lijst zijn")
+                if "voorschriften" not in item or item["voorschriften"] is None:
+                    errors.append(f"{filepath.name}: normuitleg item {i}: verplicht veld 'voorschriften' ontbreekt")
+                elif not isinstance(item["voorschriften"], list):
+                    errors.append(f"{filepath.name}: normuitleg item {i}: 'voorschriften' moet een lijst zijn")
+                else:
+                    for k, vs in enumerate(item["voorschriften"], 1):
+                        if not isinstance(vs, dict):
+                            errors.append(f"{filepath.name}: normuitleg item {i}, voorschrift {k}: moet een object zijn")
+                        elif "tekst" not in vs or vs["tekst"] is None:
+                            errors.append(f"{filepath.name}: normuitleg item {i}, voorschrift {k}: 'tekst' is verplicht")
+                        for field in ["criterium", "indicatoren"]:
+                            if field in vs and vs[field] is not None and not isinstance(vs[field], list):
+                                errors.append(f"{filepath.name}: normuitleg item {i}, voorschrift {k}: '{field}' moet een lijst zijn")
 
     return errors
 

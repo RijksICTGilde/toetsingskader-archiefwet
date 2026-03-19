@@ -1,0 +1,16 @@
+{{- /*
+  Render tekst met {ref:N} → superscript voetnootlinks.
+  N = positie (1-based) in .Params.referenties lijst.
+  Gebruik {ref:N} i.p.v. [ref:N] om conflict met markdown link-syntax te voorkomen.
+
+  Gebruik: {{ partial "reftext.html" (dict "tekst" .tekst "page" $page) }}
+*/ -}}
+{{- $tekst := .tekst | markdownify -}}
+{{- $page := .page -}}
+{{- range $i, $ref := $page.Params.referenties -}}
+  {{- $num := add $i 1 -}}
+  {{- $search := printf "{ref:%d}" $num -}}
+  {{- $replace := printf "<sup><a href=\"#ref-%d\" id=\"refback-%d\" class=\"ref-link\">%d</a></sup>" $num $num $num -}}
+  {{- $tekst = replace $tekst $search ($replace | safeHTML) -}}
+{{- end -}}
+{{- $tekst | safeHTML -}}

@@ -1,21 +1,18 @@
 ---
 title: "Norm 2: Overzicht"
+versie: "0.8"
 weight: 2
 norm_id: "2"
 norm_titel: "Overzicht"
 kern: "De organisatie heeft een overzicht van welke documenten (d.w.z. papieren en digitale stukken, waaronder e-mail, overheidsinformatie in databases, overheidsinformatie op websites of overheidsinformatie op sociale media kanalen) ze onder zich heeft en waar die zich bevindt."
-toelichting: "[PLACEHOLDER: vul hier de toelichting in]"
+wetsverwijzing:
+  tekst: "AW, artikel 4.1, lid 1"
+  url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
+toelichting: "[PLACEHOLDER: vul toelichting in]"
 synoniemen:
   - "[PLACEHOLDER: vul synoniemen in]"
 normuitleg:
   - titel: "[PLACEHOLDER: optioneel subkopje]"
-    voorschrift: "[PLACEHOLDER: vul voorschrift in]"
-    criterium:
-      - "[PLACEHOLDER: vul criterium in]"
-    indicator:
-      - "[PLACEHOLDER: vul indicator in]"
-    reikwijdte: "[PLACEHOLDER: vul reikwijdte in]"
-    gerelateerde_onderwerpen:
-      - titel: "[PLACEHOLDER]"
-        url: "/normen/"
+    voorschriften:
+      - tekst: "[PLACEHOLDER: vul voorschrift in]"
 ---

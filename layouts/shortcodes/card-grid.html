@@ -1,0 +1,8 @@
+{{/* Card grid shortcode — renders pages from a section as a card grid. */}}
+{{- $section := .Get "section" -}}
+{{- if not $section -}}
+  {{- errorf "card-grid shortcode: 'section' parameter is verplicht" -}}
+{{- end -}}
+<section>
+  {{ partial "card-grid.html" (where site.RegularPages "Section" $section).ByWeight }}
+</section>

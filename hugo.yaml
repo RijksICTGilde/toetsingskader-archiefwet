@@ -52,6 +52,9 @@ params:
 
 menu:
   main:
+    - name: Home
+      pageRef: /
+      weight: 1
     - name: Normen
       pageRef: /normen
       weight: 10
