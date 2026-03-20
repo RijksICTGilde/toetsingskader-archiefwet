@@ -1,36 +1,48 @@
 {{ define "main" }}
 {{ $page := . }}
+<nav class="side-nav" aria-label="Normen">
+  <ul>
+    <li><a href="{{ .Parent.RelPermalink }}">← Normen</a></li>
+    {{ range .Parent.Pages.ByWeight }}
+    <li>
+      <a href="{{ .RelPermalink }}"{{ if eq $.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>
+        {{ .Params.norm_id }}. {{ .Params.norm_titel }}
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</nav>
 <article class="norm-page markup-content">
   <h1>{{ .Title }}</h1>
 
   {{ with .Params.kern }}
-  <div class="norm-kern">
+  <div id="kern" class="norm-kern">
     <h2>Kern van de norm</h2>
     {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
   </div>
   {{ end }}
 
   {{ with .Params.toelichting }}
-  <div class="norm-toelichting">
+  <div id="toelichting" class="norm-toelichting">
     <h2>Toelichting</h2>
     {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
   </div>
   {{ end }}
 
   {{ with .Params.synoniemen }}
-  <div class="norm-synoniemen">
+  <div id="synoniemen" class="norm-synoniemen">
     <h2>Synoniemen</h2>
     {{ partial "reftext.html" (dict "tekst" (delimit . ", ") "page" $page) }}
   </div>
   {{ end }}
 
   {{ with .Params.normuitleg }}
-  <div class="norm-uitleg">
+  <div id="normuitleg" class="norm-uitleg">
     <h2>Normuitleg</h2>
     {{ range . }}
     <div class="norm-uitleg__item">
       {{ with .titel }}
-      <h3>{{ . }}</h3>
+      <h3 id="{{ . | urlize }}">{{ . }}</h3>
       {{ end }}
 
       {{ range .voorschriften }}
@@ -67,14 +79,14 @@
   {{ end }}
 
   {{ with .Params.reikwijdte }}
-  <div class="norm-reikwijdte">
+  <div id="reikwijdte" class="norm-reikwijdte">
     <h2>Reikwijdte</h2>
     {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
   </div>
   {{ end }}
 
   {{ with .Params.gerelateerde_onderwerpen }}
-  <div class="norm-gerelateerd">
+  <div id="gerelateerd" class="norm-gerelateerd">
     <h2>Gerelateerde onderwerpen</h2>
     <ul>
       {{ range . }}

@@ -4,7 +4,7 @@
   Gebruik: {{ partial "referenties.html" . }}
 */ -}}
 {{- with .Params.referenties -}}
-<section class="referenties" aria-label="Referenties">
+<section id="referenties" class="referenties" aria-label="Referenties">
   <h2>Referenties</h2>
   <ol>
     {{- range $i, $ref := . -}}

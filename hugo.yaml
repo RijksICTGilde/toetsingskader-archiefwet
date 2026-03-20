@@ -10,6 +10,7 @@ markup:
       unsafe: false
     extensions:
       table: true
+      footnote: true
   tableOfContents:
     startLevel: 2
     endLevel: 4

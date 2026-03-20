@@ -62,11 +62,6 @@
   order: 99;
 }
 
-/* Geen sidebar: content volle breedte */
-main > article,
-main > .normen-overzicht {
-  grid-column: 1 / -1;
-}
 
 /* Hero: volle breedte buiten grid */
 main > .hero {
@@ -77,6 +72,7 @@ main > .hero {
 .main-nav {
   color: var(--mox-color-text-inverse);
 }
+
 
 .footer-payoff {
   font-family: var(--mox-text-font-family-serif, Georgia, "Times New Roman", serif);
@@ -187,6 +183,40 @@ footer nav li::before {
   margin-block: var(--mox-space-sm);
 }
 
+/* Norm card badge */
+.norm-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: var(--mox-color-accent-default, #007bc7);
+  color: var(--mox-color-text-inverse, #fff);
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.norm-card-themed header {
+  display: flex;
+  align-items: center;
+  gap: var(--mox-space-padding-sm);
+}
+
+/* Leeswijzer info-blok */
+.leeswijzer {
+  background-color: var(--mox-color-feedback-info-subtle, #e8f0f7);
+  border-inline-start: 4px solid var(--mox-color-accent-default, #007bc7);
+  border-radius: 0 var(--mox-border-radius-md) var(--mox-border-radius-md) 0;
+  padding: var(--mox-space-padding-md) var(--mox-space-padding-lg);
+  margin-block: var(--mox-space-margin-sm);
+}
+
+.leeswijzer h2 {
+  margin-block-start: 0;
+}
+
 /* Referenties (voetnoten) */
 .referenties {
   margin-block-start: var(--mox-space-margin-md);
@@ -200,57 +230,4 @@ footer nav li::before {
 
 .referenties li {
   margin-block-end: var(--mox-space-margin-2xs);
-}
-
-/* Norm cards (introduction page) */
-.norm-cards {
-  display: grid;
-  gap: var(--mox-space-xs);
-  margin-block-start: var(--mox-space-md);
-}
-
-.norm-card {
-  display: block;
-  padding: var(--mox-space-md) var(--mox-space-lg);
-  background-color: var(--mox-color-text-inverse, #fff);
-  border: var(--mox-border-width-xs) solid var(--mox-color-border-subtle, #ccc);
-  border-inline-start: 4px solid var(--mox-color-accent-default, #007bc7);
-  border-radius: 0 var(--mox-border-radius-md) var(--mox-border-radius-md) 0;
-  text-decoration: none;
-  color: inherit;
-  transition: box-shadow 0.15s ease, border-color 0.15s ease;
-}
-
-.norm-card:hover,
-.norm-card:focus-visible {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
-
-.norm-card__header {
-  display: flex;
-  align-items: baseline;
-  gap: var(--mox-space-sm);
-}
-
-.norm-card__id {
-  font-size: var(--mox-space-lg);
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.norm-card__title {
-  margin: 0;
-  color: var(--mox-color-accent-default, #007bc7);
-}
-
-.norm-card__kern {
-  font-size: var(--mox-space-m);
-  color: var(--mox-color-text-subtle-2, #666);
-  margin: var(--mox-space-xs) 0 0;
-}
-
-.norm-card sup a {
-  color: var(--mox-color-interactive-default-text, #007bc7);
-  text-decoration: none;
-  font-size: 0.75rem;
 }
