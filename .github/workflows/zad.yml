@@ -68,7 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       deployments: write
-      packages: delete # delete container images from ghcr.io
+      packages: write
     steps:
       - uses: RijksICTGilde/zad-actions/cleanup@v3
         with:
