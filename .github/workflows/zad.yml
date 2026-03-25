@@ -1,0 +1,101 @@
+name: Deploy to ZAD
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+  push:
+    branches: [main]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE: ghcr.io/rijksictgilde/toetsingskader-archiefwet
+
+jobs:
+  build:
+    if: github.event.action != 'closed' && github.event.pull_request.user.type != 'Bot'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # push container images to ghcr.io
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Determine image tag
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "TAG=main-${{ github.sha }}" >> "$GITHUB_ENV"
+          else
+            echo "TAG=pr-${{ github.event.number }}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ env.IMAGE }}:${{ env.TAG }}
+
+  deploy-preview:
+    if: github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.user.type != 'Bot'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    environment:
+      name: pr-${{ github.event.pull_request.number }}
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - name: Deploy to ZAD
+        id: deploy
+        uses: RijksICTGilde/zad-actions/deploy@v3
+        with:
+          api-key: ${{ secrets.ZAD_API_KEY }}
+          project-id: toets-hn7
+          deployment-name: pr-${{ github.event.pull_request.number }}
+          component: web
+          image: ${{ env.IMAGE }}:pr-${{ github.event.number }}
+          clone-from: production
+
+  cleanup-preview:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.user.type != 'Bot'
+    runs-on: ubuntu-latest
+    permissions:
+      deployments: write
+      packages: delete # delete container images from ghcr.io
+    steps:
+      - uses: RijksICTGilde/zad-actions/cleanup@v3
+        with:
+          api-key: ${{ secrets.ZAD_API_KEY }}
+          project-id: toets-hn7
+          deployment-name: pr-${{ github.event.pull_request.number }}
+          delete-github-env: 'true'
+          delete-github-deployments: 'true'
+          delete-container: 'true'
+          container-org: ${{ github.repository_owner }}
+          container-name: ${{ github.event.repository.name }}
+          container-tag: pr-${{ github.event.number }}
+          github-admin-token: ${{ secrets.GITHUB_ADMIN_TOKEN }}
+
+  deploy-production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Deploy to ZAD
+        id: deploy
+        uses: RijksICTGilde/zad-actions/deploy@v3
+        with:
+          api-key: ${{ secrets.ZAD_API_KEY }}
+          project-id: toets-hn7
+          deployment-name: production
+          component: web
+          image: ${{ env.IMAGE }}:main-${{ github.sha }}
