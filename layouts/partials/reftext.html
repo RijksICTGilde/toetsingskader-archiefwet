@@ -6,6 +6,11 @@
   Gebruik: {{ partial "reftext.html" (dict "tekst" .tekst "page" $page) }}
 */ -}}
 {{- $tekst := .tekst | markdownify -}}
+{{- $base := "x" | relURL -}}
+{{- $base = strings.TrimSuffix "x" $base -}}
+{{- if ne $base "/" -}}
+  {{- $tekst = replace $tekst "href=\"/" (printf "href=\"%s" $base) -}}
+{{- end -}}
 {{- $page := .page -}}
 {{- range $i, $ref := $page.Params.referenties -}}
   {{- $num := add $i 1 -}}

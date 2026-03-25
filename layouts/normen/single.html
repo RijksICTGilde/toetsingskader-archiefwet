@@ -90,7 +90,7 @@
     <h2>Gerelateerde onderwerpen</h2>
     <ul>
       {{ range . }}
-      <li>{{ with .url }}<a href="{{ . }}">{{ end }}{{ partial "reftext.html" (dict "tekst" .titel "page" $page) }}{{ with .url }}</a>{{ end }}</li>
+      <li>{{ with .url }}<a href="{{ strings.TrimPrefix "/" . | relURL }}">{{ end }}{{ partial "reftext.html" (dict "tekst" .titel "page" $page) }}{{ with .url }}</a>{{ end }}</li>
       {{ end }}
     </ul>
   </div>

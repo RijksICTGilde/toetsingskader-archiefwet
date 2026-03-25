@@ -4,6 +4,12 @@ defaultContentLanguage: nl
 
 enableRobotsTXT: true
 
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
 markup:
   goldmark:
     renderer:
@@ -17,7 +23,7 @@ markup:
 
 params:
   search:
-    enable: false
+    enable: true
   footer:
     description: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."
     service:

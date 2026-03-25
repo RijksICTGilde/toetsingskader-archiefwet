@@ -79,11 +79,11 @@ referenties:
   - tekst: "Hyperlink naar DUTO."
     url: "https://www.nationaalarchief.nl/archiveren/duto"
 toelichting: |
-  Om een document duurzaam toegankelijk te maken en te houden{ref:3} moet een document [in beheer](/normen/01-beheer.md) zijn.{ref:4} Inbeheername is het opnemen van documenten in een omgeving waarin zij beheerd worden{ref:5}. Beheer is geen eenmalige handeling, maar vraagt om een voortdurende zorg voor documenten{ref:6}.
+  Om een document duurzaam toegankelijk te maken en te houden{ref:3} moet een document [in beheer](/normen/01-beheer/) zijn.{ref:4} Inbeheername is het opnemen van documenten in een omgeving waarin zij beheerd worden{ref:5}. Beheer is geen eenmalige handeling, maar vraagt om een voortdurende zorg voor documenten{ref:6}.
 
-  Die voortdurende zorg vereist ook sturing op de informatiehuishouding. Een overheidsorganisatie neemt daarom passende maatregelen en beschrijft die in de beheerregels{ref:7}. Op basis van beschrijving worden de passende maatregelen concreet uitgewerkt. In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurzame toegankelijkheid van categorieën documenten borgt{ref:8}. Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](_index.md) {ref:9} invulling krijgen.
+  Die voortdurende zorg vereist ook sturing op de informatiehuishouding. Een overheidsorganisatie neemt daarom passende maatregelen en beschrijft die in de beheerregels{ref:7}. Op basis van beschrijving worden de passende maatregelen concreet uitgewerkt. In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurzame toegankelijkheid van categorieën documenten borgt{ref:8}. Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](/normen/) {ref:9} invulling krijgen.
 
-  In een beheerde omgeving {ref:5} zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten {ref:6}. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/06-vernietigen.md), [gecontroleerd vernietigen](/normen/06-vernietigen.md) en [metadateren](/normen/04-metadatering.md) geeft direct richting aan de invulling van de benodigde functionaliteit {ref:10}.
+  In een beheerde omgeving {ref:5} zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten {ref:6}. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/06-vernietigen/), [gecontroleerd vernietigen](/normen/06-vernietigen/) en [metadateren](/normen/04-metadatering/) geeft direct richting aan de invulling van de benodigde functionaliteit {ref:10}.
 synoniemen:
   - "Opname (DUTO)"
   - "Duurzaam toegankelijk"
@@ -133,7 +133,7 @@ normuitleg:
         criterium:
           - "In de passende maatregelen is opgenomen dat documenten zich in een [beheerde omgeving](/normen/01-beheer/) moeten bevinden."
           - "In de passende maatregelen zijn in ieder geval de onderwerpen [overzicht](/normen/02-overzicht/), [vinden](/normen/05-vindbaarheid/) en beschikbaarstellen, [ordenen](/normen/03-ordeningsstructuur/), [metadateren](/normen/04-metadatering/), [vernietigen](/normen/06-vernietigen/) en [betrouwbaarheid](/normen/06-vernietigen/) opgenomen. {ref:17}"
-          - "De passende maatregelen zijn opgesteld op basis van een [risicobenadering](_index.md)."
+          - "De passende maatregelen zijn opgesteld op basis van een [risicobenadering](/normen/)."
           - "Een categorie, waar passende maatregelen voor zijn genomen, heeft een relatie met een selectiebesluit."
         indicatoren:
           - "Er is een informatiebeheerplan dat toetsbare doelstellingen verbindt aan een voortdurende verbetercyclus.{ref:20}"
