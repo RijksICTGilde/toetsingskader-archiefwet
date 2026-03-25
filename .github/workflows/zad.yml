@@ -1,0 +1,93 @@
+name: Deploy to ZAD
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+  push:
+    branches: [main]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=pr
+            type=sha,event=push
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+
+  deploy-preview:
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: pr${{ github.event.pull_request.number }}
+    steps:
+      - uses: RijksICTGilde/zad-actions/deploy@v3
+        with:
+          api-key: ${{ secrets.ZAD_API_KEY }}
+          project-id: toets-hn7
+          deployment-name: pr${{ github.event.pull_request.number }}
+          component: web
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:pr-${{ github.event.pull_request.number }}
+          clone-from: production
+
+  cleanup-preview:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      deployments: write
+      packages: write
+    steps:
+      - uses: RijksICTGilde/zad-actions/cleanup@v3
+        with:
+          api-key: ${{ secrets.ZAD_API_KEY }}
+          project-id: toets-hn7
+          deployment-name: pr${{ github.event.pull_request.number }}
+          delete-github-env: true
+          delete-github-deployments: true
+          delete-container: true
+          container-org: ${{ github.repository_owner }}
+          container-name: ${{ github.event.repository.name }}
+          container-tag: pr-${{ github.event.pull_request.number }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-admin-token: ${{ secrets.GITHUB_ADMIN_TOKEN }}
+
+  deploy-production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: production
+    steps:
+      - uses: RijksICTGilde/zad-actions/deploy@v3
+        with:
+          api-key: ${{ secrets.ZAD_API_KEY }}
+          project-id: toets-hn7
+          deployment-name: production
+          component: web
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
