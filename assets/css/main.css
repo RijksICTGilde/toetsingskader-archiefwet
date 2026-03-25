@@ -76,14 +76,19 @@ main > .hero {
 .main-nav-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-inline: auto;
   max-inline-size: var(--mox-page-max-inline-size);
+}
+
+.main-nav-inner ul {
+  margin-inline: 0;
 }
 
 .header-search {
   display: flex;
   align-items: center;
+  margin-inline-start: auto;
   padding: var(--mox-space-padding-sm) var(--mox-space-padding-md);
 }
 
