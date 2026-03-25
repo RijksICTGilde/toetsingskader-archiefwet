@@ -23,7 +23,7 @@ markup:
 
 params:
   search:
-    enable: true
+    enable: false
   footer:
     description: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."
     service:

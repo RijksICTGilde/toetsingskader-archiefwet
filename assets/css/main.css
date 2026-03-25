@@ -73,6 +73,31 @@ main > .hero {
   color: var(--mox-color-text-inverse);
 }
 
+.main-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-inline: auto;
+  max-inline-size: var(--mox-page-max-inline-size);
+}
+
+.header-search {
+  display: flex;
+  align-items: center;
+  padding: var(--mox-space-padding-sm) var(--mox-space-padding-md);
+}
+
+.header-search input[type="search"] {
+  border: none;
+  padding: var(--mox-space-padding-sm) var(--mox-space-padding-md);
+  font: inherit;
+  min-inline-size: 12rem;
+}
+
+.header-search button {
+  padding: var(--mox-space-padding-sm) var(--mox-space-padding-md);
+}
+
 
 .footer-payoff {
   font-family: var(--mox-text-font-family-serif, Georgia, "Times New Roman", serif);

@@ -12,24 +12,26 @@
     </a>
   </figure>
   {{ with .Site.Title }}<span class="site-title">{{ . }}</span>{{ end }}
-  {{- if site.Params.search.enable -}}
-  <form role="search" action="{{ "search/" | relURL }}" method="get">
-    <label for="search-input" class="visually-hidden">Zoeken</label>
-    <input id="search-input" type="search" name="q" placeholder="Zoeken" autocomplete="off">
-    <button type="submit">Zoeken</button>
-  </form>
-  {{- end -}}
   {{ with site.Menus.main }}
   <nav class="main-nav" aria-label="Hoofdnavigatie">
-    <ul>
-      {{ range . }}
-      <li>
-        <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>
-          {{ .Name }}
-        </a>
-      </li>
-      {{ end }}
-    </ul>
+    <div class="main-nav-inner">
+      <ul>
+        {{ range . }}
+        <li>
+          <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>
+            {{ .Name }}
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+      {{- if site.Params.search.enable -}}
+      <form role="search" class="header-search" action="{{ "search/" | relURL }}" method="get">
+        <label for="search-input" class="visually-hidden">Zoeken</label>
+        <input id="search-input" type="search" name="q" placeholder="Zoeken" autocomplete="off">
+        <button type="submit">Zoeken</button>
+      </form>
+      {{- end -}}
+    </div>
   </nav>
   {{ end }}
 </header>
