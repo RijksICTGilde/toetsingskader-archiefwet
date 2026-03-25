@@ -27,12 +27,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Lowercase image name
+        run: echo "IMAGE_NAME_LC=${IMAGE_NAME,,}" >> "$GITHUB_ENV"
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:pr-${{ github.event.number }}
+          tags: ghcr.io/rijksictgilde/toetsingskader-archiefwet:pr-${{ github.event.number }}
 
   deploy-preview:
     if: github.event_name == 'pull_request' && github.event.action != 'closed'
@@ -52,7 +55,7 @@ jobs:
           project-id: toets-hn7
           deployment-name: pr-${{ github.event.pull_request.number }}
           component: web
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:pr-${{ github.event.number }}
+          image: ghcr.io/rijksictgilde/toetsingskader-archiefwet:pr-${{ github.event.number }}
           clone-from: production
 
   cleanup-preview:
@@ -90,4 +93,4 @@ jobs:
           project-id: toets-hn7
           deployment-name: production
           component: web
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:pr-${{ github.event.number }}
+          image: ghcr.io/rijksictgilde/toetsingskader-archiefwet:pr-${{ github.event.number }}
