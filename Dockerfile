@@ -7,7 +7,7 @@ COPY . .
 ARG BASE_PATH=/
 RUN hugo --minify --baseURL "${BASE_PATH}"
 
-FROM ghcr.io/rijksictgilde/nginx-base:latest
+FROM ghcr.io/rijksictgilde/nginx-base:2026.03.1
 COPY --from=build /src/public/ /usr/share/nginx/html/
 COPY nginx.default.conf.template /etc/nginx/templates/default.conf.template
 ENV BASE_PATH=/
