@@ -7,7 +7,11 @@
       "Bash(hugo --minify)",
       "Bash(curl -sSL https://raw.githubusercontent.com/MinBZK/moza-site/main/assets/css/base.css -o /tmp/moza-base.css)",
       "Read(//tmp/**)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "WebFetch(domain:mijnoverheidzakelijk.nl)",
+      "Bash(curl -sSL https://raw.githubusercontent.com/MinBZK/moza-site/main/content/_index.md)",
+      "Bash(curl *)",
+      "Bash(hugo --minify --quiet)"
     ]
   }
 }
