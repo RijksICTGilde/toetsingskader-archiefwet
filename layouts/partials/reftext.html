@@ -1,7 +1,9 @@
 {{- /*
-  Render tekst met {ref:N} → superscript voetnootlinks.
+  Render tekst met {ref:N} → interactieve referentie-tooltips.
   N = positie (1-based) in .Params.referenties lijst.
-  Gebruik {ref:N} i.p.v. [ref:N] om conflict met markdown link-syntax te voorkomen.
+  Bij hover/focus verschijnt een tooltip met de referentietekst en
+  eventuele bronlink. Gebruik {ref:N} i.p.v. [ref:N] om conflict met
+  markdown link-syntax te voorkomen.
 
   Gebruik: {{ partial "reftext.html" (dict "tekst" .tekst "page" $page) }}
 */ -}}
@@ -15,7 +17,14 @@
 {{- range $i, $ref := $page.Params.referenties -}}
   {{- $num := add $i 1 -}}
   {{- $search := printf "{ref:%d}" $num -}}
-  {{- $replace := printf "<sup><a href=\"#ref-%d\" id=\"refback-%d\" class=\"ref-link\">%d</a></sup>" $num $num $num -}}
+  {{- $label := printf "Referentie %d: %s" $num $ref.tekst | htmlEscape -}}
+  {{- $textEsc := $ref.tekst | htmlEscape -}}
+  {{- $linkHTML := "" -}}
+  {{- with $ref.url -}}
+    {{- $linkHTML = printf "<a href=\"%s\" class=\"ref-tooltip__link\">Bekijk bron ↗</a>" . -}}
+  {{- end -}}
+  {{- $icon := "<svg class=\"ref-icon\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"currentColor\"/><circle cx=\"8\" cy=\"4.3\" r=\"1\" fill=\"#fff\"/><rect x=\"7.2\" y=\"6.3\" width=\"1.6\" height=\"5.2\" fill=\"#fff\"/></svg>" -}}
+  {{- $replace := printf "<span class=\"ref-wrapper\"><button type=\"button\" class=\"ref-link\" aria-label=\"%s\">%s</button><span class=\"ref-tooltip\" role=\"note\"><span class=\"ref-tooltip__text\">%s</span>%s</span></span>" $label $icon $textEsc $linkHTML -}}
   {{- $tekst = replace $tekst $search ($replace | safeHTML) -}}
 {{- end -}}
 {{- $tekst | safeHTML -}}

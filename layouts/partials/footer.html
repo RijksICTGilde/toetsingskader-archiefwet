@@ -44,5 +44,27 @@
       a.setAttribute('target', '_blank');
       a.setAttribute('rel', 'noopener noreferrer');
     });
+
+    // Tooltip-positionering: schuif de referentie-tooltip weg van de
+    // viewport-rand wanneer hij zou overlopen.
+    function positionRefTip(wrapper) {
+      var btn = wrapper.querySelector('.ref-link');
+      var tip = wrapper.querySelector('.ref-tooltip');
+      if (!btn || !tip) return;
+      tip.style.setProperty('--ref-offset-x', '0px');
+      // Force layout to measure after reset
+      var btnRect = btn.getBoundingClientRect();
+      var tipRect = tip.getBoundingClientRect();
+      var vw = document.documentElement.clientWidth;
+      var margin = 8;
+      var overflowRight = (btnRect.left + tipRect.width + margin) - vw;
+      if (overflowRight > 0) {
+        tip.style.setProperty('--ref-offset-x', (-overflowRight) + 'px');
+      }
+    }
+    document.querySelectorAll('.ref-wrapper').forEach(function (w) {
+      w.addEventListener('mouseenter', function () { positionRefTip(w); });
+      w.addEventListener('focusin', function () { positionRefTip(w); });
+    });
   })();
 </script>

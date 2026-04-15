@@ -11,5 +11,5 @@ hero:
 De kern van dit toetsingskader is dat documenten **in beheer** moeten zijn,
 zodat zij duurzaam toegankelijk gemaakt en gehouden kunnen worden. Volgens
 het DUTO-raamwerk is een document duurzaam toegankelijk als het vindbaar,
-beschikbaar, leesbaar, interpreteerbaar, betrouwbaar en toekomstbestendig is —
+beschikbaar, leesbaar, interpreteerbaar, betrouwbaar en toekomstbestendig is -
 voor iedereen die daar recht op heeft en voor zo lang als noodzakelijk.

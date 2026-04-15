@@ -291,7 +291,7 @@ footer nav li::before {
   margin-block: var(--mox-space-3xs);
 }
 
-/* Sticky sidebar op desktop — main is door MOx al 2-koloms grid (auto 1fr) */
+/* Sticky sidebar op desktop - main is door MOx al 2-koloms grid (auto 1fr) */
 @media (min-width: 800px) {
   main > .sidebar {
     position: sticky;
@@ -303,7 +303,7 @@ footer nav li::before {
   }
 }
 
-/* Header search trigger — plat, lijnt uit met nav-links */
+/* Header search trigger - plat, lijnt uit met nav-links */
 .main-nav .search-trigger {
   display: inline-flex;
   align-items: center;
@@ -621,7 +621,112 @@ footer nav li::before {
   margin-block-start: 0;
 }
 
-/* Referenties (voetnoten) — accordeon */
+/* Referenties - inline hover/focus-tooltip met info-icoon */
+.ref-wrapper {
+  position: relative;
+  display: inline;
+}
+
+/* Overschrijf MOx's globale button-styling expliciet */
+.markup-content button.ref-link,
+button.ref-link {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0 0.08em;
+  font: inherit;
+  line-height: 1;
+  color: var(--mox-color-accent-default, #007bc7);
+  cursor: pointer;
+  display: inline;
+  vertical-align: baseline;
+  box-shadow: none;
+  inline-size: auto;
+  min-inline-size: 0;
+  min-block-size: 0;
+  block-size: auto;
+  align-self: auto;
+  transition: none;
+}
+
+.markup-content button.ref-link:hover,
+.markup-content button.ref-link:focus-visible,
+button.ref-link:hover,
+button.ref-link:focus-visible {
+  background: transparent;
+  color: var(--mox-color-interactive-hover-text, #005e9a);
+  outline: none;
+}
+
+.ref-link .ref-icon {
+  inline-size: 0.85em;
+  block-size: 0.85em;
+  display: inline-block;
+  vertical-align: 0.25em;
+  transition: color 0.12s ease;
+}
+
+.ref-link:focus-visible .ref-icon {
+  outline: 2px solid var(--mox-color-accent-default, #007bc7);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+.ref-tooltip {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-start: 0;
+  z-index: 50;
+  inline-size: max-content;
+  min-inline-size: 14rem;
+  max-inline-size: min(22rem, calc(100vw - 2rem));
+  padding: var(--mox-space-padding-sm, 0.5rem) var(--mox-space-padding-md, 0.75rem) var(--mox-space-padding-sm, 0.5rem);
+  padding-block-start: calc(var(--mox-space-padding-sm, 0.5rem) + 0.4rem);
+  background-color: var(--mox-color-wit, #fff);
+  border: 1px solid var(--mox-color-border-subtle, #d0d7de);
+  border-radius: var(--mox-border-radius-md, 4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--mox-color-text-default);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(var(--ref-offset-x, 0), -4px);
+  transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s;
+}
+
+/* Onzichtbare "bridge" zodat de muis van het nummertje naar de tooltip
+   kan bewegen zonder dat deze sluit */
+.ref-tooltip::before {
+  content: "";
+  position: absolute;
+  inset-block-end: 100%;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 0.4rem;
+}
+
+.ref-wrapper:hover .ref-tooltip,
+.ref-wrapper:focus-within .ref-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(var(--ref-offset-x, 0), 0);
+}
+
+.ref-tooltip__text {
+  display: block;
+}
+
+.ref-tooltip__link {
+  display: inline-block;
+  margin-block-start: var(--mox-space-sm, 0.5rem);
+  font-weight: 600;
+  color: var(--mox-color-accent-default, #007bc7);
+}
+
+/* Referenties-accordeon blijft als overzicht onderaan */
 .referenties {
   margin-block-start: var(--mox-space-margin-md);
   padding-block-start: var(--mox-space-padding-md);
