@@ -33,6 +33,8 @@ Het doel van dit toetsingskader is bij te dragen aan de duurzame toegankelijkhei
 
 ## Opbouw en indeling Toetsingskader
 
+{{< bollendiagram >}}
+
 Het toetsingskader bevat nu [acht onderwerpen]({{< relref "/normen" >}}) die de inspectie als fundamenteel voor de duurzame toegankelijkheid beschouwt. De vier wit gearceerde onderwerpen horen hier ook bij, en worden op een later moment toegevoegd aan het toetsingskader. De norm ["in beheer"]({{< relref "/normen/01-beheer" >}}) vormt de basis van het toetsingskader. Informatie is in beheer wanneer het verantwoordelijk overheidsorgaan de informatie duurzaam toegankelijk kan maken en houden. In een beheerde omgeving zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten.
 
 Informatie in beheer is zowel richten (door middel van beheerregels en passende maatregelen) als verrichten (het feitelijk beheer). Als informatie in beheer is volgens de normen van de archiefwet, is informatie duurzaam toegankelijk. Daarmee zijn de begrippen "duurzame toegankelijkheid" en "informatie in beheer" synoniem, maar het verschil is dat in beheernemen een continue proces is waardoor duurzame toegankelijkheid actief wordt gemaakt. Het is ook de eerste stap in het duurzaam toegankelijk maken van informatie. Het toetsingskader biedt zo ook praktische handvatten voor het richten en verrichten van de informatiehuishouding.

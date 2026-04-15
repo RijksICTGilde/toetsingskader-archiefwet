@@ -1,0 +1,31 @@
+{{/*
+  Local head override — voegt project-specifieke CSS toe aan de bundel.
+  Gebaseerd op hugo-theme-ro/layouts/partials/head.html.
+*/}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+{{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
+
+{{/* MOx CSS — served as static files so the browser resolves @import chains */}}
+<link rel="stylesheet" href="{{ "style/style.css" | relURL }}">
+
+{{/* Theme CSS + project CSS via Hugo asset pipeline */}}
+{{ $theme := resources.Get "css/theme.css" }}
+{{ $hero := resources.Get "css/components/hero.css" }}
+{{ $cardGrid := resources.Get "css/components/card-grid.css" }}
+{{ $styles := slice $theme $hero $cardGrid }}
+{{ with resources.Get "css/main.css" }}
+  {{ $styles = $styles | append . }}
+{{ end }}
+{{ with resources.Get "css/bollendiagram.css" }}
+  {{ $styles = $styles | append . }}
+{{ end }}
+{{ $bundle := $styles | resources.Concat "css/bundle.css" }}
+<link rel="stylesheet" href="{{ $bundle.RelPermalink }}">
+
+{{/* Pagefind search — opt-in via params.search.enable */}}
+{{- if site.Params.search.enable -}}
+<link rel="stylesheet" href="{{ "pagefind/pagefind-ui.css" | relURL }}">
+<script src="{{ "pagefind/pagefind-ui.js" | relURL }}" defer></script>
+{{- end -}}

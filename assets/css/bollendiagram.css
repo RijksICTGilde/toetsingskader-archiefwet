@@ -1,0 +1,76 @@
+.bollendiagram-wrapper {
+  width: 100%;
+  max-width: 860px;
+  margin: 2rem auto;
+}
+
+.bollendiagram {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.bd-connectors line {
+  stroke: #c0d4e8;
+  stroke-width: 1.5;
+}
+
+.bd-bubble circle {
+  fill: #a8c8e8;
+  opacity: 0.88;
+  transition: fill 0.18s, opacity 0.18s;
+}
+
+.bd-bubble text {
+  fill: #1a2d42;
+  font-family: "RO Sans", "Source Sans 3", sans-serif;
+  font-size: 13px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+.bd-main circle {
+  fill: #5a96c8;
+  opacity: 0.88;
+}
+
+.bd-main text {
+  font-size: 18px;
+  font-weight: 600;
+  fill: #ffffff;
+}
+
+.bd-mid circle {
+  fill: #7eb8dc;
+  opacity: 0.85;
+}
+
+.bd-outer circle {
+  fill: #c8e0f4;
+  opacity: 0.85;
+}
+
+.bd-bubble:hover circle {
+  fill: #3a78b0;
+  opacity: 0.95;
+}
+
+.bd-bubble:hover text {
+  fill: #ffffff;
+}
+
+.bd-bubble:focus {
+  outline: none;
+}
+
+.bd-bubble:focus circle {
+  stroke: #01689b;
+  stroke-width: 3;
+}
+
+@media (max-width: 600px) {
+  .bollendiagram-wrapper {
+    margin: 1rem 0;
+  }
+}

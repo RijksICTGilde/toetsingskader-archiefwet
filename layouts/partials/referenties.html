@@ -1,21 +1,40 @@
 {{- /*
-  Render voetnotenlijst op basis van .Params.referenties.
+  Render voetnotenlijst op basis van .Params.referenties in een accordeon.
+  Klap automatisch uit wanneer op een referentie-link wordt geklikt.
   Elke referentie heeft: tekst (verplicht), url (optioneel).
   Gebruik: {{ partial "referenties.html" . }}
 */ -}}
 {{- with .Params.referenties -}}
 <section id="referenties" class="referenties" aria-label="Referenties">
-  <h2>Referenties</h2>
-  <ol>
-    {{- range $i, $ref := . -}}
-    {{- $num := add $i 1 }}
-    <li id="ref-{{ $num }}">
-      {{- with $ref.url }}<a href="{{ . }}">{{ end -}}
-      {{- $ref.tekst -}}
-      {{- with $ref.url }}</a>{{ end }}
-      <a href="#refback-{{ $num }}" class="ref-back" aria-label="Terug naar tekst">&uarr;</a>
-    </li>
-    {{- end }}
-  </ol>
+  <details class="referenties-accordion">
+    <summary>Referenties</summary>
+    <ol>
+      {{- range $i, $ref := . -}}
+      {{- $num := add $i 1 }}
+      <li id="ref-{{ $num }}">
+        {{- with $ref.url }}<a href="{{ . }}">{{ end -}}
+        {{- $ref.tekst -}}
+        {{- with $ref.url }}</a>{{ end }}
+        <a href="#refback-{{ $num }}" class="ref-back" aria-label="Terug naar tekst">&uarr;</a>
+      </li>
+      {{- end }}
+    </ol>
+  </details>
 </section>
+<script>
+  (function () {
+    function openDetailsFor(hash) {
+      if (!hash || hash.charAt(0) !== '#') return;
+      var el = document.getElementById(hash.slice(1));
+      if (!el) return;
+      var d = el.closest('details');
+      if (d && !d.open) {
+        d.open = true;
+        requestAnimationFrame(function () { el.scrollIntoView({ block: 'center' }); });
+      }
+    }
+    window.addEventListener('hashchange', function () { openDetailsFor(window.location.hash); });
+    if (window.location.hash) openDetailsFor(window.location.hash);
+  })();
+</script>
 {{- end -}}

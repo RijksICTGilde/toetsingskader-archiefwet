@@ -4,7 +4,7 @@ versie: "0.8"
 weight: 1
 norm_id: "1"
 norm_titel: "Inbeheername en beheer"
-kern: "Een document is in beheer zodat het duurzaam toegankelijk{ref:1} gemaakt en gehouden kan worden.{ref:2}"
+kern: "Een document is in beheer zodat het duurzaam toegankelijk gemaakt en gehouden kan worden."
 referenties:
   - tekst: "Ab, artikel 2.1, lid 1."
     url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
