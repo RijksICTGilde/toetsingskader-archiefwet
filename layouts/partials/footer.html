@@ -34,3 +34,13 @@
   <p class="footer-copyright">&copy; {{ now.Year }} {{ .Site.Title }}</p>
 </footer>
 {{- end -}}
+<script>
+  (function () {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (!href || href.charAt(0) === '#' || href.indexOf('javascript:') === 0 || href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0) return;
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener noreferrer');
+    });
+  })();
+</script>

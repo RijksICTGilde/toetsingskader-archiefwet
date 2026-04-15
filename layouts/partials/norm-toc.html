@@ -2,24 +2,21 @@
   Table of contents voor normpagina's.
   Genereert links naar de secties op basis van front matter.
 */ -}}
-<aside class="norm-toc" aria-label="Inhoudsopgave">
-  <h2>Op deze pagina</h2>
-  <ul>
-    {{- with .Params.kern }}<li><a href="#kern">Kern van de norm</a></li>{{ end -}}
-    {{- with .Params.toelichting }}<li><a href="#toelichting">Toelichting</a></li>{{ end -}}
-    {{- with .Params.synoniemen }}<li><a href="#synoniemen">Synoniemen</a></li>{{ end -}}
-    {{- with .Params.normuitleg }}
-    <li>
-      <a href="#normuitleg">Normuitleg</a>
-      <ul>
-        {{- range . -}}
-        {{- with .titel }}<li><a href="#{{ . | urlize }}">{{ . }}</a></li>{{ end -}}
-        {{- end }}
-      </ul>
-    </li>
-    {{- end -}}
-    {{- with .Params.reikwijdte }}<li><a href="#reikwijdte">Reikwijdte</a></li>{{ end -}}
-    {{- with .Params.gerelateerde_onderwerpen }}<li><a href="#gerelateerd">Gerelateerde onderwerpen</a></li>{{ end -}}
-    {{- with .Params.referenties }}<li><a href="#referenties">Referenties</a></li>{{ end -}}
-  </ul>
-</aside>
+<ul class="norm-toc">
+  {{- with .Params.kern }}<li><a href="#kern">Kern van de norm</a></li>{{ end -}}
+  {{- with .Params.toelichting }}<li><a href="#toelichting">Toelichting</a></li>{{ end -}}
+  {{- with .Params.synoniemen }}<li><a href="#synoniemen">Synoniemen</a></li>{{ end -}}
+  {{- with .Params.normuitleg }}
+  <li>
+    <a href="#normuitleg">Normuitleg</a>
+    <ul>
+      {{- range . -}}
+      {{- with .titel }}<li><a href="#{{ . | urlize }}">{{ . }}</a></li>{{ end -}}
+      {{- end }}
+    </ul>
+  </li>
+  {{- end -}}
+  {{- with .Params.reikwijdte }}<li><a href="#reikwijdte">Reikwijdte</a></li>{{ end -}}
+  {{- with .Params.gerelateerde_onderwerpen }}<li><a href="#gerelateerd">Gerelateerde onderwerpen</a></li>{{ end -}}
+  {{- with .Params.referenties }}<li><a href="#referenties">Referenties</a></li>{{ end -}}
+</ul>

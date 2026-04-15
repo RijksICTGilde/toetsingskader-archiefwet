@@ -128,6 +128,62 @@ footer nav li::before {
   flex: 1 1 50%;
 }
 
+/* Sidebar: bevat normen-lijst en (op normpagina's) de ToC */
+.sidebar {
+  margin-block: var(--mox-space-md);
+}
+
+.side-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-nav li {
+  margin-block: var(--mox-space-2xs);
+}
+
+.side-nav a[aria-current="page"] {
+  font-weight: 700;
+}
+
+.side-nav .norm-toc,
+.side-nav .norm-toc ul {
+  list-style: none;
+  padding-inline-start: var(--mox-space-md);
+  margin: var(--mox-space-3xs) 0 var(--mox-space-2xs);
+}
+
+.side-nav .norm-toc li {
+  margin-block: var(--mox-space-3xs);
+}
+
+@media screen and (min-width: 900px) {
+  main.mox-page-grid > .sidebar {
+    grid-column: page-start / middle;
+    position: sticky;
+    top: var(--mox-space-md);
+    align-self: start;
+    max-block-size: calc(100dvh - 2 * var(--mox-space-md));
+    overflow-y: auto;
+    padding-inline-end: var(--mox-space-md);
+  }
+  main.mox-page-grid > .norm-page,
+  main.mox-page-grid > .normen-overzicht {
+    grid-column: middle / page-end;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  main.mox-page-grid > .sidebar {
+    grid-column: page-start / span 3;
+  }
+  main.mox-page-grid > .norm-page,
+  main.mox-page-grid > .normen-overzicht {
+    grid-column: span 9 / page-end;
+  }
+}
+
 /* Toetsingskader-specifieke styling */
 
 /* Norm page: kern */

@@ -1,17 +1,23 @@
 {{ define "main" }}
 {{ $page := . }}
-<nav class="side-nav" aria-label="Normen">
-  <ul>
-    <li><a href="{{ .Parent.RelPermalink }}">← Normen</a></li>
-    {{ range .Parent.Pages.ByWeight }}
-    <li>
-      <a href="{{ .RelPermalink }}"{{ if eq $.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>
-        {{ .Params.norm_id }}. {{ .Params.norm_titel }}
-      </a>
-    </li>
-    {{ end }}
-  </ul>
-</nav>
+<div class="sidebar">
+  <nav class="side-nav" aria-label="Normen">
+    <ul>
+      <li><a href="{{ .Parent.RelPermalink }}">← Normen</a></li>
+      {{ range .Parent.Pages.ByWeight }}
+      {{ $isCurrent := eq $.RelPermalink .RelPermalink }}
+      <li>
+        <a href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
+          {{ .Params.norm_id }}. {{ .Params.norm_titel }}
+        </a>
+        {{ if $isCurrent }}
+        {{ partial "norm-toc.html" $page }}
+        {{ end }}
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+</div>
 <article class="norm-page markup-content">
   <h1>{{ .Title }}</h1>
 
@@ -99,5 +105,15 @@
   {{ partial "referenties.html" $page }}
 
   {{ .Content }}
+
+  {{ with site.Params.feedback }}
+  <aside class="norm-feedback" aria-label="Feedback">
+    <h2>Feedback</h2>
+    <p>Heeft u opmerkingen of suggesties over deze norm? We horen het graag.</p>
+    {{ with .email }}
+    <a href="mailto:{{ . }}?subject={{ printf "Feedback: %s" $page.Title | querify "s" | strings.TrimPrefix "s=" }}" class="feedback-link">Stuur uw feedback per e-mail</a>
+    {{ end }}
+  </aside>
+  {{ end }}
 </article>
 {{ end }}

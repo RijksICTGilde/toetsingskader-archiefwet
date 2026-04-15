@@ -22,6 +22,8 @@ markup:
     endLevel: 4
 
 params:
+  feedback:
+    email: toetsingskader@inspectie-oe.nl
   search:
     enable: false
   footer:
