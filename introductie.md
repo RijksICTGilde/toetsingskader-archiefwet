@@ -21,7 +21,7 @@ Het doel van dit toetsingskader is bij te dragen aan de duurzame toegankelijkhei
 - Overheidsinformatie beschikbaar is voor hergebruik
 
 ## Wettelijk kader
-Aan het beheer van overheidsinformatie zijn regels gesteld. De Inspectie Overheidsinformatie en Erfgoed ziet toe op de naleving van de Archiefwet 20XX, het Archiefbesluit 20XX  en de Archiefregeling.
+Aan het beheer van overheidsinformatie zijn regels gesteld. De Inspectie Overheidsinformatie en Erfgoed ziet toe op de naleving van de Archiefwet 2026, het Archiefbesluit 2026  en de Archiefregeling.
 Documenten  zijn in de Archiefwet gedefinieerd als een schriftelijk stuk of ander geheel van vastgelegde gegevens dat door een verantwoordelijk overheidsorgaan is opgemaakt of ontvangen en dat naar zijn aard verband houdt met de publieke taak van dat verantwoordelijk overheidsorgaan.
 Dat maakt de Archiefwet van toepassing op alle documenten die een organisatie opneemt of vormt bij de uitvoering van haar taken, of het nu gaat om interne (digitale) documenten, e-mail, overheidsinformatie in databases, gegevensverzamelingen, overheidsinformatie op websites of overheidsinformatie op sociale mediakanalen als X, Facebook en Instagram.
 In een digitale context is een document een verzameling van aan elkaar gerelateerde vastgelegde gegevens die voor de gebruiker als logische eenheid wordt gepresenteerd. Wat betreft reikwijdte komt de betekenis van het begrip ‘document’ daarmee grotendeels overeen met de term ‘informatie-object’ zoals die wordt gehanteerd binnen de context van ICT en informatiebeheer. Een ander synoniem voor document is ‘overheidsinformatie’.
@@ -62,7 +62,7 @@ Ruim 325 organisaties van de centrale overheid vallen onder de werking van de Ar
 - Overige
 Het volledige overzicht is te vinden op de website  van de Inspectie Overheidsinformatie en Erfgoed  
 Passende maatregelen
-Op basis van de Archiefwet 20XX artikel 4.2 moet een overheidsorgaan beheerregels vaststellen. In de beheerregels moet een omschrijving van de passende maatregelen om documenten duurzaam toegankelijk te maken en te houden, worden opgenomen. Dit geheel moet worden gepubliceerd en dient als basis voor de uitwerking van de passende maatregelen die op basis van de Archiefwet 20XX artikel 4.1, eerste lid moeten worden beschreven.
+Op basis van de Archiefwet 2026 artikel 4.2 moet een overheidsorgaan beheerregels vaststellen. In de beheerregels moet een omschrijving van de passende maatregelen om documenten duurzaam toegankelijk te maken en te houden, worden opgenomen. Dit geheel moet worden gepubliceerd en dient als basis voor de uitwerking van de passende maatregelen die op basis van de Archiefwet 2026 artikel 4.1, eerste lid moeten worden beschreven.
 
 Passende maatregelen, zoals bedoeld in de Archiefwet, artikel 4.1, eerste lid, zijn dermate concrete omschrijvingen dat die de duurzame toegankelijkheid per norm per categorie documenten borgen. Er moeten passende maatregelen zijn die concreet beschrijven hoe de categorieën documenten in beheer worden genomen, zichtbaar zijn in een overzicht, vindbaar zijn, enzovoorts.  Zie <<beheer>> voor welke onderwerpen een verantwoordelijk overheidsorgaan in ieder geval passende maatregelen moet nemen.  
 Risicobenadering en periodieke evaluatie
@@ -81,7 +81,7 @@ Behalve voor informatiebeveiliging, is een risicobenadering bij normen over de d
 
 -	Gecontroleerd vernietigen: De risicobenadering biedt ruimte om op verschillende manieren om te gaan met de termijn die een overheidsorganisatie neemt om documenten te vernietigen. De risicobenadering kan ook worden gebruikt om categorieën documenten op te nemen in een selectiebesluit voor documenten die op ieder moment mogen worden vernietigd.
 
--	Vinden: De risicobenadering biedt ruimte om verschillende termijnen vast te stellen in de passende maatregelen voor de vindbaarheid van documenten. De Inspectie acht een redelijke termijn voor documenten die een overheidsorgaan opstelt of ontvangt na inwerkingtreding van de Archiefwet 20XX van maximaal 10 dagen wel redelijk.
+-	Vinden: De risicobenadering biedt ruimte om verschillende termijnen vast te stellen in de passende maatregelen voor de vindbaarheid van documenten. De Inspectie acht een redelijke termijn voor documenten die een overheidsorgaan opstelt of ontvangt na inwerkingtreding van de Archiefwet 2026 van maximaal 10 dagen wel redelijk.
 
 -	Beveiligen: Een risicobenadering voor de beveiliging is verplicht. De risicobenadering moet leiden tot passende maatregelen in de vorm van beheerregels voor de beveiliging van documenten. Hierbij is het mogelijk dat per categorieën verschillende beveiligingsregimes gelden.
 

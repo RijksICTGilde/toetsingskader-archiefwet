@@ -5,7 +5,7 @@ description: "De Archiefwet 2026, het Archiefbesluit en de begrippen document, v
 weight: 20
 ---
 
-Aan het beheer van overheidsinformatie zijn regels gesteld. De Inspectie Overheidsinformatie en Erfgoed ziet toe op de naleving van de Archiefwet 20XX, het Archiefbesluit 20XX en de Archiefregeling.
+Aan het beheer van overheidsinformatie zijn regels gesteld. De Inspectie Overheidsinformatie en Erfgoed ziet toe op de naleving van de Archiefwet 2026, het Archiefbesluit 2026 en de Archiefregeling.
 
 Documenten zijn in de Archiefwet gedefinieerd als een schriftelijk stuk of ander geheel van vastgelegde gegevens dat door een verantwoordelijk overheidsorgaan is opgemaakt of ontvangen en dat naar zijn aard verband houdt met de publieke taak van dat verantwoordelijk overheidsorgaan.
 

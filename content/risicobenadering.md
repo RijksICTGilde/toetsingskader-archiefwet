@@ -7,9 +7,9 @@ weight: 40
 
 ## Passende maatregelen
 
-Op basis van de Archiefwet 20XX artikel 4.2 moet een overheidsorgaan beheerregels vaststellen. In de beheerregels moet een omschrijving van de passende maatregelen om documenten duurzaam toegankelijk te maken en te houden, worden opgenomen. Dit geheel moet worden gepubliceerd en dient als basis voor de uitwerking van de passende maatregelen die op basis van de Archiefwet 20XX artikel 4.1, eerste lid moeten worden beschreven.
+Op basis van de Archiefwet 2026 artikel 4.2 moet een overheidsorgaan beheerregels vaststellen. In de beheerregels moet een omschrijving van de passende maatregelen om documenten duurzaam toegankelijk te maken en te houden, worden opgenomen. Dit geheel moet worden gepubliceerd en dient als basis voor de uitwerking van de passende maatregelen die op basis van de Archiefwet 2026 artikel 4.1, eerste lid moeten worden beschreven.
 
-Passende maatregelen, zoals bedoeld in de Archiefwet, artikel 4.1, eerste lid, zijn dermate concrete omschrijvingen dat die de duurzame toegankelijkheid per norm per categorie documenten borgen. Er moeten passende maatregelen zijn die concreet beschrijven hoe de categorieën documenten in beheer worden genomen, zichtbaar zijn in een overzicht, vindbaar zijn, enzovoorts. Zie <<beheer>> voor welke onderwerpen een verantwoordelijk overheidsorgaan in ieder geval passende maatregelen moet nemen.
+Passende maatregelen, zoals bedoeld in de Archiefwet, artikel 4.1, eerste lid, zijn dermate concrete omschrijvingen dat die de duurzame toegankelijkheid per norm per categorie documenten borgen. Er moeten passende maatregelen zijn die concreet beschrijven hoe de categorieën documenten in beheer worden genomen, zichtbaar zijn in een overzicht, vindbaar zijn, enzovoorts. Zie [beheer]({{< relref "/normen/01-beheer" >}}) voor welke onderwerpen een verantwoordelijk overheidsorgaan in ieder geval passende maatregelen moet nemen.
 
 ## Risicobenadering en periodieke evaluatie
 
@@ -21,18 +21,18 @@ Dit betekent dat niet voor een lichter regime kan worden gekozen dan wat de wet-
 
 Behalve voor informatiebeveiliging, is een risicobenadering bij normen over de duurzame toegankelijkheid niet verplicht, maar is logisch gezien wel een criterium om differentiatie aan te brengen en toch te voldoen aan de duurzame toegankelijkheidseisen.
 
-- In beheer nemen: De risicobenadering biedt geen ruimte om documenten niet in beheer te nemen, maar biedt wel ruimte om te bepalen of dit bijvoorbeeld automatisch moet gebeuren of dat een procedure volstaat.
+- [In beheer nemen]({{< relref "/normen/01-beheer" >}}): De risicobenadering biedt geen ruimte om documenten niet in beheer te nemen, maar biedt wel ruimte om te bepalen of dit bijvoorbeeld automatisch moet gebeuren of dat een procedure volstaat.
 
-- Overzicht: De risicobenadering biedt ruimte om binnen het <<overzicht>> verschillende niveaus van beschrijving te hanteren.
+- [Overzicht]({{< relref "/normen/02-overzicht" >}}): De risicobenadering biedt ruimte om binnen het [overzicht]({{< relref "/normen/02-overzicht" >}}) verschillende niveaus van beschrijving te hanteren.
 
-- Ordenen: De risicobenadering kan een rol spelen bij de keuze om documenten te koppelen aan een ordening op basis van verschijningsvorm of functie, en niet op basis van het principe dat archief procesgebonden informatie is en daarom geordend wordt op werkproces.
+- [Ordenen]({{< relref "/normen/03-ordeningsstructuur" >}}): De risicobenadering kan een rol spelen bij de keuze om documenten te koppelen aan een ordening op basis van verschijningsvorm of functie, en niet op basis van het principe dat archief procesgebonden informatie is en daarom geordend wordt op werkproces.
 
-- Metadata: De risicobenadering kan een rol spelen bij de afwegingen die een verantwoordelijk overheidsorgaan maakt om naast de <<verplichte metadata>> extra metadata bij een document vast te leggen en keuzes te maken op welke <<aggregatieniveaus>> dit gebeurt.
+- [Metadata]({{< relref "/normen/04-metadatering" >}}): De risicobenadering kan een rol spelen bij de afwegingen die een verantwoordelijk overheidsorgaan maakt om naast de [verplichte metadata]({{< relref "/normen/04-metadatering" >}}) extra metadata bij een document vast te leggen en keuzes te maken op welke aggregatieniveaus dit gebeurt.
 
-- Gecontroleerd vernietigen: De risicobenadering biedt ruimte om op verschillende manieren om te gaan met de termijn die een overheidsorganisatie neemt om documenten te vernietigen. De risicobenadering kan ook worden gebruikt om categorieën documenten op te nemen in een selectiebesluit voor documenten die op ieder moment mogen worden vernietigd.
+- [Gecontroleerd vernietigen]({{< relref "/normen/07-informatiebeveliging" >}}): De risicobenadering biedt ruimte om op verschillende manieren om te gaan met de termijn die een overheidsorganisatie neemt om documenten te vernietigen. De risicobenadering kan ook worden gebruikt om categorieën documenten op te nemen in een selectiebesluit voor documenten die op ieder moment mogen worden vernietigd.
 
-- Vinden: De risicobenadering biedt ruimte om verschillende termijnen vast te stellen in de passende maatregelen voor de vindbaarheid van documenten. De Inspectie acht een redelijke termijn voor documenten die een overheidsorgaan opstelt of ontvangt na inwerkingtreding van de Archiefwet 20XX van maximaal 10 dagen wel redelijk.
+- [Vinden]({{< relref "/normen/05-vindbaarheid" >}}): De risicobenadering biedt ruimte om verschillende termijnen vast te stellen in de passende maatregelen voor de vindbaarheid van documenten. De Inspectie acht een redelijke termijn voor documenten die een overheidsorgaan opstelt of ontvangt na inwerkingtreding van de Archiefwet 2026 van maximaal 10 dagen wel redelijk.
 
 - Beveiligen: Een risicobenadering voor de beveiliging is verplicht. De risicobenadering moet leiden tot passende maatregelen in de vorm van beheerregels voor de beveiliging van documenten. Hierbij is het mogelijk dat per categorieën verschillende beveiligingsregimes gelden.
 
-- Periodieke evaluatie: Ook de uitkomsten van de verplichte periodieke evaluatie kunnen leiden tot het nemen van passende maatregelen.
+- [Periodieke evaluatie]({{< relref "/normen/08-periodieke-evaluatie" >}}): Ook de uitkomsten van de verplichte periodieke evaluatie kunnen leiden tot het nemen van passende maatregelen.
