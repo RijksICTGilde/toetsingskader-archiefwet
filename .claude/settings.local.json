@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Bash(mkdir -p /Users/ravimeijer/Documents/repos/toetsingskader-archiefwet/assets/vendor/fuse)",
+      "Bash(curl -sSL https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js -o /Users/ravimeijer/Documents/repos/toetsingskader-archiefwet/assets/vendor/fuse/fuse.min.js)",
+      "Bash(hugo --minify)",
+      "Bash(curl -sSL https://raw.githubusercontent.com/MinBZK/moza-site/main/assets/css/base.css -o /tmp/moza-base.css)",
+      "Read(//tmp/**)",
+      "Bash(python3 *)"
+    ]
+  }
+}

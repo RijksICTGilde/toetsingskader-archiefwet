@@ -25,7 +25,7 @@ params:
   feedback:
     email: toetsingskader@inspectie-oe.nl
   search:
-    enable: false
+    enable: true
   footer:
     description: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."
     service:

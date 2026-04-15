@@ -1,0 +1,31 @@
+{{- /* Search modal — geïnspireerd op moza-site */ -}}
+<dialog id="search-modal" class="search-modal" aria-label="Zoeken" data-search-index="{{ "index.json" | relURL }}">
+  <div class="search-modal-content">
+    <div class="search-modal-header">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input
+        type="search"
+        id="search-input"
+        class="search-input"
+        placeholder="Zoeken in het toetsingskader…"
+        aria-label="Zoek op de website"
+        autocomplete="off"
+      />
+      <button type="button" id="search-close" class="search-close" aria-label="Sluiten">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <ul id="search-results" class="search-results" aria-label="Zoekresultaten" aria-live="polite"></ul>
+    <p class="search-hint">Tip: druk op <kbd>/</kbd> om te zoeken, <kbd>↑</kbd>/<kbd>↓</kbd> om te navigeren, <kbd>Esc</kbd> om te sluiten.</p>
+  </div>
+</dialog>
+
+<button type="button" id="highlight-bar" class="highlight-bar" aria-live="polite" hidden>
+  Zoekterm "<span id="highlight-bar-query"></span>" is gemarkeerd. Klik hier om de markering te verwijderen.
+</button>
