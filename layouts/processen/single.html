@@ -38,7 +38,7 @@
     {{ end }}
     {{ if $matches }}
       {{ $hits = add $hits (len $matches) }}
-      <section class="proces-norm-groep">
+      <section class="proces-norm-groep" id="norm-{{ $norm.Params.norm_id }}">
         <h3>
           <a href="{{ $norm.RelPermalink }}">Norm {{ $norm.Params.norm_id }}: {{ $norm.Params.norm_titel }}</a>
         </h3>

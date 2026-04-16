@@ -1,28 +1,68 @@
 {{ define "main" }}
-<div class="sidebar">
-  <nav class="side-nav" aria-label="Processen">
-    <ul>
-      {{ range .Pages.ByWeight }}
-      <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-      </li>
-      {{ end }}
-    </ul>
-  </nav>
-</div>
+{{ $processen := .Pages.ByWeight }}
+{{ $normen := where site.RegularPages "Section" "normen" }}
 <div class="processen-overzicht markup-content">
   <h1>{{ .Title }}</h1>
   {{ .Content }}
 
-  <div class="card-grid">
-    {{ range .Pages.ByWeight }}
-    <article class="card">
-      <header>
-        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-      </header>
-      {{ with .Params.kort }}<p>{{ . }}</p>{{ end }}
-    </article>
-    {{ end }}
+  <div class="proces-matrix-wrapper">
+    <table class="proces-matrix" aria-label="Matrix van normen en processtappen">
+      <thead>
+        <tr>
+          <th scope="col" class="proces-matrix__corner"></th>
+          {{ range $processen }}
+          <th scope="col" class="proces-matrix__col">
+            <a href="{{ .RelPermalink }}">
+              <span class="proces-matrix__col-title">{{ .Title }}</span>
+            </a>
+          </th>
+          {{ end }}
+        </tr>
+      </thead>
+      <tbody>
+        {{ range $normen.ByWeight }}
+        {{ $norm := . }}
+        <tr>
+          <th scope="row" class="proces-matrix__row">
+            <a href="{{ .RelPermalink }}">
+              <span class="norm-badge norm-badge--sm">{{ .Params.norm_id }}</span>
+              <span class="proces-matrix__row-title">{{ .Params.norm_titel }}</span>
+            </a>
+          </th>
+          {{ range $processen }}
+          {{ $proces := . }}
+          {{ $matches := slice }}
+          {{ range $norm.Params.normuitleg }}
+            {{ range .voorschriften }}
+              {{ if in (.processen | default slice) $proces.Params.proces_id }}
+                {{ $matches = $matches | append . }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+          {{ $count := len $matches }}
+          <td class="proces-matrix__cell{{ if gt $count 0 }} is-filled{{ else }} is-empty{{ end }}">
+            {{ if gt $count 0 }}
+            <a href="{{ $proces.RelPermalink }}#norm-{{ $norm.Params.norm_id }}"
+               aria-label="{{ $count }} voorschrift(en) bij norm {{ $norm.Params.norm_id }} in {{ $proces.Title | lower }}">
+              <span class="proces-matrix__count">{{ $count }}</span>
+            </a>
+            {{ else }}
+            <span aria-hidden="true">·</span>
+            <span class="sr-only">geen voorschriften</span>
+            {{ end }}
+          </td>
+          {{ end }}
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
   </div>
+
+  <p class="proces-matrix-legend">
+    <span class="proces-matrix__dot proces-matrix__dot--filled" aria-hidden="true"></span>
+    = aantal voorschriften op het snijvlak.
+    <span class="proces-matrix__dot proces-matrix__dot--empty" aria-hidden="true"></span>
+    = nog geen voorschriften gekoppeld (taggen is werk-in-uitvoering).
+  </p>
 </div>
 {{ end }}
