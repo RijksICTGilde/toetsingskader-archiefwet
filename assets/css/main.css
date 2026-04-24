@@ -621,6 +621,181 @@ footer nav li::before {
   margin-block-start: 0;
 }
 
+/* Processen: matrix (norm × proces) */
+.proces-matrix-wrapper {
+  overflow-x: auto;
+  margin-block: var(--mox-space-md, 1rem);
+  padding-block-end: var(--mox-space-xs, 0.25rem);
+}
+
+.proces-matrix {
+  border-collapse: separate;
+  border-spacing: 0;
+  inline-size: 100%;
+  min-inline-size: 48rem;
+  font-size: 0.95rem;
+}
+
+.proces-matrix th,
+.proces-matrix td {
+  border-block-end: 1px solid var(--mox-color-border-subtle, #d0d7de);
+  border-inline-end: 1px solid var(--mox-color-border-subtle, #d0d7de);
+  padding: var(--mox-space-padding-sm, 0.5rem) var(--mox-space-padding-md, 0.75rem);
+  vertical-align: middle;
+  text-align: center;
+  background-color: var(--mox-color-wit, #fff);
+}
+
+.proces-matrix thead th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+  background-color: var(--mox-color-feedback-info-subtle, #e8f0f7);
+  font-weight: 600;
+  color: var(--mox-color-text-default);
+  vertical-align: bottom;
+  min-inline-size: 6rem;
+}
+
+.proces-matrix__corner {
+  inset-inline-start: 0;
+  z-index: 3;
+  background-color: var(--mox-color-feedback-info-subtle, #e8f0f7) !important;
+}
+
+.proces-matrix__col a,
+.proces-matrix__row a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mox-space-xs, 0.5rem);
+}
+
+.proces-matrix__col a:hover .proces-matrix__col-title,
+.proces-matrix__row a:hover .proces-matrix__row-title {
+  text-decoration: underline;
+  color: var(--mox-color-accent-default, #007bc7);
+}
+
+.proces-matrix__row {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 1;
+  text-align: start !important;
+  background-color: var(--mox-color-wit, #fff) !important;
+  min-inline-size: 14rem;
+  white-space: nowrap;
+}
+
+.norm-badge--sm {
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: 0.85rem;
+}
+
+.proces-matrix__cell {
+  min-inline-size: 4rem;
+}
+
+.proces-matrix__cell.is-filled {
+  background: linear-gradient(135deg,
+    var(--mox-color-feedback-info-subtle, #e8f0f7) 0%,
+    var(--mox-color-wit, #fff) 100%);
+}
+
+.proces-matrix__cell.is-empty {
+  color: var(--mox-color-border-subtle, #c0c7ce);
+}
+
+.proces-matrix__cell a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  border-radius: 50%;
+  background-color: var(--mox-color-accent-default, #007bc7);
+  color: var(--mox-color-text-inverse, #fff);
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.proces-matrix__cell a:hover,
+.proces-matrix__cell a:focus-visible {
+  transform: scale(1.08);
+  box-shadow: 0 2px 8px rgba(0, 123, 199, 0.35);
+  outline: none;
+}
+
+.proces-matrix-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mox-space-xs, 0.5rem);
+  margin-block: var(--mox-space-sm, 0.75rem);
+  font-size: 0.9rem;
+  color: var(--mox-color-text-subtle, #555);
+}
+
+.proces-matrix__dot {
+  display: inline-block;
+  inline-size: 0.9rem;
+  block-size: 0.9rem;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.proces-matrix__dot--filled {
+  background-color: var(--mox-color-accent-default, #007bc7);
+}
+
+.proces-matrix__dot--empty {
+  background-color: transparent;
+  border: 1px dashed var(--mox-color-border-subtle, #c0c7ce);
+}
+
+.sr-only {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Proces-pagina: norm-groepen */
+.proces-kort {
+  font-size: 1.1rem;
+  color: var(--mox-color-text-default);
+}
+
+.proces-beschrijving {
+  margin-block: var(--mox-space-md, 1rem);
+}
+
+.proces-norm-groep {
+  margin-block: var(--mox-space-md, 1rem);
+  padding: var(--mox-space-md, 1rem) var(--mox-space-lg, 1.25rem);
+  background-color: var(--mox-color-feedback-neutral-subtle, #fafafa);
+  border: 1px solid var(--mox-color-border-subtle, #d0d7de);
+  border-radius: var(--mox-border-radius-md, 4px);
+  scroll-margin-block-start: var(--mox-space-md, 1rem);
+}
+
+.proces-norm-groep > h3 {
+  margin-block-start: 0;
+  color: var(--mox-color-accent-default, #007bc7);
+}
+
+.proces-norm-groep > h3 a {
+  color: inherit;
+}
+
 /* Referenties - inline hover/focus-tooltip met info-icoon */
 .ref-wrapper {
   position: relative;

@@ -130,6 +130,7 @@ normuitleg:
           a) duurzaam toegankelijk te maken,
 
           b) te vernietigen.
+        processen: ["opname"]
         criterium:
           - "In de passende maatregelen is opgenomen dat documenten zich in een [beheerde omgeving](/normen/01-beheer/) moeten bevinden."
           - "In de passende maatregelen zijn in ieder geval de onderwerpen [overzicht](/normen/02-overzicht/), [vinden](/normen/05-vindbaarheid/) en beschikbaarstellen, [ordenen](/normen/03-ordeningsstructuur/), [metadateren](/normen/04-metadatering/), [vernietigen](/normen/06-vernietigen/) en [betrouwbaarheid](/normen/06-vernietigen/) opgenomen. {ref:17}"
@@ -163,6 +164,7 @@ normuitleg:
   - titel: "Feitelijk beheer"
     voorschriften:
       - tekst: "De Inspectie toetst of alle {ref:34} door het verantwoordelijk overheidsorgaan opgemaakte en ontvangen documenten worden opgenomen in een beheerde omgeving {ref:35} waar zij duurzaam toegankelijk worden gemaakt en gehouden. {ref:36}"
+        processen: ["opname"]
         criterium:
           - |
             In een beheerde omgeving is een document:
