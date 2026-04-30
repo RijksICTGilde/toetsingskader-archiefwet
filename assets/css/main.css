@@ -147,6 +147,14 @@ main > .page-article {
   padding-block: var(--mox-space-lg, 2rem);
 }
 
+/* Als er een sidebar naast staat, laat het artikel in kolom 2 van de grid
+   vallen in plaats van de volle breedte te spannen (anders zakt het eronder). */
+main:has(> .sidebar) > .page-article {
+  grid-column: auto;
+  margin-inline: 0;
+  max-inline-size: none;
+}
+
 .home-intro {
   padding-block: var(--mox-space-lg, 2rem);
   font-size: 1.05em;
@@ -281,14 +289,22 @@ footer nav li::before {
 }
 
 .side-nav .norm-toc,
-.side-nav .norm-toc ul {
+.side-nav .norm-toc ul,
+.side-nav .side-nav-toc nav,
+.side-nav .side-nav-toc ul {
   list-style: none;
   padding-inline-start: var(--mox-space-md);
   margin: var(--mox-space-3xs) 0 var(--mox-space-2xs);
 }
 
-.side-nav .norm-toc li {
+.side-nav .norm-toc li,
+.side-nav .side-nav-toc li {
   margin-block: var(--mox-space-3xs);
+}
+
+.side-nav .side-nav-toc a {
+  font-weight: 400;
+  font-size: 0.95em;
 }
 
 /* Sticky sidebar op desktop - main is door MOx al 2-koloms grid (auto 1fr) */
@@ -956,4 +972,92 @@ button.ref-link:focus-visible {
   padding: 0.25em 0.5em;
   margin-inline-start: -0.5em;
   border-radius: 3px;
+}
+
+/* ============================================================
+   EXPERIMENT: ref-varianten (toggle via ?v=1..4 op normpagina's)
+   Default (geen data-ref-variant) = huidige styling: icoon+hover.
+   ============================================================ */
+
+/* Voorafgaand woord en cijfer standaard onzichtbaar; icoon-knop is default zichtbaar */
+.ref__preword { display: none; }
+.ref__num { display: none; }
+.ref-link--anchor { display: none; }
+
+/* Anchor-versie (gebruikt in V3 en V4-met-url): geen knop-styling, gewoon een link */
+a.ref-link--anchor {
+  color: var(--mox-color-accent-default, #007bc7);
+  text-decoration: none;
+  margin: 0 0.08em;
+}
+a.ref-link--anchor:hover,
+a.ref-link--anchor:focus-visible {
+  color: var(--mox-color-interactive-hover-text, #005e9a);
+  outline: none;
+}
+a.ref-link--anchor:focus-visible .ref__num {
+  outline: 2px solid var(--mox-color-accent-default, #007bc7);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --- V1: stippellijn onder voorafgaand woord, geen icoon/cijfer --- */
+[data-ref-variant="1"] .ref__preword {
+  display: inline;
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  cursor: help;
+}
+[data-ref-variant="1"] .ref__preword:focus-visible {
+  outline: 2px solid var(--mox-color-accent-default, #007bc7);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+[data-ref-variant="1"] button.ref-link--button,
+[data-ref-variant="1"] .ref-link--anchor { display: none; }
+
+/* --- V2: i-icoon in lichtere kleur, op baseline --- */
+[data-ref-variant="2"] .ref-link--anchor { display: none; }
+[data-ref-variant="2"] button.ref-link--button {
+  color: var(--mox-color-text-subtle, #6b7280);
+}
+[data-ref-variant="2"] .ref-link--button:hover,
+[data-ref-variant="2"] .ref-link--button:focus-visible {
+  color: var(--mox-color-text-default, #1f2937);
+}
+[data-ref-variant="2"] .ref-link--button .ref-icon {
+  vertical-align: baseline;
+}
+
+/* --- V3: superscript cijfer, hover-tooltip --- */
+[data-ref-variant="3"] button.ref-link--button { display: none; }
+[data-ref-variant="3"] .ref-link--anchor { display: inline; }
+[data-ref-variant="3"] .ref__num {
+  display: inline;
+  vertical-align: super;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+
+/* --- V4: bron (met url) = footnote-link-cijfer; uitleg (zonder url) = hover-icoon --- */
+[data-ref-variant="4"] .ref-wrapper[data-has-url="true"] .ref-link--anchor { display: inline; }
+[data-ref-variant="4"] .ref-wrapper[data-has-url="true"] .ref-link--button { display: none; }
+[data-ref-variant="4"] .ref-wrapper[data-has-url="true"] .ref__num {
+  display: inline;
+  vertical-align: super;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+[data-ref-variant="4"] .ref-wrapper[data-has-url="false"] .ref-link--anchor { display: none; }
+[data-ref-variant="4"] .ref-wrapper[data-has-url="false"] .ref-link--button { display: inline-block; }
+[data-ref-variant="4"] .ref-wrapper[data-has-url="false"] button.ref-link--button {
+  color: var(--mox-color-text-subtle, #6b7280);
+}
+[data-ref-variant="4"] .ref-wrapper[data-has-url="false"] .ref-link--button:hover,
+[data-ref-variant="4"] .ref-wrapper[data-has-url="false"] .ref-link--button:focus-visible {
+  color: var(--mox-color-text-default, #1f2937);
+}
+[data-ref-variant="4"] .ref-wrapper[data-has-url="false"] .ref-link--button .ref-icon {
+  vertical-align: baseline;
 }

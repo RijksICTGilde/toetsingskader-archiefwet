@@ -14,7 +14,8 @@
 </div>
 <div class="normen-overzicht markup-content">
   <h1>{{ .Title }}</h1>
-  <p class="intro">De Inspectie toetst of een document in beheer is, zodat het duurzaam toegankelijk gemaakt en gehouden kan worden. Een document is in ieder geval:</p>
+
+  {{ .Content }}
 
   <div class="card-grid">
     {{ range .Pages.ByWeight }}
@@ -31,7 +32,5 @@
     </article>
     {{ end }}
   </div>
-
-  {{ .Content }}
 </div>
 {{ end }}

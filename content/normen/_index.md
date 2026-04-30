@@ -5,6 +5,12 @@ description: "De acht normen uit het toetsingskader - van inbeheername tot perio
 weight: 20
 ---
 
+De Inspectie toetst of een document in beheer is, zodat het duurzaam toegankelijk gemaakt en gehouden kan worden. Klik op een onderwerp in het diagram of in de lijst hieronder voor de normuitwerking.
+
+{{< bollendiagram >}}
+
+[Lees meer over de opbouw en indeling van het toetsingskader →]({{< relref "/over" >}}#opbouw-en-indeling-toetsingskader)
+
 {{< leeswijzer >}}
 ## Leeswijzer
 

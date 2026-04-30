@@ -6,7 +6,7 @@
 </section>
 
 <section class="home-cards" aria-label="Onderwerpen">
-  {{ $slugs := slice "/over/" "/normen/" "/wettelijk-kader/" "/risicobenadering/" "/doelgroep/" }}
+  {{ $slugs := slice "/over/" "/normen/" "/processen/" }}
   {{ $pages := slice }}
   {{ range $slugs }}
     {{ with site.GetPage . }}

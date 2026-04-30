@@ -3,6 +3,8 @@ title: "Over het toetsingskader"
 card_title: "Over het toetsingskader"
 description: "Leeswijzer, doel en opbouw van het toetsingskader Archiefwet 2026."
 weight: 10
+aliases:
+  - /doelgroep/
 ---
 
 ## Leeswijzer
@@ -33,9 +35,9 @@ Het doel van dit toetsingskader is bij te dragen aan de duurzame toegankelijkhei
 
 ## Opbouw en indeling Toetsingskader
 
-{{< bollendiagram >}}
-
 Het toetsingskader bevat nu [acht onderwerpen]({{< relref "/normen" >}}) die de inspectie als fundamenteel voor de duurzame toegankelijkheid beschouwt. De vier wit gearceerde onderwerpen horen hier ook bij, en worden op een later moment toegevoegd aan het toetsingskader. De norm ["in beheer"]({{< relref "/normen/01-beheer" >}}) vormt de basis van het toetsingskader. Informatie is in beheer wanneer het verantwoordelijk overheidsorgaan de informatie duurzaam toegankelijk kan maken en houden. In een beheerde omgeving zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten.
+
+*Bekijk het interactieve [diagram op de normenpagina]({{< relref "/normen" >}}) voor een visueel overzicht van de onderwerpen en hun samenhang.*
 
 Informatie in beheer is zowel richten (door middel van beheerregels en passende maatregelen) als verrichten (het feitelijk beheer). Als informatie in beheer is volgens de normen van de archiefwet, is informatie duurzaam toegankelijk. Daarmee zijn de begrippen "duurzame toegankelijkheid" en "informatie in beheer" synoniem, maar het verschil is dat in beheernemen een continue proces is waardoor duurzame toegankelijkheid actief wordt gemaakt. Het is ook de eerste stap in het duurzaam toegankelijk maken van informatie. Het toetsingskader biedt zo ook praktische handvatten voor het richten en verrichten van de informatiehuishouding.
 
@@ -44,3 +46,19 @@ Documenten zijn niet "opeens" duurzaam toegankelijk. Daarom kiest de Inspectie e
 Per norm is uitgewerkt welke bijzondere bepalingen uit de Archiefregelgeving daarop van toepassing zijn. Hier volgen voorschriften met eventueel bijbehorende criteria en indicatoren op.
 
 Dit toetsingskader wordt op een later moment aangevuld met andere onderwerpen uit de Archiefwet-en regelgeving.
+
+## Doelgroep
+
+Ruim 325 organisaties van de centrale overheid vallen onder de werking van de Archiefwet 1995 en het toezicht van de Inspectie Overheidsinformatie en Erfgoed. Dat zijn:
+
+- Ministeries
+- Diensten, agentschappen, rijksinspecties etc.
+- Hoge Colleges van Staat
+- Commissarissen van de Koning
+- Publiekrechtelijke zelfstandige bestuursorganen (zbo's), zoals openbare universiteiten en academische ziekenhuizen
+- Privaatrechtelijke zbo's met openbaar gezag bekleed, zoals certificerings- en keuringsinstanties voor arbeidsomstandigheden of voogdijinstellingen
+- Rechterlijke organisatie
+- Organen van de publiekrechtelijke bedrijfs- en beroepsorganisatie
+- Overige
+
+Het volledige overzicht is te vinden op de [website van de Inspectie Overheidsinformatie en Erfgoed](https://www.inspectie-oe.nl/).
