@@ -11,7 +11,8 @@
       "WebFetch(domain:mijnoverheidzakelijk.nl)",
       "Bash(curl -sSL https://raw.githubusercontent.com/MinBZK/moza-site/main/content/_index.md)",
       "Bash(curl *)",
-      "Bash(hugo --minify --quiet)"
+      "Bash(hugo --minify --quiet)",
+      "Bash(hugo)"
     ]
   }
 }

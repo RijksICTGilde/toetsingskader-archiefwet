@@ -10,17 +10,16 @@
 {{/* MOx CSS - served as static files so the browser resolves @import chains */}}
 <link rel="stylesheet" href="{{ "style/style.css" | relURL }}">
 
-{{/* Theme CSS + project CSS via Hugo asset pipeline */}}
-{{ $theme := resources.Get "css/theme.css" }}
-{{ $hero := resources.Get "css/components/hero.css" }}
-{{ $cardGrid := resources.Get "css/components/card-grid.css" }}
-{{ $styles := slice $theme $hero $cardGrid }}
-{{ with resources.Get "css/main.css" }}
-  {{ $styles = $styles | append . }}
-{{ end }}
-{{ with resources.Get "css/bollendiagram.css" }}
-  {{ $styles = $styles | append . }}
-{{ end }}
+{{/* Theme CSS + project CSS via Hugo asset pipeline.
+     `with` per resource zodat ontbrekende theme-bestanden de bundel niet breken
+     (theme is in beweging: card-grid.css → tile-grid.css). */}}
+{{ $styles := slice }}
+{{ with resources.Get "css/theme.css" }}{{ $styles = $styles | append . }}{{ end }}
+{{ with resources.Get "css/components/hero.css" }}{{ $styles = $styles | append . }}{{ end }}
+{{ with resources.Get "css/components/card-grid.css" }}{{ $styles = $styles | append . }}{{ end }}
+{{ with resources.Get "css/components/tile-grid.css" }}{{ $styles = $styles | append . }}{{ end }}
+{{ with resources.Get "css/main.css" }}{{ $styles = $styles | append . }}{{ end }}
+{{ with resources.Get "css/bollendiagram.css" }}{{ $styles = $styles | append . }}{{ end }}
 {{ $bundle := $styles | resources.Concat "css/bundle.css" }}
 <link rel="stylesheet" href="{{ $bundle.RelPermalink }}">
 
