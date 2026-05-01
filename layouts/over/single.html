@@ -1,0 +1,25 @@
+{{ define "main" }}
+{{ $page := . }}
+<div class="sidebar">
+  <nav class="side-nav" aria-label="Over het toetsingskader">
+    <ul>
+      <li>
+        <a href="{{ .Parent.RelPermalink }}">← {{ .Parent.Params.card_title | default .Parent.Title }}</a>
+      </li>
+      {{ range .Parent.Pages.ByWeight }}
+      {{ $isCurrent := eq $.RelPermalink .RelPermalink }}
+      <li>
+        <a href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>{{ .Params.card_title | default .Title }}</a>
+        {{ if and $isCurrent (gt (len $page.Fragments.Headings) 0) }}
+        <div class="side-nav-toc">{{ $page.TableOfContents }}</div>
+        {{ end }}
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+</div>
+<article class="page-article markup-content">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</article>
+{{ end }}

@@ -3,6 +3,8 @@ title: "Wettelijk kader"
 card_title: "Wettelijk kader"
 description: "De Archiefwet 2026, het Archiefbesluit en de begrippen document, voorschrift, criterium en indicator."
 weight: 20
+aliases:
+  - /wettelijk-kader/
 ---
 
 Aan het beheer van overheidsinformatie zijn regels gesteld. De Inspectie Overheidsinformatie en Erfgoed ziet toe op de naleving van de Archiefwet 2026, het Archiefbesluit 2026 en de Archiefregeling.

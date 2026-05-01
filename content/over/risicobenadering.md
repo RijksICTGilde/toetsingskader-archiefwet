@@ -3,6 +3,8 @@ title: "Risicobenadering en passende maatregelen"
 card_title: "Risicobenadering"
 description: "Hoe overheidsorganisaties passende maatregelen vaststellen en met een risicobenadering differentiatie aanbrengen."
 weight: 40
+aliases:
+  - /risicobenadering/
 ---
 
 ## Passende maatregelen

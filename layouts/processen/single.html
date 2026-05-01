@@ -1,0 +1,83 @@
+{{ define "main" }}
+{{ $procesId := .Params.proces_id }}
+{{ $normen := where site.RegularPages "Section" "normen" }}
+<div class="sidebar">
+  <nav class="side-nav" aria-label="Processen">
+    <ul>
+      <li><a href="{{ .Parent.RelPermalink }}">← Processen</a></li>
+      {{ range .Parent.Pages.ByWeight }}
+      {{ $isCurrent := eq $.RelPermalink .RelPermalink }}
+      <li>
+        <a href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>{{ .Title }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+</div>
+<article class="proces-page markup-content">
+  <h1>{{ .Title }}</h1>
+
+  {{ with .Params.kort }}<p class="proces-kort"><strong>{{ . }}</strong></p>{{ end }}
+
+  {{ with .Params.beschrijving }}
+  <div class="proces-beschrijving">{{ . | markdownify }}</div>
+  {{ end }}
+
+  <h2>Voorschriften bij deze processtap</h2>
+
+  {{ $hits := 0 }}
+  {{ range $normen.ByWeight }}
+    {{ $norm := . }}
+    {{ $matches := slice }}
+    {{ range .Params.normuitleg }}
+      {{ range .voorschriften }}
+        {{ if in (.processen | default slice) $procesId }}
+          {{ $matches = $matches | append . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ if $matches }}
+      {{ $hits = add $hits (len $matches) }}
+      <section class="proces-norm-groep" id="norm-{{ $norm.Params.norm_id }}">
+        <h3>
+          <a href="{{ $norm.RelPermalink }}">Norm {{ $norm.Params.norm_id }}: {{ $norm.Params.norm_titel }}</a>
+        </h3>
+        {{ range $matches }}
+          <div class="norm-voorschrift">
+            <h4>Voorschrift</h4>
+            {{ partial "reftext.html" (dict "tekst" .tekst "page" $norm) }}
+
+            {{ with .criterium }}
+            <div class="norm-criterium">
+              <h5>Criterium</h5>
+              <ul>
+                {{ range . }}
+                <li>{{ partial "reftext.html" (dict "tekst" . "page" $norm) }}</li>
+                {{ end }}
+              </ul>
+            </div>
+            {{ end }}
+
+            {{ with .indicatoren }}
+            <div class="norm-indicator">
+              <h5>Indicatoren</h5>
+              <ul>
+                {{ range . }}
+                <li>{{ partial "reftext.html" (dict "tekst" . "page" $norm) }}</li>
+                {{ end }}
+              </ul>
+            </div>
+            {{ end }}
+          </div>
+        {{ end }}
+      </section>
+    {{ end }}
+  {{ end }}
+
+  {{ if eq $hits 0 }}
+  <p><em>Nog geen voorschriften gekoppeld aan deze processtap.</em></p>
+  {{ end }}
+
+  {{ .Content }}
+</article>
+{{ end }}
