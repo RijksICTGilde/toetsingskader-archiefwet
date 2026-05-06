@@ -812,57 +812,24 @@ footer nav li::before {
   color: inherit;
 }
 
-/* Referenties - inline hover/focus-tooltip met info-icoon */
+/* Referenties - term met onderstippelde underline + hover/focus-tooltip */
 .ref-wrapper {
   position: relative;
   display: inline;
 }
 
-/* Overschrijf MOx's globale button-styling expliciet */
-.markup-content button.ref-link,
-button.ref-link {
-  appearance: none;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  margin: 0 0.08em;
-  font: inherit;
-  line-height: 1;
-  color: var(--mox-color-accent-default, #007bc7);
-  cursor: pointer;
-  display: inline;
-  vertical-align: baseline;
-  box-shadow: none;
-  inline-size: auto;
-  min-inline-size: 0;
-  min-block-size: 0;
-  block-size: auto;
-  align-self: auto;
-  transition: none;
+.ref-term {
+  text-decoration: underline dotted;
+  text-decoration-color: color-mix(in srgb, var(--mox-color-accent-default, #007bc7) 55%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  cursor: help;
 }
 
-.markup-content button.ref-link:hover,
-.markup-content button.ref-link:focus-visible,
-button.ref-link:hover,
-button.ref-link:focus-visible {
-  background: transparent;
-  color: var(--mox-color-interactive-hover-text, #005e9a);
-  outline: none;
-}
-
-.ref-link .ref-icon {
-  inline-size: 0.85em;
-  block-size: 0.85em;
-  display: inline-block;
-  vertical-align: 0.25em;
-  transition: color 0.12s ease;
-}
-
-.ref-link:focus-visible .ref-icon {
+.ref-term:focus-visible {
   outline: 2px solid var(--mox-color-accent-default, #007bc7);
   outline-offset: 2px;
-  border-radius: 50%;
+  border-radius: 2px;
 }
 
 .ref-tooltip {
@@ -974,90 +941,3 @@ button.ref-link:focus-visible {
   border-radius: 3px;
 }
 
-/* ============================================================
-   EXPERIMENT: ref-varianten (toggle via ?v=1..4 op normpagina's)
-   Default (geen data-ref-variant) = huidige styling: icoon+hover.
-   ============================================================ */
-
-/* Voorafgaand woord en cijfer standaard onzichtbaar; icoon-knop is default zichtbaar */
-.ref__preword { display: none; }
-.ref__num { display: none; }
-.ref-link--anchor { display: none; }
-
-/* Anchor-versie (gebruikt in V3 en V4-met-url): geen knop-styling, gewoon een link */
-a.ref-link--anchor {
-  color: var(--mox-color-accent-default, #007bc7);
-  text-decoration: none;
-  margin: 0 0.08em;
-}
-a.ref-link--anchor:hover,
-a.ref-link--anchor:focus-visible {
-  color: var(--mox-color-interactive-hover-text, #005e9a);
-  outline: none;
-}
-a.ref-link--anchor:focus-visible .ref__num {
-  outline: 2px solid var(--mox-color-accent-default, #007bc7);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-/* --- V1: stippellijn onder voorafgaand woord, geen icoon/cijfer --- */
-[data-ref-variant="1"] .ref__preword {
-  display: inline;
-  text-decoration: underline dotted;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-  cursor: help;
-}
-[data-ref-variant="1"] .ref__preword:focus-visible {
-  outline: 2px solid var(--mox-color-accent-default, #007bc7);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-[data-ref-variant="1"] button.ref-link--button,
-[data-ref-variant="1"] .ref-link--anchor { display: none; }
-
-/* --- V2: i-icoon in lichtere kleur, op baseline --- */
-[data-ref-variant="2"] .ref-link--anchor { display: none; }
-[data-ref-variant="2"] button.ref-link--button {
-  color: var(--mox-color-text-subtle, #6b7280);
-}
-[data-ref-variant="2"] .ref-link--button:hover,
-[data-ref-variant="2"] .ref-link--button:focus-visible {
-  color: var(--mox-color-text-default, #1f2937);
-}
-[data-ref-variant="2"] .ref-link--button .ref-icon {
-  vertical-align: baseline;
-}
-
-/* --- V3: superscript cijfer, hover-tooltip --- */
-[data-ref-variant="3"] button.ref-link--button { display: none; }
-[data-ref-variant="3"] .ref-link--anchor { display: inline; }
-[data-ref-variant="3"] .ref__num {
-  display: inline;
-  vertical-align: super;
-  font-size: 0.75em;
-  font-weight: 600;
-}
-
-/* --- V4: bron (met url) = footnote-link-cijfer; uitleg (zonder url) = hover-icoon --- */
-[data-ref-variant="4"] .ref-wrapper[data-has-url="true"] .ref-link--anchor { display: inline; }
-[data-ref-variant="4"] .ref-wrapper[data-has-url="true"] .ref-link--button { display: none; }
-[data-ref-variant="4"] .ref-wrapper[data-has-url="true"] .ref__num {
-  display: inline;
-  vertical-align: super;
-  font-size: 0.75em;
-  font-weight: 600;
-}
-[data-ref-variant="4"] .ref-wrapper[data-has-url="false"] .ref-link--anchor { display: none; }
-[data-ref-variant="4"] .ref-wrapper[data-has-url="false"] .ref-link--button { display: inline-block; }
-[data-ref-variant="4"] .ref-wrapper[data-has-url="false"] button.ref-link--button {
-  color: var(--mox-color-text-subtle, #6b7280);
-}
-[data-ref-variant="4"] .ref-wrapper[data-has-url="false"] .ref-link--button:hover,
-[data-ref-variant="4"] .ref-wrapper[data-has-url="false"] .ref-link--button:focus-visible {
-  color: var(--mox-color-text-default, #1f2937);
-}
-[data-ref-variant="4"] .ref-wrapper[data-has-url="false"] .ref-link--button .ref-icon {
-  vertical-align: baseline;
-}

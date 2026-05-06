@@ -70,9 +70,6 @@ menu:
     - name: Normen
       pageRef: /normen
       weight: 10
-    - name: Processen
-      pageRef: /processen
-      weight: 12
 
 module:
   imports:

@@ -1,11 +1,5 @@
 {{ define "main" }}
 {{ $page := . }}
-<script>
-  (function () {
-    var m = location.search.match(/[?&]v=([1-4])(?:&|$)/);
-    if (m) document.documentElement.setAttribute('data-ref-variant', m[1]);
-  })();
-</script>
 <div class="sidebar">
   <nav class="side-nav" aria-label="Normen">
     <ul>
