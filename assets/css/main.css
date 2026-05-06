@@ -405,7 +405,7 @@ footer nav li::before {
   }
 }
 
-/* Header search trigger - plat, lijnt uit met nav-links */
+/* Header search trigger - plat, lijnt uit met nav-links. */
 .main-nav .search-trigger {
   display: inline-flex;
   align-items: center;
@@ -417,7 +417,6 @@ footer nav li::before {
   border: none;
   cursor: pointer;
   font: var(--mox-text-nav-main-nav);
-  line-height: 1;
 }
 
 .main-nav .search-trigger:hover,
@@ -752,11 +751,7 @@ footer nav li::before {
 }
 
 .norm-uitleg__item {
-  margin-block: var(--mox-space-sm);
-  padding: var(--mox-space-md) var(--mox-space-lg);
-  background-color: var(--mox-color-feedback-neutral-subtle, #fafafa);
-  border: var(--mox-border-width-xs) solid var(--mox-color-border-subtle, #ccc);
-  border-radius: var(--mox-border-radius-md);
+  margin-block: var(--mox-space-md);
 }
 
 .norm-uitleg__item h3 {

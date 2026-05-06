@@ -57,27 +57,31 @@
         {{ partial "reftext.html" (dict "tekst" .tekst "page" $page) }}
       </div>
 
-      {{ with .criterium }}
       <div class="norm-criterium">
         <h4>Criterium</h4>
+        {{ with .criterium }}
         <ul>
           {{ range . }}
           <li>{{ partial "reftext.html" (dict "tekst" . "page" $page) }}</li>
           {{ end }}
         </ul>
+        {{ else }}
+        <p><em>Niet van toepassing</em></p>
+        {{ end }}
       </div>
-      {{ end }}
 
-      {{ with .indicatoren }}
       <div class="norm-indicator">
         <h4>Indicatoren</h4>
+        {{ with .indicatoren }}
         <ul>
           {{ range . }}
           <li>{{ partial "reftext.html" (dict "tekst" . "page" $page) }}</li>
           {{ end }}
         </ul>
+        {{ else }}
+        <p><em>Niet van toepassing</em></p>
+        {{ end }}
       </div>
-      {{ end }}
       {{ end }}
     </div>
     {{ end }}
