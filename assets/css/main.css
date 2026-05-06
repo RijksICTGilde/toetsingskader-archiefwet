@@ -854,7 +854,6 @@ footer nav li::before {
   text-decoration-color: color-mix(in srgb, var(--mox-color-accent-default, #007bc7) 55%, transparent);
   text-decoration-thickness: 2px;
   text-underline-offset: 0.2em;
-  cursor: help;
 }
 
 .ref-term:focus-visible {
