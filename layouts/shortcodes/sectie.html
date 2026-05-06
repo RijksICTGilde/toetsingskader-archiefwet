@@ -1,0 +1,29 @@
+{{/*
+  Shortcode: sectie
+  Inklapbare sectie als card. Gebruikt het native <details>/<summary>
+  component uit hugo-theme-ro (border, background-subtle, chevron-icoon
+  via ::before, hover-staat). Wij voegen alleen project-specifieke
+  toepassing toe (titel-styling en content-padding).
+
+  Usage:
+    {{< sectie titel="Leeswijzer" id="leeswijzer" >}}
+    Markdown content...
+    {{< /sectie >}}
+
+  Parameters:
+    titel  — verplichte titel die in de summary verschijnt
+    id     — optioneel, voor ankerlinks. Default: titel | urlize
+    open   — "true" om de sectie standaard open te tonen
+*/}}
+
+{{- $titel := .Get "titel" -}}
+{{- if not $titel -}}{{- errorf "sectie shortcode: 'titel' is verplicht" -}}{{- end -}}
+{{- $id := .Get "id" | default ($titel | urlize) -}}
+{{- $open := eq (.Get "open") "true" -}}
+
+<details class="sectie"{{ if $open }} open{{ end }} id="{{ $id }}">
+  <summary>{{ $titel }}</summary>
+  <div class="sectie-content markup-content">
+    {{ .Inner | markdownify }}
+  </div>
+</details>

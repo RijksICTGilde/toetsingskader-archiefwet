@@ -3,7 +3,11 @@
   {{- $text := .Plain | replaceRE `\{ref:\d+\}` "" -}}
   {{- with .Params.kern }}{{ $text = printf "%s %s" $text . }}{{ end -}}
   {{- with .Params.toelichting }}{{ $text = printf "%s %s" $text . }}{{ end -}}
-  {{- with .Params.synoniemen }}{{ $text = printf "%s %s" $text (delimit . " ") }}{{ end -}}
+  {{- $synoniemen := "" -}}
+  {{- with .Params.synoniemen -}}
+    {{- $synoniemen = delimit . " " | replaceRE `\{ref:\d+\}` "" -}}
+    {{- $text = printf "%s %s" $text $synoniemen -}}
+  {{- end -}}
   {{- with .Params.normuitleg -}}
     {{- range . -}}
       {{- with .titel }}{{ $text = printf "%s %s" $text . }}{{ end -}}
@@ -11,12 +15,15 @@
     {{- end -}}
   {{- end -}}
   {{- $title := .Title -}}
+  {{- $section := .Section -}}
   {{- if and .Params.norm_id .Params.norm_titel -}}
     {{- $title = printf "Norm %s: %s" (string .Params.norm_id) .Params.norm_titel -}}
   {{- end -}}
   {{- $pages = $pages | append (dict
     "title" $title
     "url" .RelPermalink
+    "section" $section
+    "synoniemen" $synoniemen
     "content" ($text | replaceRE `\{ref:\d+\}` "")
   ) -}}
 {{- end -}}

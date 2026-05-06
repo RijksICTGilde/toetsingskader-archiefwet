@@ -39,17 +39,97 @@
   margin-block-end: 0.5em;
 }
 
-/* Inspectie OE: hemelblauw als accentkleur i.p.v. lintblauw */
+/* === Theme-token brand-overrides + compat shim ============================
+   Het thema gebruikt sinds april 2026 --toepassing-* (was --mox-*). Een groot
+   deel van onze CSS én een paar legacy theme-bestanden refereren nog naar
+   --mox-*. Hieronder mappen we --mox-* tokens automatisch op hun
+   --toepassing-* equivalent, zodat alles weer resolves. Boven de shim staan
+   de Inspectie-OE brand-overrides (hemelblauw i.p.v. lintblauw / grijs). */
 :root {
-  --mox-color-background-inverse: #007bc7;
-  --mox-color-accent-default: #007bc7;
-  --mox-color-interactive-default-background: #007bc7;
-  --mox-color-interactive-default-text: #007bc7;
-  --mox-color-interactive-hover-background: #005e9a;
-  --mox-color-interactive-active-background: #007bc7;
-  --mox-color-interactive-hover-text: #005e9a;
-  --mox-color-logo-background: #007bc7;
-  --mox-color-component-footer-background: #007bc7;
+  /* --- Brand overrides --- */
+  --toepassing-color-background-inverse: #007bc7;
+  --toepassing-color-accent-default: #007bc7;
+  --toepassing-color-interactive-default-background: #007bc7;
+  --toepassing-color-interactive-default-text: #007bc7;
+  --toepassing-color-interactive-default-border: #007bc7;
+  --toepassing-color-interactive-hover-background: #005e9a;
+  --toepassing-color-interactive-hover-border: #005e9a;
+  --toepassing-color-interactive-hover-text: #005e9a;
+  --toepassing-color-interactive-active-background: #007bc7;
+  --toepassing-color-interactive-active-border: #007bc7;
+  --toepassing-color-interactive-selected-background: #007bc7;
+  --toepassing-color-interactive-selected-border: #007bc7;
+  --toepassing-color-logo-background: #007bc7;
+  --toepassing-color-component-footer-background: #007bc7;
+
+  /* --- Compat shim: --mox-* → --toepassing-* --- */
+  /* kleuren */
+  --mox-color-background-canvas: var(--toepassing-color-background-canvas);
+  --mox-color-background-default: var(--toepassing-color-background-default);
+  --mox-color-background-subtle: var(--toepassing-color-background-subtle);
+  --mox-color-background-raised: var(--toepassing-color-background-raised);
+  --mox-color-background-inverse: var(--toepassing-color-background-inverse);
+  --mox-color-text-default: var(--toepassing-color-text-default);
+  --mox-color-text-inverse: var(--toepassing-color-text-inverse);
+  --mox-color-text-subtle: var(--toepassing-color-text-subtle-1);
+  --mox-color-text-subtle-1: var(--toepassing-color-text-subtle-1);
+  --mox-color-text-subtle-2: var(--toepassing-color-text-subtle-2);
+  --mox-color-border-default: var(--toepassing-color-border-default);
+  --mox-color-border-subtle: var(--toepassing-color-border-subtle);
+  --mox-color-border-strong: var(--toepassing-color-border-strong);
+  --mox-color-feedback-info-subtle: var(--toepassing-color-feedback-info-subtle);
+  --mox-color-feedback-info-default: var(--toepassing-color-feedback-info-default);
+  --mox-color-feedback-info-emphasis: var(--toepassing-color-feedback-info-emphasis);
+  --mox-color-feedback-neutral-subtle: var(--toepassing-color-feedback-neutral-subtle);
+  --mox-color-accent-default: var(--toepassing-color-accent-default);
+  --mox-color-interactive-default-background: var(--toepassing-color-interactive-default-background);
+  --mox-color-interactive-default-text: var(--toepassing-color-interactive-default-text);
+  --mox-color-interactive-hover-background: var(--toepassing-color-interactive-hover-background);
+  --mox-color-interactive-hover-text: var(--toepassing-color-interactive-hover-text);
+  --mox-color-interactive-active-background: var(--toepassing-color-interactive-active-background);
+  --mox-color-logo-background: var(--toepassing-color-logo-background);
+  --mox-color-component-footer-background: var(--toepassing-color-component-footer-background);
+  --mox-color-wit: var(--rijkshuisstijl-color-neutraal-wit, #fff);
+
+  /* spacing */
+  --mox-space-3xs: var(--toepassing-space-3xs);
+  --mox-space-2xs: var(--toepassing-space-2xs);
+  --mox-space-xs: var(--toepassing-space-xs);
+  --mox-space-sm: var(--toepassing-space-sm);
+  --mox-space-md: var(--toepassing-space-md);
+  --mox-space-lg: var(--toepassing-space-lg);
+  --mox-space-xl: var(--toepassing-space-xl);
+  --mox-space-2xl: var(--toepassing-space-2xl);
+  --mox-space-padding-2xs: var(--toepassing-space-padding-2xs);
+  --mox-space-padding-xs: var(--toepassing-space-padding-xs);
+  --mox-space-padding-sm: var(--toepassing-space-padding-sm);
+  --mox-space-padding-md: var(--toepassing-space-padding-md);
+  --mox-space-padding-lg: var(--toepassing-space-padding-lg);
+  --mox-space-padding-xl: var(--toepassing-space-padding-xl);
+  --mox-space-margin-2xs: var(--toepassing-space-margin-2xs);
+  --mox-space-margin-xs: var(--toepassing-space-margin-xs);
+  --mox-space-margin-sm: var(--toepassing-space-margin-sm);
+  --mox-space-margin-md: var(--toepassing-space-margin-md);
+  --mox-space-margin-lg: var(--toepassing-space-margin-lg);
+
+  /* sizes / borders */
+  --mox-border-radius-sm: var(--toepassing-border-radius-sm);
+  --mox-border-radius-md: var(--toepassing-border-radius-md);
+  --mox-border-width-xs: var(--toepassing-border-width-xs);
+  --mox-border-width-md: var(--toepassing-border-width-md);
+  --mox-page-max-inline-size: var(--toepassing-page-max-inline-size);
+
+  /* text */
+  --mox-text-font-family-body: var(--toepassing-text-font-family-body);
+  --mox-text-font-family-serif: Georgia, "Times New Roman", serif;
+  --mox-text-font-weight-bold: var(--toepassing-text-font-weight-bold);
+  --mox-text-font-weight-semi-bold: var(--toepassing-text-font-weight-semi-bold);
+  --mox-text-size-body-md: var(--toepassing-text-size-body-md);
+  --mox-text-size-body-sm: var(--toepassing-text-size-body-sm);
+  --mox-text-size-title-md: var(--toepassing-text-size-title-md);
+  --mox-text-size-title-lg: var(--toepassing-text-size-title-lg);
+  --mox-text-nav-main-nav: var(--toepassing-text-nav-main-nav);
+  --mox-text-smalltext: var(--toepassing-text-smalltext);
 }
 
 /* Voetnoten na de norm-cards plaatsen */
@@ -66,6 +146,12 @@
 /* Verwijder MOx header margin wanneer de hero direct eronder komt */
 body:has(main > .hero:first-child) header {
   margin-block-end: 0;
+}
+
+/* Het nieuwe thema zet via `body > * + *` een margin-block-start op main.
+   Op pagina's met een hero direct onder de header willen we die ruimte niet. */
+body:has(main > .hero:first-child) main {
+  margin-block-start: 0;
 }
 
 /* Hero: volle viewport-breedte, buiten de main max-width getrokken */
@@ -230,11 +316,15 @@ main > .page-article {
   align-items: center;
   justify-content: flex-start;
   margin-inline: auto;
-  max-inline-size: var(--mox-page-max-inline-size);
+  max-inline-size: var(--toepassing-page-max-inline-size, var(--mox-page-max-inline-size, 71.25rem));
 }
 
-.main-nav-inner ul {
+/* Het nieuwe thema centreert .main-nav ul met margin-inline: auto en
+   max-inline-size — wij hebben al een centrale .main-nav-inner wrapper,
+   dus reset die regels op onze nested ul. */
+.main-nav-inner > ul {
   margin-inline: 0;
+  max-inline-size: none;
 }
 
 .footer-payoff {
@@ -280,15 +370,27 @@ footer nav li::before {
   font-weight: 700;
 }
 
-.side-nav .norm-toc,
+.side-nav .norm-toc {
+  list-style: none;
+  padding-inline-start: var(--toepassing-space-md, 1rem);
+  margin: var(--toepassing-space-2xs, 0.25rem) 0 var(--toepassing-space-sm, 0.5rem);
+}
+
+/* Genest niveau extra inspringen zodat sub-items duidelijk onder hun
+   parent staan (bijv. Besturing/Feitelijk beheer onder Normuitleg). */
 .side-nav .norm-toc ul {
   list-style: none;
-  padding-inline-start: var(--mox-space-md);
-  margin: var(--mox-space-3xs) 0 var(--mox-space-2xs);
+  padding-inline-start: var(--toepassing-space-md, 1rem);
+  margin: var(--toepassing-space-2xs, 0.25rem) 0;
 }
 
 .side-nav .norm-toc li {
-  margin-block: var(--mox-space-3xs);
+  margin-block: var(--toepassing-space-2xs, 0.25rem);
+}
+
+.side-nav .norm-toc ul li {
+  font-size: 0.95em;
+  color: var(--toepassing-color-text-subtle-1);
 }
 
 /* Sticky sidebar op desktop - main is door MOx al 2-koloms grid (auto 1fr) */
@@ -303,7 +405,7 @@ footer nav li::before {
   }
 }
 
-/* Header search trigger - plat, lijnt uit met nav-links */
+/* Header search trigger - plat, lijnt uit met nav-links. */
 .main-nav .search-trigger {
   display: inline-flex;
   align-items: center;
@@ -315,7 +417,6 @@ footer nav li::before {
   border: none;
   cursor: pointer;
   font: var(--mox-text-nav-main-nav);
-  line-height: 1;
 }
 
 .main-nav .search-trigger:hover,
@@ -502,40 +603,132 @@ footer nav li::before {
   background: var(--mox-color-interactive-hover-background, #005e9a);
 }
 
+/* Info-blokjes op homepage — flat tile-stijl met icoon + donkerblauwe titel,
+   geïnspireerd op MijnOverheid Zakelijk. Niet doorklikbaar.
+   Default 2x2 zodat tegels brede leesbare kolommen krijgen; alleen bij
+   ultra-wide schermen schalen we naar 4 op een rij. */
+.info-tiles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--toepassing-space-2xl, 2.5rem) var(--toepassing-space-xl, 2rem);
+  margin-block: var(--toepassing-space-2xl, 2.5rem);
+}
+
+@media (min-width: 640px) {
+  .info-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .info-tiles {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.info-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--toepassing-space-xs, 0.5rem);
+  max-inline-size: 32rem;
+}
+
+.info-tile-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--toepassing-color-interactive-default-background, #007bc7);
+  margin-block-end: var(--toepassing-space-xs, 0.5rem);
+}
+
+.info-tile-icon svg {
+  inline-size: 36px;
+  block-size: 36px;
+}
+
+.info-tile-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--toepassing-color-interactive-default-background, #007bc7);
+  line-height: 1.3;
+}
+
+.info-tile p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--toepassing-color-text-default);
+}
+
+.info-tile a {
+  color: var(--toepassing-color-interactive-default-text, #007bc7);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.info-tile a:hover,
+.info-tile a:focus-visible {
+  color: var(--toepassing-color-interactive-hover-text, #005e9a);
+}
+
+/* Sectie (accordion) — gebruikt het native <details>/<summary> component
+   uit hugo-theme-ro. We voegen alleen toe wat nodig is om de titel als
+   donkerblauwe heading te tonen en de content netjes te padden. */
+.sectie {
+  margin-block: var(--toepassing-space-md, 1rem);
+}
+
+.sectie > summary {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--toepassing-color-interactive-default-background, #007bc7);
+  padding: var(--toepassing-space-padding-md, 1rem) var(--toepassing-space-padding-lg, 1.25rem);
+}
+
+.sectie[open] > summary {
+  border-block-end: 1px solid var(--toepassing-color-border-subtle, #d0d7de);
+}
+
+.sectie-content {
+  padding: var(--toepassing-space-padding-md, 1rem) var(--toepassing-space-padding-lg, 1.25rem);
+}
+
+.sectie-content > *:first-child {
+  margin-block-start: 0;
+}
+
+.sectie-content > *:last-child {
+  margin-block-end: 0;
+}
+
 /* Toetsingskader-specifieke styling */
 
 /* Norm page: kern */
 .norm-kern {
-  background-color: var(--mox-color-feedback-info-subtle, #e8f0f7);
-  border-inline-start: 4px solid var(--mox-color-accent-default, #007bc7);
-  padding: var(--mox-space-md) var(--mox-space-lg);
-  margin-block: var(--mox-space-sm);
-  border-radius: 0 var(--mox-border-radius-md) var(--mox-border-radius-md) 0;
+  background-color: var(--toepassing-color-feedback-info-subtle, #e8f0f7);
+  border-inline-start: 4px solid var(--toepassing-color-accent-default, #007bc7);
+  padding: var(--toepassing-space-padding-lg, 1.25rem) var(--toepassing-space-padding-xl, 1.75rem);
+  margin-block: var(--toepassing-space-md, 1rem);
+  border-radius: 0 var(--toepassing-border-radius-md, 4px) var(--toepassing-border-radius-md, 4px) 0;
 }
 
 .norm-kern h2 {
   margin-block-start: 0;
+  margin-block-end: var(--toepassing-space-sm, 0.75rem);
 }
 
 /* Norm page: toelichting */
 .norm-toelichting {
-  margin-block: var(--mox-space-sm);
-  padding: var(--mox-space-md) var(--mox-space-lg);
-  background-color: var(--mox-color-feedback-neutral-subtle, #f9f9f9);
-  border-radius: var(--mox-border-radius-md);
+  margin-block: var(--toepassing-space-md, 1rem);
+  padding: var(--toepassing-space-padding-lg, 1.25rem) var(--toepassing-space-padding-xl, 1.75rem);
+  background-color: var(--toepassing-color-feedback-neutral-subtle, #f9f9f9);
+  border-radius: var(--toepassing-border-radius-md, 4px);
 }
 
 .norm-toelichting h2 {
   margin-block-start: 0;
-}
-
-/* Norm page: synoniemen */
-.norm-synoniemen {
-  margin-block: var(--mox-space-sm);
-}
-
-.norm-synoniemen p {
-  font-style: italic;
+  margin-block-end: var(--toepassing-space-sm, 0.75rem);
 }
 
 /* Norm page: normuitleg */
@@ -549,11 +742,7 @@ footer nav li::before {
 }
 
 .norm-uitleg__item {
-  margin-block: var(--mox-space-sm);
-  padding: var(--mox-space-md) var(--mox-space-lg);
-  background-color: var(--mox-color-feedback-neutral-subtle, #fafafa);
-  border: var(--mox-border-width-xs) solid var(--mox-color-border-subtle, #ccc);
-  border-radius: var(--mox-border-radius-md);
+  margin-block: var(--mox-space-md);
 }
 
 .norm-uitleg__item h3 {
@@ -602,10 +791,42 @@ footer nav li::before {
   flex-shrink: 0;
 }
 
+.norm-card-themed {
+  gap: var(--toepassing-space-sm, 0.75rem);
+  padding: var(--toepassing-space-padding-md, 1rem) var(--toepassing-space-padding-lg, 1.25rem);
+}
+
 .norm-card-themed header {
   display: flex;
   align-items: center;
-  gap: var(--mox-space-padding-sm);
+  gap: var(--toepassing-space-padding-sm, 0.5rem);
+  margin-block-end: 0;
+}
+
+/* Theme zet card h2 op title-2xl wat te groot is voor de smalle card-kolom. */
+.norm-card-themed header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.norm-card-themed header h2 a {
+  color: var(--toepassing-color-interactive-default-text, #007bc7);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.norm-card-themed header h2 a:hover,
+.norm-card-themed header h2 a:focus-visible {
+  color: var(--toepassing-color-interactive-hover-text, #005e9a);
+  text-decoration-thickness: 2px;
+}
+
+.norm-card-themed > p {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--toepassing-color-text-default);
 }
 
 /* Leeswijzer info-blok */

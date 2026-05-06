@@ -64,18 +64,12 @@ menu:
     - name: Home
       pageRef: /
       weight: 1
-    - name: Over
-      pageRef: /over
-      weight: 5
     - name: Normen
       pageRef: /normen
       weight: 10
-    - name: Wettelijk kader
-      pageRef: /wettelijk-kader
-      weight: 15
-    - name: Risicobenadering
-      pageRef: /risicobenadering
-      weight: 20
+    - name: Over
+      pageRef: /over
+      weight: 5
 
 module:
   imports:

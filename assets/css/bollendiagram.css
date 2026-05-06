@@ -1,76 +1,153 @@
 .bollendiagram-wrapper {
   width: 100%;
-  max-width: 860px;
-  margin: 2rem auto;
+  max-width: 920px;
+  margin: var(--mox-space-lg, 2rem) auto;
 }
 
 .bollendiagram {
   width: 100%;
   height: auto;
   display: block;
+  overflow: visible;
 }
 
-.bd-connectors line {
-  stroke: #c0d4e8;
-  stroke-width: 1.5;
+/* Multiply zorgt dat overlappende bollen op natuurlijke wijze verdonkeren,
+   zoals in de oorspronkelijke afbeelding (waterverf-effect).
+   Labels staan in een aparte groep zónder blend, zodat tekst nooit door
+   een latere bol wordt overschilderd. */
+.bd-cluster,
+.bd-future {
+  mix-blend-mode: multiply;
 }
 
+/* === Bollen (cirkels) === */
 .bd-bubble circle {
-  fill: #a8c8e8;
-  opacity: 0.88;
-  transition: fill 0.18s, opacity 0.18s;
-}
-
-.bd-bubble text {
-  fill: #1a2d42;
-  font-family: "RO Sans", "Source Sans 3", sans-serif;
-  font-size: 13px;
-  text-anchor: middle;
-  dominant-baseline: middle;
-  pointer-events: none;
+  fill: var(--rijkshuisstijl-color-hemelblauw-200, #8cc3e6);
+  stroke: var(--rijkshuisstijl-color-hemelblauw-300, #66afdd);
+  stroke-width: 1;
+  transition: fill 0.18s ease, stroke 0.18s ease, stroke-width 0.18s ease;
 }
 
 .bd-main circle {
-  fill: #5a96c8;
-  opacity: 0.88;
+  fill: var(--rijkshuisstijl-color-hemelblauw-500, #007bc7);
+  stroke: var(--rijkshuisstijl-color-donkerblauw-500, #01689b);
+  stroke-width: 1.5;
 }
 
-.bd-main text {
-  font-size: 18px;
-  font-weight: 600;
+.bd-bridge circle {
+  fill: var(--rijkshuisstijl-color-hemelblauw-300, #66afdd);
+}
+
+.bd-bubble-outlined {
   fill: #ffffff;
+  stroke: var(--rijkshuisstijl-color-hemelblauw-400, #409cd5);
+  stroke-width: 1.5;
 }
 
-.bd-mid circle {
-  fill: #7eb8dc;
-  opacity: 0.85;
+/* === Labels (tekst, op aparte laag) === */
+.bd-labels {
+  pointer-events: none;
 }
 
-.bd-outer circle {
-  fill: #c8e0f4;
-  opacity: 0.85;
+.bd-labels text {
+  font-family: "RO Sans", "Source Sans 3", system-ui, sans-serif;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.bd-label {
+  fill: var(--rijkshuisstijl-color-cool-gray-800, #1e293b);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.bd-label-bridge {
+  font-weight: 600;
+}
+
+.bd-label-main {
+  fill: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.bd-label-outlined {
+  fill: var(--rijkshuisstijl-color-cool-gray-700, #334155);
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* === Interactie === */
+.bd-bubble {
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .bd-bubble:hover circle {
-  fill: #3a78b0;
-  opacity: 0.95;
+  fill: var(--rijkshuisstijl-color-hemelblauw-400, #409cd5);
 }
 
-.bd-bubble:hover text {
-  fill: #ffffff;
+.bd-main:hover circle {
+  fill: var(--rijkshuisstijl-color-donkerblauw-500, #01689b);
 }
 
-.bd-bubble:focus {
-  outline: none;
+.bd-bridge:hover circle {
+  fill: var(--rijkshuisstijl-color-hemelblauw-500, #007bc7);
 }
 
-.bd-bubble:focus circle {
-  stroke: #01689b;
-  stroke-width: 3;
+.bd-bubble:focus-visible circle {
+  stroke: var(--rijkshuisstijl-color-donkerblauw-500, #01689b);
+  stroke-width: 4;
 }
 
-@media (max-width: 600px) {
+/* === Caption === */
+.bollendiagram-caption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--mox-color-text-subtle, #475569);
+  margin-block-start: var(--mox-space-sm, 0.5rem);
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
   .bollendiagram-wrapper {
     margin: 1rem 0;
+  }
+  .bd-label {
+    font-size: 18px;
+  }
+  .bd-label-main {
+    font-size: 30px;
+  }
+  .bd-label-outlined {
+    font-size: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bd-bubble circle {
+    transition: none;
+  }
+}
+
+/* Forced-colors (Windows High Contrast) — vervang fills door systeem-kleuren. */
+@media (forced-colors: active) {
+  .bd-cluster,
+  .bd-future {
+    mix-blend-mode: normal;
+  }
+  .bd-bubble circle,
+  .bd-bubble-outlined {
+    fill: Canvas;
+    stroke: CanvasText;
+  }
+  .bd-labels text {
+    fill: CanvasText;
+  }
+  .bd-bubble:focus-visible circle {
+    stroke: Highlight;
+    stroke-width: 4;
   }
 }

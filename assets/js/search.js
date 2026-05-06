@@ -10,7 +10,8 @@
 
   var fuseOptions = {
     keys: [
-      { name: 'title', weight: 2 },
+      { name: 'title', weight: 3 },
+      { name: 'synoniemen', weight: 2 },
       { name: 'content', weight: 1 }
     ],
     threshold: 0.3,
@@ -60,6 +61,8 @@
           return {
             title: item.title,
             url: item.url,
+            section: item.section || '',
+            synoniemen: decodeHtmlEntities(item.synoniemen || ''),
             content: decodeHtmlEntities(item.content || '')
           };
         });
@@ -77,6 +80,14 @@
         if (seen[base]) return false;
         seen[base] = true;
         return true;
+      });
+      // Hiërarchisch: normen-pagina's altijd boven andere resultaten,
+      // binnen de groepen op Fuse-score (laag = beter).
+      results.sort(function (a, b) {
+        var aNorm = a.item.section === 'normen' ? 0 : 1;
+        var bNorm = b.item.section === 'normen' ? 0 : 1;
+        if (aNorm !== bNorm) return aNorm - bNorm;
+        return a.score - b.score;
       });
       displayResults(results.slice(0, 10), query);
     });
