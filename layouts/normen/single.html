@@ -35,12 +35,9 @@
   </div>
   {{ end }}
 
-  {{ with .Params.synoniemen }}
-  <div id="synoniemen" class="norm-synoniemen">
-    <h2>Synoniemen</h2>
-    {{ partial "reftext.html" (dict "tekst" (delimit . ", ") "page" $page) }}
-  </div>
-  {{ end }}
+  {{/* Synoniemen worden bewust niet meer getoond op de pagina; ze
+       blijven in de front matter staan en worden meegenomen in de
+       zoekindex (zie layouts/index.json). */}}
 
   {{ with .Params.normuitleg }}
   <div id="normuitleg" class="norm-uitleg">
@@ -96,8 +93,8 @@
   {{ end }}
 
   {{ with .Params.gerelateerde_onderwerpen }}
-  <div id="gerelateerd" class="norm-gerelateerd">
-    <h2>Gerelateerde onderwerpen</h2>
+  <div id="zie-ook" class="norm-gerelateerd">
+    <h2>Zie ook</h2>
     <ul>
       {{ range . }}
       <li>{{ with .url }}<a href="{{ strings.TrimPrefix "/" . | relURL }}">{{ end }}{{ partial "reftext.html" (dict "tekst" .titel "page" $page) }}{{ with .url }}</a>{{ end }}</li>

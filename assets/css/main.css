@@ -731,15 +731,6 @@ footer nav li::before {
   margin-block-end: var(--toepassing-space-sm, 0.75rem);
 }
 
-/* Norm page: synoniemen */
-.norm-synoniemen {
-  margin-block: var(--mox-space-sm);
-}
-
-.norm-synoniemen p {
-  font-style: italic;
-}
-
 /* Norm page: normuitleg */
 .norm-uitleg {
   margin-block: var(--mox-space-md);
