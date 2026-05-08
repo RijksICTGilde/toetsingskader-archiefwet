@@ -1,3 +1,22 @@
+.bollendiagram-section {
+  inline-size: 100%;
+  max-inline-size: 920px;
+  margin-block-start: var(--mox-space-xl, 3rem);
+  margin-inline: auto;
+}
+
+/* Hogere specificity dan .markup-content h2 zodat onze margins winnen
+   van de generieke kop-spacing in main.css. */
+.bollendiagram-section .bollendiagram-heading {
+  margin-block: 0 var(--mox-space-sm, 0.75rem);
+  padding-block-end: var(--mox-space-xs, 0.5rem);
+  border-block-end: 2px solid var(--mox-color-accent-default, #007bc7);
+}
+
+.bollendiagram-section .bollendiagram-wrapper {
+  margin-block-start: 0;
+}
+
 .bollendiagram-wrapper {
   width: 100%;
   max-width: 920px;
