@@ -8,7 +8,8 @@
       {{ $isCurrent := eq $.RelPermalink .RelPermalink }}
       <li>
         <a href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
-          {{ .Params.norm_id }}. {{ .Params.norm_titel }}
+          <span class="side-nav__num">{{ .Params.norm_id }}.</span>
+          {{ .Params.norm_titel }}
         </a>
         {{ if $isCurrent }}
         {{ partial "norm-toc.html" $page }}

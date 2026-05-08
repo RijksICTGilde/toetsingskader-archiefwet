@@ -370,6 +370,15 @@ footer nav li::before {
   font-weight: 700;
 }
 
+/* Subtiel nummer-prefix in side-nav */
+.side-nav__num {
+  display: inline-block;
+  margin-inline-end: 0.25em;
+  color: var(--mox-color-text-subtle, #475569);
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+}
+
 .side-nav .norm-toc {
   list-style: none;
   padding-inline-start: var(--toepassing-space-md, 1rem);
@@ -776,6 +785,53 @@ footer nav li::before {
   margin-block: var(--mox-space-sm);
 }
 
+/* Featured norm op overzichtspagina — visueel groter dan de cards eronder.
+   Hergebruikt het blauw-tint + accent-stripe patroon van .norm-kern /
+   .leeswijzer, zodat normpagina's en overzicht dezelfde visuele taal delen. */
+.norm-featured {
+  background-color: var(--mox-color-feedback-info-subtle, #e8f0f7);
+  border-inline-start: 4px solid var(--mox-color-accent-default, #007bc7);
+  border-radius: 0 var(--mox-border-radius-md, 4px) var(--mox-border-radius-md, 4px) 0;
+  padding: var(--mox-space-padding-lg, 1.25rem) var(--mox-space-padding-xl, 1.75rem);
+  margin-block: var(--mox-space-md, 1rem) var(--mox-space-lg, 2rem);
+}
+
+.norm-featured__eyebrow {
+  margin: 0 0 var(--mox-space-2xs, 0.25rem);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mox-color-accent-default, #007bc7);
+}
+
+/* 2-class selector zodat onze margins .markup-content h2 (0,1,1) verslaan. */
+.norm-featured .norm-featured__title {
+  margin: 0 0 var(--mox-space-sm, 0.75rem);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.norm-featured__title a {
+  color: var(--mox-color-accent-default, #007bc7);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.norm-featured__title a:hover,
+.norm-featured__title a:focus-visible {
+  color: var(--mox-color-interactive-hover-text, #005e9a);
+  text-decoration-thickness: 2px;
+}
+
+.norm-featured__kern {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--mox-color-text-default);
+}
+
 /* Norm card badge */
 .norm-badge {
   display: inline-flex;
@@ -797,10 +853,17 @@ footer nav li::before {
 }
 
 .norm-card-themed header {
-  display: flex;
-  align-items: center;
-  gap: var(--toepassing-space-padding-sm, 0.5rem);
   margin-block-end: 0;
+}
+
+/* Subtiel nummer-eyebrow boven de titel */
+.norm-card-themed__num {
+  margin: 0 0 var(--mox-space-3xs, 0.125rem);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--mox-color-text-subtle, #475569);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
 }
 
 /* Theme zet card h2 op title-2xl wat te groot is voor de smalle card-kolom. */
