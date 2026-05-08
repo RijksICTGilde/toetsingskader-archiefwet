@@ -1,11 +1,11 @@
 {{- $pages := slice -}}
 {{- range where site.RegularPages "Kind" "page" -}}
-  {{- $text := .Plain | replaceRE `\{ref:\d+\}` "" -}}
+  {{- $text := .Plain | replaceRE `\{ref:[^}]*\}` "" -}}
   {{- with .Params.kern }}{{ $text = printf "%s %s" $text . }}{{ end -}}
   {{- with .Params.toelichting }}{{ $text = printf "%s %s" $text . }}{{ end -}}
   {{- $synoniemen := "" -}}
   {{- with .Params.synoniemen -}}
-    {{- $synoniemen = delimit . " " | replaceRE `\{ref:\d+\}` "" -}}
+    {{- $synoniemen = delimit . " " | replaceRE `\{ref:[^}]*\}` "" -}}
     {{- $text = printf "%s %s" $text $synoniemen -}}
   {{- end -}}
   {{- with .Params.normuitleg -}}
@@ -24,7 +24,7 @@
     "url" .RelPermalink
     "section" $section
     "synoniemen" $synoniemen
-    "content" ($text | replaceRE `\{ref:\d+\}` "")
+    "content" ($text | replaceRE `\{ref:[^}]*\}` "")
   ) -}}
 {{- end -}}
 {{- $pages | jsonify -}}
