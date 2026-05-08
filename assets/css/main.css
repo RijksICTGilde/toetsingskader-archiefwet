@@ -681,35 +681,10 @@ footer nav li::before {
   color: var(--toepassing-color-interactive-hover-text, #005e9a);
 }
 
-/* Sectie (accordion) — gebruikt het native <details>/<summary> component
-   uit hugo-theme-ro. We voegen alleen toe wat nodig is om de titel als
-   donkerblauwe heading te tonen en de content netjes te padden. */
-.sectie {
-  margin-block: var(--toepassing-space-md, 1rem);
-}
-
-.sectie > summary {
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--toepassing-color-interactive-default-background, #007bc7);
-  padding: var(--toepassing-space-padding-md, 1rem) var(--toepassing-space-padding-lg, 1.25rem);
-}
-
-.sectie[open] > summary {
-  border-block-end: 1px solid var(--toepassing-color-border-subtle, #d0d7de);
-}
-
-.sectie-content {
-  padding: var(--toepassing-space-padding-md, 1rem) var(--toepassing-space-padding-lg, 1.25rem);
-}
-
-.sectie-content > *:first-child {
-  margin-block-start: 0;
-}
-
-.sectie-content > *:last-child {
-  margin-block-end: 0;
-}
+/* Sectie (accordion) — geen project-CSS: <details>/<summary> komt volledig
+   uit hugo-theme-ro (border, background-subtle summary, chevron, hover-state).
+   Zie theme-alignment.md als er hier toch project-specifieke afwijkingen
+   nodig blijken. */
 
 /* Toetsingskader-specifieke styling */
 
