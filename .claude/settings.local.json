@@ -12,7 +12,11 @@
       "Bash(curl -sSL https://raw.githubusercontent.com/MinBZK/moza-site/main/content/_index.md)",
       "Bash(curl *)",
       "Bash(hugo --minify --quiet)",
-      "Bash(hugo)"
+      "Bash(hugo)",
+      "Bash(awk '/^---$/{c++; next} c==1' /tmp/migrated_failed.md)",
+      "Bash(hugo --gc --minify)",
+      "Bash(awk 'NR==9' /Users/ravimeijer/Documents/repos/toetsingskader-archiefwet/content/normen/01-beheer.md)",
+      "Bash(awk 'NR>=9 && NR<=13' /Users/ravimeijer/Documents/repos/toetsingskader-archiefwet/content/normen/01-beheer.md)"
     ]
   }
 }
