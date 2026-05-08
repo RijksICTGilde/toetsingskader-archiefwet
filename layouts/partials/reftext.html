@@ -1,27 +1,57 @@
 {{- /*
-  Render tekst met {ref:N} → onderstippelde underline op het direct
-  voorafgaande woord. Hover/focus toont een tooltip met
-  referenties[N-1].tekst en (indien aanwezig) een Bekijk-bron-link.
+  Render tekst met inline {ref: ...} markers.
 
-  Gebruik: {{ partial "reftext.html" (dict "tekst" .tekst "page" $page) }}
+  Schrijfwijze in de content (één regel):
+    in beheer{ref: Aw, artikel 4.1, lid 1. https://zoek.officielebekendmakingen.nl/kst-35968-2.html}
+    Categorie{ref: Categorie is vormvrij, maar moet een relatie hebben met het selectiebesluit.}
+
+  Het woord direct vóór de marker krijgt een gestippelde underline. Op
+  hover/focus verschijnt een tooltip met de citatie en (als de marker eindigt
+  op een http(s)-URL) een "Bekijk bron"-link. Geen accolades binnen de marker.
+
+  Markers worden eerst vervangen door platte-tekst tokens, daarna gaat de
+  tekst door markdownify, en pas daarna worden de tokens omgezet in de
+  uiteindelijke HTML. Dat voorkomt dat Goldmark URLs binnen de marker auto-linkt
+  (en daarmee de marker-grenzen kapot maakt) of de wrapper-spans uitstript
+  wanneer renderer.unsafe = false.
+
+  Gebruik in templates:
+    {{ partial "reftext.html" (dict "tekst" .tekst "page" $page) }}
 */ -}}
-{{- $tekst := .tekst | markdownify -}}
+{{- $tekst := .tekst -}}
+{{- $matches := findRESubmatch `([^\s<>]*)(\s*)\{ref:\s*([^}]+?)\s*\}` $tekst -}}
+{{- $tokens := slice -}}
+{{- range $i, $m := $matches -}}
+  {{- $whole := index $m 0 -}}
+  {{- $term := index $m 1 -}}
+  {{- $space := index $m 2 -}}
+  {{- $body := index $m 3 -}}
+  {{- $url := "" -}}
+  {{- $textPart := $body -}}
+  {{- $urlSplit := findRESubmatch `^(.*?)\s+(https?://\S+)$` $body -}}
+  {{- with $urlSplit -}}
+    {{- $first := index . 0 -}}
+    {{- $textPart = index $first 1 -}}
+    {{- $url = index $first 2 -}}
+  {{- end -}}
+  {{- $textEsc := $textPart | htmlEscape -}}
+  {{- $linkHTML := "" -}}
+  {{- with $url -}}
+    {{- $linkHTML = printf "<a href=\"%s\" class=\"ref-tooltip__link\">Bekijk bron ↗</a>" . -}}
+  {{- end -}}
+  {{- $tooltip := printf "<span class=\"ref-tooltip\" role=\"note\"><span class=\"ref-tooltip__text\">%s</span>%s</span>" $textEsc $linkHTML -}}
+  {{- $finalHTML := printf "<span class=\"ref-wrapper\"><span class=\"ref-term\" tabindex=\"0\">%s</span>%s</span>%s" $term $tooltip $space -}}
+  {{- $token := printf "ZZREFTOKEN%04dZZ" $i -}}
+  {{- $tekst = replace $tekst $whole $token 1 -}}
+  {{- $tokens = $tokens | append (dict "token" $token "html" $finalHTML) -}}
+{{- end -}}
+{{- $tekst = $tekst | markdownify -}}
+{{- range $tokens -}}
+  {{- $tekst = replace $tekst .token .html -}}
+{{- end -}}
 {{- $base := "x" | relURL -}}
 {{- $base = strings.TrimSuffix "x" $base -}}
 {{- if ne $base "/" -}}
   {{- $tekst = replace $tekst "href=\"/" (printf "href=\"%s" $base) -}}
-{{- end -}}
-{{- $page := .page -}}
-{{- range $i, $ref := $page.Params.referenties -}}
-  {{- $num := add $i 1 -}}
-  {{- $textEsc := $ref.tekst | htmlEscape -}}
-  {{- $linkHTML := "" -}}
-  {{- with $ref.url -}}
-    {{- $linkHTML = printf "<a href=\"%s\" class=\"ref-tooltip__link\">Bekijk bron ↗</a>" . -}}
-  {{- end -}}
-  {{- $tooltip := printf "<span class=\"ref-tooltip\" role=\"note\"><span class=\"ref-tooltip__text\">%s</span>%s</span>" $textEsc $linkHTML -}}
-  {{- $pattern := printf "([^\\s<>]*)(\\s*)\\{ref:%d\\}" $num -}}
-  {{- $replace := printf "<span class=\"ref-wrapper\"><span class=\"ref-term\" tabindex=\"0\">${1}</span>%s</span>${2}" $tooltip -}}
-  {{- $tekst = replaceRE $pattern $replace $tekst -}}
 {{- end -}}
 {{- $tekst | safeHTML -}}

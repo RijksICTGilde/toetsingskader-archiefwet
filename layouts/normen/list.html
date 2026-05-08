@@ -1,11 +1,13 @@
 {{ define "main" }}
+{{ $normen := .Pages.ByWeight }}
 <div class="sidebar">
   <nav class="side-nav" aria-label="Normen">
     <ul>
-      {{ range .Pages.ByWeight }}
+      {{ range $normen }}
       <li>
         <a href="{{ .RelPermalink }}">
-          {{ .Params.norm_id }}. {{ .Params.norm_titel }}
+          <span class="side-nav__num">{{ .Params.norm_id }}.</span>
+          {{ .Params.norm_titel }}
         </a>
       </li>
       {{ end }}
@@ -14,13 +16,25 @@
 </div>
 <div class="normen-overzicht markup-content">
   <h1>{{ .Title }}</h1>
-  <p class="intro">De Inspectie toetst of een document in beheer is, zodat het duurzaam toegankelijk gemaakt en gehouden kan worden. Een document is in ieder geval:</p>
+  <p class="intro">De Inspectie toetst of een document in beheer is, zodat het duurzaam toegankelijk gemaakt en gehouden kan worden. Het toetsingskader bevat nu acht normen die de inspectie als fundamenteel voor de duurzame toegankelijkheid beschouwt. De norm in beheer vormt de basis van het toetsingskader. </p>
+
+  {{ with index (where $normen "Params.norm_id" "1") 0 }}
+  <article class="norm-featured">
+    <p class="norm-featured__eyebrow">{{ .Params.norm_id }} · De basis</p>
+    <h2 class="norm-featured__title">
+      <a href="{{ .RelPermalink }}">{{ .Params.norm_titel }}</a>
+    </h2>
+    {{ with .Params.kern }}
+    <p class="norm-featured__kern">{{ . }}</p>
+    {{ end }}
+  </article>
+  {{ end }}
 
   <div class="card-grid">
-    {{ range .Pages.ByWeight }}
+    {{ range where $normen "Params.norm_id" "!=" "1" }}
     <article class="card norm-card-themed">
       <header>
-        <span class="norm-badge">{{ .Params.norm_id }}</span>
+        <p class="norm-card-themed__num">{{ .Params.norm_id }}</p>
         <h2>
           <a href="{{ .RelPermalink }}">{{ .Params.norm_titel }}</a>
         </h2>
