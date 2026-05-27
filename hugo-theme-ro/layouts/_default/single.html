@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div class="container">
+  {{ partial "breadcrumbs.html" . }}
+  <article>
+    <nldd-rich-text>
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p class="lead">{{ . }}</p>{{ end }}
+      {{ .Content }}
+    </nldd-rich-text>
+  </article>
+</div>
+{{ end }}

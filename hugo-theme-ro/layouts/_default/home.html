@@ -1,0 +1,14 @@
+{{ define "main" }}
+<div class="container">
+  <article>
+    <nldd-rich-text>
+      <h1>{{ .Title }}</h1>
+      {{ with site.Params.tagline }}<p class="lead">{{ . }}</p>{{ end }}
+      {{ .Content }}
+    </nldd-rich-text>
+  </article>
+  {{ if .Pages }}
+    {{ partial "card-grid.html" (dict "pages" .Pages) }}
+  {{ end }}
+</div>
+{{ end }}
