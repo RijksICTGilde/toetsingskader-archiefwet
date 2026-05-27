@@ -1,0 +1,46 @@
+/* box — non-clickable visual container with three variants.
+ *
+ * Distinct from:
+ *   .card     — clickable link-tile (see 30-card.css)
+ *   .callout  — semantic info/warning/etc. container (Task 15)
+ *
+ * Tokens used (verified in assets/css/nldd/settings.css):
+ *   --components-box-background-color              NLDD: surfaces-tinted-background
+ *   --components-box-on-tinted-background-color    NLDD: surfaces-background (lighter)
+ *   --components-box-corner-radius                 NLDD: corner-radius-xl (18px)
+ *   --components-box-padding                       NLDD: space-16 — used as block padding
+ *   --semantics-dividers-color / -thickness        rest border
+ *   --primitives-space-16 / -24                    inline padding, block margin
+ *   --primitives-color-accent-500                  accent variant stripe
+ *     (= --primitives-color-lintblauw-500, matching .card--accent-border —
+ *      keeps Rijksoverheid lintblauw consistent across components.)
+ *
+ * Variants:
+ *   .box           default: tinted bg + 1px divider + NLDD radius
+ *   .box--subtle   lighter bg, no border — least visual weight
+ *   .box--accent   adds 4px lintblauw inline-start stripe, asymmetric corners
+ */
+
+.box {
+	padding: var(--components-box-padding) var(--primitives-space-24);
+	background: var(--components-box-background-color);
+	border: var(--semantics-dividers-thickness) solid var(--semantics-dividers-color);
+	border-radius: var(--components-box-corner-radius);
+	margin-block: var(--primitives-space-16);
+}
+
+/* Variant: subtle — lighter (non-tinted) bg, no border. */
+.box--subtle {
+	background: var(--components-box-on-tinted-background-color);
+	border-color: transparent;
+}
+
+/* Variant: accent — 4px lintblauw stripe, right corners only. */
+.box--accent {
+	border-inline-start: 4px solid var(--primitives-color-accent-500);
+	border-radius: 0 var(--components-box-corner-radius) var(--components-box-corner-radius) 0;
+}
+
+/* Strip outer margins from first/last child so the box hugs its content. */
+.box > :first-child { margin-block-start: 0; }
+.box > :last-child  { margin-block-end: 0; }

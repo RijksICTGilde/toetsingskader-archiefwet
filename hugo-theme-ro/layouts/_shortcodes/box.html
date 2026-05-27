@@ -1,0 +1,14 @@
+{{/*
+  box — non-clickable visual container.
+
+  Usage:
+    {{< box >}}…markdown…{{< /box >}}
+    {{< box variant="subtle" >}}…{{< /box >}}
+    {{< box variant="accent" >}}…{{< /box >}}
+
+  Variants: subtle | accent | (omit for default)
+*/}}
+{{- $variant := .Get "variant" -}}
+<div class="box{{ with $variant }} box--{{ . }}{{ end }}">
+	{{ .Inner | markdownify }}
+</div>
