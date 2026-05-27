@@ -1,0 +1,16 @@
+{{/*
+  Card-grid partial — toont een grid van cards uit `pages`.
+  Argumenten:
+    pages   (Pages, required)
+    variant (string, optional) "accent-border" | "subtle"
+*/}}
+<div class="card-grid">
+  {{ range .pages }}
+    {{ partial "card.html" (dict
+      "url" .RelPermalink
+      "title" .Title
+      "excerpt" .Description
+      "variant" $.variant
+    ) }}
+  {{ end }}
+</div>
