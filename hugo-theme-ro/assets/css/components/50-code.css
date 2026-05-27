@@ -1,0 +1,36 @@
+/* code — fenced code-block styling.
+ *
+ * NLDD's `<nldd-rich-text>` (rich-text.css) styles inline `<code>` with a
+ * tinted-surface chip + JetBrains Mono, but does NOT style fenced
+ * `<pre><code>` blocks produced by Hugo's markdown render. This component
+ * fills that gap.
+ *
+ * Tokens used (verified in assets/css/nldd/settings.css):
+ *   --components-box-on-tinted-background-color  surface for code panels
+ *   --semantics-dividers-{color,thickness}       1px border
+ *   --primitives-corner-radius-md (9px)          rounded corners
+ *   --primitives-space-16 (16px)                 padding
+ *   --primitives-font-family-monospace           JetBrains Mono, monospace
+ *
+ * Note: the actual NLDD token is `-monospace`, not `-mono`.
+ */
+
+nldd-rich-text pre {
+	background: var(--components-box-on-tinted-background-color, var(--semantics-surfaces-background-color));
+	border: var(--semantics-dividers-thickness, 1px) solid var(--semantics-dividers-color);
+	border-radius: var(--primitives-corner-radius-md, 9px);
+	padding: var(--primitives-space-16);
+	overflow-x: auto;
+	font-family: var(--primitives-font-family-monospace, "JetBrains Mono", ui-monospace, monospace);
+	font-size: 0.875em;
+	line-height: 1.5;
+}
+
+/* Inside a fenced block, the inline `<code>` chip styling from rich-text.css
+ * would double-pad and re-tint the text — reset it. */
+nldd-rich-text pre > code {
+	background: none;
+	padding: 0;
+	border: none;
+	color: inherit;
+}
