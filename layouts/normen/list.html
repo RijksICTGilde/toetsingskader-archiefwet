@@ -18,17 +18,13 @@
 
   <div class="card-grid">
     {{ range .Pages.ByWeight }}
-    <article class="card norm-card-themed">
-      <header>
-        <span class="norm-badge">{{ .Params.norm_id }}</span>
-        <h2>
-          <a href="{{ .RelPermalink }}">{{ .Params.norm_titel }}</a>
-        </h2>
-      </header>
-      {{ with .Params.kern }}
-      <p>{{ . }}</p>
-      {{ end }}
-    </article>
+      {{ partial "card.html" (dict
+        "url" .RelPermalink
+        "variant" "accent-border"
+        "id_label" (printf "Norm %s" (.Params.norm_id | default .Params.id | default (.File.BaseFileName | replaceRE "^[0-9]+-" "")))
+        "title" (.Params.norm_titel | default .Title)
+        "excerpt" .Params.kern
+      ) }}
     {{ end }}
   </div>
 
