@@ -1,13 +1,33 @@
+/* === Inspectie-OE brand-overrides ============================
+   Het thema gebruikt --toepassing-* tokens (NLDD aliases). Voor de
+   Inspectie-OE willen we hemelblauw i.p.v. lintblauw als accent. */
+:root {
+  --toepassing-color-background-inverse: #007bc7;
+  --toepassing-color-accent-default: #007bc7;
+  --toepassing-color-interactive-default-background: #007bc7;
+  --toepassing-color-interactive-default-text: #007bc7;
+  --toepassing-color-interactive-default-border: #007bc7;
+  --toepassing-color-interactive-hover-background: #005e9a;
+  --toepassing-color-interactive-hover-border: #005e9a;
+  --toepassing-color-interactive-hover-text: #005e9a;
+  --toepassing-color-interactive-active-background: #007bc7;
+  --toepassing-color-interactive-active-border: #007bc7;
+  --toepassing-color-interactive-selected-background: #007bc7;
+  --toepassing-color-interactive-selected-border: #007bc7;
+  --toepassing-color-logo-background: #007bc7;
+  --toepassing-color-component-footer-background: #007bc7;
+}
+
 /* Disclaimer banner */
 .disclaimer-banner {
   background-color: var(--rijkshuisstijl-color-donkergeel-500);
-  padding: var(--mox-space-padding-sm) var(--mox-space-padding-md);
+  padding: var(--toepassing-space-padding-sm) var(--toepassing-space-padding-md);
   text-align: center;
 }
 
 .disclaimer-banner p {
   margin: 0;
-  color: var(--mox-color-text-default);
+  color: var(--toepassing-color-text-default);
 }
 
 /* Content markup: herstel list-styling die MOx reset verwijdert */
@@ -38,110 +58,6 @@
   margin-block-start: 1.5em;
   margin-block-end: 0.5em;
 }
-
-/* === Theme-token brand-overrides + compat shim ============================
-   Het thema gebruikt sinds april 2026 --toepassing-* (was --mox-*). Een groot
-   deel van onze CSS én een paar legacy theme-bestanden refereren nog naar
-   --mox-*. Hieronder mappen we --mox-* tokens automatisch op hun
-   --toepassing-* equivalent, zodat alles weer resolves. Boven de shim staan
-   de Inspectie-OE brand-overrides (hemelblauw i.p.v. lintblauw / grijs). */
-:root {
-  /* --- Brand overrides --- */
-  --toepassing-color-background-inverse: #007bc7;
-  --toepassing-color-accent-default: #007bc7;
-  --toepassing-color-interactive-default-background: #007bc7;
-  --toepassing-color-interactive-default-text: #007bc7;
-  --toepassing-color-interactive-default-border: #007bc7;
-  --toepassing-color-interactive-hover-background: #005e9a;
-  --toepassing-color-interactive-hover-border: #005e9a;
-  --toepassing-color-interactive-hover-text: #005e9a;
-  --toepassing-color-interactive-active-background: #007bc7;
-  --toepassing-color-interactive-active-border: #007bc7;
-  --toepassing-color-interactive-selected-background: #007bc7;
-  --toepassing-color-interactive-selected-border: #007bc7;
-  --toepassing-color-logo-background: #007bc7;
-  --toepassing-color-component-footer-background: #007bc7;
-
-  /* --- Compat shim: --mox-* → --toepassing-* --- */
-  /* kleuren */
-  --mox-color-background-canvas: var(--toepassing-color-background-canvas);
-  --mox-color-background-default: var(--toepassing-color-background-default);
-  --mox-color-background-subtle: var(--toepassing-color-background-subtle);
-  --mox-color-background-raised: var(--toepassing-color-background-raised);
-  --mox-color-background-inverse: var(--toepassing-color-background-inverse);
-  --mox-color-text-default: var(--toepassing-color-text-default);
-  --mox-color-text-inverse: var(--toepassing-color-text-inverse);
-  --mox-color-text-subtle: var(--toepassing-color-text-subtle-1);
-  --mox-color-text-subtle-1: var(--toepassing-color-text-subtle-1);
-  --mox-color-text-subtle-2: var(--toepassing-color-text-subtle-2);
-  --mox-color-border-default: var(--toepassing-color-border-default);
-  --mox-color-border-subtle: var(--toepassing-color-border-subtle);
-  --mox-color-border-strong: var(--toepassing-color-border-strong);
-  --mox-color-feedback-info-subtle: var(--toepassing-color-feedback-info-subtle);
-  --mox-color-feedback-info-default: var(--toepassing-color-feedback-info-default);
-  --mox-color-feedback-info-emphasis: var(--toepassing-color-feedback-info-emphasis);
-  --mox-color-feedback-neutral-subtle: var(--toepassing-color-feedback-neutral-subtle);
-  --mox-color-accent-default: var(--toepassing-color-accent-default);
-  --mox-color-interactive-default-background: var(--toepassing-color-interactive-default-background);
-  --mox-color-interactive-default-text: var(--toepassing-color-interactive-default-text);
-  --mox-color-interactive-hover-background: var(--toepassing-color-interactive-hover-background);
-  --mox-color-interactive-hover-text: var(--toepassing-color-interactive-hover-text);
-  --mox-color-interactive-active-background: var(--toepassing-color-interactive-active-background);
-  --mox-color-logo-background: var(--toepassing-color-logo-background);
-  --mox-color-component-footer-background: var(--toepassing-color-component-footer-background);
-  --mox-color-wit: var(--rijkshuisstijl-color-neutraal-wit, #fff);
-
-  /* spacing */
-  --mox-space-3xs: var(--toepassing-space-3xs);
-  --mox-space-2xs: var(--toepassing-space-2xs);
-  --mox-space-xs: var(--toepassing-space-xs);
-  --mox-space-sm: var(--toepassing-space-sm);
-  --mox-space-md: var(--toepassing-space-md);
-  --mox-space-lg: var(--toepassing-space-lg);
-  --mox-space-xl: var(--toepassing-space-xl);
-  --mox-space-2xl: var(--toepassing-space-2xl);
-  --mox-space-padding-2xs: var(--toepassing-space-padding-2xs);
-  --mox-space-padding-xs: var(--toepassing-space-padding-xs);
-  --mox-space-padding-sm: var(--toepassing-space-padding-sm);
-  --mox-space-padding-md: var(--toepassing-space-padding-md);
-  --mox-space-padding-lg: var(--toepassing-space-padding-lg);
-  --mox-space-padding-xl: var(--toepassing-space-padding-xl);
-  --mox-space-margin-2xs: var(--toepassing-space-margin-2xs);
-  --mox-space-margin-xs: var(--toepassing-space-margin-xs);
-  --mox-space-margin-sm: var(--toepassing-space-margin-sm);
-  --mox-space-margin-md: var(--toepassing-space-margin-md);
-  --mox-space-margin-lg: var(--toepassing-space-margin-lg);
-
-  /* sizes / borders */
-  --mox-border-radius-sm: var(--toepassing-border-radius-sm);
-  --mox-border-radius-md: var(--toepassing-border-radius-md);
-  --mox-border-width-xs: var(--toepassing-border-width-xs);
-  --mox-border-width-md: var(--toepassing-border-width-md);
-  --mox-page-max-inline-size: var(--toepassing-page-max-inline-size);
-
-  /* text */
-  --mox-text-font-family-body: var(--toepassing-text-font-family-body);
-  --mox-text-font-family-serif: Georgia, "Times New Roman", serif;
-  --mox-text-font-weight-bold: var(--toepassing-text-font-weight-bold);
-  --mox-text-font-weight-semi-bold: var(--toepassing-text-font-weight-semi-bold);
-  --mox-text-size-body-md: var(--toepassing-text-size-body-md);
-  --mox-text-size-body-sm: var(--toepassing-text-size-body-sm);
-  --mox-text-size-title-md: var(--toepassing-text-size-title-md);
-  --mox-text-size-title-lg: var(--toepassing-text-size-title-lg);
-  --mox-text-nav-main-nav: var(--toepassing-text-nav-main-nav);
-  --mox-text-smalltext: var(--toepassing-text-smalltext);
-}
-
-/* Voetnoten na de norm-cards plaatsen */
-.normen-overzicht {
-  display: flex;
-  flex-direction: column;
-}
-
-.normen-overzicht .footnotes {
-  order: 99;
-}
-
 
 /* Verwijder MOx header margin wanneer de hero direct eronder komt */
 body:has(main > .hero:first-child) header {
@@ -185,7 +101,7 @@ main > .hero .hero-content {
   inset-block-start: 50%;
   transform: translateY(-50%);
   inset-inline-start: 0;
-  padding: var(--mox-space-padding-lg, 1.5rem);
+  padding: var(--toepassing-space-padding-lg, 1.5rem);
   background-color: rgba(255, 255, 255, 0.92);
   border-radius: 0 0 2rem 0;
   max-inline-size: min(90vw, 560px);
@@ -204,13 +120,13 @@ body {
 }
 
 main > .hero h1 {
-  margin: 0 0 var(--mox-space-margin-2xs, 0.5rem);
-  color: var(--mox-color-text-default);
+  margin: 0 0 var(--toepassing-space-margin-2xs, 0.5rem);
+  color: var(--toepassing-color-text-default);
 }
 
 main > .hero p {
   margin: 0;
-  color: var(--mox-color-text-default);
+  color: var(--toepassing-color-text-default);
 }
 
 /* Home + single-pagina's: laat ze volle grid-rij spannen en centreer */
@@ -219,7 +135,7 @@ main > .home-cards,
 main > .page-article {
   grid-column: 1 / -1;
   margin-inline: auto;
-  padding-inline: var(--mox-space-padding-md, 1rem);
+  padding-inline: var(--toepassing-space-padding-md, 1rem);
   inline-size: 100%;
 }
 
@@ -230,85 +146,21 @@ main > .home-cards {
 
 main > .page-article {
   max-inline-size: 48rem;
-  padding-block: var(--mox-space-lg, 2rem);
+  padding-block: var(--toepassing-space-lg, 2rem);
 }
 
 .home-intro {
-  padding-block: var(--mox-space-lg, 2rem);
+  padding-block: var(--toepassing-space-lg, 2rem);
   font-size: 1.05em;
 }
 
 .home-cards {
-  padding-block-end: var(--mox-space-xl, 3rem);
-}
-
-/* Card grid (home + andere secties) */
-.card-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--mox-space-md, 1rem);
-}
-
-@media (min-width: 640px) {
-  .card-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .card-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.card-grid .card {
-  display: flex;
-  flex-direction: column;
-  padding: var(--mox-space-padding-md, 1rem) var(--mox-space-padding-lg, 1.25rem);
-  background-color: var(--mox-color-wit, #fff);
-  border: 1px solid var(--mox-color-border-subtle, #d0d7de);
-  border-radius: var(--mox-border-radius-md, 4px);
-  transition: box-shadow 0.15s ease, border-color 0.15s ease;
-}
-
-.card-grid .card:hover,
-.card-grid .card:focus-within {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border-color: var(--mox-color-accent-default, #007bc7);
-}
-
-.card-grid .card header {
-  margin-block-end: var(--mox-space-sm, 0.5rem);
-}
-
-.card-grid .card header h2 {
-  margin: 0;
-  font-size: 1.15rem;
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-.card-grid .card header h2 a {
-  color: var(--mox-color-accent-default, #007bc7);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.card-grid .card header h2 a:hover,
-.card-grid .card header h2 a:focus-visible {
-  color: var(--mox-color-interactive-hover-text, #005e9a);
-  text-decoration-thickness: 2px;
-}
-
-.card-grid .card p {
-  margin: 0;
-  color: var(--mox-color-text-default);
-  line-height: 1.5;
+  padding-block-end: var(--toepassing-space-xl, 3rem);
 }
 
 /* Navigatiebalk */
 .main-nav {
-  color: var(--mox-color-text-inverse);
+  color: var(--toepassing-color-text-inverse);
 }
 
 .main-nav-inner {
@@ -316,7 +168,7 @@ main > .page-article {
   align-items: center;
   justify-content: flex-start;
   margin-inline: auto;
-  max-inline-size: var(--toepassing-page-max-inline-size, var(--mox-page-max-inline-size, 71.25rem));
+  max-inline-size: var(--toepassing-page-max-inline-size, 71.25rem);
 }
 
 /* Het nieuwe thema centreert .main-nav ul met margin-inline: auto en
@@ -328,9 +180,9 @@ main > .page-article {
 }
 
 .footer-payoff {
-  font-family: var(--mox-text-font-family-serif, Georgia, "Times New Roman", serif);
+  font-family: var(--toepassing-text-font-family-serif, Georgia, "Times New Roman", serif);
   font-style: italic;
-  font-size: var(--mox-text-size-title-lg, 1.25rem);
+  font-size: var(--toepassing-text-size-title-lg, 1.25rem);
   line-height: 1.4;
   max-inline-size: 50ch;
   margin: 0;
@@ -339,12 +191,12 @@ main > .page-article {
 }
 
 .footer-links {
-  gap: var(--mox-space-padding-lg);
+  gap: var(--toepassing-space-padding-lg);
 }
 
 footer nav li::before {
   content: ">";
-  margin-inline-end: var(--mox-space-padding-xs);
+  margin-inline-end: var(--toepassing-space-padding-xs);
 }
 
 .footer-links > nav:first-child {
@@ -353,7 +205,7 @@ footer nav li::before {
 
 /* Sidebar: bevat normen-lijst en (op normpagina's) de ToC */
 .sidebar {
-  margin-block: var(--mox-space-md);
+  margin-block: var(--toepassing-space-md);
 }
 
 .side-nav ul {
@@ -363,7 +215,7 @@ footer nav li::before {
 }
 
 .side-nav li {
-  margin-block: var(--mox-space-2xs);
+  margin-block: var(--toepassing-space-2xs);
 }
 
 .side-nav a[aria-current="page"] {
@@ -397,11 +249,11 @@ footer nav li::before {
 @media (min-width: 800px) {
   main > .sidebar {
     position: sticky;
-    top: var(--mox-space-md, 1rem);
+    top: var(--toepassing-space-md, 1rem);
     align-self: start;
-    max-block-size: calc(100dvh - 2 * var(--mox-space-md, 1rem));
+    max-block-size: calc(100dvh - 2 * var(--toepassing-space-md, 1rem));
     overflow-y: auto;
-    padding-inline: var(--mox-space-padding-md, 1rem);
+    padding-inline: var(--toepassing-space-padding-md, 1rem);
   }
 }
 
@@ -410,13 +262,13 @@ footer nav li::before {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: var(--mox-space-padding-md);
+  padding: var(--toepassing-space-padding-md);
   margin-inline-start: auto;
   background: transparent;
-  color: var(--mox-color-text-inverse);
+  color: var(--toepassing-color-text-inverse);
   border: none;
   cursor: pointer;
-  font: var(--mox-text-nav-main-nav);
+  font: var(--toepassing-text-nav-main-nav);
 }
 
 .main-nav .search-trigger:hover,
@@ -466,9 +318,9 @@ footer nav li::before {
   inline-size: calc(100% - 2rem);
   max-inline-size: 720px;
   max-block-size: 90vh;
-  background-color: var(--mox-color-wit, #fff);
-  border: 1px solid var(--mox-color-border-subtle, #ddd);
-  border-radius: var(--mox-border-radius-md, 4px);
+  background-color: var(--rijkshuisstijl-color-neutraal-wit, #fff);
+  border: 1px solid var(--toepassing-color-border-subtle, #ddd);
+  border-radius: var(--toepassing-border-radius-md, 4px);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
@@ -476,13 +328,13 @@ footer nav li::before {
 .search-modal-header {
   display: flex;
   align-items: center;
-  gap: var(--mox-space-padding-sm);
-  padding: var(--mox-space-padding-md);
-  border-block-end: 1px solid var(--mox-color-border-subtle, #ddd);
+  gap: var(--toepassing-space-padding-sm);
+  padding: var(--toepassing-space-padding-md);
+  border-block-end: 1px solid var(--toepassing-color-border-subtle, #ddd);
 }
 
 .search-modal-header .search-icon {
-  color: var(--mox-color-text-subtle, #666);
+  color: var(--toepassing-color-text-subtle-1, #666);
   flex-shrink: 0;
 }
 
@@ -492,7 +344,7 @@ footer nav li::before {
   outline: none;
   font: inherit;
   font-size: 1.05rem;
-  padding: var(--mox-space-padding-xs) 0;
+  padding: var(--toepassing-space-padding-xs) 0;
   background: transparent;
 }
 
@@ -500,13 +352,13 @@ footer nav li::before {
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: var(--mox-space-padding-xs);
-  color: var(--mox-color-text-subtle, #666);
+  padding: var(--toepassing-space-padding-xs);
+  color: var(--toepassing-color-text-subtle-1, #666);
   display: inline-flex;
 }
 
 .search-close:hover {
-  color: var(--mox-color-text-default, #000);
+  color: var(--toepassing-color-text-default, #000);
 }
 
 .search-results {
@@ -518,7 +370,7 @@ footer nav li::before {
 }
 
 .search-results li {
-  border-block-end: 1px solid var(--mox-color-border-subtle, #eee);
+  border-block-end: 1px solid var(--toepassing-color-border-subtle, #eee);
 }
 
 .search-results li:last-child {
@@ -527,28 +379,28 @@ footer nav li::before {
 
 .search-result-item {
   display: block;
-  padding: var(--mox-space-padding-md);
+  padding: var(--toepassing-space-padding-md);
   color: inherit;
   text-decoration: none;
 }
 
 .search-result-item:hover,
 .search-result-item:focus-visible {
-  background: var(--mox-color-feedback-info-subtle, #f0f6fb);
+  background: var(--toepassing-color-feedback-info-subtle, #f0f6fb);
   outline: none;
 }
 
 .search-result-title {
   display: block;
   font-weight: 600;
-  color: var(--mox-color-accent-default, #007bc7);
+  color: var(--toepassing-color-accent-default, #007bc7);
 }
 
 .search-result-snippet {
   display: block;
-  margin-block-start: var(--mox-space-2xs, 0.25rem);
+  margin-block-start: var(--toepassing-space-2xs, 0.25rem);
   font-size: 0.9em;
-  color: var(--mox-color-text-subtle, #333);
+  color: var(--toepassing-color-text-subtle-1, #333);
   line-height: 1.4;
 }
 
@@ -561,17 +413,17 @@ footer nav li::before {
 }
 
 .search-no-results {
-  padding: var(--mox-space-padding-md);
-  color: var(--mox-color-text-subtle, #666);
+  padding: var(--toepassing-space-padding-md);
+  color: var(--toepassing-color-text-subtle-1, #666);
   font-style: italic;
 }
 
 .search-hint {
   margin: 0;
-  padding: var(--mox-space-padding-sm) var(--mox-space-padding-md);
-  border-block-start: 1px solid var(--mox-color-border-subtle, #eee);
+  padding: var(--toepassing-space-padding-sm) var(--toepassing-space-padding-md);
+  border-block-start: 1px solid var(--toepassing-color-border-subtle, #eee);
   font-size: 0.85em;
-  color: var(--mox-color-text-subtle, #666);
+  color: var(--toepassing-color-text-subtle-1, #666);
 }
 
 .search-hint kbd {
@@ -584,14 +436,14 @@ footer nav li::before {
 /* Highlight bar (na klikken op zoekresultaat) */
 .highlight-bar {
   position: fixed;
-  inset-inline-end: var(--mox-space-md, 1rem);
-  inset-block-end: var(--mox-space-md, 1rem);
+  inset-inline-end: var(--toepassing-space-md, 1rem);
+  inset-block-end: var(--toepassing-space-md, 1rem);
   z-index: 100;
-  background: var(--mox-color-accent-default, #007bc7);
-  color: var(--mox-color-text-inverse, #fff);
+  background: var(--toepassing-color-accent-default, #007bc7);
+  color: var(--toepassing-color-text-inverse, #fff);
   border: none;
-  padding: var(--mox-space-padding-sm) var(--mox-space-padding-md);
-  border-radius: var(--mox-border-radius-md, 4px);
+  padding: var(--toepassing-space-padding-sm) var(--toepassing-space-padding-md);
+  border-radius: var(--toepassing-border-radius-md, 4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   font: inherit;
@@ -600,7 +452,7 @@ footer nav li::before {
 
 .highlight-bar:hover,
 .highlight-bar:focus-visible {
-  background: var(--mox-color-interactive-hover-background, #005e9a);
+  background: var(--toepassing-color-interactive-hover-background, #005e9a);
 }
 
 /* Info-blokjes op homepage — flat tile-stijl met icoon + donkerblauwe titel,
@@ -702,58 +554,12 @@ footer nav li::before {
   margin-block-end: 0;
 }
 
-/* Toetsingskader-specifieke styling */
-
-/* Norm page: kern */
-.norm-kern {
-  background-color: var(--toepassing-color-feedback-info-subtle, #e8f0f7);
-  border-inline-start: 4px solid var(--toepassing-color-accent-default, #007bc7);
-  padding: var(--toepassing-space-padding-lg, 1.25rem) var(--toepassing-space-padding-xl, 1.75rem);
-  margin-block: var(--toepassing-space-md, 1rem);
-  border-radius: 0 var(--toepassing-border-radius-md, 4px) var(--toepassing-border-radius-md, 4px) 0;
-}
-
-.norm-kern h2 {
-  margin-block-start: 0;
-  margin-block-end: var(--toepassing-space-sm, 0.75rem);
-}
-
-/* Norm page: toelichting */
-.norm-toelichting {
-  margin-block: var(--toepassing-space-md, 1rem);
-  padding: var(--toepassing-space-padding-lg, 1.25rem) var(--toepassing-space-padding-xl, 1.75rem);
-  background-color: var(--toepassing-color-feedback-neutral-subtle, #f9f9f9);
-  border-radius: var(--toepassing-border-radius-md, 4px);
-}
-
-.norm-toelichting h2 {
-  margin-block-start: 0;
-  margin-block-end: var(--toepassing-space-sm, 0.75rem);
-}
-
-/* Norm page: normuitleg */
-.norm-uitleg {
-  margin-block: var(--mox-space-md);
-}
-
-.norm-uitleg > h2 {
-  border-block-end: 2px solid var(--mox-color-accent-default, #007bc7);
-  padding-block-end: var(--mox-space-xs);
-}
-
-.norm-uitleg__item {
-  margin-block: var(--mox-space-md);
-}
-
-.norm-uitleg__item h3 {
-  margin-block-start: 0;
-  color: var(--mox-color-accent-default, #007bc7);
-}
-
+/* Toetsingskader-specifieke styling: norm voorschrift/criterium/indicator
+   binnen normuitleg. Layout-only, geen brand-styling. */
 .norm-voorschrift {
-  margin-block: var(--mox-space-sm);
-  padding-block-start: var(--mox-space-sm);
-  border-block-start: 1px solid var(--mox-color-border-subtle, #ccc);
+  margin-block: var(--toepassing-space-sm);
+  padding-block-start: var(--toepassing-space-sm);
+  border-block-start: 1px solid var(--toepassing-color-border-subtle, #ccc);
 }
 
 .norm-voorschrift:first-child {
@@ -762,80 +568,22 @@ footer nav li::before {
 }
 
 .norm-voorschrift > h4 {
-  color: var(--mox-color-accent-default, #007bc7);
+  color: var(--toepassing-color-accent-default, #007bc7);
 }
 
 .norm-criterium,
 .norm-indicator {
-  margin-block: var(--mox-space-margin-2xs);
-  padding-inline-start: var(--mox-space-padding-md);
-}
-
-.norm-reikwijdte,
-.norm-gerelateerd {
-  margin-block: var(--mox-space-sm);
-}
-
-/* Norm card badge */
-.norm-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background-color: var(--mox-color-accent-default, #007bc7);
-  color: var(--mox-color-text-inverse, #fff);
-  font-weight: 700;
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-.norm-card-themed {
-  gap: var(--toepassing-space-sm, 0.75rem);
-  padding: var(--toepassing-space-padding-md, 1rem) var(--toepassing-space-padding-lg, 1.25rem);
-}
-
-.norm-card-themed header {
-  display: flex;
-  align-items: center;
-  gap: var(--toepassing-space-padding-sm, 0.5rem);
-  margin-block-end: 0;
-}
-
-/* Theme zet card h2 op title-2xl wat te groot is voor de smalle card-kolom. */
-.norm-card-themed header h2 {
-  margin: 0;
-  font-size: 1.15rem;
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-.norm-card-themed header h2 a {
-  color: var(--toepassing-color-interactive-default-text, #007bc7);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.norm-card-themed header h2 a:hover,
-.norm-card-themed header h2 a:focus-visible {
-  color: var(--toepassing-color-interactive-hover-text, #005e9a);
-  text-decoration-thickness: 2px;
-}
-
-.norm-card-themed > p {
-  margin: 0;
-  line-height: 1.5;
-  color: var(--toepassing-color-text-default);
+  margin-block: var(--toepassing-space-margin-2xs);
+  padding-inline-start: var(--toepassing-space-padding-md);
 }
 
 /* Leeswijzer info-blok */
 .leeswijzer {
-  background-color: var(--mox-color-feedback-info-subtle, #e8f0f7);
-  border-inline-start: 4px solid var(--mox-color-accent-default, #007bc7);
-  border-radius: 0 var(--mox-border-radius-md) var(--mox-border-radius-md) 0;
-  padding: var(--mox-space-padding-md) var(--mox-space-padding-lg);
-  margin-block: var(--mox-space-margin-sm);
+  background-color: var(--toepassing-color-feedback-info-subtle, #e8f0f7);
+  border-inline-start: 4px solid var(--toepassing-color-accent-default, #007bc7);
+  border-radius: 0 var(--toepassing-border-radius-md) var(--toepassing-border-radius-md) 0;
+  padding: var(--toepassing-space-padding-md) var(--toepassing-space-padding-lg);
+  margin-block: var(--toepassing-space-margin-sm);
 }
 
 .leeswijzer h2 {
@@ -851,13 +599,13 @@ footer nav li::before {
 
 .ref-term {
   text-decoration: underline dotted;
-  text-decoration-color: color-mix(in srgb, var(--mox-color-accent-default, #007bc7) 55%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--toepassing-color-accent-default, #007bc7) 55%, transparent);
   text-decoration-thickness: 2px;
   text-underline-offset: 0.2em;
 }
 
 .ref-term:focus-visible {
-  outline: 2px solid var(--mox-color-accent-default, #007bc7);
+  outline: 2px solid var(--toepassing-color-accent-default, #007bc7);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -870,15 +618,15 @@ footer nav li::before {
   inline-size: max-content;
   min-inline-size: 14rem;
   max-inline-size: min(22rem, calc(100vw - 2rem));
-  padding: var(--mox-space-padding-sm, 0.5rem) var(--mox-space-padding-md, 0.75rem);
-  padding-block-start: calc(var(--mox-space-padding-sm, 0.5rem) + 0.4rem);
-  background-color: var(--mox-color-wit, #fff);
-  border: 1px solid var(--mox-color-border-subtle, #d0d7de);
-  border-radius: var(--mox-border-radius-md, 4px);
+  padding: var(--toepassing-space-padding-sm, 0.5rem) var(--toepassing-space-padding-md, 0.75rem);
+  padding-block-start: calc(var(--toepassing-space-padding-sm, 0.5rem) + 0.4rem);
+  background-color: var(--rijkshuisstijl-color-neutraal-wit, #fff);
+  border: 1px solid var(--toepassing-color-border-subtle, #d0d7de);
+  border-radius: var(--toepassing-border-radius-md, 4px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   font-size: 0.9rem;
   line-height: 1.45;
-  color: var(--mox-color-text-default);
+  color: var(--toepassing-color-text-default);
   opacity: 0;
   visibility: hidden;
   transform: translate(var(--ref-offset-x, 0), -4px);
@@ -909,16 +657,16 @@ footer nav li::before {
 
 .ref-tooltip__link {
   display: inline-block;
-  margin-block-start: var(--mox-space-sm, 0.5rem);
+  margin-block-start: var(--toepassing-space-sm, 0.5rem);
   font-weight: 600;
-  color: var(--mox-color-accent-default, #007bc7);
+  color: var(--toepassing-color-accent-default, #007bc7);
 }
 
 /* Referenties-accordeon blijft als overzicht onderaan */
 .referenties {
-  margin-block-start: var(--mox-space-margin-md);
-  padding-block-start: var(--mox-space-padding-md);
-  border-block-start: 1px solid var(--mox-color-border-subtle, #ccc);
+  margin-block-start: var(--toepassing-space-margin-md);
+  padding-block-start: var(--toepassing-space-padding-md);
+  border-block-start: 1px solid var(--toepassing-color-border-subtle, #ccc);
 }
 
 .referenties-accordion > summary {
@@ -927,10 +675,10 @@ footer nav li::before {
   font: inherit;
   font-size: 1.5rem;
   font-weight: 700;
-  padding-block: var(--mox-space-padding-xs, 0.25rem);
+  padding-block: var(--toepassing-space-padding-xs, 0.25rem);
   display: flex;
   align-items: center;
-  gap: var(--mox-space-padding-xs, 0.5rem);
+  gap: var(--toepassing-space-padding-xs, 0.5rem);
 }
 
 .referenties-accordion > summary::-webkit-details-marker {
@@ -941,7 +689,7 @@ footer nav li::before {
   content: "▸";
   display: inline-block;
   transition: transform 0.15s ease;
-  color: var(--mox-color-accent-default, #007bc7);
+  color: var(--toepassing-color-accent-default, #007bc7);
   font-size: 0.9em;
 }
 
@@ -950,22 +698,22 @@ footer nav li::before {
 }
 
 .referenties-accordion > summary:focus-visible {
-  outline: 2px solid var(--mox-color-accent-default, #007bc7);
+  outline: 2px solid var(--toepassing-color-accent-default, #007bc7);
   outline-offset: 2px;
 }
 
 .referenties ol {
   padding-inline-start: 1.5em;
-  margin-block-start: var(--mox-space-sm, 0.5rem);
+  margin-block-start: var(--toepassing-space-sm, 0.5rem);
 }
 
 .referenties li {
-  margin-block-end: var(--mox-space-margin-2xs);
+  margin-block-end: var(--toepassing-space-margin-2xs);
 }
 
 /* Highlight voor de aangeklikte referentie wanneer de accordeon opent */
 .referenties li:target {
-  background-color: var(--mox-color-feedback-info-subtle, #fff3a8);
+  background-color: var(--toepassing-color-feedback-info-subtle, #fff3a8);
   padding: 0.25em 0.5em;
   margin-inline-start: -0.5em;
   border-radius: 3px;
