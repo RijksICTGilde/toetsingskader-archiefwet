@@ -1,0 +1,15 @@
+{{/*
+  Callout shortcode.
+
+  Usage:
+    {{< callout type="info" title="Kern" >}}…markdown…{{< /callout >}}
+    {{< callout type="warning" >}}…{{< /callout >}}
+
+  Types: info | warning | success | danger  (default: info)
+*/}}
+{{- $type := .Get "type" | default "info" -}}
+{{- $title := .Get "title" -}}
+<aside class="callout callout--{{ $type }}" role="note">
+	{{- with $title }}<p class="callout__title">{{ . }}</p>{{ end }}
+	<div class="callout__body">{{ .Inner | markdownify }}</div>
+</aside>
