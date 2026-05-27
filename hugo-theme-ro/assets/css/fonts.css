@@ -1,0 +1,49 @@
+/* fonts.css — @font-face URL overrides for vendored NLDD fonts.
+ *
+ * NLDD's settings.css already declares @font-face for RijksSans + JetBrains Mono,
+ * but the URLs in settings.css point to ../fonts/<name>.woff2 — which would
+ * resolve (relative to the bundled CSS at /css/bundle.<hash>.css) to
+ * /fonts/<name>.woff2. Our vendor script (scripts/vendor-nldd.mjs) places the
+ * files at assets/fonts/nldd/ — i.e. /fonts/nldd/<name>.woff2 after Hugo
+ * processing.
+ *
+ * To avoid 404s on font requests, we re-declare @font-face here with the
+ * correct vendored path. Later @font-face rules with the same family/weight/
+ * style win in cascade order, provided this file is bundled AFTER nldd/
+ * settings.css (head.html should enforce that order).
+ *
+ * If a project needs to override or add additional fonts, do so in their own
+ * main.css after the theme bundle.
+ */
+
+@font-face {
+	font-family: 'RijksSans';
+	src: url('/fonts/nldd/RijksSansWeb-Regular.woff2') format('woff2-variations');
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'RijksSans';
+	src: url('/fonts/nldd/RijksSansWeb-Italic.woff2') format('woff2-variations');
+	font-weight: 100 900;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('/fonts/nldd/JetBrainsMono[wght].woff2') format('woff2-variations');
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('/fonts/nldd/JetBrainsMono-Italic[wght].woff2') format('woff2-variations');
+	font-weight: 100 900;
+	font-style: italic;
+	font-display: swap;
+}

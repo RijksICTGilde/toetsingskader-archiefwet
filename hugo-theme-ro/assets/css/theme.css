@@ -1,0 +1,41 @@
+/* theme.css — site-shell complement on <nldd-rich-text>.
+ *
+ * Uses only NLDD-token equivalents from assets/css/nldd/settings.css.
+ * Where the original spec named tokens that don't exist (e.g. spacing-md,
+ * content-color-subtle), we swap to the closest existing token:
+ *   --primitives-spacing-md         -> --primitives-space-16
+ *   --semantics-content-color-subtle -> --semantics-content-color
+ * Tokens used as-named:
+ *   --semantics-surfaces-background-color
+ *   --components-rich-text-wide-max-width
+ *   --primitives-font-body-lg-regular-snug
+ */
+
+:root {
+	color-scheme: light dark;
+}
+
+body {
+	background: var(--semantics-surfaces-background-color);
+	color: var(--semantics-content-color);
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+}
+
+main {
+	flex: 1;
+}
+
+.container {
+	width: 100%;
+	max-width: var(--components-rich-text-wide-max-width);
+	margin-inline: auto;
+	padding-inline: var(--primitives-space-16);
+}
+
+nldd-rich-text > p.lead {
+	font: var(--primitives-font-body-lg-regular-snug);
+	color: var(--semantics-content-color);
+}
