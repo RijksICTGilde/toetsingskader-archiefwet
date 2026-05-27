@@ -1,65 +1,28 @@
-# Toetsingskader Archiefwet
+# `hugo-theme-rijksoverheid` branch
 
-Het Toetsingskader Archiefwet van de [Inspectie Overheidsinformatie en Erfgoed](https://www.inspectie-oe.nl) biedt een gestructureerd raamwerk voor het toetsen van de naleving van de Archiefwet 2026 door overheidsorganisaties. Deze website presenteert de normen op een toegankelijke manier.
-
-## Architectuur
-
-Dit project gebruikt [hugo-theme-ro](https://github.com/RijksICTGilde/hugo-theme-ro) als Hugo module. De theme levert de Rijksoverheid huisstijl (via MOx design system), basistemplates, navigatie en header/footer. Dit project bevat alleen de content en project-specifieke templates en styling.
-
-## Lokale ontwikkeling
-
-### Vereisten
-
-- [Hugo](https://gohugo.io/installation/) (extended edition)
-- [Go](https://go.dev/dl/) (voor Hugo modules)
-- [Git](https://git-scm.com/)
-
-### Installatie
-
-```bash
-git clone https://github.com/RijksICTGilde/toetsingskader-archiefwet.git
-cd toetsingskader-archiefwet
-
-# Start de ontwikkelserver
-hugo server
-```
-
-Hugo haalt automatisch de theme module op bij de eerste keer draaien.
-
-De site is beschikbaar op `http://localhost:1313/`.
-
-### Pre-commit hooks
-
-Dit project gebruikt [pre-commit](https://pre-commit.com/) voor code-kwaliteitscontroles.
-
-```bash
-pip install pre-commit
-pre-commit install
-```
-
-### Handige commando's
-
-```bash
-# Bouw de site (controleert op fouten)
-hugo --minify
-
-# Valideer normpagina's front matter
-python3 scripts/validate-norms.py
-
-# Update de theme naar de nieuwste versie
-hugo mod get -u
-```
+Werkbranch waarop **theme + consumer-migratie gelijktijdig** ontwikkeld worden
+voor de NLDD-gebaseerde versie van `hugo-theme-RO`.
 
 ## Structuur
 
-| Map | Beschrijving |
-|---|---|
-| `content/normen/` | Normpagina's (7 normen + introductiepagina) |
-| `layouts/normen/` | Project-specifieke templates voor normpagina's |
-| `assets/css/` | Project-specifieke CSS |
-| `scripts/` | Validatie- en hulpscripts |
-| `.github/` | CI/CD workflows |
+- **Branch-root**: consumer-config (`hugo.yaml`, `content/`, `layouts/normen/`, …)
+  — wordt straks gemerged naar `main` van `toetsingskader-archiefwet`.
+- **`hugo-theme-ro/` subdir**: theme-code — wordt geëxtraheerd naar de
+  canonical `RijksICTGilde/hugo-theme-RO` repo.
+- **`theme-alignment.md`**: prior-art context document; blijft hier leven.
 
-## Licentie
+## Lokale dev
 
-Dit project is gelicentieerd onder de [EUPL v1.2](LICENSE).
+```bash
+cd /Users/robbert/Projects/toetsingskader-archiefwet/hugo-theme-rijksoverheid
+hugo server   # gebruikt config/development/module.yaml met replacement → ./hugo-theme-ro
+```
+
+## Eindspel
+
+1. Theme + consumer stable, team-review akkoord.
+2. **Track C** (extraction): `hugo-theme-ro/*` → `RijksICTGilde/hugo-theme-RO`, tag `v0.1.0`.
+3. Op deze branch: `git rm -r hugo-theme-ro/`, vervang replacement door pin op `v0.1.0`.
+4. Merge naar `main`; PR bevat dan alleen consumer-migratie.
+
+Spec + plan: `RijksICTGilde/hugo-theme-RO/docs/superpowers/`.
