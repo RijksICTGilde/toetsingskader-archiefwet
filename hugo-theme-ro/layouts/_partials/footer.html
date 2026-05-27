@@ -1,1 +1,40 @@
-<!-- stub: footer.html -->
+{{- $variant := site.Params.footer.variant | default "light" -}}
+{{- $primaryLabel := site.Params.footer.columns.primary_label | default "Zie ook" -}}
+{{- $secondaryLabel := site.Params.footer.columns.secondary_label | default "Over deze site" -}}
+<footer class="footer footer--{{ $variant }}">
+	<div class="footer__container">
+		{{ with site.Params.footer.tagline }}
+		<p class="footer__tagline">{{ . }}</p>
+		{{ end }}
+
+		<div class="footer__columns">
+			{{ with site.Menus.footer-primary }}
+			<nav class="footer__column footer__primary" aria-label="{{ $primaryLabel }}">
+				<h2 class="footer__column-title">{{ $primaryLabel }}</h2>
+				<ul>
+					{{ range . }}
+					<li><a href="{{ .URL }}">{{ .Name }}</a></li>
+					{{ end }}
+				</ul>
+			</nav>
+			{{ end }}
+
+			{{ with site.Menus.footer-secondary }}
+			<nav class="footer__column footer__secondary" aria-label="{{ $secondaryLabel }}">
+				<h2 class="footer__column-title">{{ $secondaryLabel }}</h2>
+				<ul>
+					{{ range . }}
+					<li><a href="{{ .URL }}">{{ .Name }}</a></li>
+					{{ end }}
+				</ul>
+			</nav>
+			{{ end }}
+		</div>
+
+		{{ if site.Params.footer.colofon.enable }}
+		<div class="footer__colofon">
+			<p>&copy; {{ now.Year }} {{ site.Title }}</p>
+		</div>
+		{{ end }}
+	</div>
+</footer>
