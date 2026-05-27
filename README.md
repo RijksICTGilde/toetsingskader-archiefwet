@@ -13,9 +13,31 @@ voor de NLDD-gebaseerde versie van `hugo-theme-RO`.
 
 ## Lokale dev
 
+Hugo 0.159.x accepteert geen relatieve paden in `module.replacements`. Daarom
+draaien we Hugo via een `justfile` of `direnv` die `HUGO_MODULE_REPLACEMENTS`
+met het absolute pad van deze worktree injecteert.
+
+**Met just** (geen direnv nodig):
+
 ```bash
 cd /Users/robbert/Projects/toetsingskader-archiefwet/hugo-theme-rijksoverheid
-hugo server   # gebruikt config/development/module.yaml met replacement → ./hugo-theme-ro
+just serve              # = `hugo server --environment development` met replacement
+just hugo --help        # of een willekeurig hugo-commando
+just build              # productie-build zonder replacement (gebruikt pinned module)
+```
+
+**Met direnv** (automatisch laden):
+
+```bash
+direnv allow            # eenmalig per worktree
+hugo server             # werkt direct; .envrc heeft de env-var gezet
+```
+
+**Handmatig** (zonder just/direnv):
+
+```bash
+source .envrc
+hugo server
 ```
 
 ## Eindspel
