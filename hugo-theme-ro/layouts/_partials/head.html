@@ -1,0 +1,36 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Title }}{{ end }}">
+
+{{ with .Params.og_image }}
+<meta property="og:image" content="{{ . | absURL }}">
+{{ end }}
+
+{{ if .Params.noindex }}
+<meta name="robots" content="noindex,nofollow">
+{{ end }}
+
+{{/* CSS bundle: NLDD foundation → fonts overrides → theme → components → consumer override.
+     Order matters: fonts.css @font-face must come AFTER nldd/settings.css to win cascade. */}}
+{{ $settings   := resources.Get "css/nldd/settings.css" }}
+{{ $palettes   := resources.Get "css/nldd/palettes.generated.css" }}
+{{ $reset      := resources.Get "css/nldd/reset.css" }}
+{{ $richText   := resources.Get "css/nldd/rich-text.css" }}
+{{ $fonts      := resources.Get "css/fonts.css" }}
+{{ $theme      := resources.Get "css/theme.css" }}
+{{ $components := resources.Match "css/components/*.css" }}
+{{ $main       := resources.Get "css/main.css" }}
+
+{{ $bundle := slice }}
+{{ with $settings }}{{ $bundle = $bundle | append . }}{{ end }}
+{{ with $palettes }}{{ $bundle = $bundle | append . }}{{ end }}
+{{ with $reset }}{{ $bundle = $bundle | append . }}{{ end }}
+{{ with $richText }}{{ $bundle = $bundle | append . }}{{ end }}
+{{ with $fonts }}{{ $bundle = $bundle | append . }}{{ end }}
+{{ with $theme }}{{ $bundle = $bundle | append . }}{{ end }}
+{{ $bundle = $bundle | append $components }}
+{{ with $main }}{{ $bundle = $bundle | append (slice .) }}{{ end }}
+
+{{ $css := $bundle | resources.Concat "css/bundle.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
