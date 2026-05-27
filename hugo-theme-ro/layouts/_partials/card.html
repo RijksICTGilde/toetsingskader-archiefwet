@@ -1,0 +1,14 @@
+{{/*
+  Card partial — link-tile met optionele variant.
+  Argumenten (via dict):
+    url       (string, required) link target
+    title     (string, required) zichtbare titel
+    variant   (string, optional) "accent-border" | "subtle"
+    id_label  (string, optional) klein label vóór titel (bv. "Norm 6")
+    excerpt   (string, optional) korte beschrijving
+*/}}
+<a href="{{ .url }}" class="card{{ with .variant }} card--{{ . }}{{ end }}">
+  {{ with .id_label }}<span class="card__id">{{ . }}</span>{{ end }}
+  <h3 class="card__title">{{ .title }}</h3>
+  {{ with .excerpt }}<p class="card__excerpt">{{ . }}</p>{{ end }}
+</a>
