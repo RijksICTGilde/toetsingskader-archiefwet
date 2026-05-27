@@ -1,0 +1,20 @@
+/* Utility classes — small, broadly-reusable atoms. */
+
+/* Visually hidden — port from moza-site; for a11y skip-text. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Section heading with underline (replaces toetsingskader's .norm-uitleg > h2 styling). */
+.section-heading--underline {
+  border-block-end: 2px solid var(--primitives-color-accent-500);
+  padding-block-end: var(--primitives-space-4);
+}
