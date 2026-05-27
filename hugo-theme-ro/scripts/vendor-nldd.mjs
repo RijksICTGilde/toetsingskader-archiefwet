@@ -10,13 +10,13 @@ if (!existsSync(NLDD)) {
 
 console.log('Cleaning previous NLDD vendor output…');
 await rm('assets/css/nldd', { recursive: true, force: true });
-await rm('assets/fonts/nldd', { recursive: true, force: true });
+await rm('static/fonts/nldd', { recursive: true, force: true });
 
 console.log('Copying NLDD CSS…');
 await cp(`${NLDD}/css`, 'assets/css/nldd', { recursive: true });
 
-console.log('Copying NLDD fonts…');
-await cp(`${NLDD}/fonts`, 'assets/fonts/nldd', { recursive: true });
+console.log('Copying NLDD fonts to static/ (served directly, no Pipes needed)…');
+await cp(`${NLDD}/fonts`, 'static/fonts/nldd', { recursive: true });
 
 const pkg = JSON.parse(
   await readFile('node_modules/@nldd/design-system/package.json', 'utf8')
