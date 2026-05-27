@@ -22,17 +22,22 @@
   <h1>{{ .Title }}</h1>
 
   {{ with .Params.kern }}
-  <div id="kern" class="norm-kern">
-    <h2>Kern van de norm</h2>
-    {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
+  <div id="kern">
+    {{ $kernHTML := partial "reftext.html" (dict "tekst" . "page" $page) }}
+    {{ partial "callout.html" (dict
+        "type" "info"
+        "title" "Kern van de norm"
+        "content" $kernHTML) }}
   </div>
   {{ end }}
 
   {{ with .Params.toelichting }}
-  <div id="toelichting" class="norm-toelichting">
+  <section id="toelichting">
     <h2>Toelichting</h2>
-    {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
-  </div>
+    <div class="box box--subtle">
+      {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
+    </div>
+  </section>
   {{ end }}
 
   {{/* Synoniemen worden bewust niet meer getoond op de pagina; ze
@@ -40,10 +45,10 @@
        zoekindex (zie layouts/index.json). */}}
 
   {{ with .Params.normuitleg }}
-  <div id="normuitleg" class="norm-uitleg">
-    <h2>Normuitleg</h2>
+  <section id="normuitleg">
+    <h2 class="section-heading section-heading--underline">Normuitleg</h2>
     {{ range . }}
-    <div class="norm-uitleg__item">
+    <div class="box box--subtle">
       {{ with .titel }}
       <h3 id="{{ . | urlize }}">{{ . }}</h3>
       {{ end }}
@@ -82,25 +87,25 @@
       {{ end }}
     </div>
     {{ end }}
-  </div>
+  </section>
   {{ end }}
 
   {{ with .Params.reikwijdte }}
-  <div id="reikwijdte" class="norm-reikwijdte">
+  <section id="reikwijdte">
     <h2>Reikwijdte</h2>
     {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
-  </div>
+  </section>
   {{ end }}
 
   {{ with .Params.gerelateerde_onderwerpen }}
-  <div id="zie-ook" class="norm-gerelateerd">
+  <section id="zie-ook">
     <h2>Zie ook</h2>
     <ul>
       {{ range . }}
       <li>{{ with .url }}<a href="{{ strings.TrimPrefix "/" . | relURL }}">{{ end }}{{ partial "reftext.html" (dict "tekst" .titel "page" $page) }}{{ with .url }}</a>{{ end }}</li>
       {{ end }}
     </ul>
-  </div>
+  </section>
   {{ end }}
 
   {{ partial "referenties.html" $page }}
