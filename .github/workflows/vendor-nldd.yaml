@@ -1,0 +1,51 @@
+name: Vendor NLDD design system
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # weekly, Monday 06:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    defaults:
+      run:
+        working-directory: hugo-theme-ro
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: hugo-theme-ro/package-lock.json
+
+      - name: Install latest NLDD
+        run: |
+          npm install @nldd/design-system@latest --save-dev
+          npm install
+
+      - name: Vendor NLDD into hugo-theme-ro/
+        run: npm run vendor:nldd
+
+      - name: Read vendored version
+        id: ver
+        run: |
+          v=$(cat assets/css/nldd/VERSION.txt | tr -d '\n')
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          title: 'chore: bump NLDD design-system to ${{ steps.ver.outputs.version }}'
+          commit-message: 'chore: vendor @nldd/design-system@${{ steps.ver.outputs.version }}'
+          branch: chore/vendor-nldd
+          body: |
+            Automated bump of vendored NLDD design system assets.
+
+            Inspect the diff for changes in CSS variables or rich-text rules
+            that might affect downstream theming.
+
+            **Note**: this PR targets branch `hugo-theme-rijksoverheid` (where theme dev lives).
