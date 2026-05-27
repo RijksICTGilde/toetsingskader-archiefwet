@@ -1,0 +1,14 @@
+{{/*
+  Hulppartial om consistent links te renderen vanuit andere templates.
+  Argumenten (via dict):
+    destination (string, required)
+    title       (string, optional)
+    text        (string/HTML, required)
+*/}}
+{{ $dest := .destination }}
+{{ $isExternal := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") }}
+{{ $rel := "" }}
+{{ if $isExternal }}
+  {{ $rel = "external noopener" }}
+{{ end }}
+<a href="{{ $dest }}"{{ with .title }} title="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}>{{ .text | safeHTML }}</a>

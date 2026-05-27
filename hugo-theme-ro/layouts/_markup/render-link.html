@@ -1,0 +1,7 @@
+{{- $dest := .Destination -}}
+{{- $isExternal := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") -}}
+{{- $rel := "" -}}
+{{- if $isExternal -}}
+  {{- $rel = " rel=\"external noopener\"" -}}
+{{- end -}}
+<a href="{{ $dest | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ $rel | safeHTMLAttr }}>{{ .Text | safeHTML }}</a>
