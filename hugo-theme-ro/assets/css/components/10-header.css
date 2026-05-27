@@ -1,0 +1,72 @@
+/* header — site header with logo, site title and primary navigation.
+ *
+ * Tokens used (verified in assets/css/nldd/settings.css):
+ *   --primitives-space-4 / -8 / -16              spacing
+ *   --semantics-surfaces-background-color        header background
+ *   --semantics-dividers-color                   bottom-border color
+ *   --semantics-dividers-thickness               bottom-border thickness
+ *   --semantics-content-color                    text / link color
+ *   --components-rich-text-wide-max-width        container max-width
+ *   --components-top-navigation-bar-title-md-font  site title font
+ *
+ * Note: NLDD has no generic `--semantics-borders-*` token; the closest
+ * semantic match for a thin separator is the dividers pair.
+ */
+
+.header {
+	background: var(--semantics-surfaces-background-color);
+	border-block-end: var(--semantics-dividers-thickness) solid var(--semantics-dividers-color);
+}
+
+.header__container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--primitives-space-16);
+	width: 100%;
+	max-width: var(--components-rich-text-wide-max-width);
+	margin-inline: auto;
+	padding: var(--primitives-space-16);
+}
+
+.header__logo {
+	display: flex;
+	align-items: center;
+	gap: var(--primitives-space-8);
+	text-decoration: none;
+	color: inherit;
+}
+
+.header__logo img {
+	display: block;
+	width: 3rem;
+	height: 3rem;
+}
+
+.header__site-title {
+	font: var(--components-top-navigation-bar-title-md-font);
+	color: var(--semantics-content-color);
+}
+
+.header__nav ul {
+	display: flex;
+	gap: var(--primitives-space-16);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.header__nav a {
+	text-decoration: none;
+	color: var(--semantics-content-color);
+	padding: var(--primitives-space-4) var(--primitives-space-8);
+}
+
+.header__nav a:hover,
+.header__nav a:focus-visible {
+	text-decoration: underline;
+}
+
+.header__nav a[aria-current="page"] {
+	font-weight: 700;
+}

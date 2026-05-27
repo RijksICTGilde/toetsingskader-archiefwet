@@ -1,1 +1,21 @@
-<!-- stub: header.html -->
+<header class="header">
+  <div class="header__container">
+    <a href="{{ "/" | relURL }}" class="header__logo" aria-label="Naar de homepage van {{ site.Title }}">
+      <img src="{{ (site.Params.logo | default "images/beeldmerk-rijksoverheid.svg") | relURL }}"
+           alt="" width="48" height="48">
+      <span class="header__site-title">{{ site.Title }}</span>
+    </a>
+
+    {{ with site.Menus.main }}
+    <nav class="header__nav" aria-label="Hoofdmenu">
+      <ul>
+        {{ range . }}
+        <li>
+          <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </nav>
+    {{ end }}
+  </div>
+</header>
