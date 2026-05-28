@@ -30,7 +30,17 @@
     <div class="menu">
       <ul>
         {{- range .Site.Menus.main -}}
-          {{- $isActive := or (eq $.RelPermalink .URL) (and .URL (ne .URL "/") (hasPrefix $.RelPermalink .URL)) -}}
+          {{- /* Home-detectie: vergelijk met site.Home.RelPermalink (robuust
+                 voor trailing-slash en basePath verschillen). Anders zou
+                 baseURL als prefix op elke URL matchen en Home altijd
+                 actief tonen. */ -}}
+          {{- $isHomeMenu := eq .URL site.Home.RelPermalink -}}
+          {{- $isActive := false -}}
+          {{- if $isHomeMenu -}}
+            {{- $isActive = $.IsHome -}}
+          {{- else -}}
+            {{- $isActive = or (eq $.RelPermalink .URL) (hasPrefix $.RelPermalink .URL) -}}
+          {{- end -}}
           <li>
             <a href="{{ .URL }}" data-text="{{ .Name }}"{{ if $isActive }} class="active" aria-current="page"{{ end }}>
               {{- .Name -}}

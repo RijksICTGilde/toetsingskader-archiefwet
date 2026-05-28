@@ -411,6 +411,14 @@ main > .page-article {
   flex: 1 1 50%;
 }
 
+/* Inspectie-OE: rechter footer-kolommen iets breder zodat
+   "Kwetsbaarheid melden" en de service-links niet ongelukkig wrappen. */
+@media (min-width: 700px) {
+  footer .footer-columns nav {
+    min-width: 14rem;
+  }
+}
+
 /* Sidebar: bevat normen-lijst en (op normpagina's) de ToC */
 .sidebar {
   margin-block: var(--mox-space-md);
