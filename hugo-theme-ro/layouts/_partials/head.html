@@ -11,23 +11,53 @@
 <meta name="robots" content="noindex,nofollow">
 {{ end }}
 
-{{/* CSS bundle: NLDD foundation → fonts overrides → theme → components → consumer override.
-     Order matters: fonts.css @font-face must come AFTER nldd/settings.css to win cascade. */}}
+{{/* @font-face inline so Hugo's relURL resolves the basepath correctly.
+     Vendor script strips NLDD's own @font-face from settings.css. */}}
+<style>
+@font-face {
+  font-family: 'RijksSans';
+  src: url('{{ "fonts/nldd/RijksSansWeb-Regular.woff2" | relURL }}') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'RijksSans';
+  src: url('{{ "fonts/nldd/RijksSansWeb-Italic.woff2" | relURL }}') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('{{ "fonts/nldd/JetBrainsMono[wght].woff2" | relURL }}') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('{{ "fonts/nldd/JetBrainsMono-Italic[wght].woff2" | relURL }}') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+</style>
+
+{{/* CSS bundle: NLDD foundation → theme shell → components → consumer override. */}}
 {{ $settings   := resources.Get "css/nldd/settings.css" }}
 {{ $palettes   := resources.Get "css/nldd/palettes.generated.css" }}
 {{ $reset      := resources.Get "css/nldd/reset.css" }}
 {{ $richText   := resources.Get "css/nldd/rich-text.css" }}
-{{ $fonts      := resources.Get "css/fonts.css" }}
 {{ $theme      := resources.Get "css/theme.css" }}
 {{ $components := resources.Match "css/components/*.css" }}
 {{ $main       := resources.Get "css/main.css" }}
 
 {{ $bundle := slice }}
-{{ with $settings }}{{ $bundle = $bundle | append . }}{{ end }}
 {{ with $palettes }}{{ $bundle = $bundle | append . }}{{ end }}
+{{ with $settings }}{{ $bundle = $bundle | append . }}{{ end }}
 {{ with $reset }}{{ $bundle = $bundle | append . }}{{ end }}
 {{ with $richText }}{{ $bundle = $bundle | append . }}{{ end }}
-{{ with $fonts }}{{ $bundle = $bundle | append . }}{{ end }}
 {{ with $theme }}{{ $bundle = $bundle | append . }}{{ end }}
 {{ $bundle = $bundle | append $components }}
 {{ with $main }}{{ $bundle = $bundle | append (slice .) }}{{ end }}

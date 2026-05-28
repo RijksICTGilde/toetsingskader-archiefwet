@@ -8,7 +8,7 @@
 		{{ end }}
 
 		<div class="footer__columns">
-			{{ with site.Menus.footer-primary }}
+			{{ with index site.Menus "footer-primary" }}
 			<nav class="footer__column footer__primary" aria-label="{{ $primaryLabel }}">
 				<h2 class="footer__column-title">{{ $primaryLabel }}</h2>
 				<ul>
@@ -19,7 +19,7 @@
 			</nav>
 			{{ end }}
 
-			{{ with site.Menus.footer-secondary }}
+			{{ with index site.Menus "footer-secondary" }}
 			<nav class="footer__column footer__secondary" aria-label="{{ $secondaryLabel }}">
 				<h2 class="footer__column-title">{{ $secondaryLabel }}</h2>
 				<ul>
