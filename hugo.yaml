@@ -34,10 +34,9 @@ params:
     strong: "Let op:"
     text: "Dit is versie 0.8 van het toetsingskader. De inhoud is nog in ontwikkeling en kan wijzigen."
   footer:
-    tagline: "Eén Overheid. Voor iedereen!"
+    tagline: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."
     links: "Zie ook"
     rechts: "Over deze site"
-    description: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."
 
 menus:
   main:

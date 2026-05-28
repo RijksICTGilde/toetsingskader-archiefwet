@@ -45,6 +45,16 @@
    --toepassing-* (van het oude --mox-*-tijdperk). Hieronder de bridge zodat
    alles weer resolves. */
 :root {
+  /* === Inspectie-OE brand-override op moza-site theme tokens ===
+     De Inspectie gebruikt hemelblauw (#007bc7), niet de moza-site donkerblauw
+     (lintblauw). We overrulen --color-rijks-blauw, --color-primary en
+     --color-link op het hoogste niveau zodat alle theme-componenten
+     (header banner, navbar, links, hero-overlay, etc.) automatisch
+     overstappen. */
+  --color-rijks-blauw: #007bc7;
+  --color-primary: #007bc7;
+  --color-link: light-dark(#007bc7, #66c0e8);
+
   /* --- Base mapping: --toepassing-* → moza-site --color-* --- */
   --toepassing-color-background-canvas: var(--color-bg-page);
   --toepassing-color-background-default: var(--color-bg-page);
