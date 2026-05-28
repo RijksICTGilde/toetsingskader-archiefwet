@@ -404,10 +404,8 @@ main > .page-article {
   gap: var(--mox-space-padding-lg);
 }
 
-footer nav li::before {
-  content: ">";
-  margin-inline-end: var(--mox-space-padding-xs);
-}
+/* footer nav li::before — verwijderd: moza-site theme heeft eigen chevron via
+   border-rotate in footer.css; consumer's tekst-chevron veroorzaakte dubbele >>. */
 
 .footer-links > nav:first-child {
   flex: 1 1 50%;

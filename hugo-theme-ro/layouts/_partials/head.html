@@ -57,9 +57,13 @@
 {{ $layout     := resources.Get "css/layout.css" }}
 {{ $components := resources.Match "css/components/*.css" }}
 
-{{/* Consumer-level overrides: theme picks up alle CSS files in consumer's
-     assets/css/ (glob, top-level), zodat consumers project-specifieke CSS
-     in eigen assets/css/ kunnen plaatsen (main.css, bollendiagram.css, …). */}}
+{{/* Consumer-level overrides: theme picks up CSS files in consumer's
+     assets/css/ (glob, top-level). Hugo's module-system merged het thema's
+     eigen assets/css/ in dezelfde namespace; filter daarom dubbelingen
+     (tokens, fonts, base, layout) eruit zodat alleen extra consumer-files
+     (main.css, bollendiagram.css, …) doorkomen — anders overschrijft
+     theme's tokens.css de consumer-overrides aan het eind van de cascade. */}}
+{{ $themeRoots := slice "tokens.css" "fonts.css" "base.css" "layout.css" }}
 {{ $consumerCss := resources.Match "css/*.css" }}
 
 {{ $cssList := slice }}
@@ -68,7 +72,10 @@
 {{ with $base }}{{ $cssList = $cssList | append . }}{{ end }}
 {{ with $layout }}{{ $cssList = $cssList | append . }}{{ end }}
 {{ $cssList = $cssList | append $components }}
-{{ range $consumerCss }}{{ $cssList = $cssList | append . }}{{ end }}
+{{ range $consumerCss }}
+  {{ $basename := path.Base .Name }}
+  {{ if not (in $themeRoots $basename) }}{{ $cssList = $cssList | append . }}{{ end }}
+{{ end }}
 {{ $css := $cssList | resources.Concat "css/style.css" | resources.ExecuteAsTemplate "css/style.css" . | fingerprint "md5" }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
 
