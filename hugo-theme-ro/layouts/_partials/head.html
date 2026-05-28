@@ -48,28 +48,27 @@
 <link rel="preload" href="{{ relURL "fonts/RO-SansWebText-Bold.woff2" }}" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="{{ relURL "fonts/RO-SerifWeb-Italic.woff2" }}" as="font" type="font/woff2" crossorigin />
 
-{{/* CSS bundling via Hugo's asset pipeline */}}
-{{ $tokens := resources.Get "css/tokens.css" }}
-{{ $fonts := resources.Get "css/fonts.css" }}
-{{ $base := resources.Get "css/base.css" }}
-{{ $layout := resources.Get "css/layout.css" }}
-{{ $header := resources.Get "css/components/header.css" }}
-{{ $hero := resources.Get "css/components/hero.css" }}
-{{ $cardGrid := resources.Get "css/components/card-grid.css" }}
-{{ $box := resources.Get "css/components/box.css" }}
-{{ $button := resources.Get "css/components/button.css" }}
-{{ $blockquote := resources.Get "css/components/blockquote.css" }}
-{{ $list := resources.Get "css/components/list.css" }}
-{{ $footer := resources.Get "css/components/footer.css" }}
-{{ $toast := resources.Get "css/components/toast.css" }}
-{{ $search := resources.Get "css/components/search.css" }}
-{{ $mermaid := resources.Get "css/components/mermaid.css" }}
-{{ $pageNav := resources.Get "css/components/page-nav.css" }}
-{{/* Consumer-level overrides: theme picks up assets/css/main.css if present
-     (theme convention — consumers can blend in project-specific CSS via this filename). */}}
-{{ $main := resources.Get "css/main.css" }}
-{{ $cssList := slice $tokens $fonts $base $layout $header $hero $cardGrid $box $button $blockquote $list $footer $toast $search $mermaid $pageNav }}
-{{ with $main }}{{ $cssList = $cssList | append . }}{{ end }}
+{{/* CSS bundling via Hugo's asset pipeline.
+     Volgorde: design tokens → fonts → base typography → layout → components → consumer overrides.
+     Components: glob op css/components/*.css zodat nieuwe componenten automatisch worden meegenomen. */}}
+{{ $tokens     := resources.Get "css/tokens.css" }}
+{{ $fonts      := resources.Get "css/fonts.css" }}
+{{ $base       := resources.Get "css/base.css" }}
+{{ $layout     := resources.Get "css/layout.css" }}
+{{ $components := resources.Match "css/components/*.css" }}
+
+{{/* Consumer-level overrides: theme picks up alle CSS files in consumer's
+     assets/css/ (glob, top-level), zodat consumers project-specifieke CSS
+     in eigen assets/css/ kunnen plaatsen (main.css, bollendiagram.css, …). */}}
+{{ $consumerCss := resources.Match "css/*.css" }}
+
+{{ $cssList := slice }}
+{{ with $tokens }}{{ $cssList = $cssList | append . }}{{ end }}
+{{ with $fonts }}{{ $cssList = $cssList | append . }}{{ end }}
+{{ with $base }}{{ $cssList = $cssList | append . }}{{ end }}
+{{ with $layout }}{{ $cssList = $cssList | append . }}{{ end }}
+{{ $cssList = $cssList | append $components }}
+{{ range $consumerCss }}{{ $cssList = $cssList | append . }}{{ end }}
 {{ $css := $cssList | resources.Concat "css/style.css" | resources.ExecuteAsTemplate "css/style.css" . | fingerprint "md5" }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
 

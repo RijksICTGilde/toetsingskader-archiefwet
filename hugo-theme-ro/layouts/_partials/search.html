@@ -15,13 +15,18 @@
         {{- partial "icon.html" "x" -}}
       </button>
     </div>
+    {{/* Sectie-filters config-driven via site.Params.search.filters.
+         Fallback: alleen "Alles" — zoekt over hele site zonder filter. */}}
+    {{ $filters := site.Params.search.filters }}
+    {{ if and $filters (gt (len $filters) 1) }}
     <div class="search-filters" role="group" aria-label="Filter op sectie">
-      <button class="search-filter active" data-section="" aria-pressed="true">Alles</button>
-      <button class="search-filter" data-section="weekly" aria-pressed="false">MOZa Weekly</button>
-      <button class="search-filter" data-section="onderwerpen" aria-pressed="false">Onderwerpen</button>
-      <button class="search-filter" data-section="handboek" aria-pressed="false">Handboek</button>
-      <button class="search-filter" data-section="documenten" aria-pressed="false">Documenten</button>
+      {{ range $i, $f := $filters }}
+      <button class="search-filter{{ if eq $i 0 }} active{{ end }}"
+              data-section="{{ .section }}"
+              aria-pressed="{{ if eq $i 0 }}true{{ else }}false{{ end }}">{{ .label }}</button>
+      {{ end }}
     </div>
+    {{ end }}
     <ul id="search-results" class="search-results" aria-label="Zoekresultaten" aria-live="polite"></ul>
   </div>
 </dialog>

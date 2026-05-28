@@ -1,6 +1,7 @@
 baseURL: https://minbzk.github.io/toetsingskader-archiefwet/
 languageCode: nl
 defaultContentLanguage: nl
+title: Toetsingskader Archiefwet
 
 enableRobotsTXT: true
 
@@ -26,49 +27,71 @@ params:
     email: toetsingskader@inspectie-oe.nl
   search:
     enable: true
+    # Sectie-filters: weglaten of korte lijst → alleen "Alles" wordt impliciet getoond
+  tagline: "Normen voor duurzame toegankelijkheid"
+  page_banner:
+    type: warning
+    strong: "Let op:"
+    text: "Dit is versie 0.8 van het toetsingskader. De inhoud is nog in ontwikkeling en kan wijzigen."
   footer:
+    tagline: "Eén Overheid. Voor iedereen!"
+    links: "Zie ook"
+    rechts: "Over deze site"
     description: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."
-    service:
-      - name: Contact
-        url: https://www.inspectie-oe.nl/service/contact
-      - name: RSS
-        url: https://www.inspectie-oe.nl/service/rss
-      - name: Abboneren
-        url: https://www.inspectie-oe.nl/abonneren/abonnementen?context=inschrijven%2Denkele%2Dnieuwsbrief&titel=nieuwsberichten&nieuwsbrief%2Did=9f325d39%2D354b%2D462a%2D8e76%2D187599df19f6
-      - name: Sitemap
-        url: https://www.inspectie-oe.nl/sitemap
-      - name: Help
-        url: https://www.inspectie-oe.nl/service/help
-      - name: Archief
-        url: https://www.inspectie-oe.nl/service/archief
-      - name: Bereikbaarheid
-        url: https://www.inspectie-oe.nl/bereikbaarheid
-      - name: Vacatures
-        url: https://www.inspectie-oe.nl/de-inspectie-overheidsinformatie-en-erfgoed/vacatures
 
-
-    about:
-      - name: Copyright
-        url: https://www.inspectie-oe.nl/service/copyright
-      - name: Privacy
-        url: https://www.inspectie-oe.nl/service/privacy
-      - name: Cookies
-        url: https://www.inspectie-oe.nl/service/cookies
-      - name: Toegankelijkheid
-        url: https://www.inspectie-oe.nl/service/toegankelijkheid
-      - name: Kwetsbaarheid melden
-        url: https://www.inspectie-oe.nl/service/kwetsbaarheid-melden
-
-menu:
+menus:
   main:
     - name: Home
       pageRef: /
       weight: 1
+    - name: Over
+      pageRef: /over
+      weight: 5
     - name: Normen
       pageRef: /normen
       weight: 10
-    - name: Over
-      pageRef: /over
+
+  footer-links:
+    - name: Contact
+      url: https://www.inspectie-oe.nl/service/contact
+      weight: 1
+    - name: RSS
+      url: https://www.inspectie-oe.nl/service/rss
+      weight: 2
+    - name: Abonneren
+      url: https://www.inspectie-oe.nl/abonneren/abonnementen
+      weight: 3
+    - name: Sitemap
+      url: https://www.inspectie-oe.nl/sitemap
+      weight: 4
+    - name: Help
+      url: https://www.inspectie-oe.nl/service/help
+      weight: 5
+    - name: Archief
+      url: https://www.inspectie-oe.nl/service/archief
+      weight: 6
+    - name: Bereikbaarheid
+      url: https://www.inspectie-oe.nl/bereikbaarheid
+      weight: 7
+    - name: Vacatures
+      url: https://www.inspectie-oe.nl/de-inspectie-overheidsinformatie-en-erfgoed/vacatures
+      weight: 8
+
+  footer-rechts:
+    - name: Copyright
+      url: https://www.inspectie-oe.nl/service/copyright
+      weight: 1
+    - name: Privacy
+      url: https://www.inspectie-oe.nl/service/privacy
+      weight: 2
+    - name: Cookies
+      url: https://www.inspectie-oe.nl/service/cookies
+      weight: 3
+    - name: Toegankelijkheid
+      url: https://www.inspectie-oe.nl/service/toegankelijkheid
+      weight: 4
+    - name: Kwetsbaarheid melden
+      url: https://www.inspectie-oe.nl/service/kwetsbaarheid-melden
       weight: 5
 
 module:
