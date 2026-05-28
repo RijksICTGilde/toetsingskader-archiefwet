@@ -35,9 +35,8 @@ params:
     enable: true
   footer:
     tagline: "Eén Overheid. Voor iedereen!"
-    variant: light
-    colofon:
-      enable: true
+    links: "Zie ook"           # label voor footer-links menu
+    rechts: "Over deze site"   # label voor footer-rechts menu
     description: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed."
   feedback:
     email: toetsingskader@inspectie-oe.nl

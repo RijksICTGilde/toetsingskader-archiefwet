@@ -1,97 +1,78 @@
-/* footer — site footer with optional tagline, two menu columns and colofon.
- *
- * Tokens used (verified in assets/css/nldd/settings.css):
- *   --primitives-space-4 / -8 / -16 / -24 / -32      spacing
- *   --components-page-footer-background-color        light variant background
- *   --components-page-footer-divider-color           colofon top-border color
- *   --semantics-content-color                        body text
- *   --semantics-content-secondary-color              muted colofon text
- *   --semantics-links-color                          link color (default)
- *   --semantics-dividers-thickness                   divider thickness
- *   --components-rich-text-wide-max-width            container max-width
- *   --components-top-navigation-bar-title-md-font    tagline font (no dedicated
- *                                                    footer-title token exists)
- *   --primitives-color-reference-donkerblauw         dark variant background
- *                                                    (fixed hex, won't flip in
- *                                                    dark mode like the *-900
- *                                                    shade would)
- *
- * Notes:
- * - NLDD has no `--components-footer-*` title font; we reuse the top-nav
- *   title token to stay consistent with the header.
- * - The dark variant uses a reference primitive (not a numbered shade) so the
- *   surface stays visually dark across both light and dark color schemes.
- */
+body > footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 2rem 1rem 1.5rem;
+  background-color: var(--color-rijks-blauw);
+  box-shadow: 0 0 0 100vmax var(--color-rijks-blauw);
+  clip-path: inset(0 -100vmax);
+  color: var(--color-text-inverse);
 
-.footer {
-	margin-block-start: var(--primitives-space-32);
-	padding-block: var(--primitives-space-32);
-}
+  .tagline {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--color-text-inverse);
+  }
 
-.footer--light {
-	background: var(--components-page-footer-background-color);
-	color: var(--semantics-content-color);
-}
+  .footer-columns {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-.footer--dark {
-	background: var(--primitives-color-reference-donkerblauw);
-	color: #fff;
-}
+  nav {
+    text-align: left;
+  }
 
-.footer--dark a {
-	color: inherit;
-	text-decoration: underline;
-}
+  h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
 
-.footer__container {
-	width: 100%;
-	max-width: var(--components-rich-text-wide-max-width);
-	margin-inline: auto;
-	padding-inline: var(--primitives-space-16);
-}
+  ul {
+    font-size: 1.125rem;
+  }
 
-.footer__tagline {
-	font: var(--components-top-navigation-bar-title-md-font);
-	margin: 0 0 var(--primitives-space-24);
-}
+  li {
+    margin-bottom: 0.25rem;
+  }
 
-.footer__columns {
-	display: grid;
-	gap: var(--primitives-space-24);
-	grid-template-columns: 1fr;
-}
+  a {
+    color: var(--color-text-inverse);
 
-@media (min-width: 640px) {
-	.footer__columns {
-		grid-template-columns: 1fr 1fr;
-	}
-}
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 0.5em;
+      height: 0.5em;
+      margin-right: 0.4em;
+      margin-bottom: 0.1em;
+      border-right: 2px solid var(--color-text-inverse);
+      border-bottom: 2px solid var(--color-text-inverse);
+      transform: rotate(-45deg);
+    }
+  }
 
-.footer__column-title {
-	font-weight: 700;
-	margin: 0 0 var(--primitives-space-8);
-}
+  @media (min-width: 700px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 
-.footer__column ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
+    .tagline {
+      margin-bottom: 0;
+    }
 
-.footer__column li {
-	margin-block: var(--primitives-space-4);
-}
+    .footer-columns {
+      flex-direction: row;
+      gap: 3rem;
 
-.footer__colofon {
-	margin-block-start: var(--primitives-space-24);
-	padding-block-start: var(--primitives-space-16);
-	border-block-start: var(--semantics-dividers-thickness) solid var(--components-page-footer-divider-color);
-	color: var(--semantics-content-secondary-color);
-	font-size: 0.875em;
-}
-
-.footer--dark .footer__colofon {
-	color: inherit;
-	opacity: 0.8;
-	border-block-start-color: currentColor;
+      nav {
+        min-width: 10rem;
+      }
+    }
+  }
 }

@@ -49,6 +49,7 @@
 {{ $palettes   := resources.Get "css/nldd/palettes.generated.css" }}
 {{ $reset      := resources.Get "css/nldd/reset.css" }}
 {{ $richText   := resources.Get "css/nldd/rich-text.css" }}
+{{ $tokens     := resources.Get "css/tokens.css" }}
 {{ $theme      := resources.Get "css/theme.css" }}
 {{ $components := resources.Match "css/components/*.css" }}
 {{ $main       := resources.Get "css/main.css" }}
@@ -58,6 +59,7 @@
 {{ with $settings }}{{ $bundle = $bundle | append . }}{{ end }}
 {{ with $reset }}{{ $bundle = $bundle | append . }}{{ end }}
 {{ with $richText }}{{ $bundle = $bundle | append . }}{{ end }}
+{{ with $tokens }}{{ $bundle = $bundle | append . }}{{ end }}
 {{ with $theme }}{{ $bundle = $bundle | append . }}{{ end }}
 {{ $bundle = $bundle | append $components }}
 {{ with $main }}{{ $bundle = $bundle | append (slice .) }}{{ end }}
