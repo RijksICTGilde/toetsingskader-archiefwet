@@ -1,8 +1,10 @@
-FROM golang:1.24-alpine AS build
+FROM golang:1.26-alpine AS build
 RUN apk add --no-cache git hugo
 WORKDIR /src
-COPY go.mod go.sum ./
-RUN hugo mod get
+# Copy alles eerst: go.mod's replace-directive verwijst naar lokale
+# ./hugo-theme-ro/, dus die directory moet aanwezig zijn voordat Hugo
+# de modules resolved. Eerdere `hugo mod get` op alleen go.mod/go.sum
+# faalde de replace en pakte de oude canonical theme via network.
 COPY . .
 ARG BASE_PATH=/
 RUN hugo --minify --baseURL "${BASE_PATH}"

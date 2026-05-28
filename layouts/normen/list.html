@@ -1,28 +1,13 @@
 {{ define "main" }}
-<div class="sidebar">
-  <nav class="side-nav" aria-label="Normen">
-    <ul>
-      {{ range .Pages.ByWeight }}
-      <li>
-        <a href="{{ .RelPermalink }}">
-          {{ .Params.norm_id }}. {{ .Params.norm_titel }}
-        </a>
-      </li>
-      {{ end }}
-    </ul>
-  </nav>
-</div>
-<div class="normen-overzicht markup-content">
+<section>
   <h1>{{ .Title }}</h1>
-  <p class="intro">De Inspectie toetst of een document in beheer is, zodat het duurzaam toegankelijk gemaakt en gehouden kan worden. Een document is in ieder geval:</p>
 
   <div class="card-grid">
     {{ range .Pages.ByWeight }}
-    <article class="card norm-card-themed">
+    <article class="card">
       <header>
-        <span class="norm-badge">{{ .Params.norm_id }}</span>
         <h2>
-          <a href="{{ .RelPermalink }}">{{ .Params.norm_titel }}</a>
+          <a href="{{ .RelPermalink }}">{{ .Params.norm_id }}. {{ .Params.norm_titel | default .Title }}</a>
         </h2>
       </header>
       {{ with .Params.kern }}
@@ -33,5 +18,5 @@
   </div>
 
   {{ .Content }}
-</div>
+</section>
 {{ end }}

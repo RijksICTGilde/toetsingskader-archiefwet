@@ -6,6 +6,9 @@ resources/
 # Node.js
 node_modules/
 
+# Storybook
+storybook-static/
+
 # OS files
 .DS_Store
 Thumbs.db

@@ -1,0 +1,21 @@
+<footer>
+  <p class="tagline">{{ .Site.Params.footer.tagline }}</p>
+  <div class="footer-columns">
+    <nav aria-label="{{ .Site.Params.footer.links }}">
+      <h2>{{ .Site.Params.footer.links }}</h2>
+      <ul>
+        {{ range (index .Site.Menus "footer-links") }}
+        <li>{{ partial "render-link" (dict "href" .URL "text" .Name) }}</li>
+        {{ end }}
+      </ul>
+    </nav>
+    <nav aria-label="{{ .Site.Params.footer.rechts }}">
+      <h2>{{ .Site.Params.footer.rechts }}</h2>
+      <ul>
+        {{ range (index .Site.Menus "footer-rechts") }}
+        <li>{{ partial "render-link" (dict "href" .URL "text" .Name) }}</li>
+        {{ end }}
+      </ul>
+    </nav>
+  </div>
+</footer>

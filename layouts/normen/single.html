@@ -1,23 +1,5 @@
 {{ define "main" }}
 {{ $page := . }}
-<div class="sidebar">
-  <nav class="side-nav" aria-label="Normen">
-    <ul>
-      <li><a href="{{ .Parent.RelPermalink }}">← Normen</a></li>
-      {{ range .Parent.Pages.ByWeight }}
-      {{ $isCurrent := eq $.RelPermalink .RelPermalink }}
-      <li>
-        <a href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
-          {{ .Params.norm_id }}. {{ .Params.norm_titel }}
-        </a>
-        {{ if $isCurrent }}
-        {{ partial "norm-toc.html" $page }}
-        {{ end }}
-      </li>
-      {{ end }}
-    </ul>
-  </nav>
-</div>
 <article class="norm-page markup-content">
   <h1>{{ .Title }}</h1>
 
@@ -117,4 +99,9 @@
   </aside>
   {{ end }}
 </article>
+
+<aside class="toc is-open" aria-label="Op deze pagina">
+  <h2>Op deze pagina</h2>
+  {{ partial "norm-toc.html" $page }}
+</aside>
 {{ end }}

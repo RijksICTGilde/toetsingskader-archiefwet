@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ .Title }} | {{ .Site.Title }}</title>
+  {{/* Reveal.js CSS bundelen */}}
+  {{ $revealCore := resources.Get "vendor/reveal/reveal.css" }}
+  {{ $revealTheme := resources.Get "vendor/reveal/white.css" }}
+  {{ $revealCustom := resources.Get "css/reveal.css" }}
+  {{ $revealCss := slice $revealCore $revealTheme $revealCustom | resources.Concat "css/reveal-bundle.css" | fingerprint "md5" }}
+  <link rel="stylesheet" href="{{ $revealCss.RelPermalink }}">
+</head>
+<body>
+  <button
+    class="close-button"
+    aria-label="Sluit presentatie"
+  >&#10005;</button>
+
+  <div class="reveal">
+    <img
+      src="{{ relURL "images/logo-rijksoverheid.svg" }}"
+      alt="Logo Rijksoverheid"
+      id="header-logo"
+    />
+    <div class="slides">
+      {{ .Content }}
+    </div>
+  </div>
+
+  {{/* Reveal.js JavaScript */}}
+  {{ $revealJs := resources.Get "vendor/reveal/reveal.js" }}
+  {{ $presentationJs := resources.Get "js/presentation.js" }}
+  {{ $js := slice $revealJs $presentationJs | resources.Concat "js/presentation-bundle.js" | fingerprint "md5" }}
+  <script src="{{ $js.RelPermalink }}"></script>
+</body>
+</html>

@@ -48,6 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: write     # nodig zodat de preview-URL als sticky comment op de PR komt
     environment:
       name: pr-${{ github.event.pull_request.number }}
       url: ${{ steps.deploy.outputs.url }}
@@ -62,6 +63,17 @@ jobs:
           component: frontend
           image: ${{ env.IMAGE }}:pr-${{ github.event.number }}
           clone-from: production
+
+      - name: Comment preview URL on PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: zad-preview
+          message: |
+            ### 🚀 ZAD Preview
+
+            **Preview**: ${{ steps.deploy.outputs.url }}
+
+            <sub>Werkt op de laatste commit `${{ github.event.pull_request.head.sha }}` — wordt automatisch bijgewerkt bij elke nieuwe push.</sub>
 
   cleanup-preview:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.user.type != 'Bot'
