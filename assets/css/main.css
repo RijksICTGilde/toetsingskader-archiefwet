@@ -40,13 +40,65 @@
 }
 
 /* === Theme-token brand-overrides + compat shim ============================
-   Het thema gebruikt sinds april 2026 --toepassing-* (was --mox-*). Een groot
-   deel van onze CSS én een paar legacy theme-bestanden refereren nog naar
-   --mox-*. Hieronder mappen we --mox-* tokens automatisch op hun
-   --toepassing-* equivalent, zodat alles weer resolves. Boven de shim staan
-   de Inspectie-OE brand-overrides (hemelblauw i.p.v. lintblauw / grijs). */
+   Sinds de migratie naar de moza-site-gebaseerde theme: het thema definieert
+   --color-* tokens (moza-site naming). Toetsingskader's CSS gebruikt nog
+   --toepassing-* (van het oude --mox-*-tijdperk). Hieronder de bridge zodat
+   alles weer resolves. */
 :root {
-  /* --- Brand overrides --- */
+  /* --- Base mapping: --toepassing-* → moza-site --color-* --- */
+  --toepassing-color-background-canvas: var(--color-bg-page);
+  --toepassing-color-background-default: var(--color-bg-page);
+  --toepassing-color-background-subtle: var(--color-bg-muted);
+  --toepassing-color-background-raised: var(--color-bg-page);
+  --toepassing-color-text-default: var(--color-text);
+  --toepassing-color-text-subtle-1: var(--color-text-muted);
+  --toepassing-color-text-subtle-2: var(--color-text-muted);
+  --toepassing-color-text-inverse: var(--color-text-inverse);
+  --toepassing-color-border-default: var(--color-border);
+  --toepassing-color-border-subtle: var(--color-border);
+  --toepassing-color-border-strong: var(--color-border);
+  --toepassing-color-feedback-info-default: var(--color-link);
+  --toepassing-color-feedback-info-subtle: var(--color-bg-info);
+  --toepassing-color-feedback-info-emphasis: var(--color-link);
+  --toepassing-color-feedback-neutral-subtle: var(--color-bg-muted);
+
+  /* Spacing — toetsingskader spacing scale */
+  --toepassing-space-3xs: 0.125rem;
+  --toepassing-space-2xs: 0.25rem;
+  --toepassing-space-xs: 0.5rem;
+  --toepassing-space-sm: 0.75rem;
+  --toepassing-space-md: 1rem;
+  --toepassing-space-lg: 1.5rem;
+  --toepassing-space-xl: 2rem;
+  --toepassing-space-2xl: 3rem;
+  --toepassing-space-3xl: 4rem;
+  --toepassing-space-padding-xs: 0.5rem;
+  --toepassing-space-padding-sm: 0.75rem;
+  --toepassing-space-padding-md: 1rem;
+  --toepassing-space-padding-lg: 1.5rem;
+  --toepassing-space-margin-xs: 0.5rem;
+  --toepassing-space-margin-sm: 0.75rem;
+  --toepassing-space-margin-md: 1rem;
+  --toepassing-space-margin-lg: 1.5rem;
+
+  /* Border-radius */
+  --toepassing-border-radius-sm: 0.25rem;
+  --toepassing-border-radius-md: 0.5rem;
+  --toepassing-border-radius-lg: 1rem;
+  --toepassing-border-width-xs: 1px;
+  --toepassing-border-width-md: 2px;
+  --toepassing-border-default: 1px solid var(--color-border);
+
+  /* Typography helpers (gebruikt in main.css) */
+  --toepassing-text-size-body-sm: 0.875rem;
+  --toepassing-text-font-weight-bold: 700;
+  --toepassing-text-font-family-serif: var(--font-serif);
+  --toepassing-text-nav-main-nav: 600 0.9375rem/1.4 var(--font-sans);
+  --toepassing-text-size-title-lg: 1.25rem;
+  --toepassing-page-max-inline-size: var(--content-max-width);
+  --toepassing-box-shadow-default: var(--shadow-card);
+
+  /* --- Brand overrides (Inspectie-OE hemelblauw boven moza-site donkerblauw) --- */
   --toepassing-color-background-inverse: #007bc7;
   --toepassing-color-accent-default: #007bc7;
   --toepassing-color-interactive-default-background: #007bc7;

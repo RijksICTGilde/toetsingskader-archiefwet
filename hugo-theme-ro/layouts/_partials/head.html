@@ -65,7 +65,12 @@
 {{ $search := resources.Get "css/components/search.css" }}
 {{ $mermaid := resources.Get "css/components/mermaid.css" }}
 {{ $pageNav := resources.Get "css/components/page-nav.css" }}
-{{ $css := slice $tokens $fonts $base $layout $header $hero $cardGrid $box $button $blockquote $list $footer $toast $search $mermaid $pageNav | resources.Concat "css/style.css" | resources.ExecuteAsTemplate "css/style.css" . | fingerprint "md5" }}
+{{/* Consumer-level overrides: theme picks up assets/css/main.css if present
+     (theme convention — consumers can blend in project-specific CSS via this filename). */}}
+{{ $main := resources.Get "css/main.css" }}
+{{ $cssList := slice $tokens $fonts $base $layout $header $hero $cardGrid $box $button $blockquote $list $footer $toast $search $mermaid $pageNav }}
+{{ with $main }}{{ $cssList = $cssList | append . }}{{ end }}
+{{ $css := $cssList | resources.Concat "css/style.css" | resources.ExecuteAsTemplate "css/style.css" . | fingerprint "md5" }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
 
 {{- $themeInit := resources.Get "js/theme-init.js" | fingerprint "md5" -}}
