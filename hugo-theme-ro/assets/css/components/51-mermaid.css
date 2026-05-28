@@ -1,53 +1,58 @@
-/* mermaid — styling for client-side mermaid.js SVG output.
- *
- * The theme does NOT load mermaid.js itself in v0.1. Consumers that want
- * mermaid diagrams must include it themselves (e.g. via a CDN script tag
- * or as a vendored asset). This file just:
- *   1. provides a custom-property palette (--rr-mm-*) using NLDD tokens
- *   2. overrides the inline `<style>` block that mermaid's runtime writes
- *      into each generated SVG
- *
- * The `!important` flags are unavoidable: mermaid emits per-SVG inline
- * styles at runtime, which would otherwise win the cascade against any
- * stylesheet rule of equal specificity.
- *
- * The render-hook `layouts/_markup/render-codeblock-mermaid.html` converts
- *   ```mermaid
- *   <diagram source>
- *   ```
- * into `<pre class="mermaid">…</pre>`, the markup mermaid.js looks for.
- *
- * Tokens used (verified in assets/css/nldd/palettes.generated.css):
- *   --primitives-color-lichtblauw-50   pale node fill
- *   --primitives-color-donkerblauw-500 node stroke + edge
- *   --primitives-color-donkerblauw-900 label text
- */
-
-svg.flowchart,
-svg[id^="mermaid-"] {
-	--rr-mm-node-fill: var(--primitives-color-lichtblauw-50, #dff1f9);
-	--rr-mm-node-stroke: var(--primitives-color-donkerblauw-500, #257cb0);
-	--rr-mm-text: var(--primitives-color-donkerblauw-900, #152632);
-	--rr-mm-edge: var(--primitives-color-donkerblauw-500, #257cb0);
-	max-width: 100%;
-	height: auto;
+/* Pre-rendered SVG diagrammen */
+.mermaid-diagram {
+  position: relative;
+  text-align: center;
+  background-color: var(--color-bg-muted);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
 }
 
-svg[id^="mermaid-"] .node rect,
-svg[id^="mermaid-"] .node polygon,
-svg[id^="mermaid-"] .node circle,
-svg[id^="mermaid-"] .node path {
-	fill: var(--rr-mm-node-fill) !important;
-	stroke: var(--rr-mm-node-stroke) !important;
+.mermaid-diagram img {
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
 }
 
-svg[id^="mermaid-"] .nodeLabel,
-svg[id^="mermaid-"] .label {
-	color: var(--rr-mm-text) !important;
-	fill: var(--rr-mm-text) !important;
+.mermaid-diagram .mermaid-img--light {
+  display: block;
 }
 
-svg[id^="mermaid-"] .edgePath path,
-svg[id^="mermaid-"] .flowchart-link {
-	stroke: var(--rr-mm-edge) !important;
+.mermaid-diagram .mermaid-img--dark {
+  display: none;
+}
+
+:root[data-theme="dark"] .mermaid-diagram .mermaid-img--light {
+  display: none;
+}
+
+:root[data-theme="dark"] .mermaid-diagram .mermaid-img--dark {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .mermaid-diagram .mermaid-img--light {
+    display: none;
+  }
+
+  :root:not([data-theme="light"]) .mermaid-diagram .mermaid-img--dark {
+    display: block;
+  }
+}
+
+/* Download-knop */
+.mermaid-download {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 1;
+  border-radius: 0.25rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.mermaid-diagram:hover .mermaid-download,
+.mermaid-download:focus-visible {
+  opacity: 1;
 }

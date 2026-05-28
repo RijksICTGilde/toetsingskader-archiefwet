@@ -1,6 +1,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
+{{- $pageTitle := site.Title -}}
+{{- $metaTitle := or .Params.page_title .Title -}}
+{{- if and (not .IsHome) $metaTitle -}}
+  {{- $pageTitle = printf "%s | %s" $metaTitle site.Title -}}
+{{- end -}}
+<title>{{ $pageTitle }}</title>
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Title }}{{ end }}">
 
 {{ with .Params.og_image }}
@@ -11,46 +16,34 @@
 <meta name="robots" content="noindex,nofollow">
 {{ end }}
 
-{{/* @font-face inline so Hugo's relURL resolves the basepath correctly.
-     Vendor script strips NLDD's own @font-face from settings.css. */}}
+{{/* @font-face inline so Hugo's relURL resolves the basepath. */}}
 <style>
 @font-face {
   font-family: 'RijksSans';
   src: url('{{ "fonts/nldd/RijksSansWeb-Regular.woff2" | relURL }}') format('woff2-variations');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
+  font-weight: 100 900; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: 'RijksSans';
   src: url('{{ "fonts/nldd/RijksSansWeb-Italic.woff2" | relURL }}') format('woff2-variations');
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
+  font-weight: 100 900; font-style: italic; font-display: swap;
 }
 @font-face {
   font-family: 'JetBrains Mono';
   src: url('{{ "fonts/nldd/JetBrainsMono[wght].woff2" | relURL }}') format('woff2-variations');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  src: url('{{ "fonts/nldd/JetBrainsMono-Italic[wght].woff2" | relURL }}') format('woff2-variations');
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
+  font-weight: 100 900; font-style: normal; font-display: swap;
 }
 </style>
 
-{{/* CSS bundle: NLDD foundation → theme shell → components → consumer override. */}}
-{{ $settings   := resources.Get "css/nldd/settings.css" }}
+{{/* CSS bundle: NLDD design tokens → moza-site base/layout → components → consumer override.
+     ExecuteAsTemplate processes Hugo syntax inside the CSS (relURL in base.css). */}}
 {{ $palettes   := resources.Get "css/nldd/palettes.generated.css" }}
+{{ $settings   := resources.Get "css/nldd/settings.css" }}
 {{ $reset      := resources.Get "css/nldd/reset.css" }}
 {{ $richText   := resources.Get "css/nldd/rich-text.css" }}
 {{ $tokens     := resources.Get "css/tokens.css" }}
-{{ $theme      := resources.Get "css/theme.css" }}
+{{ $base       := resources.Get "css/00-base.css" }}
+{{ $layout     := resources.Get "css/01-layout.css" }}
 {{ $components := resources.Match "css/components/*.css" }}
 {{ $main       := resources.Get "css/main.css" }}
 
@@ -60,9 +53,17 @@
 {{ with $reset }}{{ $bundle = $bundle | append . }}{{ end }}
 {{ with $richText }}{{ $bundle = $bundle | append . }}{{ end }}
 {{ with $tokens }}{{ $bundle = $bundle | append . }}{{ end }}
-{{ with $theme }}{{ $bundle = $bundle | append . }}{{ end }}
+{{ with $base }}{{ $bundle = $bundle | append . }}{{ end }}
+{{ with $layout }}{{ $bundle = $bundle | append . }}{{ end }}
 {{ $bundle = $bundle | append $components }}
 {{ with $main }}{{ $bundle = $bundle | append (slice .) }}{{ end }}
 
-{{ $css := $bundle | resources.Concat "css/bundle.css" | minify | fingerprint }}
+{{ $css := $bundle | resources.Concat "css/bundle.css" | resources.ExecuteAsTemplate "css/bundle.css" . | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+
+{{/* theme-init runs early to set color-scheme before paint (prevents FOUC). */}}
+{{- $themeInit := resources.Get "js/theme-init.js" -}}
+{{- with $themeInit -}}
+{{- $themeInit = . | fingerprint "md5" -}}
+<script src="{{ $themeInit.RelPermalink }}"></script>
+{{- end -}}

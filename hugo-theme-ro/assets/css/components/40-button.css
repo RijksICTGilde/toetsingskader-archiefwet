@@ -1,119 +1,100 @@
-/* button — 4 variants mapped onto NLDD's button-token families.
- *
- * Variant mapping (verified in assets/css/nldd/settings.css):
- *   .button (default)   -> --semantics-buttons-accent-filled-*
- *   .button--outline    -> --semantics-buttons-accent-transparent-* (content)
- *                          + accent-filled background-color for the border,
- *                          inverts to accent-filled on hover.
- *   .button--ghost      -> --semantics-buttons-neutral-transparent-*
- *   .button--link       -> --semantics-links-color (no NLDD button equiv;
- *                          intentionally renders as a textual link).
- *
- * Notes:
- *  - NLDD ships state tokens for `is-hovered` and `is-active`; we wire both.
- *  - NLDD has no dedicated `accent-transparent-background` token, so for the
- *    outline variant we reuse `accent-filled-background-color` for the border
- *    and hover-fill — this keeps colour parity with the primary button.
- *  - Focus uses the canonical `--semantics-focus-ring-outline(-offset)`.
- *  - Padding uses primitives-space scale (matches moza-site's 8/24).
- */
+/* Standaard button styling */
+button,
+.button {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background-color: light-dark(var(--color-bg-info), var(--color-text));
+  color: light-dark(var(--color-text), var(--color-bg-page));
+  border: 1px solid light-dark(var(--color-bg-info), var(--color-text));
 
-.button,
-button.button {
-	display: inline-block;
-	padding: var(--primitives-space-8) var(--primitives-space-24);
-	font: inherit;
-	font-weight: 600;
-	text-decoration: none;
-	border-radius: var(--primitives-corner-radius-xs);
-	cursor: pointer;
-	transition:
-		background-color 0.15s ease,
-		border-color 0.15s ease,
-		color 0.15s ease;
-	background-color: var(--semantics-buttons-accent-filled-background-color);
-	color: var(--semantics-buttons-accent-filled-content-color);
-	border: var(--primitives-border-width-thin) solid var(--semantics-buttons-accent-filled-background-color);
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-rijks-blauw);
+    border-color: var(--color-rijks-blauw);
+    color: var(--color-text-inverse);
+    outline: none;
+  }
+
+  flex-shrink: 0;
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
 }
 
-.button:hover {
-	background-color: var(--semantics-buttons-accent-filled-is-hovered-background-color);
-	border-color: var(--semantics-buttons-accent-filled-is-hovered-background-color);
-	color: var(--semantics-buttons-accent-filled-is-hovered-content-color);
-	text-decoration: none;
+/* Outline variant */
+.button-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+  }
 }
 
-.button:active {
-	background-color: var(--semantics-buttons-accent-filled-is-active-background-color);
-	border-color: var(--semantics-buttons-accent-filled-is-active-background-color);
-	color: var(--semantics-buttons-accent-filled-is-active-content-color);
+/* Ghost variant - transparant en subtiel */
+.button-ghost {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--color-text-muted);
+
+  &:hover,
+  &:focus-visible {
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
 }
 
-.button:focus-visible {
-	outline: var(--semantics-focus-ring-outline);
-	outline-offset: var(--semantics-focus-ring-outline-offset);
-}
+/* Link variant - button die eruitziet als een link */
+.button-link {
+  display: inline;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  font: inherit;
+  font-weight: inherit;
+  color: var(--color-link);
+  cursor: pointer;
+  text-decoration: none;
 
-/* Outline — accent-coloured border + label, inverts on hover. */
-.button--outline {
-	background-color: transparent;
-	color: var(--semantics-buttons-accent-transparent-content-color);
-	border-color: var(--semantics-buttons-accent-filled-background-color);
-}
+  &:hover {
+    background: none;
+    border: none;
+    color: var(--color-link);
+    text-decoration: underline;
+  }
 
-.button--outline:hover {
-	background-color: var(--semantics-buttons-accent-filled-background-color);
-	border-color: var(--semantics-buttons-accent-filled-background-color);
-	color: var(--semantics-buttons-accent-filled-content-color);
-}
-
-.button--outline:active {
-	background-color: var(--semantics-buttons-accent-filled-is-active-background-color);
-	border-color: var(--semantics-buttons-accent-filled-is-active-background-color);
-	color: var(--semantics-buttons-accent-filled-is-active-content-color);
-}
-
-/* Ghost — neutral-transparent: chromeless until hover. */
-.button--ghost {
-	background-color: transparent;
-	border-color: transparent;
-	color: var(--semantics-buttons-neutral-transparent-content-color);
-	padding: var(--primitives-space-4) var(--primitives-space-8);
-}
-
-.button--ghost:hover {
-	background-color: var(--components-box-on-tinted-background-color);
-	border-color: transparent;
-	color: var(--semantics-buttons-neutral-transparent-is-hovered-content-color);
-}
-
-.button--ghost:active {
-	color: var(--semantics-buttons-neutral-transparent-is-active-content-color);
-}
-
-/* Link — visually a link, semantically still a button. */
-.button--link {
-	display: inline;
-	padding: 0;
-	background: none;
-	border: none;
-	border-radius: 0;
-	font: inherit;
-	font-weight: inherit;
-	color: var(--semantics-links-color);
-	cursor: pointer;
-	text-decoration: none;
-}
-
-.button--link:hover {
-	background: none;
-	border: none;
-	color: var(--semantics-links-color);
-	text-decoration: underline;
-}
-
-.button--link:active {
-	background: none;
-	border: none;
-	color: var(--semantics-links-color);
+  &:focus-visible {
+    background: none;
+    border: none;
+    color: var(--color-link);
+    outline: 2px solid var(--color-link);
+    outline-offset: 2px;
+  }
 }
