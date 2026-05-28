@@ -1,0 +1,16 @@
+{{/*
+  Tile grid shortcode — renders pages from a section as a tile grid.
+
+  Project-level override van de theme-versie omdat upstream een parse-error
+  bevat (genest comment-syntaxis). Deze versie laat de doc-comment weg.
+
+  Usage in markdown: tile-grid section="onderwerpen"
+  Pages are sorted by weight (set weight in front matter).
+*/}}
+{{- $section := .Get "section" -}}
+{{- if not $section -}}
+  {{- errorf "tile-grid shortcode: 'section' parameter is verplicht" -}}
+{{- end -}}
+<section>
+  {{ partial "tile-grid.html" (where site.RegularPages "Section" $section).ByWeight }}
+</section>

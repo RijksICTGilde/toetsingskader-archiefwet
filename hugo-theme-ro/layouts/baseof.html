@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Ga naar de inhoud</a>
+    {{ partial "header.html" . }}
+    <main id="main-content">
+      {{- block "main" . }}{{ end -}}
+    </main>
+    {{ partial "footer.html" . }}
+    {{ partial "search.html" . }}
+    {{ partial "scripts.html" . }}
+  </body>
+</html>

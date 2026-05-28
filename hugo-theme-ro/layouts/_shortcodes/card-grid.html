@@ -1,7 +1,11 @@
-{{/*
-  Shortcode {{< card-grid >}}...{{< /card-grid >}}
-  Inhoud van shortcode-body wordt direct in de grid gerenderd.
-*/}}
-<div class="card-grid">
-  {{ .Inner }}
-</div>
+{{- $section := .Get "section" -}}
+{{- if not $section -}}
+  {{- errorf "card-grid shortcode: 'section' parameter is verplicht" -}}
+{{- end -}}
+{{- with site.GetPage $section -}}
+<section>
+  {{ partial "card-grid.html" .Pages.ByWeight }}
+</section>
+{{- else -}}
+  {{- errorf "card-grid shortcode: sectie %q niet gevonden" $section -}}
+{{- end -}}

@@ -1,25 +1,38 @@
 {{ define "main" }}
 {{ $page := . }}
+<div class="sidebar">
+  <nav class="side-nav" aria-label="Normen">
+    <ul>
+      <li><a href="{{ .Parent.RelPermalink }}">← Normen</a></li>
+      {{ range .Parent.Pages.ByWeight }}
+      {{ $isCurrent := eq $.RelPermalink .RelPermalink }}
+      <li>
+        <a href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
+          {{ .Params.norm_id }}. {{ .Params.norm_titel }}
+        </a>
+        {{ if $isCurrent }}
+        {{ partial "norm-toc.html" $page }}
+        {{ end }}
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+</div>
 <article class="norm-page markup-content">
   <h1>{{ .Title }}</h1>
 
   {{ with .Params.kern }}
-  <div id="kern">
-    {{ $kernHTML := partial "reftext.html" (dict "tekst" . "page" $page) }}
-    {{ partial "callout.html" (dict
-        "type" "info"
-        "title" "Kern van de norm"
-        "content" $kernHTML) }}
+  <div id="kern" class="norm-kern">
+    <h2>Kern van de norm</h2>
+    {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
   </div>
   {{ end }}
 
   {{ with .Params.toelichting }}
-  <section id="toelichting">
+  <div id="toelichting" class="norm-toelichting">
     <h2>Toelichting</h2>
-    <div class="box box--subtle">
-      {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
-    </div>
-  </section>
+    {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
+  </div>
   {{ end }}
 
   {{/* Synoniemen worden bewust niet meer getoond op de pagina; ze
@@ -27,10 +40,10 @@
        zoekindex (zie layouts/index.json). */}}
 
   {{ with .Params.normuitleg }}
-  <section id="normuitleg">
-    <h2 class="section-heading section-heading--underline">Normuitleg</h2>
+  <div id="normuitleg" class="norm-uitleg">
+    <h2>Normuitleg</h2>
     {{ range . }}
-    <div class="box box--subtle">
+    <div class="norm-uitleg__item">
       {{ with .titel }}
       <h3 id="{{ . | urlize }}">{{ . }}</h3>
       {{ end }}
@@ -69,25 +82,25 @@
       {{ end }}
     </div>
     {{ end }}
-  </section>
+  </div>
   {{ end }}
 
   {{ with .Params.reikwijdte }}
-  <section id="reikwijdte">
+  <div id="reikwijdte" class="norm-reikwijdte">
     <h2>Reikwijdte</h2>
     {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
-  </section>
+  </div>
   {{ end }}
 
   {{ with .Params.gerelateerde_onderwerpen }}
-  <section id="zie-ook">
+  <div id="zie-ook" class="norm-gerelateerd">
     <h2>Zie ook</h2>
     <ul>
       {{ range . }}
       <li>{{ with .url }}<a href="{{ strings.TrimPrefix "/" . | relURL }}">{{ end }}{{ partial "reftext.html" (dict "tekst" .titel "page" $page) }}{{ with .url }}</a>{{ end }}</li>
       {{ end }}
     </ul>
-  </section>
+  </div>
   {{ end }}
 
   {{ partial "referenties.html" $page }}
@@ -104,9 +117,4 @@
   </aside>
   {{ end }}
 </article>
-
-<aside class="toc" aria-label="Op deze pagina">
-  <h2>Op deze pagina</h2>
-  {{ partial "norm-toc.html" $page }}
-</aside>
 {{ end }}

@@ -1,69 +1,70 @@
-/* tokens.css — Bridge tussen moza-site CSS-namen en NLDD design tokens.
- *
- * Alle component-CSS (geport uit moza-site) gebruikt --color-*, --font-*,
- * --content-max-width etc. namen. Dit bestand definieert die namen in
- * termen van NLDD design tokens (--primitives-*, --semantics-*,
- * --components-*) zodat alles uit dezelfde design-token-bron komt.
- *
- * Single source of truth: NLDD. Update NLDD → alles past zich aan.
- * Géén hardcoded hex-kleuren hier.
- */
-
 :root {
-	color-scheme: light dark;
+  color-scheme: light dark;
 
-	/* === Layout === */
-	--content-max-width: 1100px;
-	--article-max-width: 800px;
-	--navbar-height: 55px;
+  /* Layout */
+  --content-max-width: 1100px;
+  --article-max-width: 800px;
+  --navbar-height: 55px;
 
-	/* === Kleuren — uit NLDD === */
-	--color-rijks-blauw: var(--primitives-color-donkerblauw-500);
-	--color-rijks-oranje: var(--primitives-color-oranje-500);
+  /* Primaire kleuren */
+  --color-rijks-blauw: #154273;
+  --color-rijks-oranje: #e17000;
+  --color-primary: light-dark(var(--color-rijks-blauw), #80d5fc);
+  --color-link: light-dark(#01689b, #93dcfa);
 
-	--color-primary: var(--primitives-color-accent-500);
-	--color-link: var(--semantics-links-color);
+  /* Achtergrondkleuren */
+  --color-bg-page: light-dark(#ffffff, #0f172a);
+  --color-bg-hero: light-dark(rgba(220, 227, 234, 0.9), rgba(30, 41, 59, 0.95));
+  --color-bg-info: light-dark(#d9ebf7, #1e3a5f);
+  --color-bg-muted: light-dark(#f3f3f3, #1e293b);
+  --color-bg-light: light-dark(#eff7fc, #1e293b);
 
-	/* Achtergronden */
-	--color-bg-page: var(--semantics-surfaces-background-color);
-	--color-bg-hero: var(--components-box-on-tinted-background-color);
-	--color-bg-info: var(--primitives-color-accent-50);
-	--color-bg-muted: var(--components-box-background-color);
-	--color-bg-light: var(--components-box-on-tinted-background-color);
+  /* Tekstkleuren */
+  --color-text: light-dark(#0f172a, #e2e8f0);
+  --color-text-heading: light-dark(#0f172a, #f1f5f9);
+  --color-text-muted: light-dark(#334155, #b8c4d0);
+  --color-text-inverse: #ffffff;
+  --color-text-on-primary: light-dark(#ffffff, #1e293b);
 
-	/* Tekst */
-	--color-text: var(--semantics-content-color);
-	--color-text-heading: var(--semantics-content-color);
-	--color-text-muted: var(--semantics-content-secondary-color);
-	--color-text-inverse: var(--primitives-color-neutral-0);
-	--color-text-on-primary: var(--semantics-buttons-accent-filled-content-color);
+  /* Border kleur */
+  --color-border: light-dark(#e2e8f0, #334155);
 
-	/* Border + highlight */
-	--color-border: var(--semantics-dividers-color);
-	--color-highlight: var(--primitives-color-warning-100);
-	--color-highlight-text: var(--semantics-content-color);
+  /* Highlight kleur voor zoekresultaten */
+  --color-highlight: var(--color-bg-info);
+  --color-highlight-text: inherit;
 
-	/* === Typografie — uit NLDD === */
-	--font-sans: 'RijksSans', system-ui, -apple-system, sans-serif;
-	--font-serif: Georgia, 'Times New Roman', serif;
-	--font-mono: var(--primitives-font-family-monospace);
+  /* Typography */
+  --font-sans: "RO-Sans", "Fira Sans", Arial, sans-serif;
+  --font-serif: "RO-Serif", "Times New Roman", serif;
 
-	/* Base text */
-	--text-base: 1rem;
+  /* Font size */
+  --text-base: 1rem;
 
-	/* Card radius hoeken */
-	--radius-upper-left: 2rem 0 0 0;
-	--radius-upper-right: 0 2rem 0 0;
-	--radius-bottom-right: 0 0 2rem 0;
-	--radius-bottom-left: 0 0 0 2rem;
+  /* Border radius */
+  --radius-upper-left: 2rem 0 0 0;
+  --radius-upper-right: 0 2rem 0 0;
+  --radius-bottom-right: 0 0 2rem 0;
+  --radius-bottom-left: 0 0 0 2rem;
 
-	/* Shadows */
-	--shadow-card: var(--primitives-box-shadows-level-2);
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Dark-mode varianten zijn niet meer nodig: NLDD primitives gebruiken al
-   light-dark() intern, dus de tokens schakelen automatisch.
-   Project kan opt-out via :root[data-theme="light"] / [="dark"]. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+}
 
-:root[data-theme="dark"] { color-scheme: dark; }
-:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}

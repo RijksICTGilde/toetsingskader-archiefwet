@@ -1,69 +1,72 @@
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-{{- $pageTitle := site.Title -}}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{{- $pageTitle := .Site.Title -}}
 {{- $metaTitle := or .Params.page_title .Title -}}
 {{- if and (not .IsHome) $metaTitle -}}
-  {{- $pageTitle = printf "%s | %s" $metaTitle site.Title -}}
+  {{- $pageTitle = printf "%s | %s" $metaTitle .Site.Title -}}
 {{- end -}}
 <title>{{ $pageTitle }}</title>
-<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Title }}{{ end }}">
-
-{{ with .Params.og_image }}
-<meta property="og:image" content="{{ . | absURL }}">
-{{ end }}
-
-{{ if .Params.noindex }}
-<meta name="robots" content="noindex,nofollow">
-{{ end }}
-
-{{/* @font-face inline so Hugo's relURL resolves the basepath. */}}
-<style>
-@font-face {
-  font-family: 'RijksSans';
-  src: url('{{ "fonts/nldd/RijksSansWeb-Regular.woff2" | relURL }}') format('woff2-variations');
-  font-weight: 100 900; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'RijksSans';
-  src: url('{{ "fonts/nldd/RijksSansWeb-Italic.woff2" | relURL }}') format('woff2-variations');
-  font-weight: 100 900; font-style: italic; font-display: swap;
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  src: url('{{ "fonts/nldd/JetBrainsMono[wght].woff2" | relURL }}') format('woff2-variations');
-  font-weight: 100 900; font-style: normal; font-display: swap;
-}
-</style>
-
-{{/* CSS bundle: NLDD design tokens → moza-site base/layout → components → consumer override.
-     ExecuteAsTemplate processes Hugo syntax inside the CSS (relURL in base.css). */}}
-{{ $palettes   := resources.Get "css/nldd/palettes.generated.css" }}
-{{ $settings   := resources.Get "css/nldd/settings.css" }}
-{{ $reset      := resources.Get "css/nldd/reset.css" }}
-{{ $richText   := resources.Get "css/nldd/rich-text.css" }}
-{{ $tokens     := resources.Get "css/tokens.css" }}
-{{ $base       := resources.Get "css/00-base.css" }}
-{{ $layout     := resources.Get "css/01-layout.css" }}
-{{ $components := resources.Match "css/components/*.css" }}
-{{ $main       := resources.Get "css/main.css" }}
-
-{{ $bundle := slice }}
-{{ with $palettes }}{{ $bundle = $bundle | append . }}{{ end }}
-{{ with $settings }}{{ $bundle = $bundle | append . }}{{ end }}
-{{ with $reset }}{{ $bundle = $bundle | append . }}{{ end }}
-{{ with $richText }}{{ $bundle = $bundle | append . }}{{ end }}
-{{ with $tokens }}{{ $bundle = $bundle | append . }}{{ end }}
-{{ with $base }}{{ $bundle = $bundle | append . }}{{ end }}
-{{ with $layout }}{{ $bundle = $bundle | append . }}{{ end }}
-{{ $bundle = $bundle | append $components }}
-{{ with $main }}{{ $bundle = $bundle | append (slice .) }}{{ end }}
-
-{{ $css := $bundle | resources.Concat "css/bundle.css" | resources.ExecuteAsTemplate "css/bundle.css" . | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
-
-{{/* theme-init runs early to set color-scheme before paint (prevents FOUC). */}}
-{{- $themeInit := resources.Get "js/theme-init.js" -}}
-{{- with $themeInit -}}
-{{- $themeInit = . | fingerprint "md5" -}}
-<script src="{{ $themeInit.RelPermalink }}"></script>
+{{- $description := .Description -}}
+{{- if not $description -}}
+  {{- if .Content -}}
+    {{- $description = .Plain | truncate 160 -}}
+  {{- else -}}
+    {{- $description = .Site.Params.description -}}
+  {{- end -}}
+{{- else if gt (len $description) 160 -}}
+  {{- warnf "Description te lang (%d tekens) op pagina: %s - max 160 tekens aanbevolen" (len $description) .RelPermalink -}}
 {{- end -}}
+<meta name="description" content="{{ $description }}" />
+<link rel="canonical" href="{{ .Permalink }}" />
+
+{{/* Favicons */}}
+<link rel="icon" href="{{ relURL "favicon.ico" }}" sizes="any" />
+<link rel="icon" href="{{ relURL "favicon-32x32.png" }}" type="image/png" sizes="32x32" />
+<link rel="icon" href="{{ relURL "favicon-192x192.png" }}" type="image/png" sizes="192x192" />
+<link rel="apple-touch-icon" href="{{ relURL "apple-touch-icon.png" }}" />
+
+{{/* Open Graph */}}
+<meta property="og:title" content="{{ $pageTitle }}" />
+<meta property="og:description" content="{{ $description }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:locale" content="nl_NL" />
+<meta property="og:image" content="{{ absURL "favicon-192x192.png" }}" />
+<meta property="og:image:width" content="192" />
+<meta property="og:image:height" content="192" />
+
+{{/* Twitter Card */}}
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{ $pageTitle }}" />
+<meta name="twitter:description" content="{{ $description }}" />
+<meta name="twitter:image" content="{{ absURL "favicon-192x192.png" }}" />
+<meta name="twitter:image:width" content="192" />
+<meta name="twitter:image:height" content="192" />
+
+<link rel="preload" href="{{ relURL "fonts/RO-SansWebText-Regular.woff2" }}" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="{{ relURL "fonts/RO-SansWebText-Bold.woff2" }}" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="{{ relURL "fonts/RO-SerifWeb-Italic.woff2" }}" as="font" type="font/woff2" crossorigin />
+
+{{/* CSS bundling via Hugo's asset pipeline */}}
+{{ $tokens := resources.Get "css/tokens.css" }}
+{{ $fonts := resources.Get "css/fonts.css" }}
+{{ $base := resources.Get "css/base.css" }}
+{{ $layout := resources.Get "css/layout.css" }}
+{{ $header := resources.Get "css/components/header.css" }}
+{{ $hero := resources.Get "css/components/hero.css" }}
+{{ $cardGrid := resources.Get "css/components/card-grid.css" }}
+{{ $box := resources.Get "css/components/box.css" }}
+{{ $button := resources.Get "css/components/button.css" }}
+{{ $blockquote := resources.Get "css/components/blockquote.css" }}
+{{ $list := resources.Get "css/components/list.css" }}
+{{ $footer := resources.Get "css/components/footer.css" }}
+{{ $toast := resources.Get "css/components/toast.css" }}
+{{ $search := resources.Get "css/components/search.css" }}
+{{ $mermaid := resources.Get "css/components/mermaid.css" }}
+{{ $pageNav := resources.Get "css/components/page-nav.css" }}
+{{ $css := slice $tokens $fonts $base $layout $header $hero $cardGrid $box $button $blockquote $list $footer $toast $search $mermaid $pageNav | resources.Concat "css/style.css" | resources.ExecuteAsTemplate "css/style.css" . | fingerprint "md5" }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+
+{{- $themeInit := resources.Get "js/theme-init.js" | fingerprint "md5" -}}
+<script src="{{ $themeInit.RelPermalink }}"></script>

@@ -1,0 +1,69 @@
+{{- if or (site.Params.footer.service) (site.Params.footer.about) (site.Params.footer.description) -}}
+<footer>
+  <div class="footer-links">
+    {{- with site.Params.footer.description -}}
+    <blockquote class="footer-payoff">
+      <p>{{ . }}</p>
+    </blockquote>
+    {{- end -}}
+    {{- with site.Params.footer.service -}}
+    <nav>
+      <h4>Service</h4>
+      <ul>
+        {{- range . -}}
+        <li><a href="{{ .url }}">{{ .name }}</a></li>
+        {{- end -}}
+      </ul>
+    </nav>
+    {{- end -}}
+    {{- with site.Params.footer.about -}}
+    <nav>
+      <h4>Over deze site</h4>
+      <ul>
+        {{- range . -}}
+        <li><a href="{{ .url }}">{{ .name }}</a></li>
+        {{- end -}}
+      </ul>
+    </nav>
+    {{- end -}}
+  </div>
+  <p class="footer-copyright">&copy; {{ now.Year }} {{ .Site.Title }}</p>
+</footer>
+{{- else -}}
+<footer>
+  <p class="footer-copyright">&copy; {{ now.Year }} {{ .Site.Title }}</p>
+</footer>
+{{- end -}}
+<script>
+  (function () {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (!/^https?:\/\//i.test(href)) return;
+      if (a.hostname === window.location.hostname) return;
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener noreferrer');
+    });
+
+    // Tooltip-positionering: schuif de referentie-tooltip weg van de
+    // viewport-rand wanneer hij zou overlopen.
+    function positionRefTip(wrapper) {
+      var term = wrapper.querySelector('.ref-term');
+      var tip = wrapper.querySelector('.ref-tooltip');
+      if (!term || !tip) return;
+      tip.style.setProperty('--ref-offset-x', '0px');
+      var termRect = term.getBoundingClientRect();
+      var tipRect = tip.getBoundingClientRect();
+      var vw = document.documentElement.clientWidth;
+      var margin = 8;
+      var overflowRight = (termRect.left + tipRect.width + margin) - vw;
+      if (overflowRight > 0) {
+        tip.style.setProperty('--ref-offset-x', (-overflowRight) + 'px');
+      }
+    }
+    document.querySelectorAll('.ref-wrapper').forEach(function (w) {
+      w.addEventListener('mouseenter', function () { positionRefTip(w); });
+      w.addEventListener('focusin', function () { positionRefTip(w); });
+    });
+  })();
+</script>

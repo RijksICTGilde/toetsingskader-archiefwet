@@ -1,0 +1,11 @@
+{{/*
+  Project-level page template (Hugo 0.146+ root-naming).
+  Overschrijft theme's page.html zodat we onze eigen `markup-content` /
+  `page-article` classes blijven gebruiken voor consistente styling.
+*/}}
+{{ define "main" }}
+<article class="page-article markup-content">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</article>
+{{ end }}
