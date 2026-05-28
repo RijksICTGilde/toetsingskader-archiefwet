@@ -151,7 +151,10 @@
   --mox-color-interactive-active-background: var(--toepassing-color-interactive-active-background);
   --mox-color-logo-background: var(--toepassing-color-logo-background);
   --mox-color-component-footer-background: var(--toepassing-color-component-footer-background);
-  --mox-color-wit: var(--rijkshuisstijl-color-neutraal-wit, #fff);
+  /* mox-color-wit was hardcoded #fff (no dark variant) → cards/panels bleven
+     wit in dark mode. Map naar moza-site --color-bg-page wat light-dark()
+     gebruikt en automatisch schakelt. */
+  --mox-color-wit: var(--color-bg-page);
 
   /* spacing */
   --mox-space-3xs: var(--toepassing-space-3xs);

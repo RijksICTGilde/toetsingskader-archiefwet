@@ -20,27 +20,28 @@
   mix-blend-mode: multiply;
 }
 
-/* === Bollen (cirkels) === */
+/* === Bollen (cirkels) === light-dark() schakelt automatisch in dark mode.
+   --rijkshuisstijl-color-* bestond in oude theme; nu in beide modes leesbaar. */
 .bd-bubble circle {
-  fill: var(--rijkshuisstijl-color-hemelblauw-200, #8cc3e6);
-  stroke: var(--rijkshuisstijl-color-hemelblauw-300, #66afdd);
+  fill: light-dark(#8cc3e6, #1e3a5f);
+  stroke: light-dark(#66afdd, #2563a3);
   stroke-width: 1;
   transition: fill 0.18s ease, stroke 0.18s ease, stroke-width 0.18s ease;
 }
 
 .bd-main circle {
-  fill: var(--rijkshuisstijl-color-hemelblauw-500, #007bc7);
-  stroke: var(--rijkshuisstijl-color-donkerblauw-500, #01689b);
+  fill: light-dark(#007bc7, #007bc7);
+  stroke: light-dark(#01689b, #93dcfa);
   stroke-width: 1.5;
 }
 
 .bd-bridge circle {
-  fill: var(--rijkshuisstijl-color-hemelblauw-300, #66afdd);
+  fill: light-dark(#66afdd, #2563a3);
 }
 
 .bd-bubble-outlined {
-  fill: #ffffff;
-  stroke: var(--rijkshuisstijl-color-hemelblauw-400, #409cd5);
+  fill: light-dark(#ffffff, #1e293b);
+  stroke: light-dark(#409cd5, #66c0e8);
   stroke-width: 1.5;
 }
 
