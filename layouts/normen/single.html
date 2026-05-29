@@ -101,7 +101,12 @@
   </aside>
   {{ end }}
 
-  {{ partial "page-nav.html" . }}
+  {{- $pageNav := partial "page-nav.html" . -}}
+  {{- if trim $pageNav " \n\t" -}}
+  <footer>
+    {{- $pageNav -}}
+  </footer>
+  {{- end -}}
 </article>
 
 <aside class="toc is-open" aria-label="Op deze pagina">
