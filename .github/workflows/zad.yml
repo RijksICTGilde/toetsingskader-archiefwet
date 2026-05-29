@@ -6,6 +6,11 @@ on:
   push:
     branches: [main]
 
+# Eén actieve build per PR/main-ref; nieuwe push cancelt de lopende.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 env:
   REGISTRY: ghcr.io
   IMAGE: ghcr.io/rijksictgilde/toetsingskader-archiefwet
@@ -17,8 +22,13 @@ jobs:
     permissions:
       contents: read
       packages: write # push container images to ghcr.io
+    outputs:
+      image: ${{ steps.meta.outputs.tags }}
     steps:
       - uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
 
       - name: Log in to GHCR
         uses: docker/login-action@v4
@@ -27,27 +37,27 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Determine image tags
-        # Hybride tagging om K8s mutable-tag caching te omzeilen:
-        # - PR push: dubbele tag :pr-{n} (alias) + :pr-{n}-{sha} (immutable).
-        #   Deploy gebruikt de SHA-variant zodat K8s elke commit een nieuwe
-        #   digest ziet en de pod garandeerd herstart.
-        # - Main push: alleen :main-{sha} (al immutable per commit).
-        run: |
-          SHA_SHORT="${GITHUB_SHA:0:7}"
-          if [ "${{ github.event_name }}" = "push" ]; then
-            echo "TAGS=${{ env.IMAGE }}:main-${{ github.sha }}" >> "$GITHUB_ENV"
-          else
-            PR="${{ github.event.number }}"
-            echo "TAGS=${{ env.IMAGE }}:pr-${PR},${{ env.IMAGE }}:pr-${PR}-${SHA_SHORT}" >> "$GITHUB_ENV"
-          fi
+      - name: Extract metadata
+        # Immutable per-commit tag (geen mutable :pr-N alias) — K8s Deployment
+        # ziet altijd nieuwe image-string → gegarandeerde pod-rollout. Pattern
+        # gebaseerd op moza-site preview-deployment workflow.
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ${{ env.IMAGE }}
+          tags: |
+            type=sha,format=short,prefix=pr-${{ github.event.pull_request.number }}-,enable=${{ github.event_name == 'pull_request' }}
+            type=raw,value=main-${{ github.sha }},enable=${{ github.event_name == 'push' }}
 
       - name: Build and push
         uses: docker/build-push-action@v7
         with:
           context: .
           push: true
-          tags: ${{ env.TAGS }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   deploy-preview:
     if: github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.user.type != 'Bot'
@@ -55,14 +65,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      deployments: write
+      pull-requests: write
     environment:
       name: pr-${{ github.event.pull_request.number }}
       url: ${{ steps.deploy.outputs.url }}
     steps:
-      - name: Compute SHA-tagged image
-        id: img
-        run: echo "tag=pr-${{ github.event.number }}-${GITHUB_SHA:0:7}" >> "$GITHUB_OUTPUT"
-
       - name: Deploy to ZAD
         id: deploy
         uses: RijksICTGilde/zad-actions/deploy@v4
@@ -71,10 +79,10 @@ jobs:
           project-id: toets-hn7
           deployment-name: pr-${{ github.event.pull_request.number }}
           component: frontend
-          # SHA-suffixed tag forceert K8s om elke commit als unieke image
-          # te zien → pod restart per push (mutable :pr-N zou cached blijven).
-          image: ${{ env.IMAGE }}:${{ steps.img.outputs.tag }}
+          image: ${{ needs.build.outputs.image }}
           clone-from: production
+          comment-on-pr: true
+          wait-for-ready: true
 
   cleanup-preview:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.user.type != 'Bot'
@@ -82,19 +90,46 @@ jobs:
     permissions:
       deployments: write
       packages: write
+      pull-requests: write
     steps:
-      - uses: RijksICTGilde/zad-actions/cleanup@v4
+      - name: Cleanup ZAD deployment
+        uses: RijksICTGilde/zad-actions/cleanup@v4
         with:
           api-key: ${{ secrets.ZAD_API_KEY }}
           project-id: toets-hn7
           deployment-name: pr-${{ github.event.pull_request.number }}
           delete-github-env: 'true'
           delete-github-deployments: 'true'
-          delete-container: 'true'
-          container-org: ${{ github.repository_owner }}
-          container-name: ${{ github.event.repository.name }}
-          container-tag: pr-${{ github.event.number }}
-          github-admin-token: ${{ secrets.GITHUB_ADMIN_TOKEN }}
+          delete-pr-comment: 'true'
+
+      - name: Delete container images for this PR
+        # Verwijdert ALLE :pr-N-* SHA-tagged images via gh-api prefix-match,
+        # niet alleen één losse tag. Pattern uit moza-site.
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_ADMIN_TOKEN }}
+          CONTAINER_ORG: ${{ github.repository_owner }}
+          CONTAINER_NAME: ${{ github.event.repository.name }}
+          TAG_PREFIX: pr-${{ github.event.pull_request.number }}-
+        run: |
+          echo "Deleting container images with tag prefix: $TAG_PREFIX"
+          ENCODED_NAME=$(printf '%s' "$CONTAINER_NAME" | jq -sRr @uri)
+          VERSIONS=$(gh api "orgs/$CONTAINER_ORG/packages/container/$ENCODED_NAME/versions" 2>/dev/null \
+            | jq -r --arg prefix "$TAG_PREFIX" '.[] | select(.metadata.container.tags[]? | startswith($prefix)) | .id')
+          if [ -z "$VERSIONS" ]; then
+            echo "No versions found with tag prefix: $TAG_PREFIX (may already be deleted)"
+            exit 0
+          fi
+          DELETED=0
+          for ID in $VERSIONS; do
+            if gh api "orgs/$CONTAINER_ORG/packages/container/$ENCODED_NAME/versions/$ID" -X DELETE 2>/dev/null; then
+              echo "Deleted version: $ID"
+              DELETED=$((DELETED + 1))
+            else
+              echo "Failed to delete version: $ID"
+            fi
+          done
+          echo "Deleted $DELETED container version(s) for PR ${{ github.event.pull_request.number }}"
 
   deploy-production:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -112,3 +147,4 @@ jobs:
           deployment-name: production
           component: frontend
           image: ${{ env.IMAGE }}:main-${{ github.sha }}
+          wait-for-ready: true
