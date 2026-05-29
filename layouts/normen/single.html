@@ -3,15 +3,17 @@
 <article class="norm-page markup-content">
   <h1>{{ .Title }}</h1>
 
+  {{/* Generieke .box component uit theme; .box--info = hemelblauw accent
+       (semantische "key info"), zonder modifier = neutraal grijs. */}}
   {{ with .Params.kern }}
-  <div id="kern" class="norm-kern">
+  <div id="kern" class="box box--info">
     <h2>Kern van de norm</h2>
     {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
   </div>
   {{ end }}
 
   {{ with .Params.toelichting }}
-  <div id="toelichting" class="norm-toelichting">
+  <div id="toelichting" class="box">
     <h2>Toelichting</h2>
     {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
   </div>

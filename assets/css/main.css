@@ -414,14 +414,22 @@ main > .page-article {
   flex: 1 1 50%;
 }
 
-/* Inspectie-OE: rechter footer-kolommen iets breder zodat
-   "Kwetsbaarheid melden" en de service-links niet ongelukkig wrappen.
-   moza-site footer.css gebruikt nested CSS (.footer-columns { nav { min-width } })
-   die qua specificiteit gelijk is; flex-basis + !important is robuuster. */
+/* Inspectie-OE footer-layout: tagline minder breed (max ~50ch) zodat
+   het niet ongemakkelijk onder de nav-kolommen schuift. "Zie ook"
+   compacter omdat het korte service-links zijn; "Over deze site"
+   iets breder voor "Kwetsbaarheid melden". */
 @media (min-width: 700px) {
-  body > footer .footer-columns > nav {
+  body > footer .tagline {
+    max-width: 50ch;
+    flex: 0 1 auto;
+  }
+  body > footer .footer-columns > nav[aria-label="Zie ook"] {
+    min-width: 9rem;
+    flex: 0 0 9rem;
+  }
+  body > footer .footer-columns > nav[aria-label="Over deze site"] {
     min-width: 14rem;
-    flex: 1 1 14rem;
+    flex: 0 0 14rem;
   }
 }
 
@@ -788,29 +796,10 @@ main > .page-article {
 
 /* Toetsingskader-specifieke styling */
 
-/* Norm page: kern */
-.norm-kern {
-  background-color: var(--toepassing-color-feedback-info-subtle, #e8f0f7);
-  border-inline-start: 4px solid var(--toepassing-color-accent-default, #007bc7);
-  padding: var(--toepassing-space-padding-lg, 1.25rem) var(--toepassing-space-padding-xl, 1.75rem);
-  margin-block: var(--toepassing-space-md, 1rem);
-  border-radius: 0 var(--toepassing-border-radius-md, 4px) var(--toepassing-border-radius-md, 4px) 0;
-}
-
-.norm-kern h2 {
+/* Norm page: kern + toelichting gebruiken theme's .box (+ .box--info).
+   Eerste h2-margin reset zodat de header netjes tegen de paneel-top zit. */
+.norm-page .box h2:first-child {
   margin-block-start: 0;
-  margin-block-end: var(--toepassing-space-sm, 0.75rem);
-}
-
-/* Norm page: toelichting — geen inline-padding zodat het visueel uitlijnt
-   met de andere secties (Normuitleg, Reikwijdte, Zie ook) eronder. */
-.norm-toelichting {
-  margin-block: var(--toepassing-space-md, 1rem);
-}
-
-.norm-toelichting h2 {
-  margin-block-start: 0;
-  margin-block-end: var(--toepassing-space-sm, 0.75rem);
 }
 
 /* Norm page: normuitleg */
