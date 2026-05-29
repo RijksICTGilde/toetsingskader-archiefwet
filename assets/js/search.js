@@ -8,13 +8,17 @@
   var searchResults;
   var searchTriggers;
 
+  /* Threshold 0.4 i.p.v. 0.3: lange content-velden geven een fuzzy-distance
+     waarbij zelfs exact aanwezige termen tegen ~0.29 aanlopen (bv. "ordenings-
+     structuur" matchte met score 0.294 — onveilig dicht bij 0.3). 0.4 geeft
+     buffer zonder te veel ruis. */
   var fuseOptions = {
     keys: [
       { name: 'title', weight: 3 },
       { name: 'synoniemen', weight: 2 },
       { name: 'content', weight: 1 }
     ],
-    threshold: 0.3,
+    threshold: 0.4,
     ignoreLocation: true,
     includeScore: true,
     findAllMatches: true,
