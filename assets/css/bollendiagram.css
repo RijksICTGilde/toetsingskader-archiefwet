@@ -11,37 +11,51 @@
   overflow: visible;
 }
 
-/* Multiply zorgt dat overlappende bollen op natuurlijke wijze verdonkeren,
-   zoals in de oorspronkelijke afbeelding (waterverf-effect).
-   Labels staan in een aparte groep zónder blend, zodat tekst nooit door
-   een latere bol wordt overschilderd. */
+/* Blend-mode laat overlappende bollen natuurlijk samenvloeien.
+   - Light bg + multiply: donker × licht = behoudt cirkelkleur, overlap iets donkerder
+   - Dark bg + screen: licht ⊕ donker = behoudt cirkelkleur, overlap iets lichter
+   mix-blend-mode kent geen light-dark() helper, dus expliciete selectors. */
 .bd-cluster,
 .bd-future {
   mix-blend-mode: multiply;
 }
 
-/* === Bollen (cirkels) === light-dark() pairs zo gekozen dat cirkels
-   contrasteren met body bg (lichte modus: hemelblauw op wit; donker:
-   medium hemelblauw op donker navy, niet té donker). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .bd-cluster,
+  :root:not([data-theme="light"]) .bd-future {
+    mix-blend-mode: screen;
+  }
+}
+
+:root[data-theme="dark"] .bd-cluster,
+:root[data-theme="dark"] .bd-future {
+  mix-blend-mode: screen;
+}
+
+/* === Bollen (cirkels) === Dezelfde brightness in beide modi: screen op
+   donker bg geeft hetzelfde visuele effect als multiply op licht bg,
+   mits source-kleuren licht genoeg zijn. */
 .bd-bubble circle {
-  fill: light-dark(#8cc3e6, #4a8db5);
-  stroke: light-dark(#66afdd, #6fa8ce);
+  fill: #8cc3e6;
+  stroke: #66afdd;
   stroke-width: 1;
   transition: fill 0.18s ease, stroke 0.18s ease, stroke-width 0.18s ease;
 }
 
 .bd-main circle {
-  fill: light-dark(#007bc7, #1d8acb);
-  stroke: light-dark(#01689b, #93dcfa);
+  fill: #007bc7;
+  stroke: light-dark(#01689b, #4ba3d8);
   stroke-width: 1.5;
 }
 
 .bd-bridge circle {
-  fill: light-dark(#66afdd, #5ea0c7);
+  fill: #66afdd;
 }
 
+/* Outlined cirkels (toekomst-cluster): in light mode hollow met witte fill,
+   in dark mode transparant zodat alleen de stroke leesbaar blijft tegen donker bg. */
 .bd-bubble-outlined {
-  fill: light-dark(#ffffff, #243348);
+  fill: light-dark(#ffffff, transparent);
   stroke: light-dark(#409cd5, #8cc3e6);
   stroke-width: 1.5;
 }
