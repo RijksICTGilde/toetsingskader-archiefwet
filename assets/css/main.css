@@ -433,16 +433,6 @@ main > .page-article {
   }
 }
 
-/* Search-result highlights: voorkom dat de browser-default mark padding
-   van ~0.16em links/rechts tekst-flow afbreekt. Inline + 0-padding houdt
-   het lijn-natuurlijk. */
-.search-results mark,
-.search-result-snippet mark,
-.search-result-title mark {
-  padding: 0;
-  margin: 0;
-}
-
 /* Sidebar: bevat normen-lijst en (op normpagina's) de ToC */
 .sidebar {
   margin-block: var(--mox-space-md);
@@ -644,15 +634,9 @@ main > .page-article {
   line-height: 1.4;
 }
 
-/* Highlight: gele bg in beide modi, expliciet donkere tekst (geen
-   inherit — anders erft mark in dark mode de lichte snippet-kleur en
-   wordt het 1.57:1 contrast op geel). */
-.search-result-snippet mark,
-.search-result-title mark,
 #main-content mark[data-search-highlight] {
-  background-color: #fff3a8;
-  color: #1e293b;
-  padding: 0 0.15em;
+  background-color: var(--color-highlight);
+  color: var(--color-highlight-text);
 }
 
 .search-no-results {
