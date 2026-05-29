@@ -27,12 +27,19 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Determine image tag
+      - name: Determine image tags
+        # Hybride tagging om K8s mutable-tag caching te omzeilen:
+        # - PR push: dubbele tag :pr-{n} (alias) + :pr-{n}-{sha} (immutable).
+        #   Deploy gebruikt de SHA-variant zodat K8s elke commit een nieuwe
+        #   digest ziet en de pod garandeerd herstart.
+        # - Main push: alleen :main-{sha} (al immutable per commit).
         run: |
+          SHA_SHORT="${GITHUB_SHA:0:7}"
           if [ "${{ github.event_name }}" = "push" ]; then
-            echo "TAG=main-${{ github.sha }}" >> "$GITHUB_ENV"
+            echo "TAGS=${{ env.IMAGE }}:main-${{ github.sha }}" >> "$GITHUB_ENV"
           else
-            echo "TAG=pr-${{ github.event.number }}" >> "$GITHUB_ENV"
+            PR="${{ github.event.number }}"
+            echo "TAGS=${{ env.IMAGE }}:pr-${PR},${{ env.IMAGE }}:pr-${PR}-${SHA_SHORT}" >> "$GITHUB_ENV"
           fi
 
       - name: Build and push
@@ -40,7 +47,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.IMAGE }}:${{ env.TAG }}
+          tags: ${{ env.TAGS }}
 
   deploy-preview:
     if: github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.user.type != 'Bot'
@@ -52,6 +59,10 @@ jobs:
       name: pr-${{ github.event.pull_request.number }}
       url: ${{ steps.deploy.outputs.url }}
     steps:
+      - name: Compute SHA-tagged image
+        id: img
+        run: echo "tag=pr-${{ github.event.number }}-${GITHUB_SHA:0:7}" >> "$GITHUB_OUTPUT"
+
       - name: Deploy to ZAD
         id: deploy
         uses: RijksICTGilde/zad-actions/deploy@v4
@@ -60,7 +71,9 @@ jobs:
           project-id: toets-hn7
           deployment-name: pr-${{ github.event.pull_request.number }}
           component: frontend
-          image: ${{ env.IMAGE }}:pr-${{ github.event.number }}
+          # SHA-suffixed tag forceert K8s om elke commit als unieke image
+          # te zien → pod restart per push (mutable :pr-N zou cached blijven).
+          image: ${{ env.IMAGE }}:${{ steps.img.outputs.tag }}
           clone-from: production
 
   cleanup-preview:
