@@ -27,6 +27,16 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Determine BASE_URL for build
+        id: baseurl
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            PR="${{ github.event.pull_request.number }}"
+            echo "value=https://frontend-pr-${PR}-toets-hn7.rig.prd1.gn2.quattro.rijksapps.nl/" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
 
@@ -38,9 +48,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata
-        # Immutable per-commit tag (geen mutable :pr-N alias) — K8s Deployment
-        # ziet altijd nieuwe image-string → gegarandeerde pod-rollout. Pattern
-        # gebaseerd op moza-site preview-deployment workflow.
+        # Immutable per-commit tag (geen mutable :pr-N alias) — K8s
+        # Deployment ziet altijd nieuwe image-string → pod-rollout.
         id: meta
         uses: docker/metadata-action@v6
         with:
@@ -56,6 +65,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            BASE_URL=${{ steps.baseurl.outputs.value }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

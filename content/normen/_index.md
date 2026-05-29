@@ -3,6 +3,7 @@ title: "Normen"
 card_title: "Normen"
 description: "De acht normen uit het toetsingskader - van inbeheername tot periodieke evaluatie."
 weight: 20
+prev_next: true
 ---
 
 {{< leeswijzer >}}

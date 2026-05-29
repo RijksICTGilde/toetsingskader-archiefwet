@@ -6,11 +6,16 @@ WORKDIR /src
 # de modules resolved. Eerdere `hugo mod get` op alleen go.mod/go.sum
 # faalde de replace en pakte de oude canonical theme via network.
 COPY . .
-ARG BASE_PATH=/
-RUN hugo --minify --baseURL "${BASE_PATH}"
+ARG BASE_URL=
+RUN if [ -n "$BASE_URL" ]; then \
+      hugo --minify --baseURL "$BASE_URL"; \
+    else \
+      hugo --minify; \
+    fi
 
 FROM ghcr.io/rijksictgilde/nginx-base:2026.03.1
 COPY --from=build /src/public/ /usr/share/nginx/html/
 COPY nginx.default.conf.template /etc/nginx/templates/default.conf.template
+# Runtime substitutie voor ${BASE_PATH} in nginx.default.conf.template.
 ENV BASE_PATH=/
 EXPOSE 8080
