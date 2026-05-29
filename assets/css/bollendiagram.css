@@ -88,8 +88,10 @@
   letter-spacing: 0.01em;
 }
 
+/* Outlined cluster (italic future-labels) staat NIET op een cirkel — direct
+   op body bg. In dark mode dus licht grijs nodig (cool-gray-300 ipv 700). */
 .bd-label-outlined {
-  fill: var(--rijkshuisstijl-color-cool-gray-700, #334155);
+  fill: light-dark(#334155, #cbd5e1);
   font-size: 14px;
   font-style: italic;
 }

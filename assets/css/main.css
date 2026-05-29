@@ -644,11 +644,14 @@ main > .page-article {
   line-height: 1.4;
 }
 
+/* Highlight: gele bg in beide modi, expliciet donkere tekst (geen
+   inherit — anders erft mark in dark mode de lichte snippet-kleur en
+   wordt het 1.57:1 contrast op geel). */
 .search-result-snippet mark,
 .search-result-title mark,
 #main-content mark[data-search-highlight] {
   background-color: #fff3a8;
-  color: inherit;
+  color: #1e293b;
   padding: 0 0.15em;
 }
 
