@@ -2,7 +2,11 @@
 <section>
   <h1>{{ .Title }}</h1>
 
-  <div class="card-grid">
+  {{ with .Params.intro }}
+  <p class="intro">{{ . }}</p>
+  {{ end }}
+
+  <div class="card-grid card-grid--boxed">
     {{ range .Pages.ByWeight }}
     <article class="card">
       <header>
