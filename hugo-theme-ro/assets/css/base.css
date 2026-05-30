@@ -79,6 +79,11 @@ a {
   color: var(--color-link);
   text-decoration: underline;
   text-underline-offset: 0.15em;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: color-mix(in oklch, var(--color-link), black 12%);
+  }
 
   &:focus-visible {
     outline: 2px solid var(--color-link);

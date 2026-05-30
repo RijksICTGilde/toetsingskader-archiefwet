@@ -51,6 +51,14 @@
   }
 }
 
+/* Extra discoverability: titel-link onderstrepen bij hover op de card. */
+.card-grid.clickable > article:hover header h2 a,
+.card-grid.clickable > article:focus-within header h2 a,
+.card-grid.clickable .card:hover header h2 a,
+.card-grid.clickable .card:focus-within header h2 a {
+  text-decoration: underline;
+}
+
 /* Article direct in .card-grid is impliciet een card; expliciete
    .card-class blijft werken voor standalone gebruik buiten een grid. */
 .card-grid > article,

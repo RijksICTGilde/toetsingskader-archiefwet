@@ -104,15 +104,11 @@
 }
 
 .bd-bubble:hover circle {
-  fill: var(--rijkshuisstijl-color-hemelblauw-400, #409cd5);
+  fill: #409cd5;
 }
 
 .bd-main:hover circle {
-  fill: var(--rijkshuisstijl-color-donkerblauw-500, #01689b);
-}
-
-.bd-bridge:hover circle {
-  fill: var(--rijkshuisstijl-color-hemelblauw-500, #007bc7);
+  fill: #01689b;
 }
 
 .bd-bubble:focus-visible circle {
