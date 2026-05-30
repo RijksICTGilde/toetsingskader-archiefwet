@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{ $page := . }}
-<article class="norm-page markup-content">
+<article>
   <h1>{{ .Title }}</h1>
 
   {{ with .Params.kern }}
@@ -29,7 +29,7 @@
   <div id="normuitleg" class="norm-uitleg">
     <h2>Normuitleg</h2>
     {{ range . }}
-    <div class="norm-uitleg__item">
+    <article>
       {{ with .titel }}
       <h3 id="{{ . | urlize }}">{{ . }}</h3>
       {{ end }}
@@ -66,7 +66,7 @@
         {{ end }}
       </div>
       {{ end }}
-    </div>
+    </article>
     {{ end }}
   </div>
   {{ end }}

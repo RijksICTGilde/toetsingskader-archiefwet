@@ -19,7 +19,7 @@
   padding-block-end: 0.5rem;
 }
 
-.norm-uitleg__item h3,
+.norm-uitleg article h3,
 .norm-voorschrift > h4 {
   color: var(--color-primary);
 }
