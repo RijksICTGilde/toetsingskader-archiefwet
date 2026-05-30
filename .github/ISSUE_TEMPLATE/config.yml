@@ -1,2 +1,8 @@
-blank_issues_enabled: true
-contact_links: []
+blank_issues_enabled: false
+contact_links:
+  - name: E-mail toetsingskader-team
+    url: mailto:toetsingskader@inspectie-oe.nl
+    about: Voor inhoudelijke vragen die niet via een issue passen.
+  - name: Contact Inspectie Overheidsinformatie en Erfgoed
+    url: https://www.inspectie-oe.nl/service/contact
+    about: Algemene contactmogelijkheden van de Inspectie.
