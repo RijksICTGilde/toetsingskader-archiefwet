@@ -4,12 +4,10 @@ ARG HUGO_SHA256=e34160095b6a6406af857fe212f50e4451f67ed1276b9bb0de13d08754980118
 RUN apk add --no-cache git wget tar \
   && wget -qO /tmp/hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" \
   && echo "${HUGO_SHA256}  /tmp/hugo.tar.gz" | sha256sum -c - \
-  && mkdir -p /tmp/hugo-extract \
-  && tar -xzf /tmp/hugo.tar.gz -C /tmp/hugo-extract hugo \
-  && mv /tmp/hugo-extract/hugo /usr/local/bin/hugo \
-  && chmod +x /usr/local/bin/hugo \
-  && rm -rf /tmp/hugo-extract /tmp/hugo.tar.gz \
-  && hugo version
+  && tar -xzf /tmp/hugo.tar.gz -C /usr/local/bin \
+  && rm /tmp/hugo.tar.gz \
+  && ls -la /usr/local/bin/hugo \
+  && /usr/local/bin/hugo version
 WORKDIR /src
 # Copy alles eerst: go.mod's replace-directive verwijst naar lokale
 # ./hugo-theme-ro/, dus die directory moet aanwezig zijn voordat Hugo
