@@ -2,7 +2,6 @@
 title: "Over het toetsingskader"
 card_title: "Over het toetsingskader"
 description: "Leeswijzer, doel en opbouw van het toetsingskader Archiefwet 2026."
-weight: 10
 show_lastmod: true
 ---
 
