@@ -59,7 +59,7 @@ button,
 
   &:hover,
   &:focus-visible {
-    background: transparent;
+    background: var(--color-bg-muted);
     border: none;
     color: var(--color-text);
   }

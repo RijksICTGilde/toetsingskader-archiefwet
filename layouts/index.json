@@ -1,5 +1,6 @@
 {{- $pages := slice -}}
-{{- range where site.RegularPages "Kind" "page" -}}
+{{- $allPages := site.RegularPages | append site.Home -}}
+{{- range $allPages -}}
   {{- $text := .Plain | replaceRE `\{ref:\d+\}` "" -}}
   {{- with .Params.kern }}{{ $text = printf "%s %s" $text . }}{{ end -}}
   {{- with .Params.toelichting }}{{ $text = printf "%s %s" $text . }}{{ end -}}

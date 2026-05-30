@@ -112,21 +112,6 @@
   font-weight: 600;
 }
 
-/* Border alleen tonen als er resultaten zijn - tekstbreed */
-.search-results:not(:empty) {
-  position: relative;
-}
-
-.search-results:not(:empty)::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 1rem;
-  right: 1rem;
-  height: 1px;
-  background-color: var(--color-border);
-}
-
 .search-modal-header .search-icon {
   width: 1.25rem;
   height: 1.25rem;
@@ -198,11 +183,6 @@
 
 .search-result-item:hover::after,
 .search-result-item:focus-visible::after {
-  background-color: var(--color-bg-info);
-}
-
-.search-result-item:hover mark,
-.search-result-item:focus-visible mark {
   background-color: var(--color-bg-info);
 }
 
