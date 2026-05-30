@@ -188,6 +188,13 @@
   background-color: var(--color-bg-info);
 }
 
+/* Volgende item z'n top-divider mee-faden: zit grenzend aan de
+   hover-bg en zou anders een zwevend lijntje achterlaten. */
+.search-results li:has(.search-result-item:hover) + li .search-result-item::before,
+.search-results li:has(.search-result-item:focus-visible) + li .search-result-item::before {
+  background-color: var(--color-bg-page);
+}
+
 .search-result-title {
   display: block;
   font-weight: 700;
