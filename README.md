@@ -28,27 +28,6 @@ pip install pre-commit
 pre-commit install
 ```
 
-### Werken aan het theme
-
-Het theme zit in een aparte repo:
-[`RijksICTGilde/hugo-theme-rijksoverheid`]. Voor parallelle ontwikkeling
-clone die repo lokaal en gebruik `replace` in `go.mod`:
-
-```bash
-git clone git@github.com:RijksICTGilde/hugo-theme-rijksoverheid.git \
-  ../hugo-theme-rijksoverheid-local
-```
-
-```go
-// go.mod (consumer)
-replace github.com/RijksICTGilde/hugo-theme-rijksoverheid =>
-  ../hugo-theme-rijksoverheid-local
-```
-
-`hugo server` pakt vanaf nu wijzigingen in de lokale theme-clone live op.
-
-[`RijksICTGilde/hugo-theme-rijksoverheid`]: https://github.com/RijksICTGilde/hugo-theme-rijksoverheid
-
 ## Structuur
 
 - **Project-root**: consumer-content: `hugo.yaml`, `content/` (normen,
