@@ -2,15 +2,8 @@
 <div class="hero">
   {{ with .Params.hero }}
   {{ $hero := resources.Get .image }}
-  {{/* Twee-staps: PNG → JPEG strip de alpha-channel die de AVIF-
-       encoder van Hugo niet aankan. Daarna naar AVIF/WebP. */}}
-  {{ $heroBase := $hero.Resize "1500x jpeg q90 #ffffff" }}
-  {{ $heroAvif := $heroBase.Resize "1500x avif q50" }}
-  {{ $heroWebp := $heroBase.Resize "1500x webp q80" }}
-  <picture>
-    <source type="image/avif" srcset="{{ $heroAvif.RelPermalink }}">
-    <img src="{{ $heroWebp.RelPermalink }}" alt="{{ .image_alt }}" width="{{ $heroWebp.Width }}" height="{{ $heroWebp.Height }}">
-  </picture>
+  {{ $heroWebp := $hero.Resize "1500x webp q100" }}
+  <img src="{{ $heroWebp.RelPermalink }}" alt="{{ .image_alt }}" width="{{ $heroWebp.Width }}" height="{{ $heroWebp.Height }}">
   <div class="content">
     <h1>{{ .title }}</h1>
     <p>{{ .text }}</p>
