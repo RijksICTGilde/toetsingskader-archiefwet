@@ -3,6 +3,7 @@ title: "Over het toetsingskader"
 card_title: "Over het toetsingskader"
 description: "Leeswijzer, doel en opbouw van het toetsingskader Archiefwet 2026."
 weight: 10
+show_lastmod: true
 ---
 
 Op deze pagina lees je hoe dit toetsingskader is opgebouwd, waarop het zich richt en welk wettelijk kader eronder ligt.

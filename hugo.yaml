@@ -4,6 +4,7 @@ defaultContentLanguage: nl
 title: Toetsingskader Archiefwet
 
 enableRobotsTXT: true
+enableGitInfo: true
 
 outputs:
   home:

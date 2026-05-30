@@ -59,6 +59,13 @@
   text-decoration: underline;
 }
 
+/* Card-titel als link: gebruik primary-kleur zodat het card-doel
+   (en zijn klikbaarheid) visueel benadrukt wordt. */
+.card-grid > article header h2 a,
+.card header h2 a {
+  color: var(--color-primary);
+}
+
 /* Article direct in .card-grid is impliciet een card; expliciete
    .card-class blijft werken voor standalone gebruik buiten een grid. */
 .card-grid > article,

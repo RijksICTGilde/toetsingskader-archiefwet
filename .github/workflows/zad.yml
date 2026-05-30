@@ -26,6 +26,10 @@ jobs:
       image: ${{ steps.meta.outputs.tags }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          # Volledige git-historie nodig voor Hugo's enableGitInfo
+          # (Lastmod uit git commit-tijd ipv file mtime).
+          fetch-depth: 0
 
       - name: Determine BASE_URL for build
         id: baseurl

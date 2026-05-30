@@ -13,11 +13,10 @@
   </header>
   {{ .Content }}
   {{- $pageNav := partial "page-nav.html" . -}}
-  {{- if or .Params.show_lastmod (trim $pageNav " \n\t") -}}
+  {{- $lastmod := partial "lastmod.html" . -}}
+  {{- if or (trim $lastmod " \n\t") (trim $pageNav " \n\t") -}}
   <footer>
-    {{- if .Params.show_lastmod -}}
-    <p>Deze pagina is voor het laatst bijgewerkt op <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod | time.Format ":date_full" }}</time>.</p>
-    {{- end -}}
+    {{- $lastmod -}}
     {{- $pageNav -}}
   </footer>
   {{- end -}}

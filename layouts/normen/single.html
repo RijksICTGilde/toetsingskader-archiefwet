@@ -102,8 +102,10 @@
   {{ end }}
 
   {{- $pageNav := partial "page-nav.html" . -}}
-  {{- if trim $pageNav " \n\t" -}}
+  {{- $lastmod := partial "lastmod.html" . -}}
+  {{- if or (trim $lastmod " \n\t") (trim $pageNav " \n\t") -}}
   <footer>
+    {{- $lastmod -}}
     {{- $pageNav -}}
   </footer>
   {{- end -}}
