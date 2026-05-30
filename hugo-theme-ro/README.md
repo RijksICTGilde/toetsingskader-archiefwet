@@ -5,21 +5,42 @@ Hugo-thema voor Rijksoverheid-sites, gebaseerd op het
 Levert layout, components en design-tokens; consumer-sites brengen hun
 eigen content + project-specifieke styling mee.
 
+Vereist [Hugo Extended] ≥ 0.162 en [Go] ≥ 1.26 (voor Hugo Modules).
+
 ## Snelstart
 
-`hugo.yaml`:
+Minimale `hugo.yaml` voor een nieuwe consumer-site. De keys voor
+`locale`, `outputs`, `markup`, `enableGitInfo` etc. **moeten op
+consumer-niveau** — Hugo's config-merging laat top-level keys met
+`_merge: none` niet uit het thema komen.
 
 ```yaml
 baseURL: https://example.rijksoverheid.nl/
 title: Mijn RO-site
-locale: nl
+
+# Lokalisatie + Git-gebaseerde lastmod
+locale: nl-NL
 defaultContentLanguage: nl
 enableGitInfo: true
+enableRobotsTXT: true
+
+# JSON-output nodig voor de search-index
+outputs:
+  home: [HTML, RSS, JSON]
+
+markup:
+  goldmark:
+    extensions:
+      footnote: true
+  tableOfContents:
+    startLevel: 2
+    endLevel: 4
 
 module:
   imports:
     - path: github.com/RijksICTGilde/hugo-theme-ro
 
+# Zie sectie "Menus" hieronder voor footer + section-navs
 menus:
   main:
     - { name: Home, pageRef: /, weight: 1 }
@@ -33,38 +54,63 @@ params:
     priority_sections: []   # optioneel: ['blogs', 'docs'] etc.
 ```
 
-Bouw:
+Bouwen:
 
 ```bash
 hugo mod get -u github.com/RijksICTGilde/hugo-theme-ro
 hugo server
 ```
 
-Vereist Hugo ≥ 0.158 (`locale` config-key). CI/productie pinnen
-`0.162.1`.
-
 ## Lokale theme-ontwikkeling
 
-Voor parallelle ontwikkeling aan thema + site:
+Voor parallelle ontwikkeling op thema + site, gebruik `go.mod`'s
+`replace`-directive in de consumer (geen env-vars of direnv nodig):
 
 ```bash
-# In je consumer-project:
+# In consumer's repo
 git clone git@github.com:RijksICTGilde/hugo-theme-RO.git ../hugo-theme-RO-local
 ```
 
-In `config/development/module.yaml` (absolute pad sinds Hugo 0.159):
+In `go.mod` van de consumer:
+
+```go
+replace github.com/RijksICTGilde/hugo-theme-ro => ../hugo-theme-RO-local
+```
+
+`hugo server` pakt vanaf nu wijzigingen in de lokale theme-clone live op.
+
+## Menus
+
+Het thema kent vier menu-conventies. Alle zijn optioneel; alleen `main`
+is sterk aangeraden.
+
+| Menu | Locatie | Doel |
+|---|---|---|
+| `main` | header | top-navigatie |
+| `footer-links` | footer, links-kant | service-links (contact, sitemap, …) |
+| `footer-rechts` | footer, rechts-kant | beleid-links (privacy, cookies, toegankelijkheid, …) |
+| `<sectie>_nav` | side-nav binnen een section | optioneel; activeert section-nav als consumer dit menu definieert |
+
+Voorbeeld met alle drie hoofd-menus:
 
 ```yaml
-replacements:
-  - "github.com/RijksICTGilde/hugo-theme-ro -> /absolute/path/to/hugo-theme-RO-local"
+menus:
+  main:
+    - { name: Home,    pageRef: /,         weight: 1 }
+    - { name: Over,    pageRef: /over,     weight: 2 }
+    - { name: Normen,  pageRef: /normen,   weight: 3 }
+
+  footer-links:
+    - { name: Contact, url: https://...,   weight: 1 }
+    - { name: Sitemap, url: https://...,   weight: 2 }
+
+  footer-rechts:
+    - { name: Privacy,         url: https://..., weight: 1 }
+    - { name: Toegankelijkheid, url: https://..., weight: 2 }
 ```
 
-Of via env-var (bv. met direnv):
-
-```bash
-export HUGO_MODULE_REPLACEMENTS="github.com/RijksICTGilde/hugo-theme-ro -> $PWD/../hugo-theme-RO-local"
-hugo server
-```
+Externe URL's gebruiken `url:`; interne pages `pageRef:`. Beide
+ondersteund.
 
 ## Architectuur
 
@@ -124,4 +170,7 @@ toc: false                  # disable auto-TOC voor deze pagina
 
 ## Licentie
 
-[EUPL v1.2](LICENSE)
+Dit project is gelicentieerd onder de [EUPL v1.2](LICENSE).
+
+[Hugo Extended]: https://github.com/gohugoio/hugo/releases
+[Go]: https://go.dev

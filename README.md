@@ -6,8 +6,8 @@ overheidsorganisaties. Statische site, gebouwd met [Hugo].
 
 ## Vereisten
 
-- [Hugo Extended] ≥ 0.158 (CI/productie pinnen 0.162.1)
-- [Go] ≥ 1.26.3 (voor Hugo Modules)
+- [Hugo Extended] ≥ 0.162
+- [Go] ≥ 1.26 (voor Hugo Modules)
 - [just] voor de dev-recipes
 - [pre-commit] voor lokale hooks (optioneel, draait ook in CI)
 
@@ -62,7 +62,7 @@ build geverifieerd met SHA256-checksum tegen de officiële release.
 
 ## Licentie
 
-[EUPL v1.2](LICENSE)
+Dit project is gelicentieerd onder de [EUPL v1.2](LICENSE).
 
 [Hugo]: https://gohugo.io
 [Hugo Extended]: https://github.com/gohugoio/hugo/releases
