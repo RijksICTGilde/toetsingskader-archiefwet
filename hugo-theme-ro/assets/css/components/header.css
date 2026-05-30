@@ -102,8 +102,8 @@ header {
     max-width: var(--content-max-width);
     margin: 0 auto;
     padding: 0 1rem;
-    background-color: var(--color-rijks-blauw);
-    box-shadow: 0 0 0 100vmax var(--color-rijks-blauw);
+    background-color: var(--color-primary);
+    box-shadow: 0 0 0 100vmax var(--color-primary);
     clip-path: inset(0 -100vmax);
     color: var(--color-text-inverse);
 
