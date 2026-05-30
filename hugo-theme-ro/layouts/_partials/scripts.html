@@ -5,4 +5,3 @@
 {{- $searchJs := resources.Get "js/search.js" -}}
 {{- $js := slice $baseJs $tocJs $fuseJs $searchJs | resources.Concat "js/bundle.js" | fingerprint "md5" -}}
 <script src="{{ $js.RelPermalink }}"></script>
-
