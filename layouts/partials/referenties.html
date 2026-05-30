@@ -5,16 +5,18 @@
   Gebruik: {{ partial "referenties.html" . }}
 */ -}}
 {{- with .Params.referenties -}}
-<section id="referenties" class="referenties" aria-label="Referenties">
-  <details class="referenties-accordion">
+<section id="referenties" class="references" aria-label="Referenties">
+  <details>
     <summary>Referenties</summary>
     <ol>
       {{- range $i, $ref := . -}}
       {{- $num := add $i 1 }}
       <li id="ref-{{ $num }}">
-        {{- with $ref.url }}<a href="{{ . }}">{{ end -}}
-        {{- $ref.tekst -}}
-        {{- with $ref.url }}</a>{{ end }}
+        {{- with $ref.url -}}
+          {{ partial "render-link.html" (dict "href" . "text" $ref.tekst) }}
+        {{- else -}}
+          {{ $ref.tekst }}
+        {{- end }}
         <a href="#refback-{{ $num }}" class="ref-back" aria-label="Terug naar tekst">&uarr;</a>
       </li>
       {{- end }}
