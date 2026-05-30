@@ -28,7 +28,9 @@ params:
     email: toetsingskader@inspectie-oe.nl
   search:
     enable: true
-    # Sectie-filters: weglaten of korte lijst → alleen "Alles" wordt impliciet getoond
+    # priority_sections: hits in deze sections komen bovenaan, in deze volgorde
+    priority_sections:
+      - normen
   tagline: "Normen voor duurzame toegankelijkheid"
   page_banner:
     type: warning

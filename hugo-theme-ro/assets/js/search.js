@@ -8,6 +8,7 @@
   var searchResults;
   var searchTriggers;
   var activeFilter = '';
+  var prioSections = [];
 
   var fuseOptions = {
     keys: [
@@ -30,6 +31,9 @@
     if (!searchModal || !searchInput || !searchResults) {
       return;
     }
+
+    var prio = searchModal.dataset.searchPriority || '';
+    prioSections = prio.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
 
     setupEventListeners();
   }
@@ -104,6 +108,17 @@
       if (activeFilter) {
         results = results.filter(function (result) {
           return result.item.section === activeFilter;
+        });
+      }
+
+      if (prioSections.length) {
+        results.sort(function (a, b) {
+          var aPri = prioSections.indexOf(a.item.section);
+          var bPri = prioSections.indexOf(b.item.section);
+          var aRank = aPri === -1 ? 999 : aPri;
+          var bRank = bPri === -1 ? 999 : bPri;
+          if (aRank !== bRank) return aRank - bRank;
+          return a.score - b.score;
         });
       }
 
