@@ -67,8 +67,9 @@ referenties, normen-grid) zitten op consumer-niveau.
   image bouwen (digest-pinned base images, Trivy-scan), pushen naar
   GHCR, deployen via [ZAD] met preview-URL per PR.
 
-Container build-recept staat in `Containerfile`. Hugo wordt binnen de
-build geverifieerd met SHA256-checksum tegen de officiële release.
+Container build-recept staat in `container/Containerfile`, samen met de
+runtime `container/nginx.conf`. Hugo wordt binnen de build geverifieerd
+met SHA256-checksum tegen de officiële release.
 
 ## Standaarden en bijdragen
 
