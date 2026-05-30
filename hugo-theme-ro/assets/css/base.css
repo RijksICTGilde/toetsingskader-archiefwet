@@ -129,14 +129,14 @@ a[rel~="external"]::after {
 a[href^="mailto:"]::after {
   content: "";
   display: inline-block;
-  width: 0.85em;
-  height: 0.85em;
+  width: 1em;
+  height: 1em;
   margin-left: 0.25em;
   background-color: currentColor;
   mask-image: url("{{ relURL "images/icons/mail.svg" }}");
   mask-size: contain;
   mask-repeat: no-repeat;
-  vertical-align: -0.1em;
+  vertical-align: -0.15em;
 }
 
 a[rel~="private"]::after {

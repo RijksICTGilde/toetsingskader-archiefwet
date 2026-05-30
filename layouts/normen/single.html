@@ -89,12 +89,10 @@
   </div>
   {{ end }}
 
-  {{ partial "referenties.html" $page }}
-
   {{ .Content }}
 
   {{ with site.Params.feedback }}
-  <aside class="norm-feedback" aria-label="Feedback">
+  <aside id="feedback" class="norm-feedback" aria-label="Feedback">
     <h2>Feedback</h2>
     <p>Heeft u opmerkingen of suggesties over deze norm? We horen het graag.</p>
     {{ with .email }}
@@ -102,6 +100,8 @@
     {{ end }}
   </aside>
   {{ end }}
+
+  {{ partial "referenties.html" $page }}
 
   {{- $pageNav := partial "page-nav.html" . -}}
   {{- $lastmod := partial "lastmod.html" . -}}
