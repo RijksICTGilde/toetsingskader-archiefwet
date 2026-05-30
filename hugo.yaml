@@ -1,5 +1,5 @@
 baseURL: https://frontend-production-toets-hn7.rig.prd1.gn2.quattro.rijksapps.nl/
-languageCode: nl
+locale: nl
 defaultContentLanguage: nl
 title: Toetsingskader Archiefwet
 

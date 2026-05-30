@@ -63,6 +63,7 @@ jobs:
             type=raw,value=main-${{ github.sha }},enable=${{ github.event_name == 'push' }}
 
       - name: Build and push
+        id: docker_build
         uses: docker/build-push-action@v7
         with:
           context: .
@@ -73,6 +74,14 @@ jobs:
             BASE_URL=${{ steps.baseurl.outputs.value }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Trivy security scan
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: '1'
 
   deploy-preview:
     if: github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.user.type != 'Bot'
