@@ -1,0 +1,70 @@
+publiccodeYmlVersion: "0.4.0"
+
+name: Toetsingskader Archiefwet
+url: "https://github.com/RijksICTGilde/toetsingskader-archiefwet"
+
+platforms:
+  - web
+
+categories:
+  - knowledge-management
+  - document-management
+  - compliance-management
+
+developmentStatus: beta
+
+softwareType: "standalone/web"
+
+description:
+  nl:
+    localisedName: "Toetsingskader Archiefwet"
+    shortDescription: >-
+      Hugo-site met het toetsingskader van de Inspectie Overheidsinformatie
+      en Erfgoed voor toezicht op naleving van de Archiefwet 2026.
+    longDescription: |
+      Het Toetsingskader Archiefwet is een openbaar instrument waarmee de
+      Inspectie Overheidsinformatie en Erfgoed (Inspectie OE&E) toezicht
+      houdt op de naleving van de Archiefwet 2026 door
+      overheidsorganisaties. Het kader maakt de open normen uit de wet
+      hanteerbaar door ze te vertalen naar concrete toetsbare criteria,
+      indicatoren en aandachtspunten.
+
+      Deze repository bevat de broncode van de Hugo-site waarop het
+      toetsingskader wordt gepubliceerd. De site is bedoeld voor:
+
+      - overheidsorganisaties die hun informatiehuishouding willen
+        toetsen aan de eisen van de Archiefwet 2026;
+      - inspecteurs en toezichthouders die het kader gebruiken bij
+        inspecties en audits;
+      - beleidsmakers, archivarissen, juristen en andere
+        geïnteresseerden in archief- en informatiewetgeving.
+
+      Het toetsingskader is transparant en in openbare ontwikkeling: de
+      inhoud, de structuur en het tot stand komen van criteria zijn voor
+      iedereen in te zien en bespreekbaar. Op die manier draagt het bij
+      aan voorspelbaar, navolgbaar en uitlegbaar toezicht op het beheer
+      van overheidsinformatie en het cultureel erfgoed dat daaruit
+      voortkomt.
+
+      Deze versie (0.8) is nog in ontwikkeling; de inhoud kan wijzigen
+      tot publicatie van een definitieve versie.
+    features:
+      - Vertaling van open normen uit de Archiefwet 2026 naar concrete toetsbare criteria
+      - Transparant toezichtinstrument voor de Inspectie Overheidsinformatie en Erfgoed
+      - Zelftoets-mogelijkheid voor overheidsorganisaties op hun informatiehuishouding
+      - Openbare en navolgbare totstandkoming van toetsingscriteria
+      - Statische Hugo-site, eenvoudig te hosten en te onderhouden
+
+legal:
+  license: EUPL-1.2
+
+maintenance:
+  type: internal
+  contacts:
+    - name: "RijksICTGilde / Inspectie Overheidsinformatie en Erfgoed"
+      email: "toetsingskader@inspectie-oe.nl"
+
+localisation:
+  localisationReady: true
+  availableLanguages:
+    - nl
