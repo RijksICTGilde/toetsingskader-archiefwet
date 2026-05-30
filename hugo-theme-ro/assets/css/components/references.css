@@ -114,6 +114,12 @@
   transform: translate(var(--ref-offset-x, 0), 0);
 }
 
+/* Tekst-span: block-level zodat de bron-link onder de tekst valt
+   i.p.v. ernaast doorloopt. */
+.ref-tooltip > span {
+  display: block;
+}
+
 .ref-tooltip > a {
   display: inline-block;
   margin-block-start: 0.75rem;
