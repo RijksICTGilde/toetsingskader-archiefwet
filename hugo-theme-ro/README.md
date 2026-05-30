@@ -40,7 +40,8 @@ hugo mod get -u github.com/RijksICTGilde/hugo-theme-ro
 hugo server
 ```
 
-Vereist Hugo ≥ 0.162 (AVIF image-encoding, `locale` config-key).
+Vereist Hugo ≥ 0.158 (`locale` config-key). CI/productie pinnen
+`0.162.1`.
 
 ## Lokale theme-ontwikkeling
 
@@ -75,15 +76,15 @@ hugo server
   niveau (bv. `--color-primary`, `--color-banner`).
 - **JS-bundle**: `base.js` + `toc.js` + Fuse + `search.js` concatenated
   + fingerprinted via `_partials/scripts.html`.
-- **Image processing**: AVIF + WebP via `resources.Resize`, served via
-  `<picture>` met AVIF-source en WebP-fallback in `<img>`.
+- **Image processing**: WebP via `resources.Resize` (q80), als enkele
+  `<img>` in de hero — AVIF gaf bij onze hero te veel kwaliteitsverlies.
 
 ## Components
 
 | Component | Doel |
 |---|---|
 | `.card-grid` (+ `.boxed`, `.clickable`, `.columns-2`) | Responsive grid + opt-in border/click/columns |
-| `.box` (+ `.box--info` enz.) | Niet-klikbare content-container, semantische varianten |
+| `.box` (+ `.box.info`/`.warning`/`.success`/`.danger`) | Niet-klikbare content-container, semantische varianten |
 | `blockquote.callout` (+ `.muted`/`.warning`/`.success`/`.danger`, `.corner-*`) | Info-block met header + content; via `{{< callout titel="..." >}}` shortcode |
 | `.references` (+ inline `.ref-tooltip`) | Footnote-accordeon onderaan + inline tooltip-markers; opt-in via `show_referenties` frontmatter |
 | `.button` (+ `.button-outline`, `.button-ghost`) | Knoppen |
