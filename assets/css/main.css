@@ -3,16 +3,6 @@
   --color-banner: #007bc7;
 }
 
-/* Voetnoten na de norm-cards plaatsen */
-.normen-overzicht {
-  display: flex;
-  flex-direction: column;
-}
-
-.normen-overzicht .footnotes {
-  order: 99;
-}
-
 /* "Over deze site" kolom expliciet breder voor het langste label
    ("Kwetsbaarheid melden"). Theme nav { min-width: 10rem } is voor
    alle navs hetzelfde; deze override forceert breder ipv groeien. */
@@ -67,4 +57,3 @@
 .norm-gerelateerd {
   margin-block: 0.75rem;
 }
-
