@@ -218,7 +218,8 @@
 }
 
 .search-result-snippet mark,
-.search-result-title mark {
+.search-result-title mark,
+#main-content mark[data-search-highlight] {
   background-color: var(--color-highlight);
   color: var(--color-highlight-text);
 }

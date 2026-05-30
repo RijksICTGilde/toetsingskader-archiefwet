@@ -18,6 +18,6 @@ tiles:
     body: 'Bij de norm [Inbeheername en beheer](normen/01-beheer/). Dat is de basis: een document is in beheer wanneer je het duurzaam toegankelijk kunt maken en houden. Vanuit daar verken je de andere normen via het diagram hieronder.'
 ---
 
-{{< infoblokken >}}
+{{< tiles columns="2" aria="Toetsingskader in het kort" >}}
 
 {{< bollendiagram >}}

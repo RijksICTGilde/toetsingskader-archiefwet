@@ -1,5 +1,5 @@
 {{ define "main" }}
-<section>
+<article>
   <h1>{{ .Title }}</h1>
 
   {{ with .Params.intro }}
@@ -23,6 +23,9 @@
 
   {{ .Content }}
 
-  {{ partial "lastmod.html" . }}
-</section>
+  {{- $lastmod := partial "lastmod.html" . -}}
+  {{- if trim $lastmod " \n\t" -}}
+  <footer>{{ $lastmod }}</footer>
+  {{- end -}}
+</article>
 {{ end }}
