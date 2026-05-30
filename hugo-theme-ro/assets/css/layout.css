@@ -94,13 +94,13 @@ article > header:has(.toc-toggle) {
   }
 }
 
-article > footer {
+:where(article, section) > footer {
   margin-top: 2rem;
   padding-top: 1rem;
   border-top: 1px solid var(--color-border);
 }
 
-article > footer p {
+:where(article, section) > footer p {
   color: var(--color-text-muted);
   font-style: italic;
 }

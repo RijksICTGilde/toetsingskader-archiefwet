@@ -1,5 +1,5 @@
 {{ define "main" }}
-<article>
+<section>
   <h1>{{ .Title }}</h1>
 
   {{ with .Params.intro }}
@@ -27,5 +27,5 @@
   {{- if trim $lastmod " \n\t" -}}
   <footer>{{ $lastmod }}</footer>
   {{- end -}}
-</article>
+</section>
 {{ end }}
