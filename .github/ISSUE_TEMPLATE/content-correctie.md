@@ -8,7 +8,7 @@ assignees: ""
 
 ## Pagina
 
-URL of pad in de site (bijv. `/normen/duurzame-toegankelijkheid/`).
+URL of pad in de site (bijv. `/normen/01-beheer/`).
 
 ## Wat klopt niet
 
