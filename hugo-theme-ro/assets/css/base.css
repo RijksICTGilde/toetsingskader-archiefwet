@@ -77,16 +77,18 @@ p {
 
 a {
   color: var(--color-link);
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 
   &:focus-visible {
     outline: 2px solid var(--color-link);
     outline-offset: 2px;
   }
+}
+
+/* Underline weg op surfaces waar context al klikbaarheid signaleert. */
+:where(nav, .card-grid > article, .card, .breadcrumb, .toc, body > footer, .page-nav, .button, .button-outline, .button-ghost) a {
+  text-decoration: none;
 }
 
 a[rel~="external"]::after {
@@ -200,8 +202,3 @@ figcaption {
   margin-block-start: 0.5rem;
 }
 
-/* Inline body-text links onderstrepen: kleur-only is voor lopende
-   tekst onvoldoende discriminatief van omringende tekst. */
-figcaption a {
-  text-decoration: underline;
-}

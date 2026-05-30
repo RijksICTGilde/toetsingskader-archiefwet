@@ -14,35 +14,6 @@
 }
 
 
-/* Home + single-pagina's: laat ze volle grid-rij spannen en centreer */
-main > .home-intro,
-main > .home-cards,
-main > .page-article {
-  grid-column: 1 / -1;
-  margin-inline: auto;
-  padding-inline: 1rem;
-  inline-size: 100%;
-}
-
-main > .home-intro,
-main > .home-cards {
-  max-inline-size: 60rem;
-}
-
-main > .page-article {
-  max-inline-size: 48rem;
-  padding-block: 1.5rem;
-}
-
-.home-intro {
-  padding-block: 1.5rem;
-  font-size: 1.05em;
-}
-
-.home-cards {
-  padding-block-end: 2rem;
-}
-
 /* Navigatiebalk */
 .main-nav {
   color: var(--color-text-inverse);
