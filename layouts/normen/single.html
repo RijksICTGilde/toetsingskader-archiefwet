@@ -3,20 +3,22 @@
 <article class="norm-page markup-content">
   <h1>{{ .Title }}</h1>
 
-  {{/* Generieke .box component uit theme; .box--info = hemelblauw accent
-       (semantische "key info"), zonder modifier = neutraal grijs. */}}
   {{ with .Params.kern }}
-  <div id="kern" class="box box--info">
-    <h2>Kern van de norm</h2>
-    {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
-  </div>
+  <blockquote id="kern" class="callout">
+    <header><span class="title">Kern van de norm</span></header>
+    <div class="content">
+      {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
+    </div>
+  </blockquote>
   {{ end }}
 
   {{ with .Params.toelichting }}
-  <div id="toelichting" class="box">
-    <h2>Toelichting</h2>
-    {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
-  </div>
+  <blockquote id="toelichting" class="callout muted">
+    <header><span class="title">Toelichting</span></header>
+    <div class="content">
+      {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
+    </div>
+  </blockquote>
   {{ end }}
 
   {{/* Synoniemen worden bewust niet meer getoond op de pagina; ze

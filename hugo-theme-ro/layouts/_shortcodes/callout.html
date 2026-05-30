@@ -1,14 +1,21 @@
 {{- /* Callout: gestyleerd info-blok voor leeswijzer, let-op, samenvattingen.
 
   Usage:
-    {{< callout titel="Leeswijzer" >}}
-    body markdown...
-    {{< /callout >}}
+    {{< callout titel="Leeswijzer" >}}body{{< /callout >}}
+    {{< callout titel="Let op" variant="warning" >}}body{{< /callout >}}
 
-  Title is optioneel; zonder verstevigt theme.css automatisch padding.
+  Params:
+    titel    optioneel
+    variant  optioneel — muted | warning | success | danger
+             (default = hemelblauw via .callout base)
 */ -}}
 {{- $titel := .Get "titel" -}}
-<blockquote class="callout">
+{{- $variant := .Get "variant" -}}
+{{- $valid := slice "muted" "warning" "success" "danger" -}}
+{{- if and $variant (not (in $valid $variant)) -}}
+  {{- errorf "callout shortcode: variant %q is niet geldig (gebruik: %s)" $variant (delimit $valid ", ") -}}
+{{- end -}}
+<blockquote class="callout{{ with $variant }} {{ . }}{{ end }}">
   {{- with $titel }}
   <header><span class="title">{{ . }}</span></header>
   {{- end }}

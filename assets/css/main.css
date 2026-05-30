@@ -32,12 +32,6 @@
   }
 }
 
-/* Norm page: kern + toelichting gebruiken theme's .box (+ .box--info).
-   Eerste h2-margin reset zodat de header netjes tegen de paneel-top zit. */
-.norm-page .box h2:first-child {
-  margin-block-start: 0;
-}
-
 /* Norm page: normuitleg */
 .norm-uitleg {
   margin-block: 1rem;

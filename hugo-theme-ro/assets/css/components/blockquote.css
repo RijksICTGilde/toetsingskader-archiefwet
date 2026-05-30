@@ -50,19 +50,37 @@ blockquote.callout {
 
     p {
       margin-bottom: 0.5rem;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
     }
 
     ul,
     ol {
       padding-left: 1.4rem;
     }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
   }
 
   &:not(:has(header)) .content {
     padding-top: 0;
   }
+}
+
+/* Callout-varianten — opt-in via extra utility class.
+   Default callout = hemelblauw (--color-bg-info). */
+blockquote.callout.muted {
+  background-color: var(--color-bg-muted);
+}
+
+blockquote.callout.warning {
+  background-color: light-dark(#fff8e1, #3a3219);
+}
+
+blockquote.callout.success {
+  background-color: light-dark(#dcfce7, #14361f);
+}
+
+blockquote.callout.danger {
+  background-color: light-dark(#fee2e2, #3a1a1a);
 }
