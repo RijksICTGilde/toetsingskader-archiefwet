@@ -1,21 +1,33 @@
+{{- /* Helper: strip markdown-syntax (links, bold, italic, …) tot platte
+       tekst. `markdownify | plainify` is robuuster dan handmatige regex en
+       handelt edge-cases (nested formatting, escaped chars) correct af. */ -}}
 {{- $pages := slice -}}
-{{- range where site.RegularPages "Kind" "page" -}}
-  {{- $text := .Plain | replaceRE `\{ref:\d+\}` "" -}}
-  {{- with .Params.kern }}{{ $text = printf "%s %s" $text . }}{{ end -}}
-  {{- with .Params.toelichting }}{{ $text = printf "%s %s" $text . }}{{ end -}}
+{{- $allPages := site.RegularPages | append site.Home -}}
+{{- range $allPages -}}
+  {{- $text := .Plain -}}
+  {{- with .Params.kern }}{{ $text = printf "%s %s" $text (. | markdownify | plainify) }}{{ end -}}
+  {{- with .Params.toelichting }}{{ $text = printf "%s %s" $text (. | markdownify | plainify) }}{{ end -}}
   {{- $synoniemen := "" -}}
   {{- with .Params.synoniemen -}}
-    {{- $synoniemen = delimit . " " | replaceRE `\{ref:\d+\}` "" -}}
+    {{- $synoniemen = delimit . " " | markdownify | plainify -}}
     {{- $text = printf "%s %s" $text $synoniemen -}}
   {{- end -}}
   {{- with .Params.normuitleg -}}
     {{- range . -}}
-      {{- with .titel }}{{ $text = printf "%s %s" $text . }}{{ end -}}
-      {{- range .voorschriften }}{{ with .tekst }}{{ $text = printf "%s %s" $text . }}{{ end }}{{ end -}}
+      {{- with .titel }}{{ $text = printf "%s %s" $text (. | markdownify | plainify) }}{{ end -}}
+      {{- range .voorschriften }}{{ with .tekst }}{{ $text = printf "%s %s" $text (. | markdownify | plainify) }}{{ end }}{{ end -}}
     {{- end -}}
   {{- end -}}
+  {{- $text = $text | replaceRE `\{ref:\d+\}` "" -}}
+  {{- $synoniemen = $synoniemen | replaceRE `\{ref:\d+\}` "" -}}
   {{- $title := .Title -}}
+  {{- /* Section voor top-level pages: home → "home", overige top-level
+         (over.md, …) → file-basename zodat priority_sections per pagina kan. */ -}}
   {{- $section := .Section -}}
+  {{- if not $section -}}
+    {{- if eq .Kind "home" -}}{{- $section = "home" -}}
+    {{- else -}}{{- $section = .File.BaseFileName -}}{{- end -}}
+  {{- end -}}
   {{- if and .Params.norm_id .Params.norm_titel -}}
     {{- $title = printf "Norm %s: %s" (string .Params.norm_id) .Params.norm_titel -}}
   {{- end -}}
@@ -24,7 +36,7 @@
     "url" .RelPermalink
     "section" $section
     "synoniemen" $synoniemen
-    "content" ($text | replaceRE `\{ref:\d+\}` "")
+    "content" $text
   ) -}}
 {{- end -}}
 {{- $pages | jsonify -}}

@@ -11,36 +11,52 @@
   overflow: visible;
 }
 
-/* Multiply zorgt dat overlappende bollen op natuurlijke wijze verdonkeren,
-   zoals in de oorspronkelijke afbeelding (waterverf-effect).
-   Labels staan in een aparte groep zónder blend, zodat tekst nooit door
-   een latere bol wordt overschilderd. */
+/* Blend-mode laat overlappende bollen natuurlijk samenvloeien.
+   - Light bg + multiply: donker × licht = behoudt cirkelkleur, overlap iets donkerder
+   - Dark bg + screen: licht ⊕ donker = behoudt cirkelkleur, overlap iets lichter
+   mix-blend-mode kent geen light-dark() helper, dus expliciete selectors. */
 .bd-cluster,
 .bd-future {
   mix-blend-mode: multiply;
 }
 
-/* === Bollen (cirkels) === */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .bd-cluster,
+  :root:not([data-theme="light"]) .bd-future {
+    mix-blend-mode: screen;
+  }
+}
+
+:root[data-theme="dark"] .bd-cluster,
+:root[data-theme="dark"] .bd-future {
+  mix-blend-mode: screen;
+}
+
+/* === Bollen (cirkels) === Dezelfde brightness in beide modi: screen op
+   donker bg geeft hetzelfde visuele effect als multiply op licht bg,
+   mits source-kleuren licht genoeg zijn. */
 .bd-bubble circle {
-  fill: var(--rijkshuisstijl-color-hemelblauw-200, #8cc3e6);
-  stroke: var(--rijkshuisstijl-color-hemelblauw-300, #66afdd);
+  fill: #8cc3e6;
+  stroke: #66afdd;
   stroke-width: 1;
   transition: fill 0.18s ease, stroke 0.18s ease, stroke-width 0.18s ease;
 }
 
 .bd-main circle {
-  fill: var(--rijkshuisstijl-color-hemelblauw-500, #007bc7);
-  stroke: var(--rijkshuisstijl-color-donkerblauw-500, #01689b);
+  fill: #007bc7;
+  stroke: light-dark(#01689b, #4ba3d8);
   stroke-width: 1.5;
 }
 
 .bd-bridge circle {
-  fill: var(--rijkshuisstijl-color-hemelblauw-300, #66afdd);
+  fill: #66afdd;
 }
 
+/* Outlined cirkels (toekomst-cluster): in light mode hollow met witte fill,
+   in dark mode transparant zodat alleen de stroke leesbaar blijft tegen donker bg. */
 .bd-bubble-outlined {
-  fill: #ffffff;
-  stroke: var(--rijkshuisstijl-color-hemelblauw-400, #409cd5);
+  fill: light-dark(#ffffff, transparent);
+  stroke: light-dark(#409cd5, #8cc3e6);
   stroke-width: 1.5;
 }
 
@@ -61,10 +77,6 @@
   font-weight: 500;
 }
 
-.bd-label-bridge {
-  font-weight: 600;
-}
-
 .bd-label-main {
   fill: #ffffff;
   font-size: 22px;
@@ -72,8 +84,10 @@
   letter-spacing: 0.01em;
 }
 
+/* Outlined cluster (italic future-labels) staat NIET op een cirkel — direct
+   op body bg. In dark mode dus licht grijs nodig (cool-gray-300 ipv 700). */
 .bd-label-outlined {
-  fill: var(--rijkshuisstijl-color-cool-gray-700, #334155);
+  fill: light-dark(#334155, #cbd5e1);
   font-size: 14px;
   font-style: italic;
 }
@@ -86,15 +100,11 @@
 }
 
 .bd-bubble:hover circle {
-  fill: var(--rijkshuisstijl-color-hemelblauw-400, #409cd5);
+  fill: #409cd5;
 }
 
 .bd-main:hover circle {
-  fill: var(--rijkshuisstijl-color-donkerblauw-500, #01689b);
-}
-
-.bd-bridge:hover circle {
-  fill: var(--rijkshuisstijl-color-hemelblauw-500, #007bc7);
+  fill: #01689b;
 }
 
 .bd-bubble:focus-visible circle {
@@ -102,14 +112,6 @@
   stroke-width: 4;
 }
 
-/* === Caption === */
-.bollendiagram-caption {
-  text-align: center;
-  font-size: 0.9rem;
-  color: var(--mox-color-text-subtle, #475569);
-  margin-block-start: var(--mox-space-sm, 0.5rem);
-  font-style: italic;
-}
 
 @media (max-width: 640px) {
   .bollendiagram-wrapper {
