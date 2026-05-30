@@ -13,51 +13,7 @@
   order: 99;
 }
 
-
-/* Navigatiebalk */
-.main-nav {
-  color: var(--color-text-inverse);
-}
-
-.main-nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-inline: auto;
-  max-inline-size: var(--content-max-width));
-}
-
-/* Het nieuwe thema centreert .main-nav ul met margin-inline: auto en
-   max-inline-size — wij hebben al een centrale .main-nav-inner wrapper,
-   dus reset die regels op onze nested ul. */
-.main-nav-inner > ul {
-  margin-inline: 0;
-  max-inline-size: none;
-}
-
-.footer-payoff {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.25rem;
-  line-height: 1.4;
-  max-inline-size: 50ch;
-  margin: 0;
-  border: none;
-  padding: 0;
-}
-
-.footer-links {
-  gap: 1.5rem;
-}
-
-/* footer nav li::before — verwijderd: moza-site theme heeft eigen chevron via
-   border-rotate in footer.css; consumer's tekst-chevron veroorzaakte dubbele >>. */
-
-.footer-links > nav:first-child {
-  flex: 1 1 50%;
-}
-
-/* Inspectie-OE footer-layout: tagline minder breed (max ~50ch) zodat
+/* Inspectie-OE footer-layout: tagline minder breed (max ~40ch) zodat
    het niet ongemakkelijk onder de nav-kolommen schuift. "Zie ook"
    compacter omdat het korte service-links zijn; "Over deze site"
    iets breder voor "Kwetsbaarheid melden". */
@@ -76,126 +32,10 @@
   }
 }
 
-/* Sidebar: bevat normen-lijst en (op normpagina's) de ToC */
-.sidebar {
-  margin-block: 1rem;
-}
-
-.side-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.side-nav li {
-  margin-block: 0.25rem;
-}
-
-.side-nav a[aria-current="page"] {
-  font-weight: 700;
-}
-
-.side-nav .norm-toc {
-  list-style: none;
-  padding-inline-start: 1rem;
-  margin: 0.25rem 0 0.75rem;
-}
-
-/* Genest niveau extra inspringen zodat sub-items duidelijk onder hun
-   parent staan (bijv. Besturing/Feitelijk beheer onder Normuitleg). */
-.side-nav .norm-toc ul {
-  list-style: none;
-  padding-inline-start: 1rem;
-  margin: 0.25rem 0;
-}
-
-.side-nav .norm-toc li {
-  margin-block: 0.25rem;
-}
-
-.side-nav .norm-toc ul li {
-  font-size: 0.95em;
-  color: var(--color-text-muted);
-}
-
-/* Sticky sidebar op desktop - main is door MOx al 2-koloms grid (auto 1fr) */
-@media (min-width: 800px) {
-  main > .sidebar {
-    position: sticky;
-    top: 1rem;
-    align-self: start;
-    max-block-size: calc(100dvh - 2 * 1rem);
-    overflow-y: auto;
-    padding-inline: 1rem;
-  }
-}
-
-/* Header search trigger - plat, lijnt uit met nav-links. */
-.main-nav .search-trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 1rem;
-  margin-inline-start: auto;
-  background: transparent;
-  color: var(--color-text-inverse);
-  border: none;
-  cursor: pointer;
-  font: 600 0.9375rem/1.4 var(--font-sans);
-}
-
-.main-nav .search-trigger:hover,
-.main-nav .search-trigger:focus-visible {
-  background: rgba(255, 255, 255, 0.12);
-  outline: none;
-}
-
-.main-nav .search-trigger kbd {
-  font-family: ui-monospace, monospace;
-  font-size: 0.7em;
-  padding: 0.1em 0.4em;
-  border: 1px solid currentColor;
-  border-radius: 3px;
-  opacity: 0.75;
-  line-height: 1;
-}
-
 #main-content mark[data-search-highlight] {
   background-color: var(--color-highlight);
   color: var(--color-highlight-text);
 }
-
-/* Sectie (accordion) — gebruikt het native <details>/<summary> component
-   uit hugo-theme-ro. We voegen alleen toe wat nodig is om de titel als
-   donkerblauwe heading te tonen en de content netjes te padden. */
-.sectie {
-  margin-block: 1rem;
-}
-
-.sectie > summary {
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--color-primary);
-  padding: 1rem 1.5rem;
-}
-
-.sectie[open] > summary {
-  border-block-end: 1px solid var(--color-border);
-}
-
-.sectie-content {
-  padding: 1rem 1.5rem;
-}
-
-.sectie-content > *:first-child {
-  margin-block-start: 0;
-}
-
-.sectie-content > *:last-child {
-  margin-block-end: 0;
-}
-
-/* Toetsingskader-specifieke styling */
 
 /* Norm page: kern + toelichting gebruiken theme's .box (+ .box--info).
    Eerste h2-margin reset zodat de header netjes tegen de paneel-top zit. */
@@ -248,59 +88,6 @@
   margin-block: 0.75rem;
 }
 
-/* Norm card badge */
-.norm-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background-color: var(--color-primary);
-  color: var(--color-text-inverse);
-  font-weight: 700;
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-.norm-card-themed {
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-}
-
-.norm-card-themed header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-block-end: 0;
-}
-
-/* Theme zet card h2 op title-2xl wat te groot is voor de smalle card-kolom. */
-.norm-card-themed header h2 {
-  margin: 0;
-  font-size: 1.15rem;
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-.norm-card-themed header h2 a {
-  color: var(--color-primary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.norm-card-themed header h2 a:hover,
-.norm-card-themed header h2 a:focus-visible {
-  color: #005e9a;
-  text-decoration-thickness: 2px;
-}
-
-.norm-card-themed > p {
-  margin: 0;
-  line-height: 1.5;
-  color: var(--color-text);
-}
-
 /* Leeswijzer info-blok */
 .leeswijzer {
   background-color: var(--color-bg-info);
@@ -314,8 +101,8 @@
   margin-block-start: 0;
 }
 
-/* Referenties - gestippelde underline op woord vóór {ref:N};
-   hover/focus toont een rustige tooltip met de uitleg en optionele bron. */
+/* Referenties: gestippelde underline op woord vóór {ref:N}; hover/focus
+   toont rustige tooltip met uitleg + optionele bron. */
 .ref-wrapper {
   position: relative;
   display: inline;
@@ -357,8 +144,8 @@
   transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s;
 }
 
-/* Onzichtbare "bridge" zodat de muis van de term naar de tooltip
-   kan bewegen zonder dat deze sluit */
+/* Onzichtbare "bridge" zodat de muis van term naar tooltip kan bewegen
+   zonder dat deze sluit. */
 .ref-tooltip::before {
   content: "";
   position: absolute;
@@ -386,7 +173,7 @@
   color: var(--color-primary);
 }
 
-/* Referenties-accordeon blijft als overzicht onderaan */
+/* Referenties-accordeon als overzicht onderaan */
 .referenties {
   margin-block-start: 1rem;
   padding-block-start: 1rem;
@@ -435,7 +222,6 @@
   margin-block-end: 0.25rem;
 }
 
-/* Highlight voor de aangeklikte referentie wanneer de accordeon opent */
 .referenties li:target {
   background-color: var(--color-bg-info);
   padding: 0.25em 0.5em;

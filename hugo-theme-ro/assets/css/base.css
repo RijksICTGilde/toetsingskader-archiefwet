@@ -99,6 +99,20 @@ a {
   text-decoration: none;
 }
 
+/* In dezelfde surfaces: kleur erft van parent (footer wit, nav wit op
+   banner, etc.) — body-text hover color-shift uitschakelen. Underline
+   verschijnt nog op hover via theme-defaults voor a:hover. */
+:where(nav, .breadcrumb, .toc, body > footer, .page-nav, .button, .button-outline, .button-ghost) a,
+:where(.card-grid > article, .card) header a {
+  color: inherit;
+}
+
+:where(nav, .breadcrumb, .toc, body > footer, .page-nav, .button, .button-outline, .button-ghost) a:hover,
+:where(.card-grid > article, .card) header a:hover {
+  color: inherit;
+  text-decoration: underline;
+}
+
 a[rel~="external"]::after {
   content: "";
   display: inline-block;
