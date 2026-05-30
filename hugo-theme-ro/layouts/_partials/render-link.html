@@ -15,11 +15,10 @@
 {{- $u := urls.Parse .href -}}
 {{- $isExternal := and $u.IsAbs (hasPrefix $u.Scheme "http") -}}
 {{- $isPrivate := or .private (and $isExternal (or (strings.Contains $u.Host "samenwerkruimten.nl") (and (strings.Contains $u.Host "digilab.overheid.nl") (strings.Contains $u.Path "/chat")))) -}}
-{{- $class := .class -}}
 {{- if $isPrivate -}}
-<a href="{{ .href }}"{{ with $class }} class="{{ . }}"{{ end }}{{ with .title }} title="{{ . }}"{{ end }} target="_blank" rel="external private noopener noreferrer">{{ .text }}<span class="visually-hidden"> (besloten omgeving)</span></a>
+<a href="{{ .href }}"{{ with .title }} title="{{ . }}"{{ end }} target="_blank" rel="external private noopener noreferrer">{{ .text }}<span class="visually-hidden"> (besloten omgeving)</span></a>
 {{- else if $isExternal -}}
-<a href="{{ .href }}"{{ with $class }} class="{{ . }}"{{ end }}{{ with .title }} title="{{ . }}"{{ end }} target="_blank" rel="external noopener noreferrer">{{ .text }}</a>
+<a href="{{ .href }}"{{ with .title }} title="{{ . }}"{{ end }} target="_blank" rel="external noopener noreferrer">{{ .text }}</a>
 {{- else -}}
-<a href="{{ .href }}"{{ with $class }} class="{{ . }}"{{ end }}{{ with .title }} title="{{ . }}"{{ end }}>{{ .text }}</a>
+<a href="{{ .href }}"{{ with .title }} title="{{ . }}"{{ end }}>{{ .text }}</a>
 {{- end -}}
