@@ -16,7 +16,13 @@
     {{- end -}}
   {{- end -}}
   {{- $title := .Title -}}
+  {{- /* Section voor top-level pages: home → "home", overige top-level
+         (over.md, …) → file-basename zodat priority_sections per pagina kan. */ -}}
   {{- $section := .Section -}}
+  {{- if not $section -}}
+    {{- if eq .Kind "home" -}}{{- $section = "home" -}}
+    {{- else -}}{{- $section = .File.BaseFileName -}}{{- end -}}
+  {{- end -}}
   {{- if and .Params.norm_id .Params.norm_titel -}}
     {{- $title = printf "Norm %s: %s" (string .Params.norm_id) .Params.norm_titel -}}
   {{- end -}}

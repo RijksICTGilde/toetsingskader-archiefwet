@@ -31,6 +31,7 @@ params:
     # priority_sections: hits in deze sections komen bovenaan, in deze volgorde
     priority_sections:
       - normen
+      - over
   tagline: "Normen voor duurzame toegankelijkheid"
   page_banner:
     type: warning
