@@ -1,43 +1,73 @@
-# Toetsingskader Archiefwet — site + theme
+# Toetsingskader Archiefwet
 
-Werkbranch waarop **consumer-site + theme-code gelijktijdig** ontwikkeld
-worden. De theme wordt straks geëxtraheerd naar de canonical
-[`RijksICTGilde/hugo-theme-RO`](https://github.com/RijksICTGilde/hugo-theme-RO);
-deze branch fuseert nu beide.
+Website met het toetsingskader waarmee de **Inspectie Overheidsinformatie
+en Erfgoed** toeziet op de naleving van de Archiefwet 2026 door
+overheidsorganisaties. Statische site, gebouwd met [Hugo].
+
+## Vereisten
+
+- [Hugo Extended] ≥ 0.158 (CI/productie pinnen 0.162.1)
+- [Go] ≥ 1.26.3 (voor Hugo Modules)
+- [just] voor de dev-recipes
+- [pre-commit] voor lokale hooks (optioneel, draait ook in CI)
+
+## Lokaal draaien
+
+```bash
+git clone git@github.com:RijksICTGilde/toetsingskader-archiefwet.git
+cd toetsingskader-archiefwet
+just            # toont alle recipes
+just serve      # dev-server op http://localhost:1313
+just build      # productie-build naar public/
+```
+
+Eerste keer? Installeer ook pre-commit:
+
+```bash
+pip install pre-commit
+pre-commit install
+```
 
 ## Structuur
 
-- **Branch-root**: consumer-config (`hugo.yaml`, `content/`,
-  `layouts/`, etc.) — eindstaat voor `main` van
-  `toetsingskader-archiefwet`.
-- **`hugo-theme-ro/`**: theme-code — module-pad
-  `github.com/RijksICTGilde/hugo-theme-ro`, in lokaal gebruik via
+Het project bundelt **content + theme** in één repo:
+
+- **Project-root** — consumer-content: `hugo.yaml`, `content/` (normen,
+  over), `layouts/` (project-specifieke overrides), `assets/css/main.css`,
+  `static/`.
+- **`hugo-theme-ro/`** — herbruikbaar Rijksoverheid-thema: layouts,
+  components, design tokens, JS. Modulepad
+  `github.com/RijksICTGilde/hugo-theme-ro`, lokaal in gebruik via
   `go.mod`'s `replace`-directive.
 
-## Lokale dev
+Het thema is generiek; project-specifieke schemata (normen-frontmatter,
+referenties, normen-grid) zitten op consumer-niveau.
 
-`go.mod`'s `replace`-directive wijst het theme-module naar
-`./hugo-theme-ro` voor alle builds op deze branch — geen env-vars of
-direnv nodig.
+## CI/CD
 
-```bash
-just            # toont alle recipes
-just serve      # dev-server (hugo server --environment development)
-just build      # productie-build
-```
+- **`.github/workflows/test.yml`** — bij elke PR: pre-commit-hooks,
+  Hugo-build en [htmltest] link-validatie.
+- **`.github/workflows/zad.yml`** — bij PR + push naar `main`: container
+  image bouwen (digest-pinned base images, Trivy-scan), pushen naar
+  GHCR, deployen via [ZAD] met preview-URL per PR.
 
-## CI
+Container build-recept staat in `Containerfile`. Hugo wordt binnen de
+build geverifieerd met SHA256-checksum tegen de officiële release.
 
-- **`.github/workflows/test.yml`**: pre-commit-hooks + Hugo-build +
-  htmltest link-validatie op PRs.
-- **`.github/workflows/zad.yml`**: container-image bouwen + ZAD-deploy
-  (dual-tag, Trivy-scan).
+## Bijdragen
 
-## Eindspel
+1. Branch + PR.
+2. Pre-commit + tests groen in CI.
+3. Review → merge naar `main` → automatische deploy.
 
-1. Theme + consumer stable, team-review akkoord.
-2. **Track C** (extractie): `hugo-theme-ro/*` →
-   `RijksICTGilde/hugo-theme-RO`, tag `v0.1.0`.
-3. Op deze branch: `git rm -r hugo-theme-ro/`, vervang `replace` door
-   pin op `v0.1.0`.
-4. Merge naar `main`; PR bevat dan alleen consumer-migratie.
+## Licentie
+
+[EUPL v1.2](LICENSE)
+
+[Hugo]: https://gohugo.io
+[Hugo Extended]: https://github.com/gohugoio/hugo/releases
+[Go]: https://go.dev
+[just]: https://github.com/casey/just
+[pre-commit]: https://pre-commit.com
+[htmltest]: https://github.com/wjdp/htmltest
+[ZAD]: https://github.com/RijksICTGilde/zad-actions
