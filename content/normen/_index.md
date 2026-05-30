@@ -8,8 +8,11 @@ show_lastmod: true
 cascade:
   show_lastmod: true
   show_referenties: true
-intro: "De Inspectie toetst of een document in beheer is, zodat het duurzaam toegankelijk gemaakt en gehouden kan worden. Een document is in ieder geval:"
 ---
+
+De Inspectie toetst of een document in beheer is, zodat het duurzaam toegankelijk gemaakt en gehouden kan worden. Een document is in ieder geval:
+
+{{< normen-grid >}}
 
 {{< callout titel="Leeswijzer" >}}
 Per normpagina vindt u de volgende onderdelen:

@@ -122,6 +122,14 @@
         });
       }
 
+      // Filter fuzzy weg als er exacte (of bijna-exacte) matches zijn.
+      // Score 0 = perfect match; ≤ 0.05 telt als 'exact genoeg' voor de
+      // gebruiker; daarboven is fuzzy ruis als er al goede hits zijn.
+      var hasExact = results.some(function (r) { return r.score <= 0.05; });
+      if (hasExact) {
+        results = results.filter(function (r) { return r.score <= 0.05; });
+      }
+
       displayResults(results.slice(0, 10), query);
     });
   }
