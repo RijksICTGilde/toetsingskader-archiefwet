@@ -154,7 +154,7 @@ p + ol {
 
 ul,
 ol {
-  padding-left: 1.1rem;
+  padding-left: 1.75rem;
   margin-top: 0;
   margin-bottom: 1.5rem;
   list-style: disc;
@@ -162,6 +162,9 @@ ol {
 
 ol {
   list-style: decimal;
+  /* Wat extra padding zodat 2-digit nummer-markers binnen het content-blok
+     blijven; bullets (ul) hebben dit niet nodig. */
+  padding-left: 2.25rem;
 }
 
 li {
