@@ -86,8 +86,11 @@ a {
   }
 }
 
-/* Underline weg op surfaces waar context al klikbaarheid signaleert. */
-:where(nav, .card-grid > article, .card, .breadcrumb, .toc, body > footer, .page-nav, .button, .button-outline, .button-ghost) a {
+/* Underline weg op surfaces waar context al klikbaarheid signaleert.
+   Voor cards alleen het title-link in <header> uitsluiten — inline body-
+   text links binnen de card-paragraaf blijven onderstreept. */
+:where(nav, .breadcrumb, .toc, body > footer, .page-nav, .button, .button-outline, .button-ghost) a,
+:where(.card-grid > article, .card) header a {
   text-decoration: none;
 }
 
