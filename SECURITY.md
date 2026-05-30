@@ -44,12 +44,3 @@ Wij vragen u:
 - geen aanvallen uit te voeren op fysieke beveiliging, social engineering, (D)DoS, spam of applicaties van derden.
 
 Bij melding te goeder trouw conform deze spelregels zullen wij geen juridische stappen ondernemen.
-
-## PGP
-
-Een PGP-sleutel voor versleutelde meldingen is op dit moment nog niet beschikbaar. Wanneer u versleutelde communicatie wenst, kunt u dat aangeven in uw eerste bericht; wij maken dan afspraken voor een veilig kanaal.
-
-<!--
-PGP-key placeholder — vul hier op termijn de fingerprint en publieke sleutel
-(of een link naar de sleutelserver) in zodra deze beschikbaar is.
--->

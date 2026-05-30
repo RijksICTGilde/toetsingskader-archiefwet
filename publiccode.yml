@@ -2,8 +2,6 @@ publiccodeYmlVersion: "0.4.0"
 
 name: Toetsingskader Archiefwet
 url: "https://github.com/RijksICTGilde/toetsingskader-archiefwet"
-softwareVersion: "0.8.0"
-releaseDate: "2026-05-30"
 
 platforms:
   - web
