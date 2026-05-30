@@ -1,10 +1,12 @@
-FROM golang:1.26-alpine AS build
-RUN apk add --no-cache git hugo
+FROM golang:1.26.3-alpine AS build
+ARG HUGO_VERSION=0.162.1
+RUN apk add --no-cache git wget tar \
+  && wget -qO- "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" \
+     | tar -xz -C /usr/local/bin hugo
 WORKDIR /src
 # Copy alles eerst: go.mod's replace-directive verwijst naar lokale
 # ./hugo-theme-ro/, dus die directory moet aanwezig zijn voordat Hugo
-# de modules resolved. Eerdere `hugo mod get` op alleen go.mod/go.sum
-# faalde de replace en pakte de oude canonical theme via network.
+# de modules resolved.
 COPY . .
 ARG BASE_URL=
 RUN if [ -n "$BASE_URL" ]; then \
