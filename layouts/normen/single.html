@@ -13,7 +13,7 @@
   {{ end }}
 
   {{ with .Params.toelichting }}
-  <blockquote id="toelichting" class="callout muted">
+  <blockquote id="toelichting" class="callout muted corner-bottom-right">
     <header><span class="title">Toelichting</span></header>
     <div class="content">
       {{ partial "reftext.html" (dict "tekst" . "page" $page) }}

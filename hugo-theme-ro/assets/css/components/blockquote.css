@@ -22,6 +22,16 @@ blockquote.callout {
   border-radius: var(--radius-upper-right);
   background-color: var(--color-bg-info);
 
+  &.corner-bottom-right {
+    border-radius: var(--radius-bottom-right);
+  }
+  &.corner-bottom-left {
+    border-radius: var(--radius-bottom-left);
+  }
+  &.corner-upper-left {
+    border-radius: var(--radius-upper-left);
+  }
+
   header {
     display: flex;
     align-items: center;

@@ -17,7 +17,7 @@
   {{- $textEsc := $ref.tekst | htmlEscape -}}
   {{- $linkHTML := "" -}}
   {{- with $ref.url -}}
-    {{- $linkHTML = printf "<a href=\"%s\" class=\"ref-tooltip__link\" target=\"_blank\" rel=\"external noopener noreferrer\">Bekijk bron</a>" . -}}
+    {{- $linkHTML = partial "render-link.html" (dict "href" . "text" "Bekijk bron" "class" "ref-tooltip__link") -}}
   {{- end -}}
   {{- $tooltip := printf "<span class=\"ref-tooltip\" role=\"note\"><span class=\"ref-tooltip__text\">%s</span>%s</span>" $textEsc $linkHTML -}}
   {{- $pattern := printf "([^\\s<>]*)(\\s*)\\{ref:%d\\}" $num -}}
