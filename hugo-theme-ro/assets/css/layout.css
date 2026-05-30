@@ -18,7 +18,7 @@ body {
   position: absolute;
   top: -50px;
   left: 0;
-  background: var(--color-rijks-blauw);
+  background: var(--color-rijksblauw);
   color: var(--color-text-inverse);
   padding: 0.5rem 1rem;
   z-index: 100;

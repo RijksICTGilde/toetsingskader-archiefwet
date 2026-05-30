@@ -1,5 +1,6 @@
 :root {
   --color-primary: light-dark(#007bc7, #80d5fc);
+  --color-banner: #007bc7;
 }
 
 /* Voetnoten na de norm-cards plaatsen */

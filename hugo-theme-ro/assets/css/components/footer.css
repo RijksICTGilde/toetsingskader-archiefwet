@@ -5,8 +5,8 @@ body > footer {
   max-width: var(--content-max-width);
   margin: 0 auto;
   padding: 2rem 1rem 1.5rem;
-  background-color: var(--color-primary);
-  box-shadow: 0 0 0 100vmax var(--color-primary);
+  background-color: var(--color-banner);
+  box-shadow: 0 0 0 100vmax var(--color-banner);
   clip-path: inset(0 -100vmax);
   color: var(--color-text-inverse);
 

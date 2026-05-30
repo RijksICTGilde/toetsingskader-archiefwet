@@ -19,8 +19,8 @@ button,
 
   &:hover,
   &:focus-visible {
-    background-color: var(--color-rijks-blauw);
-    border-color: var(--color-rijks-blauw);
+    background-color: var(--color-rijksblauw);
+    border-color: var(--color-rijksblauw);
     color: var(--color-text-inverse);
     outline: none;
   }
