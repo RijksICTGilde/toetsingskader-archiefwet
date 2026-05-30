@@ -1,61 +1,57 @@
 # hugo-theme-RO
 
-Hugo-thema voor Rijksoverheid-sites, gebaseerd op het [NLDD design system](https://github.com/MinBZK/storybook).
+Hugo-thema voor Rijksoverheid-sites, gebaseerd op het
+[moza-site](https://github.com/RijksICTGilde/moza-site) design system.
+Levert layout, components en design-tokens; consumer-sites brengen hun
+eigen content + project-specifieke styling mee.
 
-## Snelstart voor een nieuwe site
+## Snelstart
 
-Maak een minimale `hugo.yaml`:
+`hugo.yaml`:
 
 ```yaml
 baseURL: https://example.rijksoverheid.nl/
 title: Mijn RO-site
-languageCode: nl
+locale: nl
 defaultContentLanguage: nl
+enableGitInfo: true
 
 module:
   imports:
     - path: github.com/RijksICTGilde/hugo-theme-ro
 
-params:
-  tagline: "Voor inwoners en bedrijven"
-  footer:
-    tagline: "Eén Overheid. Voor iedereen!"
-    columns:
-      primary_label: "Zie ook"
-      secondary_label: "Over deze site"
-
 menus:
   main:
     - { name: Home, pageRef: /, weight: 1 }
-  footer-primary:
-    - { name: Documentatie, pageRef: /docs, weight: 1 }
-  footer-secondary:
-    - { name: Privacy, pageRef: /privacy, weight: 1 }
+
+params:
+  tagline: "Korte tagline onder de banner"
+  footer:
+    tagline: "Eén Overheid. Voor iedereen!"
+  search:
+    enable: true
+    priority_sections: []   # optioneel: ['blogs', 'docs'] etc.
 ```
 
-Pull het thema en bouw:
+Bouw:
 
 ```bash
 hugo mod get -u github.com/RijksICTGilde/hugo-theme-ro
 hugo server
 ```
 
-## Lokale theme-development tegen een echte consumer
+Vereist Hugo ≥ 0.162 (AVIF image-encoding, `locale` config-key).
 
-Tijdens v0.1 dev leeft het thema als subdirectory binnen
-`toetsingskader-archiefwet` op branch `hugo-theme-rijksoverheid`.
-Zie de README op die branch-root voor instructies.
+## Lokale theme-ontwikkeling
 
-Wanneer het thema is geëxtraheerd naar de eigen `hugo-theme-RO` repo
-en je wil lokaal tegen een consumer werken:
+Voor parallelle ontwikkeling aan thema + site:
 
 ```bash
 # In je consumer-project:
 git clone git@github.com:RijksICTGilde/hugo-theme-RO.git ../hugo-theme-RO-local
 ```
 
-In `config/development/module.yaml` (let op: pas pad aan op je systeem
-— Hugo accepteert geen relatieve paden vanaf 0.159):
+In `config/development/module.yaml` (absolute pad sinds Hugo 0.159):
 
 ```yaml
 replacements:
@@ -69,83 +65,61 @@ export HUGO_MODULE_REPLACEMENTS="github.com/RijksICTGilde/hugo-theme-ro -> $PWD/
 hugo server
 ```
 
-`hugo server` (default `--environment development`) gebruikt de
-replacement; `hugo --environment production` valt terug op de gepubliceerde
-module-versie.
-
 ## Architectuur
 
-- **NLDD CSS gevendor'd uit npm** naar `assets/css/nldd/`. Hugo Pipes
-  (`resources.Concat`) bundelt het samen met theme-CSS in één
-  gefingerprinted stylesheet via `_partials/head.html`.
-- **Markdown-prose** wordt in templates gewrapt in `<nldd-rich-text>`.
-  Geen Lit/JS-runtime nodig; we gebruiken alleen NLDD's CSS via
-  element-selectors. Mermaid is een opt-in voor consumers die zelf
-  mermaid.js laden.
-- **Layouts/components** geënt op moza-site's UX, hertaald naar
-  NLDD-tokens (`--primitives-*`, `--semantics-*`, `--components-*`).
-
-Volledige ontwerpdocumentatie:
-[hugo-theme-RO/docs/superpowers/specs/2026-05-27-hugo-theme-ro-design.md](https://github.com/RijksICTGilde/hugo-theme-RO/blob/main/docs/superpowers/specs/2026-05-27-hugo-theme-ro-design.md)
+- **CSS-pipeline**: tokens.css → fonts.css → base.css → layout.css →
+  `components/*.css` glob → consumer's `assets/css/*.css` (excl.
+  theme-namen). Eén gefingerprinte stylesheet via `_partials/head.html`.
+- **Design tokens** in `assets/css/tokens.css` — `--color-*`, `--font-*`,
+  `--content-max-width`, `--radius-*`. Consumers overrulen op `:root`-
+  niveau (bv. `--color-primary`, `--color-banner`).
+- **JS-bundle**: `base.js` + `toc.js` + Fuse + `search.js` concatenated
+  + fingerprinted via `_partials/scripts.html`.
+- **Image processing**: AVIF + WebP via `resources.Resize`, served via
+  `<picture>` met AVIF-source en WebP-fallback in `<img>`.
 
 ## Components
 
-Voor visuele documentatie van alle components, start Storybook:
-
-```bash
-npm install
-npm run storybook   # opens at http://localhost:6006
-```
-
-Beschikbare components in v0.1:
-
 | Component | Doel |
 |---|---|
-| `.card` (+`--accent-border`, `--subtle`) | Klikbare tegel in een raster |
-| `.card-grid` | Responsive grid wrapper |
-| `.box` (+`--subtle`, `--accent`) | Niet-klikbare content-container |
-| `.callout` (+`--info`/`--warning`/`--success`/`--danger`) | Type-meaning info-block |
-| `.button` (+`--outline`, `--ghost`, `--link`) | Knoppen |
-| `.header`, `.footer` | Site-shell |
-| `.breadcrumbs` | Kruimelpad |
-| `.skip-link` | A11y skip-nav |
-| Utilities | `.visually-hidden`, `.section-heading--underline` |
+| `.card-grid` (+ `.boxed`, `.clickable`, `.columns-2`) | Responsive grid + opt-in border/click/columns |
+| `.box` (+ `.box--info` enz.) | Niet-klikbare content-container, semantische varianten |
+| `blockquote.callout` (+ `.muted`/`.warning`/`.success`/`.danger`, `.corner-*`) | Info-block met header + content; via `{{< callout titel="..." >}}` shortcode |
+| `.references` (+ inline `.ref-tooltip`) | Footnote-accordeon onderaan + inline tooltip-markers; opt-in via `show_referenties` frontmatter |
+| `.button` (+ `.button-outline`, `.button-ghost`) | Knoppen |
+| `.search-modal` | Fuzzy site-search via Fuse.js; sectie-priority via `params.search.priority_sections` |
+| `.page-banner` (+ `.page-banner--warning`/`--info`) | Site-wide melding bovenaan via `params.page_banner` |
+| `.page-nav` | Prev/next binnen reeks; opt-in via `prev_next: true` op section `_index.md` |
+| `.breadcrumb`, `.toc` | Standaard breadcrumbs + sticky TOC |
+| Header / Footer | Site-shell met `--color-banner` token (default `--color-rijksblauw`) |
 
-## Per-page frontmatter (optional)
+Externe links: gebruik partial `render-link.html` (autodetect external/
+private/internal) zodat `rel="external"` + icon consistent zijn.
+
+## Shortcodes
+
+| Shortcode | Doel |
+|---|---|
+| `{{< callout titel="..." variant="muted\|warning\|success\|danger" corner="..." >}}body{{< /callout >}}` | Info-block |
+| `{{< tiles columns="2\|3" aria="..." field="tiles" >}}` | Card-grid uit `params.tiles` frontmatter |
+| `{{< card-grid section="..." >}}` | Card-grid van pages in een section |
+
+## Per-page frontmatter
 
 ```yaml
 ---
 title: ""
 description: ""
-weight: 0
-
-toc: true | false           # v0.2
-breadcrumbs: false          # disable for specific page
-
-og_image: "images/og/x.png"
-noindex: false
+weight: 0                   # sort-volgorde binnen section
+prev_next: true             # in section _index.md: enable prev/next-nav
+hide_tiles: true            # in section _index.md: gebruik body i.p.v. auto-cards
+show_lastmod: true          # toon "laatst aangepast" footer
+show_referenties: true      # render referenties-accordeon (vereist .Params.referenties)
+cascade:                    # propageer params naar alle descendants
+  show_lastmod: true
+toc: false                  # disable auto-TOC voor deze pagina
 ---
 ```
-
-## Development
-
-```bash
-npm install
-npm run vendor:nldd    # update gevendor'de NLDD assets
-npm run storybook      # component-docs op :6006
-npm run build-storybook
-```
-
-## NLDD updates
-
-Wekelijks draait een GitHub Actions workflow (`.github/workflows/vendor-nldd.yaml`
-op branch-root tijdens dev) en opent een PR met de nieuwste
-`@nldd/design-system` versie. Review de diff in `assets/css/nldd/`
-voordat je merget.
-
-## Hugo version
-
-Vereist Hugo ≥ 0.146 (unified template lookup).
 
 ## Licentie
 

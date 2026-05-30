@@ -52,6 +52,13 @@ main > article {
   > * {
     max-width: var(--article-max-width);
   }
+
+  /* Grid-content (kaarten, niet prose) hoeft niet aan de smalle
+     article-leesregel-breedte vast — laat het de volle content-
+     max-width vullen. */
+  > .card-grid {
+    max-width: none;
+  }
 }
 
 .sidebar-layout-right {
