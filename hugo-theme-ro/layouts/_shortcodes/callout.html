@@ -1,0 +1,18 @@
+{{- /* Callout: gestyleerd info-blok voor leeswijzer, let-op, samenvattingen.
+
+  Usage:
+    {{< callout titel="Leeswijzer" >}}
+    body markdown...
+    {{< /callout >}}
+
+  Title is optioneel; zonder verstevigt theme.css automatisch padding.
+*/ -}}
+{{- $titel := .Get "titel" -}}
+<blockquote class="callout">
+  {{- with $titel }}
+  <header><span class="title">{{ . }}</span></header>
+  {{- end }}
+  <div class="content">
+    {{ .Inner | markdownify }}
+  </div>
+</blockquote>
