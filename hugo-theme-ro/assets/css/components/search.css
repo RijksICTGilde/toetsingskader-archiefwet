@@ -152,7 +152,7 @@
 .search-result-item {
   display: block;
   position: relative;
-  padding: 0.875rem 1rem;
+  padding: 0.625rem 1rem;
   text-decoration: none;
   color: var(--color-text);
   transition: background-color 0.15s ease;
