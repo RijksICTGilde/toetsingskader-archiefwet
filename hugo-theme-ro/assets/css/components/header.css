@@ -84,7 +84,7 @@ header {
       height: 0.5em;
       /* Asymmetrische margin: chevron-mass zit rechts in zijn bounding-box
          (de tip wijst naar rechts). Met gelijke margins voelt links groter. */
-      margin: 0 0.5em 0 0.4em;
+      margin: 0 0.5em 0 0.3em;
       border-right: 2px solid var(--color-text-muted);
       border-bottom: 2px solid var(--color-text-muted);
       transform: rotate(-45deg);
