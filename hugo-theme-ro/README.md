@@ -11,7 +11,7 @@ Vereist [Hugo Extended] ≥ 0.162 en [Go] ≥ 1.26 (voor Hugo Modules).
 
 Minimale `hugo.yaml` voor een nieuwe consumer-site. De keys voor
 `locale`, `outputs`, `markup`, `enableGitInfo` etc. **moeten op
-consumer-niveau** — Hugo's config-merging laat top-level keys met
+consumer-niveau**, omdat Hugo's config-merging top-level keys met
 `_merge: none` niet uit het thema komen.
 
 ```yaml
@@ -117,13 +117,13 @@ ondersteund.
 - **CSS-pipeline**: tokens.css → fonts.css → base.css → layout.css →
   `components/*.css` glob → consumer's `assets/css/*.css` (excl.
   theme-namen). Eén gefingerprinte stylesheet via `_partials/head.html`.
-- **Design tokens** in `assets/css/tokens.css` — `--color-*`, `--font-*`,
+- **Design tokens** in `assets/css/tokens.css`: `--color-*`, `--font-*`,
   `--content-max-width`, `--radius-*`. Consumers overrulen op `:root`-
   niveau (bv. `--color-primary`, `--color-banner`).
 - **JS-bundle**: `base.js` + `toc.js` + Fuse + `search.js` concatenated
   + fingerprinted via `_partials/scripts.html`.
 - **Image processing**: WebP via `resources.Resize` (q80), als enkele
-  `<img>` in de hero — AVIF gaf bij onze hero te veel kwaliteitsverlies.
+  `<img>` in de hero. AVIF gaf bij onze hero te veel kwaliteitsverlies.
 
 ## Components
 

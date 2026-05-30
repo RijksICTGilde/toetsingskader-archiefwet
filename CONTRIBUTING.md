@@ -2,19 +2,19 @@
 
 Fijn dat je wilt bijdragen. Dit project beheert het toetsingskader van de
 Inspectie Overheidsinformatie en Erfgoed (Inspectie OE&E) voor de Archiefwet
-2026. Iedere bijdrage — van een typefout tot een inhoudelijke correctie —
+2026. Iedere bijdrage, van een typefout tot een inhoudelijke correctie,
 wordt gewaardeerd.
 
 ## Soorten bijdragen
 
 We verwelkomen onder andere de volgende bijdragen:
 
-- **Bugs en technische issues** — meld via [GitHub Issues](https://github.com/RijksICTGilde/toetsingskader-archiefwet/issues).
-- **Inhoudelijke correcties op normen-tekst** — open een issue voor discussie
+- **Bugs en technische issues**: meld via [GitHub Issues](https://github.com/RijksICTGilde/toetsingskader-archiefwet/issues).
+- **Inhoudelijke correcties op normen-tekst**: open een issue voor discussie
   of dien direct een pull request in met de voorgestelde wijziging.
-- **Feature-verzoeken** — beschrijf het probleem en de gewenste oplossing in
+- **Feature-verzoeken**: beschrijf het probleem en de gewenste oplossing in
   een issue, zodat we er samen over kunnen sparren.
-- **Taal- en vertaalverbeteringen** — verbeteringen aan formuleringen,
+- **Taal- en vertaalverbeteringen**: verbeteringen aan formuleringen,
   consistentie of toegankelijkheid van de tekst zijn altijd welkom.
 
 ## Pre-commit

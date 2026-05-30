@@ -36,8 +36,8 @@ inhoudelijke wijzigingen.
 
 Tech-keuzes (theme-updates, build-pipeline, dependencies,
 deploy-strategie) worden binnen het Rijks ICT Gilde genomen. Bij
-controversiële of impactvolle wijzigingen — grote refactors, verandering
-van publicatie-URL, breaking changes voor bijdragers — wordt eerst een
+controversiële of impactvolle wijzigingen (grote refactors, verandering
+van publicatie-URL, breaking changes voor bijdragers) wordt eerst een
 GitHub Issue aangemaakt voor publieke discussie voordat implementatie
 start.
 

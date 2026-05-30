@@ -2,7 +2,7 @@
 
 ## Onze belofte
 
-Wij — leden, bijdragers en leiders — beloven dat deelname aan onze
+Wij, als leden, bijdragers en leiders, beloven dat deelname aan onze
 community een ervaring zonder intimidatie is voor iedereen, ongeacht
 leeftijd, lichaamsgrootte, zichtbare of onzichtbare beperking, etniciteit,
 geslachtskenmerken, genderidentiteit en -expressie, ervaringsniveau,
@@ -22,7 +22,7 @@ onze community:
 - Opbouwende feedback geven en gracieus accepteren.
 - Verantwoordelijkheid nemen, onze fouten erkennen tegenover wie erdoor
   geraakt is, en leren van de ervaring.
-- Focussen op wat het beste is — niet alleen voor ons als individu, maar
+- Focussen op wat het beste is, niet alleen voor ons als individu, maar
   voor de community als geheel.
 
 Voorbeelden van onaanvaardbaar gedrag:
