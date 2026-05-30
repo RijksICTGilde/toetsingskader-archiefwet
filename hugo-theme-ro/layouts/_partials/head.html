@@ -57,11 +57,11 @@
 {{ $layout     := resources.Get "css/layout.css" }}
 {{ $components := resources.Match "css/components/*.css" }}
 
-{{/* Consumer-level overrides: theme picks up CSS files in consumer's
-     assets/css/ (glob, top-level). Hugo's module-system merged het thema's
-     eigen assets/css/ in dezelfde namespace; filter daarom dubbelingen
-     (tokens, fonts, base, layout) eruit zodat alleen extra consumer-files
-     (main.css, bollendiagram.css, …) doorkomen — anders overschrijft
+{{/* Consumer-overrides: het thema pakt CSS-bestanden op uit de consumer's
+     assets/css/ (glob, top-level). Hugo's module-systeem merget de eigen
+     assets/css/ van het thema in dezelfde namespace; filter daarom dubbele
+     bestanden (tokens, fonts, base, layout) eruit zodat alleen extra
+     consumer-bestanden (main.css, etc.) doorkomen — anders overschrijft
      theme's tokens.css de consumer-overrides aan het eind van de cascade. */}}
 {{ $themeRoots := slice "tokens.css" "fonts.css" "base.css" "layout.css" }}
 {{ $consumerCss := resources.Match "css/*.css" }}

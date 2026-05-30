@@ -122,10 +122,7 @@
         });
       }
 
-      // Filter Fuse's fuzzy (typo-tolerance) weg als er substring-matches
-      // zijn. Fuse rankt soms een typo-distance match (bv. Norm 2 zonder
-      // "maat" anywhere) net zo hoog als een substring-match. Voor user-
-      // expectatie: substring = "exact"; typo-only = fuzzy fallback.
+      // Filter Fuse's fuzzy (typo-tolerance) weg als er exact matches zijn.
       var qLower = query.trim().toLowerCase();
       function hasSubstring(item) {
         return item.title.toLowerCase().indexOf(qLower) !== -1
