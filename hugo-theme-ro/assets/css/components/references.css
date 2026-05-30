@@ -54,9 +54,14 @@
 }
 
 /* Nummer-marker binnen content-blok houden — base ol padding-left
-   1.1rem is te krap voor 2+ cijfers. */
+   1.1rem is te krap voor 2+ cijfers. Padding op li geeft extra
+   gap tussen marker en content (browser-default is krap). */
 .references ol {
   padding-inline-start: 2.5rem;
+}
+
+.references ol > li {
+  padding-inline-start: 0.5rem;
 }
 
 /* Highlight de aangeklikte referentie wanneer accordeon opent. */
