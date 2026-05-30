@@ -28,6 +28,22 @@ pip install pre-commit
 pre-commit install
 ```
 
+### Werken met theme uit eigen repo
+
+Standaard wordt het thema vanuit de submap `hugo-theme-ro/` geladen.
+Wil je tegen een externe clone van [`RijksICTGilde/hugo-theme-RO`]
+ontwikkelen (bv. `~/Projects/hugo-theme-RO`)? Zet `THEME_PATH`:
+
+```bash
+THEME_PATH=~/Projects/hugo-theme-RO just serve
+```
+
+Hugo Modules gebruikt dan dat absolute pad via
+`HUGO_MODULE_REPLACEMENTS`. Zonder `THEME_PATH` gebruikt Hugo het
+go.mod-replace naar `./hugo-theme-ro`.
+
+[`RijksICTGilde/hugo-theme-RO`]: https://github.com/RijksICTGilde/hugo-theme-RO
+
 ## Structuur
 
 Het project bundelt **content + theme** in één repo:
@@ -53,12 +69,6 @@ referenties, normen-grid) zitten op consumer-niveau.
 
 Container build-recept staat in `Containerfile`. Hugo wordt binnen de
 build geverifieerd met SHA256-checksum tegen de officiële release.
-
-## Bijdragen
-
-1. Branch + PR.
-2. Pre-commit + tests groen in CI.
-3. Review → merge naar `main` → automatische deploy.
 
 ## Standaarden en bijdragen
 
