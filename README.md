@@ -28,36 +28,38 @@ pip install pre-commit
 pre-commit install
 ```
 
-### Werken met theme uit eigen repo
+### Werken aan het theme
 
-Standaard wordt het thema vanuit de submap `hugo-theme-ro/` geladen.
-Wil je tegen een externe clone van [`RijksICTGilde/hugo-theme-RO`]
-ontwikkelen (bv. `~/Projects/hugo-theme-RO`)? Zet `THEME_PATH`:
+Het theme zit in een aparte repo:
+[`RijksICTGilde/hugo-theme-rijksoverheid`]. Voor parallelle ontwikkeling
+clone die repo lokaal en gebruik `replace` in `go.mod`:
 
 ```bash
-THEME_PATH=~/Projects/hugo-theme-RO just serve
+git clone git@github.com:RijksICTGilde/hugo-theme-rijksoverheid.git \
+  ../hugo-theme-rijksoverheid-local
 ```
 
-Hugo Modules gebruikt dan dat absolute pad via
-`HUGO_MODULE_REPLACEMENTS`. Zonder `THEME_PATH` gebruikt Hugo het
-go.mod-replace naar `./hugo-theme-ro`.
+```go
+// go.mod (consumer)
+replace github.com/RijksICTGilde/hugo-theme-rijksoverheid =>
+  ../hugo-theme-rijksoverheid-local
+```
 
-[`RijksICTGilde/hugo-theme-RO`]: https://github.com/RijksICTGilde/hugo-theme-RO
+`hugo server` pakt vanaf nu wijzigingen in de lokale theme-clone live op.
+
+[`RijksICTGilde/hugo-theme-rijksoverheid`]: https://github.com/RijksICTGilde/hugo-theme-rijksoverheid
 
 ## Structuur
 
-Het project bundelt **content + theme** in één repo:
-
 - **Project-root**: consumer-content: `hugo.yaml`, `content/` (normen,
-  over), `layouts/` (project-specifieke overrides), `assets/css/main.css`,
-  `static/`.
-- **`hugo-theme-ro/`**: herbruikbaar Rijksoverheid-thema: layouts,
-  components, design tokens, JS. Modulepad
-  `github.com/RijksICTGilde/hugo-theme-ro`, lokaal in gebruik via
-  `go.mod`'s `replace`-directive.
+  over), `layouts/` (project-specifieke overrides),
+  `assets/css/main.css`, `static/`.
+- **Theme**: extern, geïmporteerd via Hugo Modules
+  (`module.imports: github.com/RijksICTGilde/hugo-theme-rijksoverheid`).
+  Bijwerken met `hugo mod get -u`.
 
-Het thema is generiek; project-specifieke schemata (normen-frontmatter,
-referenties, normen-grid) zitten op consumer-niveau.
+Project-specifieke schemata (normen-frontmatter, referenties,
+normen-grid) zitten op consumer-niveau; het theme is generiek.
 
 ## CI/CD
 

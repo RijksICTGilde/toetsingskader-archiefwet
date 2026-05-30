@@ -98,4 +98,4 @@ menus:
 
 module:
   imports:
-    - path: github.com/RijksICTGilde/hugo-theme-ro
+    - path: github.com/RijksICTGilde/hugo-theme-rijksoverheid

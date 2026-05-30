@@ -1,10 +1,6 @@
-github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260309104322-5c7f4589582e h1:DPKkzaEuHnHcZwp2/AgmpXLVPzNQBuZk/Lub+VT1tdM=
-github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260309104322-5c7f4589582e/go.mod h1:hrJIcLHsXrRtsUtnZg0TT64mCd90wkqS/UAFNrRvyR8=
-github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260310121009-9878e8d308fe h1:ihdGhUMd3sqJQeulY17Yoi+QOdzPUJczuhzrOxW4jNo=
-github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260310121009-9878e8d308fe/go.mod h1:hrJIcLHsXrRtsUtnZg0TT64mCd90wkqS/UAFNrRvyR8=
-github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260430122428-307f33e7e4e6 h1:Xr1mLeQnUZ+A8NZqRXZRYZvyyplccR7vALTSdyWnBzM=
-github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260430122428-307f33e7e4e6/go.mod h1:hrJIcLHsXrRtsUtnZg0TT64mCd90wkqS/UAFNrRvyR8=
-github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260430125224-68e32147984e h1:TqF9tDpnNgIxbrQSZPqfP/BFNMmS4d3A3/bEtxzWW8o=
-github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260430125224-68e32147984e/go.mod h1:hrJIcLHsXrRtsUtnZg0TT64mCd90wkqS/UAFNrRvyR8=
-github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260430142837-b1c9224cde45 h1:leVx8AEsUGAJhSd94ovMRXIz0PbtGAfieTiVkr2Zr2o=
-github.com/RijksICTGilde/hugo-theme-ro v0.0.0-20260430142837-b1c9224cde45/go.mod h1:hrJIcLHsXrRtsUtnZg0TT64mCd90wkqS/UAFNrRvyR8=
+github.com/RijksICTGilde/hugo-theme-rijksoverheid v0.0.0-20260530211606-96805711030a h1:PrCdVFLYGYCt36k4AJeh1Kt0RAPP1SchXeLxszuJpQk=
+github.com/RijksICTGilde/hugo-theme-rijksoverheid v0.0.0-20260530211606-96805711030a/go.mod h1:8Kvgi0+2DXAwx8IMaLB7uIL52G3FRFuwp5NDseHtDkU=
+github.com/RijksICTGilde/hugo-theme-rijksoverheid v0.0.0-20260530212348-21a3c2bd1d81 h1:DpOCfHFBkNvvjcEGJUZ+WCEO/BvT1r6ME401a3VYlh4=
+github.com/RijksICTGilde/hugo-theme-rijksoverheid v0.0.0-20260530212348-21a3c2bd1d81/go.mod h1:8Kvgi0+2DXAwx8IMaLB7uIL52G3FRFuwp5NDseHtDkU=
+github.com/RijksICTGilde/hugo-theme-rijksoverheid v0.0.0-20260530212515-55539dadc5f6 h1:GYwaFHq08O+O2NXj4eb8lnMvZ/TnCqg3OWJgDFHyyGs=
+github.com/RijksICTGilde/hugo-theme-rijksoverheid v0.0.0-20260530212515-55539dadc5f6/go.mod h1:8Kvgi0+2DXAwx8IMaLB7uIL52G3FRFuwp5NDseHtDkU=
