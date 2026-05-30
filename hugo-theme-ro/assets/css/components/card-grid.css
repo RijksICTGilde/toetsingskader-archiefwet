@@ -14,6 +14,14 @@
   }
 }
 
+/* Cap kolom-aantal — handig voor grids met 2/4 items waar 3 cols
+   ongelijk wrappt. */
+.card-grid.cols-2 {
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Opt-in modifier: border + bg + shadow, voor compacte overzichten
    waar scanbaarheid boven open layout gaat. */
 .card-grid.boxed .card {
