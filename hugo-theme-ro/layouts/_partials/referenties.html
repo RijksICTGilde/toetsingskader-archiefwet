@@ -3,8 +3,13 @@
   Klap automatisch uit wanneer op een referentie-link wordt geklikt.
   Elke referentie heeft: tekst (verplicht), url (optioneel).
   Gebruik: {{ partial "referenties.html" . }}
+
+  Opt-in via .Params.show_referenties (default uit). Op section-niveau
+  in een _index.md kun je cascade gebruiken om het voor alle child-
+  pages aan te zetten.
 */ -}}
 {{- $page := . -}}
+{{- if and .Params.show_referenties .Params.referenties -}}
 {{- with .Params.referenties -}}
 {{- /* Bouw één string van alle velden waar reftext.html op werkt, zodat we
        per ref kunnen bepalen of {ref:N} in de body voorkomt. Refs die niet
@@ -54,4 +59,5 @@
     if (window.location.hash) openDetailsFor(window.location.hash);
   })();
 </script>
+{{- end -}}
 {{- end -}}
