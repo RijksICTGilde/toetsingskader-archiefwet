@@ -38,7 +38,14 @@
 }
 
 .references > details[open] > summary::before {
-  transform: rotate(45deg);
+  /* translateY compenseert dat de chevron-tip bij rotate(45deg) van
+     het horizontale midden naar de onderkant van de bounding-box
+     verschuift — zonder shift zou de chevron visueel omlaag drijven. */
+  transform: rotate(45deg) translate(-0.1em, -0.1em);
+}
+
+.references .ref-back {
+  margin-inline-start: 0.5em;
 }
 
 .references > details > summary:focus-visible {
