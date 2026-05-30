@@ -122,12 +122,19 @@
         });
       }
 
-      // Filter fuzzy weg als er exacte (of bijna-exacte) matches zijn.
-      // Score 0 = perfect match; ≤ 0.05 telt als 'exact genoeg' voor de
-      // gebruiker; daarboven is fuzzy ruis als er al goede hits zijn.
-      var hasExact = results.some(function (r) { return r.score <= 0.05; });
-      if (hasExact) {
-        results = results.filter(function (r) { return r.score <= 0.05; });
+      // Filter fuzzy weg als er word-boundary matches zijn — Fuse ziet
+      // "maat" in "maatregelen" als perfect substring (score 0), maar voor
+      // de gebruiker is dat NIET hetzelfde als een match op het hele woord
+      // "maat". Regex met \b grenzen geeft semantische "exacte" match.
+      var qWord = query.trim().toLowerCase();
+      var qEsc = qWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      var wordRe = new RegExp('\\b' + qEsc + '\\b', 'i');
+      function hasWordMatch(item) {
+        return wordRe.test(item.title) || wordRe.test(item.content);
+      }
+      var hasAnyWordMatch = results.some(function (r) { return hasWordMatch(r.item); });
+      if (hasAnyWordMatch) {
+        results = results.filter(function (r) { return hasWordMatch(r.item); });
       }
 
       displayResults(results.slice(0, 10), query);
