@@ -49,8 +49,10 @@ blockquote.callout {
   }
 
   .content {
-    display: flex;
-    flex-direction: column;
+    /* Block flow (geen flex): inline text-children van .content moeten
+       gesplit kunnen worden door <mark>-highlights zonder dat elk
+       fragment een eigen anonymous flex-item-rij wordt. */
+    display: block;
     padding-top: 0.5rem;
     padding-bottom: 1rem;
 
