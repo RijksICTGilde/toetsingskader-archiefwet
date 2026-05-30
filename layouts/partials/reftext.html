@@ -20,8 +20,16 @@
     {{- $linkHTML = partial "render-link.html" (dict "href" . "text" "Bekijk bron") -}}
   {{- end -}}
   {{- $tooltip := printf "<span class=\"ref-tooltip\" role=\"note\"><span>%s</span>%s</span>" $textEsc $linkHTML -}}
-  {{- $pattern := printf "([^\\s<>]*)(\\s*)\\{ref:%d\\}" $num -}}
-  {{- $replace := printf "<span class=\"ref-wrapper\"><span class=\"ref-term\" tabindex=\"0\">${1}</span>%s</span>${2}" $tooltip -}}
-  {{- $tekst = replaceRE $pattern $replace $tekst -}}
+  {{- /* Mark eerste occurrence zodat alleen die het id="refback-N" krijgt
+         — back-anchor target voor de ↑-link onderaan. */ -}}
+  {{- $marker := printf "{ref:%d}" $num -}}
+  {{- $firstMarker := printf "{ref:%d!}" $num -}}
+  {{- $tekst = replace $tekst $marker $firstMarker 1 -}}
+  {{- $patternFirst := printf "([^\\s<>]*)(\\s*)\\{ref:%d!\\}" $num -}}
+  {{- $replaceFirst := printf "<span class=\"ref-wrapper\" id=\"refback-%d\"><span class=\"ref-term\" tabindex=\"0\">${1}</span>%s</span>${2}" $num $tooltip -}}
+  {{- $tekst = replaceRE $patternFirst $replaceFirst $tekst -}}
+  {{- $patternRest := printf "([^\\s<>]*)(\\s*)\\{ref:%d\\}" $num -}}
+  {{- $replaceRest := printf "<span class=\"ref-wrapper\"><span class=\"ref-term\" tabindex=\"0\">${1}</span>%s</span>${2}" $tooltip -}}
+  {{- $tekst = replaceRE $patternRest $replaceRest $tekst -}}
 {{- end -}}
 {{- $tekst | safeHTML -}}
