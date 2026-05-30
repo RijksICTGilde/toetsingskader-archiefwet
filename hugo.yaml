@@ -28,7 +28,6 @@ params:
     email: toetsingskader@inspectie-oe.nl
   search:
     enable: true
-    # priority_sections: hits in deze sections komen bovenaan, in deze volgorde
     priority_sections:
       - normen
       - over
@@ -49,10 +48,10 @@ menus:
       weight: 1
     - name: Over
       pageRef: /over
-      weight: 5
+      weight: 2
     - name: Normen
       pageRef: /normen
-      weight: 10
+      weight: 3
 
   footer-links:
     - name: Contact
