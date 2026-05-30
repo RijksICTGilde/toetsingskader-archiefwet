@@ -5,6 +5,7 @@ description: "De acht normen uit het toetsingskader - van inbeheername tot perio
 prev_next: true
 show_lastmod: true
 hide_tiles: true
+wide: true
 cascade:
   show_lastmod: true
   show_referenties: true
