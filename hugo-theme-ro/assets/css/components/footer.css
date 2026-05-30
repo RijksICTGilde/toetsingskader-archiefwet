@@ -64,6 +64,7 @@ body > footer {
 
     .tagline {
       margin-bottom: 0;
+      max-width: 40ch;
     }
 
     .footer-columns {
