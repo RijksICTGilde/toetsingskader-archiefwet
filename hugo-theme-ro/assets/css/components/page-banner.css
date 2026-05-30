@@ -1,6 +1,5 @@
 /* Page-banner — site-wide melding bovenaan elke pagina.
- * Render-conditie + markup in _partials/page-banner.html.
- * Activeren via site.Params.page_banner (type/text/strong).
+ * Activeren via site.Params.page_banner.
  */
 
 .page-banner {

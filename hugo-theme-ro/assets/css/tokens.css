@@ -8,13 +8,11 @@
 
   /* Primaire kleuren */
   --color-rijksblauw: #154273;
-  --color-rijks-oranje: #e17000;
+  --color-rijksoranje: #e17000;
   --color-primary: light-dark(var(--color-rijksblauw), #80d5fc);
   --color-link: light-dark(#01689b, #93dcfa);
 
-  /* Banner-bg voor header + footer. Bewust geen light-dark wrap zodat de
-     chrome altijd zijn donkere identiteit behoudt. Consumers met eigen
-     brand-color overrulen alleen deze token. */
+  /* Background voor menu + footer. */
   --color-banner: var(--color-rijksblauw);
 
   /* Achtergrondkleuren */

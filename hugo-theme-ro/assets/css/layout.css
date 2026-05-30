@@ -54,10 +54,6 @@ main > article {
   }
 }
 
-/* Opt-in via `wide: true` in frontmatter — voor pages waar content
-   geen prose-leesregel-breedte hoeft (overzichten met kaarten,
-   dashboards). Article-wrapper levert lastmod + page-nav footer,
-   max-width-cap geldt niet. */
 main > article.wide > * {
   max-width: none;
 }

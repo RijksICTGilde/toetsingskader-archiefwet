@@ -25,7 +25,6 @@
   display: none;
 }
 
-/* Chevron via border-rotate — zelfde pattern als breadcrumb-separator. */
 .references > details > summary::before {
   content: "";
   display: inline-block;
@@ -38,9 +37,6 @@
 }
 
 .references > details[open] > summary::before {
-  /* translateY compenseert dat de chevron-tip bij rotate(45deg) van
-     het horizontale midden naar de onderkant van de bounding-box
-     verschuift — zonder shift zou de chevron visueel omlaag drijven. */
   transform: rotate(45deg) translate(-0.1em, -0.1em);
 }
 
@@ -53,8 +49,6 @@
   outline-offset: 2px;
 }
 
-
-/* Highlight de aangeklikte referentie wanneer accordeon opent. */
 .references li:target {
   background-color: var(--color-bg-info);
   padding: 0.25em 0.5em;
@@ -62,7 +56,6 @@
   border-radius: 3px;
 }
 
-/* === Inline tooltip-marker === */
 .ref-wrapper {
   position: relative;
   display: inline;
@@ -104,8 +97,6 @@
   transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s;
 }
 
-/* Onzichtbare "bridge" zodat de muis van term naar tooltip kan bewegen
-   zonder dat deze sluit. */
 .ref-tooltip::before {
   content: "";
   position: absolute;
@@ -122,8 +113,6 @@
   transform: translate(var(--ref-offset-x, 0), 0);
 }
 
-/* Tekst-span: block-level zodat de bron-link onder de tekst valt
-   i.p.v. ernaast doorloopt. */
 .ref-tooltip > span {
   display: block;
 }

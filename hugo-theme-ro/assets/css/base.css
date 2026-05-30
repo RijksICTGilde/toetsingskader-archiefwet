@@ -91,17 +91,11 @@ a {
   }
 }
 
-/* Underline weg op surfaces waar context al klikbaarheid signaleert.
-   Voor cards alleen het title-link in <header> uitsluiten — inline body-
-   text links binnen de card-paragraaf blijven onderstreept. */
 :where(nav, .breadcrumb, .toc, body > footer, .page-nav, .button, .button-outline, .button-ghost) a,
 :where(.card-grid > article, .card) header a {
   text-decoration: none;
 }
 
-/* In dezelfde surfaces: kleur erft van parent (footer wit, nav wit op
-   banner, etc.) — body-text hover color-shift uitschakelen. Underline
-   verschijnt nog op hover via theme-defaults voor a:hover. */
 :where(nav, .breadcrumb, .toc, body > footer, .page-nav, .button, .button-outline, .button-ghost) a,
 :where(.card-grid > article, .card) header a {
   color: inherit;
@@ -162,8 +156,6 @@ ol {
 
 ol {
   list-style: decimal;
-  /* Wat extra padding voor 2-digit nummer-markers + iets meer gap tussen
-     marker en content via li padding (browser-default gap is krap). */
   padding-left: 2.25rem;
 
   > li {
@@ -243,4 +235,3 @@ figcaption {
   font-size: 1rem;
   margin-block-start: 0.5rem;
 }
-

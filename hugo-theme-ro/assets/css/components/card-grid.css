@@ -14,16 +14,12 @@
   }
 }
 
-/* Cap kolom-aantal — voor grids met 2 of 4 items waar 3 cols
-   ongelijk wrappt. */
 .card-grid.columns-2 {
   @media (min-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Opt-in modifier: border + bg + shadow, voor compacte overzichten
-   waar scanbaarheid boven open layout gaat. */
 .card-grid.boxed > article,
 .card-grid.boxed .card {
   padding: 1rem 1.5rem;
@@ -41,7 +37,6 @@
   border-color: var(--color-primary);
 }
 
-/* Opt-in modifier: hele card is click-target (niet alleen de h2 link). */
 .card-grid.clickable > article,
 .card-grid.clickable .card {
   position: relative;
@@ -51,7 +46,6 @@
   }
 }
 
-/* Extra discoverability: titel-link onderstrepen bij hover op de card. */
 .card-grid.clickable > article:hover header h2 a,
 .card-grid.clickable > article:focus-within header h2 a,
 .card-grid.clickable .card:hover header h2 a,
@@ -59,15 +53,11 @@
   text-decoration: underline;
 }
 
-/* Card-titel als link: gebruik primary-kleur zodat het card-doel
-   (en zijn klikbaarheid) visueel benadrukt wordt. */
 .card-grid > article header h2 a,
 .card header h2 a {
   color: var(--color-primary);
 }
 
-/* Article direct in .card-grid is impliciet een card; expliciete
-   .card-class blijft werken voor standalone gebruik buiten een grid. */
 .card-grid > article,
 .card {
   width: 100%;

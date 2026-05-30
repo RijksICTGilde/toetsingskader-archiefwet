@@ -162,9 +162,6 @@
   transition: background-color 0.15s ease;
 }
 
-/* Tekstbrede divider via ::before — hoort spatieel bij het huidige item
-   (top-edge), niet bij het vorige item. Daardoor blijft de divider visueel
-   verbonden met zijn blok wanneer dat blok gehighlight wordt. */
 .search-result-item::before {
   content: "";
   position: absolute;
@@ -192,8 +189,6 @@
   background-color: var(--color-bg-info);
 }
 
-/* Volgende item z'n top-divider mee-faden: zit grenzend aan de
-   hover-bg en zou anders een zwevend lijntje achterlaten. */
 .search-results li:has(.search-result-item:hover) + li .search-result-item::before,
 .search-results li:has(.search-result-item:focus-visible) + li .search-result-item::before {
   background-color: var(--color-bg-page);
