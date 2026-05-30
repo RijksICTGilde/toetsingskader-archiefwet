@@ -152,17 +152,19 @@
 .search-result-item {
   display: block;
   position: relative;
-  padding: 0.625rem 1rem;
+  padding: 0.875rem 1rem;
   text-decoration: none;
   color: var(--color-text);
   transition: background-color 0.15s ease;
 }
 
-/* Tekstbrede divider via ::after */
-.search-result-item::after {
+/* Tekstbrede divider via ::before — hoort spatieel bij het huidige item
+   (top-edge), niet bij het vorige item. Daardoor blijft de divider visueel
+   verbonden met zijn blok wanneer dat blok gehighlight wordt. */
+.search-result-item::before {
   content: "";
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 1rem;
   right: 1rem;
   height: 1px;
@@ -170,7 +172,7 @@
   transition: background-color 0.15s ease;
 }
 
-.search-results li:last-child .search-result-item::after {
+.search-results li:first-child .search-result-item::before {
   display: none;
 }
 
@@ -181,15 +183,9 @@
   outline: none;
 }
 
-.search-result-item:hover::after,
-.search-result-item:focus-visible::after {
+.search-result-item:hover::before,
+.search-result-item:focus-visible::before {
   background-color: var(--color-bg-info);
-}
-
-/* Divider van vorig item meekleuren bij hover */
-.search-results li:has(+ li .search-result-item:hover) .search-result-item::after,
-.search-results li:has(+ li .search-result-item:focus-visible) .search-result-item::after {
-  background-color: var(--color-bg-page);
 }
 
 .search-result-title {
