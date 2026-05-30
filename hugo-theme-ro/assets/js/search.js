@@ -122,19 +122,18 @@
         });
       }
 
-      // Filter fuzzy weg als er word-boundary matches zijn — Fuse ziet
-      // "maat" in "maatregelen" als perfect substring (score 0), maar voor
-      // de gebruiker is dat NIET hetzelfde als een match op het hele woord
-      // "maat". Regex met \b grenzen geeft semantische "exacte" match.
-      var qWord = query.trim().toLowerCase();
-      var qEsc = qWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      var wordRe = new RegExp('\\b' + qEsc + '\\b', 'i');
-      function hasWordMatch(item) {
-        return wordRe.test(item.title) || wordRe.test(item.content);
+      // Filter Fuse's fuzzy (typo-tolerance) weg als er substring-matches
+      // zijn. Fuse rankt soms een typo-distance match (bv. Norm 2 zonder
+      // "maat" anywhere) net zo hoog als een substring-match. Voor user-
+      // expectatie: substring = "exact"; typo-only = fuzzy fallback.
+      var qLower = query.trim().toLowerCase();
+      function hasSubstring(item) {
+        return item.title.toLowerCase().indexOf(qLower) !== -1
+            || item.content.toLowerCase().indexOf(qLower) !== -1;
       }
-      var hasAnyWordMatch = results.some(function (r) { return hasWordMatch(r.item); });
-      if (hasAnyWordMatch) {
-        results = results.filter(function (r) { return hasWordMatch(r.item); });
+      var hasAnySubstring = results.some(function (r) { return hasSubstring(r.item); });
+      if (hasAnySubstring) {
+        results = results.filter(function (r) { return hasSubstring(r.item); });
       }
 
       displayResults(results.slice(0, 10), query);
