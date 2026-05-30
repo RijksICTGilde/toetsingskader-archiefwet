@@ -4,7 +4,7 @@ card_title: "Normen"
 description: "De acht normen uit het toetsingskader - van inbeheername tot periodieke evaluatie."
 prev_next: true
 show_lastmod: true
-hide_tiles: true
+manual_layout: true
 wide: true
 cascade:
   show_lastmod: true

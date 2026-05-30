@@ -112,7 +112,7 @@ title: ""
 description: ""
 weight: 0                   # sort-volgorde binnen section
 prev_next: true             # in section _index.md: enable prev/next-nav
-hide_tiles: true            # in section _index.md: gebruik body i.p.v. auto-cards
+manual_layout: true         # in section _index.md: body bepaalt layout (geen auto-cards)
 show_lastmod: true          # toon "laatst aangepast" footer
 show_referenties: true      # render referenties-accordeon (vereist .Params.referenties)
 cascade:                    # propageer params naar alle descendants
