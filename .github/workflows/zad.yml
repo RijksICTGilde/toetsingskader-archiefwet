@@ -6,7 +6,6 @@ on:
   push:
     branches: [main]
 
-# Eén actieve build per PR/main-ref; nieuwe push cancelt de lopende.
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -21,14 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write # push container images to ghcr.io
+      packages: write
     outputs:
       image: ${{ steps.meta.outputs.tags }}
     steps:
       - uses: actions/checkout@v6
         with:
-          # Volledige git-historie nodig voor Hugo's enableGitInfo
-          # (Lastmod uit git commit-tijd ipv file mtime).
           fetch-depth: 0
 
       - name: Determine BASE_URL for build
@@ -52,8 +49,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata
-        # Immutable per-commit tag (geen mutable :pr-N alias) — K8s
-        # Deployment ziet altijd nieuwe image-string → pod-rollout.
         id: meta
         uses: docker/metadata-action@v6
         with:
@@ -67,7 +62,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: .
-          file: container/Containerfile
+          file: Containerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -128,8 +123,6 @@ jobs:
           delete-pr-comment: 'true'
 
       - name: Delete container images for this PR
-        # Verwijdert ALLE :pr-N-* SHA-tagged images via gh-api prefix-match,
-        # niet alleen één losse tag. Pattern uit moza-site.
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_ADMIN_TOKEN }}

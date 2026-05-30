@@ -20,7 +20,4 @@ RUN if [ -n "$BASE_URL" ]; then \
 
 FROM ghcr.io/rijksictgilde/nginx-base:2026.03.1@sha256:f931cf8677982c21c0bbb4dc00e46456f3afef84f4e10603a9722d4265cfa5fd
 COPY --from=build /src/public/ /usr/share/nginx/html/
-COPY container/nginx.default.conf.template /etc/nginx/templates/default.conf.template
-# Runtime substitutie voor ${BASE_PATH} in nginx.default.conf.template.
-ENV BASE_PATH=/
 EXPOSE 8080
