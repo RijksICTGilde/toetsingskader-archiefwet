@@ -8,9 +8,6 @@ RUN apk add --no-cache git wget tar \
   && rm /tmp/hugo.tar.gz \
   && hugo version
 WORKDIR /src
-# Copy alles eerst: go.mod's replace-directive verwijst naar lokale
-# ./hugo-theme-ro/, dus die directory moet aanwezig zijn voordat Hugo
-# de modules resolved.
 COPY . .
 ARG BASE_URL=
 RUN if [ -n "$BASE_URL" ]; then \
