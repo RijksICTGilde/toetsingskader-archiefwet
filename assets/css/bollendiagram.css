@@ -120,13 +120,6 @@
   stroke-width: 4;
 }
 
-/* === Caption === */
-.bollendiagram-caption {
-  text-align: center;
-  font-size: 0.9rem;
-  margin-block-start: 0.5rem;
-  font-style: italic;
-}
 
 @media (max-width: 640px) {
   .bollendiagram-wrapper {

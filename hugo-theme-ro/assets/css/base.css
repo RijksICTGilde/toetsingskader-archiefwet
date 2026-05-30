@@ -192,3 +192,16 @@ nav a {
     text-decoration: underline;
   }
 }
+
+figcaption {
+  text-align: center;
+  font-style: italic;
+  font-size: 1rem;
+  margin-block-start: 0.5rem;
+}
+
+/* Inline body-text links onderstrepen: kleur-only is voor lopende
+   tekst onvoldoende discriminatief van omringende tekst. */
+figcaption a {
+  text-decoration: underline;
+}

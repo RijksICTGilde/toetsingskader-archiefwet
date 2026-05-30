@@ -1,7 +1,7 @@
 .card-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 2rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
 
@@ -14,9 +14,9 @@
   }
 }
 
-/* Cap kolom-aantal — handig voor grids met 2/4 items waar 3 cols
+/* Cap kolom-aantal — voor grids met 2 of 4 items waar 3 cols
    ongelijk wrappt. */
-.card-grid.cols-2 {
+.card-grid.columns-2 {
   @media (min-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -24,6 +24,7 @@
 
 /* Opt-in modifier: border + bg + shadow, voor compacte overzichten
    waar scanbaarheid boven open layout gaat. */
+.card-grid.boxed > article,
 .card-grid.boxed .card {
   padding: 1rem 1.5rem;
   background-color: var(--color-bg-page);
@@ -32,16 +33,16 @@
   transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
+.card-grid.boxed > article:hover,
+.card-grid.boxed > article:focus-within,
 .card-grid.boxed .card:hover,
 .card-grid.boxed .card:focus-within {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   border-color: var(--color-primary);
 }
 
-/* Opt-in modifier: hele card is click-target (niet alleen de h2 link).
-   Werkt door positioning context naar .card te verschuiven zodat het
-   bestaande a::after { inset: 0 } pseudo de card vult. Combineer met
-   .boxed of standalone op de minimal variant. */
+/* Opt-in modifier: hele card is click-target (niet alleen de h2 link). */
+.card-grid.clickable > article,
 .card-grid.clickable .card {
   position: relative;
 
@@ -50,6 +51,9 @@
   }
 }
 
+/* Article direct in .card-grid is impliciet een card; expliciete
+   .card-class blijft werken voor standalone gebruik buiten een grid. */
+.card-grid > article,
 .card {
   width: 100%;
 
