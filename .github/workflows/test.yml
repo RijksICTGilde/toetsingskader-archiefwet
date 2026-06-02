@@ -1,13 +1,34 @@
-name: Test Hugo build
+name: Test
 
 on:
-  pull_request:
+  push:
     branches:
       - main
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - uses: pre-commit/action@v3.0.1
+
   build:
     runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.162.1
+      HTMLTEST_VERSION: 0.17.0
+      TZ: Europe/Amsterdam
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -17,16 +38,32 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v6
         with:
-          go-version: "stable"
+          go-version: stable
+          cache: false
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "latest"
+          hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
 
-      - name: Build Hugo
+      - name: Install htmltest
+        run: |
+          curl -sLJO "https://github.com/wjdp/htmltest/releases/download/v${HTMLTEST_VERSION}/htmltest_${HTMLTEST_VERSION}_linux_amd64.tar.gz"
+          mkdir -p "${HOME}/.local/htmltest"
+          tar -C "${HOME}/.local/htmltest" -xf "htmltest_${HTMLTEST_VERSION}_linux_amd64.tar.gz"
+          rm "htmltest_${HTMLTEST_VERSION}_linux_amd64.tar.gz"
+          echo "${HOME}/.local/htmltest" >> "${GITHUB_PATH}"
+
+      - name: Verify installations
+        run: |
+          hugo version
+          htmltest --version
+
+      - name: Build site
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
-          TZ: Europe/Amsterdam
-        run: hugo --minify
+        run: hugo --gc --minify --logLevel warning
+
+      - name: Test links
+        run: hugo --minify --quiet --baseURL / --destination .htmltest/public && htmltest

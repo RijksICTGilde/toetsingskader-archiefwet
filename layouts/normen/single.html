@@ -1,38 +1,24 @@
 {{ define "main" }}
 {{ $page := . }}
-<div class="sidebar">
-  <nav class="side-nav" aria-label="Normen">
-    <ul>
-      <li><a href="{{ .Parent.RelPermalink }}">← Normen</a></li>
-      {{ range .Parent.Pages.ByWeight }}
-      {{ $isCurrent := eq $.RelPermalink .RelPermalink }}
-      <li>
-        <a href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
-          {{ .Params.norm_id }}. {{ .Params.norm_titel }}
-        </a>
-        {{ if $isCurrent }}
-        {{ partial "norm-toc.html" $page }}
-        {{ end }}
-      </li>
-      {{ end }}
-    </ul>
-  </nav>
-</div>
-<article class="norm-page markup-content">
+<article>
   <h1>{{ .Title }}</h1>
 
   {{ with .Params.kern }}
-  <div id="kern" class="norm-kern">
-    <h2>Kern van de norm</h2>
-    {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
-  </div>
+  <blockquote id="kern" class="callout">
+    <header><span class="title">Kern van de norm</span></header>
+    <div class="content">
+      {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
+    </div>
+  </blockquote>
   {{ end }}
 
   {{ with .Params.toelichting }}
-  <div id="toelichting" class="norm-toelichting">
-    <h2>Toelichting</h2>
-    {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
-  </div>
+  <blockquote id="toelichting" class="callout muted corner-bottom-right">
+    <header><span class="title">Toelichting</span></header>
+    <div class="content">
+      {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
+    </div>
+  </blockquote>
   {{ end }}
 
   {{/* Synoniemen worden bewust niet meer getoond op de pagina; ze
@@ -43,7 +29,7 @@
   <div id="normuitleg" class="norm-uitleg">
     <h2>Normuitleg</h2>
     {{ range . }}
-    <div class="norm-uitleg__item">
+    <article>
       {{ with .titel }}
       <h3 id="{{ . | urlize }}">{{ . }}</h3>
       {{ end }}
@@ -80,7 +66,7 @@
         {{ end }}
       </div>
       {{ end }}
-    </div>
+    </article>
     {{ end }}
   </div>
   {{ end }}
@@ -103,12 +89,10 @@
   </div>
   {{ end }}
 
-  {{ partial "referenties.html" $page }}
-
   {{ .Content }}
 
   {{ with site.Params.feedback }}
-  <aside class="norm-feedback" aria-label="Feedback">
+  <aside id="feedback" class="norm-feedback" aria-label="Feedback">
     <h2>Feedback</h2>
     <p>Heeft u opmerkingen of suggesties over deze norm? We horen het graag.</p>
     {{ with .email }}
@@ -116,5 +100,38 @@
     {{ end }}
   </aside>
   {{ end }}
+
+  {{ partial "referenties.html" $page }}
+
+  {{- $pageNav := partial "page-nav.html" . -}}
+  {{- $lastmod := partial "lastmod.html" . -}}
+  {{- if or (trim $lastmod " \n\t") (trim $pageNav " \n\t") -}}
+  <footer>
+    {{- $lastmod -}}
+    {{- $pageNav -}}
+  </footer>
+  {{- end -}}
 </article>
+
+<aside class="toc is-open" aria-label="Op deze pagina">
+  <h2>Op deze pagina</h2>
+  <ul class="norm-toc">
+    {{- with .Params.kern }}<li><a href="#kern">Kern van de norm</a></li>{{ end -}}
+    {{- with .Params.toelichting }}<li><a href="#toelichting">Toelichting</a></li>{{ end -}}
+    {{- with .Params.normuitleg }}
+    <li>
+      <a href="#normuitleg">Normuitleg</a>
+      <ul>
+        {{- range . -}}
+        {{- with .titel }}<li><a href="#{{ . | urlize }}">{{ . }}</a></li>{{ end -}}
+        {{- end }}
+      </ul>
+    </li>
+    {{- end -}}
+    {{- with .Params.reikwijdte }}<li><a href="#reikwijdte">Reikwijdte</a></li>{{ end -}}
+    {{- with .Params.gerelateerde_onderwerpen }}<li><a href="#zie-ook">Zie ook</a></li>{{ end -}}
+    {{- with site.Params.feedback }}<li><a href="#feedback">Feedback</a></li>{{ end -}}
+    {{- if and $page.Params.show_referenties $page.Params.referenties }}<li><a href="#referenties">Referenties</a></li>{{ end -}}
+  </ul>
+</aside>
 {{ end }}

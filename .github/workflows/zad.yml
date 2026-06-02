@@ -6,6 +6,10 @@ on:
   push:
     branches: [main]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 env:
   REGISTRY: ghcr.io
   IMAGE: ghcr.io/rijksictgilde/toetsingskader-archiefwet
@@ -16,9 +20,26 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write # push container images to ghcr.io
+      packages: write
+    outputs:
+      image: ${{ steps.meta.outputs.tags }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Determine BASE_URL for build
+        id: baseurl
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            PR="${{ github.event.pull_request.number }}"
+            echo "value=https://frontend-pr-${PR}-toets-hn7.rig.prd1.gn2.quattro.rijksapps.nl/" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
 
       - name: Log in to GHCR
         uses: docker/login-action@v4
@@ -27,20 +48,36 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Determine image tag
-        run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
-            echo "TAG=main-${{ github.sha }}" >> "$GITHUB_ENV"
-          else
-            echo "TAG=pr-${{ github.event.number }}" >> "$GITHUB_ENV"
-          fi
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ${{ env.IMAGE }}
+          tags: |
+            type=sha,format=short,prefix=pr-${{ github.event.pull_request.number }}-,enable=${{ github.event_name == 'pull_request' }}
+            type=raw,value=main-${{ github.sha }},enable=${{ github.event_name == 'push' }}
 
       - name: Build and push
+        id: docker_build
         uses: docker/build-push-action@v7
         with:
           context: .
+          file: container/Containerfile
           push: true
-          tags: ${{ env.IMAGE }}:${{ env.TAG }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            BASE_URL=${{ steps.baseurl.outputs.value }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Trivy security scan
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: '1'
 
   deploy-preview:
     if: github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.user.type != 'Bot'
@@ -48,6 +85,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      deployments: write
+      pull-requests: write
     environment:
       name: pr-${{ github.event.pull_request.number }}
       url: ${{ steps.deploy.outputs.url }}
@@ -60,8 +99,10 @@ jobs:
           project-id: toets-hn7
           deployment-name: pr-${{ github.event.pull_request.number }}
           component: frontend
-          image: ${{ env.IMAGE }}:pr-${{ github.event.number }}
+          image: ${{ needs.build.outputs.image }}
           clone-from: production
+          comment-on-pr: true
+          wait-for-ready: true
 
   cleanup-preview:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.user.type != 'Bot'
@@ -69,19 +110,44 @@ jobs:
     permissions:
       deployments: write
       packages: write
+      pull-requests: write
     steps:
-      - uses: RijksICTGilde/zad-actions/cleanup@v4
+      - name: Cleanup ZAD deployment
+        uses: RijksICTGilde/zad-actions/cleanup@v4
         with:
           api-key: ${{ secrets.ZAD_API_KEY }}
           project-id: toets-hn7
           deployment-name: pr-${{ github.event.pull_request.number }}
           delete-github-env: 'true'
           delete-github-deployments: 'true'
-          delete-container: 'true'
-          container-org: ${{ github.repository_owner }}
-          container-name: ${{ github.event.repository.name }}
-          container-tag: pr-${{ github.event.number }}
-          github-admin-token: ${{ secrets.GITHUB_ADMIN_TOKEN }}
+          delete-pr-comment: 'true'
+
+      - name: Delete container images for this PR
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_ADMIN_TOKEN }}
+          CONTAINER_ORG: ${{ github.repository_owner }}
+          CONTAINER_NAME: ${{ github.event.repository.name }}
+          TAG_PREFIX: pr-${{ github.event.pull_request.number }}-
+        run: |
+          echo "Deleting container images with tag prefix: $TAG_PREFIX"
+          ENCODED_NAME=$(printf '%s' "$CONTAINER_NAME" | jq -sRr @uri)
+          VERSIONS=$(gh api "orgs/$CONTAINER_ORG/packages/container/$ENCODED_NAME/versions" 2>/dev/null \
+            | jq -r --arg prefix "$TAG_PREFIX" '.[] | select(.metadata.container.tags[]? | startswith($prefix)) | .id')
+          if [ -z "$VERSIONS" ]; then
+            echo "No versions found with tag prefix: $TAG_PREFIX (may already be deleted)"
+            exit 0
+          fi
+          DELETED=0
+          for ID in $VERSIONS; do
+            if gh api "orgs/$CONTAINER_ORG/packages/container/$ENCODED_NAME/versions/$ID" -X DELETE 2>/dev/null; then
+              echo "Deleted version: $ID"
+              DELETED=$((DELETED + 1))
+            else
+              echo "Failed to delete version: $ID"
+            fi
+          done
+          echo "Deleted $DELETED container version(s) for PR ${{ github.event.pull_request.number }}"
 
   deploy-production:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -99,3 +165,4 @@ jobs:
           deployment-name: production
           component: frontend
           image: ${{ env.IMAGE }}:main-${{ github.sha }}
+          wait-for-ready: true
