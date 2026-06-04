@@ -1,108 +1,38 @@
 {{/*
-  Shortcode: bollendiagram
-  Hub-and-spoke-visualisatie van "Informatie in beheer" met de samenhangende
-  normen. De norm in beheer staat centraal; de zeven andere normen liggen
-  gelijkmatig in een cirkel eromheen, verbonden via dunne spokes.
-  De gevulde bollen zijn toetsenbord-navigeerbaar (focus zichtbaar via stroke).
-  Onder een scheidingslijn staan de vervaagde onderwerpen die later worden
-  toegevoegd.
+  Shortcode: bollendiagram — "rounded layers", volledig opgebouwd uit
+  thema-componenten (card-grid + box). Geen eigen CSS.
 
-  Tekenvolgorde (paint-order): eerst de spokes, dan de cirkels eroverheen (de
-  opake fills verbergen de spoke-uiteinden), dan de toekomst-bollen en als
-  laatste alle labels in een aparte groep bovenop. Zo overschildert niets de
-  tekst.
+  Lagen (boven → onder):
+    1. "Informatie in beheer"   → .box.info als basis (brand-accent)
+    2. de zeven normen          → .card-grid.boxed.clickable (afgeronde kaarten)
+    3. toekomstige onderwerpen  → muted .box
+
+  Data-gedreven uit content/normen/ (op weight): norm 1 (weight 1) is de
+  basis; de overige normen zijn de kaarten. Zo blijven labels/links in sync
+  met de front matter (norm_titel).
 */}}
+{{- with site.GetPage "/normen" -}}
+{{- $pages := .Pages.ByWeight -}}
+{{- $base := index $pages 0 -}}
+{{- $rest := after 1 $pages -}}
+<div class="box info">
+  <header><h2><a href="{{ $base.RelPermalink }}">Informatie in beheer</a></h2></header>
+  <div class="content">
+    <p>De basis van het toetsingskader: de zeven normen hieronder bouwen hierop voort.</p>
+  </div>
+</div>
 
-<figure class="bollendiagram-wrapper">
-  <svg class="bollendiagram"
-       viewBox="80 0 480 525"
-       xmlns="http://www.w3.org/2000/svg"
-       role="img"
-       aria-labelledby="bollendiagram-title">
-    <title id="bollendiagram-title">Relatie tussen de normen van het Toetsingskader Archiefwet</title>
+<div class="card-grid boxed clickable">
+  {{- range $rest }}
+  <article>
+    <header><h2><a href="{{ .RelPermalink }}">{{ .Params.norm_titel | default .Title }}</a></h2></header>
+  </article>
+  {{- end }}
+</div>
 
-    <g class="bd-spokes" aria-hidden="true">
-      <line class="bd-spoke" x1="320" y1="215" x2="320" y2="60"/>
-      <line class="bd-spoke" x1="320" y1="215" x2="441" y2="118"/>
-      <line class="bd-spoke" x1="320" y1="215" x2="471" y2="249"/>
-      <line class="bd-spoke" x1="320" y1="215" x2="387" y2="355"/>
-      <line class="bd-spoke" x1="320" y1="215" x2="253" y2="355"/>
-      <line class="bd-spoke" x1="320" y1="215" x2="169" y2="249"/>
-      <line class="bd-spoke" x1="320" y1="215" x2="199" y2="118"/>
-    </g>
-
-    <g class="bd-cluster">
-      <a class="bd-bubble bd-main" href="{{ relURL "normen/01-beheer/" }}">
-        <title>Informatie in beheer</title>
-        <circle cx="320" cy="215" r="80"/>
-      </a>
-
-      <a class="bd-bubble" href="{{ relURL "normen/02-overzicht/" }}">
-        <title>Overzicht</title>
-        <circle cx="320" cy="60" r="55"/>
-      </a>
-
-      <a class="bd-bubble" href="{{ relURL "normen/03-ordeningsstructuur/" }}">
-        <title>Ordenen</title>
-        <circle cx="441" cy="118" r="55"/>
-      </a>
-
-      <a class="bd-bubble" href="{{ relURL "normen/04-metadatering/" }}">
-        <title>Metadateren</title>
-        <circle cx="471" cy="249" r="55"/>
-      </a>
-
-      <a class="bd-bubble" href="{{ relURL "normen/05-vindbaarheid/" }}">
-        <title>Vindbaar</title>
-        <circle cx="387" cy="355" r="55"/>
-      </a>
-
-      <a class="bd-bubble" href="{{ relURL "normen/06-vernietigen/" }}">
-        <title>Betrouwbaar</title>
-        <circle cx="253" cy="355" r="55"/>
-      </a>
-
-      <a class="bd-bubble" href="{{ relURL "normen/07-informatiebeveiliging/" }}">
-        <title>Gecontroleerd vernietigen</title>
-        <circle cx="169" cy="249" r="55"/>
-      </a>
-
-      <a class="bd-bubble" href="{{ relURL "normen/08-periodieke-evaluatie/" }}">
-        <title>Periodieke evaluatie</title>
-        <circle cx="199" cy="118" r="55"/>
-      </a>
-    </g>
-
-    <g class="bd-future" aria-hidden="true">
-      <line class="bd-divider" x1="110" y1="420" x2="530" y2="420"/>
-      <circle class="bd-bubble-outlined" cx="134" cy="470" r="42"/>
-      <circle class="bd-bubble-outlined" cx="258" cy="470" r="42"/>
-      <circle class="bd-bubble-outlined" cx="382" cy="470" r="42"/>
-      <circle class="bd-bubble-outlined" cx="506" cy="470" r="42"/>
-    </g>
-
-    <g class="bd-labels" aria-hidden="true">
-      <text class="bd-label-main" x="320" y="204">Informatie</text>
-      <text class="bd-label-main" x="320" y="230">in beheer</text>
-
-      <text class="bd-label" x="320" y="60">Overzicht</text>
-      <text class="bd-label" x="441" y="118">Ordenen</text>
-      <text class="bd-label" x="471" y="249">Metadateren</text>
-      <text class="bd-label" x="387" y="355">Vindbaar</text>
-      <text class="bd-label" x="253" y="355">Betrouwbaar</text>
-      <text class="bd-label" x="169" y="240">Gecontroleerd</text>
-      <text class="bd-label" x="169" y="258">vernietigen</text>
-      <text class="bd-label" x="199" y="109">Periodieke</text>
-      <text class="bd-label" x="199" y="127">evaluatie</text>
-
-      <text class="bd-label-outlined" x="134" y="470">leesbaar</text>
-      <text class="bd-label-outlined" x="258" y="470">migreren</text>
-      <text class="bd-label-outlined" x="382" y="470">converteren</text>
-      <text class="bd-label-outlined" x="506" y="470">beschikbaar</text>
-    </g>
-  </svg>
-
-  <figcaption class="bollendiagram-caption">
-    Het toetsingskader bevat nu acht onderwerpen die de inspectie als fundamenteel voor de duurzame toegankelijkheid beschouwt. De norm <a href="{{ relURL "normen/01-beheer/" }}">in beheer</a> vormt de basis; de zeven andere normen hangen daar direct mee samen. De vier vervaagde onderwerpen onderaan horen hier ook bij en worden op een later moment aan het toetsingskader toegevoegd.
-  </figcaption>
-</figure>
+<div class="box">
+  <div class="content">
+    <p><strong>Later toe te voegen:</strong> leesbaar, migreren, converteren en beschikbaar. Deze onderwerpen horen ook bij de duurzame toegankelijkheid en worden op een later moment aan het toetsingskader toegevoegd.</p>
+  </div>
+</div>
+{{- end -}}
