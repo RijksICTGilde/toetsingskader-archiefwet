@@ -17,6 +17,54 @@ We verwelkomen onder andere de volgende bijdragen:
 - **Taal- en vertaalverbeteringen**: verbeteringen aan formuleringen,
   consistentie of toegankelijkheid van de tekst zijn altijd welkom.
 
+## Voor redacteuren (zonder technische achtergrond)
+
+Normpagina's bewerk je rechtstreeks op GitHub — er hoeft niets
+geïnstalleerd te worden. Zie ook de training in
+`docs/training-contentbeheer.html` (download en open in je browser).
+
+### Een pagina aanpassen
+
+1. Ga naar de map [`content/normen/`](content/normen/) en klik op de norm.
+2. Klik rechtsboven op het potlood-icoon ("Edit this file").
+3. Pas de tekst aan. Boven in het bestand (tussen de `---`-strepen) staan
+   alleen titel, kern en synoniemen; de rest van de pagina is gewone tekst
+   met koppen.
+4. Klik op "Commit changes…", kies **"Create a new branch"** en start een
+   pull request. Je wijziging gaat nooit direct live.
+5. Wacht op de automatische controle (groen vinkje). Bij een rood kruis:
+   klik op "Details" — de foutmelding vertelt in het Nederlands wat er
+   mis is en op welke regel.
+
+### Opbouw van een normpagina
+
+| Kop | Betekenis |
+|---|---|
+| `## Toelichting` | uitleg van de norm (verplicht) |
+| `## Normuitleg` | uitwerking (verplicht), met daarbinnen: |
+| `### <thema>` | subkop, bijvoorbeeld "Besturing" |
+| `#### Voorschrift` | wat de Inspectie toetst |
+| `#### Criteria` | waaraan getoetst wordt (lijst met `-`) |
+| `#### Indicatoren` | hoe vastgesteld wordt of aan het criterium is voldaan (lijst met `-`) |
+| `## Reikwijdte` | op welke documenten de norm van toepassing is (optioneel) |
+| `## Zie ook` | verwijzingen naar andere normen of onderwerpen (optioneel) |
+
+### Bronnen (voetnoten)
+
+Zet `[^naam]` direct achter het woord dat je onderbouwt en zet de bron
+eronder. De nummering en de bronnenlijst onderaan de pagina gaan vanzelf.
+
+```markdown
+Een document moet in beheer zijn.[^aw-4-1-lid-1]
+
+[^aw-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+```
+
+- Dezelfde bron nog een keer gebruiken? Typ alleen opnieuw `[^aw-4-1-lid-1]`
+  (zonder de regel eronder te herhalen).
+- Een bron zonder link mag ook: laat het `[Bekijk bron](…)`-deel weg.
+- Namen: kleine letters, cijfers en koppeltekens (bv. `[^kamerstuk-35968]`).
+
 ## Pre-commit
 
 Dit project gebruikt [pre-commit](https://pre-commit.com/) om wijzigingen

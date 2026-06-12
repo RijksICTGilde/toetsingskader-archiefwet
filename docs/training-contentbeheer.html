@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Training contentbeheer — Toetsingskader Archiefwet</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+           max-width: 46rem; margin: 0 auto; padding: 1.5rem;
+           line-height: 1.6; color: #1a1a1a; }
+    h1 { font-size: 1.8rem; }
+    h2 { border-bottom: 2px solid #007bc7; padding-bottom: .3rem; margin-top: 2.5rem; }
+    h3 { margin-top: 1.8rem; }
+    nav { margin: 1rem 0 2rem; padding: .75rem 1rem; background: #f0f7fc; border-radius: .5rem; }
+    nav a { margin-right: .75rem; }
+    code, pre { background: #f4f4f4; border-radius: .3rem; font-size: .92em; }
+    code { padding: .1rem .3rem; }
+    pre { padding: .75rem 1rem; overflow-x: auto; }
+    pre code { padding: 0; background: none; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+    th, td { border: 1px solid #ccc; padding: .4rem .6rem; text-align: left; vertical-align: top; }
+    th { background: #f0f7fc; }
+    details { border: 1px solid #ccc; border-radius: .5rem; padding: .5rem 1rem; margin: 1rem 0; }
+    summary { font-weight: 600; cursor: pointer; }
+    .tip { background: #f0f7fc; border-left: 4px solid #007bc7; padding: .5rem 1rem; margin: 1rem 0; }
+    .gerust { background: #eef7ee; border-left: 4px solid #39870c; padding: .5rem 1rem; margin: 1rem 0; }
+    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #ccc; font-size: .9em; color: #555; }
+    @media print { details { border: none; padding: 0; } details[open] summary { font-size: 1.1em; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Training contentbeheer</h1>
+  <p><strong>Toetsingskader Archiefwet</strong> — voor redacteuren.
+     Duur: ± 2 uur inclusief oefeningen. Geen technische voorkennis nodig.</p>
+  <nav>
+    <a href="#deel1">1.&nbsp;Wat is GitHub?</a>
+    <a href="#deel2">2.&nbsp;Handleiding</a>
+    <a href="#deel3">3.&nbsp;Oefeningen</a>
+  </nav>
+</header>
+
+<section id="deel1">
+  <h2>Deel 1 — Wat is GitHub en hoe werkt versiebeheer?</h2>
+
+  <p>De teksten van het toetsingskader staan op <strong>GitHub</strong>: een
+  website waar bestanden samen met hun volledige geschiedenis worden bewaard.
+  Elke wijziging wordt vastgelegd: wie, wanneer, wat en waarom. Er gaat nooit
+  iets verloren en alles is terug te draaien.</p>
+
+  <h3>Vier begrippen</h3>
+  <table>
+    <tr><th>Begrip</th><th>Betekenis</th></tr>
+    <tr><td><strong>Repository</strong></td>
+        <td>De map met alle bestanden van het toetsingskader (plus de hele geschiedenis).</td></tr>
+    <tr><td><strong>Commit</strong></td>
+        <td>Eén opgeslagen wijziging, met een korte omschrijving van wat je deed.</td></tr>
+    <tr><td><strong>Pull request (PR)</strong></td>
+        <td>Een voorstel: "ik wil deze wijziging doorvoeren". Anderen kunnen het
+            bekijken vóór het echt gebeurt.</td></tr>
+    <tr><td><strong>Check</strong></td>
+        <td>Een automatische controle die elk voorstel naleest op fouten in de
+            opbouw (kop vergeten, voetnoot zonder bron, …).</td></tr>
+  </table>
+
+  <h3>De route van elke wijziging</h3>
+  <ol>
+    <li>Jij bewerkt een pagina op github.com.</li>
+    <li>GitHub maakt er een <strong>voorstel</strong> (pull request) van.</li>
+    <li>De <strong>automatische controle</strong> leest het na: groen vinkje
+        (in orde) of rood kruis (er klopt iets niet — met uitleg in het
+        Nederlands, inclusief regelnummer).</li>
+    <li>Een <strong>collega keurt goed</strong>.</li>
+    <li>Daarna pas komt de wijziging op de website.</li>
+  </ol>
+
+  <div class="gerust">
+    <strong>Je kunt niets kapotmaken.</strong> De website verandert nooit
+    direct door wat jij typt. Elke stap is omkeerbaar, en de controle plus een
+    collega kijken altijd mee voordat iets live gaat.
+  </div>
+</section>
+
+<section id="deel2">
+  <h2>Deel 2 — Handleiding (naslag)</h2>
+
+  <h3>2.1 Een pagina vinden en bewerken</h3>
+  <ol>
+    <li>Ga naar <code>github.com/RijksICTGilde/toetsingskader-archiefwet</code>.</li>
+    <li>Klik op de map <code>content</code>, dan <code>normen</code>.</li>
+    <li>Klik op de norm die je wilt aanpassen (bijv. <code>02-overzicht.md</code>).</li>
+    <li>Klik rechtsboven op het <strong>potlood-icoon</strong> ("Edit this file").</li>
+  </ol>
+  <p>Wat je dan ziet: bovenin, tussen twee <code>---</code>-strepen, staan de
+  titel, de kern en de synoniemen van de norm. Daaronder staat de gewone tekst
+  van de pagina, met koppen die beginnen met <code>##</code>.</p>
+  <div class="tip"><strong>Tip:</strong> met de tab "Preview" bovenin zie je
+  direct hoe je tekst eruit komt te zien.</div>
+
+  <h3>2.2 De opbouw van een pagina</h3>
+  <table>
+    <tr><th>Kop</th><th>Betekenis</th></tr>
+    <tr><td><code>## Toelichting</code></td><td>uitleg van de norm (verplicht)</td></tr>
+    <tr><td><code>## Normuitleg</code></td><td>uitwerking (verplicht), met daarbinnen:</td></tr>
+    <tr><td><code>### &lt;thema&gt;</code></td><td>subkop, bijvoorbeeld "Besturing"</td></tr>
+    <tr><td><code>#### Voorschrift</code></td><td>wat de Inspectie toetst</td></tr>
+    <tr><td><code>#### Criteria</code></td><td>waaraan getoetst wordt (lijst met <code>-</code>)</td></tr>
+    <tr><td><code>#### Indicatoren</code></td><td>hoe vastgesteld wordt of aan het criterium is voldaan (lijst met <code>-</code>)</td></tr>
+    <tr><td><code>## Reikwijdte</code></td><td>op welke documenten de norm van toepassing is (optioneel)</td></tr>
+    <tr><td><code>## Zie ook</code></td><td>verwijzingen naar andere normen of onderwerpen (optioneel)</td></tr>
+  </table>
+
+  <p>Voorbeeldfragment:</p>
+  <pre><code>## Normuitleg
+
+### Besturing
+
+#### Voorschrift
+
+De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
+
+#### Criteria
+
+- De vastgestelde beheerregels zijn actueel.
+- De vastgestelde beheerregels zijn volledig.</code></pre>
+
+  <h3>2.3 Bronnen toevoegen (voetnoten)</h3>
+  <p>Zet <code>[^naam]</code> direct achter het woord dat je onderbouwt en zet
+  de bron eronder. De nummering en de bronnenlijst onderaan de pagina gaan
+  vanzelf — die hoef je nooit zelf bij te houden.</p>
+  <pre><code>Een document moet in beheer zijn.[^aw-4-1-lid-1]
+
+[^aw-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)</code></pre>
+  <ul>
+    <li><strong>Zelfde bron nog een keer gebruiken?</strong> Typ alleen opnieuw
+        <code>[^aw-4-1-lid-1]</code> — de regel eronder hoeft niet herhaald.</li>
+    <li><strong>Bron zonder link?</strong> Mag: laat het
+        <code>[Bekijk bron](…)</code>-deel weg.</li>
+    <li><strong>Namen:</strong> kleine letters, cijfers en koppeltekens,
+        bijvoorbeeld <code>[^kamerstuk-35968]</code>.</li>
+  </ul>
+
+  <h3>2.4 Wijziging indienen</h3>
+  <ol>
+    <li>Klik op de groene knop <strong>"Commit changes…"</strong>.</li>
+    <li>Vul een korte omschrijving in (bijv. "Toelichting norm 2 aangevuld").</li>
+    <li>Kies <strong>"Create a new branch for this commit and start a pull
+        request"</strong>.</li>
+    <li>Klik <strong>"Propose changes"</strong> en daarna
+        <strong>"Create pull request"</strong>.</li>
+  </ol>
+
+  <h3>2.5 De automatische controle lezen</h3>
+  <p>Onderaan je pull request verschijnt na ongeveer een minuut het resultaat:</p>
+  <ul>
+    <li><strong>Groen vinkje</strong> — alles in orde. Wachten op goedkeuring
+        van een collega.</li>
+    <li><strong>Rood kruis</strong> — klik op <strong>"Details"</strong>. Je
+        ziet dan een melding zoals:
+        <pre><code>04-metadatering.md:23: Gebruik '#### Criteria' (meervoud) in plaats van '#### Criterium'</code></pre>
+        Dat betekent: bestand <code>04-metadatering.md</code>, regel 23.
+        Open het bestand opnieuw via het potlood-icoon <em>in dezelfde pull
+        request</em> (tabblad "Files changed" → potlood), herstel het, en
+        commit opnieuw. De controle draait dan vanzelf opnieuw.</li>
+  </ul>
+
+  <h3>2.6 Veelgemaakte fouten</h3>
+  <table>
+    <tr><th>Fout</th><th>Wat de controle zegt</th><th>Oplossing</th></tr>
+    <tr><td><code>#### Criterium</code> (enkelvoud)</td>
+        <td>"Gebruik '#### Criteria' (meervoud)…"</td>
+        <td>Kop hernoemen naar <code>#### Criteria</code></td></tr>
+    <tr><td>Voetnoot gebruikt, definitieregel vergeten</td>
+        <td>"…wordt gebruikt maar is nergens gedefinieerd"</td>
+        <td>Regel <code>[^naam]: Bron.</code> toevoegen onder de alinea</td></tr>
+    <tr><td>Definitie aangemaakt, voetnoot nergens gebruikt</td>
+        <td>"…is gedefinieerd maar wordt nergens gebruikt"</td>
+        <td><code>[^naam]</code> in de tekst zetten, of de definitie weghalen</td></tr>
+    <tr><td><code>##</code> vergeten voor een kop</td>
+        <td>"Verplichte sectie '## …' ontbreekt"</td>
+        <td><code>##</code> (met spatie erna) vóór de kop zetten</td></tr>
+    <tr><td>Aanhalingsteken weggehaald in de regels bovenin (tussen <code>---</code>)</td>
+        <td>"Front matter is geen geldige YAML…"</td>
+        <td>Aanhalingstekens om de waarde terugzetten</td></tr>
+  </table>
+</section>
+
+<section id="deel3">
+  <h2>Deel 3 — Oefeningen</h2>
+  <p>Drie opdrachten, samen ± 1 uur. De trainer begeleidt en ruimt na afloop
+  de oefen-voorstellen op (sluiten zonder doorvoeren) — de website blijft dus
+  ongewijzigd.</p>
+
+  <details open>
+    <summary>Oefening A — Tekst wijzigen (± 15 min)</summary>
+    <p><strong>Doel:</strong> een pagina openen, bewerken en je wijziging in de
+    preview zien.</p>
+    <ol>
+      <li>Open <code>content/normen/02-overzicht.md</code> en klik het potlood-icoon.</li>
+      <li>Vervang in de sectie <code>## Toelichting</code> de tekst
+          <code>[PLACEHOLDER: vul toelichting in]</code> door één eigen zin.</li>
+      <li>Bekijk het resultaat via de tab <strong>"Preview"</strong>.</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> je ziet jouw zin netjes opgemaakt in de preview.</p>
+  </details>
+
+  <details>
+    <summary>Oefening B — Bron toevoegen (± 20 min)</summary>
+    <p><strong>Doel:</strong> een voetnoot maken.</p>
+    <ol>
+      <li>Zet in dezelfde bewerking achter jouw zin: <code>[^mijn-bron]</code>.</li>
+      <li>Zet er een lege regel onder en daarna:
+          <pre><code>[^mijn-bron]: Eigen aantekening als oefening.</code></pre></li>
+      <li>Bekijk de preview.</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> de preview toont een voetnootnummer achter
+    je zin en je aantekening onderaan.</p>
+  </details>
+
+  <details>
+    <summary>Oefening C — Voorstel indienen + controle lezen (± 25 min)</summary>
+    <p><strong>Doel:</strong> de hele route doorlopen, inclusief een bewuste fout
+    herstellen.</p>
+    <ol>
+      <li><strong>Verwijder eerst expres</strong> de definitieregel
+          (<code>[^mijn-bron]: …</code>) uit je tekst.</li>
+      <li>Klik "Commit changes…", kies "Create a new branch", maak de pull
+          request aan.</li>
+      <li>Wacht op het <strong>rode kruis</strong>, klik "Details" en lees de
+          melding.</li>
+      <li>Herstel de fout in dezelfde pull request (tabblad "Files changed" →
+          potlood) en commit opnieuw.</li>
+      <li>Wacht tot de check <strong>groen</strong> wordt en wijs rechts een
+          reviewer aan (Reviewers → kies je collega of de trainer).</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> groene check én een toegewezen reviewer.</p>
+  </details>
+</section>
+
+<footer>
+  <p>Vragen na de training? Open een issue op GitHub
+  (<code>github.com/RijksICTGilde/toetsingskader-archiefwet/issues</code>) of
+  mail de beheerder. Naslag: zie ook <code>CONTRIBUTING.md</code> in de
+  repository.</p>
+</footer>
+
+</body>
+</html>
