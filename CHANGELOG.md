@@ -11,4 +11,8 @@ changelog volgt [Semantic Versioning][semver].
 
 ## [Unreleased]
 
+- Normcontent verplaatst van YAML front matter naar markdown-body met
+  vaste koppen; bronnen zijn nu standaard markdown-voetnoten. Validator
+  en redacteursdocumentatie vernieuwd; training toegevoegd
+  (`docs/training-contentbeheer.html`).
 - Eerste versie van het Toetsingskader Archiefwet als publieke Hugo-site.
