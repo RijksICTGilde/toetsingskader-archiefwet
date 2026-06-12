@@ -1,1 +1,7 @@
 DirectoryPath: .htmltest/public
+# Trage overheidssites krijgen ruimer de tijd dan de default (15s).
+ExternalTimeout: 45
+IgnoreURLs:
+  # Serveert een incomplete certificaatketen; client-side niet op te lossen,
+  # htmltest faalt er hard op terwijl de links in de browser gewoon werken.
+  - '^https://zoek\.officielebekendmakingen\.nl/'
