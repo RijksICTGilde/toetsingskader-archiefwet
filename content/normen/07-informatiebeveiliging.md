@@ -5,14 +5,28 @@ weight: 7
 norm_id: "7"
 norm_titel: "Gecontroleerd vernietigen"
 kern: "Documenten moeten gecontroleerd vernietigd worden."
-wetsverwijzing:
-  tekst: "Ar, artikel 2.5"
-  url: "https://www.internetconsultatie.nl/archiefregeling/b1"
-toelichting: "[PLACEHOLDER: vul toelichting in]"
 synoniemen:
   - "[PLACEHOLDER: vul synoniemen in]"
-normuitleg:
-  - titel: "[PLACEHOLDER: optioneel subkopje]"
-    voorschriften:
-      - tekst: "[PLACEHOLDER: vul voorschrift in]"
 ---
+
+## Toelichting
+
+[PLACEHOLDER: vul toelichting in][^ar-artikel-2-5]
+
+[^ar-artikel-2-5]: Ar, artikel 2.5. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+
+## Normuitleg
+
+### [PLACEHOLDER: vul thema in]
+
+#### Voorschrift
+
+[PLACEHOLDER: vul voorschrift in]
+
+#### Criteria
+
+*Niet van toepassing*
+
+#### Indicatoren
+
+*Niet van toepassing*

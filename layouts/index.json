@@ -1,25 +1,17 @@
-{{- /* Helper: strip markdown-syntax (links, bold, italic, …) tot platte
-       tekst. `markdownify | plainify` is robuuster dan handmatige regex en
-       handelt edge-cases (nested formatting, escaped chars) correct af. */ -}}
+{{- /* Zoekindex. De body-tekst (toelichting, normuitleg, reikwijdte, zie
+       ook, voetnootbronnen) zit in `.Plain`. `kern` staat in de front
+       matter en `synoniemen` worden bewust niet getoond maar wel
+       geïndexeerd. `markdownify | plainify` maakt er platte tekst van. */ -}}
 {{- $pages := slice -}}
 {{- $allPages := site.RegularPages | append site.Home -}}
 {{- range $allPages -}}
   {{- $text := .Plain -}}
   {{- with .Params.kern }}{{ $text = printf "%s %s" $text (. | markdownify | plainify) }}{{ end -}}
-  {{- with .Params.toelichting }}{{ $text = printf "%s %s" $text (. | markdownify | plainify) }}{{ end -}}
   {{- $synoniemen := "" -}}
   {{- with .Params.synoniemen -}}
     {{- $synoniemen = delimit . " " | markdownify | plainify -}}
     {{- $text = printf "%s %s" $text $synoniemen -}}
   {{- end -}}
-  {{- with .Params.normuitleg -}}
-    {{- range . -}}
-      {{- with .titel }}{{ $text = printf "%s %s" $text (. | markdownify | plainify) }}{{ end -}}
-      {{- range .voorschriften }}{{ with .tekst }}{{ $text = printf "%s %s" $text (. | markdownify | plainify) }}{{ end }}{{ end -}}
-    {{- end -}}
-  {{- end -}}
-  {{- $text = $text | replaceRE `\{ref:\d+\}` "" -}}
-  {{- $synoniemen = $synoniemen | replaceRE `\{ref:\d+\}` "" -}}
   {{- $title := .Title -}}
   {{- /* Section voor top-level pages: home → "home", overige top-level
          (over.md, …) → file-basename zodat priority_sections per pagina kan. */ -}}

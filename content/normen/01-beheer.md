@@ -5,172 +5,208 @@ weight: 1
 norm_id: "1"
 norm_titel: "Inbeheername en beheer"
 kern: "Een document is in beheer zodat het duurzaam toegankelijk gemaakt en gehouden kan worden."
-referenties:
-  - tekst: "Ab, artikel 2.1, lid 1."
-    url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
-  - tekst: "Aw, artikel 4.1, lid 1."
-    url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-  - tekst: "Aw, artikel 4.1, lid 1."
-    url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-  - tekst: "Ab, artikel 2.1, lid 1. Dit sluit aan bij de \"Position Paper nieuwe Archiefwet\", NEN commissie voor informatie- en archiefmanagement en de VNG Adviescommissie Archieven, onder H2, Toelichting \"in control zijn\"."
-    url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
-  - tekst: "Functies | Nationaal Archief"
-    url: "https://www.nationaalarchief.nl/archiveren/kennisbank/functies-registreren#collapse-162601"
-  - tekst: "Deze toelichting is ontleend aan de kennisbank van het Nationaal Archief. De algemene archiefnorm NEN-ISO 15489-1:2016 gebruikt andere begrippen die uitdrukken aan welke kenmerken documenten moeten voldoen om als gezaghebbend bewijs te kunnen dienen: documenten dienen authentiek, betrouwbaar, integer en bruikbaar te zijn en daartoe worden beheerd in systemen die betrouwbaar, veilig, afdoende, uitgebreid en systematisch zijn."
-  - tekst: "Kamerstukken II 2018/19, 35 112, nr. 2. Dit sluit tevens aan op artikel 6.1 van de novelle bij de Woo."
-  - tekst: "AW, artikelen 4.1 en 4.2 en de toelichting in de AR (AR, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen – pagina 36)"
-  - tekst: "Verwijzing naar kopje risicoanalyse in de introductie."
-  - tekst: "Kamerstukken II 2021/22, 35968, nr. 3, Beheerstrategie, p.15."
-  - tekst: "Ar, Toelichting, H1, eisen die van toepassing zijn op alle documenten & H1 uitplaatsing."
-  - tekst: "Ar, Toelichting, H2, duurzame toegankelijkheid, overzicht."
-  - tekst: "Aw, artikel 4.2, eerste lid."
-    url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-  - tekst: "Categorie is vormvrij, maar moet wel een relatie hebben met het selectiebesluit."
-  - tekst: "AW, artikel 4.2, tweede lid, sub b."
-    url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-  - tekst: "Aw, artikel 4.2, tweede lid, sub b."
-    url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-  - tekst: "Aw, artikel 4.2, tweede lid, sub b."
-    url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-  - tekst: "Categorie is vormvrij, maar moet wel een relatie hebben met het selectiebesluit."
-  - tekst: "Aw, artikel 4.1, eerste lid."
-    url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-  - tekst: "Aw, geconsolideerde versie, Memorie van toelichting, 4.3 Duurzame toegankelijkheid, beheerstrategie, p. 46."
-  - tekst: "Aw, artikel 4.2, derde lid."
-    url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-  - tekst: "Ab, artikelen 2.2, 2.3, 2.4."
-    url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
-  - tekst: "Aw, artikel 4.2, eerste lid."
-    url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-  - tekst: "Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 4.3, Duurzame toegankelijkheid, beheerstrategie, 2e alinea."
-  - tekst: "Aw, artikel 4.2."
-    url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-  - tekst: "Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 2.2, Zorgdrager of verantwoordelijk overheidsorgaan."
-  - tekst: "Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 2.2, Zorgdrager of verantwoordelijk overheidsorgaan."
-  - tekst: "Ar, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten. Dit kan nog een hyperlink worden naar normblad over werken in de cloud."
-  - tekst: "Ar, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten."
-  - tekst: "Ab, Nota van Toelichting, 8. Implementatie, SIO."
-  - tekst: "Ab, Nota van Toelichting, 8. Implementatie, SIO."
-  - tekst: "Dit heet in de AW1995 \"kwaliteitssyteem\"."
-  - tekst: "Aw, artikel 4.2, tweede lid, sub c."
-    url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-  - tekst: "Aw, artikel 4.1, tweede lid."
-    url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-  - tekst: "Dit hoeft geen systeem te zijn zoals een documentmanagementsysteem. Een beheerde omgeving is een omgeving met functionaliteiten en voorzieningen waarmee een organisatie in staat is om documenten te beheren volgens de normen uit de archiefwet- en regelgeving."
-  - tekst: "Aw artikel 4.1 en Ab artikel 2.1; Kamerstukken 2022/23, 35968, nr. 8, Eerste nota van wijzigingen, Onderdeel C (artikel 4.1)."
-  - tekst: "Ab, artikel 2.1, eerste lid, sub a."
-    url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
-  - tekst: "Ab, artikel 2.1, eerste lid, sub b."
-    url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
-  - tekst: "Ab, artikel 2.1, eerste lid, sub c."
-    url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
-  - tekst: "Ar, artikel 2.3."
-    url: "https://www.internetconsultatie.nl/archiefregeling/b1"
-  - tekst: "Ab, artikel 2.1, sub d en Ar, artikel 2.5."
-    url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
-  - tekst: "Ab, artikel 21, sub d en Ar, artikel 2.2."
-    url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
-  - tekst: "Ab, artikel 2.1, eerste lid, sub f en artikelen 2.2, 2.3 en 2.4."
-    url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
-  - tekst: "Ab, artikel 2.1, eerste lid, sub e."
-    url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
-  - tekst: "AB, art. 4.1, derde lid."
-    url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
-  - tekst: "Hyperlink naar DUTO."
-    url: "https://www.nationaalarchief.nl/archiveren/duto"
-toelichting: |
-  Om een document duurzaam toegankelijk te maken en te houden{ref:3} moet een document [in beheer](/normen/01-beheer/) zijn.{ref:4} Inbeheername is het opnemen van documenten in een omgeving waarin zij beheerd worden{ref:5}. Beheer is geen eenmalige handeling, maar vraagt om een voortdurende zorg voor documenten{ref:6}.
-
-  Die voortdurende zorg vereist ook sturing op de informatiehuishouding. Een overheidsorganisatie neemt daarom passende maatregelen en beschrijft die in de beheerregels{ref:7}. Op basis van beschrijving worden de passende maatregelen concreet uitgewerkt. In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurzame toegankelijkheid van categorieën documenten borgt{ref:8}. Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](/normen/) {ref:9} invulling krijgen.
-
-  In een beheerde omgeving {ref:5} zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten {ref:6}. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/06-vernietigen/), [gecontroleerd vernietigen](/normen/06-vernietigen/) en [metadateren](/normen/04-metadatering/) geeft direct richting aan de invulling van de benodigde functionaliteit {ref:10}.
 synoniemen:
   - "Opname (DUTO)"
   - "Duurzaam toegankelijk"
-  - "Beheerstrategie{ref:10}"
+  - "Beheerstrategie"
   - "Beheerregels"
-  - "Beheertaken{ref:11}"
-  - "Beheerhandelingen{ref:12}"
-reikwijdte: |
-  Alle documenten moeten in beheer zijn. Ook de documenten die op elk moment mogen worden vernietigd.
-gerelateerde_onderwerpen:
-  - titel: "Opname"
-  - titel: "Archiveren by design{ref:46}"
-  - titel: "Beheerbeleid"
-  - titel: "Vindbaar"
-    url: "/normen/05-vindbaarheid/"
-  - titel: "Migratie en conversie"
-  - titel: "Metadata"
-    url: "/normen/04-metadatering/"
-  - titel: "Overzicht"
-    url: "/normen/02-overzicht/"
-  - titel: "Ordening"
-    url: "/normen/03-ordeningsstructuur/"
-  - titel: "Kwaliteitssysteem / periodieke evaluatie"
-    url: "/normen/08-periodieke-evaluatie/"
-normuitleg:
-  - titel: "Besturing"
-    voorschriften:
-      - tekst: "De Inspectie toetst of regels voor het archiefbeheer van documenten zijn vastgesteld door het verantwoordelijke overheidsorgaan. {ref:13}"
-        criterium:
-          - "De vastgestelde beheerregels zijn actueel."
-          - "De vastgestelde beheerregels zijn volledig."
-        indicatoren:
-          - "De beheerregels komen overeen met het mandaatbesluit van de organisatie."
-          - "De beheerregels zijn van toepassing op alle organisatieonderdelen die onder de verantwoordelijkheid van de organisatie vallen."
-      - tekst: |
-          De Inspectie toetst of in de beheerregels, in ieder geval per categorie {ref:14} documenten een omschrijving is opgenomen van de passende maatregelen die het verantwoordelijke overheidsorgaan neemt om de documenten: {ref:15}
-
-          a) duurzaam toegankelijk te maken,{ref:16}
-
-          b) te [vernietigen](/normen/06-vernietigen/). {ref:17}
-      - tekst: |
-          De Inspectie toetst of de organisatie, in ieder geval per categorie {ref:18} passende maatregelen heeft genomen om documenten: {ref:19}
-
-          a) duurzaam toegankelijk te maken,
-
-          b) te vernietigen.
-        criterium:
-          - "In de passende maatregelen is opgenomen dat documenten zich in een [beheerde omgeving](/normen/01-beheer/) moeten bevinden."
-          - "In de passende maatregelen zijn in ieder geval de onderwerpen [overzicht](/normen/02-overzicht/), [vinden](/normen/05-vindbaarheid/) en beschikbaarstellen, [ordenen](/normen/03-ordeningsstructuur/), [metadateren](/normen/04-metadatering/), [vernietigen](/normen/06-vernietigen/) en [betrouwbaarheid](/normen/06-vernietigen/) opgenomen. {ref:17}"
-          - "De passende maatregelen zijn opgesteld op basis van een [risicobenadering](/normen/)."
-          - "Een categorie, waar passende maatregelen voor zijn genomen, heeft een relatie met een selectiebesluit."
-        indicatoren:
-          - "Er is een informatiebeheerplan dat toetsbare doelstellingen verbindt aan een voortdurende verbetercyclus.{ref:20}"
-          - "De organisatie heeft archiveren by design geïmplementeerd."
-          - "Het is duidelijk welke passende maatregelen van toepassing zijn op verschillende categorieën overheidsinformatie."
-          - "Er zijn werkinstructies, procedures en handboeken voor het duurzaam toegankelijk maken en houden van documenten."
-          - "De categorieën komen overeen met categorieën documenten die korter dan tien jaar, langer dan tien jaar, of blijvend te bewaren zijn volgens een selectiebesluit, of komen overeen met categorieën documenten in een selectiebesluit."
-      - tekst: "De Inspectie toetst of het verantwoordelijke overheidsorgaan de door hem vastgestelde beheerregels, inclusief de omschrijving van de passende maatregelen, openbaar heeft gemaakt. {ref:21}"
-      - tekst: "De Inspectie toetst of het verantwoordelijk overheidsorgaan inzichtelijk heeft welke categorieën documenten gemigreerd, geconverteerd of vervangen moeten worden. {ref:22} Alleen wanneer dergelijke categorieën bestaan, toetst de Inspectie of in de beheerregels een omschrijving is opgenomen van de passende maatregelen voor migratie, conversie en vervanging."
-      - tekst: |
-          De Inspectie toetst of in de beheerregels{ref:23} de beheertaken op zowel leidinggevend als uitvoerend niveau zijn beschreven. {ref:24} Dit betreft in ieder geval een omschrijving van de volgende beheertaken: {ref:25}
-
-          - het (doen) ontwerpen van selectiebesluiten; {ref:26}
-          - het (doen) overbrengen van documenten naar een archiefdienst en (eventueel) het stellen van openbaarheidsbeperkingen voor documenten van die overbrenging; {ref:27}
-          - het opslaan en verwerken van documenten binnen de Europese Unie; {ref:28}
-          - het maken van een [overzicht](/normen/02-overzicht/), het [ordenen](/normen/03-ordeningsstructuur/) en het [metadateren](/normen/04-metadatering/). {ref:29}
-        criterium:
-          - "De beheerregels voor de beheertaken zijn actueel."
-          - "De beheerregels voor de beheertaken zijn volledig."
-          - "De verantwoordelijkheden voor de beheertaken zijn beschreven."
-          - "In een strategisch informatie overleg (SIO) {ref:30}, of een soortgelijk overleg, worden keuzes gemaakt over het ontwerp en de inrichting van de informatiehuishouding die van invloed zijn op de duurzame toegankelijkheid van documenten.{ref:31}"
-        indicatoren:
-          - "Documenten zijn herleidbaar naar een categorie in het selectiebesluit."
-          - "De organisatie heeft geen achterstanden in de overbrenging van overheidsinformatie naar een archiefbewaarplaats."
-          - "De organisatie heeft inzichtelijk welke overheidsinformatie er in beheer is."
-      - tekst: "De Inspectie toetst of in de beheerregels een nadere omschrijving is opgenomen over de wijze waarop het archiefbeheer van documenten [periodiek](/normen/08-periodieke-evaluatie/) wordt geëvalueerd{ref:32}, onderzocht en indien nodig wordt bijgesteld. {ref:33}"
-  - titel: "Feitelijk beheer"
-    voorschriften:
-      - tekst: "De Inspectie toetst of alle {ref:34} door het verantwoordelijk overheidsorgaan opgemaakte en ontvangen documenten worden opgenomen in een beheerde omgeving {ref:35} waar zij duurzaam toegankelijk worden gemaakt en gehouden. {ref:36}"
-        criterium:
-          - |
-            In een beheerde omgeving is een document:
-            - binnen een redelijke termijn [vindbaar](/normen/05-vindbaarheid/){ref:37}, beschikbaar{ref:38} en leesbaar{ref:39};
-            - opgenomen in een [overzicht](/normen/02-overzicht/); {ref:40}
-            - [gemetadateerd](/normen/04-metadatering/); {ref:41}
-            - gekoppeld aan een [ordening](/normen/03-ordeningsstructuur/); {ref:42}
-            - niet onderhevig aan verlies, dus tijdig gemigreerd, geconverteerd en vervangen; {ref:43}
-            - [betrouwbaar](/normen/06-vernietigen/); {ref:44}
-            - volgens een selectiebesluit [gecontroleerd vernietigd](/normen/06-vernietigen/). Dit geldt niet voor documenten die op elk moment mogen worden vernietigd. {ref:45}
+  - "Beheertaken"
+  - "Beheerhandelingen"
 ---
+
+## Toelichting
+
+Om een document duurzaam toegankelijk te maken en te houden[^aw-artikel-4-1-lid-1] moet een document [in beheer](/normen/01-beheer/) zijn.[^ab-artikel-2-1-lid-1-2] Inbeheername is het opnemen van documenten in een omgeving waarin zij beheerd worden[^functies-nationaal-archief]. Beheer is geen eenmalige handeling, maar vraagt om een voortdurende zorg voor documenten[^deze-toelichting-ontleend-kennisbank-nationaal-a].
+
+Die voortdurende zorg vereist ook sturing op de informatiehuishouding. Een overheidsorganisatie neemt daarom passende maatregelen en beschrijft die in de beheerregels[^kamerstukken-2018-19-35-112]. Op basis van beschrijving worden de passende maatregelen concreet uitgewerkt. In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurzame toegankelijkheid van categorieën documenten borgt[^aw-artikelen-4-1-4-2]. Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](/normen/) [^verwijzing-kopje-risicoanalyse-introductie] invulling krijgen.
+
+In een beheerde omgeving [^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten [^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/06-vernietigen/), [gecontroleerd vernietigen](/normen/06-vernietigen/) en [metadateren](/normen/04-metadatering/) geeft direct richting aan de invulling van de benodigde functionaliteit [^kamerstukken-2021-22-35968].
+
+## Normuitleg
+
+### Besturing
+
+#### Voorschrift
+
+De Inspectie toetst of regels voor het archiefbeheer van documenten zijn vastgesteld door het verantwoordelijke overheidsorgaan. [^aw-artikel-4-2-lid-1]
+
+#### Criteria
+
+- De vastgestelde beheerregels zijn actueel.
+- De vastgestelde beheerregels zijn volledig.
+
+#### Indicatoren
+
+- De beheerregels komen overeen met het mandaatbesluit van de organisatie.
+- De beheerregels zijn van toepassing op alle organisatieonderdelen die onder de verantwoordelijkheid van de organisatie vallen.
+
+#### Voorschrift
+
+De Inspectie toetst of in de beheerregels, in ieder geval per categorie [^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten een omschrijving is opgenomen van de passende maatregelen die het verantwoordelijke overheidsorgaan neemt om de documenten: [^aw-artikel-4-2-lid-2]
+
+a) duurzaam toegankelijk te maken,[^aw-artikel-4-2-lid-2]
+
+b) te [vernietigen](/normen/06-vernietigen/). [^aw-artikel-4-2-lid-2]
+
+#### Criteria
+
+*Niet van toepassing*
+
+#### Indicatoren
+
+*Niet van toepassing*
+
+#### Voorschrift
+
+De Inspectie toetst of de organisatie, in ieder geval per categorie [^categorie-vormvrij-maar-relatie-hebben-selectieb] passende maatregelen heeft genomen om documenten: [^aw-artikel-4-1-lid-1]
+
+a) duurzaam toegankelijk te maken,
+
+b) te vernietigen.
+
+#### Criteria
+
+- In de passende maatregelen is opgenomen dat documenten zich in een [beheerde omgeving](/normen/01-beheer/) moeten bevinden.
+- In de passende maatregelen zijn in ieder geval de onderwerpen [overzicht](/normen/02-overzicht/), [vinden](/normen/05-vindbaarheid/) en beschikbaarstellen, [ordenen](/normen/03-ordeningsstructuur/), [metadateren](/normen/04-metadatering/), [vernietigen](/normen/06-vernietigen/) en [betrouwbaarheid](/normen/06-vernietigen/) opgenomen. [^aw-artikel-4-2-lid-2]
+- De passende maatregelen zijn opgesteld op basis van een [risicobenadering](/normen/).
+- Een categorie, waar passende maatregelen voor zijn genomen, heeft een relatie met een selectiebesluit.
+
+#### Indicatoren
+
+- Er is een informatiebeheerplan dat toetsbare doelstellingen verbindt aan een voortdurende verbetercyclus.[^aw-geconsolideerde-versie-memorie-toelichting-4]
+- De organisatie heeft archiveren by design geïmplementeerd.
+- Het is duidelijk welke passende maatregelen van toepassing zijn op verschillende categorieën overheidsinformatie.
+- Er zijn werkinstructies, procedures en handboeken voor het duurzaam toegankelijk maken en houden van documenten.
+- De categorieën komen overeen met categorieën documenten die korter dan tien jaar, langer dan tien jaar, of blijvend te bewaren zijn volgens een selectiebesluit, of komen overeen met categorieën documenten in een selectiebesluit.
+
+#### Voorschrift
+
+De Inspectie toetst of het verantwoordelijke overheidsorgaan de door hem vastgestelde beheerregels, inclusief de omschrijving van de passende maatregelen, openbaar heeft gemaakt. [^aw-artikel-4-2-lid-3]
+
+#### Criteria
+
+*Niet van toepassing*
+
+#### Indicatoren
+
+*Niet van toepassing*
+
+#### Voorschrift
+
+De Inspectie toetst of het verantwoordelijk overheidsorgaan inzichtelijk heeft welke categorieën documenten gemigreerd, geconverteerd of vervangen moeten worden. [^ab-artikelen-2-2-2-3] Alleen wanneer dergelijke categorieën bestaan, toetst de Inspectie of in de beheerregels een omschrijving is opgenomen van de passende maatregelen voor migratie, conversie en vervanging.
+
+#### Criteria
+
+*Niet van toepassing*
+
+#### Indicatoren
+
+*Niet van toepassing*
+
+#### Voorschrift
+
+De Inspectie toetst of in de beheerregels[^aw-artikel-4-2-lid-1] de beheertaken op zowel leidinggevend als uitvoerend niveau zijn beschreven. [^kamerstukken-2021-22-35968-2] Dit betreft in ieder geval een omschrijving van de volgende beheertaken: [^aw-artikel-4-2]
+
+- het (doen) ontwerpen van selectiebesluiten; [^kamerstukken-2021-22-35968-3]
+- het (doen) overbrengen van documenten naar een archiefdienst en (eventueel) het stellen van openbaarheidsbeperkingen voor documenten van die overbrenging; [^kamerstukken-2021-22-35968-3]
+- het opslaan en verwerken van documenten binnen de Europese Unie; [^ar-toelichting-algemeen-deel-h1-eisen]
+- het maken van een [overzicht](/normen/02-overzicht/), het [ordenen](/normen/03-ordeningsstructuur/) en het [metadateren](/normen/04-metadatering/). [^ar-toelichting-algemeen-deel-h1-eisen-2]
+
+#### Criteria
+
+- De beheerregels voor de beheertaken zijn actueel.
+- De beheerregels voor de beheertaken zijn volledig.
+- De verantwoordelijkheden voor de beheertaken zijn beschreven.
+- In een strategisch informatie overleg (SIO) [^ab-nota-toelichting-8], of een soortgelijk overleg, worden keuzes gemaakt over het ontwerp en de inrichting van de informatiehuishouding die van invloed zijn op de duurzame toegankelijkheid van documenten.[^ab-nota-toelichting-8]
+
+#### Indicatoren
+
+- Documenten zijn herleidbaar naar een categorie in het selectiebesluit.
+- De organisatie heeft geen achterstanden in de overbrenging van overheidsinformatie naar een archiefbewaarplaats.
+- De organisatie heeft inzichtelijk welke overheidsinformatie er in beheer is.
+
+#### Voorschrift
+
+De Inspectie toetst of in de beheerregels een nadere omschrijving is opgenomen over de wijze waarop het archiefbeheer van documenten [periodiek](/normen/08-periodieke-evaluatie/) wordt geëvalueerd[^heet-aw1995-kwaliteitssyteem], onderzocht en indien nodig wordt bijgesteld. [^aw-artikel-4-2-lid-2-2]
+
+#### Criteria
+
+*Niet van toepassing*
+
+#### Indicatoren
+
+*Niet van toepassing*
+
+### Feitelijk beheer
+
+#### Voorschrift
+
+De Inspectie toetst of alle [^aw-artikel-4-1-lid-2] door het verantwoordelijk overheidsorgaan opgemaakte en ontvangen documenten worden opgenomen in een beheerde omgeving [^hoeft-geen-systeem-zoals-documentmanagementsyste] waar zij duurzaam toegankelijk worden gemaakt en gehouden. [^aw-artikel-4-1-ab-artikel]
+
+#### Criteria
+
+- In een beheerde omgeving is een document:
+  - binnen een redelijke termijn [vindbaar](/normen/05-vindbaarheid/)[^ab-artikel-2-1-lid-1-3], beschikbaar[^ab-artikel-2-1-lid-1-4] en leesbaar[^ab-artikel-2-1-lid-1-5];
+  - opgenomen in een [overzicht](/normen/02-overzicht/); [^ar-artikel-2-3]
+  - [gemetadateerd](/normen/04-metadatering/); [^ab-artikel-2-1-sub-d]
+  - gekoppeld aan een [ordening](/normen/03-ordeningsstructuur/); [^ab-artikel-21-sub-d-ar]
+  - niet onderhevig aan verlies, dus tijdig gemigreerd, geconverteerd en vervangen; [^ab-artikel-2-1-lid-1-6]
+  - [betrouwbaar](/normen/06-vernietigen/); [^ab-artikel-2-1-lid-1-7]
+  - volgens een selectiebesluit [gecontroleerd vernietigd](/normen/06-vernietigen/). Dit geldt niet voor documenten die op elk moment mogen worden vernietigd. [^ab-art]
+
+#### Indicatoren
+
+*Niet van toepassing*
+
+## Reikwijdte
+
+Alle documenten moeten in beheer zijn. Ook de documenten die op elk moment mogen worden vernietigd.
+
+## Zie ook
+
+- Opname
+- Archiveren by design[^hyperlink-duto]
+- Beheerbeleid
+- [Vindbaar](/normen/05-vindbaarheid/)
+- Migratie en conversie
+- [Metadata](/normen/04-metadatering/)
+- [Overzicht](/normen/02-overzicht/)
+- [Ordening](/normen/03-ordeningsstructuur/)
+- [Kwaliteitssysteem / periodieke evaluatie](/normen/08-periodieke-evaluatie/)
+
+
+[^aw-artikel-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^ab-artikel-2-1-lid-1-2]: Ab, artikel 2.1, lid 1. Dit sluit aan bij de "Position Paper nieuwe Archiefwet", NEN commissie voor informatie- en archiefmanagement en de VNG Adviescommissie Archieven, onder H2, Toelichting "in control zijn". [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^functies-nationaal-archief]: Functies | Nationaal Archief [Bekijk bron](https://www.nationaalarchief.nl/archiveren/kennisbank/functies-registreren#collapse-162601)
+[^deze-toelichting-ontleend-kennisbank-nationaal-a]: Deze toelichting is ontleend aan de kennisbank van het Nationaal Archief. De algemene archiefnorm NEN-ISO 15489-1:2016 gebruikt andere begrippen die uitdrukken aan welke kenmerken documenten moeten voldoen om als gezaghebbend bewijs te kunnen dienen: documenten dienen authentiek, betrouwbaar, integer en bruikbaar te zijn en daartoe worden beheerd in systemen die betrouwbaar, veilig, afdoende, uitgebreid en systematisch zijn.
+[^kamerstukken-2018-19-35-112]: Kamerstukken II 2018/19, 35 112, nr. 2. Dit sluit tevens aan op artikel 6.1 van de novelle bij de Woo.
+[^aw-artikelen-4-1-4-2]: AW, artikelen 4.1 en 4.2 en de toelichting in de AR (AR, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen – pagina 36)
+[^verwijzing-kopje-risicoanalyse-introductie]: Verwijzing naar kopje risicoanalyse in de introductie.
+[^kamerstukken-2021-22-35968]: Kamerstukken II 2021/22, 35968, nr. 3, Beheerstrategie, p.15.
+[^aw-artikel-4-2-lid-1]: Aw, artikel 4.2, eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^categorie-vormvrij-maar-relatie-hebben-selectieb]: Categorie is vormvrij, maar moet wel een relatie hebben met het selectiebesluit.
+[^aw-artikel-4-2-lid-2]: AW, artikel 4.2, tweede lid, sub b. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^aw-geconsolideerde-versie-memorie-toelichting-4]: Aw, geconsolideerde versie, Memorie van toelichting, 4.3 Duurzame toegankelijkheid, beheerstrategie, p. 46.
+[^aw-artikel-4-2-lid-3]: Aw, artikel 4.2, derde lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^ab-artikelen-2-2-2-3]: Ab, artikelen 2.2, 2.3, 2.4. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^kamerstukken-2021-22-35968-2]: Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 4.3, Duurzame toegankelijkheid, beheerstrategie, 2e alinea.
+[^aw-artikel-4-2]: Aw, artikel 4.2. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^kamerstukken-2021-22-35968-3]: Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 2.2, Zorgdrager of verantwoordelijk overheidsorgaan.
+[^ar-toelichting-algemeen-deel-h1-eisen]: Ar, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten. Dit kan nog een hyperlink worden naar normblad over werken in de cloud.
+[^ar-toelichting-algemeen-deel-h1-eisen-2]: Ar, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten.
+[^ab-nota-toelichting-8]: Ab, Nota van Toelichting, 8. Implementatie, SIO.
+[^heet-aw1995-kwaliteitssyteem]: Dit heet in de AW1995 "kwaliteitssyteem".
+[^aw-artikel-4-2-lid-2-2]: Aw, artikel 4.2, tweede lid, sub c. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^aw-artikel-4-1-lid-2]: Aw, artikel 4.1, tweede lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^hoeft-geen-systeem-zoals-documentmanagementsyste]: Dit hoeft geen systeem te zijn zoals een documentmanagementsysteem. Een beheerde omgeving is een omgeving met functionaliteiten en voorzieningen waarmee een organisatie in staat is om documenten te beheren volgens de normen uit de archiefwet- en regelgeving.
+[^aw-artikel-4-1-ab-artikel]: Aw artikel 4.1 en Ab artikel 2.1; Kamerstukken 2022/23, 35968, nr. 8, Eerste nota van wijzigingen, Onderdeel C (artikel 4.1).
+[^ab-artikel-2-1-lid-1-3]: Ab, artikel 2.1, eerste lid, sub a. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-1-4]: Ab, artikel 2.1, eerste lid, sub b. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-1-5]: Ab, artikel 2.1, eerste lid, sub c. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ar-artikel-2-3]: Ar, artikel 2.3. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ab-artikel-2-1-sub-d]: Ab, artikel 2.1, sub d en Ar, artikel 2.5. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-21-sub-d-ar]: Ab, artikel 21, sub d en Ar, artikel 2.2. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-1-6]: Ab, artikel 2.1, eerste lid, sub f en artikelen 2.2, 2.3 en 2.4. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-1-7]: Ab, artikel 2.1, eerste lid, sub e. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-art]: AB, art. 4.1, derde lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^hyperlink-duto]: Hyperlink naar DUTO. [Bekijk bron](https://www.nationaalarchief.nl/archiveren/duto)

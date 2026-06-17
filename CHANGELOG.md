@@ -11,8 +11,13 @@ changelog volgt [Semantic Versioning][semver].
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-06-17
+
 - Normcontent verplaatst van YAML front matter naar markdown-body met
   vaste koppen; bronnen zijn nu standaard markdown-voetnoten. Validator
   en redacteursdocumentatie vernieuwd; training toegevoegd
   (`docs/training-contentbeheer.html`).
 - Eerste versie van het Toetsingskader Archiefwet als publieke Hugo-site.
+
+[Unreleased]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.1.0

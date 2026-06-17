@@ -18,3 +18,9 @@ repos:
         language: system
         files: ^content/normen/
         types: [markdown]
+      - id: validator-tests
+        name: Validator unittests
+        entry: python3 -m unittest discover -s tests -p "test_*.py"
+        language: system
+        pass_filenames: false
+        files: ^(scripts/validate-norms\.py|tests/test_.*\.py)$

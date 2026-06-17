@@ -7,6 +7,10 @@ resources/
 # Node.js
 node_modules/
 
+# Python
+__pycache__/
+*.pyc
+
 # OS files
 .DS_Store
 Thumbs.db
@@ -18,3 +22,4 @@ Thumbs.db
 
 # Claude Code
 CLAUDE.md
+.claude/settings.local.json

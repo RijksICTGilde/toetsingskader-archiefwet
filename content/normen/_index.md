@@ -20,10 +20,10 @@ Per normpagina vindt u de volgende onderdelen:
 
 - **Kern van de norm** - een korte samenvatting van waar de norm over gaat
 - **Toelichting** - een uitgebreidere uitleg van de norm
-- **Normuitleg** - een gedetailleerde uitwerking met per onderdeel:
+- **Normuitleg** - een gedetailleerde uitwerking, per thema, met:
   - *Voorschrift* - wat de norm voorschrijft
-  - *Criterium* - waaraan getoetst wordt
-  - *Indicator* - hoe wordt vastgesteld of aan het criterium is voldaan
+  - *Criteria* - waaraan getoetst wordt
+  - *Indicatoren* - hoe wordt vastgesteld of aan het criterium is voldaan
 - **Reikwijdte** - op welke documenten het voorschrift van toepassing is
 - **Zie ook** - verwijzingen naar andere relevante normen of onderwerpen
 {{< /callout >}}

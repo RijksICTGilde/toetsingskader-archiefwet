@@ -13,6 +13,9 @@ categories:
 
 developmentStatus: beta
 
+softwareVersion: "0.1.0"
+releaseDate: "2026-06-17"
+
 softwareType: "standalone/web"
 
 description:
