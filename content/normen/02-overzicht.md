@@ -11,9 +11,9 @@ synoniemen:
 
 ## Toelichting
 
-Dit is mijn eigen zin.[^aw-artikel-4-1-lid-1]
+Dit is mijn eigen zin.[^mijn-bron]
 
-[^aw-artikel-4-1-lid-1]: AW, artikel 4.1, lid 1. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^mijn-bron]: Eigen aantekening als oefening. Zie ook [deze website](https:www.inspectie-oe.nl).
 
 ## Normuitleg
 
