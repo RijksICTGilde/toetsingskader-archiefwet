@@ -13,28 +13,47 @@
   }
 }
 
-/* Norm page: alleen project-specifieke decoratie; spacing volgt theme defaults. */
-.norm-uitleg > h2 {
+/* Norm page: project-specifieke decoratie op de markdown-body-structuur.
+   (Voorheen op .norm-* wrappers; in het markdown-formaat zijn de koppen
+   gewone h2/h3/h4, dus we scopen via .norm + heading-ids.) */
+
+/* Normuitleg-kop met accentlijn. */
+.norm h2#normuitleg {
   border-block-end: 2px solid var(--color-primary);
   padding-block-end: 0.5rem;
 }
 
-.norm-uitleg article h3,
-.norm-voorschrift > h4 {
+/* Thema-koppen (h3, alleen binnen Normuitleg) en Voorschrift-koppen in
+   accentkleur. */
+.norm h3,
+.norm h4[id^="voorschrift"] {
   color: var(--color-primary);
 }
 
-.norm-voorschrift {
+/* Scheidingslijn boven elk Voorschrift, behalve het eerste van een thema. */
+.norm h4[id^="voorschrift"] {
   padding-block-start: 0.75rem;
   border-block-start: 1px solid var(--color-border);
 }
 
-.norm-voorschrift:first-child {
+.norm h3 + h4[id^="voorschrift"] {
   border-block-start: none;
   padding-block-start: 0;
 }
 
-.norm-criterium,
-.norm-indicator {
-  padding-inline-start: 1rem;
+/* Criteria en Indicatoren springen in t.o.v. Voorschrift — zowel de kop als
+   de eropvolgende inhoud (lijst of "Niet van toepassing"). margin (niet
+   padding) zodat lijst-bullets op hun plek blijven. */
+.norm h4[id^="criteria"],
+.norm h4[id^="indicatoren"],
+.norm h4[id^="criteria"] + *,
+.norm h4[id^="indicatoren"] + * {
+  margin-inline-start: 1rem;
+}
+
+/* Referentie-term: klikbaar naar het lijstitem, maar in tekstkleur i.p.v.
+   de standaard linkkleur (de dotted underline komt uit het thema). */
+.norm a.ref-term,
+.norm a.ref-term:hover {
+  color: inherit;
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Training contentbeheer — Toetsingskader Archiefwet</title>
+  <title>Training contentbeheer - Toetsingskader Archiefwet</title>
   <style>
     body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
            max-width: 46rem; margin: 0 auto; padding: 1.5rem;
@@ -32,8 +32,8 @@
 
 <header>
   <h1>Training contentbeheer</h1>
-  <p><strong>Toetsingskader Archiefwet</strong> — voor redacteuren.
-     Duur: ± 2 uur inclusief oefeningen. Geen technische voorkennis nodig.</p>
+  <p><strong>Toetsingskader Archiefwet</strong>, voor redacteuren.
+     Geen technische voorkennis nodig.</p>
   <nav>
     <a href="#deel1">1.&nbsp;Wat is GitHub?</a>
     <a href="#deel2">2.&nbsp;Handleiding</a>
@@ -42,14 +42,14 @@
 </header>
 
 <section id="deel1">
-  <h2>Deel 1 — Wat is GitHub en hoe werkt versiebeheer?</h2>
+  <h2>Deel 1: Wat is GitHub en hoe werkt versiebeheer?</h2>
 
   <p>De teksten van het toetsingskader staan op <strong>GitHub</strong>: een
   website waar bestanden samen met hun volledige geschiedenis worden bewaard.
   Elke wijziging wordt vastgelegd: wie, wanneer, wat en waarom. Er gaat nooit
   iets verloren en alles is terug te draaien.</p>
 
-  <h3>Vier begrippen</h3>
+  <h3>Vijf begrippen</h3>
   <table>
     <tr><th>Begrip</th><th>Betekenis</th></tr>
     <tr><td><strong>Repository</strong></td>
@@ -62,6 +62,10 @@
     <tr><td><strong>Check</strong></td>
         <td>Een automatische controle die elk voorstel naleest op fouten in de
             opbouw (kop vergeten, voetnoot zonder bron, …).</td></tr>
+    <tr><td><strong>Release</strong></td>
+        <td>Een gepubliceerde, genummerde momentopname van de site (bijvoorbeeld
+            <code>v0.1.0</code>): een set doorgevoerde wijzigingen samen onder
+            één versienummer.</td></tr>
   </table>
 
   <h3>De route van elke wijziging</h3>
@@ -69,11 +73,17 @@
     <li>Jij bewerkt een pagina op github.com.</li>
     <li>GitHub maakt er een <strong>voorstel</strong> (pull request) van.</li>
     <li>De <strong>automatische controle</strong> leest het na: groen vinkje
-        (in orde) of rood kruis (er klopt iets niet — met uitleg in het
+        (in orde) of rood kruis (er klopt iets niet, met uitleg in het
         Nederlands, inclusief regelnummer).</li>
     <li>Een <strong>collega keurt goed</strong>.</li>
     <li>Daarna pas komt de wijziging op de website.</li>
   </ol>
+
+  <p>Losse wijzigingen worden van tijd tot tijd gebundeld tot een
+  <strong>release</strong>: een genummerde versie (bijvoorbeeld <code>v0.1.0</code>)
+  die vastlegt hoe de site er op dat moment uitzag. Zo blijft navolgbaar wat er
+  in welke versie veranderde. Hoe je releases leest en zelf aanmaakt, staat in
+  2.7.</p>
 
   <div class="gerust">
     <strong>Je kunt niets kapotmaken.</strong> De website verandert nooit
@@ -83,7 +93,7 @@
 </section>
 
 <section id="deel2">
-  <h2>Deel 2 — Handleiding (naslag)</h2>
+  <h2>Deel 2: Handleiding (naslag)</h2>
 
   <h3>2.1 Een pagina vinden en bewerken</h3>
   <ol>
@@ -128,13 +138,13 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
   <h3>2.3 Bronnen toevoegen (voetnoten)</h3>
   <p>Zet <code>[^naam]</code> direct achter het woord dat je onderbouwt en zet
   de bron eronder. De nummering en de bronnenlijst onderaan de pagina gaan
-  vanzelf — die hoef je nooit zelf bij te houden.</p>
+  vanzelf. Die hoef je nooit zelf bij te houden.</p>
   <pre><code>Een document moet in beheer zijn.[^aw-4-1-lid-1]
 
 [^aw-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)</code></pre>
   <ul>
     <li><strong>Zelfde bron nog een keer gebruiken?</strong> Typ alleen opnieuw
-        <code>[^aw-4-1-lid-1]</code> — de regel eronder hoeft niet herhaald.</li>
+        <code>[^aw-4-1-lid-1]</code>. De regel eronder hoeft niet herhaald.</li>
     <li><strong>Bron zonder link?</strong> Mag: laat het
         <code>[Bekijk bron](…)</code>-deel weg.</li>
     <li><strong>Namen:</strong> kleine letters, cijfers en koppeltekens,
@@ -152,11 +162,11 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
   </ol>
 
   <h3>2.5 De automatische controle lezen</h3>
-  <p>Onderaan je pull request verschijnt na ongeveer een minuut het resultaat:</p>
+  <p>Onderaan je pull request verschijnt na korte tijd het resultaat:</p>
   <ul>
-    <li><strong>Groen vinkje</strong> — alles in orde. Wachten op goedkeuring
+    <li><strong>Groen vinkje</strong>: alles in orde. Wachten op goedkeuring
         van een collega.</li>
-    <li><strong>Rood kruis</strong> — klik op <strong>"Details"</strong>. Je
+    <li><strong>Rood kruis</strong>: klik op <strong>"Details"</strong>. Je
         ziet dan een melding zoals:
         <pre><code>04-metadatering.md:23: Gebruik '#### Criteria' (meervoud) in plaats van '#### Criterium'</code></pre>
         Dat betekent: bestand <code>04-metadatering.md</code>, regel 23.
@@ -184,16 +194,50 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
         <td>"Front matter is geen geldige YAML…"</td>
         <td>Aanhalingstekens om de waarde terugzetten</td></tr>
   </table>
+
+  <h3 id="rel">2.7 Releases en versies</h3>
+  <p>Een <strong>release</strong> is een genummerde momentopname van de site.
+  Waar een pull request één wijziging doorvoert, bundelt een release een set
+  doorgevoerde wijzigingen onder één versienummer, zodat naderhand precies te
+  zien is wat er in welke versie zat.</p>
+  <p>Het versienummer heeft drie delen, bijvoorbeeld <code>v0.1.0</code>:</p>
+  <ul>
+    <li>het <strong>laatste</strong> getal loopt op bij kleine correcties;</li>
+    <li>het <strong>middelste</strong> getal bij nieuwe of uitgebreide inhoud;</li>
+    <li>het <strong>eerste</strong> getal bij grote, ingrijpende wijzigingen.</li>
+  </ul>
+  <p>Wat er per versie veranderde, staat in <code>CHANGELOG.md</code> in de
+  repository en op de <strong>Releases</strong>-pagina van GitHub
+  (<code>github.com/RijksICTGilde/toetsingskader-archiefwet/releases</code>).</p>
+
+  <p><strong>Zelf een release aanmaken</strong> (in de GitHub UI):</p>
+  <ol>
+    <li>Open de repository op GitHub en klik rechts op <strong>"Releases"</strong>,
+        daarna op <strong>"Draft a new release"</strong>.</li>
+    <li>Bij <strong>"Choose a tag"</strong>: typ het nieuwe versienummer
+        (bijvoorbeeld <code>v0.1.0</code>) en kies <strong>"Create new tag on
+        publish"</strong>. Laat het doel op <code>main</code> staan.</li>
+    <li>Vul een <strong>titel</strong> in (bijvoorbeeld <code>v0.1.0</code>) en
+        beschrijf in het tekstvak kort de wijzigingen. Met de knop
+        <strong>"Generate release notes"</strong> vult GitHub automatisch de
+        doorgevoerde pull requests sinds de vorige release in; vul ze zo nodig
+        aan vanuit <code>CHANGELOG.md</code>.</li>
+    <li>Klik <strong>"Publish release"</strong>.</li>
+  </ol>
+  <div class="tip"><strong>Tip:</strong> werk het versienummer in
+  <code>CHANGELOG.md</code> (en zo nodig <code>publiccode.yml</code>) bij in een
+  gewone pull request <em>voordat</em> je de release publiceert, zodat de release
+  en de documentatie hetzelfde versienummer noemen.</div>
 </section>
 
 <section id="deel3">
-  <h2>Deel 3 — Oefeningen</h2>
-  <p>Drie opdrachten, samen ± 1 uur. De trainer begeleidt en ruimt na afloop
-  de oefen-voorstellen op (sluiten zonder doorvoeren) — de website blijft dus
+  <h2>Deel 3: Oefeningen</h2>
+  <p>Vier opdrachten. De trainer begeleidt en ruimt na afloop
+  de oefen-voorstellen op (sluiten zonder doorvoeren). De website blijft dus
   ongewijzigd.</p>
 
   <details open>
-    <summary>Oefening A — Tekst wijzigen (± 15 min)</summary>
+    <summary>Oefening A: Tekst wijzigen</summary>
     <p><strong>Doel:</strong> een pagina openen, bewerken en je wijziging in de
     preview zien.</p>
     <ol>
@@ -206,7 +250,7 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
   </details>
 
   <details>
-    <summary>Oefening B — Bron toevoegen (± 20 min)</summary>
+    <summary>Oefening B: Bron toevoegen</summary>
     <p><strong>Doel:</strong> een voetnoot maken.</p>
     <ol>
       <li>Zet in dezelfde bewerking achter jouw zin: <code>[^mijn-bron]</code>.</li>
@@ -219,7 +263,7 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
   </details>
 
   <details>
-    <summary>Oefening C — Voorstel indienen + controle lezen (± 25 min)</summary>
+    <summary>Oefening C: Voorstel indienen + controle lezen</summary>
     <p><strong>Doel:</strong> de hele route doorlopen, inclusief een bewuste fout
     herstellen.</p>
     <ol>
@@ -236,6 +280,22 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
     </ol>
     <p><strong>Klaar wanneer:</strong> groene check én een toegewezen reviewer.</p>
   </details>
+
+  <details>
+    <summary>Oefening D: Een release lezen</summary>
+    <p><strong>Doel:</strong> de huidige versie vinden en de bijbehorende
+    release-notes lezen. Je maakt hierbij niets aan; je leest alleen.</p>
+    <ol>
+      <li>Ga naar de repository op GitHub en klik rechts op
+          <strong>"Releases"</strong>.</li>
+      <li>Open de bovenste (meest recente) release en lees de notes: welk
+          versienummer is het, en wat is er in die versie veranderd?</li>
+      <li>Open <code>CHANGELOG.md</code> in de repository en zoek hetzelfde
+          versienummer op. Komt de beschrijving overeen?</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> je het huidige versienummer kunt noemen en
+    in eigen woorden kunt zeggen wat er in die release zat.</p>
+  </details>
 </section>
 
 <footer>
@@ -243,6 +303,9 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
   (<code>github.com/RijksICTGilde/toetsingskader-archiefwet/issues</code>) of
   mail de beheerder. Naslag: zie ook <code>CONTRIBUTING.md</code> in de
   repository.</p>
+  <p>Deze training hoort bij release <strong>v0.1.0</strong> van het
+  Toetsingskader Archiefwet (juni 2026). Wijzigingen per versie staan in
+  <code>CHANGELOG.md</code>.</p>
 </footer>
 
 </body>

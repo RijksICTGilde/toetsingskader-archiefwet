@@ -5,11 +5,26 @@ weight: 8
 norm_id: "8"
 norm_titel: "Periodieke evaluatie"
 kern: "[PLACEHOLDER: vul kern in]"
-toelichting: "[PLACEHOLDER: vul toelichting in]"
 synoniemen:
   - "[PLACEHOLDER: vul synoniemen in]"
-normuitleg:
-  - titel: "[PLACEHOLDER: optioneel subkopje]"
-    voorschriften:
-      - tekst: "[PLACEHOLDER: vul voorschrift in]"
 ---
+
+## Toelichting
+
+[PLACEHOLDER: vul toelichting in]
+
+## Normuitleg
+
+### [PLACEHOLDER: vul thema in]
+
+#### Voorschrift
+
+[PLACEHOLDER: vul voorschrift in]
+
+#### Criteria
+
+*Niet van toepassing*
+
+#### Indicatoren
+
+*Niet van toepassing*

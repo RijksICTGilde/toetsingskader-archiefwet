@@ -1,95 +1,85 @@
 {{ define "main" }}
 {{ $page := . }}
-<article>
-  <h1>{{ .Title }}</h1>
+
+{{/* ---------------------------------------------------------------------
+     Voetnoten → thema-referentie-UX.
+
+     De body wordt in markdown geschreven met Goldmark-voetnoten ([^id]).
+     Goldmark rendert die als genummerde superscripts + een platte lijst
+     onderaan. Dit project toont liever de reference-UX van het thema:
+     géén zichtbare cijfers in de tekst, maar een onderstreept woord met
+     hover-tooltip (.ref-term/.ref-tooltip) en een uitklapbare lijst
+     onderaan (.references). Daarom transformeren we de gerenderde
+     `.Content` server-side (geen JS, CSP-veilig) naar die thema-markup.
+
+     Kandidaat voor upstream: het thema laten renderen vanuit voetnoten
+     i.p.v. de eigen {ref:N}/referenties-front matter.
+     --------------------------------------------------------------------- */}}
+{{ $content := .Content }}
+
+{{/* 1. Per voetnoot: brontekst uit de <li id="fn:N"> halen (zonder de
+       ↩-backlinks) en elke inline <sup> vervangen door een hover-tooltip
+       op het voorafgaande woord. De originele anker-id (fnref…:N) blijft
+       behouden zodat de ↩-backlinks blijven werken. */}}
+{{ $defs := findRESubmatch `(?s)<li id="fn:(\d+)">\s*<p>(.*?)(?:&#160;)?<a href="#fnref[0-9]*:\d+" class="footnote-backref"` $content }}
+{{ range $defs }}
+  {{ $n := index . 1 }}
+  {{ $text := index . 2 | strings.TrimSpace }}
+  {{/* Splits de brontekst van de "Bekijk bron"-link, zodat de link een
+       direct kind van .ref-tooltip wordt (thema stylet die als vet blok
+       met extern-link-icoon via rel="external"). */}}
+  {{ $textOnly := $text }}
+  {{ $linkHTML := "" }}
+  {{ $lm := findRESubmatch `(?s)^(.*?)\s*(<a href="[^"]+"[^>]*>Bekijk bron</a>)\s*$` $text }}
+  {{ with $lm }}
+    {{ $textOnly = index (index . 0) 1 }}
+    {{ $linkHTML = index (index . 0) 2 }}
+  {{ end }}
+  {{/* Het woord wordt een link naar het referentielijst-item (#fn:N); de
+       accordeon klapt daar automatisch open (theme referenties.js + native
+       <details>-gedrag). De anker-id (fnref…:N) blijft op de wrapper voor
+       de ↩-backlinks vanuit de lijst. */}}
+  {{ $pattern := printf `([^\s<>]*)<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
+  {{ $repl := printf `<span class="ref-wrapper" id="$2"><a href="#fn:%s" class="ref-term">$1</a><span class="ref-tooltip" role="note"><span>%s</span>%s</span></span>` $n $textOnly $linkHTML }}
+  {{ $content = replaceRE $pattern $repl $content }}
+{{ end }}
+
+{{/* 2. Het footnotes-blok uit de body lichten en als thema-accordeon
+       onderaan tonen (ná de feedback, net als voorheen de referenties). */}}
+{{ $refs := "" }}
+{{ $block := findRESubmatch `(?s)<div class="footnotes" role="doc-endnotes">\s*<hr\s*/?>\s*(<ol>.*?</ol>)\s*</div>` $content }}
+{{ with $block }}
+  {{ $ol := index (index . 0) 1 }}
+  {{ $refs = printf `<section id="referenties" class="references" aria-label="Referenties"><details><summary>Referenties</summary>%s</details></section>` $ol }}
+  {{ $content = replaceRE `(?s)<div class="footnotes" role="doc-endnotes">.*?</ol>\s*</div>` "" $content }}
+{{ end }}
+
+{{/* TOC opbouwen uit .Fragments. Begint de body bij h2 (geen h1), dan zit
+     er een lege root-heading boven de h2's; die slaan we over. */}}
+{{ $headings := .Fragments.Headings }}
+{{ with $headings }}{{ $first := index . 0 }}{{ if not $first.ID }}{{ $headings = $first.Headings }}{{ end }}{{ end }}
+{{ $hasToc := or .Params.kern (gt (len $headings) 0) }}
+
+<article class="norm{{ if .Params.wide }} wide{{ end }}">
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{- if $hasToc -}}
+    <button class="toc-toggle" aria-expanded="false" aria-controls="toc">
+      {{- partial "icon.html" "toc-open" -}}
+      {{- partial "icon.html" "toc-close" -}}
+      <span class="visually-hidden">Inhoudsopgave tonen</span>
+    </button>
+    {{- end -}}
+  </header>
 
   {{ with .Params.kern }}
   <blockquote id="kern" class="callout">
     <header><span class="title">Kern van de norm</span></header>
-    <div class="content">
-      {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
-    </div>
+    <div class="content">{{ . | markdownify }}</div>
   </blockquote>
   {{ end }}
 
-  {{ with .Params.toelichting }}
-  <blockquote id="toelichting" class="callout muted corner-bottom-right">
-    <header><span class="title">Toelichting</span></header>
-    <div class="content">
-      {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
-    </div>
-  </blockquote>
-  {{ end }}
-
-  {{/* Synoniemen worden bewust niet meer getoond op de pagina; ze
-       blijven in de front matter staan en worden meegenomen in de
-       zoekindex (zie layouts/index.json). */}}
-
-  {{ with .Params.normuitleg }}
-  <div id="normuitleg" class="norm-uitleg">
-    <h2>Normuitleg</h2>
-    {{ range . }}
-    <article>
-      {{ with .titel }}
-      <h3 id="{{ . | urlize }}">{{ . }}</h3>
-      {{ end }}
-
-      {{ range .voorschriften }}
-      <div class="norm-voorschrift">
-        <h4>Voorschrift</h4>
-        {{ partial "reftext.html" (dict "tekst" .tekst "page" $page) }}
-      </div>
-
-      <div class="norm-criterium">
-        <h4>Criterium</h4>
-        {{ with .criterium }}
-        <ul>
-          {{ range . }}
-          <li>{{ partial "reftext.html" (dict "tekst" . "page" $page) }}</li>
-          {{ end }}
-        </ul>
-        {{ else }}
-        <p><em>Niet van toepassing</em></p>
-        {{ end }}
-      </div>
-
-      <div class="norm-indicator">
-        <h4>Indicatoren</h4>
-        {{ with .indicatoren }}
-        <ul>
-          {{ range . }}
-          <li>{{ partial "reftext.html" (dict "tekst" . "page" $page) }}</li>
-          {{ end }}
-        </ul>
-        {{ else }}
-        <p><em>Niet van toepassing</em></p>
-        {{ end }}
-      </div>
-      {{ end }}
-    </article>
-    {{ end }}
-  </div>
-  {{ end }}
-
-  {{ with .Params.reikwijdte }}
-  <div id="reikwijdte" class="norm-reikwijdte">
-    <h2>Reikwijdte</h2>
-    {{ partial "reftext.html" (dict "tekst" . "page" $page) }}
-  </div>
-  {{ end }}
-
-  {{ with .Params.gerelateerde_onderwerpen }}
-  <div id="zie-ook" class="norm-gerelateerd">
-    <h2>Zie ook</h2>
-    <ul>
-      {{ range . }}
-      <li>{{ with .url }}<a href="{{ strings.TrimPrefix "/" . | relURL }}">{{ end }}{{ partial "reftext.html" (dict "tekst" .titel "page" $page) }}{{ with .url }}</a>{{ end }}</li>
-      {{ end }}
-    </ul>
-  </div>
-  {{ end }}
-
-  {{ .Content }}
+  {{ $content | safeHTML }}
 
   {{ with site.Params.feedback }}
   <aside id="feedback" class="norm-feedback" aria-label="Feedback">
@@ -101,7 +91,7 @@
   </aside>
   {{ end }}
 
-  {{ partial "referenties.html" $page }}
+  {{ with $refs }}{{ . | safeHTML }}{{ end }}
 
   {{- $pageNav := partial "page-nav.html" . -}}
   {{- $lastmod := partial "lastmod.html" . -}}
@@ -113,25 +103,26 @@
   {{- end -}}
 </article>
 
-<aside class="toc is-open" aria-label="Op deze pagina">
+{{- if $hasToc -}}
+<aside id="toc" class="toc is-open" aria-label="Op deze pagina">
   <h2>Op deze pagina</h2>
-  <ul class="norm-toc">
-    {{- with .Params.kern }}<li><a href="#kern">Kern van de norm</a></li>{{ end -}}
-    {{- with .Params.toelichting }}<li><a href="#toelichting">Toelichting</a></li>{{ end -}}
-    {{- with .Params.normuitleg }}
-    <li>
-      <a href="#normuitleg">Normuitleg</a>
-      <ul>
-        {{- range . -}}
-        {{- with .titel }}<li><a href="#{{ . | urlize }}">{{ . }}</a></li>{{ end -}}
-        {{- end }}
-      </ul>
-    </li>
-    {{- end -}}
-    {{- with .Params.reikwijdte }}<li><a href="#reikwijdte">Reikwijdte</a></li>{{ end -}}
-    {{- with .Params.gerelateerde_onderwerpen }}<li><a href="#zie-ook">Zie ook</a></li>{{ end -}}
-    {{- with site.Params.feedback }}<li><a href="#feedback">Feedback</a></li>{{ end -}}
-    {{- if and $page.Params.show_referenties $page.Params.referenties }}<li><a href="#referenties">Referenties</a></li>{{ end -}}
-  </ul>
+  <nav>
+    <ul>
+      {{- with .Params.kern }}<li><a href="#kern">Kern van de norm</a></li>{{ end -}}
+      {{- range $headings -}}
+      <li>
+        <a href="#{{ .ID }}">{{ .Title }}</a>
+        {{- with .Headings -}}
+        <ul>
+          {{- range . -}}<li><a href="#{{ .ID }}">{{ .Title }}</a></li>{{- end -}}
+        </ul>
+        {{- end -}}
+      </li>
+      {{- end -}}
+      {{- with $refs }}<li><a href="#referenties">Referenties</a></li>{{ end -}}
+      {{- with site.Params.feedback }}<li><a href="#feedback">Feedback</a></li>{{ end -}}
+    </ul>
+  </nav>
 </aside>
+{{- end -}}
 {{ end }}
