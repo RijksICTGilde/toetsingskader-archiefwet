@@ -12,6 +12,7 @@ synoniemen:
 ## Toelichting
 
 [PLACEHOLDER: vul toelichting in][^aw-artikel-4-1-lid-1]
+Hoi Ravi en Joeri
 
 [^aw-artikel-4-1-lid-1]: AW, artikel 4.1, lid 1. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
