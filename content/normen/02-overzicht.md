@@ -13,7 +13,7 @@ synoniemen:
 
 Dit is mijn eigen zin.[^mijn-bron]
 
-[^mijn-bron]: Eigen aantekening als oefening. Zie ook [deze website](https:www.inspectie-oe.nl).
+[^mijn-bron]: Eigen aantekening als oefening. Zie ook [deze website](https://www.inspectie-oe.nl).
 
 ## Normuitleg
 
