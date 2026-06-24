@@ -100,22 +100,25 @@
     base.styles = styles
     base.info = { title: data.titel, author: 'Inspectie Overheidsinformatie en Erfgoed', subject: 'Versie: ' + (data.versie || '') }
     base.header = function () {
-      // Logo gecentreerd bovenaan elke pagina (running letterhead).
+      // Logo gecentreerd bovenaan elke pagina (running letterhead) + dunne
+      // scheidingslijn eronder die de kopband afkadert.
       return {
-        columns: [
-          { text: '', width: '*' },
-          { svg: window.TKPDF.PDF_LOGO_SVG, width: 28 },
-          { text: '', width: '*' }
+        stack: [
+          { columns: [{ text: '', width: '*' }, { svg: window.TKPDF.PDF_LOGO_SVG, width: 28 }, { text: '', width: '*' }] },
+          { canvas: [{ type: 'line', x1: 48, y1: 8, x2: 547, y2: 8, lineWidth: 0.5, lineColor: '#dddddd' }] }
         ],
-        margin: [0, 0, 0, 0]
+        margin: [0, 14, 0, 0]
       }
     }
     base.footer = function (currentPage, pageCount) {
+      // Dunne scheidingslijn + alleen paginanummer (versie/datum staan op de
+      // titelpagina, niet in de voet).
       return {
-        columns: [
-          { text: data.titel, fontSize: 8, color: '#999999', margin: [48, 0, 0, 0] },
-          { text: 'Pagina ' + currentPage + ' van ' + pageCount, alignment: 'right', fontSize: 8, color: '#999999', margin: [0, 0, 48, 0] }
-        ]
+        stack: [
+          { canvas: [{ type: 'line', x1: 48, y1: 0, x2: 547, y2: 0, lineWidth: 0.5, lineColor: '#dddddd' }] },
+          { text: 'Pagina ' + currentPage + ' van ' + pageCount, alignment: 'center', fontSize: 8, color: '#999999', margin: [0, 5, 0, 0] }
+        ],
+        margin: [0, 6, 0, 0]
       }
     }
     return base
