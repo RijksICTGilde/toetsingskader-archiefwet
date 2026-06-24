@@ -87,7 +87,7 @@
   function docDefinition(data) {
     var base = data.kind === 'kader' ? buildKader(data) : buildNorm(data)
     base.pageSize = 'A4'
-    base.pageMargins = [48, 72, 48, 56]
+    base.pageMargins = [48, 104, 48, 56]
     base.defaultStyle = { font: 'ROSans', fontSize: 10.5, color: '#1a1a1a' }
     base.styles = styles
     base.info = { title: data.titel, author: 'Inspectie Overheidsinformatie en Erfgoed', subject: 'Versie: ' + (data.versie || '') }

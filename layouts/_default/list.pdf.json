@@ -10,10 +10,14 @@
       "kern_html" $kern
       "body_html" .Content) -}}
 {{- end -}}
+{{- /* Alleen de lead-alinea als intro; de normen-grid/leeswijzer-shortcodes
+       weglaten (die zouden als dubbele koppen vóór de echte normen komen). */ -}}
+{{- $intro := "" -}}
+{{- with findRE `(?s)<p>.*?</p>` .Content 1 }}{{ $intro = index . 0 }}{{ end -}}
 {{- dict
   "kind" "kader"
   "titel" "Toetsingskader Archiefwet 2026"
-  "intro_html" (.Content | default "")
+  "intro_html" $intro
   "url" .Permalink
   "versie" (site.Params.versie | default "")
   "normen" $items
