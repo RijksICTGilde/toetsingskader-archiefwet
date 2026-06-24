@@ -26,7 +26,7 @@ vm.runInContext(read('assets/js/pdf-assets.js'), sandbox)
 async function renderVendored(json, out){
   const dd = await build(json)
   // strip header/footer functions referencing window.TKPDF of outer realm -> reuse sandbox TKPDF logo
-  dd.header = (function(cp){ return cp===1 ? { image: sandbox.window.TKPDF.PDF_LOGO, width:150, margin:[48,20,0,0] } : null } )
+  dd.header = (function(cp){ return cp===1 ? { svg: sandbox.window.TKPDF.PDF_LOGO_SVG, width:32, margin:[48,20,0,0] } : null } )
   return await new Promise((resolve,reject)=>{
     try {
       sandbox.addVirtualFileSystem(sandbox.window.TKPDF.PDF_VFS)

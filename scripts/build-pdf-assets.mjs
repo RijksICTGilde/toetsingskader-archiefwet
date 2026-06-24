@@ -11,9 +11,11 @@ const b64 = (p) => readFileSync(join(root, p)).toString('base64')
 const vfs = {
   'ro-sans-regular.ttf': b64('assets/fonts/ro-sans-regular.ttf'),
   'ro-sans-bold.ttf': b64('assets/fonts/ro-sans-bold.ttf'),
-  'ro-sans-italic.ttf': b64('assets/fonts/ro-sans-italic.ttf'),
-  'ro-logo.png': b64('assets/images/ro-logo.png')
+  'ro-sans-italic.ttf': b64('assets/fonts/ro-sans-italic.ttf')
 }
+
+// Officieel Rijksoverheid-lint-logo (SVG) — scherp in de PDF via pdfMake.
+const logoSvg = readFileSync(join(root, 'assets/images/logo-rijksoverheid.svg'), 'utf8').trim()
 
 const fonts = {
   ROSans: {
@@ -31,7 +33,7 @@ const out = `// GEGENEREERD door scripts/build-pdf-assets.mjs - niet handmatig b
   window.TKPDF = window.TKPDF || {};
   window.TKPDF.PDF_VFS = vfs;
   window.TKPDF.PDF_FONTS = fonts;
-  window.TKPDF.PDF_LOGO = 'data:image/png;base64,' + vfs['ro-logo.png'];
+  window.TKPDF.PDF_LOGO_SVG = ${JSON.stringify(logoSvg)};
 })();
 `
 writeFileSync(join(root, 'assets/js/pdf-assets.js'), out)

@@ -54,8 +54,9 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.ok(dd.header(1))
   assert.equal(dd.header(2), null)
   assert.ok(dd.footer(1, 3).columns)
-  // logo ingebed
-  assert.match(dd.header(1).image, /^data:image\/png;base64,/)
+  // logo ingebed (officieel lint-SVG)
+  assert.ok(dd.header(1).svg)
+  assert.match(dd.header(1).svg, /^<svg/)
 })
 
 test('kader-doc: 8 normen met pageBreaks', async () => {
