@@ -60,10 +60,16 @@ jobs:
           hugo version
           htmltest --version
 
+      - name: Determine version from git tag
+        # Alleen een echte tag exporteren; geen tag → hugo.yaml-default (geen hash).
+        run: |
+          V="$(git describe --tags --abbrev=0 2>/dev/null || true)"
+          if [ -n "$V" ]; then echo "HUGO_PARAMS_VERSIE=$V" >> "$GITHUB_ENV"; fi
+
       - name: Build site
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
-        run: HUGO_PARAMS_VERSIE="$(git describe --tags --always)" hugo --gc --minify --logLevel warning
+        run: hugo --gc --minify --logLevel warning
 
       - name: Test links
-        run: HUGO_PARAMS_VERSIE="$(git describe --tags --always)" hugo --minify --quiet --baseURL / --destination .htmltest/public && htmltest
+        run: hugo --minify --quiet --baseURL / --destination .htmltest/public && htmltest
