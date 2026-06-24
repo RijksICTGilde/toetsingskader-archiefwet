@@ -45,7 +45,7 @@
 {{ end }}
 
 {{/* 2. Het footnotes-blok uit de body lichten en als thema-accordeon
-       onderaan tonen (ná de feedback, net als voorheen de referenties). */}}
+       onderaan tonen (net als voorheen de referenties). */}}
 {{ $refs := "" }}
 {{ $block := findRESubmatch `(?s)<div class="footnotes" role="doc-endnotes">\s*<hr\s*/?>\s*(<ol>.*?</ol>)\s*</div>` $content }}
 {{ with $block }}
@@ -89,16 +89,6 @@
 
   {{ $content | safeHTML }}
 
-  {{ with site.Params.feedback }}
-  <aside id="feedback" class="norm-feedback" aria-label="Feedback">
-    <h2>Feedback</h2>
-    <p>Heeft u opmerkingen of suggesties over deze norm? We horen het graag.</p>
-    {{ with .email }}
-    <a href="mailto:{{ . }}?subject={{ printf "Feedback: %s" $page.Title | querify "s" | strings.TrimPrefix "s=" }}" class="feedback-link">Stuur uw feedback per e-mail</a>
-    {{ end }}
-  </aside>
-  {{ end }}
-
   {{ with $refs }}{{ . | safeHTML }}{{ end }}
 
   {{- $pageNav := partial "page-nav.html" . -}}
@@ -128,7 +118,6 @@
       </li>
       {{- end -}}
       {{- with $refs }}<li><a href="#referenties">Referenties</a></li>{{ end -}}
-      {{- with site.Params.feedback }}<li><a href="#feedback">Feedback</a></li>{{ end -}}
     </ul>
   </nav>
 </aside>
