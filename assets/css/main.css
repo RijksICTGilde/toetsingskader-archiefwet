@@ -57,3 +57,44 @@
 .norm a.ref-term:hover {
   color: inherit;
 }
+
+/* Inklapbare Toelichting (standaard dicht). Summary oogt als de sectie-h2
+   (1.75rem) met een brand-chevron, conform de thema-referenties-accordeon. */
+.norm .toelichting {
+  margin-block: 1.5rem;
+}
+
+.norm .toelichting > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  list-style: none;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.norm .toelichting > summary::-webkit-details-marker {
+  display: none;
+}
+
+.norm .toelichting > summary::before {
+  content: "";
+  flex: none;
+  width: 0.5em;
+  height: 0.5em;
+  border-right: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+
+.norm .toelichting[open] > summary::before {
+  transform: rotate(45deg) translate(-0.1em, -0.1em);
+}
+
+.norm .toelichting > summary:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
