@@ -18,9 +18,9 @@ synoniemen:
 
 Om een document duurzaam toegankelijk te maken en te houden[^aw-artikel-4-1-lid-1] moet een document [in beheer](/normen/01-beheer/) zijn.[^ab-artikel-2-1-lid-1-2] Inbeheername is het opnemen van documenten in een omgeving waarin zij beheerd worden[^functies-nationaal-archief]. Beheer is geen eenmalige handeling, maar vraagt om een voortdurende zorg voor documenten[^deze-toelichting-ontleend-kennisbank-nationaal-a].
 
-Die voortdurende zorg vereist ook sturing op de informatiehuishouding. Een overheidsorganisatie neemt daarom passende maatregelen en beschrijft die in de beheerregels[^kamerstukken-2018-19-35-112]. Op basis van beschrijving worden de passende maatregelen concreet uitgewerkt. In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurzame toegankelijkheid van categorieën documenten borgt[^aw-artikelen-4-1-4-2]. Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](/normen/) [^verwijzing-kopje-risicoanalyse-introductie] invulling krijgen.
+Die voortdurende zorg vereist ook sturing op de informatiehuishouding. Een overheidsorganisatie neemt daarom passende maatregelen en beschrijft die in de beheerregels[^kamerstukken-2018-19-35-112]. Op basis van beschrijving worden de passende maatregelen concreet uitgewerkt. In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurzame toegankelijkheid van categorieën documenten borgt[^aw-artikelen-4-1-4-2]. Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](/over/#risicobenadering-en-passende-maatregelen) [^verwijzing-kopje-risicoanalyse-introductie] invulling krijgen.
 
-In een beheerde omgeving [^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten [^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/06-vernietigen/), [gecontroleerd vernietigen](/normen/06-vernietigen/) en [metadateren](/normen/04-metadatering/) geeft direct richting aan de invulling van de benodigde functionaliteit [^kamerstukken-2021-22-35968].
+In een beheerde omgeving [^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten [^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/06-vernietigen/), [gecontroleerd vernietigen](/normen/07-informatiebeveiliging/) en [metadateren](/normen/04-metadatering/) geeft direct richting aan de invulling van de benodigde functionaliteit [^kamerstukken-2021-22-35968].
 
 ## Normuitleg
 
@@ -46,7 +46,7 @@ De Inspectie toetst of in de beheerregels, in ieder geval per categorie [^catego
 
 a) duurzaam toegankelijk te maken,[^aw-artikel-4-2-lid-2]
 
-b) te [vernietigen](/normen/06-vernietigen/). [^aw-artikel-4-2-lid-2]
+b) te [vernietigen](/normen/07-informatiebeveiliging/). [^aw-artikel-4-2-lid-2]
 
 #### Criteria
 
@@ -67,8 +67,8 @@ b) te vernietigen.
 #### Criteria
 
 - In de passende maatregelen is opgenomen dat documenten zich in een [beheerde omgeving](/normen/01-beheer/) moeten bevinden.
-- In de passende maatregelen zijn in ieder geval de onderwerpen [overzicht](/normen/02-overzicht/), [vinden](/normen/05-vindbaarheid/) en beschikbaarstellen, [ordenen](/normen/03-ordeningsstructuur/), [metadateren](/normen/04-metadatering/), [vernietigen](/normen/06-vernietigen/) en [betrouwbaarheid](/normen/06-vernietigen/) opgenomen. [^aw-artikel-4-2-lid-2]
-- De passende maatregelen zijn opgesteld op basis van een [risicobenadering](/normen/).
+- In de passende maatregelen zijn in ieder geval de onderwerpen [overzicht](/normen/02-overzicht/), [vinden](/normen/05-vindbaarheid/) en beschikbaarstellen, [ordenen](/normen/03-ordeningsstructuur/), [metadateren](/normen/04-metadatering/), [vernietigen](/normen/07-informatiebeveiliging/) en [betrouwbaarheid](/normen/06-vernietigen/) opgenomen. [^aw-artikel-4-2-lid-2]
+- De passende maatregelen zijn opgesteld op basis van een [risicobenadering](/over/#risicobenadering-en-passende-maatregelen).
 - Een categorie, waar passende maatregelen voor zijn genomen, heeft een relatie met een selectiebesluit.
 
 #### Indicatoren
@@ -152,7 +152,7 @@ De Inspectie toetst of alle [^aw-artikel-4-1-lid-2] door het verantwoordelijk ov
   - gekoppeld aan een [ordening](/normen/03-ordeningsstructuur/); [^ab-artikel-21-sub-d-ar]
   - niet onderhevig aan verlies, dus tijdig gemigreerd, geconverteerd en vervangen; [^ab-artikel-2-1-lid-1-6]
   - [betrouwbaar](/normen/06-vernietigen/); [^ab-artikel-2-1-lid-1-7]
-  - volgens een selectiebesluit [gecontroleerd vernietigd](/normen/06-vernietigen/). Dit geldt niet voor documenten die op elk moment mogen worden vernietigd. [^ab-art]
+  - volgens een selectiebesluit [gecontroleerd vernietigd](/normen/07-informatiebeveiliging/). Dit geldt niet voor documenten die op elk moment mogen worden vernietigd. [^ab-art]
 
 #### Indicatoren
 
