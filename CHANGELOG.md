@@ -11,6 +11,33 @@ changelog volgt [Semantic Versioning][semver].
 
 ## [Unreleased]
 
+### Gewijzigd
+
+- Bollendiagram herontworpen naar een hub-and-spoke-visualisatie.
+- Navigatievolgorde: Normen vóór Over.
+- Footer beperkt tot contact, privacy, cookies, toegankelijkheid,
+  kwetsbaarheid melden en terug naar hoofdsite.
+- Voorschriften worden genummerd (`<norm>.<n>`, bv. 1.1, 1.2).
+- Toelichting is inklapbaar (standaard dicht); Toelichting en Referenties
+  delen één (thema-)accordeonstijl.
+- Heading-hiërarchie in Normuitleg verduidelijkt (voorschrift als accent-kop,
+  duidelijke overgang tussen thema's).
+
+### Verwijderd
+
+- Feedback-blok van de normpagina's (de `params.feedback`-config blijft).
+
+### Opgelost
+
+- Interne normverwijzingen gecorrigeerd: "(gecontroleerd) vernietigen" wees
+  naar de norm "Betrouwbaar" maar hoort naar "Gecontroleerd vernietigen"
+  (`07-informatiebeveiliging`); "risicobenadering"/"risicoanalyse" wezen naar
+  de sectie-index in plaats van de over-pagina.
+- Voetnoot-verwijzingen werken nu ook na een spatie of leesteken en op links
+  (geen lege of op-een-leesteken-geplaatste hover-term meer); een term die
+  tegelijk een interne link is, wordt blauw met de voetnoot-stippellijn.
+- Zoek-highlight knipt links in de paginatekst niet meer op.
+
 ## [0.1.0] - 2026-06-17
 
 - Normcontent verplaatst van YAML front matter naar markdown-body met
