@@ -46,11 +46,11 @@ menus:
     - name: Home
       pageRef: /
       weight: 1
-    - name: Over
-      pageRef: /over
-      weight: 2
     - name: Normen
       pageRef: /normen
+      weight: 2
+    - name: Over
+      pageRef: /over
       weight: 3
 
   footer-links:
