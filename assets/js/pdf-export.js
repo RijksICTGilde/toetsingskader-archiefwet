@@ -27,9 +27,9 @@
     'Aan dit document kunnen geen rechten worden ontleend.'
   ]
 
-  function parse(html) {
+  function parse(html, prefix) {
     var doc = new DOMParser().parseFromString('<!DOCTYPE html><html><body>' + (html || '') + '</body></html>', 'text/html')
-    return window.TKPDF.elementToPdfContent(doc.body)
+    return window.TKPDF.elementToPdfContent(doc.body, prefix || '')
   }
 
   // Titelpagina (zoals de DPIA-/AI-verordening-PDF's): gecentreerde stack met
@@ -75,7 +75,9 @@
       blocks.push({ text: 'Kern van de norm', style: 'h4', margin: [0, 0, 0, 2] })
       blocks = blocks.concat(kernBlocks(n.kern_html))
     }
-    blocks = blocks.concat(parse(n.body_html))
+    // Unieke voetnoot-prefix per norm, zodat #fn:N van verschillende normen
+    // in de kader-PDF niet botsen.
+    blocks = blocks.concat(parse(n.body_html, 'n' + (n.norm_id || '') + '-'))
     return blocks
   }
 
@@ -100,13 +102,9 @@
     base.styles = styles
     base.info = { title: data.titel, author: 'Inspectie Overheidsinformatie en Erfgoed', subject: 'Versie: ' + (data.versie || '') }
     base.header = function () {
-      // Logo gecentreerd bovenaan elke pagina (running letterhead) + dunne
-      // scheidingslijn eronder die de kopband afkadert.
+      // Logo gecentreerd bovenaan elke pagina (running letterhead), zonder lijn.
       return {
-        stack: [
-          { columns: [{ text: '', width: '*' }, { svg: window.TKPDF.PDF_LOGO_SVG, width: 28 }, { text: '', width: '*' }] },
-          { canvas: [{ type: 'line', x1: 48, y1: 8, x2: 547, y2: 8, lineWidth: 0.5, lineColor: '#dddddd' }] }
-        ],
+        columns: [{ text: '', width: '*' }, { svg: window.TKPDF.PDF_LOGO_SVG, width: 28 }, { text: '', width: '*' }],
         margin: [0, 14, 0, 0]
       }
     }
