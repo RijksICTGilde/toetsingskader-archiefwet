@@ -63,7 +63,7 @@ jobs:
       - name: Build site
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
-        run: hugo --gc --minify --logLevel warning
+        run: HUGO_PARAMS_VERSIE="$(git describe --tags --always)" hugo --gc --minify --logLevel warning
 
       - name: Test links
-        run: hugo --minify --quiet --baseURL / --destination .htmltest/public && htmltest
+        run: HUGO_PARAMS_VERSIE="$(git describe --tags --always)" hugo --minify --quiet --baseURL / --destination .htmltest/public && htmltest

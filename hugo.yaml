@@ -37,6 +37,10 @@ markup:
     endLevel: 4
 
 params:
+  # Versie van het toetsingskader. Lokale default; in CI overschreven met de
+  # git-release-tag via HUGO_PARAMS_VERSIE (zie workflows + Containerfile).
+  # Bron voor de PDF-export (release-tag in elke gedownloade PDF).
+  versie: "0.8"
   feedback:
     email: toetsingskader@inspectie-oe.nl
   search:
