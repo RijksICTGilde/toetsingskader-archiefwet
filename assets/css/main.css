@@ -90,4 +90,11 @@
 }
 
 /* De inklapbare Toelichting hergebruikt de thema-`.references`-accordeonstijl
-   (zie single.html), dus hier is geen eigen accordeon-CSS meer nodig. */
+   (zie single.html). Enige project-override: de kop (én chevron via
+   currentColor) in de thema-standaardkleur (donker) i.p.v. het thema-blauw.
+   Geldt voor beide accordeons (Toelichting + Referenties).
+   Upstream-kandidaat: thema de referenties-summary-kleur als token laten zetten
+   zodat dit zonder override kan. */
+.norm .references > details > summary {
+  color: var(--color-text);
+}
