@@ -58,13 +58,15 @@
   color: inherit;
 }
 
-/* Inklapbare Toelichting (standaard dicht). Summary oogt als de sectie-h2
-   (1.75rem) met een brand-chevron, conform de thema-referenties-accordeon. */
+/* Inklapbare accordeons (standaard dicht): Toelichting én Referenties krijgen
+   exact dezelfde kop — donkere tekst (1.75rem) met een blauwe chevron. Het
+   thema kleurt de referenties-kop blauw; hier gelijkgetrokken met Toelichting. */
 .norm .toelichting {
   margin-block: 1.5rem;
 }
 
-.norm .toelichting > summary {
+.norm .toelichting > summary,
+.norm .references > details > summary {
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -73,13 +75,16 @@
   font-size: 1.75rem;
   font-weight: 700;
   line-height: 1.2;
+  color: var(--color-text);
 }
 
-.norm .toelichting > summary::-webkit-details-marker {
+.norm .toelichting > summary::-webkit-details-marker,
+.norm .references > details > summary::-webkit-details-marker {
   display: none;
 }
 
-.norm .toelichting > summary::before {
+.norm .toelichting > summary::before,
+.norm .references > details > summary::before {
   content: "";
   flex: none;
   width: 0.5em;
@@ -90,11 +95,13 @@
   transition: transform 0.15s ease;
 }
 
-.norm .toelichting[open] > summary::before {
+.norm .toelichting[open] > summary::before,
+.norm .references > details[open] > summary::before {
   transform: rotate(45deg) translate(-0.1em, -0.1em);
 }
 
-.norm .toelichting > summary:focus-visible {
+.norm .toelichting > summary:focus-visible,
+.norm .references > details > summary:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
