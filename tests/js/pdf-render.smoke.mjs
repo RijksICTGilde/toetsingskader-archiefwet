@@ -37,6 +37,10 @@ async function renderVendored(json, out){
   })
 }
 for (const [name,file,out] of [['norm','public/normen/01-beheer/index.pdf.json','/tmp/norm.pdf'],['kader','public/normen/index.pdf.json','/tmp/kader.pdf']]) {
-  try { const b = await renderVendored(JSON.parse(read(file)), out); console.log(name, b.length, 'bytes', b.slice(0,5).toString()==='%PDF-'?'PDF OK':'NOT PDF') }
-  catch(e){ console.log(name,'render error:', e.message) }
+  try {
+    const b = await renderVendored(JSON.parse(read(file)), out)
+    const ok = b.slice(0, 5).toString() === '%PDF-'
+    console.log(name, b.length, 'bytes', ok ? 'PDF OK' : 'NOT PDF')
+    if (!ok) process.exitCode = 1
+  } catch (e) { console.log(name, 'render error:', e.message); process.exitCode = 1 }
 }

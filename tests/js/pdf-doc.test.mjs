@@ -42,22 +42,27 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.ok(dd, 'doc-definition gemaakt')
   assert.equal(dd.defaultStyle.font, 'ROSans')
   assert.ok(Array.isArray(dd.content))
-  // header bevat versie + bron-link
-  const headerText = JSON.stringify(dd.content[0])
-  assert.match(headerText, /Versie/)
-  assert.match(headerText, /Gedownload op/)
-  // kern aanwezig
-  assert.ok(dd.content.some(b => b.text === 'Kern van de norm'))
-  // disclaimer aan het eind
+  // titelpagina (content[0]): titel + versie + datum + bron, met pageBreak
+  const cover = dd.content[0]
+  const coverText = JSON.stringify(cover)
+  assert.match(coverText, /Versie/)
+  assert.match(coverText, /Gedownload op/)
+  assert.match(coverText, /Bron/)
+  assert.equal(cover.pageBreak, 'after')
+  // kop "Kern van de norm" aanwezig én de kerntekst zelf gerenderd (niet leeg)
+  const kernIdx = dd.content.findIndex(b => b.text === 'Kern van de norm')
+  assert.ok(kernIdx !== -1, 'kern-kop aanwezig')
+  const kernBlock = dd.content[kernIdx + 1]
+  assert.equal(kernBlock.style, 'kern')
+  assert.ok(typeof kernBlock.text === 'string' && kernBlock.text.length > 10, 'kerntekst gerenderd')
+  // disclaimer
   assert.ok(dd.content.some(b => b.ul && typeof b.ul[0] === 'string' && b.ul[0].includes('automatisch gegenereerd')))
-  // header/footer-functies leveren objecten
-  assert.ok(dd.header(1))
-  assert.equal(dd.header(2), null)
+  // header (logo op elke pagina) + footer leveren objecten
   assert.ok(dd.footer(1, 3).columns)
-  // logo ingebed (officieel lint-SVG), gecentreerd via columns
   const logoCol = dd.header(1).columns.find(c => c.svg)
   assert.ok(logoCol, 'logo-kolom aanwezig')
   assert.match(logoCol.svg, /^<svg/)
+  assert.ok(dd.header(2).columns.find(c => c.svg), 'logo ook op pagina 2 (running letterhead)')
 })
 
 test('kader-doc: 8 normen met pageBreaks', async () => {
