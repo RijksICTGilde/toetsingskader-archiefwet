@@ -87,12 +87,20 @@
   function docDefinition(data) {
     var base = data.kind === 'kader' ? buildKader(data) : buildNorm(data)
     base.pageSize = 'A4'
-    base.pageMargins = [48, 104, 48, 56]
+    base.pageMargins = [48, 92, 48, 56]
     base.defaultStyle = { font: 'ROSans', fontSize: 10.5, color: '#1a1a1a' }
     base.styles = styles
     base.info = { title: data.titel, author: 'Inspectie Overheidsinformatie en Erfgoed', subject: 'Versie: ' + (data.versie || '') }
     base.header = function (currentPage) {
-      return currentPage === 1 ? { svg: window.TKPDF.PDF_LOGO_SVG, width: 32, margin: [48, 20, 0, 0] } : null
+      // Logo gecentreerd en bovenaan de pagina (geen witruimte erboven).
+      return currentPage === 1 ? {
+        columns: [
+          { text: '', width: '*' },
+          { svg: window.TKPDF.PDF_LOGO_SVG, width: 36 },
+          { text: '', width: '*' }
+        ],
+        margin: [0, 0, 0, 0]
+      } : null
     }
     base.footer = function (currentPage, pageCount) {
       return {

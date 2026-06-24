@@ -54,9 +54,10 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.ok(dd.header(1))
   assert.equal(dd.header(2), null)
   assert.ok(dd.footer(1, 3).columns)
-  // logo ingebed (officieel lint-SVG)
-  assert.ok(dd.header(1).svg)
-  assert.match(dd.header(1).svg, /^<svg/)
+  // logo ingebed (officieel lint-SVG), gecentreerd via columns
+  const logoCol = dd.header(1).columns.find(c => c.svg)
+  assert.ok(logoCol, 'logo-kolom aanwezig')
+  assert.match(logoCol.svg, /^<svg/)
 })
 
 test('kader-doc: 8 normen met pageBreaks', async () => {
