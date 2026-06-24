@@ -71,5 +71,7 @@ test('kader-doc: 8 normen met pageBreaks', async () => {
   assert.ok(dd)
   const sections = dd.content.filter(b => b.style === 'section')
   assert.equal(sections.length, 8)
-  assert.ok(sections.every(s => s.pageBreak === 'before'))
+  // Eerste norm sluit aan op de titelpagina (geen break); 2 t/m 8 op nieuwe pagina.
+  assert.ok(!sections[0].pageBreak, 'eerste norm zonder pageBreak')
+  assert.ok(sections.slice(1).every(s => s.pageBreak === 'before'), 'norm 2-8 met pageBreak')
 })

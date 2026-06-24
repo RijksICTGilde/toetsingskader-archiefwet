@@ -64,9 +64,13 @@
     return blocks
   }
 
-  function normSection(n, asSection) {
+  function normSection(n, asSection, pageBreak) {
     var blocks = []
-    if (asSection) blocks.push({ text: n.titel, style: 'section', pageBreak: 'before' })
+    if (asSection) {
+      var head = { text: n.titel, style: 'section' }
+      if (pageBreak) head.pageBreak = 'before'
+      blocks.push(head)
+    }
     if (n.kern_html) {
       blocks.push({ text: 'Kern van de norm', style: 'h4', margin: [0, 0, 0, 2] })
       blocks = blocks.concat(kernBlocks(n.kern_html))
@@ -81,9 +85,10 @@
   }
 
   function buildKader(data) {
+    // Titelpagina → normen (eerste sluit aan op de cover, rest op nieuwe
+    // pagina) → disclaimer. Geen losse intro-pagina.
     var content = cover(data)
-    if (data.intro_html) content = content.concat(parse(data.intro_html))
-    for (var i = 0; i < data.normen.length; i++) content = content.concat(normSection(data.normen[i], true))
+    for (var i = 0; i < data.normen.length; i++) content = content.concat(normSection(data.normen[i], true, i > 0))
     return { content: content.concat(disclaimer()) }
   }
 
