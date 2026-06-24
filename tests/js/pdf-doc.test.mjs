@@ -59,10 +59,10 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.ok(dd.content.some(b => b.ul && typeof b.ul[0] === 'string' && b.ul[0].includes('automatisch gegenereerd')))
   // header (logo op elke pagina) + footer (stack met paginanummer)
   assert.match(JSON.stringify(dd.footer(2, 5)), /Pagina 2 van 5/)
-  const logoCol = dd.header(1).stack[0].columns.find(c => c.svg)
+  const logoCol = dd.header(1).columns.find(c => c.svg)
   assert.ok(logoCol, 'logo-kolom aanwezig')
   assert.match(logoCol.svg, /^<svg/)
-  assert.ok(dd.header(2).stack[0].columns.find(c => c.svg), 'logo ook op pagina 2 (running letterhead)')
+  assert.ok(dd.header(2).columns.find(c => c.svg), 'logo ook op pagina 2 (running letterhead)')
 })
 
 test('kader-doc: 8 normen met pageBreaks', async () => {

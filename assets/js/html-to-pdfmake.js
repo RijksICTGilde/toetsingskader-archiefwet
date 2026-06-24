@@ -3,6 +3,14 @@
 // Geen externe afhankelijkheden, geen ES-modules (de bundel is een plain script).
 (function () {
   var BRAND = '#007bc7'
+  // Prefix voor interne voetnoot-bestemmingen (uniek per norm in de kader-PDF).
+  // Gezet door elementToPdfContent; recursie laat hem ongemoeid.
+  var linkPrefix = ''
+
+  function footnoteDest(href) {
+    var m = (href || '').match(/#fn:?(.+)$/)
+    return m ? linkPrefix + 'fn-' + m[1] : null
+  }
 
   function inlineRuns(node, acc, style) {
     var children = node.childNodes
@@ -19,8 +27,16 @@
         if (tag === 'strong' || tag === 'b') inlineRuns(child, acc, Object.assign({}, style, { bold: true }))
         else if (tag === 'em' || tag === 'i') inlineRuns(child, acc, Object.assign({}, style, { italics: true }))
         else if (tag === 'a') {
-          // Voetnoot-↩-backlinks weglaten: betekenisloos in een PDF.
-          if ((child.getAttribute('class') || '').indexOf('footnote-backref') === -1) {
+          var cls = child.getAttribute('class') || ''
+          if (cls.indexOf('footnote-backref') !== -1) {
+            // ↩-backlink weglaten: betekenisloos in een PDF.
+          } else if (cls.indexOf('footnote-ref') !== -1) {
+            // Voetnoot-nummer: interne sprong naar de bron in de bronnenlijst.
+            var dest = footnoteDest(child.getAttribute('href'))
+            var ref = { text: child.textContent, color: BRAND }
+            if (dest) ref.linkToDestination = dest
+            acc.push(ref)
+          } else {
             acc.push({ text: child.textContent, link: child.getAttribute('href') || '', color: BRAND, decoration: 'underline' })
           }
         } else inlineRuns(child, acc, style)
@@ -48,12 +64,22 @@
     var out = []
     var children = node.children
     for (var i = 0; i < children.length; i++) {
-      if (children[i].tagName.toLowerCase() === 'li') out.push({ text: inline(children[i]) })
+      var li = children[i]
+      if (li.tagName.toLowerCase() !== 'li') continue
+      var item = { text: inline(li) }
+      // Bronnenlijst-item met id="fn:N" → pdfMake-bestemming, zodat de
+      // voetnoot-nummers ernaartoe kunnen springen.
+      var liId = li.getAttribute && li.getAttribute('id')
+      var m = liId && liId.match(/^fn:?(.+)$/)
+      if (m) item.id = linkPrefix + 'fn-' + m[1]
+      out.push(item)
     }
     return out
   }
 
-  function elementToPdfContent(root) {
+  function elementToPdfContent(root, prefix) {
+    // Alleen de top-level aanroep zet de prefix; recursie (div/section) erft 'm.
+    if (typeof prefix === 'string') linkPrefix = prefix
     var out = []
     var children = root.childNodes
     for (var i = 0; i < children.length; i++) {

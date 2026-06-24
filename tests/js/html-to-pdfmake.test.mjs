@@ -62,3 +62,23 @@ test('witruimte/newline in lijstitem wordt samengevouwen (geen losse regel)', ()
   // tekst begint met de bron, niet met witruimte-regel
   assert.match((flat[0].text || '').trim(), /^Aw, artikel/)
 })
+
+test('voetnoot-nummer wordt interne sprong (linkToDestination, met norm-prefix)', () => {
+  const { document } = parseHTML('<!DOCTYPE html><html><body></body></html>')
+  const div = document.createElement('div')
+  div.innerHTML = '<p>tekst<sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup></p>'
+  const out = elementToPdfContent(div, 'n1-')
+  const ref = out[0].text.find(r => r.linkToDestination)
+  assert.ok(ref, 'ref-run met linkToDestination')
+  assert.equal(ref.linkToDestination, 'n1-fn-1')
+  assert.equal(ref.text, '1')
+  assert.ok(!ref.link, 'geen externe link')
+})
+
+test('bronnenlijst-item krijgt matching bestemming-id', () => {
+  const { document } = parseHTML('<!DOCTYPE html><html><body></body></html>')
+  const div = document.createElement('div')
+  div.innerHTML = '<ol><li id="fn:1"><p>Bron. <a href="#x">Bekijk bron</a></p></li></ol>'
+  const out = elementToPdfContent(div, 'n1-')
+  assert.equal(out[0].ol[0].id, 'n1-fn-1')
+})
