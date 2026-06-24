@@ -6,8 +6,6 @@
   var dateFmt = new Intl.DateTimeFormat('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })
 
   var styles = {
-    title: { fontSize: 24, bold: true, color: BRAND, margin: [0, 0, 0, 6] },
-    meta: { fontSize: 10, color: '#666666' },
     h2: { fontSize: 16, bold: true, color: BRAND, margin: [0, 14, 0, 6] },
     h3: { fontSize: 13, bold: true, margin: [0, 10, 0, 4] },
     h4: { fontSize: 11, bold: true, margin: [0, 8, 0, 2] },
@@ -18,7 +16,9 @@
     callout: { fontSize: 11, italics: true, color: '#154273', margin: [0, 4, 0, 10] },
     kern: { fontSize: 11, bold: true, margin: [0, 0, 0, 10] },
     section: { fontSize: 14, bold: true, color: BRAND, margin: [0, 18, 0, 8] },
-    disclaimerH: { fontSize: 13, bold: true, color: BRAND, margin: [0, 18, 0, 6] }
+    disclaimerH: { fontSize: 13, bold: true, color: BRAND, margin: [0, 18, 0, 6] },
+    coverTitle: { fontSize: 26, bold: true, color: BRAND, margin: [0, 0, 0, 24] },
+    coverMeta: { fontSize: 12, color: '#666666', margin: [0, 4, 0, 0] }
   }
 
   var DISCLAIMER = [
@@ -32,18 +32,21 @@
     return window.TKPDF.elementToPdfContent(doc.body)
   }
 
-  function header(data) {
-    return {
+  // Titelpagina (zoals de DPIA-/AI-verordening-PDF's): gecentreerde stack met
+  // titel, downloaddatum, bron en versie; logo komt uit de running header.
+  // pageBreak: 'after' → de inhoud begint op pagina 2.
+  function cover(data) {
+    return [{
       stack: [
-        { text: data.titel, style: 'title' },
-        { text: [
-            { text: 'Versie: ' }, { text: data.versie || 'onbekend', bold: true },
-            { text: '   ·   Gedownload op ' }, { text: dateFmt.format(new Date()) }
-          ], style: 'meta' },
-        { text: [ { text: 'Bron: ' }, { text: data.url, link: data.url, color: BRAND, decoration: 'underline' } ], style: 'meta', margin: [0, 2, 0, 0] }
+        { text: data.titel, style: 'coverTitle' },
+        { text: 'Gedownload op ' + dateFmt.format(new Date()), style: 'coverMeta' },
+        { text: [{ text: 'Bron: ' }, { text: data.url, link: data.url, color: BRAND, decoration: 'underline' }], style: 'coverMeta' },
+        { text: 'Versie: ' + (data.versie || 'onbekend'), style: 'coverMeta' }
       ],
-      margin: [0, 0, 0, 14]
-    }
+      alignment: 'center',
+      margin: [0, 170, 0, 0],
+      pageBreak: 'after'
+    }]
   }
 
   function disclaimer() {
@@ -73,14 +76,13 @@
   }
 
   function buildNorm(data) {
-    return { content: [header(data)].concat(normSection(data, false)).concat(disclaimer()) }
+    return { content: cover(data).concat(disclaimer()).concat(normSection(data, false)) }
   }
 
   function buildKader(data) {
-    var content = [header(data)]
+    var content = cover(data).concat(disclaimer())
     if (data.intro_html) content = content.concat(parse(data.intro_html))
     for (var i = 0; i < data.normen.length; i++) content = content.concat(normSection(data.normen[i], true))
-    content = content.concat(disclaimer())
     return { content: content }
   }
 
@@ -91,16 +93,16 @@
     base.defaultStyle = { font: 'ROSans', fontSize: 10.5, color: '#1a1a1a' }
     base.styles = styles
     base.info = { title: data.titel, author: 'Inspectie Overheidsinformatie en Erfgoed', subject: 'Versie: ' + (data.versie || '') }
-    base.header = function (currentPage) {
-      // Logo gecentreerd en bovenaan de pagina (geen witruimte erboven).
-      return currentPage === 1 ? {
+    base.header = function () {
+      // Logo gecentreerd bovenaan elke pagina (running letterhead).
+      return {
         columns: [
           { text: '', width: '*' },
           { svg: window.TKPDF.PDF_LOGO_SVG, width: 36 },
           { text: '', width: '*' }
         ],
         margin: [0, 0, 0, 0]
-      } : null
+      }
     }
     base.footer = function (currentPage, pageCount) {
       return {
