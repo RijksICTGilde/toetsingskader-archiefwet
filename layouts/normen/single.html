@@ -73,9 +73,10 @@
 
 {{/* 4. Toelichting inklapbaar maken (standaard dicht). Het kader is naslag, dus
        criteria/indicatoren moeten snel bereikbaar zijn zonder eerst langs de
-       toelichting te scrollen. Wrap de sectie (tot de volgende h2) in een
-       <details> (id behouden voor de TOC-link). */}}
-{{ $content = replaceRE `(?s)<h2 id="toelichting">Toelichting</h2>(.*?)(<h2 )` `<details id="toelichting" class="toelichting"><summary>Toelichting</summary>$1</details>$2` $content 1 }}
+       toelichting te scrollen. Wrap in de thema-`.references`-accordeonstructuur,
+       zodat het thema 'm stylet (geen eigen accordeon-CSS nodig). id op de
+       <details> blijft voor de TOC-link (#toelichting). */}}
+{{ $content = replaceRE `(?s)<h2 id="toelichting">Toelichting</h2>(.*?)(<h2 )` `<section class="references"><details id="toelichting"><summary>Toelichting</summary>$1</details></section>$2` $content 1 }}
 
 {{/* TOC opbouwen uit .Fragments. Begint de body bij h2 (geen h1), dan zit
      er een lege root-heading boven de h2's; die slaan we over. */}}
