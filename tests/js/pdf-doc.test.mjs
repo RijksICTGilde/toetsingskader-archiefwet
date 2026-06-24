@@ -65,13 +65,17 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.ok(dd.header(2).columns.find(c => c.svg), 'logo ook op pagina 2 (running letterhead)')
 })
 
-test('kader-doc: 8 normen met pageBreaks', async () => {
+test('kader-doc: inhoudsopgave + 8 normen op eigen pagina, in toc opgenomen', async () => {
   const kader = JSON.parse(read('public/normen/index.pdf.json'))
   const dd = await clickWith(kader)
   assert.ok(dd)
+  // Klikbare inhoudsopgave aanwezig (na de cover).
+  const toc = dd.content.find(b => b.toc)
+  assert.ok(toc, 'toc-node aanwezig')
+  assert.match(JSON.stringify(toc.toc.title), /Inhoudsopgave/)
+  // 8 norm-secties, elk op een nieuwe pagina én opgenomen in de inhoudsopgave.
   const sections = dd.content.filter(b => b.style === 'section')
   assert.equal(sections.length, 8)
-  // Eerste norm sluit aan op de titelpagina (geen break); 2 t/m 8 op nieuwe pagina.
-  assert.ok(!sections[0].pageBreak, 'eerste norm zonder pageBreak')
-  assert.ok(sections.slice(1).every(s => s.pageBreak === 'before'), 'norm 2-8 met pageBreak')
+  assert.ok(sections.every(s => s.pageBreak === 'before'), 'elke norm op nieuwe pagina')
+  assert.ok(sections.every(s => s.tocItem === true), 'elke norm in de inhoudsopgave')
 })

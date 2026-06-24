@@ -74,7 +74,9 @@
     var opts = { prefix: 'n' + (n.norm_id || '') + '-', origin: ctx.origin, normDests: ctx.normDests }
     var blocks = []
     if (asSection) {
-      var head = { text: n.titel, style: 'section' }
+      // tocItem: opgenomen in de inhoudsopgave (kader-PDF); id: doel voor
+      // kruisverwijzingen vanuit andere normen.
+      var head = { text: n.titel, style: 'section', tocItem: true }
       if (pageBreak) head.pageBreak = 'before'
       if (n.slug) head.id = 'norm-' + n.slug
       blocks.push(head)
@@ -104,7 +106,17 @@
     }
     var ctx = { origin: originOf(data.url), normDests: normDests }
     var content = cover(data)
-    for (var i = 0; i < data.normen.length; i++) content = content.concat(normSection(data.normen[i], true, i > 0, ctx))
+    // Klikbare inhoudsopgave op pagina 2 (pdfMake verzamelt de tocItem-koppen
+    // met paginanummers; entries springen naar de norm-sectie).
+    content.push({
+      toc: {
+        title: { text: 'Inhoudsopgave', style: 'section', margin: [0, 0, 0, 16] },
+        textStyle: { fontSize: 11, color: BRAND },
+        numberStyle: { fontSize: 11, color: '#666666' }
+      }
+    })
+    // Elke norm op een eigen pagina (de inhoudsopgave vult pagina 2).
+    for (var i = 0; i < data.normen.length; i++) content = content.concat(normSection(data.normen[i], true, true, ctx))
     return { content: content.concat(disclaimer()) }
   }
 
