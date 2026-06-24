@@ -71,7 +71,7 @@
     </button>
     {{- end -}}
     {{- with .OutputFormats.Get "pdf" -}}
-    <a class="pdf-download" href="{{ .RelPermalink }}" data-pdf-url="{{ .RelPermalink }}" download>Download als PDF</a>
+    <a class="button" href="{{ .RelPermalink }}" data-pdf-url="{{ .RelPermalink }}" download>Download als PDF</a>
     {{- end -}}
   </header>
 

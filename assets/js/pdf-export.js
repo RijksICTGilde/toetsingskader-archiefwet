@@ -134,6 +134,8 @@
     var btn = e.target.closest ? e.target.closest('[data-pdf-url]') : null
     if (!btn) return
     e.preventDefault()
+    // Dubbelklik tijdens genereren negeren (voorheen via CSS pointer-events).
+    if (btn.getAttribute('aria-busy') === 'true') return
     btn.setAttribute('aria-busy', 'true')
     var original = btn.textContent
     btn.textContent = 'PDF wordt gemaakt…'
