@@ -55,9 +55,17 @@
 
   function elementToPdfContent(root) {
     var out = []
-    var children = root.children
+    var children = root.childNodes
     for (var i = 0; i < children.length; i++) {
       var el = children[i]
+      // Losse tekst op blokniveau (bv. een ééngeregelde markdownify-output
+      // zonder <p>, zoals de kern) als alinea opnemen i.p.v. negeren.
+      if (el.nodeType === 3) {
+        var bare = el.textContent.replace(/\s+/g, ' ').trim()
+        if (bare) out.push({ text: bare, style: 'para' })
+        continue
+      }
+      if (el.nodeType !== 1) continue
       var tag = el.tagName.toLowerCase()
       if (/^h[1-6]$/.test(tag)) out.push({ text: el.textContent.trim(), style: tag })
       else if (tag === 'p') out.push({ text: inline(el), style: 'para' })
