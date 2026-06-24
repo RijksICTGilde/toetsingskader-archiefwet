@@ -11,6 +11,10 @@ changelog volgt [Semantic Versioning][semver].
 
 ## [Unreleased]
 
+- PDF-export toegevoegd: downloadbare Rijkshuisstijl-PDF per normpagina en
+  voor het hele toetsingskader, met titelpagina, release-tag en
+  downloaddatum. Client-side gegenereerd met pdfMake; CSP-veilig.
+
 ## [0.1.0] - 2026-06-17
 
 - Normcontent verplaatst van YAML front matter naar markdown-body met
