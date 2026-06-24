@@ -36,15 +36,17 @@
     {{ $linkHTML = index (index . 0) 2 }}
   {{ end }}
   {{/* Twee passes, zodat een voorafgaande spatie (`woord [^id]`) of een link
-       (`[tekst](…) [^id]`) de hover-term niet leeg maakt:
-       A) link + optionele spatie vóór de voetnoot → de link zélf wordt de
-          ref-term (behoudt navigatie naar de norm én krijgt de tooltip);
+       (`[tekst](…)[^id]` of `[tekst](…). [^id]`) de hover-term niet leeg of op
+       een leesteken laat landen:
+       A) link + optionele leestekens + optionele spatie vóór de voetnoot → de
+          link zélf wordt de ref-term (behoudt navigatie + tooltip); het
+          leesteken blijft erachter staan;
        B) gewoon woord + optionele spatie → het woord wordt de ref-term.
        De anker-id (fnref…:N) blijft op de wrapper voor de ↩-backlinks. Wat
        geen van beide matcht (zeldzaam) blijft een zichtbaar superscript i.p.v.
        een lege term. */}}
-  {{ $linkPat := printf `<a ([^>]*)>([^<]*)</a>\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
-  {{ $linkRepl := printf `<span class="ref-wrapper" id="$3"><a $1 class="ref-term">$2</a><span class="ref-tooltip" role="note"><span>%s</span>%s</span></span>` $textOnly $linkHTML }}
+  {{ $linkPat := printf `<a ([^>]*)>([^<]*)</a>([.,;:!?)]*)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
+  {{ $linkRepl := printf `<span class="ref-wrapper" id="${4}"><a ${1} class="ref-term">${2}</a><span class="ref-tooltip" role="note"><span>%s</span>%s</span></span>${3}` $textOnly $linkHTML }}
   {{ $content = replaceRE $linkPat $linkRepl $content }}
   {{ $wordPat := printf `([^\s<>]+)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
   {{ $wordRepl := printf `<span class="ref-wrapper" id="$2"><a href="#fn:%s" class="ref-term">$1</a><span class="ref-tooltip" role="note"><span>%s</span>%s</span></span>` $n $textOnly $linkHTML }}
