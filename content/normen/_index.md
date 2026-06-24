@@ -13,8 +13,6 @@ cascade:
 
 De Inspectie toetst of een document in beheer is, zodat het duurzaam toegankelijk gemaakt en gehouden kan worden. Een document is in ieder geval:
 
-{{< pdf-kader >}}
-
 {{< normen-grid >}}
 
 {{< callout titel="Leeswijzer" >}}
@@ -29,3 +27,5 @@ Per normpagina vindt u de volgende onderdelen:
 - **Reikwijdte** - op welke documenten het voorschrift van toepassing is
 - **Zie ook** - verwijzingen naar andere relevante normen of onderwerpen
 {{< /callout >}}
+
+{{< pdf-kader >}}
