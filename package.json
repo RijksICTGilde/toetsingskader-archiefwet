@@ -3,8 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/js/",
-    "build:pdf-assets": "node scripts/build-pdf-assets.mjs"
+    "test": "node --test tests/js/*.test.mjs",
+    "build:pdf-assets": "node scripts/build-pdf-assets.mjs",
+    "smoke:pdf": "node tests/js/pdf-render.smoke.mjs"
   },
   "devDependencies": {
     "linkedom": "^0.18.12"
