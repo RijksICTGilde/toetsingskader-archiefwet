@@ -44,7 +44,7 @@
       stack: [
         { text: data.titel, style: 'coverTitle' },
         { text: 'Gedownload op ' + dateFmt.format(new Date()), style: 'coverMeta' },
-        { text: [{ text: 'Bron: ' }, { text: data.url, link: data.url, color: BRAND, decoration: 'underline' }], style: 'coverMeta' },
+        { text: [{ text: 'Bron: ' }, { text: data.url, link: data.url, color: BRAND }], style: 'coverMeta' },
         { text: 'Versie: ' + (data.versie || 'onbekend'), style: 'coverMeta' }
       ],
       alignment: 'center',

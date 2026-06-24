@@ -31,7 +31,7 @@ test('ongeordende lijst', () => {
 
 test('link behoudt href en brand-kleur', () => {
   const out = convert('<p><a href="https://x.nl">bron</a></p>')
-  assert.deepEqual(out[0].text[0], { text: 'bron', link: 'https://x.nl', color: '#007bc7', decoration: 'underline' })
+  assert.deepEqual(out[0].text[0], { text: 'bron', link: 'https://x.nl', color: '#007bc7' })
 })
 
 test('onbekend element valt terug op platte tekst', () => {

@@ -19,17 +19,15 @@
 
   // Kruisverwijzing/interne link: in de kader-PDF een sprong naar de norm-sectie,
   // anders een absolute link naar de live site. Externe links blijven extern.
+  // Geen onderstreping (alleen brand-kleur als signaal) — consistent met de
+  // voetnoten, en omdat een sprong in een losse norm-PDF niet kan bestaan.
   function crossRefLink(text, href) {
-    var run = { text: text, color: BRAND, decoration: 'underline' }
+    var run = { text: text, color: BRAND }
     if (!href) { return { text: text } }
     if (href.charAt(0) === '/') {
       var slug = (href.match(/^\/normen\/([^/?#]+)\/?/) || [])[1]
-      if (normDests && slug && normDests[slug]) {
-        run.decoration = undefined
-        run.linkToDestination = normDests[slug]
-      } else {
-        run.link = linkOrigin + href
-      }
+      if (normDests && slug && normDests[slug]) run.linkToDestination = normDests[slug]
+      else run.link = linkOrigin + href
     } else {
       run.link = href
     }
