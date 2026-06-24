@@ -70,6 +70,9 @@
       <span class="visually-hidden">Inhoudsopgave tonen</span>
     </button>
     {{- end -}}
+    {{- with .OutputFormats.Get "pdf" -}}
+    <a class="pdf-download" href="{{ .RelPermalink }}" data-pdf-url="{{ .RelPermalink }}" download>Download als PDF</a>
+    {{- end -}}
   </header>
 
   {{ with .Params.kern }}
@@ -125,4 +128,6 @@
   </nav>
 </aside>
 {{- end -}}
+
+{{- with .OutputFormats.Get "pdf" }}{{ partial "pdf-scripts.html" $page }}{{ end -}}
 {{ end }}

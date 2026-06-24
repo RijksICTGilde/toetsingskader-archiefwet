@@ -1,0 +1,9 @@
+{{- $pdf := .Page.OutputFormats.Get "pdf" -}}
+{{- with $pdf -}}
+<p class="pdf-kader">
+  <a class="pdf-download" href="{{ .RelPermalink }}" data-pdf-url="{{ .RelPermalink }}" download>
+    Download het volledige kader als PDF
+  </a>
+</p>
+{{ partial "pdf-scripts.html" $.Page }}
+{{- end -}}

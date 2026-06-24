@@ -15,6 +15,8 @@ De Inspectie toetst of een document in beheer is, zodat het duurzaam toegankelij
 
 {{< normen-grid >}}
 
+{{< pdf-kader >}}
+
 {{< callout titel="Leeswijzer" >}}
 Per normpagina vindt u de volgende onderdelen:
 
