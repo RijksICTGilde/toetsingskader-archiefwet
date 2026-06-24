@@ -54,6 +54,14 @@
   {{ $content = replaceRE `(?s)<div class="footnotes" role="doc-endnotes">.*?</ol>\s*</div>` "" $content }}
 {{ end }}
 
+{{/* 3. Voorschriften nummeren als "Voorschrift <norm_id>.<n>" (sequentieel
+       binnen de norm; norm_id uit de front matter). Elke replaceRE met limit 1
+       pakt het eerstvolgende nog-ongenummerde voorschrift. */}}
+{{ $normId := .Params.norm_id }}
+{{ range $i, $_ := (findRE `<h4 id="voorschrift[^"]*">Voorschrift</h4>` $content) }}
+  {{ $content = replaceRE `(<h4 id="voorschrift[^"]*">)Voorschrift(</h4>)` (printf `${1}Voorschrift %v.%d${2}` $normId (add $i 1)) $content 1 }}
+{{ end }}
+
 {{/* TOC opbouwen uit .Fragments. Begint de body bij h2 (geen h1), dan zit
      er een lege root-heading boven de h2's; die slaan we over. */}}
 {{ $headings := .Fragments.Headings }}
