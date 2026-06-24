@@ -1,7 +1,7 @@
 .bollendiagram-wrapper {
   width: 100%;
-  max-width: 920px;
-  margin: var(--mox-space-lg, 2rem) auto;
+  max-width: 600px;
+  margin: 2rem auto;
 }
 
 .bollendiagram {
@@ -11,30 +11,23 @@
   overflow: visible;
 }
 
-/* Blend-mode laat overlappende bollen natuurlijk samenvloeien.
-   - Light bg + multiply: donker × licht = behoudt cirkelkleur, overlap iets donkerder
-   - Dark bg + screen: licht ⊕ donker = behoudt cirkelkleur, overlap iets lichter
-   mix-blend-mode kent geen light-dark() helper, dus expliciete selectors. */
-.bd-cluster,
-.bd-future {
-  mix-blend-mode: multiply;
+/* === Verbindingslijnen (spokes) ===
+   Getekend ONDER de bollen; de opake fills verbergen de uiteinden zodat alleen
+   het stukje tussen centrum-bol en norm-bol zichtbaar blijft. */
+.bd-spoke {
+  stroke: var(--color-border, #cdd5df);
+  stroke-width: 1.5;
+  fill: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .bd-cluster,
-  :root:not([data-theme="light"]) .bd-future {
-    mix-blend-mode: screen;
-  }
+.bd-divider {
+  stroke: var(--color-border, #cdd5df);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+  stroke-linecap: round;
 }
 
-:root[data-theme="dark"] .bd-cluster,
-:root[data-theme="dark"] .bd-future {
-  mix-blend-mode: screen;
-}
-
-/* === Bollen (cirkels) === Dezelfde brightness in beide modi: screen op
-   donker bg geeft hetzelfde visuele effect als multiply op licht bg,
-   mits source-kleuren licht genoeg zijn. */
+/* === Bollen (cirkels) === */
 .bd-bubble circle {
   fill: #8cc3e6;
   stroke: #66afdd;
@@ -48,19 +41,17 @@
   stroke-width: 1.5;
 }
 
-.bd-bridge circle {
-  fill: #66afdd;
-}
-
-/* Outlined cirkels (toekomst-cluster): in light mode hollow met witte fill,
-   in dark mode transparant zodat alleen de stroke leesbaar blijft tegen donker bg. */
+/* Toekomst-cluster: vervaagde, gestippelde cirkels onder de scheidingslijn.
+   In light mode lichte fill, in dark mode transparant zodat alleen de
+   gestippelde stroke leesbaar blijft tegen de donkere achtergrond. */
 .bd-bubble-outlined {
-  fill: light-dark(#ffffff, transparent);
-  stroke: light-dark(#409cd5, #8cc3e6);
+  fill: light-dark(#eef5fb, transparent);
+  stroke: light-dark(#9ec9e8, #6c8aa3);
   stroke-width: 1.5;
+  stroke-dasharray: 4 4;
 }
 
-/* === Labels (tekst, op aparte laag) === */
+/* === Labels (tekst, op aparte laag bovenop) === */
 .bd-labels {
   pointer-events: none;
 }
@@ -79,16 +70,15 @@
 
 .bd-label-main {
   fill: #ffffff;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
 
-/* Outlined cluster (italic future-labels) staat NIET op een cirkel — direct
-   op body bg. In dark mode dus licht grijs nodig (cool-gray-300 ipv 700). */
+/* Toekomst-labels staan op de (vervaagde) cirkel; eigen, gedempte kleur. */
 .bd-label-outlined {
-  fill: light-dark(#334155, #cbd5e1);
-  font-size: 14px;
+  fill: light-dark(#5a7184, #aebfcf);
+  font-size: 13px;
   font-style: italic;
 }
 
@@ -112,19 +102,18 @@
   stroke-width: 4;
 }
 
-
 @media (max-width: 640px) {
   .bollendiagram-wrapper {
     margin: 1rem 0;
   }
   .bd-label {
-    font-size: 18px;
+    font-size: 15px;
   }
   .bd-label-main {
-    font-size: 30px;
+    font-size: 22px;
   }
   .bd-label-outlined {
-    font-size: 17px;
+    font-size: 14px;
   }
 }
 
@@ -136,13 +125,13 @@
 
 /* Forced-colors (Windows High Contrast) — vervang fills door systeem-kleuren. */
 @media (forced-colors: active) {
-  .bd-cluster,
-  .bd-future {
-    mix-blend-mode: normal;
-  }
   .bd-bubble circle,
   .bd-bubble-outlined {
     fill: Canvas;
+    stroke: CanvasText;
+  }
+  .bd-spoke,
+  .bd-divider {
     stroke: CanvasText;
   }
   .bd-labels text {
