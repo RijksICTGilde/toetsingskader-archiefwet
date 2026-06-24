@@ -23,15 +23,24 @@
   padding-block-end: 0.5rem;
 }
 
-/* Thema-koppen (h3, alleen binnen Normuitleg) en Voorschrift-koppen in
-   accentkleur. */
-.norm h3,
-.norm h4[id^="voorschrift"] {
-  color: var(--color-primary);
+/* Nieuw thema (h3): duidelijke overgang met ruimte + scheidingslijn (zoals
+   tussen voorschriften), behalve het eerste thema direct onder Normuitleg. */
+.norm h3 {
+  margin-block-start: 2.5rem;
+  padding-block-start: 1.25rem;
+  border-block-start: 1px solid var(--color-border);
 }
 
-/* Scheidingslijn boven elk Voorschrift, behalve het eerste van een thema. */
+.norm h3:first-of-type {
+  margin-block-start: 1.5rem;
+  padding-block-start: 0;
+  border-block-start: none;
+}
+
+/* Normuitleg (h2) en thema (h3) staan in de thema-standaardkleur (donker);
+   het Voorschrift is de blauwe accent-kop. */
 .norm h4[id^="voorschrift"] {
+  color: var(--color-primary);
   padding-block-start: 0.75rem;
   border-block-start: 1px solid var(--color-border);
 }
@@ -41,9 +50,14 @@
   padding-block-start: 0;
 }
 
-/* Criteria en Indicatoren springen in t.o.v. Voorschrift — zowel de kop als
-   de eropvolgende inhoud (lijst of "Niet van toepassing"). margin (niet
-   padding) zodat lijst-bullets op hun plek blijven. */
+/* Criteria en Indicatoren: sub-items van het voorschrift — iets kleiner en
+   ingesprongen (zowel de kop als de eropvolgende inhoud; margin i.p.v.
+   padding zodat lijst-bullets op hun plek blijven). */
+.norm h4[id^="criteria"],
+.norm h4[id^="indicatoren"] {
+  font-size: 1.15rem;
+}
+
 .norm h4[id^="criteria"],
 .norm h4[id^="indicatoren"],
 .norm h4[id^="criteria"] + *,
@@ -56,4 +70,52 @@
 .norm a.ref-term,
 .norm a.ref-term:hover {
   color: inherit;
+}
+
+/* Inklapbare accordeons (standaard dicht): Toelichting én Referenties krijgen
+   exact dezelfde kop — donkere tekst (1.75rem) met een blauwe chevron. Het
+   thema kleurt de referenties-kop blauw; hier gelijkgetrokken met Toelichting. */
+.norm .toelichting {
+  margin-block: 1.5rem;
+}
+
+.norm .toelichting > summary,
+.norm .references > details > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  list-style: none;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+.norm .toelichting > summary::-webkit-details-marker,
+.norm .references > details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.norm .toelichting > summary::before,
+.norm .references > details > summary::before {
+  content: "";
+  flex: none;
+  width: 0.5em;
+  height: 0.5em;
+  border-right: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+
+.norm .toelichting[open] > summary::before,
+.norm .references > details[open] > summary::before {
+  transform: rotate(45deg) translate(-0.1em, -0.1em);
+}
+
+.norm .toelichting > summary:focus-visible,
+.norm .references > details > summary:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }

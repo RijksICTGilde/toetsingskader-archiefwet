@@ -24,6 +24,7 @@ markup:
     endLevel: 4
 
 params:
+  # Feedback-config blijft staan (de UI is verwijderd; param bewaard voor later).
   feedback:
     email: toetsingskader@inspectie-oe.nl
   search:
@@ -46,43 +47,22 @@ menus:
     - name: Home
       pageRef: /
       weight: 1
-    - name: Over
-      pageRef: /over
-      weight: 2
     - name: Normen
       pageRef: /normen
+      weight: 2
+    - name: Over
+      pageRef: /over
       weight: 3
 
   footer-links:
     - name: Contact
       url: https://www.inspectie-oe.nl/service/contact
       weight: 1
-    - name: RSS
-      url: https://www.inspectie-oe.nl/service/rss
+    - name: Terug naar hoofdsite
+      url: https://www.inspectie-oe.nl/
       weight: 2
-    - name: Abonneren
-      url: https://www.inspectie-oe.nl/abonneren/abonnementen
-      weight: 3
-    - name: Sitemap
-      url: https://www.inspectie-oe.nl/sitemap
-      weight: 4
-    - name: Help
-      url: https://www.inspectie-oe.nl/service/help
-      weight: 5
-    - name: Archief
-      url: https://www.inspectie-oe.nl/service/archief
-      weight: 6
-    - name: Bereikbaarheid
-      url: https://www.inspectie-oe.nl/bereikbaarheid
-      weight: 7
-    - name: Vacatures
-      url: https://www.inspectie-oe.nl/de-inspectie-overheidsinformatie-en-erfgoed/vacatures
-      weight: 8
 
   footer-rechts:
-    - name: Copyright
-      url: https://www.inspectie-oe.nl/service/copyright
-      weight: 1
     - name: Privacy
       url: https://www.inspectie-oe.nl/service/privacy
       weight: 2
