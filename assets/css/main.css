@@ -23,15 +23,10 @@
   padding-block-end: 0.5rem;
 }
 
-/* Onderscheid thema vs voorschrift via de accentkleur (niet via eigen
-   groottes — typografie komt uit het thema): thema (h3) = blauw; voorschrift
-   en criteria/indicatoren = thema-standaardkleur (donker). */
-.norm h3 {
-  color: var(--color-primary);
-}
-
-/* Scheidingslijn boven elk voorschrift, behalve het eerste van een thema. */
+/* Normuitleg (h2) en thema (h3) staan in de thema-standaardkleur (donker);
+   het Voorschrift is de blauwe accent-kop. */
 .norm h4[id^="voorschrift"] {
+  color: var(--color-primary);
   padding-block-start: 0.75rem;
   border-block-start: 1px solid var(--color-border);
 }
@@ -41,9 +36,14 @@
   padding-block-start: 0;
 }
 
-/* Criteria en Indicatoren springen in t.o.v. Voorschrift — zowel de kop als
-   de eropvolgende inhoud (lijst of "Niet van toepassing"). margin (niet
-   padding) zodat lijst-bullets op hun plek blijven. */
+/* Criteria en Indicatoren: sub-items van het voorschrift — iets kleiner en
+   ingesprongen (zowel de kop als de eropvolgende inhoud; margin i.p.v.
+   padding zodat lijst-bullets op hun plek blijven). */
+.norm h4[id^="criteria"],
+.norm h4[id^="indicatoren"] {
+  font-size: 1.15rem;
+}
+
 .norm h4[id^="criteria"],
 .norm h4[id^="indicatoren"],
 .norm h4[id^="criteria"] + *,
