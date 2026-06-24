@@ -57,8 +57,8 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.ok(typeof kernBlock.text === 'string' && kernBlock.text.length > 10, 'kerntekst gerenderd')
   // disclaimer
   assert.ok(dd.content.some(b => b.ul && typeof b.ul[0] === 'string' && b.ul[0].includes('automatisch gegenereerd')))
-  // header (logo op elke pagina) + footer leveren objecten
-  assert.ok(dd.footer(1, 3).columns)
+  // header (logo op elke pagina) + footer (stack met paginanummer)
+  assert.match(JSON.stringify(dd.footer(2, 5)), /Pagina 2 van 5/)
   const logoCol = dd.header(1).columns.find(c => c.svg)
   assert.ok(logoCol, 'logo-kolom aanwezig')
   assert.match(logoCol.svg, /^<svg/)
