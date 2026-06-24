@@ -15,7 +15,7 @@
     list: { fontSize: 10.5, margin: [8, 0, 0, 6] },
     callout: { fontSize: 11, italics: true, color: '#154273', margin: [0, 4, 0, 10] },
     kern: { fontSize: 11, bold: true, margin: [0, 0, 0, 10] },
-    section: { fontSize: 14, bold: true, color: BRAND, margin: [0, 18, 0, 8] },
+    section: { fontSize: 20, bold: true, color: BRAND, margin: [0, 0, 0, 12] },
     disclaimerH: { fontSize: 13, bold: true, color: BRAND, margin: [0, 18, 0, 6] },
     coverTitle: { fontSize: 26, bold: true, color: BRAND, margin: [0, 0, 0, 24] },
     coverMeta: { fontSize: 12, color: '#666666', margin: [0, 4, 0, 0] }
