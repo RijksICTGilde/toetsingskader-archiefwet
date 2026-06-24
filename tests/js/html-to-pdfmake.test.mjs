@@ -44,3 +44,11 @@ test('geneste section wordt platgeslagen', () => {
   assert.equal(out[0].style, 'h3')
   assert.equal(out[1].style, 'para')
 })
+
+test('voetnoot-backref-link wordt weggelaten', () => {
+  const out = convert('<ol><li><p>Brontekst. <a href="#x">Bekijk bron</a> <a href="#fnref1:1" class="footnote-backref">\u21a9</a></p></li></ol>')
+  const runs = out[0].ol[0].text
+  assert.ok(Array.isArray(runs))
+  assert.ok(runs.some(r => r.text === 'Bekijk bron'))
+  assert.ok(!runs.some(r => r.text && r.text.indexOf('\u21a9') !== -1))
+})

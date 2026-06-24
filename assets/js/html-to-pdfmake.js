@@ -15,8 +15,12 @@
         var tag = child.tagName.toLowerCase()
         if (tag === 'strong' || tag === 'b') inlineRuns(child, acc, Object.assign({}, style, { bold: true }))
         else if (tag === 'em' || tag === 'i') inlineRuns(child, acc, Object.assign({}, style, { italics: true }))
-        else if (tag === 'a') acc.push({ text: child.textContent, link: child.getAttribute('href') || '', color: BRAND, decoration: 'underline' })
-        else inlineRuns(child, acc, style)
+        else if (tag === 'a') {
+          // Voetnoot-↩-backlinks weglaten: betekenisloos in een PDF.
+          if ((child.getAttribute('class') || '').indexOf('footnote-backref') === -1) {
+            acc.push({ text: child.textContent, link: child.getAttribute('href') || '', color: BRAND, decoration: 'underline' })
+          }
+        } else inlineRuns(child, acc, style)
       }
     }
     return acc
