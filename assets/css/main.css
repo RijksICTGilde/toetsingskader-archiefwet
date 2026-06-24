@@ -13,6 +13,14 @@
   }
 }
 
+/* Zoek-highlight (?q=…) wikkelt matches in <mark>, óók binnen links. De
+   thema-mark-stijl overschrijft dan de linkkleur, waardoor de link "opgeknipt"
+   oogt. Hier behoudt een highlight ín een link de linkkleur (alleen de gele
+   achtergrond blijft). Project-CSS — raakt het thema niet. */
+#main-content a mark {
+  color: inherit;
+}
+
 /* Norm page: project-specifieke decoratie op de markdown-body-structuur.
    (Voorheen op .norm-* wrappers; in het markdown-formaat zijn de koppen
    gewone h2/h3/h4, dus we scopen via .norm + heading-ids.) */
