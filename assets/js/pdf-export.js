@@ -76,14 +76,15 @@
   }
 
   function buildNorm(data) {
-    return { content: cover(data).concat(disclaimer()).concat(normSection(data, false)) }
+    // Titelpagina → inhoud → disclaimer (colofon) achteraan.
+    return { content: cover(data).concat(normSection(data, false)).concat(disclaimer()) }
   }
 
   function buildKader(data) {
-    var content = cover(data).concat(disclaimer())
+    var content = cover(data)
     if (data.intro_html) content = content.concat(parse(data.intro_html))
     for (var i = 0; i < data.normen.length; i++) content = content.concat(normSection(data.normen[i], true))
-    return { content: content }
+    return { content: content.concat(disclaimer()) }
   }
 
   function docDefinition(data) {
@@ -98,7 +99,7 @@
       return {
         columns: [
           { text: '', width: '*' },
-          { svg: window.TKPDF.PDF_LOGO_SVG, width: 36 },
+          { svg: window.TKPDF.PDF_LOGO_SVG, width: 28 },
           { text: '', width: '*' }
         ],
         margin: [0, 0, 0, 0]
@@ -137,10 +138,14 @@
     // Dubbelklik tijdens genereren negeren (voorheen via CSS pointer-events).
     if (btn.getAttribute('aria-busy') === 'true') return
     btn.setAttribute('aria-busy', 'true')
-    var original = btn.textContent
-    btn.textContent = 'PDF wordt gemaakt…'
+    // Alleen het tekstlabel wisselen, niet de hele knop — anders sneuvelt het
+    // icoon (textContent bevat geen <svg>). Val terug op de knop zelf als er
+    // geen apart label-<span> is.
+    var label = btn.querySelector('span') || btn
+    var original = label.textContent
+    label.textContent = 'PDF wordt gemaakt…'
     generate(btn.getAttribute('data-pdf-url'))
       .catch(function (err) { console.error(err); window.alert('Het maken van de PDF is mislukt. Probeer het later opnieuw.') })
-      .then(function () { btn.removeAttribute('aria-busy'); btn.textContent = original })
+      .then(function () { btn.removeAttribute('aria-busy'); label.textContent = original })
   })
 })();
