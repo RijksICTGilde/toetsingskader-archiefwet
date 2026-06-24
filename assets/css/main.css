@@ -57,3 +57,30 @@
 .norm a.ref-term:hover {
   color: inherit;
 }
+
+/* PDF-downloadknop in de "Op deze pagina"-sidebar: solide brand-knop met
+   download-icoon + tekstlabel. Bouwt op de thema-.button (padding/radius/font/
+   icoon-grootte); alleen brand-kleur + icoon-uitlijning is project-specifiek.
+   Border == achtergrond, dus geen contrasterend randje op hover. */
+.toc .pdf-download.button {
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+.pdf-download.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.pdf-download.button:hover,
+.pdf-download.button:focus-visible {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  filter: brightness(0.9);
+}

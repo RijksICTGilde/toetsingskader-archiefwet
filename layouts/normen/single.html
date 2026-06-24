@@ -70,9 +70,6 @@
       <span class="visually-hidden">Inhoudsopgave tonen</span>
     </button>
     {{- end -}}
-    {{- with .OutputFormats.Get "pdf" -}}
-    <a class="button button-outline" href="{{ .RelPermalink }}" data-pdf-url="{{ .RelPermalink }}" download>Download als PDF</a>
-    {{- end -}}
   </header>
 
   {{ with .Params.kern }}
@@ -108,6 +105,11 @@
 
 {{- if $hasToc -}}
 <aside id="toc" class="toc is-open" aria-label="Op deze pagina">
+  {{- with .OutputFormats.Get "pdf" -}}
+  <a class="button pdf-download" href="{{ .RelPermalink }}" data-pdf-url="{{ .RelPermalink }}" download>
+    {{- partial "icon.html" "download" -}}<span>Download als PDF</span>
+  </a>
+  {{- end -}}
   <h2>Op deze pagina</h2>
   <nav>
     <ul>
