@@ -13,6 +13,14 @@
   }
 }
 
+/* Zoek-highlight (?q=…) wikkelt matches in <mark>, óók binnen links. De
+   thema-mark-stijl overschrijft dan de linkkleur, waardoor de link "opgeknipt"
+   oogt. Hier behoudt een highlight ín een link de linkkleur (alleen de gele
+   achtergrond blijft). Project-CSS — raakt het thema niet. */
+#main-content a mark {
+  color: inherit;
+}
+
 /* Norm page: project-specifieke decoratie op de markdown-body-structuur.
    (Voorheen op .norm-* wrappers; in het markdown-formaat zijn de koppen
    gewone h2/h3/h4, dus we scopen via .norm + heading-ids.) */
@@ -72,50 +80,21 @@
   color: inherit;
 }
 
-/* Inklapbare accordeons (standaard dicht): Toelichting én Referenties krijgen
-   exact dezelfde kop — donkere tekst (1.75rem) met een blauwe chevron. Het
-   thema kleurt de referenties-kop blauw; hier gelijkgetrokken met Toelichting. */
-.norm .toelichting {
-  margin-block: 1.5rem;
+/* Een ref-term die óók een interne navigatielink is (voetnoot + link naar een
+   andere pagina) krijgt de linkkleur (blauw), zodat zichtbaar is dat je erheen
+   kunt klikken; de dotted underline (voetnoot-indicator) blijft uit het thema.
+   Plain footnote-termen (href="#fn:…") blijven in tekstkleur. */
+.norm a.ref-term[href^="/"],
+.norm a.ref-term[href^="/"]:hover {
+  color: var(--color-primary);
 }
 
-.norm .toelichting > summary,
+/* De inklapbare Toelichting hergebruikt de thema-`.references`-accordeonstijl
+   (zie single.html). Enige project-override: de kop (én chevron via
+   currentColor) in de thema-standaardkleur (donker) i.p.v. het thema-blauw.
+   Geldt voor beide accordeons (Toelichting + Referenties).
+   Upstream-kandidaat: thema de referenties-summary-kleur als token laten zetten
+   zodat dit zonder override kan. */
 .norm .references > details > summary {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  cursor: pointer;
-  list-style: none;
-  font-size: 1.75rem;
-  font-weight: 700;
-  line-height: 1.2;
   color: var(--color-text);
-}
-
-.norm .toelichting > summary::-webkit-details-marker,
-.norm .references > details > summary::-webkit-details-marker {
-  display: none;
-}
-
-.norm .toelichting > summary::before,
-.norm .references > details > summary::before {
-  content: "";
-  flex: none;
-  width: 0.5em;
-  height: 0.5em;
-  border-right: 2px solid var(--color-primary);
-  border-bottom: 2px solid var(--color-primary);
-  transform: rotate(-45deg);
-  transition: transform 0.15s ease;
-}
-
-.norm .toelichting[open] > summary::before,
-.norm .references > details[open] > summary::before {
-  transform: rotate(45deg) translate(-0.1em, -0.1em);
-}
-
-.norm .toelichting > summary:focus-visible,
-.norm .references > details > summary:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
 }
