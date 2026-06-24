@@ -52,3 +52,13 @@ test('voetnoot-backref-link wordt weggelaten', () => {
   assert.ok(runs.some(r => r.text === 'Bekijk bron'))
   assert.ok(!runs.some(r => r.text && r.text.indexOf('\u21a9') !== -1))
 })
+
+test('witruimte/newline in lijstitem wordt samengevouwen (geen losse regel)', () => {
+  const out = convert('<ol><li>\n  <p>Aw, artikel 4.2. <a href="#x">Bekijk bron</a></p>\n</li></ol>')
+  const runs = out[0].ol[0].text
+  const flat = Array.isArray(runs) ? runs : [{ text: runs }]
+  // geen enkele run mag een newline bevatten
+  assert.ok(flat.every(r => !/\n/.test(r.text)), 'geen newline-runs')
+  // tekst begint met de bron, niet met witruimte-regel
+  assert.match((flat[0].text || '').trim(), /^Aw, artikel/)
+})

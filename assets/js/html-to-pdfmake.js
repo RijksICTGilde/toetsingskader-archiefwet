@@ -9,7 +9,10 @@
     for (var i = 0; i < children.length; i++) {
       var child = children[i]
       if (child.nodeType === 3) {
-        var t = child.textContent
+        // Witruimte samenvouwen tot één spatie (zoals HTML); voorkomt dat
+        // opmaak-newlines in de bron als regeleinden in de PDF belanden
+        // (bv. lijstnummer los van de tekst in de bronnenlijst).
+        var t = child.textContent.replace(/\s+/g, ' ')
         if (t) acc.push(Object.assign({ text: t }, style))
       } else if (child.nodeType === 1) {
         var tag = child.tagName.toLowerCase()
@@ -28,6 +31,14 @@
 
   function inline(node) {
     var runs = inlineRuns(node, [], {})
+    // Witruimte-runs aan de randen weghalen en de buitenste tekst trimmen
+    // (block-gedrag van HTML), zodat tekst niet met een spatie/regel begint.
+    while (runs.length && /^\s*$/.test(runs[0].text)) runs.shift()
+    while (runs.length && /^\s*$/.test(runs[runs.length - 1].text)) runs.pop()
+    if (runs.length) {
+      runs[0].text = runs[0].text.replace(/^\s+/, '')
+      runs[runs.length - 1].text = runs[runs.length - 1].text.replace(/\s+$/, '')
+    }
     if (runs.length === 0) return ''
     if (runs.length === 1 && !runs[0].link && !runs[0].bold && !runs[0].italics) return runs[0].text
     return runs
