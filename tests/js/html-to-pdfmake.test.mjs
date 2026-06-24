@@ -63,11 +63,15 @@ test('witruimte/newline in lijstitem wordt samengevouwen (geen losse regel)', ()
   assert.match((flat[0].text || '').trim(), /^Aw, artikel/)
 })
 
-test('voetnoot-nummer wordt interne sprong (linkToDestination, met norm-prefix)', () => {
+function convertWith(html, opts) {
   const { document } = parseHTML('<!DOCTYPE html><html><body></body></html>')
   const div = document.createElement('div')
-  div.innerHTML = '<p>tekst<sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup></p>'
-  const out = elementToPdfContent(div, 'n1-')
+  div.innerHTML = html
+  return elementToPdfContent(div, opts)
+}
+
+test('voetnoot-nummer wordt interne sprong (linkToDestination, met norm-prefix)', () => {
+  const out = convertWith('<p>tekst<sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup></p>', { prefix: 'n1-' })
   const ref = out[0].text.find(r => r.linkToDestination)
   assert.ok(ref, 'ref-run met linkToDestination')
   assert.equal(ref.linkToDestination, 'n1-fn-1')
@@ -76,9 +80,26 @@ test('voetnoot-nummer wordt interne sprong (linkToDestination, met norm-prefix)'
 })
 
 test('bronnenlijst-item krijgt matching bestemming-id', () => {
-  const { document } = parseHTML('<!DOCTYPE html><html><body></body></html>')
-  const div = document.createElement('div')
-  div.innerHTML = '<ol><li id="fn:1"><p>Bron. <a href="#x">Bekijk bron</a></p></li></ol>'
-  const out = elementToPdfContent(div, 'n1-')
+  const out = convertWith('<ol><li id="fn:1"><p>Bron. <a href="#x">Bekijk bron</a></p></li></ol>', { prefix: 'n1-' })
   assert.equal(out[0].ol[0].id, 'n1-fn-1')
+})
+
+test('interne norm-link wordt in-PDF-sprong als normDests gegeven (kader)', () => {
+  const out = convertWith('<p>zie <a href="/normen/06-vernietigen/">Norm 6</a></p>', { origin: 'https://x.nl', normDests: { '06-vernietigen': 'norm-06-vernietigen' } })
+  const link = out[0].text.find(r => r.linkToDestination)
+  assert.ok(link, 'in-PDF-sprong')
+  assert.equal(link.linkToDestination, 'norm-06-vernietigen')
+  assert.ok(!link.link, 'geen externe link')
+})
+
+test('interne norm-link wordt absolute site-link zonder normDests (losse norm-PDF)', () => {
+  const out = convertWith('<p>zie <a href="/normen/06-vernietigen/">Norm 6</a></p>', { origin: 'https://x.nl', normDests: null })
+  const link = out[0].text.find(r => r.link)
+  assert.equal(link.link, 'https://x.nl/normen/06-vernietigen/')
+  assert.ok(!link.linkToDestination)
+})
+
+test('externe link blijft extern', () => {
+  const out = convertWith('<p><a href="https://nationaalarchief.nl/x">DUTO</a></p>', { origin: 'https://x.nl', normDests: null })
+  assert.equal(out[0].text[0].link, 'https://nationaalarchief.nl/x')
 })

@@ -3,13 +3,37 @@
 // Geen externe afhankelijkheden, geen ES-modules (de bundel is een plain script).
 (function () {
   var BRAND = '#007bc7'
-  // Prefix voor interne voetnoot-bestemmingen (uniek per norm in de kader-PDF).
-  // Gezet door elementToPdfContent; recursie laat hem ongemoeid.
+  // Linkcontext, gezet door elementToPdfContent (recursie laat 'm ongemoeid):
+  //  linkPrefix — uniek prefix voor voetnoot-bestemmingen (per norm in de kader).
+  //  linkOrigin — site-origin om root-relatieve links absoluut te maken.
+  //  normDests  — map van norm-slug → in-PDF-bestemming (alleen in de kader-PDF);
+  //               null in de losse norm-PDF.
   var linkPrefix = ''
+  var linkOrigin = ''
+  var normDests = null
 
   function footnoteDest(href) {
     var m = (href || '').match(/#fn:?(.+)$/)
     return m ? linkPrefix + 'fn-' + m[1] : null
+  }
+
+  // Kruisverwijzing/interne link: in de kader-PDF een sprong naar de norm-sectie,
+  // anders een absolute link naar de live site. Externe links blijven extern.
+  function crossRefLink(text, href) {
+    var run = { text: text, color: BRAND, decoration: 'underline' }
+    if (!href) { return { text: text } }
+    if (href.charAt(0) === '/') {
+      var slug = (href.match(/^\/normen\/([^/?#]+)\/?/) || [])[1]
+      if (normDests && slug && normDests[slug]) {
+        run.decoration = undefined
+        run.linkToDestination = normDests[slug]
+      } else {
+        run.link = linkOrigin + href
+      }
+    } else {
+      run.link = href
+    }
+    return run
   }
 
   function inlineRuns(node, acc, style) {
@@ -37,7 +61,7 @@
             if (dest) ref.linkToDestination = dest
             acc.push(ref)
           } else {
-            acc.push({ text: child.textContent, link: child.getAttribute('href') || '', color: BRAND, decoration: 'underline' })
+            acc.push(crossRefLink(child.textContent, child.getAttribute('href') || ''))
           }
         } else inlineRuns(child, acc, style)
       }
@@ -77,9 +101,13 @@
     return out
   }
 
-  function elementToPdfContent(root, prefix) {
-    // Alleen de top-level aanroep zet de prefix; recursie (div/section) erft 'm.
-    if (typeof prefix === 'string') linkPrefix = prefix
+  function elementToPdfContent(root, opts) {
+    // Alleen de top-level aanroep zet de linkcontext; recursie erft 'm.
+    if (opts) {
+      if (typeof opts.prefix === 'string') linkPrefix = opts.prefix
+      if (typeof opts.origin === 'string') linkOrigin = opts.origin
+      if (opts.normDests !== undefined) normDests = opts.normDests
+    }
     var out = []
     var children = root.childNodes
     for (var i = 0; i < children.length; i++) {

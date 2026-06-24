@@ -27,9 +27,13 @@
     'Aan dit document kunnen geen rechten worden ontleend.'
   ]
 
-  function parse(html, prefix) {
+  function parse(html, opts) {
     var doc = new DOMParser().parseFromString('<!DOCTYPE html><html><body>' + (html || '') + '</body></html>', 'text/html')
-    return window.TKPDF.elementToPdfContent(doc.body, prefix || '')
+    return window.TKPDF.elementToPdfContent(doc.body, opts)
+  }
+
+  function originOf(url) {
+    try { return new URL(url).origin } catch (e) { return '' }
   }
 
   // Titelpagina (zoals de DPIA-/AI-verordening-PDF's): gecentreerde stack met
@@ -56,41 +60,51 @@
     ]
   }
 
-  function kernBlocks(html) {
-    var blocks = parse(html)
+  function kernBlocks(html, ctx) {
+    var blocks = parse(html, ctx)
     for (var i = 0; i < blocks.length; i++) {
       if (blocks[i].style === 'para') blocks[i].style = 'kern'
     }
     return blocks
   }
 
-  function normSection(n, asSection, pageBreak) {
+  function normSection(n, asSection, pageBreak, ctx) {
+    // Linkcontext per norm: unieke voetnoot-prefix (anders botsen #fn:N van
+    // verschillende normen in de kader-PDF) + site-origin + norm-bestemmingen.
+    var opts = { prefix: 'n' + (n.norm_id || '') + '-', origin: ctx.origin, normDests: ctx.normDests }
     var blocks = []
     if (asSection) {
       var head = { text: n.titel, style: 'section' }
       if (pageBreak) head.pageBreak = 'before'
+      if (n.slug) head.id = 'norm-' + n.slug
       blocks.push(head)
     }
     if (n.kern_html) {
       blocks.push({ text: 'Kern van de norm', style: 'h4', margin: [0, 0, 0, 2] })
-      blocks = blocks.concat(kernBlocks(n.kern_html))
+      blocks = blocks.concat(kernBlocks(n.kern_html, opts))
     }
-    // Unieke voetnoot-prefix per norm, zodat #fn:N van verschillende normen
-    // in de kader-PDF niet botsen.
-    blocks = blocks.concat(parse(n.body_html, 'n' + (n.norm_id || '') + '-'))
+    blocks = blocks.concat(parse(n.body_html, opts))
     return blocks
   }
 
   function buildNorm(data) {
-    // Titelpagina → inhoud → disclaimer (colofon) achteraan.
-    return { content: cover(data).concat(normSection(data, false)).concat(disclaimer()) }
+    // Titelpagina → inhoud → disclaimer (colofon) achteraan. Geen in-PDF-
+    // norm-sprongen (normDests null) → kruisverwijzingen worden site-links.
+    var ctx = { origin: originOf(data.url), normDests: null }
+    return { content: cover(data).concat(normSection(data, false, false, ctx)).concat(disclaimer()) }
   }
 
   function buildKader(data) {
     // Titelpagina → normen (eerste sluit aan op de cover, rest op nieuwe
     // pagina) → disclaimer. Geen losse intro-pagina.
+    // Kruisverwijzingen tussen normen → in-PDF-sprong naar de norm-sectie.
+    var normDests = {}
+    for (var j = 0; j < data.normen.length; j++) {
+      if (data.normen[j].slug) normDests[data.normen[j].slug] = 'norm-' + data.normen[j].slug
+    }
+    var ctx = { origin: originOf(data.url), normDests: normDests }
     var content = cover(data)
-    for (var i = 0; i < data.normen.length; i++) content = content.concat(normSection(data.normen[i], true, i > 0))
+    for (var i = 0; i < data.normen.length; i++) content = content.concat(normSection(data.normen[i], true, i > 0, ctx))
     return { content: content.concat(disclaimer()) }
   }
 
