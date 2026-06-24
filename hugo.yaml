@@ -24,6 +24,9 @@ markup:
     endLevel: 4
 
 params:
+  # Feedback-config blijft staan (de UI is verwijderd; param bewaard voor later).
+  feedback:
+    email: toetsingskader@inspectie-oe.nl
   search:
     enable: true
     priority_sections:
