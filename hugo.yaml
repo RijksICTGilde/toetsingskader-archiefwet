@@ -6,11 +6,24 @@ title: Toetsingskader Archiefwet
 enableRobotsTXT: true
 enableGitInfo: true
 
+outputFormats:
+  pdf:
+    mediaType: application/json
+    baseName: index.pdf
+    isPlainText: true
+    notAlternative: true
+
 outputs:
   home:
     - HTML
     - RSS
     - JSON
+  page:
+    - HTML
+    - pdf
+  section:
+    - HTML
+    - pdf
 
 markup:
   goldmark:
