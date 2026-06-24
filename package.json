@@ -1,0 +1,12 @@
+{
+  "name": "toetsingskader-archiefwet",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/js/",
+    "build:pdf-assets": "node scripts/build-pdf-assets.mjs"
+  },
+  "devDependencies": {
+    "linkedom": "^0.18.12"
+  }
+}
