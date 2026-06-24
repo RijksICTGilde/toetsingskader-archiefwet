@@ -23,15 +23,18 @@
   padding-block-end: 0.5rem;
 }
 
-/* Thema-koppen (h3, alleen binnen Normuitleg) en Voorschrift-koppen in
-   accentkleur. */
-.norm h3,
-.norm h4[id^="voorschrift"] {
+/* Heading-hiërarchie binnen Normuitleg, duidelijk onderscheiden:
+   - thema (h3) = blauwe groepskop (dominant, 1.5rem uit het thema);
+   - voorschrift (h4) = donker en kleiner, dus zichtbaar één niveau lager;
+   - criteria/indicatoren (h4) = nog kleiner én ingesprongen. */
+.norm h3 {
   color: var(--color-primary);
 }
 
-/* Scheidingslijn boven elk Voorschrift, behalve het eerste van een thema. */
+/* Voorschrift: donker (niet blauw) + kleiner dan het thema, met scheidingslijn
+   boven elk voorschrift behalve het eerste van een thema. */
 .norm h4[id^="voorschrift"] {
+  font-size: 1.15rem;
   padding-block-start: 0.75rem;
   border-block-start: 1px solid var(--color-border);
 }
@@ -41,9 +44,14 @@
   padding-block-start: 0;
 }
 
-/* Criteria en Indicatoren springen in t.o.v. Voorschrift — zowel de kop als
-   de eropvolgende inhoud (lijst of "Niet van toepassing"). margin (niet
-   padding) zodat lijst-bullets op hun plek blijven. */
+/* Criteria en Indicatoren: kleinste niveau, en springen in t.o.v. Voorschrift —
+   zowel de kop als de eropvolgende inhoud (lijst of "Niet van toepassing").
+   margin (niet padding) zodat lijst-bullets op hun plek blijven. */
+.norm h4[id^="criteria"],
+.norm h4[id^="indicatoren"] {
+  font-size: 1.05rem;
+}
+
 .norm h4[id^="criteria"],
 .norm h4[id^="indicatoren"],
 .norm h4[id^="criteria"] + *,
