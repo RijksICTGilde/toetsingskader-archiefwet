@@ -80,6 +80,15 @@
   color: inherit;
 }
 
+/* Een ref-term die óók een interne navigatielink is (voetnoot + link naar een
+   andere pagina) krijgt de linkkleur (blauw), zodat zichtbaar is dat je erheen
+   kunt klikken; de dotted underline (voetnoot-indicator) blijft uit het thema.
+   Plain footnote-termen (href="#fn:…") blijven in tekstkleur. */
+.norm a.ref-term[href^="/"],
+.norm a.ref-term[href^="/"]:hover {
+  color: var(--color-primary);
+}
+
 /* Inklapbare accordeons (standaard dicht): Toelichting én Referenties krijgen
    exact dezelfde kop — donkere tekst (1.75rem) met een blauwe chevron. Het
    thema kleurt de referenties-kop blauw; hier gelijkgetrokken met Toelichting. */
