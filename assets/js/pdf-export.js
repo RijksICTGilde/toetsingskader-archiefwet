@@ -14,7 +14,6 @@
     para: { fontSize: 10.5, margin: [0, 0, 0, 6], lineHeight: 1.25 },
     list: { fontSize: 10.5, margin: [8, 0, 0, 6] },
     callout: { fontSize: 11, italics: true, color: '#154273', margin: [0, 4, 0, 10] },
-    kern: { fontSize: 11, bold: true, margin: [0, 0, 0, 10] },
     section: { fontSize: 20, bold: true, color: BRAND, margin: [0, 0, 0, 12] },
     disclaimerH: { fontSize: 13, bold: true, color: BRAND, margin: [0, 18, 0, 6] },
     coverTitle: { fontSize: 26, bold: true, color: BRAND, margin: [0, 0, 0, 24] },
@@ -60,14 +59,6 @@
     ]
   }
 
-  function kernBlocks(html, ctx) {
-    var blocks = parse(html, ctx)
-    for (var i = 0; i < blocks.length; i++) {
-      if (blocks[i].style === 'para') blocks[i].style = 'kern'
-    }
-    return blocks
-  }
-
   function normSection(n, asSection, pageBreak, ctx) {
     // Linkcontext per norm: unieke voetnoot-prefix (anders botsen #fn:N van
     // verschillende normen in de kader-PDF) + site-origin + norm-bestemmingen.
@@ -82,8 +73,10 @@
       blocks.push(head)
     }
     if (n.kern_html) {
-      blocks.push({ text: 'Kern van de norm', style: 'h4', margin: [0, 0, 0, 2] })
-      blocks = blocks.concat(kernBlocks(n.kern_html, opts))
+      // "Kern van de norm" als sectiekop (h2) en de tekst als normale alinea —
+      // net als Toelichting (klantfeedback: kern was te klein/dikgedrukt).
+      blocks.push({ text: 'Kern van de norm', style: 'h2' })
+      blocks = blocks.concat(parse(n.kern_html, opts))
     }
     blocks = blocks.concat(parse(n.body_html, opts))
     return blocks

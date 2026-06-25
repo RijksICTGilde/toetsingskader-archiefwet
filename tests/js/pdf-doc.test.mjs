@@ -49,11 +49,13 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.match(coverText, /Gedownload op/)
   assert.match(coverText, /Bron/)
   assert.equal(cover.pageBreak, 'after')
-  // kop "Kern van de norm" aanwezig én de kerntekst zelf gerenderd (niet leeg)
+  // "Kern van de norm" als sectiekop (h2, zoals Toelichting) + de kerntekst
+  // als normale alinea (niet leeg).
   const kernIdx = dd.content.findIndex(b => b.text === 'Kern van de norm')
   assert.ok(kernIdx !== -1, 'kern-kop aanwezig')
+  assert.equal(dd.content[kernIdx].style, 'h2', 'kern-kop als sectiekop (h2)')
   const kernBlock = dd.content[kernIdx + 1]
-  assert.equal(kernBlock.style, 'kern')
+  assert.equal(kernBlock.style, 'para')
   assert.ok(typeof kernBlock.text === 'string' && kernBlock.text.length > 10, 'kerntekst gerenderd')
   // disclaimer
   assert.ok(dd.content.some(b => b.ul && typeof b.ul[0] === 'string' && b.ul[0].includes('automatisch gegenereerd')))
