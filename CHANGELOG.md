@@ -37,6 +37,9 @@ changelog volgt [Semantic Versioning][semver].
   (geen lege of op-een-leesteken-geplaatste hover-term meer); een term die
   tegelijk een interne link is, wordt blauw met de voetnoot-stippellijn.
 - Zoek-highlight knipt links in de paginatekst niet meer op.
+- "Op deze pagina"-TOC volgt de actieve sectie nu vloeiend mee; voorheen
+  verdween de highlight in de voorschrift-/criteria-/indicator-blokken
+  (project-scroll-spy; thema-fix als upstream-PR ingediend).
 
 ## [0.1.0] - 2026-06-17
 
