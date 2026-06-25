@@ -3,9 +3,10 @@
   --color-banner: #007bc7;
 }
 
-/* "Over deze site" kolom expliciet breder voor het langste label
-   ("Kwetsbaarheid melden"). Theme nav { min-width: 10rem } is voor
-   alle navs hetzelfde; deze override forceert breder ipv groeien. */
+/* UPSTREAM-KANDIDAAT (thema): "Over deze site"-kolom expliciet breder voor het
+   langste label ("Kwetsbaarheid melden"). Theme nav { min-width: 10rem } is
+   voor alle navs hetzelfde; deze override forceert breder ipv groeien. Kan weg
+   als het thema de footer-nav laat auto-sizen. */
 @media (min-width: 700px) {
   body > footer .footer-columns > nav[aria-label="Over deze site"] {
     min-width: 14rem;
@@ -13,10 +14,11 @@
   }
 }
 
-/* Zoek-highlight (?q=…) wikkelt matches in <mark>, óók binnen links. De
-   thema-mark-stijl overschrijft dan de linkkleur, waardoor de link "opgeknipt"
-   oogt. Hier behoudt een highlight ín een link de linkkleur (alleen de gele
-   achtergrond blijft). Project-CSS — raakt het thema niet. */
+/* UPSTREAM-KANDIDAAT (thema): zoek-highlight (?q=…) wikkelt matches in <mark>,
+   óók binnen links. De thema-mark-stijl overschrijft dan de linkkleur, waardoor
+   de link "opgeknipt" oogt. Hier behoudt een highlight ín een link de linkkleur
+   (alleen de gele achtergrond blijft). Kan weg als de thema-highlight-walker
+   links overslaat. Raakt het thema niet. */
 #main-content a mark {
   color: inherit;
 }
@@ -73,8 +75,11 @@
   margin-inline-start: 1rem;
 }
 
-/* Referentie-term: klikbaar naar het lijstitem, maar in tekstkleur i.p.v.
-   de standaard linkkleur (de dotted underline komt uit het thema). */
+/* UPSTREAM-KANDIDAAT (thema): referentie-term in tekstkleur i.p.v. de standaard
+   linkkleur. Het thema geeft `.ref-term` alleen een dotted underline en geen
+   kleur, dus een `<a>.ref-term` valt terug op het linkblauw; deze override zet
+   'm op tekstkleur. Kan weg als het thema zelf `.ref-term { color: inherit }`
+   zet. (De dotted underline komt uit het thema.) */
 .norm a.ref-term,
 .norm a.ref-term:hover {
   color: inherit;
@@ -89,12 +94,12 @@
   color: var(--color-primary);
 }
 
-/* De inklapbare Toelichting hergebruikt de thema-`.references`-accordeonstijl
-   (zie single.html). Enige project-override: de kop (én chevron via
-   currentColor) in de thema-standaardkleur (donker) i.p.v. het thema-blauw.
-   Geldt voor beide accordeons (Toelichting + Referenties).
-   Upstream-kandidaat: thema de referenties-summary-kleur als token laten zetten
-   zodat dit zonder override kan. */
+/* UPSTREAM-KANDIDAAT (thema): de inklapbare Toelichting hergebruikt de
+   thema-`.references`-accordeonstijl (zie single.html). Enige project-override:
+   de kop (én chevron via currentColor) in de thema-standaardkleur (donker)
+   i.p.v. het thema-blauw. Geldt voor beide accordeons (Toelichting +
+   Referenties). Kan weg als het thema de summary-kleur als token zet (of niet
+   hardcoded op blauw). */
 .norm .references > details > summary {
   color: var(--color-text);
 }
