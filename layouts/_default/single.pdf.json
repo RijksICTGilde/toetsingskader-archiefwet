@@ -1,0 +1,16 @@
+{{- /* Niet-norm pagina's krijgen geen PDF-data. */ -}}
+{{- if .Params.norm_id -}}
+{{- $kern := "" -}}{{- with .Params.kern }}{{ $kern = . | markdownify }}{{ end -}}
+{{- dict
+  "kind" "norm"
+  "titel" (printf "Norm %s: %s" (string .Params.norm_id) .Params.norm_titel)
+  "norm_id" (string .Params.norm_id)
+  "norm_titel" .Params.norm_titel
+  "kern_html" $kern
+  "body_html" .Content
+  "url" .Permalink
+  "versie" (site.Params.versie | default "")
+  | jsonify -}}
+{{- else -}}
+{}
+{{- end -}}

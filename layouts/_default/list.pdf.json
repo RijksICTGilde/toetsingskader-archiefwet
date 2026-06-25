@@ -1,0 +1,20 @@
+{{- /* Kader-aggregaat: intro + alle normen op weight-volgorde. */ -}}
+{{- $normen := where (where site.RegularPages "Section" "normen") "Params.norm_id" "!=" nil -}}
+{{- $normen = sort $normen "Weight" -}}
+{{- $items := slice -}}
+{{- range $normen -}}
+  {{- $kern := "" -}}{{- with .Params.kern }}{{ $kern = . | markdownify }}{{ end -}}
+  {{- $items = $items | append (dict
+      "titel" (printf "Norm %s: %s" (string .Params.norm_id) .Params.norm_titel)
+      "norm_id" (string .Params.norm_id)
+      "slug" .File.ContentBaseName
+      "kern_html" $kern
+      "body_html" .Content) -}}
+{{- end -}}
+{{- dict
+  "kind" "kader"
+  "titel" "Toetsingskader Archiefwet 2026"
+  "url" .Permalink
+  "versie" (site.Params.versie | default "")
+  "normen" $items
+  | jsonify -}}

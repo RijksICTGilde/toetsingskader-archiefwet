@@ -1,3 +1,7 @@
+# Vendored libraries (bv. pdfMake) blijven byte-identiek aan upstream: niet
+# linten/herformatteren en uitsluiten van de large-files-check.
+exclude: '^assets/lib/'
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0

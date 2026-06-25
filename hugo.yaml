@@ -6,11 +6,24 @@ title: Toetsingskader Archiefwet
 enableRobotsTXT: true
 enableGitInfo: true
 
+outputFormats:
+  pdf:
+    mediaType: application/json
+    baseName: index.pdf
+    isPlainText: true
+    notAlternative: true
+
 outputs:
   home:
     - HTML
     - RSS
     - JSON
+  page:
+    - HTML
+    - pdf
+  section:
+    - HTML
+    - pdf
 
 markup:
   goldmark:
@@ -24,7 +37,10 @@ markup:
     endLevel: 4
 
 params:
-  # Feedback-config blijft staan (de UI is verwijderd; param bewaard voor later).
+  # Versie van het toetsingskader. Lokale default; in CI overschreven met de
+  # git-release-tag via HUGO_PARAMS_VERSIE (zie workflows + Containerfile).
+  # Bron voor de PDF-export (release-tag in elke gedownloade PDF).
+  versie: "0.8"
   feedback:
     email: toetsingskader@inspectie-oe.nl
   search:
@@ -36,7 +52,8 @@ params:
   page_banner:
     type: warning
     strong: "Let op:"
-    text: "Dit is versie 0.8 van het toetsingskader. De inhoud is nog in ontwikkeling en kan wijzigen."
+    # {versie} wordt vervangen door params.versie (zie _partials/page-banner.html).
+    text: "Dit is versie {versie} van het toetsingskader. De inhoud is nog in ontwikkeling en kan wijzigen."
   footer:
     tagline: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."
     links: "Zie ook"

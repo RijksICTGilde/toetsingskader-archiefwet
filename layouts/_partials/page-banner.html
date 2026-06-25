@@ -1,0 +1,18 @@
+{{/*
+  Project-override van de theme-page-banner.
+
+  Verschil met het thema: een {versie}-placeholder in de bannertekst wordt
+  vervangen door site.Params.versie — dezelfde bron als de PDF-export (lokaal
+  de hugo.yaml-default, in CI de git-release-tag via HUGO_PARAMS_VERSIE). Zo
+  staat het versienummer op één plek en lopen banner en PDF niet uiteen.
+
+  Verder identiek aan _partials/page-banner.html van het thema.
+  Upstream-kandidaat: templating/{versie} in de bannertekst in het thema zelf.
+*/}}
+{{- $b := site.Params.page_banner -}}
+{{- if and $b $b.text -}}
+{{- $text := replace $b.text "{versie}" (site.Params.versie | default "") -}}
+<div class="page-banner page-banner--{{ $b.type | default "info" }}" role="status">
+  <p>{{ with $b.strong }}<strong>{{ . }}</strong> {{ end }}{{ $text }}</p>
+</div>
+{{- end -}}

@@ -43,6 +43,12 @@ jobs:
         id: pages
         uses: actions/configure-pages@v6
 
+      - name: Determine version from git tag
+        # Alleen een echte tag exporteren; geen tag → hugo.yaml-default (geen hash).
+        run: |
+          V="$(git describe --tags --abbrev=0 2>/dev/null || true)"
+          if [ -n "$V" ]; then echo "HUGO_PARAMS_VERSIE=$V" >> "$GITHUB_ENV"; fi
+
       - name: Build Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
