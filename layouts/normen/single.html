@@ -35,17 +35,26 @@
     {{ $textOnly = index (index . 0) 1 }}
     {{ $linkHTML = index (index . 0) 2 }}
   {{ end }}
-  {{/* Het woord wordt een link naar het referentielijst-item (#fn:N); de
-       accordeon klapt daar automatisch open (theme referenties.js + native
-       <details>-gedrag). De anker-id (fnref…:N) blijft op de wrapper voor
-       de ↩-backlinks vanuit de lijst. */}}
-  {{ $pattern := printf `([^\s<>]*)<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
-  {{ $repl := printf `<span class="ref-wrapper" id="$2"><a href="#fn:%s" class="ref-term">$1</a><span class="ref-tooltip" role="note"><span>%s</span>%s</span></span>` $n $textOnly $linkHTML }}
-  {{ $content = replaceRE $pattern $repl $content }}
+  {{/* Twee passes, zodat een voorafgaande spatie (`woord [^id]`) of een link
+       (`[tekst](…)[^id]` of `[tekst](…). [^id]`) de hover-term niet leeg of op
+       een leesteken laat landen:
+       A) link + optionele leestekens + optionele spatie vóór de voetnoot → de
+          link zélf wordt de ref-term (behoudt navigatie + tooltip); het
+          leesteken blijft erachter staan;
+       B) gewoon woord + optionele spatie → het woord wordt de ref-term.
+       De anker-id (fnref…:N) blijft op de wrapper voor de ↩-backlinks. Wat
+       geen van beide matcht (zeldzaam) blijft een zichtbaar superscript i.p.v.
+       een lege term. */}}
+  {{ $linkPat := printf `<a ([^>]*)>([^<]*)</a>([.,;:!?)]*)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
+  {{ $linkRepl := printf `<span class="ref-wrapper" id="${4}"><a ${1} class="ref-term">${2}</a><span class="ref-tooltip" role="note"><span>%s</span>%s</span></span>${3}` $textOnly $linkHTML }}
+  {{ $content = replaceRE $linkPat $linkRepl $content }}
+  {{ $wordPat := printf `([^\s<>]+)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
+  {{ $wordRepl := printf `<span class="ref-wrapper" id="$2"><a href="#fn:%s" class="ref-term">$1</a><span class="ref-tooltip" role="note"><span>%s</span>%s</span></span>` $n $textOnly $linkHTML }}
+  {{ $content = replaceRE $wordPat $wordRepl $content }}
 {{ end }}
 
 {{/* 2. Het footnotes-blok uit de body lichten en als thema-accordeon
-       onderaan tonen (ná de feedback, net als voorheen de referenties). */}}
+       onderaan tonen (net als voorheen de referenties). */}}
 {{ $refs := "" }}
 {{ $block := findRESubmatch `(?s)<div class="footnotes" role="doc-endnotes">\s*<hr\s*/?>\s*(<ol>.*?</ol>)\s*</div>` $content }}
 {{ with $block }}
@@ -53,6 +62,21 @@
   {{ $refs = printf `<section id="referenties" class="references" aria-label="Referenties"><details><summary>Referenties</summary>%s</details></section>` $ol }}
   {{ $content = replaceRE `(?s)<div class="footnotes" role="doc-endnotes">.*?</ol>\s*</div>` "" $content }}
 {{ end }}
+
+{{/* 3. Voorschriften nummeren als "Voorschrift <norm_id>.<n>" (sequentieel
+       binnen de norm; norm_id uit de front matter). Elke replaceRE met limit 1
+       pakt het eerstvolgende nog-ongenummerde voorschrift. */}}
+{{ $normId := .Params.norm_id }}
+{{ range $i, $_ := (findRE `<h4 id="voorschrift[^"]*">Voorschrift</h4>` $content) }}
+  {{ $content = replaceRE `(<h4 id="voorschrift[^"]*">)Voorschrift(</h4>)` (printf `${1}Voorschrift %v.%d${2}` $normId (add $i 1)) $content 1 }}
+{{ end }}
+
+{{/* 4. Toelichting inklapbaar maken (standaard dicht). Het kader is naslag, dus
+       criteria/indicatoren moeten snel bereikbaar zijn zonder eerst langs de
+       toelichting te scrollen. Wrap in de thema-`.references`-accordeonstructuur,
+       zodat het thema 'm stylet (geen eigen accordeon-CSS nodig). id op de
+       <details> blijft voor de TOC-link (#toelichting). */}}
+{{ $content = replaceRE `(?s)<h2 id="toelichting">Toelichting</h2>(.*?)(<h2 )` `<section class="references"><details id="toelichting"><summary>Toelichting</summary>$1</details></section>$2` $content 1 }}
 
 {{/* TOC opbouwen uit .Fragments. Begint de body bij h2 (geen h1), dan zit
      er een lege root-heading boven de h2's; die slaan we over. */}}
@@ -80,16 +104,6 @@
   {{ end }}
 
   {{ $content | safeHTML }}
-
-  {{ with site.Params.feedback }}
-  <aside id="feedback" class="norm-feedback" aria-label="Feedback">
-    <h2>Feedback</h2>
-    <p>Heeft u opmerkingen of suggesties over deze norm? We horen het graag.</p>
-    {{ with .email }}
-    <a href="mailto:{{ . }}?subject={{ printf "Feedback: %s" $page.Title | querify "s" | strings.TrimPrefix "s=" }}" class="feedback-link">Stuur uw feedback per e-mail</a>
-    {{ end }}
-  </aside>
-  {{ end }}
 
   {{ with $refs }}{{ . | safeHTML }}{{ end }}
 
@@ -125,7 +139,6 @@
       </li>
       {{- end -}}
       {{- with $refs }}<li><a href="#referenties">Referenties</a></li>{{ end -}}
-      {{- with site.Params.feedback }}<li><a href="#feedback">Feedback</a></li>{{ end -}}
     </ul>
   </nav>
 </aside>

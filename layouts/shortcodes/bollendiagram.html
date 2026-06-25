@@ -1,93 +1,108 @@
 {{/*
   Shortcode: bollendiagram
-  Visualisatie van "Informatie in beheer" met de samenhangende normen.
+  Hub-and-spoke-visualisatie van "Informatie in beheer" met de samenhangende
+  normen. De norm in beheer staat centraal; de zeven andere normen liggen
+  gelijkmatig in een cirkel eromheen, verbonden via dunne spokes.
   De gevulde bollen zijn toetsenbord-navigeerbaar (focus zichtbaar via stroke).
-  Wit-omrande bollen staan voor onderwerpen die later worden toegevoegd.
+  Onder een scheidingslijn staan de vervaagde onderwerpen die later worden
+  toegevoegd.
 
-  Opbouw: eerst alle cirkels, daarna alle labels in een aparte groep er
-  bovenop. Zo overschilderen latere bollen nooit de tekst van eerder
-  getekende bollen.
+  Tekenvolgorde (paint-order): eerst de spokes, dan de cirkels eroverheen (de
+  opake fills verbergen de spoke-uiteinden), dan de toekomst-bollen en als
+  laatste alle labels in een aparte groep bovenop. Zo overschildert niets de
+  tekst.
 */}}
 
 <figure class="bollendiagram-wrapper">
   <svg class="bollendiagram"
-       viewBox="0 30 900 500"
+       viewBox="80 0 480 525"
        xmlns="http://www.w3.org/2000/svg"
        role="img"
        aria-labelledby="bollendiagram-title">
-    <title id="bollendiagram-title">Relatie tussen Normen van het Toetsingskader Archiefwet</title>
+    <title id="bollendiagram-title">Relatie tussen de normen van het Toetsingskader Archiefwet</title>
+
+    <g class="bd-spokes" aria-hidden="true">
+      <line class="bd-spoke" x1="320" y1="215" x2="320" y2="60"/>
+      <line class="bd-spoke" x1="320" y1="215" x2="441" y2="118"/>
+      <line class="bd-spoke" x1="320" y1="215" x2="471" y2="249"/>
+      <line class="bd-spoke" x1="320" y1="215" x2="387" y2="355"/>
+      <line class="bd-spoke" x1="320" y1="215" x2="253" y2="355"/>
+      <line class="bd-spoke" x1="320" y1="215" x2="169" y2="249"/>
+      <line class="bd-spoke" x1="320" y1="215" x2="199" y2="118"/>
+    </g>
 
     <g class="bd-cluster">
       <a class="bd-bubble bd-main" href="{{ relURL "normen/01-beheer/" }}">
         <title>Informatie in beheer</title>
-        <circle cx="340" cy="280" r="145"/>
-      </a>
-
-      <a class="bd-bubble" href="{{ relURL "normen/03-ordeningsstructuur/" }}">
-        <title>Ordenen</title>
-        <circle cx="301" cy="109" r="65"/>
+        <circle cx="320" cy="215" r="80"/>
       </a>
 
       <a class="bd-bubble" href="{{ relURL "normen/02-overzicht/" }}">
         <title>Overzicht</title>
-        <circle cx="449" cy="143" r="65"/>
+        <circle cx="320" cy="60" r="55"/>
+      </a>
+
+      <a class="bd-bubble" href="{{ relURL "normen/03-ordeningsstructuur/" }}">
+        <title>Ordenen</title>
+        <circle cx="441" cy="118" r="55"/>
       </a>
 
       <a class="bd-bubble" href="{{ relURL "normen/04-metadatering/" }}">
         <title>Metadateren</title>
-        <circle cx="182" cy="204" r="65"/>
+        <circle cx="471" cy="249" r="55"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/07-informatiebeveiliging/" }}">
-        <title>Gecontroleerd vernietigen</title>
-        <circle cx="182" cy="356" r="65"/>
+      <a class="bd-bubble" href="{{ relURL "normen/05-vindbaarheid/" }}">
+        <title>Vindbaar</title>
+        <circle cx="387" cy="355" r="55"/>
       </a>
 
       <a class="bd-bubble" href="{{ relURL "normen/06-vernietigen/" }}">
         <title>Betrouwbaar</title>
-        <circle cx="301" cy="451" r="65"/>
+        <circle cx="253" cy="355" r="55"/>
+      </a>
+
+      <a class="bd-bubble" href="{{ relURL "normen/07-informatiebeveiliging/" }}">
+        <title>Gecontroleerd vernietigen</title>
+        <circle cx="169" cy="249" r="55"/>
       </a>
 
       <a class="bd-bubble" href="{{ relURL "normen/08-periodieke-evaluatie/" }}">
         <title>Periodieke evaluatie</title>
-        <circle cx="449" cy="417" r="65"/>
-      </a>
-
-      <a class="bd-bubble bd-bridge" href="{{ relURL "normen/05-vindbaarheid/" }}">
-        <title>Vindbaar</title>
-        <circle cx="515" cy="280" r="65"/>
+        <circle cx="199" cy="118" r="55"/>
       </a>
     </g>
 
     <g class="bd-future" aria-hidden="true">
-      <circle class="bd-bubble-outlined" cx="615" cy="235" r="60"/>
-      <circle class="bd-bubble-outlined" cx="710" cy="180" r="60"/>
-      <circle class="bd-bubble-outlined" cx="685" cy="305" r="60"/>
-      <circle class="bd-bubble-outlined" cx="595" cy="365" r="60"/>
+      <line class="bd-divider" x1="110" y1="420" x2="530" y2="420"/>
+      <circle class="bd-bubble-outlined" cx="134" cy="470" r="42"/>
+      <circle class="bd-bubble-outlined" cx="258" cy="470" r="42"/>
+      <circle class="bd-bubble-outlined" cx="382" cy="470" r="42"/>
+      <circle class="bd-bubble-outlined" cx="506" cy="470" r="42"/>
     </g>
 
     <g class="bd-labels" aria-hidden="true">
-      <text class="bd-label-main" x="340" y="270">Informatie</text>
-      <text class="bd-label-main" x="340" y="298">in beheer</text>
+      <text class="bd-label-main" x="320" y="204">Informatie</text>
+      <text class="bd-label-main" x="320" y="230">in beheer</text>
 
-      <text class="bd-label" x="301" y="112">Ordenen</text>
-      <text class="bd-label" x="449" y="146">Overzicht</text>
-      <text class="bd-label" x="182" y="207">Metadateren</text>
-      <text class="bd-label" x="182" y="349">Gecontroleerd</text>
-      <text class="bd-label" x="182" y="368">vernietigen</text>
-      <text class="bd-label" x="301" y="454">Betrouwbaar</text>
-      <text class="bd-label" x="449" y="410">Periodieke</text>
-      <text class="bd-label" x="449" y="429">evaluatie</text>
-      <text class="bd-label bd-label-bridge" x="515" y="283">Vindbaar</text>
+      <text class="bd-label" x="320" y="60">Overzicht</text>
+      <text class="bd-label" x="441" y="118">Ordenen</text>
+      <text class="bd-label" x="471" y="249">Metadateren</text>
+      <text class="bd-label" x="387" y="355">Vindbaar</text>
+      <text class="bd-label" x="253" y="355">Betrouwbaar</text>
+      <text class="bd-label" x="169" y="240">Gecontroleerd</text>
+      <text class="bd-label" x="169" y="258">vernietigen</text>
+      <text class="bd-label" x="199" y="109">Periodieke</text>
+      <text class="bd-label" x="199" y="127">evaluatie</text>
 
-      <text class="bd-label-outlined" x="615" y="238">leesbaar</text>
-      <text class="bd-label-outlined" x="710" y="183">migreren</text>
-      <text class="bd-label-outlined" x="685" y="308">converteren</text>
-      <text class="bd-label-outlined" x="595" y="368">beschikbaar</text>
+      <text class="bd-label-outlined" x="134" y="470">leesbaar</text>
+      <text class="bd-label-outlined" x="258" y="470">migreren</text>
+      <text class="bd-label-outlined" x="382" y="470">converteren</text>
+      <text class="bd-label-outlined" x="506" y="470">beschikbaar</text>
     </g>
   </svg>
 
   <figcaption class="bollendiagram-caption">
-    Het toetsingskader bevat nu acht onderwerpen die de inspectie als fundamenteel voor de duurzame toegankelijkheid beschouwt. De vier wit gearceerde onderwerpen horen hier ook bij, en worden op een later moment toegevoegd aan het toetsingskader. De norm <a href="{{ relURL "normen/01-beheer/" }}">in beheer</a> vormt de basis van het toetsingskader.
+    Het toetsingskader bevat nu acht onderwerpen die de inspectie als fundamenteel voor de duurzame toegankelijkheid beschouwt. De norm <a href="{{ relURL "normen/01-beheer/" }}">in beheer</a> vormt de basis; de zeven andere normen hangen daar direct mee samen. De vier vervaagde onderwerpen onderaan horen hier ook bij en worden op een later moment aan het toetsingskader toegevoegd.
   </figcaption>
 </figure>

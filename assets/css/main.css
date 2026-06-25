@@ -13,6 +13,14 @@
   }
 }
 
+/* Zoek-highlight (?q=…) wikkelt matches in <mark>, óók binnen links. De
+   thema-mark-stijl overschrijft dan de linkkleur, waardoor de link "opgeknipt"
+   oogt. Hier behoudt een highlight ín een link de linkkleur (alleen de gele
+   achtergrond blijft). Project-CSS — raakt het thema niet. */
+#main-content a mark {
+  color: inherit;
+}
+
 /* Norm page: project-specifieke decoratie op de markdown-body-structuur.
    (Voorheen op .norm-* wrappers; in het markdown-formaat zijn de koppen
    gewone h2/h3/h4, dus we scopen via .norm + heading-ids.) */
@@ -23,15 +31,24 @@
   padding-block-end: 0.5rem;
 }
 
-/* Thema-koppen (h3, alleen binnen Normuitleg) en Voorschrift-koppen in
-   accentkleur. */
-.norm h3,
-.norm h4[id^="voorschrift"] {
-  color: var(--color-primary);
+/* Nieuw thema (h3): duidelijke overgang met ruimte + scheidingslijn (zoals
+   tussen voorschriften), behalve het eerste thema direct onder Normuitleg. */
+.norm h3 {
+  margin-block-start: 2.5rem;
+  padding-block-start: 1.25rem;
+  border-block-start: 1px solid var(--color-border);
 }
 
-/* Scheidingslijn boven elk Voorschrift, behalve het eerste van een thema. */
+.norm h3:first-of-type {
+  margin-block-start: 1.5rem;
+  padding-block-start: 0;
+  border-block-start: none;
+}
+
+/* Normuitleg (h2) en thema (h3) staan in de thema-standaardkleur (donker);
+   het Voorschrift is de blauwe accent-kop. */
 .norm h4[id^="voorschrift"] {
+  color: var(--color-primary);
   padding-block-start: 0.75rem;
   border-block-start: 1px solid var(--color-border);
 }
@@ -41,9 +58,14 @@
   padding-block-start: 0;
 }
 
-/* Criteria en Indicatoren springen in t.o.v. Voorschrift — zowel de kop als
-   de eropvolgende inhoud (lijst of "Niet van toepassing"). margin (niet
-   padding) zodat lijst-bullets op hun plek blijven. */
+/* Criteria en Indicatoren: sub-items van het voorschrift — iets kleiner en
+   ingesprongen (zowel de kop als de eropvolgende inhoud; margin i.p.v.
+   padding zodat lijst-bullets op hun plek blijven). */
+.norm h4[id^="criteria"],
+.norm h4[id^="indicatoren"] {
+  font-size: 1.15rem;
+}
+
 .norm h4[id^="criteria"],
 .norm h4[id^="indicatoren"],
 .norm h4[id^="criteria"] + *,
@@ -83,4 +105,21 @@
   border-color: var(--color-primary);
   color: #fff;
   filter: brightness(0.9);
+/* Een ref-term die óók een interne navigatielink is (voetnoot + link naar een
+   andere pagina) krijgt de linkkleur (blauw), zodat zichtbaar is dat je erheen
+   kunt klikken; de dotted underline (voetnoot-indicator) blijft uit het thema.
+   Plain footnote-termen (href="#fn:…") blijven in tekstkleur. */
+.norm a.ref-term[href^="/"],
+.norm a.ref-term[href^="/"]:hover {
+  color: var(--color-primary);
+}
+
+/* De inklapbare Toelichting hergebruikt de thema-`.references`-accordeonstijl
+   (zie single.html). Enige project-override: de kop (én chevron via
+   currentColor) in de thema-standaardkleur (donker) i.p.v. het thema-blauw.
+   Geldt voor beide accordeons (Toelichting + Referenties).
+   Upstream-kandidaat: thema de referenties-summary-kleur als token laten zetten
+   zodat dit zonder override kan. */
+.norm .references > details > summary {
+  color: var(--color-text);
 }
