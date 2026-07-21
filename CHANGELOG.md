@@ -22,6 +22,9 @@ changelog volgt [Semantic Versioning][semver].
   delen één (thema-)accordeonstijl.
 - Heading-hiërarchie in Normuitleg verduidelijkt (voorschrift als accent-kop,
   duidelijke overgang tussen thema's).
+- PDF-export toegevoegd: downloadbare Rijkshuisstijl-PDF per normpagina en
+  voor het hele toetsingskader, met titelpagina, release-tag en
+  downloaddatum. Client-side gegenereerd met pdfMake; CSP-veilig.
 
 ### Verwijderd
 

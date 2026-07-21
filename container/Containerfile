@@ -10,7 +10,11 @@ RUN apk add --no-cache git wget tar \
 WORKDIR /src
 COPY . .
 ARG BASE_URL=
-RUN if [ -n "$BASE_URL" ]; then \
+# Release-tag (git describe) doorgegeven vanuit de workflow; voedt de PDF-export
+# via HUGO_PARAMS_VERSIE → site.Params.versie. Leeg → Hugo-default uit hugo.yaml.
+ARG VERSIE=
+RUN if [ -n "$VERSIE" ]; then export HUGO_PARAMS_VERSIE="$VERSIE"; fi; \
+    if [ -n "$BASE_URL" ]; then \
       hugo --minify --baseURL "$BASE_URL"; \
     else \
       hugo --minify; \

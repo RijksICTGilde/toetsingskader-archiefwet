@@ -38,6 +38,13 @@ jobs:
             echo "value=" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Determine version from git tag
+        id: versie
+        # Alleen een echte tag; leeg als er (nog) geen tag is, zodat de
+        # Containerfile terugvalt op de leesbare default uit hugo.yaml
+        # (geen kale commit-hash als "versie").
+        run: echo "value=$(git describe --tags --abbrev=0 2>/dev/null || true)" >> "$GITHUB_OUTPUT"
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
 
@@ -68,6 +75,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             BASE_URL=${{ steps.baseurl.outputs.value }}
+            VERSIE=${{ steps.versie.outputs.value }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

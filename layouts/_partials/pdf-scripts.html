@@ -1,0 +1,9 @@
+{{- /* Eén 'self'-script: vendored pdfMake + base64-assets + converter + export.
+       Mirror van het thema-Concat-patroon (lib/fuse). Alleen geladen op
+       pagina's met een downloadknop. */ -}}
+{{- $pdfmake := resources.Get "lib/pdfmake/pdfmake.min.js" -}}
+{{- $assets := resources.Get "js/pdf-assets.js" -}}
+{{- $conv := resources.Get "js/html-to-pdfmake.js" -}}
+{{- $export := resources.Get "js/pdf-export.js" -}}
+{{- $bundle := slice $pdfmake $assets $conv $export | resources.Concat "js/pdf-bundle.js" | fingerprint "md5" -}}
+<script src="{{ $bundle.RelPermalink }}"></script>
