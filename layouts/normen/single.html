@@ -142,6 +142,11 @@
     </ul>
   </nav>
 </aside>
+
+{{/* Scroll-spy: highlight de actieve sectie in de TOC (alleen koppen mét een
+     TOC-link; draait ná de thema-scroll-spy). CSP-veilig 'self'-script. */}}
+{{- $spy := resources.Get "js/toc-scrollspy.js" | fingerprint "md5" -}}
+<script src="{{ $spy.RelPermalink }}"></script>
 {{- end -}}
 
 {{- with .OutputFormats.Get "pdf" }}{{ partial "pdf-scripts.html" $page }}{{ end -}}
