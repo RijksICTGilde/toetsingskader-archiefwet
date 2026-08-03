@@ -3,6 +3,8 @@
 // addVirtualFileSystem) en window.TKPDF (converter + base64-assets).
 (function () {
   var BRAND = '#007bc7'
+  // Rijkshuisstijl-donkerblauw: kleur van het lint en het woordmerk ernaast.
+  var LOGO_BLUE = '#154273'
   var dateFmt = new Intl.DateTimeFormat('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })
 
   var styles = {
@@ -121,10 +123,25 @@
     base.styles = styles
     base.info = { title: data.titel, author: 'Inspectie Overheidsinformatie en Erfgoed', subject: 'Versie: ' + (data.versie || '') }
     base.header = function () {
-      // Logo gecentreerd bovenaan elke pagina (running letterhead), zonder lijn.
+      // Rijkshuisstijl-lockup linksboven op elke pagina (running letterhead),
+      // zonder lijn: lint + organisatienaam + ministerie, zoals de header van
+      // inspectie-oe.nl. De tekst staat in RO Sans (al in de VFS) i.p.v. een
+      // woordmerk-SVG, zodat hij scherp en selecteerbaar blijft.
+      // Het lint is 1:2 (viewBox 50x100), dus 26 breed → 52 hoog; de
+      // top-marge van de tekst centreert het tekstblok (±21 hoog) verticaal.
       return {
-        columns: [{ text: '', width: '*' }, { svg: window.TKPDF.PDF_LOGO_SVG, width: 28 }, { text: '', width: '*' }],
-        margin: [0, 14, 0, 0]
+        columns: [
+          { svg: window.TKPDF.PDF_LOGO_SVG, width: 26 },
+          {
+            width: '*',
+            margin: [8, 16, 0, 0],
+            stack: [
+              { text: 'Inspectie Overheidsinformatie en Erfgoed', fontSize: 9.5, bold: true, color: LOGO_BLUE, lineHeight: 1.15 },
+              { text: 'Ministerie van Onderwijs, Cultuur en Wetenschap', fontSize: 8, color: LOGO_BLUE, lineHeight: 1.15, margin: [0, 1, 0, 0] }
+            ]
+          }
+        ],
+        margin: [48, 14, 48, 0]
       }
     }
     base.footer = function (currentPage, pageCount) {

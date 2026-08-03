@@ -64,6 +64,10 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   const logoCol = dd.header(1).columns.find(c => c.svg)
   assert.ok(logoCol, 'logo-kolom aanwezig')
   assert.match(logoCol.svg, /^<svg/)
+  // Rijkshuisstijl-lockup: lint + organisatienaam + ministerie (OCW).
+  const wordmark = JSON.stringify(dd.header(1).columns.find(c => c.stack))
+  assert.match(wordmark, /Inspectie Overheidsinformatie en Erfgoed/)
+  assert.match(wordmark, /Ministerie van Onderwijs, Cultuur en Wetenschap/)
   assert.ok(dd.header(2).columns.find(c => c.svg), 'logo ook op pagina 2 (running letterhead)')
 })
 
