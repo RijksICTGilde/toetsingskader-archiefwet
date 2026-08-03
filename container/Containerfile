@@ -23,8 +23,13 @@ RUN if [ -n "$VERSIE" ]; then export HUGO_PARAMS_VERSIE="$VERSIE"; fi; \
 FROM nginxinc/nginx-unprivileged:stable-alpine-slim@sha256:e88d990b349df8cf4aa82f16642d7a23375016638c9ace4e5c6ca25028e62e65
 # Patch Alpine-packages onafhankelijk van de (soms achterlopende) base-image
 # rebuild; houdt de Trivy-scan groen bij CVE's die Alpine al gefixt heeft.
+# Let op: deze upgrade vervangt nginx door de Alpine-build, die prefix
+# /var/lib/nginx heeft. Die directory is 0750 en van uid 101, terwijl ZAD
+# de pod met een willekeurige UID draait — zonder chmod faalt nginx op het
+# default-logpad nog voordat hij nginx.conf (met expliciete logpaden) leest.
 USER root
-RUN apk upgrade --no-cache
+RUN apk upgrade --no-cache \
+  && if [ -d /var/lib/nginx ]; then chmod 755 /var/lib/nginx; fi
 USER 101
 COPY --from=build /src/public/ /usr/share/nginx/html/
 COPY container/nginx.conf /etc/nginx/nginx.conf
