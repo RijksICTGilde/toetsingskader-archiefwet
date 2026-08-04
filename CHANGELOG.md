@@ -24,7 +24,11 @@ changelog volgt [Semantic Versioning][semver].
   duidelijke overgang tussen thema's).
 - PDF-export toegevoegd: downloadbare Rijkshuisstijl-PDF per normpagina en
   voor het hele toetsingskader, met titelpagina, release-tag en
-  downloaddatum. Client-side gegenereerd met pdfMake; CSP-veilig.
+  downloaddatum. Client-side gegenereerd met pdfMake; CSP-veilig. Als
+  briefhoofd op elke pagina de volledige logo-lockup: Rijksoverheidslint met
+  "Inspectie Overheidsinformatie en Erfgoed" en "Ministerie van Onderwijs,
+  Cultuur en Wetenschap". Het lint staat horizontaal gecentreerd en loopt af
+  aan de bovenrand van de pagina, zoals de huisstijl voorschrijft.
 
 ### Verwijderd
 

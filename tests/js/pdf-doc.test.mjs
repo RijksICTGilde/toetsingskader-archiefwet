@@ -61,10 +61,20 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.ok(dd.content.some(b => b.ul && typeof b.ul[0] === 'string' && b.ul[0].includes('automatisch gegenereerd')))
   // header (logo op elke pagina) + footer (stack met paginanummer)
   assert.match(JSON.stringify(dd.footer(2, 5)), /Pagina 2 van 5/)
-  const logoCol = dd.header(1).columns.find(c => c.svg)
-  assert.ok(logoCol, 'logo-kolom aanwezig')
-  assert.match(logoCol.svg, /^<svg/)
-  assert.ok(dd.header(2).columns.find(c => c.svg), 'logo ook op pagina 2 (running letterhead)')
+  const A4 = { width: 595.28, height: 841.89 }
+  const lint = dd.header(1, 6, A4).find(c => c.svg)
+  assert.ok(lint, 'lint aanwezig')
+  assert.match(lint.svg, /^<svg/)
+  // Het lint loopt af aan de bovenrand (y = 0) en staat horizontaal gecentreerd;
+  // zonder dat zweeft het logo los onder de paginarand.
+  assert.equal(lint.absolutePosition.y, 0, 'lint tegen de bovenrand')
+  assert.equal(lint.absolutePosition.x + lint.width / 2, A4.width / 2, 'lint horizontaal gecentreerd')
+  // Rijkshuisstijl-lockup: lint + organisatienaam + ministerie (OCW).
+  const wordmark = dd.header(1, 6, A4).find(c => c.stack)
+  assert.match(JSON.stringify(wordmark), /Inspectie Overheidsinformatie en Erfgoed/)
+  assert.match(JSON.stringify(wordmark), /Ministerie van Onderwijs, Cultuur en Wetenschap/)
+  assert.ok(wordmark.absolutePosition.x > lint.absolutePosition.x + lint.width, 'woordmerk rechts van het lint')
+  assert.ok(dd.header(2, 6, A4).find(c => c.svg), 'logo ook op pagina 2 (running letterhead)')
 })
 
 test('kader-doc: inhoudsopgave + 8 normen op eigen pagina, in toc opgenomen', async () => {

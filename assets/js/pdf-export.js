@@ -3,6 +3,10 @@
 // addVirtualFileSystem) en window.TKPDF (converter + base64-assets).
 (function () {
   var BRAND = '#007bc7'
+  // Rijkshuisstijl-donkerblauw: kleur van het lint en het woordmerk ernaast.
+  var LOGO_BLUE = '#154273'
+  // Breedte van het lint in punten; de SVG is 1:2, dus de hoogte is het dubbele.
+  var LOGO_W = 26
   var dateFmt = new Intl.DateTimeFormat('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })
 
   var styles = {
@@ -120,12 +124,30 @@
     base.defaultStyle = { font: 'ROSans', fontSize: 10.5, color: '#1a1a1a' }
     base.styles = styles
     base.info = { title: data.titel, author: 'Inspectie Overheidsinformatie en Erfgoed', subject: 'Versie: ' + (data.versie || '') }
-    base.header = function () {
-      // Logo gecentreerd bovenaan elke pagina (running letterhead), zonder lijn.
-      return {
-        columns: [{ text: '', width: '*' }, { svg: window.TKPDF.PDF_LOGO_SVG, width: 28 }, { text: '', width: '*' }],
-        margin: [0, 14, 0, 0]
-      }
+    base.header = function (currentPage, pageCount, pageSize) {
+      // Rijkshuisstijl-lockup bovenaan elke pagina (running letterhead), zonder
+      // lijn: lint + organisatienaam + ministerie, zoals de header van
+      // inspectie-oe.nl. De tekst staat in RO Sans (al in de VFS) i.p.v. een
+      // woordmerk-SVG, zodat hij scherp en selecteerbaar blijft.
+      // Het lint is 1:2 (viewBox 50x100), dus LOGO_W breed → 2x zo hoog.
+      // Beide onderdelen staan met absolutePosition op de pagina (zoals de
+      // logolockup in de AI-verordening-beslishulp) i.p.v. in de header-flow:
+      // zo ligt het lint gegarandeerd tegen de bovenrand (y = 0) en precies in
+      // het paginamidden, los van pageMargins. In de huisstijl loopt het lint
+      // af aan de bovenrand; het mag er niet los onder zweven. De tekst sluit
+      // rechts op het lint aan en staat er verticaal op gecentreerd.
+      var lintX = (pageSize.width - LOGO_W) / 2
+      return [
+        { svg: window.TKPDF.PDF_LOGO_SVG, width: LOGO_W, absolutePosition: { x: lintX, y: 0 } },
+        {
+          width: 220,
+          absolutePosition: { x: lintX + LOGO_W + 8, y: 16 },
+          stack: [
+            { text: 'Inspectie Overheidsinformatie en Erfgoed', fontSize: 9.5, bold: true, color: LOGO_BLUE, lineHeight: 1.15 },
+            { text: 'Ministerie van Onderwijs, Cultuur en Wetenschap', fontSize: 8, color: LOGO_BLUE, lineHeight: 1.15, margin: [0, 1, 0, 0] }
+          ]
+        }
+      ]
     }
     base.footer = function (currentPage, pageCount) {
       // Dunne scheidingslijn + alleen paginanummer (versie/datum staan op de
