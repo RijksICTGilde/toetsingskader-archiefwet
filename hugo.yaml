@@ -49,6 +49,19 @@ params:
       - normen
       - onderwerpen
       - over
+    # Sectiefilters in de zoekmodal. Zonder deze filters toont een resultaat
+    # alleen titel + fragment, dus zag je niet of een treffer een norm, een
+    # begrip of een achtergrondpagina was. Het eerste item (lege `section`)
+    # is "alles" en staat standaard actief.
+    filters:
+      - section: ""
+        label: "Alles"
+      - section: "normen"
+        label: "Normen"
+      - section: "onderwerpen"
+        label: "Onderwerpen"
+      - section: "over"
+        label: "Over"
   tagline: "Normen voor duurzame toegankelijkheid"
   page_banner:
     type: warning

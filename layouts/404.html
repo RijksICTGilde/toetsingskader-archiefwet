@@ -1,0 +1,24 @@
+{{/* Shadowt het thema-404, dat alleen naar de homepage wijst. Dit kader heeft
+     hernoemde URL's gehad (zie de aliases in de normen-front matter), dus de
+     404 is een reële landingsplek. Beter dan één link terug: de vier ingangen
+     plus de hint dat er een zoekfunctie is. */}}
+{{ define "main" }}
+<section>
+  <h1>Pagina niet gevonden</h1>
+  <p>
+    Deze pagina bestaat niet of is verplaatst. Hieronder staan de ingangen van
+    het toetsingskader. Weet u waar u naar zoekt? Gebruik dan de zoekfunctie
+    rechtsboven, of druk op <kbd>/</kbd>.
+  </p>
+
+  <ul>
+    <li><a href="{{ relURL "normen/" }}">Normen</a> — de acht normen met voorschriften, criteria en indicatoren</li>
+    <li><a href="{{ relURL "samenhang/" }}">Samenhang van de normen</a> — hoe de normen zich tot elkaar verhouden</li>
+    <li><a href="{{ relURL "onderwerpen/" }}">Onderwerpen en begrippen</a> — alfabetische index op de begrippen</li>
+    <li><a href="{{ relURL "over/" }}">Over het toetsingskader</a> — doel, wettelijk kader, opbouw en doelgroep</li>
+  </ul>
+
+  <p>Of ga terug naar de <a href="{{ relURL "/" }}">homepage</a>.</p>
+  <p><small>Foutcode: 404</small></p>
+</section>
+{{ end }}

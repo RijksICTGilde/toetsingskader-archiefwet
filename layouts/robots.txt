@@ -1,0 +1,7 @@
+{{/* Hugo's ingebouwde robots.txt is alleen "User-agent: *", zonder verwijzing
+     naar de sitemap. Voor een naslagwerk dat via zoekmachines gevonden moet
+     worden is die verwijzing het minimum. */ -}}
+User-agent: *
+Allow: /
+
+Sitemap: {{ "sitemap.xml" | absURL }}
