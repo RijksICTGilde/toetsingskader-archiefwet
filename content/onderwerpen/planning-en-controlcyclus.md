@@ -2,6 +2,7 @@
 title: "Planning- en controlcyclus"
 card_title: "Planning- en controlcyclus"
 description: "Archiefbeheer als onderdeel van een breder informatiebeheerbeleid, in samenhang met privacy en informatiebeveiliging."
+weight: 100
 synoniemen:
   - "P&C-cyclus"
   - "Planning en control"

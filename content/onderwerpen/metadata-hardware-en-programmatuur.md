@@ -2,6 +2,7 @@
 title: "Metadata: hardware en programmatuur"
 card_title: "Metadata: hardware en programmatuur"
 description: "Bij documenten die langer dan tien jaar worden bewaard moet de gebruikte hardware, besturings- en toepassingsprogrammatuur zijn vastgelegd."
+weight: 70
 synoniemen:
   - "Besturingsprogrammatuur"
   - "Toepassingsprogrammatuur"

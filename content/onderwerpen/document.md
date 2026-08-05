@@ -2,6 +2,7 @@
 title: "Document"
 card_title: "Document"
 description: "Wat de Archiefwet onder een document verstaat, en waarom dat begrip samenvalt met informatieobject en overheidsinformatie."
+weight: 40
 synoniemen:
   - "Informatie-object"
   - "Informatieobject"

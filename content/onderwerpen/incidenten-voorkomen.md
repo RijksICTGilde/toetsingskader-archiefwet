@@ -2,6 +2,7 @@
 title: "Incidenten voorkomen"
 card_title: "Incidenten voorkomen"
 description: "Risico's als hacks, virussen en gijzelsoftware kunnen leiden tot informatieverlies en onrechtmatige vernietiging."
+weight: 60
 synoniemen:
   - "Beveiligingsincident"
   - "Gijzelsoftware"

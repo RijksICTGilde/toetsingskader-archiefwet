@@ -2,6 +2,7 @@
 title: "Audittrail"
 card_title: "Audittrail"
 description: "Chronologische registratie van activiteiten en transacties bij een document, waarmee reconstructie en onderzoek mogelijk is."
+weight: 20
 synoniemen:
   - "Logging"
   - "Auditlog"

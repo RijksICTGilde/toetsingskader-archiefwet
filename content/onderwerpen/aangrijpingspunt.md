@@ -2,6 +2,7 @@
 title: "Aangrijpingspunt"
 card_title: "Aangrijpingspunt"
 description: "Het moment waarop de telling van een bewaartermijn of overbrengingstermijn begint."
+weight: 10
 synoniemen:
   - "Startmoment bewaartermijn"
   - "Overbrengingstermijn"

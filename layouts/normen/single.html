@@ -84,6 +84,24 @@
 {{ with $headings }}{{ $first := index . 0 }}{{ if not $first.ID }}{{ $headings = $first.Headings }}{{ end }}{{ end }}
 {{ $hasToc := or .Params.kern (gt (len $headings) 0) }}
 
+{{/* Voorschrift-koppen (h4) horen óók in de TOC: de nummering is bedoeld als
+     verwijsanker ("zie voorschrift 1.5"), maar zonder TOC-ingang was zo'n
+     voorschrift alleen met scrollen te vinden. Criteria en Indicatoren blijven
+     eruit, anders slibt de lijst dicht.
+
+     De labels komen niet uit .Fragments (daar heet elke kop nog "Voorschrift",
+     want het nummer wordt pas ná het renderen in de body gezet). Daarom hier
+     dezelfde telling: paginabreed, in documentvolgorde — identiek aan wat
+     _partials/nummer-voorschriften.html in de body doet. */}}
+{{ $vsLabels := dict }}
+{{ $vsCount := 0 }}
+{{ range $headings }}{{ range .Headings }}{{ range .Headings }}
+  {{ if eq .Title "Voorschrift" }}
+    {{ $vsCount = add $vsCount 1 }}
+    {{ $vsLabels = merge $vsLabels (dict .ID (printf "Voorschrift %v.%d" $.Params.norm_id $vsCount)) }}
+  {{ end }}
+{{ end }}{{ end }}{{ end }}
+
 <article class="norm{{ if .Params.wide }} wide{{ end }}">
   <header>
     <h1>{{ .Title }}</h1>
@@ -133,7 +151,18 @@
         <a href="#{{ .ID }}">{{ .Title }}</a>
         {{- with .Headings -}}
         <ul>
-          {{- range . -}}<li><a href="#{{ .ID }}">{{ .Title }}</a></li>{{- end -}}
+          {{- range . -}}
+          <li>
+            <a href="#{{ .ID }}">{{ .Title }}</a>
+            {{- $vs := slice -}}
+            {{- range .Headings -}}{{- if eq .Title "Voorschrift" -}}{{- $vs = $vs | append . -}}{{- end -}}{{- end -}}
+            {{- with $vs -}}
+            <ul>
+              {{- range . -}}<li><a href="#{{ .ID }}">{{ index $vsLabels .ID }}</a></li>{{- end -}}
+            </ul>
+            {{- end -}}
+          </li>
+          {{- end -}}
         </ul>
         {{- end -}}
       </li>

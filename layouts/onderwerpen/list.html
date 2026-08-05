@@ -5,7 +5,12 @@
      index-component krijgt.
 
      Groeperen zonder GroupBy: .Pages.ByTitle staat al alfabetisch, dus de
-     beginletters in leesvolgorde vormen vanzelf de gesorteerde letterlijst. */}}
+     beginletters in leesvolgorde vormen vanzelf de gesorteerde letterlijst.
+
+     LET OP: de vorige/volgende-navigatie (theme _partials/page-nav.html) sorteert
+     op .Pages.ByWeight, niet op titel. Daarom heeft elk begrip een `weight` die
+     de alfabetische rang volgt (10, 20, 30, …), zodat index en carousel niet uit
+     elkaar kunnen lopen. Nieuw begrip ertussen: pak een weight in het gat. */}}
 {{ $pages := .Pages.ByTitle }}
 {{ $letters := slice }}
 {{ range $pages }}

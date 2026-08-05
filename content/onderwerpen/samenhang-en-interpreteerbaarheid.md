@@ -2,6 +2,7 @@
 title: "Samenhang en interpreteerbaarheid"
 card_title: "Samenhang en interpreteerbaarheid"
 description: "Metadata over herkomst, context en status maken documenten interpreteerbaar en houden de samenhang met andere documenten zichtbaar."
+weight: 110
 synoniemen:
   - "Interpreteerbaar"
   - "Context"

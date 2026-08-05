@@ -23,11 +23,15 @@
   {{- if and .Params.norm_id .Params.norm_titel -}}
     {{- $title = printf "Norm %s: %s" (string .Params.norm_id) .Params.norm_titel -}}
   {{- end -}}
+  {{- /* Géén apart `synoniemen`-veld: de zoek-JS van het thema indexeert
+         alleen `title` en `content`, dus dat veld was dode ballast die de
+         synoniemen dubbel in de index zette. Ze zitten hierboven al in
+         `$text`. Zodra het thema een eigen sleutel voor synoniemen krijgt,
+         kan het veld terug. */ -}}
   {{- $pages = $pages | append (dict
     "title" $title
     "url" .RelPermalink
     "section" $section
-    "synoniemen" $synoniemen
     "content" $text
   ) -}}
 {{- end -}}

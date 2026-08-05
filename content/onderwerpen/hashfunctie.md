@@ -2,6 +2,7 @@
 title: "Hashfunctie"
 card_title: "Hashfunctie"
 description: "Techniek waarmee de blijvende integriteit van digitale bestanden geautomatiseerd controleerbaar wordt gemaakt."
+weight: 50
 synoniemen:
   - "Hash"
   - "Checksum"

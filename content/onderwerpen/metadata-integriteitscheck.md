@@ -2,6 +2,7 @@
 title: "Metadata: integriteitscheck"
 card_title: "Metadata: integriteitscheck"
 description: "Bij documenten die langer dan tien jaar worden bewaard moeten de resultaten van integriteitschecks in de metadata staan."
+weight: 80
 synoniemen:
   - "Integriteitscheck"
   - "Integriteitscontrole"
