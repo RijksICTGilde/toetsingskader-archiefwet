@@ -63,13 +63,9 @@
   {{ $content = replaceRE `(?s)<div class="footnotes" role="doc-endnotes">.*?</ol>\s*</div>` "" $content }}
 {{ end }}
 
-{{/* 3. Voorschriften nummeren als "Voorschrift <norm_id>.<n>" (sequentieel
-       binnen de norm; norm_id uit de front matter). Elke replaceRE met limit 1
-       pakt het eerstvolgende nog-ongenummerde voorschrift. */}}
-{{ $normId := .Params.norm_id }}
-{{ range $i, $_ := (findRE `<h4 id="voorschrift[^"]*">Voorschrift</h4>` $content) }}
-  {{ $content = replaceRE `(<h4 id="voorschrift[^"]*">)Voorschrift(</h4>)` (printf `${1}Voorschrift %v.%d${2}` $normId (add $i 1)) $content 1 }}
-{{ end }}
+{{/* 3. Voorschriften nummeren als "Voorschrift <norm_id>.<n>". Gedeeld met de
+       PDF-output, zodat beide dezelfde nummering tonen. */}}
+{{ $content = partial "nummer-voorschriften.html" (dict "content" $content "norm_id" .Params.norm_id) }}
 
 {{/* 4. Toelichting inklapbaar maken (standaard dicht). Het kader is naslag, dus
        criteria/indicatoren moeten snel bereikbaar zijn zonder eerst langs de
