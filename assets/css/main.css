@@ -21,6 +21,38 @@
   color: inherit;
 }
 
+/* TOC-toggle op élke schermbreedte tonen. Het thema verbergt 'm onder 950px,
+   terwijl de TOC zelf standaard dicht staat (opacity/visibility/max-height op
+   0) — daardoor was "Op deze pagina" op mobiel niet te openen. Nu staat de TOC
+   standaard open (js/toc-default-open.js) en kan de gebruiker 'm overal
+   in- en uitklappen. Upstream-kandidaat voor het thema. */
+button.toc-toggle {
+  display: flex;
+}
+
+/* Onder 950px is er geen sidebar-kolom (het thema zet het tweekolomsgrid pas
+   vanaf 950px aan), dus valt de TOC-aside ná het artikel. Op een normpagina
+   betekende dat: eerst de hele norm doorscrollen voordat je de inhoudsopgave
+   én de "Download als PDF"-knop ziet. Zet de aside daar bovenaan; sticky heeft
+   zonder eigen kolom geen functie, dus die zetten we uit. */
+@media (max-width: 949px) {
+  main:has(.toc) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #toc {
+    order: -1;
+    position: static;
+    padding-top: 0;
+  }
+
+  /* Alleen in open toestand: de dichte toestand leunt op max-height 0. */
+  #toc.is-open {
+    max-height: none;
+  }
+}
+
 /* Norm page: project-specifieke decoratie op de markdown-body-structuur.
    (Voorheen op .norm-* wrappers; in het markdown-formaat zijn de koppen
    gewone h2/h3/h4, dus we scopen via .norm + heading-ids.) */

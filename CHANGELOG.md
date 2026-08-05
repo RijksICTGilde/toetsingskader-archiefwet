@@ -22,6 +22,9 @@ changelog volgt [Semantic Versioning][semver].
   delen één (thema-)accordeonstijl.
 - Heading-hiërarchie in Normuitleg verduidelijkt (voorschrift als accent-kop,
   duidelijke overgang tussen thema's).
+- "Op deze pagina" staat nu op élke pagina met een inhoudsopgave standaard
+  open, en is op elke schermbreedte in- en uitklapbaar. De keuze van de
+  gebruiker wordt onthouden.
 - PDF-export toegevoegd: downloadbare Rijkshuisstijl-PDF per normpagina en
   voor het hele toetsingskader, met titelpagina, release-tag en
   downloaddatum. Client-side gegenereerd met pdfMake; CSP-veilig. Als
@@ -36,6 +39,14 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Opgelost
 
+- De inhoudsopgave was op schermen smaller dan 950px niet te openen: de TOC
+  stond dicht en de toggle was daar verborgen. Op de normpagina's stond de
+  TOC wél open, maar met `aria-expanded="false"` op de knop — een
+  screenreader meldde "ingeklapt" terwijl de lijst zichtbaar was.
+- Op smalle schermen stonden de inhoudsopgave en de "Download als PDF"-knop
+  onder het hele artikel; die staan nu boven de tekst.
+- Lege `/tags/`- en `/categories/`-pagina's werden gegenereerd en in de
+  sitemap opgenomen. Taxonomieën zijn uitgezet.
 - Voorschriftnummering (`<norm>.<n>`) ontbrak in de PDF-export; de nummering
   is nu gedeeld tussen webpagina en PDF, zowel per norm als in de kader-PDF.
 - Interne normverwijzingen gecorrigeerd: "(gecontroleerd) vernietigen" wees
