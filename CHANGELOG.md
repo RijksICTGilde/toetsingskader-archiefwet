@@ -13,6 +13,12 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Toegevoegd
 
+- Zoekfilters per sectie (Alles / Normen / Onderwerpen / Over) in de
+  zoekmodal.
+- `robots.txt` verwijst naar de sitemap.
+- Eigen 404-pagina met de vier ingangen van het toetsingskader en een
+  verwijzing naar de zoekfunctie, in plaats van alleen een link naar de
+  homepage.
 - Pagina "Samenhang van de normen" (`/samenhang/`) met het bollendiagram, de
   uitleg over richten/verrichten en de relatie met DUTO. Bevat een
   placeholder voor de nog te leveren procesplaat.
@@ -23,6 +29,20 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Navigatie: de secties staan nu in een tweede navigatiebalk die per sectie de
+  onderliggende pagina's uitklapt. Vanaf een normpagina zijn de andere zeven
+  normen direct bereikbaar. De breadcrumb vervalt daarmee (het thema toont die
+  niet naast een sectiebalk).
+- De inhoudsopgave op een normpagina gaat nu tot voorschriftniveau, met
+  dezelfde nummering als de body.
+- Elke norm heeft een "Zie ook" met verwijzingen naar de begrippen uit de
+  index; voorheen verwezen alleen de begrippen naar de normen.
+- Het woord "onderwerp" is gereserveerd voor de begrippenindex. Op `/normen/`
+  en in het diagrambijschrift heet het nu "normen", en bij DUTO "kenmerken".
+- De zichtbare `[PLACEHOLDER: …]`-teksten in de nog niet uitgewerkte normen
+  zijn vervangen door tekst die zegt dat de uitwerking volgt, met een callout
+  onder Normuitleg.
+- Begrippagina's hebben geen inhoudsopgave meer (die bevatte één regel).
 - Normen hernoemd zodat bestandsnaam, `norm_id` en `norm_titel` overeenkomen
   met de volgorde uit de introductie van het toetsingskader:
   `03-ordeningsstructuur` → `03-ordenen`, `04-metadatering` →
@@ -71,6 +91,15 @@ changelog volgt [Semantic Versioning][semver].
   (geen lege of op-een-leesteken-geplaatste hover-term meer); een term die
   tegelijk een interne link is, wordt blauw met de voetnoot-stippellijn.
 - Zoek-highlight knipt links in de paginatekst niet meer op.
+- Het bollendiagram had `role="img"`, waardoor hulpsoftware de acht normlinks
+  erin niet aanbood. "Gecontroleerd vernietigen" was op de samenhangpagina
+  bovendien alleen via het diagram te bereiken; die norm staat nu ook in de
+  lopende tekst.
+- `/over/doel/`, `/over/doelgroep/` en `/samenhang/` hadden geen enkele
+  uitgaande verwijzing meer aan het eind van de pagina.
+- De A-Z index en de vorige/volgende-navigatie van de begrippen sorteerden op
+  verschillende velden (titel versus weight) en konden uit elkaar lopen; elk
+  begrip heeft nu een weight die de alfabetische rang volgt.
 - "Op deze pagina"-TOC volgt de actieve sectie nu vloeiend mee; voorheen
   verdween de highlight in de voorschrift-/criteria-/indicator-blokken
   (project-scroll-spy; thema-fix als upstream-PR ingediend).
