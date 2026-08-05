@@ -1,0 +1,52 @@
+{{ define "main" }}
+{{/* Alfabetische index op de onderwerpen/begrippen. Het thema levert een
+     card-grid-list; voor een index met tientallen korte items leest een A-Z
+     lijst beter dan kaarten. Kandidaat voor upstream als het thema ooit een
+     index-component krijgt.
+
+     Groeperen zonder GroupBy: .Pages.ByTitle staat al alfabetisch, dus de
+     beginletters in leesvolgorde vormen vanzelf de gesorteerde letterlijst. */}}
+{{ $pages := .Pages.ByTitle }}
+{{ $letters := slice }}
+{{ range $pages }}
+  {{ $letter := upper (substr .Title 0 1) }}
+  {{ if not (in $letters $letter) }}{{ $letters = $letters | append $letter }}{{ end }}
+{{ end }}
+
+<article class="wide">
+  <header>
+    <h1>{{ .Title }}</h1>
+  </header>
+
+  {{ .Content }}
+
+  {{ with $letters }}
+  <nav class="index-letters" aria-label="Spring naar letter">
+    {{ range . }}<a href="#letter-{{ . | urlize }}">{{ . }}</a>{{ end }}
+  </nav>
+
+  {{ range $letter := . }}
+  <section class="index-group">
+    <h2 id="letter-{{ $letter | urlize }}">{{ $letter }}</h2>
+    <ul class="index-list">
+      {{ range $pages }}
+        {{ if eq (upper (substr .Title 0 1)) $letter }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .Params.card_title | default .Title }}</a>
+          {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+        </li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+  {{ else }}
+  <p>Er zijn nog geen onderwerpen beschikbaar.</p>
+  {{ end }}
+
+  {{- $lastmod := partial "lastmod.html" . -}}
+  {{- if trim $lastmod " \n\t" -}}
+  <footer>{{ $lastmod }}</footer>
+  {{- end -}}
+</article>
+{{ end }}

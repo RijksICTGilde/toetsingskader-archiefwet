@@ -21,6 +21,57 @@
   color: inherit;
 }
 
+/* Onderwerpen-index (layouts/onderwerpen/list.html): letternavigatie +
+   A-Z-groepen. Bewust een lijst i.p.v. de thema-card-grid, omdat een index
+   met korte begrippen sneller te scannen is dan kaarten. */
+.index-letters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block: 1.5rem 2rem;
+}
+
+.index-letters a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.index-letters a:hover,
+.index-letters a:focus-visible {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.index-group h2 {
+  border-block-end: 2px solid var(--color-primary);
+  padding-block-end: 0.25rem;
+}
+
+.index-list {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.index-list > li + li {
+  margin-block-start: 1rem;
+}
+
+.index-list > li > a {
+  font-weight: 600;
+}
+
+.index-list p {
+  margin-block: 0.15rem 0;
+}
+
 /* Norm page: project-specifieke decoratie op de markdown-body-structuur.
    (Voorheen op .norm-* wrappers; in het markdown-formaat zijn de koppen
    gewone h2/h3/h4, dus we scopen via .norm + heading-ids.) */
