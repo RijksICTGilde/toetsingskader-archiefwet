@@ -18,7 +18,8 @@ changelog volgt [Semantic Versioning][semver].
   placeholder voor de nog te leveren procesplaat.
 - Sectie "Onderwerpen en begrippen" (`/onderwerpen/`): alfabetische index met
   een pagina per begrip, op basis van het document "Onderwerpen en
-  verwijzingen". Eigen A-Z-template met letternavigatie.
+  verwijzingen". Eigen A-Z-template met letternavigatie. Passende maatregelen
+  en risicobenadering staat hier als een van de onderwerpen.
 
 ### Gewijzigd
 

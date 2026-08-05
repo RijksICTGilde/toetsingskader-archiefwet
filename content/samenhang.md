@@ -12,13 +12,13 @@ Dat documenten in beheer moeten zijn, is het fundament van het toetsingskader. D
 
 ## Richten en verrichten
 
-Van overheidsinformatie die in beheer is, wordt zowel de inrichting als de uitvoering van het beheer geborgd. Dit betekent dat beheerregels en [passende maatregelen]({{< relref "/over/passende-maatregelen" >}}) zijn vastgesteld (richten) én dat deze maatregelen daadwerkelijk worden toegepast (verrichten). Wanneer een document volgens de normen van de Archiefwet in beheer is, is het duurzaam toegankelijk. Hiervoor is een beheerde omgeving noodzakelijk, waarin functionaliteiten beschikbaar zijn om documenten systematisch te beheren.
+Van overheidsinformatie die in beheer is, wordt zowel de inrichting als de uitvoering van het beheer geborgd. Dit betekent dat beheerregels en [passende maatregelen]({{< relref "/onderwerpen/passende-maatregelen" >}}) zijn vastgesteld (richten) én dat deze maatregelen daadwerkelijk worden toegepast (verrichten). Wanneer een document volgens de normen van de Archiefwet in beheer is, is het duurzaam toegankelijk. Hiervoor is een beheerde omgeving noodzakelijk, waarin functionaliteiten beschikbaar zijn om documenten systematisch te beheren.
 
 ## Beheer is een continu proces
 
 Duurzame toegankelijkheid ontstaat niet vanzelf. Hiervoor zijn beheerregels, de omschrijving van de passende maatregelen en een uitwerking van deze maatregelen nodig. Samen vormen zij het beleid voor de informatiehuishouding van de organisatie.
 
-Het feitelijk beheer wordt uitgevoerd op basis van de passende maatregelen. Op basis van [risicoanalyses]({{< relref "/over/passende-maatregelen" >}}) en [periodieke evaluaties]({{< relref "/normen/08-periodieke-evaluatie" >}}) worden deze maatregelen waar nodig aangevuld, herzien of verbeterd. Het beheer van overheidsinformatie is daarmee een continu proces.
+Het feitelijk beheer wordt uitgevoerd op basis van de passende maatregelen. Op basis van [risicoanalyses]({{< relref "/onderwerpen/passende-maatregelen" >}}) en [periodieke evaluaties]({{< relref "/normen/08-periodieke-evaluatie" >}}) worden deze maatregelen waar nodig aangevuld, herzien of verbeterd. Het beheer van overheidsinformatie is daarmee een continu proces.
 
 {{< callout titel="Procesplaat volgt" variant="muted" >}}
 Op deze plek komt de procesplaat: een visualisatie van het continue proces van richten en verrichten. De plaat wordt in een volgende versie van het toetsingskader toegevoegd.

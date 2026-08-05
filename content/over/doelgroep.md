@@ -17,4 +17,4 @@ Alle organisaties van de centrale overheid vallen onder de werking van de Archie
 - Organen van de publiekrechtelijke bedrijfs- en beroepsorganisatie
 - Overige
 
-Het overzicht is te vinden op de [website van de Inspectie Overheidsinformatie en Erfgoed](https://www.inspectie-oe.nl/).
+Het volledige overzicht staat op [Overzicht organisaties met archiefwettelijk toezicht](https://www.inspectie-oe.nl/toezichtvelden/overheidsinformatie/geinspecteerde-instellingen) op de website van de Inspectie.

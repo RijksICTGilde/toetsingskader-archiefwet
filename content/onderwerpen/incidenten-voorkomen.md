@@ -18,4 +18,4 @@ Dit soort incidenten kunnen ook de overbrengings- en vernietigingsplicht die voo
 
 - [Informatiebeveiliging en betrouwbaar]({{< relref "/normen/05-betrouwbaar" >}})
 - [Gecontroleerd vernietigen]({{< relref "/normen/07-vernietigen" >}})
-- [Passende maatregelen en risicobenadering]({{< relref "/over/passende-maatregelen" >}})
+- [Passende maatregelen en risicobenadering]({{< relref "/onderwerpen/passende-maatregelen" >}})

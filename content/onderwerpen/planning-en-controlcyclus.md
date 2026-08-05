@@ -17,4 +17,4 @@ Een dergelijke integrale aanpak ligt voor de hand, nu ook de AVG en de actuele B
 ## Zie ook
 
 - [Periodieke evaluatie]({{< relref "/normen/08-periodieke-evaluatie" >}})
-- [Passende maatregelen en risicobenadering]({{< relref "/over/passende-maatregelen" >}})
+- [Passende maatregelen en risicobenadering]({{< relref "/onderwerpen/passende-maatregelen" >}})

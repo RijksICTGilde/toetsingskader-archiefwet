@@ -16,4 +16,4 @@ Dit moet worden vastgelegd om te kunnen bepalen welke passende maatregelen noodz
 ## Zie ook
 
 - [Metadateren]({{< relref "/normen/04-metadateren" >}})
-- [Passende maatregelen en risicobenadering]({{< relref "/over/passende-maatregelen" >}})
+- [Passende maatregelen en risicobenadering]({{< relref "/onderwerpen/passende-maatregelen" >}})

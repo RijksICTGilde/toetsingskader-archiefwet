@@ -4,6 +4,7 @@ card_title: "Passende maatregelen en risicobenadering"
 description: "Wat passende maatregelen zijn, en hoe een risicobenadering ruimte biedt voor maatwerk binnen de wettelijke normen."
 weight: 6
 aliases:
+  - /over/passende-maatregelen/
   - /over/passende-maatregelen-en-risicobenadering/
 ---
 
