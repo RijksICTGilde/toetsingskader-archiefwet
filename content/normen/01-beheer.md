@@ -20,7 +20,7 @@ Om een document duurzaam toegankelijk te maken en te houden[^aw-artikel-4-1-lid-
 
 Die voortdurende zorg vereist ook sturing op de informatiehuishouding. Een overheidsorganisatie neemt daarom passende maatregelen en beschrijft die in de beheerregels[^kamerstukken-2018-19-35-112]. Op basis van beschrijving worden de passende maatregelen concreet uitgewerkt. In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurzame toegankelijkheid van categorieën documenten borgt[^aw-artikelen-4-1-4-2]. Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](/over/#risicobenadering-en-passende-maatregelen) [^verwijzing-kopje-risicoanalyse-introductie] invulling krijgen.
 
-In een beheerde omgeving [^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten [^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/06-vernietigen/), [gecontroleerd vernietigen](/normen/07-informatiebeveiliging/) en [metadateren](/normen/04-metadatering/) geeft direct richting aan de invulling van de benodigde functionaliteit [^kamerstukken-2021-22-35968].
+In een beheerde omgeving [^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten [^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/05-betrouwbaar/), [gecontroleerd vernietigen](/normen/07-vernietigen/) en [metadateren](/normen/04-metadateren/) geeft direct richting aan de invulling van de benodigde functionaliteit [^kamerstukken-2021-22-35968].
 
 ## Normuitleg
 
@@ -46,7 +46,7 @@ De Inspectie toetst of in de beheerregels, in ieder geval per categorie [^catego
 
 a) duurzaam toegankelijk te maken,[^aw-artikel-4-2-lid-2]
 
-b) te [vernietigen](/normen/07-informatiebeveiliging/). [^aw-artikel-4-2-lid-2]
+b) te [vernietigen](/normen/07-vernietigen/). [^aw-artikel-4-2-lid-2]
 
 #### Criteria
 
@@ -67,7 +67,7 @@ b) te vernietigen.
 #### Criteria
 
 - In de passende maatregelen is opgenomen dat documenten zich in een [beheerde omgeving](/normen/01-beheer/) moeten bevinden.
-- In de passende maatregelen zijn in ieder geval de onderwerpen [overzicht](/normen/02-overzicht/), [vinden](/normen/05-vindbaarheid/) en beschikbaarstellen, [ordenen](/normen/03-ordeningsstructuur/), [metadateren](/normen/04-metadatering/), [vernietigen](/normen/07-informatiebeveiliging/) en [betrouwbaarheid](/normen/06-vernietigen/) opgenomen. [^aw-artikel-4-2-lid-2]
+- In de passende maatregelen zijn in ieder geval de onderwerpen [overzicht](/normen/02-overzicht/), [vinden](/normen/06-vindbaar/) en beschikbaarstellen, [ordenen](/normen/03-ordenen/), [metadateren](/normen/04-metadateren/), [vernietigen](/normen/07-vernietigen/) en [betrouwbaarheid](/normen/05-betrouwbaar/) opgenomen. [^aw-artikel-4-2-lid-2]
 - De passende maatregelen zijn opgesteld op basis van een [risicobenadering](/over/#risicobenadering-en-passende-maatregelen).
 - Een categorie, waar passende maatregelen voor zijn genomen, heeft een relatie met een selectiebesluit.
 
@@ -110,7 +110,7 @@ De Inspectie toetst of in de beheerregels[^aw-artikel-4-2-lid-1] de beheertaken 
 - het (doen) ontwerpen van selectiebesluiten; [^kamerstukken-2021-22-35968-3]
 - het (doen) overbrengen van documenten naar een archiefdienst en (eventueel) het stellen van openbaarheidsbeperkingen voor documenten van die overbrenging; [^kamerstukken-2021-22-35968-3]
 - het opslaan en verwerken van documenten binnen de Europese Unie; [^ar-toelichting-algemeen-deel-h1-eisen]
-- het maken van een [overzicht](/normen/02-overzicht/), het [ordenen](/normen/03-ordeningsstructuur/) en het [metadateren](/normen/04-metadatering/). [^ar-toelichting-algemeen-deel-h1-eisen-2]
+- het maken van een [overzicht](/normen/02-overzicht/), het [ordenen](/normen/03-ordenen/) en het [metadateren](/normen/04-metadateren/). [^ar-toelichting-algemeen-deel-h1-eisen-2]
 
 #### Criteria
 
@@ -146,13 +146,13 @@ De Inspectie toetst of alle [^aw-artikel-4-1-lid-2] door het verantwoordelijk ov
 #### Criteria
 
 - In een beheerde omgeving is een document:
-  - binnen een redelijke termijn [vindbaar](/normen/05-vindbaarheid/)[^ab-artikel-2-1-lid-1-3], beschikbaar[^ab-artikel-2-1-lid-1-4] en leesbaar[^ab-artikel-2-1-lid-1-5];
+  - binnen een redelijke termijn [vindbaar](/normen/06-vindbaar/)[^ab-artikel-2-1-lid-1-3], beschikbaar[^ab-artikel-2-1-lid-1-4] en leesbaar[^ab-artikel-2-1-lid-1-5];
   - opgenomen in een [overzicht](/normen/02-overzicht/); [^ar-artikel-2-3]
-  - [gemetadateerd](/normen/04-metadatering/); [^ab-artikel-2-1-sub-d]
-  - gekoppeld aan een [ordening](/normen/03-ordeningsstructuur/); [^ab-artikel-21-sub-d-ar]
+  - [gemetadateerd](/normen/04-metadateren/); [^ab-artikel-2-1-sub-d]
+  - gekoppeld aan een [ordening](/normen/03-ordenen/); [^ab-artikel-21-sub-d-ar]
   - niet onderhevig aan verlies, dus tijdig gemigreerd, geconverteerd en vervangen; [^ab-artikel-2-1-lid-1-6]
-  - [betrouwbaar](/normen/06-vernietigen/); [^ab-artikel-2-1-lid-1-7]
-  - volgens een selectiebesluit [gecontroleerd vernietigd](/normen/07-informatiebeveiliging/). Dit geldt niet voor documenten die op elk moment mogen worden vernietigd. [^ab-art]
+  - [betrouwbaar](/normen/05-betrouwbaar/); [^ab-artikel-2-1-lid-1-7]
+  - volgens een selectiebesluit [gecontroleerd vernietigd](/normen/07-vernietigen/). Dit geldt niet voor documenten die op elk moment mogen worden vernietigd. [^ab-art]
 
 #### Indicatoren
 
@@ -167,11 +167,11 @@ Alle documenten moeten in beheer zijn. Ook de documenten die op elk moment mogen
 - Opname
 - Archiveren by design[^hyperlink-duto]
 - Beheerbeleid
-- [Vindbaar](/normen/05-vindbaarheid/)
+- [Vindbaar](/normen/06-vindbaar/)
 - Migratie en conversie
-- [Metadata](/normen/04-metadatering/)
+- [Metadata](/normen/04-metadateren/)
 - [Overzicht](/normen/02-overzicht/)
-- [Ordening](/normen/03-ordeningsstructuur/)
+- [Ordening](/normen/03-ordenen/)
 - [Kwaliteitssysteem / periodieke evaluatie](/normen/08-periodieke-evaluatie/)
 
 

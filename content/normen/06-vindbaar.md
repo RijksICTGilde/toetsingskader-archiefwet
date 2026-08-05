@@ -4,6 +4,8 @@ versie: "0.8"
 weight: 6
 norm_id: "6"
 norm_titel: "Vindbaar"
+aliases:
+  - /normen/05-vindbaarheid/
 kern: "Een document moet binnen een redelijke termijn na creatie of ontvangst vindbaar, beschikbaar en leesbaar zijn."
 synoniemen:
   - "[PLACEHOLDER: vul synoniemen in]"

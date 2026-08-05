@@ -4,6 +4,8 @@ versie: "0.8"
 weight: 3
 norm_id: "3"
 norm_titel: "Ordenen"
+aliases:
+  - /normen/03-ordeningsstructuur/
 kern: "Documenten zijn gekoppeld aan een ordening. Een ordeningsstructuur is een onmisbaar instrument voor het beheer van documenten."
 synoniemen:
   - "[PLACEHOLDER: vul synoniemen in]"

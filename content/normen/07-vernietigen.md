@@ -4,6 +4,8 @@ versie: "0.8"
 weight: 7
 norm_id: "7"
 norm_titel: "Gecontroleerd vernietigen"
+aliases:
+  - /normen/07-informatiebeveiliging/
 kern: "Documenten moeten gecontroleerd vernietigd worden."
 synoniemen:
   - "[PLACEHOLDER: vul synoniemen in]"

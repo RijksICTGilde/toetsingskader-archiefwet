@@ -4,6 +4,8 @@ versie: "0.8"
 weight: 4
 norm_id: "4"
 norm_titel: "Metadateren"
+aliases:
+  - /normen/04-metadatering/
 kern: "Documenten zijn gemetadateerd zodat hun onderlinge samenhang bekend is, hun betrouwbaarheid kan worden aangetoond, gevonden kunnen worden, opgenomen kunnen worden in een overzicht, toekomstbestendig worden gehouden en geselecteerd kunnen worden voor gecontroleerde vernietiging."
 synoniemen:
   - "[PLACEHOLDER: vul synoniemen in]"
