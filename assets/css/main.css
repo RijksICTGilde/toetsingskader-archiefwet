@@ -105,6 +105,8 @@
   border-color: var(--color-primary);
   color: #fff;
   filter: brightness(0.9);
+}
+
 /* Een ref-term die óók een interne navigatielink is (voetnoot + link naar een
    andere pagina) krijgt de linkkleur (blauw), zodat zichtbaar is dat je erheen
    kunt klikken; de dotted underline (voetnoot-indicator) blijft uit het thema.
