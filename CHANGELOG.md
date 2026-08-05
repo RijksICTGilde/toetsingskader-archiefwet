@@ -36,6 +36,8 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Opgelost
 
+- Voorschriftnummering (`<norm>.<n>`) ontbrak in de PDF-export; de nummering
+  is nu gedeeld tussen webpagina en PDF, zowel per norm als in de kader-PDF.
 - Interne normverwijzingen gecorrigeerd: "(gecontroleerd) vernietigen" wees
   naar de norm "Betrouwbaar" maar hoort naar "Gecontroleerd vernietigen"
   (`07-informatiebeveiliging`); "risicobenadering"/"risicoanalyse" wezen naar

@@ -9,7 +9,7 @@
       "norm_id" (string .Params.norm_id)
       "slug" .File.ContentBaseName
       "kern_html" $kern
-      "body_html" .Content) -}}
+      "body_html" (partial "nummer-voorschriften.html" (dict "content" .Content "norm_id" .Params.norm_id))) -}}
 {{- end -}}
 {{- dict
   "kind" "kader"
