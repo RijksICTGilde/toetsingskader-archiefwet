@@ -7,31 +7,35 @@ norm_titel: "Metadateren"
 aliases:
   - /normen/04-metadatering/
 kern: "Documenten zijn gemetadateerd zodat hun onderlinge samenhang bekend is, hun betrouwbaarheid kan worden aangetoond, gevonden kunnen worden, opgenomen kunnen worden in een overzicht, toekomstbestendig worden gehouden en geselecteerd kunnen worden voor gecontroleerde vernietiging."
-synoniemen:
-  - "[PLACEHOLDER: vul synoniemen in]"
+synoniemen: []
 ---
 
 ## Toelichting
 
-[PLACEHOLDER: vul toelichting in][^ab-artikel-2-1-lid-1]
+De wettelijke grondslag voor deze norm staat in de Archiefwet- en regelgeving.[^ab-artikel-2-1-lid-1] De toelichting wordt in een volgende versie van het toetsingskader uitgewerkt.
 
 [^ab-artikel-2-1-lid-1]: Ab, artikel 2.1, lid 1, sub f en artikel 2.2, 2.3 en 2.4. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
 ## Normuitleg
 
-### [PLACEHOLDER: vul thema in]
+{{< callout titel="Nog in bewerking" variant="muted" >}}
+De normuitleg bij deze norm is nog niet vastgesteld. Voorschrift, criteria en
+indicatoren worden in een volgende versie van het toetsingskader uitgewerkt.
+{{< /callout >}}
+
+### Nog uit te werken
 
 #### Voorschrift
 
-[PLACEHOLDER: vul voorschrift in]
+Wordt in een volgende versie van het toetsingskader uitgewerkt.
 
 #### Criteria
 
-*Bij dit voorschrift zijn geen aanvullende criteria.*
+*Worden in een volgende versie van het toetsingskader uitgewerkt.*
 
 #### Indicatoren
 
-*Bij dit voorschrift zijn geen indicatoren.*
+*Worden in een volgende versie van het toetsingskader uitgewerkt.*
 
 ## Zie ook
 

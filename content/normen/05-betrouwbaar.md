@@ -7,31 +7,35 @@ norm_titel: "Informatiebeveiliging en betrouwbaar"
 aliases:
   - /normen/06-vernietigen/
 kern: "Een document moet aantoonbaar betrouwbaar zijn, dat wil zeggen dat het document is, wat het zegt te zijn."
-synoniemen:
-  - "[PLACEHOLDER: vul synoniemen in]"
+synoniemen: []
 ---
 
 ## Toelichting
 
-[PLACEHOLDER: vul toelichting in][^ar-artikel-2-3]
+De wettelijke grondslag voor deze norm staat in de Archiefwet- en regelgeving.[^ar-artikel-2-3] De toelichting wordt in een volgende versie van het toetsingskader uitgewerkt.
 
 [^ar-artikel-2-3]: Ar, artikel 2.3. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 ## Normuitleg
 
-### [PLACEHOLDER: vul thema in]
+{{< callout titel="Nog in bewerking" variant="muted" >}}
+De normuitleg bij deze norm is nog niet vastgesteld. Voorschrift, criteria en
+indicatoren worden in een volgende versie van het toetsingskader uitgewerkt.
+{{< /callout >}}
+
+### Nog uit te werken
 
 #### Voorschrift
 
-[PLACEHOLDER: vul voorschrift in]
+Wordt in een volgende versie van het toetsingskader uitgewerkt.
 
 #### Criteria
 
-*Bij dit voorschrift zijn geen aanvullende criteria.*
+*Worden in een volgende versie van het toetsingskader uitgewerkt.*
 
 #### Indicatoren
 
-*Bij dit voorschrift zijn geen indicatoren.*
+*Worden in een volgende versie van het toetsingskader uitgewerkt.*
 
 ## Zie ook
 

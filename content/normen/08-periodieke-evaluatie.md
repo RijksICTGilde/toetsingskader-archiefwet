@@ -4,30 +4,34 @@ versie: "0.8"
 weight: 8
 norm_id: "8"
 norm_titel: "Periodieke evaluatie"
-kern: "[PLACEHOLDER: vul kern in]"
-synoniemen:
-  - "[PLACEHOLDER: vul synoniemen in]"
+kern: "De kern van deze norm wordt in een volgende versie van het toetsingskader vastgesteld."
+synoniemen: []
 ---
 
 ## Toelichting
 
-[PLACEHOLDER: vul toelichting in]
+De toelichting bij deze norm wordt in een volgende versie van het toetsingskader uitgewerkt.
 
 ## Normuitleg
 
-### [PLACEHOLDER: vul thema in]
+{{< callout titel="Nog in bewerking" variant="muted" >}}
+De normuitleg bij deze norm is nog niet vastgesteld. Voorschrift, criteria en
+indicatoren worden in een volgende versie van het toetsingskader uitgewerkt.
+{{< /callout >}}
+
+### Nog uit te werken
 
 #### Voorschrift
 
-[PLACEHOLDER: vul voorschrift in]
+Wordt in een volgende versie van het toetsingskader uitgewerkt.
 
 #### Criteria
 
-*Bij dit voorschrift zijn geen aanvullende criteria.*
+*Worden in een volgende versie van het toetsingskader uitgewerkt.*
 
 #### Indicatoren
 
-*Bij dit voorschrift zijn geen indicatoren.*
+*Worden in een volgende versie van het toetsingskader uitgewerkt.*
 
 ## Zie ook
 

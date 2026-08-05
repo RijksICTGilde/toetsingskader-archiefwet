@@ -7,31 +7,35 @@ norm_titel: "Vindbaar"
 aliases:
   - /normen/05-vindbaarheid/
 kern: "Een document moet binnen een redelijke termijn na creatie of ontvangst vindbaar, beschikbaar en leesbaar zijn."
-synoniemen:
-  - "[PLACEHOLDER: vul synoniemen in]"
+synoniemen: []
 ---
 
 ## Toelichting
 
-[PLACEHOLDER: vul toelichting in][^ar-artikel-2-2]
+De wettelijke grondslag voor deze norm staat in de Archiefwet- en regelgeving.[^ar-artikel-2-2] De toelichting wordt in een volgende versie van het toetsingskader uitgewerkt.
 
 [^ar-artikel-2-2]: Ar, artikel 2.2. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 ## Normuitleg
 
-### [PLACEHOLDER: vul thema in]
+{{< callout titel="Nog in bewerking" variant="muted" >}}
+De normuitleg bij deze norm is nog niet vastgesteld. Voorschrift, criteria en
+indicatoren worden in een volgende versie van het toetsingskader uitgewerkt.
+{{< /callout >}}
+
+### Nog uit te werken
 
 #### Voorschrift
 
-[PLACEHOLDER: vul voorschrift in]
+Wordt in een volgende versie van het toetsingskader uitgewerkt.
 
 #### Criteria
 
-*Bij dit voorschrift zijn geen aanvullende criteria.*
+*Worden in een volgende versie van het toetsingskader uitgewerkt.*
 
 #### Indicatoren
 
-*Bij dit voorschrift zijn geen indicatoren.*
+*Worden in een volgende versie van het toetsingskader uitgewerkt.*
 
 ## Zie ook
 
