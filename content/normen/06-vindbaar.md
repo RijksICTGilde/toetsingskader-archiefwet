@@ -32,3 +32,8 @@ synoniemen:
 #### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
+
+## Zie ook
+
+- [Norm 1: Inbeheername en beheer]({{< relref "/normen/01-beheer" >}})
+- [Passende maatregelen en risicobenadering]({{< relref "/onderwerpen/passende-maatregelen" >}})

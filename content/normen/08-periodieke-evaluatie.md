@@ -28,3 +28,9 @@ synoniemen:
 #### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
+
+## Zie ook
+
+- [Norm 1: Inbeheername en beheer]({{< relref "/normen/01-beheer" >}})
+- [Planning- en controlcyclus]({{< relref "/onderwerpen/planning-en-controlcyclus" >}})
+- [Passende maatregelen en risicobenadering]({{< relref "/onderwerpen/passende-maatregelen" >}})

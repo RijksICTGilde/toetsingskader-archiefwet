@@ -173,6 +173,8 @@ Alle documenten moeten in beheer zijn. Ook de documenten die op elk moment mogen
 - [Overzicht](/normen/02-overzicht/)
 - [Ordening](/normen/03-ordenen/)
 - [Kwaliteitssysteem / periodieke evaluatie](/normen/08-periodieke-evaluatie/)
+- [Document]({{< relref "/onderwerpen/document" >}})
+- [Passende maatregelen en risicobenadering]({{< relref "/onderwerpen/passende-maatregelen" >}})
 
 
 [^aw-artikel-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
