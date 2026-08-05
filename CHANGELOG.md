@@ -11,8 +11,34 @@ changelog volgt [Semantic Versioning][semver].
 
 ## [Unreleased]
 
+### Toegevoegd
+
+- Pagina "Samenhang van de normen" (`/samenhang/`) met het bollendiagram, de
+  uitleg over richten/verrichten en de relatie met DUTO. Bevat een
+  placeholder voor de nog te leveren procesplaat.
+- Sectie "Onderwerpen en begrippen" (`/onderwerpen/`): alfabetische index met
+  een pagina per begrip, op basis van het document "Onderwerpen en
+  verwijzingen". Eigen A-Z-template met letternavigatie.
+
 ### Gewijzigd
 
+- Normen hernoemd zodat bestandsnaam, `norm_id` en `norm_titel` overeenkomen
+  met de volgorde uit de introductie van het toetsingskader:
+  `03-ordeningsstructuur` → `03-ordenen`, `04-metadatering` →
+  `04-metadateren`, `06-vernietigen` → `05-betrouwbaar` (titel nu
+  "Informatiebeveiliging en betrouwbaar"), `05-vindbaarheid` →
+  `06-vindbaar`, `07-informatiebeveiliging` → `07-vernietigen`. Oude URL's
+  blijven werken via aliases.
+- "Over" is een sectie geworden met losse pagina's per onderwerp (inleiding,
+  doel, wettelijk kader, opbouw en indeling, doelgroep, passende maatregelen
+  en risicobenadering), met de herziene teksten uit de introductie.
+- Homepage: tekst over beheer aangepast aan de actuele introductie; het
+  bollendiagram staat niet meer op de homepage maar op de samenhang-pagina,
+  met links naar samenhang, passende maatregelen en de index.
+- "Niet van toepassing" bij criteria en indicatoren vervangen door
+  "Bij dit voorschrift zijn geen aanvullende criteria/indicatoren"
+  (voorlopige formulering).
+- Navigatie uitgebreid met Samenhang en Onderwerpen.
 - Bollendiagram herontworpen naar een hub-and-spoke-visualisatie.
 - Navigatievolgorde: Normen vóór Over.
 - Footer beperkt tot contact, privacy, cookies, toegankelijkheid,
