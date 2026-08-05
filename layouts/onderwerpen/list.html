@@ -44,9 +44,16 @@
   <p>Er zijn nog geen onderwerpen beschikbaar.</p>
   {{ end }}
 
+  {{/* page-nav maakt de reeks doorklikbaar: vanaf de index naar het eerste
+       begrip, en op het laatste begrip terug naar de index. Vereist
+       `prev_next: true` op deze sectie. */}}
+  {{- $pageNav := partial "page-nav.html" . -}}
   {{- $lastmod := partial "lastmod.html" . -}}
-  {{- if trim $lastmod " \n\t" -}}
-  <footer>{{ $lastmod }}</footer>
+  {{- if or (trim $lastmod " \n\t") (trim $pageNav " \n\t") -}}
+  <footer>
+    {{- $lastmod -}}
+    {{- $pageNav -}}
+  </footer>
   {{- end -}}
 </article>
 {{ end }}

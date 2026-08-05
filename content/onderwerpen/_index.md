@@ -3,6 +3,7 @@ title: "Onderwerpen en begrippen"
 card_title: "Onderwerpen en begrippen"
 description: "Alfabetische index op de begrippen die in het toetsingskader worden gebruikt."
 weight: 3
+prev_next: true
 show_lastmod: true
 cascade:
   show_lastmod: true
