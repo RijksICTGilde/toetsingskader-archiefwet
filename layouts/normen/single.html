@@ -114,7 +114,10 @@
 </article>
 
 {{- if $hasToc -}}
-<aside id="toc" class="toc is-open" aria-label="Op deze pagina">
+{{/* Geen hardgecodeerde `is-open`: die botste met aria-expanded op de toggle en
+     negeerde de opgeslagen voorkeur. Standaard-open regelt nu
+     assets/js/toc-default-open.js, site-breed en in sync met de toggle. */}}
+<aside id="toc" class="toc" aria-label="Op deze pagina">
   {{- with .OutputFormats.Get "pdf" -}}
   <a class="button pdf-download" href="{{ .RelPermalink }}" data-pdf-url="{{ .RelPermalink }}" download>
     {{- partial "icon.html" "download" -}}<span>Download als PDF</span>

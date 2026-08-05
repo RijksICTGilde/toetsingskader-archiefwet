@@ -6,6 +6,12 @@ title: Toetsingskader Archiefwet
 enableRobotsTXT: true
 enableGitInfo: true
 
+# Geen tags/categories in dit kader; zonder dit genereert Hugo lege
+# /tags/- en /categories/-pagina's die wél in de sitemap belanden.
+disableKinds:
+  - taxonomy
+  - term
+
 outputFormats:
   pdf:
     mediaType: application/json

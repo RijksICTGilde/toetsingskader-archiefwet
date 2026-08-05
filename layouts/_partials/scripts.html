@@ -1,0 +1,16 @@
+{{/* Shadowt _partials/scripts.html uit het thema om js/toc-default-open.js
+     áchteraan de bundel te hangen: dat script moet ná theme/js/toc.js draaien
+     (dat herstelt de opgeslagen TOC-voorkeur) en moet op élke pagina laden,
+     niet alleen op de normpagina's.
+
+     LET OP: de bundel-lijst hieronder is een kopie van het thema. Controleer
+     bij een theme-update (`just update-theme`) of het thema scripts heeft
+     toegevoegd of hernoemd, en pas deze lijst aan. */}}
+{{- $baseJs := resources.Get "js/base.js" -}}
+{{- $tocJs := resources.Get "js/toc.js" -}}
+{{- $referentiesJs := resources.Get "js/referenties.js" -}}
+{{- $fuseJs := resources.Get "lib/fuse/fuse.min.js" -}}
+{{- $searchJs := resources.Get "js/search.js" -}}
+{{- $tocDefaultOpenJs := resources.Get "js/toc-default-open.js" -}}
+{{- $js := slice $baseJs $tocJs $referentiesJs $fuseJs $searchJs $tocDefaultOpenJs | resources.Concat "js/bundle.js" | fingerprint "md5" -}}
+<script src="{{ $js.RelPermalink }}"></script>
