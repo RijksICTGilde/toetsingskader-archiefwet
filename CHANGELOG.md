@@ -14,7 +14,8 @@ changelog volgt [Semantic Versioning][semver].
 ### Toegevoegd
 
 - Zoekfilters per sectie (Alles / Normen / Onderwerpen / Over) in de
-  zoekmodal.
+  zoekmodal. De sectie-indexen (`/normen/`, `/onderwerpen/`, `/over/`) staan
+  nu ook in de zoekindex; hun introteksten waren daarvoor niet te vinden.
 - `robots.txt` verwijst naar de sitemap.
 - Eigen 404-pagina met de vier ingangen van het toetsingskader en een
   verwijzing naar de zoekfunctie, in plaats van alleen een link naar de
@@ -29,10 +30,6 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
-- Navigatie: de secties staan nu in een tweede navigatiebalk die per sectie de
-  onderliggende pagina's uitklapt. Vanaf een normpagina zijn de andere zeven
-  normen direct bereikbaar. De breadcrumb vervalt daarmee (het thema toont die
-  niet naast een sectiebalk).
 - De inhoudsopgave op een normpagina gaat nu tot voorschriftniveau, met
   dezelfde nummering als de body.
 - Elke norm heeft een "Zie ook" met verwijzingen naar de begrippen uit de

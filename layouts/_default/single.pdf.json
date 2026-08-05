@@ -7,7 +7,7 @@
   "norm_id" (string .Params.norm_id)
   "norm_titel" .Params.norm_titel
   "kern_html" $kern
-  "body_html" .Content
+  "body_html" (partial "nummer-voorschriften.html" (dict "content" .Content "norm_id" .Params.norm_id))
   "url" .Permalink
   "versie" (site.Params.versie | default "")
   | jsonify -}}

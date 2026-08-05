@@ -2,11 +2,6 @@
 layout: hero
 title: "Toetsingskader Archiefwet"
 description: "Hoe de Inspectie Overheidsinformatie en Erfgoed toezicht houdt op de naleving van de Archiefwet 2026."
-# Zet de tweede navigatiebalk (het `sections`-menu) op élke pagina aan; het
-# thema leest `second_nav` van de pagina, en een cascade vanaf de homepage
-# geldt sitebreed.
-cascade:
-  second_nav: sections
 hero:
   image: "images/hero.png"
   image_alt: "Toetsingskader Archiefwet"

@@ -3,7 +3,11 @@
        matter en `synoniemen` worden bewust niet getoond maar wel
        geïndexeerd. `markdownify | plainify` maakt er platte tekst van. */ -}}
 {{- $pages := slice -}}
-{{- $allPages := site.RegularPages | append site.Home -}}
+{{- /* Sectie-indexen (`_index.md`) zitten niet in `site.RegularPages`, maar
+       hebben wel eigen tekst die vindbaar moet zijn: /normen/ legt voorschrift/
+       criterium/indicator uit, /over/ en /onderwerpen/ hebben een intro. Toen
+       `content/over.md` een sectie werd, viel die tekst uit de index. */ -}}
+{{- $allPages := site.RegularPages | append (where site.Pages "Kind" "section") | append site.Home -}}
 {{- range $allPages -}}
   {{- $text := .Plain -}}
   {{- with .Params.kern }}{{ $text = printf "%s %s" $text (. | markdownify | plainify) }}{{ end -}}

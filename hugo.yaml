@@ -80,19 +80,7 @@ params:
     rechts: "Over deze site"
 
 menus:
-  # De secties staan in de tweede navigatiebalk (`params.second_nav`, gezet via
-  # de cascade in content/_index.md). Die balk klapt per sectie de onderliggende
-  # pagina's uit — vanaf een normpagina zijn de andere zeven normen dan direct
-  # bereikbaar, in plaats van via de index. De hoofdbalk houdt alleen Home over
-  # (plus zoeken en de thema-schakelaar, die het thema daar zelf plaatst).
   main:
-    - name: Home
-      pageRef: /
-      weight: 1
-
-  # LET OP: het thema klapt het eerste item (index 0) nooit uit; Home staat
-  # daarom vooraan.
-  sections:
     - name: Home
       pageRef: /
       weight: 1

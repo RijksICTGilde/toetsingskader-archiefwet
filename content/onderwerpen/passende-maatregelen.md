@@ -2,10 +2,10 @@
 title: "Passende maatregelen en risicobenadering"
 card_title: "Passende maatregelen en risicobenadering"
 description: "Wat passende maatregelen zijn, en hoe een risicobenadering ruimte biedt voor maatwerk binnen de wettelijke normen."
+# Weight volgt de alfabetische rang (10, 20, 30, …): de A-Z-index sorteert op
+# titel, de vorige/volgende-navigatie van het thema op weight. Zonder die
+# afspraak lopen index en carousel uit elkaar.
 weight: 90
-# Geen weight: onderwerpen sorteren alfabetisch op titel, zowel in de A-Z-index
-# als in de vorige/volgende-navigatie (page-nav sorteert ByWeight, en met
-# gelijke weights valt Hugo terug op de titel).
 aliases:
   - /over/passende-maatregelen/
   - /over/passende-maatregelen-en-risicobenadering/

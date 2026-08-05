@@ -1,0 +1,16 @@
+{{- /*
+  Nummert de "Voorschrift"-koppen in een gerenderde norm-body als
+  "Voorschrift <norm_id>.<n>", sequentieel binnen de norm. Elke replaceRE met
+  limit 1 pakt het eerstvolgende nog-ongenummerde voorschrift.
+
+  Zowel de HTML-pagina als de PDF-output gebruiken dit, zodat de nummering in
+  de PDF gelijk is aan die op de webpagina.
+
+  Aanroep: {{ partial "nummer-voorschriften.html" (dict "content" .Content "norm_id" .Params.norm_id) }}
+*/ -}}
+{{- $content := .content -}}
+{{- $normId := .norm_id -}}
+{{- range $i, $_ := (findRE `<h4 id="voorschrift[^"]*">Voorschrift</h4>` $content) -}}
+  {{- $content = replaceRE `(<h4 id="voorschrift[^"]*">)Voorschrift(</h4>)` (printf `${1}Voorschrift %v.%d${2}` $normId (add $i 1)) $content 1 -}}
+{{- end -}}
+{{- return $content -}}
