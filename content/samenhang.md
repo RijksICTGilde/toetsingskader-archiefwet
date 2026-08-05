@@ -6,7 +6,7 @@ weight: 2
 show_lastmod: true
 ---
 
-Dat documenten in beheer moeten zijn, is het fundament van het toetsingskader. De norm [Inbeheername en beheer]({{< relref "/normen/01-beheer" >}}) staat daarom in het midden; de andere normen werken uit wat er in een beheerde omgeving geregeld moet zijn.
+Dat documenten in beheer moeten zijn, is het fundament van het toetsingskader. De norm [Inbeheername en beheer]({{< relref "/normen/01-beheer" >}}) staat daarom in het midden; de andere normen — van [Overzicht]({{< relref "/normen/02-overzicht" >}}) tot [Gecontroleerd vernietigen]({{< relref "/normen/07-vernietigen" >}}) — werken uit wat er in een beheerde omgeving geregeld moet zijn.
 
 {{< bollendiagram >}}
 
@@ -30,4 +30,10 @@ Het Nationaal Archief definieert in het [DUTO-raamwerk](https://www.nationaalarc
 
 Dit toetsingskader sluit aan bij die definitie. Een deel van de DUTO-kenmerken is direct als norm uitgewerkt: vindbaar en betrouwbaar. Het begrip toekomstbestendig wordt nader ingevuld aan de hand van de normen uit de Archiefwet 2026 en de daarop gebaseerde regelgeving, onder meer via [Overzicht]({{< relref "/normen/02-overzicht" >}}), [Ordenen]({{< relref "/normen/03-ordenen" >}}) en [Metadateren]({{< relref "/normen/04-metadateren" >}}).
 
-De kenmerken beschikbaar en leesbaar zijn nog niet als afzonderlijke norm uitgewerkt. Die onderwerpen staan vervaagd in het diagram hierboven en worden op een later moment aan het toetsingskader toegevoegd. Zie ook [Opbouw en indeling]({{< relref "/over/opbouw-en-indeling" >}}).
+De kenmerken beschikbaar en leesbaar zijn nog niet als afzonderlijke norm uitgewerkt. Die kenmerken staan vervaagd in het diagram hierboven en worden op een later moment aan het toetsingskader toegevoegd. Zie ook [Opbouw en indeling]({{< relref "/over/opbouw-en-indeling" >}}).
+
+## Verder lezen
+
+- [Alle normen]({{< relref "/normen" >}}) — de acht normen met voorschriften, criteria en indicatoren
+- [Onderwerpen en begrippen]({{< relref "/onderwerpen" >}}) — alfabetische index op de begrippen uit de normen
+- [Over het toetsingskader]({{< relref "/over" >}}) — doel, wettelijk kader, opbouw en doelgroep

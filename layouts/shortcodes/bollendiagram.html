@@ -17,7 +17,11 @@
   <svg class="bollendiagram"
        viewBox="80 0 480 525"
        xmlns="http://www.w3.org/2000/svg"
-       role="img"
+       {{/* Bewust géén role="img": dat maakt de hele SVG één bladknoop, waardoor
+            hulpsoftware de acht normlinks hierin niet meer aanbiedt. Met
+            role="group" blijft de titel de toegankelijke naam én blijven de
+            links bereikbaar. */}}
+       role="group"
        aria-labelledby="bollendiagram-title">
     <title id="bollendiagram-title">Relatie tussen de normen van het Toetsingskader Archiefwet</title>
 
@@ -105,6 +109,6 @@
   </svg>
 
   <figcaption class="bollendiagram-caption">
-    Het toetsingskader bevat nu acht onderwerpen die de inspectie als fundamenteel voor de duurzame toegankelijkheid beschouwt. De norm <a href="{{ relURL "normen/01-beheer/" }}">in beheer</a> vormt de basis; de zeven andere normen hangen daar direct mee samen. De vier vervaagde onderwerpen onderaan horen hier ook bij en worden op een later moment aan het toetsingskader toegevoegd.
+    Het toetsingskader bevat nu acht normen die de Inspectie als fundamenteel voor de duurzame toegankelijkheid beschouwt. De norm <a href="{{ relURL "normen/01-beheer/" }}">in beheer</a> vormt de basis; de zeven andere normen hangen daar direct mee samen. De vier vervaagde kenmerken onderaan (leesbaar, migreren, converteren en beschikbaar) horen hier ook bij en worden op een later moment aan het toetsingskader toegevoegd.
   </figcaption>
 </figure>

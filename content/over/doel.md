@@ -13,3 +13,5 @@ Een overheidsorgaan houdt bij de uitoefening van zijn taken en bevoegdheden die 
 - voor een ieder bij het kennisnemen van en het uitoefenen van rechten en plichten;
 - voor onderzoek; en
 - als onderdeel van het cultureel erfgoed.
+
+Hoe de Inspectie dat toetst, staat uitgewerkt in [de acht normen]({{< relref "/normen" >}}). Zie [Opbouw en indeling]({{< relref "/over/opbouw-en-indeling" >}}) voor het verschil tussen een voorschrift, een criterium en een indicator.

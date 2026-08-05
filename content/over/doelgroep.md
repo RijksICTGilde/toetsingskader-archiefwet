@@ -18,3 +18,5 @@ Alle organisaties van de centrale overheid vallen onder de werking van de Archie
 - Overige
 
 Het volledige overzicht staat op [Overzicht organisaties met archiefwettelijk toezicht](https://www.inspectie-oe.nl/toezichtvelden/overheidsinformatie/geinspecteerde-instellingen) op de website van de Inspectie.
+
+Valt uw organisatie hieronder? Begin dan bij [Norm 1: Inbeheername en beheer]({{< relref "/normen/01-beheer" >}}); daar staat wat het betekent dat documenten in beheer zijn. Welke documenten dat zijn, staat bij [Wettelijk kader]({{< relref "/over/wettelijk-kader" >}}).

@@ -14,6 +14,6 @@ cascade:
 
 In dit toetsingskader werkt de Inspectie Overheidsinformatie en Erfgoed uit hoe zij invulling geeft aan haar toezicht op de naleving van de Archiefwet. Het toetsingskader richt zich op de belangrijkste risico's als gevolg van onvoldoende naleving van wet- en regelgeving. Daardoor staan niet alle normen uit de wet- en regelgeving in dit toetsingskader.
 
-Hieronder staat per onderwerp de achtergrond bij het toetsingskader. Wilt u zien hoe de onderwerpen met elkaar samenhangen? Bekijk dan [de samenhang van de normen]({{< relref "/samenhang" >}}).
+Hieronder staat de achtergrond bij het toetsingskader. Wilt u zien hoe de normen met elkaar samenhangen? Bekijk dan [de samenhang van de normen]({{< relref "/samenhang" >}}).
 
 {{< card-grid section="/over" >}}
