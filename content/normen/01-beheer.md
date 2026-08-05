@@ -50,11 +50,11 @@ b) te [vernietigen](/normen/07-vernietigen/). [^aw-artikel-4-2-lid-2]
 
 #### Criteria
 
-*Niet van toepassing*
+*Bij dit voorschrift zijn geen aanvullende criteria.*
 
 #### Indicatoren
 
-*Niet van toepassing*
+*Bij dit voorschrift zijn geen indicatoren.*
 
 #### Voorschrift
 
@@ -85,11 +85,11 @@ De Inspectie toetst of het verantwoordelijke overheidsorgaan de door hem vastges
 
 #### Criteria
 
-*Niet van toepassing*
+*Bij dit voorschrift zijn geen aanvullende criteria.*
 
 #### Indicatoren
 
-*Niet van toepassing*
+*Bij dit voorschrift zijn geen indicatoren.*
 
 #### Voorschrift
 
@@ -97,11 +97,11 @@ De Inspectie toetst of het verantwoordelijk overheidsorgaan inzichtelijk heeft w
 
 #### Criteria
 
-*Niet van toepassing*
+*Bij dit voorschrift zijn geen aanvullende criteria.*
 
 #### Indicatoren
 
-*Niet van toepassing*
+*Bij dit voorschrift zijn geen indicatoren.*
 
 #### Voorschrift
 
@@ -131,11 +131,11 @@ De Inspectie toetst of in de beheerregels een nadere omschrijving is opgenomen o
 
 #### Criteria
 
-*Niet van toepassing*
+*Bij dit voorschrift zijn geen aanvullende criteria.*
 
 #### Indicatoren
 
-*Niet van toepassing*
+*Bij dit voorschrift zijn geen indicatoren.*
 
 ### Feitelijk beheer
 
@@ -156,7 +156,7 @@ De Inspectie toetst of alle [^aw-artikel-4-1-lid-2] door het verantwoordelijk ov
 
 #### Indicatoren
 
-*Niet van toepassing*
+*Bij dit voorschrift zijn geen indicatoren.*
 
 ## Reikwijdte
 

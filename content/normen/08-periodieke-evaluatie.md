@@ -23,8 +23,8 @@ synoniemen:
 
 #### Criteria
 
-*Niet van toepassing*
+*Bij dit voorschrift zijn geen aanvullende criteria.*
 
 #### Indicatoren
 
-*Niet van toepassing*
+*Bij dit voorschrift zijn geen indicatoren.*
