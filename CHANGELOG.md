@@ -34,6 +34,25 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Norm 1 (Inbeheername en beheer) bijgewerkt naar het herziene normblad
+  "1) Normanalyse beheer" (4e iteratie): toelichting aangevuld met archiveren
+  by design, de koppeling van categorieën aan het selectiebesluit en de
+  publicatie van de beheerregeling; criteria voor passende maatregelen
+  uitgebreid (alle opslagomgevingen, actueel, worden toegepast); het SIO is
+  verplaatst naar een indicator bij het voorschrift over de omschrijving van
+  passende maatregelen; het informatiebeheerplan is een indicator bij het
+  voorschrift over periodieke evaluatie geworden; migratie/conversie/
+  vervanging en vernietiging toegevoegd aan de beheertaken, en het opslaan en
+  verwerken binnen de Europese Unie daaruit verwijderd.
+- "Terug naar boven"-knop op elke pagina, zichtbaar zodra er meer dan een
+  schermhoogte is gescrold — bedoeld voor de lange normpagina's.
+- Versienummer van het toetsingskader staat nu ook als label in de paginavoet,
+  naast de laatst-gewijzigd-datum. Dat blijft staan wanneer de beta-banner
+  verdwijnt.
+- Navigatievolgorde: Onderwerpen vóór Samenhang.
+- De "Over"-index toont dezelfde boxed card-grid als de normen-index.
+- Voetnootnummers in de PDF staan als superscript (kleiner en hoger), zoals op
+  de site.
 - De `kern` van de normen 1, 2, 3, 4 en 8 komt nu overeen met de
   geactualiseerde inhoudsopgave uit "0) Introductie toetsingskader"; de
   oudere formuleringen op de site zijn vervallen.
@@ -74,6 +93,13 @@ changelog volgt [Semantic Versioning][semver].
 ### Verwijderd
 
 - Feedback-blok van de normpagina's (de `params.feedback`-config blijft).
+- De placeholder voor de procesplaat op `/samenhang/`: het bollendiagram is de
+  enige plaat; het continue proces van richten en verrichten staat in tekst.
+- De card-grid naar de secties op de homepage: die dupliceerde de
+  hoofdnavigatie. De tegels ("Wat is het?", "Voor wie?", "Wanneer?", "Waar
+  beginnen?") blijven.
+- De leeswijzer-callout op `/normen/`: voorschrift, criterium en indicator
+  staan al uitgelegd op [Opbouw en indeling](/over/opbouw-en-indeling/).
 
 ### Opgelost
 

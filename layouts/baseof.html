@@ -1,0 +1,30 @@
+{{/*
+  Project-override van de theme-baseof (hugo-theme-rijksoverheid v0.1.0).
+
+  Verschil met het thema: één extra element vlak voor </body> — de
+  "Terug naar boven"-knop, zodat je vanaf het einde van een lange normpagina in
+  één keer bovenaan bent. De knop is een gewone anchor naar #main-content
+  (werkt zonder JS); back-to-top.js toont 'm pas na een stukje scrollen.
+
+  Upstream-kandidaat: back-to-top als theme-component. Bij een theme-update:
+  vergelijk dit bestand met layouts/baseof.html van het thema en neem
+  structurele wijzigingen over.
+*/}}
+<!doctype html>
+<html lang="nl">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body>
+    {{ partial "page-banner.html" . }}
+    <a href="#main-content" class="skip-link">Ga naar de inhoud</a>
+    {{ partial "header.html" . }}
+    <main id="main-content">
+      {{- block "main" . }}{{ end -}}
+    </main>
+    {{ partial "footer.html" . }}
+    {{ partial "search.html" . }}
+    {{ partial "scripts.html" . }}
+    {{- partial "terug-naar-boven.html" . -}}
+  </body>
+</html>

@@ -77,6 +77,8 @@ test('voetnoot-nummer wordt interne sprong (linkToDestination, met norm-prefix)'
   assert.equal(ref.linkToDestination, 'n1-fn-1')
   assert.equal(ref.text, '1')
   assert.ok(!ref.link, 'geen externe link')
+  assert.equal(ref.sup, true, 'voetnoot-nummer als superscript (kleiner en hoger)')
+  assert.equal(ref.fontSize, undefined, 'geen expliciete fontSize: pdfMake schaalt sup zelf')
 })
 
 test('bronnenlijst-item krijgt matching bestemming-id', () => {

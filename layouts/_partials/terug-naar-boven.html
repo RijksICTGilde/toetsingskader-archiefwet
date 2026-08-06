@@ -1,0 +1,19 @@
+{{/*
+  "Terug naar boven" — vanaf het einde van een lange normpagina in één keer
+  bovenaan. Bewust een gewone anchor naar #main-content (net als de skip-link
+  van het thema): werkt ook zonder JS en zet de leespositie én focus bovenaan.
+
+  back-to-top.js haalt het `hidden`-attribuut pas weg als er een schermhoogte
+  is gescrold, zodat de knop niet op korte pagina's staat te zweven. Script uit
+  de asset-pipeline ('self'), dus CSP-veilig.
+
+  Het thema heeft geen arrow-up-icoon; de SVG staat daarom inline.
+*/}}
+<a href="#main-content" class="to-top" hidden>
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <path d="M12 19V5M5 12l7-7 7 7" />
+  </svg>
+  <span>Naar boven</span>
+</a>
+{{- $toTop := resources.Get "js/back-to-top.js" | fingerprint "md5" -}}
+<script src="{{ $toTop.RelPermalink }}"></script>
