@@ -4,7 +4,9 @@ title: "Toetsingskader Archiefwet"
 description: "Hoe de Inspectie Overheidsinformatie en Erfgoed toezicht houdt op de naleving van de Archiefwet 2026."
 hero:
   image: "images/hero.png"
-  image_alt: "Toetsingskader Archiefwet"
+  # Leeg: de hero-afbeelding is decoratief en de <h1> eronder heeft dezelfde
+  # tekst. Met een alt hoort een schermlezergebruiker de titel twee keer.
+  image_alt: ""
   title: "Toetsingskader Archiefwet"
   text: "Hoe de Inspectie Overheidsinformatie en Erfgoed toezicht houdt op de naleving van de Archiefwet 2026."
 tiles:

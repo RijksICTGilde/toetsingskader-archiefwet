@@ -6,6 +6,14 @@ title: Toetsingskader Archiefwet
 enableRobotsTXT: true
 enableGitInfo: true
 
+# Het toetsingskader gebruikt geen tags of categorieën. Hugo genereerde er wel
+# twee lege taxonomiepagina's voor, met "Categories" als Engelse kop binnen
+# <html lang="nl"> (WCAG 3.1.2) en zonder beschrijvende titel (2.4.6) — en ze
+# stonden in sitemap.xml. Uitzetten is hier de juiste oplossing.
+disableKinds:
+  - taxonomy
+  - term
+
 outputFormats:
   pdf:
     mediaType: application/json

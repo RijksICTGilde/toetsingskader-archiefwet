@@ -1,0 +1,91 @@
+/* ============================================================================
+   Toegankelijkheidsoverrides op het thema (hugo-theme-rijksoverheid v0.1.0)
+
+   TIJDELIJK. Elke regel hier repareert een defect dat in het thema hoort te
+   worden opgelost; zie docs/toegankelijkheidsonderzoek-2026-08.md voor de
+   analyse en het bevindingsnummer. Zodra een fix upstream is gemerged en het
+   thema is bijgewerkt (`just update-theme`), hoort het bijbehorende blok hier
+   weg. Verwijder niets voordat je de thema-versie hebt gecontroleerd.
+
+   De consumer-CSS wordt door het thema ná de thema-CSS geconcat (zie
+   _partials/head.html), dus deze regels winnen bij gelijke specificiteit.
+   ========================================================================= */
+
+/* --- Bevinding 1a: focus in de zoekresultaten (WCAG 2.4.7 A, 1.4.11 AA) -----
+   search.css zet `outline: none` op :hover én :focus-visible en laat alleen een
+   achtergrondwissel #ffffff → #d9ebf7 over: 1,22:1 (donker 1,55:1). Juist deze
+   lijst heeft pijltjestoetsnavigatie, dus de gefocuste rij moet aanwijsbaar
+   zijn. Outline naar binnen (negatieve offset) zodat hij niet buiten de
+   scrollcontainer valt. */
+.search-result-item:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: -3px;
+}
+
+/* --- Bevinding 1b: focus op het zoekinvoerveld (WCAG 2.4.7 A) ---------------
+   search.css: `border: none; outline: none` zonder vervangende :focus-stijl.
+   Bij openen valt dat weg door autofocus, maar wie met ArrowUp terugkeert uit
+   de resultatenlijst heeft geen enkele indicatie meer. */
+.search-modal .search-input:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --- Bevinding 1c: focus op de footerlinks (WCAG 2.4.7 A, 1.4.11 AA) --------
+   De basisregel in base.css is `a:focus-visible { outline: 2px solid
+   var(--color-link) }`. De navbar heeft daarvoor een eigen override met een
+   witte ring; de footer niet. Omdat --color-banner in dit project op #007bc7
+   staat, komt een donkerblauwe ring (#01689b) op een blauwe balk terecht:
+   1,35:1. Wit haalt 4,51:1 tegen #007bc7. Zes links op elke pagina. */
+body > footer a:focus-visible {
+  outline: 3px solid var(--color-text-inverse);
+  outline-offset: 2px;
+}
+
+/* --- Bevinding 12: sneltoetshint in de balk (WCAG 1.4.3 AA) -----------------
+   De <kbd>/</kbd> in de zoekknop staat op `opacity: 0.7` — witte tekst op 70%
+   dekking over #007bc7 is 2,98:1 bij 12 px, waar 4,5:1 vereist is. Volle
+   dekking geeft 4,51:1; de iets grotere letter maakt hem daarnaast leesbaarder
+   zonder de eis te verlagen. */
+.search-trigger .search-shortcut {
+  opacity: 1;
+  font-size: 0.8125rem;
+}
+
+/* --- Bevinding 17: zwevende melding kan de focus afdekken (WCAG 2.4.11 AA) --
+   De zoekterm-meldbalk staat `position: fixed` onderin met z-index 100. Zodra
+   hij zichtbaar is, krijgt elk focusbaar element ruimte onder zich mee, zodat
+   de browser het bij het focussen boven de balk scrollt in plaats van erachter. */
+body:has(.toast:not([hidden])) :is(a, button, summary, input, select, textarea, [tabindex]) {
+  scroll-margin-block-end: 6rem;
+}
+
+/* --- Aanpassing bij de <h2>-in-<summary> (bevinding 8) ----------------------
+   Geen thema-defect maar het gevolg van onze eigen fix in normen/single.html:
+   "Toelichting" en "Referenties" zijn nu echte koppen ín de <summary>. De
+   <summary> is een flex-container die de kopstijl al levert, dus de h2 moet
+   zijn eigen typografie en marges loslaten — anders verspringt de kop. */
+.references > details > summary h2 {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* Idem voor "Kern van de norm": was een <span class="title">, is nu een <h2>
+   met dezelfde class. De thema-.title-stijl blijft leidend. */
+blockquote.callout header h2.title {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* --- Bevinding 19: PDF-knop is pas bruikbaar mét JavaScript -----------------
+   De knop staat `hidden` in de markup en wordt door pdf-export.js zichtbaar
+   gemaakt. `.pdf-download.button` zet `display: inline-flex`, wat het
+   user-agent-`[hidden] { display: none }` overschrijft; daarom expliciet. */
+.pdf-download.button[hidden] {
+  display: none;
+}

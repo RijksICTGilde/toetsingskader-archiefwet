@@ -45,11 +45,17 @@
        De anker-id (fnref…:N) blijft op de wrapper voor de ↩-backlinks. Wat
        geen van beide matcht (zeldzaam) blijft een zichtbaar superscript i.p.v.
        een lege term. */}}
+  {{/* `aria-describedby` koppelt de tooltip programmatisch aan de term (WCAG
+       1.3.1 / 4.1.2): zonder die koppeling hoort een schermlezergebruiker
+       alleen de linktekst en nooit de brontekst — ook niet wanneer de tooltip
+       zichtbaar is, want hij staat op `visibility: hidden` en dus buiten de
+       toegankelijkheidsboom. De naamberekening van aria-describedby leest de
+       verwijzing wél, ook als het doel verborgen is. */}}
   {{ $linkPat := printf `<a ([^>]*)>([^<]*)</a>([.,;:!?)]*)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
-  {{ $linkRepl := printf `<span class="ref-wrapper" id="${4}"><a ${1} class="ref-term">${2}</a><span class="ref-tooltip" role="note"><span>%s</span>%s</span></span>${3}` $textOnly $linkHTML }}
+  {{ $linkRepl := printf `<span class="ref-wrapper" id="${4}"><a ${1} class="ref-term" aria-describedby="${4}-bron">${2}</a><span class="ref-tooltip" role="note" id="${4}-bron"><span>%s</span>%s</span></span>${3}` $textOnly $linkHTML }}
   {{ $content = replaceRE $linkPat $linkRepl $content }}
   {{ $wordPat := printf `([^\s<>]+)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
-  {{ $wordRepl := printf `<span class="ref-wrapper" id="$2"><a href="#fn:%s" class="ref-term">$1</a><span class="ref-tooltip" role="note"><span>%s</span>%s</span></span>` $n $textOnly $linkHTML }}
+  {{ $wordRepl := printf `<span class="ref-wrapper" id="$2"><a href="#fn:%s" class="ref-term" aria-describedby="$2-bron">$1</a><span class="ref-tooltip" role="note" id="$2-bron"><span>%s</span>%s</span></span>` $n $textOnly $linkHTML }}
   {{ $content = replaceRE $wordPat $wordRepl $content }}
 {{ end }}
 
@@ -59,7 +65,14 @@
 {{ $block := findRESubmatch `(?s)<div class="footnotes" role="doc-endnotes">\s*<hr\s*/?>\s*(<ol>.*?</ol>)\s*</div>` $content }}
 {{ with $block }}
   {{ $ol := index (index . 0) 1 }}
-  {{ $refs = printf `<section id="referenties" class="references" aria-label="Referenties"><details><summary>Referenties</summary>%s</details></section>` $ol }}
+  {{/* Goldmark geeft elke backlink alleen "↩︎" als tekst; in een linkoverzicht
+       van een schermlezer staan er dan tientallen naamloze links onder elkaar
+       (WCAG 2.4.4). Een aria-label maakt het doel los van de context duidelijk. */}}
+  {{ $ol = replaceRE `class="footnote-backref"` `class="footnote-backref" aria-label="Terug naar de tekst"` $ol }}
+  {{/* De <summary> is visueel een h2 (1.75rem/700) maar zat niet in de
+       kopstructuur: wie op koppen navigeert sloeg de bronnen over (WCAG 1.3.1).
+       Een <h2> ín de <summary> is toegestaan en herstelt dat. */}}
+  {{ $refs = printf `<section id="referenties" class="references"><details><summary><h2>Referenties</h2></summary>%s</details></section>` $ol }}
   {{ $content = replaceRE `(?s)<div class="footnotes" role="doc-endnotes">.*?</ol>\s*</div>` "" $content }}
 {{ end }}
 
@@ -72,7 +85,7 @@
        toelichting te scrollen. Wrap in de thema-`.references`-accordeonstructuur,
        zodat het thema 'm stylet (geen eigen accordeon-CSS nodig). id op de
        <details> blijft voor de TOC-link (#toelichting). */}}
-{{ $content = replaceRE `(?s)<h2 id="toelichting">Toelichting</h2>(.*?)(<h2 )` `<section class="references"><details id="toelichting"><summary>Toelichting</summary>$1</details></section>$2` $content 1 }}
+{{ $content = replaceRE `(?s)<h2 id="toelichting">Toelichting</h2>(.*?)(<h2 )` `<section class="references"><details id="toelichting"><summary><h2>Toelichting</h2></summary>$1</details></section>$2` $content 1 }}
 
 {{/* TOC opbouwen uit .Fragments. Begint de body bij h2 (geen h1), dan zit
      er een lege root-heading boven de h2's; die slaan we over. */}}
@@ -84,17 +97,26 @@
   <header>
     <h1>{{ .Title }}</h1>
     {{- if $hasToc -}}
-    <button class="toc-toggle" aria-expanded="false" aria-controls="toc">
+    {{/* De aside rendert met `is-open` (zie onder), dus de knop start in de
+         uitgeklapte toestand. Stond hier `aria-expanded="false"`, dan meldde de
+         knop permanent het omgekeerde van de werkelijkheid: de eerste klik zag
+         de aside als open, sloot hem en zette `false` opnieuw — de state `true`
+         werd nooit bereikt (WCAG 4.1.2). De thema-JS (toc.js) corrigeert de
+         attributen niet bij het laden; die roept alleen openToc() aan als
+         localStorage "true" zegt. */}}
+    <button class="toc-toggle" aria-expanded="true" aria-controls="toc">
       {{- partial "icon.html" "toc-open" -}}
       {{- partial "icon.html" "toc-close" -}}
-      <span class="visually-hidden">Inhoudsopgave tonen</span>
+      <span class="visually-hidden">Inhoudsopgave verbergen</span>
     </button>
     {{- end -}}
   </header>
 
   {{ with .Params.kern }}
+  {{/* "Kern van de norm" is visueel een kop en staat als zodanig in de
+       inhoudsopgave; als <span> ontbrak hij in de kopstructuur (WCAG 1.3.1). */}}
   <blockquote id="kern" class="callout">
-    <header><span class="title">Kern van de norm</span></header>
+    <header><h2 class="title">Kern van de norm</h2></header>
     <div class="content">{{ . | markdownify }}</div>
   </blockquote>
   {{ end }}
@@ -115,10 +137,14 @@
 
 {{- if $hasToc -}}
 <aside id="toc" class="toc is-open" aria-label="Op deze pagina">
+  {{/* De PDF wordt client-side uit de JSON-output gebouwd. Als <a href="…json"
+       download> leverde dat zonder JavaScript een JSON-bestand op onder de naam
+       "Download als PDF" — een gebroken belofte. Daarom een <button> die
+       standaard `hidden` is en door pdf-export.js zichtbaar wordt gemaakt. */}}
   {{- with .OutputFormats.Get "pdf" -}}
-  <a class="button pdf-download" href="{{ .RelPermalink }}" data-pdf-url="{{ .RelPermalink }}" download>
+  <button type="button" class="button pdf-download" data-pdf-url="{{ .RelPermalink }}" hidden>
     {{- partial "icon.html" "download" -}}<span>Download als PDF</span>
-  </a>
+  </button>
   {{- end -}}
   <h2>Op deze pagina</h2>
   <nav>

@@ -20,38 +20,40 @@ De scan is reproduceerbaar: `hugo && npm run test:a11y`
 ## Samenvatting
 
 "Blokkeert AA" betekent: zolang dit open staat, kan de site niet als
-WCAG 2.2 AA-conform worden verklaard.
+WCAG 2.2 AA-conform worden verklaard. De kolom **Status** beschrijft de stand op
+de branch `chore/wcag-2.2-audit`; zie [Wat er is
+opgelost](#wat-er-is-opgelost-op-deze-branch) voor de gemaakte wijzigingen.
 
-| # | Bevinding | WCAG | Niveau | Blokkeert AA | Inspanning |
+| # | Bevinding | WCAG | Niveau | Blokkeert AA | Status |
 |---|---|---|---|---|---|
-| **1** | **Vijf focusindicatoren onder de norm** | 2.4.7, 1.4.11 | A, AA | ja | klein |
-| **2** | Bollendiagram: acht normlinks zonder toegankelijke naam | 1.3.1, 2.4.4, 4.1.2 | A | ja | klein |
-| **3** | Bollendiagram: vier onderwerpen bestaan alleen visueel | 1.1.1, 1.3.1, 1.4.1 | A | ja | klein |
-| **4** | Inhoudsopgave-knop meldt permanent "ingeklapt" | 4.1.2 | A | ja | klein |
-| **5** | Placeholderteksten als koppen en labels (7 normpagina's) | 2.4.6 | AA | ja | redactie — *opgelost op openstaande branch* |
-| **6** | PDF-export levert een ongetagde PDF | EN 301 549 §10 | — | ja (PDF) | groot |
-| **7** | Bron-tooltip: niet te sluiten én niet gekoppeld aan de term | 1.4.13, 1.3.1 | AA, A | ja | klein |
-| **8** | Toelichting, Referenties en Kern zijn geen koppen | 1.3.1 | A | ja | klein |
-| **9** | Zoekterm-markering wordt niet aangekondigd | 1.3.1, 4.1.3 | A, AA | ja | middel |
-| **10** | Sneltoets `/` niet uit te zetten of te wijzigen | 2.1.4 | A | ja | klein |
-| **11** | Verbindingslijnen in het diagram: 1,23:1 | 1.4.11 | AA | ja | klein |
-| **12** | Sneltoetshint `/` in de balk: 2,98:1 | 1.4.3 | AA | ja | klein |
-| **13** | Statusmelding tijdens PDF-generatie niet bepaalbaar | 4.1.3 | AA | ja | klein |
-| **14** | `lang`-fout en lege taxonomiepagina's | 3.1.2, 2.4.6 | AA | ja | klein |
-| 15 | Ontbrekende `}` in `main.css` zet twee regels uit | — | — | nee | klein — *opgelost op openstaande branch* |
-| 16 | Skip-link verplaatst de focus niet betrouwbaar | 2.4.1 | A | te bevestigen | klein |
-| 17 | Zwevende melding kan de focus afdekken | 2.4.11 | AA | te bevestigen | klein |
-| 18 | Hero-tekst kan bij 200% tekstvergroting afknippen | 1.4.4 | AA | te bevestigen | middel |
-| 19 | PDF-downloadlink werkt niet zonder JavaScript | — | — | nee | middel |
-| 20 | Hero-`alt` dupliceert de `h1` eronder | 1.1.1 | A | nee | klein |
-| 21 | `aria-label="Zoeken"` dekt zichtbare tekst niet | 2.5.3 | A | ja | klein |
-| 22 | Backlinks in de bronnenlijst heten "↩︎" | 2.4.4 | A | nee | klein |
-| 23 | Externe links openen nieuw venster zonder melding | 1.3.1 | A | nee | klein |
-| 24 | Genest navigatielandmark, geen Escape op mobiel menu | 1.3.1 | A | nee | klein |
-| 25 | `role="status"` op een statische banner | 4.1.2 | A | nee | klein |
-| 26 | Niet-tekstcontrast van de knopranden in de balk | 1.4.11 | AA | nee (zie toelichting) | klein |
-| 27 | Herhaalde linktekst "Bekijk bron" | 2.4.9 | AAA | nee | middel |
-| 28 | Afkortingen Aw, Ab, Ar, DUTO, SIO nergens uitgeschreven | 3.1.4 | AAA | nee | klein |
+| **1** | **Vijf focusindicatoren onder de norm** | 2.4.7, 1.4.11 | A, AA | ja | opgelost (d, e in dit project; a, b, c als override op het thema) |
+| **2** | Bollendiagram: acht normlinks zonder toegankelijke naam | 1.3.1, 2.4.4, 4.1.2 | A | ja | opgelost |
+| **3** | Bollendiagram: vier onderwerpen bestaan alleen visueel | 1.1.1, 1.3.1, 1.4.1 | A | ja | opgelost |
+| **4** | Inhoudsopgave-knop meldt permanent "ingeklapt" | 4.1.2 | A | ja | opgelost |
+| **5** | Placeholderteksten als koppen en labels (7 normpagina's) | 2.4.6 | AA | ja | opgelost op `feat/herziening-over-index-procesplaat`, niet hier |
+| **6** | PDF-export levert een ongetagde PDF | EN 301 549 §10 | — | ja (PDF) | **open — besluit van het team nodig** |
+| **7** | Bron-tooltip: niet te sluiten én niet gekoppeld aan de term | 1.4.13, 1.3.1 | AA, A | ja | deels: koppeling opgelost, Escape open (thema) |
+| **8** | Toelichting, Referenties en Kern zijn geen koppen | 1.3.1 | A | ja | opgelost |
+| **9** | Zoekterm-markering wordt niet aangekondigd | 1.3.1, 4.1.3 | A, AA | ja | deels: melding wordt aangekondigd, `<mark>` open (thema) |
+| **10** | Sneltoets `/` niet uit te zetten of te wijzigen | 2.1.4 | A | ja | opgelost (werkt nu alleen met focus op de zoekknop) |
+| **11** | Verbindingslijnen in het diagram: 1,23:1 | 1.4.11 | AA | ja | opgelost |
+| **12** | Sneltoetshint `/` in de balk: 2,98:1 | 1.4.3 | AA | ja | opgelost (override op het thema) |
+| **13** | Statusmelding tijdens PDF-generatie niet bepaalbaar | 4.1.3 | AA | ja | opgelost |
+| **14** | `lang`-fout en lege taxonomiepagina's | 3.1.2, 2.4.6 | AA | ja | opgelost (taxonomieën uitgezet) |
+| 15 | Ontbrekende `}` in `main.css` zet twee regels uit | — | — | nee | opgelost |
+| 16 | Skip-link verplaatst de focus niet betrouwbaar | 2.4.1 | A | te bevestigen | opgelost (override op het thema) |
+| 17 | Zwevende melding kan de focus afdekken | 2.4.11 | AA | te bevestigen | opgelost via `scroll-margin`; nog in browser te bevestigen |
+| 18 | Hero-tekst kan bij 200% tekstvergroting afknippen | 1.4.4 | AA | te bevestigen | **open — vraagt browsertest en een thema-fix** |
+| 19 | PDF-downloadlink werkt niet zonder JavaScript | — | — | nee | opgelost |
+| 20 | Hero-`alt` dupliceert de `h1` eronder | 1.1.1 | A | nee | opgelost |
+| 21 | `aria-label="Zoeken"` dekt zichtbare tekst niet | 2.5.3 | A | ja | opgelost (override op het thema) |
+| 22 | Backlinks in de bronnenlijst heten "↩︎" | 2.4.4 | A | nee | opgelost |
+| 23 | Externe links openen nieuw venster zonder melding | 1.3.1 | A | nee | opgelost (override op het thema) |
+| 24 | Genest navigatielandmark, geen Escape op mobiel menu | 1.3.1 | A | nee | opgelost (override op het thema) |
+| 25 | `role="status"` op een statische banner | 4.1.2 | A | nee | opgelost |
+| 26 | Niet-tekstcontrast van de knopranden in de balk | 1.4.11 | AA | nee (zie toelichting) | ongewijzigd — geen fail |
+| 27 | Herhaalde linktekst "Bekijk bron" | 2.4.9 | AAA | nee | open (buiten AA) |
+| 28 | Afkortingen Aw, Ab, Ar, DUTO, SIO nergens uitgeschreven | 3.1.4 | AAA | nee | open (buiten AA) |
 
 **Kern van het beeld:** het fundament is goed (semantiek, koppenhiërarchie,
 tekstcontrast, `prefers-reduced-motion`, een echte `<dialog>` voor zoeken), maar
@@ -62,16 +64,59 @@ vraagt in plaats van een patch.
 
 ---
 
-## Wat als eerste oppakken
+## Wat er is opgelost op deze branch
 
-1. **De vijf focusindicatoren (1)** — één CSS-sessie, raakt elk toetsenbord- en
-   vergrotingsgebruik van de site.
-2. **Bollendiagram (2 en 3)** — `aria-label` per link plus een tekstueel
-   alternatief; het diagram is op de homepage de aangeboden ingang naar de normen.
-3. **Inhoudsopgave-knop (4)** en **de ontbrekende koppen (8)** — samen goed voor
-   het grootste deel van wat een schermlezergebruiker op een normpagina misloopt.
-4. **Keuze maken over de PDF (6)** — geen patch, wel een besluit.
-5. De rest in volgorde van de tabel.
+Alle bevindingen die met code op te lossen zijn, zijn opgelost. Wat overblijft:
+
+* **Bevinding 6 (PDF ongetagd)** — geen patch maar een keuze uit drie routes;
+  zie [§6](#6-de-pdf-export-levert-een-ongetagde-pdf).
+* **Bevinding 18 (hero bij 200% tekstvergroting)** — de vaste `height: 300px`
+  met `overflow: hidden` zit in het thema en het herschrijven ervan (naar een
+  grid-overlay die mee kan groeien) raakt de positionering op drie breekpunten.
+  Dat is niet verantwoord zonder browser om het resultaat te controleren.
+* **De AAA-bevindingen 27 en 28** — buiten de scope van AA.
+* **Bevinding 5** — al opgelost op een andere openstaande branch.
+
+### Wijzigingen in dit project
+
+| Bestand | Bevinding |
+|---|---|
+| `assets/css/main.css` | 15 (ontbrekende `}`), 1d (focus-ring PDF-knop) |
+| `assets/css/bollendiagram.css` | 11 (lijncontrast 3:1), 1e (focusring buiten de bol), 3 (styling normenlijst) |
+| `layouts/shortcodes/bollendiagram.html` | 2 (`aria-label` per link, `role="group"`), 3 (onderwerpen bij naam + tekstuele normenlijst) |
+| `layouts/normen/single.html` | 4 (`aria-expanded`), 7 (`aria-describedby`), 8 (`<h2>` in `<summary>` en op de kern), 19 (`<button>` i.p.v. `<a>`), 22 (`aria-label` op backlinks) |
+| `layouts/shortcodes/pdf-kader.html` | 19 |
+| `layouts/_partials/page-banner.html` | 25 (`role="region"` i.p.v. `role="status"`) |
+| `assets/js/pdf-export.js` | 13 (live region), 19 (knoppen zichtbaar maken) |
+| `hugo.yaml` | 14 (`disableKinds: taxonomy, term`) |
+| `content/_index.md` | 20 (`image_alt: ""`) |
+| `.github/workflows/test.yml` | `npm run test:a11y` toegevoegd aan CI |
+
+### Tijdelijke overrides op het thema
+
+Deze bevindingen zitten in `hugo-theme-rijksoverheid` v0.1.0. Ze zijn hier
+gerepareerd zodat de site nu voldoet, maar horen upstream te worden opgelost.
+Beide bestanden hebben een kop die dat expliciet vermeldt; ze verdwijnen zodra
+het thema is bijgewerkt.
+
+| Bestand | Bevinding |
+|---|---|
+| `assets/css/toegankelijkheid.css` | 1a, 1b, 1c (focusindicatoren), 12 (contrast sneltoetshint), 17 (`scroll-margin` onder de meldbalk) |
+| `assets/js/toegankelijkheid.js` | 16 (skip-link), 21 (label in name), 24 (genest landmark + Escape), 10 (`/`-sneltoets), 23 (externe-linkmelding), 9 (aankondiging van de markering) |
+| `layouts/_partials/scripts.html` | shadow van het thema, alleen om het script hierboven te laden |
+
+Nog niet vanuit dit project op te lossen en dus een thema-issue: de
+`<mark>`-helft van bevinding 9, de Escape-afhandeling van de tooltip
+(bevinding 7) en bevinding 18.
+
+### Verificatie
+
+`hugo && npm run test:a11y` → **12 pagina's, 0 overtredingen** (was: 9
+overtredingen op de homepage). De scan draait nu ook in CI. Wat axe niet dekt —
+contrast, doelgrootte, reflow, schermlezergedrag — is met de hand nagerekend
+zoals in [Methode](#methode) beschreven, en blijft de
+[beperking](#beperkingen-van-dit-onderzoek) die hij was: dit vervangt geen
+handmatige doorloop en geen gebruikerstest.
 
 ---
 
@@ -207,13 +252,14 @@ gewone lijst met dezelfde acht links opnemen zodat het diagram niet de enige
 route is. De `<figcaption>` bevat nu één link (naar norm 1) en de hoofdnavigatie
 heeft een "Normen"-ingang; dat is te mager als alternatief voor acht normen.
 
-**Terzijde:** het lokale werkbestand `CLAUDE.md` beschrijft dat de SVG
+**Terzijde:** het lokale werkbestand `CLAUDE.md` beschreef al dat de SVG
 `role="group"` heeft "en **niet** `role="img"`, want dat verbergt de acht
-normlinks voor hulpsoftware". De code doet het omgekeerde, op `main` én op de
-branch `feat/herziening-over-index-procesplaat`. De documentatie beschrijft een
-gewenste situatie die nooit is geïmplementeerd — en herhaalt daarbij dezelfde
-ongetoetste aanname. (`CLAUDE.md` staat in `.gitignore` en is dus geen
-repo-artefact.)
+normlinks voor hulpsoftware". De code deed het omgekeerde, op `main` én op de
+branch `feat/herziening-over-index-procesplaat`: de documentatie beschreef een
+gewenste situatie die nooit was geïmplementeerd — en herhaalde daarbij dezelfde
+ongetoetste aanname, want de role was niet de oorzaak van de ontbrekende namen.
+Op deze branch doet de code nu wat er staat. (`CLAUDE.md` staat in `.gitignore`
+en is dus geen repo-artefact.)
 
 ---
 
@@ -672,25 +718,22 @@ niet — die zijn met de hand nagerekend.
 
 ## Aanbevolen vervolg
 
-1. **De vijf focusindicatoren (bevinding 1)** — grootste opbrengst per regel CSS.
-   Punten a, b en c horen in het thema, d en e in dit project.
-2. **Bollendiagram (2, 3, 11)** — `aria-label` per link, role corrigeren,
-   tekstueel alternatief, en de lijnen naar 3:1.
-3. **Normpagina-semantiek (4, 7, 8)** — de inhoudsopgave-knop, de tooltip-koppeling
-   en de ontbrekende koppen; alle drie in `layouts/normen/single.html`.
-4. **Keuze maken over de PDF (6)** — leg keuze én motivering vast; dit is de enige
+1. **Keuze maken over de PDF (6)** — leg keuze én motivering vast; dit is de enige
    bevinding die niet met een patch is op te lossen.
-5. **Thema-issues indienen** voor 9, 10, 16, 21, 23, 24 en de thema-helft van 1 en
-   7, op `RijksICTGilde/hugo-theme-rijksoverheid`.
-6. **Toegankelijkheidsverklaring** — de footer verwijst naar de verklaring van
+2. **Thema-issues indienen** voor 9, 10, 16, 17, 18, 21, 23, 24 en de thema-helft
+   van 1 en 7, op `RijksICTGilde/hugo-theme-rijksoverheid`. Alles wat hier in
+   `assets/css/toegankelijkheid.css` en `assets/js/toegankelijkheid.js` staat is
+   een tijdelijke reparatie op thema-code en hoort daar te verdwijnen.
+3. **Bevinding 18 in een browser natrekken** — de hero op 320 px bij 200%
+   tekstvergroting. Dit is de laatste openstaande AA-bevinding die met code op
+   te lossen is.
+4. **Toegankelijkheidsverklaring** — de footer verwijst naar de verklaring van
    inspectie-oe.nl. Op grond van het Tijdelijk besluit digitale toegankelijkheid
    overheid heeft deze site een eigen verklaring nodig in het register van
    DigiToegankelijk, met de eigen URL en de actuele status. Dat de site nog in
    bèta is, ontslaat niet van die plicht. (Juridisch punt, niet uit de code te
    verifiëren.)
-7. **`npm run test:a11y` aan CI toevoegen**, naast de bestaande htmltest-stap in
-   `.github/workflows/test.yml`, zodat regressies bij een PR opvallen.
-8. **Handmatige doorloop en gebruikerstest** — een toetsenbord-doorloop en een test
+5. **Handmatige doorloop en gebruikerstest** — een toetsenbord-doorloop en een test
    met NVDA of VoiceOver dekken het deel dat geen enkele scanner vindt. Betrek
    daarbij mensen die hulpsoftware dagelijks gebruiken.
 

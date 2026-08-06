@@ -3,21 +3,44 @@
   Hub-and-spoke-visualisatie van "Informatie in beheer" met de samenhangende
   normen. De norm in beheer staat centraal; de zeven andere normen liggen
   gelijkmatig in een cirkel eromheen, verbonden via dunne spokes.
-  De gevulde bollen zijn toetsenbord-navigeerbaar (focus zichtbaar via stroke).
-  Onder een scheidingslijn staan de vervaagde onderwerpen die later worden
-  toegevoegd.
+  De gevulde bollen zijn toetsenbord-navigeerbaar (focus zichtbaar via een
+  losse ring buiten de bol, zie .bd-focus-ring). Onder een scheidingslijn staan
+  de vervaagde onderwerpen die later worden toegevoegd.
 
   Tekenvolgorde (paint-order): eerst de spokes, dan de cirkels eroverheen (de
   opake fills verbergen de spoke-uiteinden), dan de toekomst-bollen en als
   laatste alle labels in een aparte groep bovenop. Zo overschildert niets de
   tekst.
+
+  Toegankelijkheid:
+  - De SVG heeft `role="group"`, NIET `role="img"`: dat laatste markeert de
+    inhoud als presentatie terwijl er acht focusbare links in staan
+    (axe: nested-interactive).
+  - Elke <a> draagt een `aria-label`. Een SVG-<title> als kind van een SVG-<a>
+    wordt niet betrouwbaar als toegankelijke naam gebruikt (axe: link-name);
+    de <title> blijft staan voor de browser-tooltip.
+  - De labellaag is aria-hidden (zou de linknamen dupliceren). De vier
+    toekomst-onderwerpen staan daarom bij naam in de figcaption, en onder het
+    diagram staat een gewone lijst met dezelfde acht normlinks — het diagram is
+    dan niet de enige route naar de normen.
 */}}
+
+{{- $normen := slice
+  (dict "url" "normen/01-beheer/"                "naam" "Informatie in beheer")
+  (dict "url" "normen/02-overzicht/"             "naam" "Overzicht")
+  (dict "url" "normen/03-ordeningsstructuur/"    "naam" "Ordenen")
+  (dict "url" "normen/04-metadatering/"          "naam" "Metadateren")
+  (dict "url" "normen/05-vindbaarheid/"          "naam" "Vindbaar")
+  (dict "url" "normen/06-vernietigen/"           "naam" "Betrouwbaar")
+  (dict "url" "normen/07-informatiebeveiliging/" "naam" "Gecontroleerd vernietigen")
+  (dict "url" "normen/08-periodieke-evaluatie/"  "naam" "Periodieke evaluatie")
+-}}
 
 <figure class="bollendiagram-wrapper">
   <svg class="bollendiagram"
        viewBox="80 0 480 525"
        xmlns="http://www.w3.org/2000/svg"
-       role="img"
+       role="group"
        aria-labelledby="bollendiagram-title">
     <title id="bollendiagram-title">Relatie tussen de normen van het Toetsingskader Archiefwet</title>
 
@@ -32,44 +55,52 @@
     </g>
 
     <g class="bd-cluster">
-      <a class="bd-bubble bd-main" href="{{ relURL "normen/01-beheer/" }}">
-        <title>Informatie in beheer</title>
+      <a class="bd-bubble bd-main" href="{{ relURL (index $normen 0).url }}" aria-label="{{ (index $normen 0).naam }}">
+        <title>{{ (index $normen 0).naam }}</title>
         <circle cx="320" cy="215" r="80"/>
+        <circle class="bd-focus-ring" cx="320" cy="215" r="84"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/02-overzicht/" }}">
-        <title>Overzicht</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 1).url }}" aria-label="{{ (index $normen 1).naam }}">
+        <title>{{ (index $normen 1).naam }}</title>
         <circle cx="320" cy="60" r="55"/>
+        <circle class="bd-focus-ring" cx="320" cy="60" r="59"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/03-ordeningsstructuur/" }}">
-        <title>Ordenen</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 2).url }}" aria-label="{{ (index $normen 2).naam }}">
+        <title>{{ (index $normen 2).naam }}</title>
         <circle cx="441" cy="118" r="55"/>
+        <circle class="bd-focus-ring" cx="441" cy="118" r="59"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/04-metadatering/" }}">
-        <title>Metadateren</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 3).url }}" aria-label="{{ (index $normen 3).naam }}">
+        <title>{{ (index $normen 3).naam }}</title>
         <circle cx="471" cy="249" r="55"/>
+        <circle class="bd-focus-ring" cx="471" cy="249" r="59"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/05-vindbaarheid/" }}">
-        <title>Vindbaar</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 4).url }}" aria-label="{{ (index $normen 4).naam }}">
+        <title>{{ (index $normen 4).naam }}</title>
         <circle cx="387" cy="355" r="55"/>
+        <circle class="bd-focus-ring" cx="387" cy="355" r="59"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/06-vernietigen/" }}">
-        <title>Betrouwbaar</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 5).url }}" aria-label="{{ (index $normen 5).naam }}">
+        <title>{{ (index $normen 5).naam }}</title>
         <circle cx="253" cy="355" r="55"/>
+        <circle class="bd-focus-ring" cx="253" cy="355" r="59"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/07-informatiebeveiliging/" }}">
-        <title>Gecontroleerd vernietigen</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 6).url }}" aria-label="{{ (index $normen 6).naam }}">
+        <title>{{ (index $normen 6).naam }}</title>
         <circle cx="169" cy="249" r="55"/>
+        <circle class="bd-focus-ring" cx="169" cy="249" r="59"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/08-periodieke-evaluatie/" }}">
-        <title>Periodieke evaluatie</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 7).url }}" aria-label="{{ (index $normen 7).naam }}">
+        <title>{{ (index $normen 7).naam }}</title>
         <circle cx="199" cy="118" r="55"/>
+        <circle class="bd-focus-ring" cx="199" cy="118" r="59"/>
       </a>
     </g>
 
@@ -103,6 +134,16 @@
   </svg>
 
   <figcaption class="bollendiagram-caption">
-    Het toetsingskader bevat nu acht onderwerpen die de inspectie als fundamenteel voor de duurzame toegankelijkheid beschouwt. De norm <a href="{{ relURL "normen/01-beheer/" }}">in beheer</a> vormt de basis; de zeven andere normen hangen daar direct mee samen. De vier vervaagde onderwerpen onderaan horen hier ook bij en worden op een later moment aan het toetsingskader toegevoegd.
+    Het toetsingskader bevat nu acht onderwerpen die de inspectie als fundamenteel voor de duurzame toegankelijkheid beschouwt. De norm <a href="{{ relURL "normen/01-beheer/" }}">in beheer</a> vormt de basis; de zeven andere normen hangen daar direct mee samen. Vier onderwerpen worden op een later moment aan het toetsingskader toegevoegd: leesbaar, migreren, converteren en beschikbaar.
   </figcaption>
+
+  {{/* Tekstuele route naar dezelfde acht normen: het diagram is daarmee niet
+       de enige ingang (WCAG 1.1.1 / 1.3.1). */}}
+  <nav class="bd-normenlijst" aria-label="Normen in het diagram">
+    <ul>
+      {{- range $normen }}
+      <li><a href="{{ relURL .url }}">{{ .naam }}</a></li>
+      {{- end }}
+    </ul>
+  </nav>
 </figure>

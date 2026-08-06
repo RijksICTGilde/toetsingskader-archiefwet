@@ -105,6 +105,18 @@
   border-color: var(--color-primary);
   color: #fff;
   filter: brightness(0.9);
+}
+
+/* Focus moet zichtbaar én onderscheidend zijn (WCAG 2.4.7 A, 1.4.11 AA): hover
+   alleen (brightness 0.9) haalt 1,19:1 tegen de rustkleur. De thema-.button zet
+   `outline: none`, dus die moet hier expliciet terug. --color-text is in beide
+   modi hoogcontrast tegen zowel de blauwe knop als de paginaachtergrond. */
+.pdf-download.button:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 2px;
+  filter: none;
+}
+
 /* Een ref-term die óók een interne navigatielink is (voetnoot + link naar een
    andere pagina) krijgt de linkkleur (blauw), zodat zichtbaar is dat je erheen
    kunt klikken; de dotted underline (voetnoot-indicator) blijft uit het thema.
