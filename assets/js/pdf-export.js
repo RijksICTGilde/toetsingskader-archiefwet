@@ -178,6 +178,24 @@
     })
   }
 
+  // De download-knoppen staan `hidden` in de markup: zonder JavaScript is er
+  // geen PDF om te downloaden. Nu er wel JavaScript is, mogen ze zichtbaar.
+  var hiddenButtons = document.querySelectorAll('[data-pdf-url][hidden]')
+  for (var b = 0; b < hiddenButtons.length; b++) hiddenButtons[b].removeAttribute('hidden')
+
+  // Live region voor de voortgangsmelding (WCAG 4.1.3 Status Messages). Het
+  // wisselende knoplabel + aria-busy op de knop is niet genoeg: aria-busy wordt
+  // door de meeste schermlezers genegeerd, en het genereren duurt seconden.
+  // De region staat vanaf paginalading in de DOM en is leeg — schermlezers
+  // kondigen wijzigingen in een live region die bij lading niet gerenderd was
+  // doorgaans niet aan.
+  var statusRegion = document.createElement('p')
+  statusRegion.className = 'visually-hidden'
+  statusRegion.setAttribute('role', 'status')
+  document.body.appendChild(statusRegion)
+
+  function announce(msg) { statusRegion.textContent = msg }
+
   document.addEventListener('click', function (e) {
     var btn = e.target.closest ? e.target.closest('[data-pdf-url]') : null
     if (!btn) return
@@ -191,8 +209,14 @@
     var label = btn.querySelector('span') || btn
     var original = label.textContent
     label.textContent = 'PDF wordt gemaakt…'
+    announce('De PDF wordt gemaakt. Dit kan enkele seconden duren.')
     generate(btn.getAttribute('data-pdf-url'))
-      .catch(function (err) { console.error(err); window.alert('Het maken van de PDF is mislukt. Probeer het later opnieuw.') })
+      .then(function () { announce('De PDF is gemaakt en wordt gedownload.') })
+      .catch(function (err) {
+        console.error(err)
+        announce('Het maken van de PDF is mislukt.')
+        window.alert('Het maken van de PDF is mislukt. Probeer het later opnieuw.')
+      })
       .then(function () { btn.removeAttribute('aria-busy'); label.textContent = original })
   })
 })();

@@ -83,5 +83,11 @@ jobs:
           npm test
           npm run smoke:pdf
 
+      - name: Toegankelijkheidsscan (axe-core)
+        # Draait ná de Hugo-build over public/. Faalt bij elke WCAG-overtreding
+        # die axe kan vaststellen; layout-afhankelijke regels (contrast, doelgrootte)
+        # zitten er niet in — zie docs/toegankelijkheidsonderzoek-2026-08.md.
+        run: npm run test:a11y
+
       - name: Test links
         run: hugo --minify --quiet --baseURL / --destination .htmltest/public && htmltest

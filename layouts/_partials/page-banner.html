@@ -6,13 +6,18 @@
   de hugo.yaml-default, in CI de git-release-tag via HUGO_PARAMS_VERSIE). Zo
   staat het versienummer op één plek en lopen banner en PDF niet uiteen.
 
+  Tweede verschil: `role="region"` met een label i.p.v. `role="status"`. De
+  banner is een statische mededeling die nooit verandert; als live region
+  kondigen sommige schermlezers hem bij elke paginalading opnieuw aan
+  (WCAG 4.1.2). Ook upstream-kandidaat.
+
   Verder identiek aan _partials/page-banner.html van het thema.
   Upstream-kandidaat: templating/{versie} in de bannertekst in het thema zelf.
 */}}
 {{- $b := site.Params.page_banner -}}
 {{- if and $b $b.text -}}
 {{- $text := replace $b.text "{versie}" (site.Params.versie | default "") -}}
-<div class="page-banner page-banner--{{ $b.type | default "info" }}" role="status">
+<div class="page-banner page-banner--{{ $b.type | default "info" }}" role="region" aria-label="Melding over dit toetsingskader">
   <p>{{ with $b.strong }}<strong>{{ . }}</strong> {{ end }}{{ $text }}</p>
 </div>
 {{- end -}}
