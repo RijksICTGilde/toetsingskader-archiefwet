@@ -4,7 +4,7 @@ versie: "0.8"
 weight: 1
 norm_id: "1"
 norm_titel: "Inbeheername en beheer"
-kern: "Een document is in beheer zodat het duurzaam toegankelijk gemaakt en gehouden kan worden."
+kern: "Er zijn beheerregels en passende maatregelen die de duurzame toegankelijkheid van documenten borgen. Een document bevindt zich in een beheerde omgeving, zodat de beheertaken kunnen worden uitgevoerd waarmee documenten duurzaam toegankelijk gemaakt worden en blijven."
 synoniemen:
   - "Opname (DUTO)"
   - "Duurzaam toegankelijk"
@@ -18,9 +18,9 @@ synoniemen:
 
 Om een document duurzaam toegankelijk te maken en te houden[^aw-artikel-4-1-lid-1] moet een document [in beheer](/normen/01-beheer/) zijn.[^ab-artikel-2-1-lid-1-2] Inbeheername is het opnemen van documenten in een omgeving waarin zij beheerd worden[^functies-nationaal-archief]. Beheer is geen eenmalige handeling, maar vraagt om een voortdurende zorg voor documenten[^deze-toelichting-ontleend-kennisbank-nationaal-a].
 
-Die voortdurende zorg vereist ook sturing op de informatiehuishouding. Een overheidsorganisatie neemt daarom passende maatregelen en beschrijft die in de beheerregels[^kamerstukken-2018-19-35-112]. Op basis van beschrijving worden de passende maatregelen concreet uitgewerkt. In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurzame toegankelijkheid van categorieën documenten borgt[^aw-artikelen-4-1-4-2]. Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](/onderwerpen/passende-maatregelen/) [^verwijzing-kopje-risicoanalyse-introductie] invulling krijgen.
+Die voortdurende zorg vereist ook sturing op de informatiehuishouding. Een overheidsorganisatie neemt daarom passende maatregelen en beschrijft die in de beheerregels[^kamerstukken-2018-19-35-112]. Op basis van beschrijving worden de passende maatregelen concreet uitgewerkt. In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurzame toegankelijkheid van categorieën documenten borgt[^aw-artikelen-4-1-4-2]. Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](/onderwerpen/passende-maatregelen/) invulling krijgen. Het DUTO-raamwerk van het Nationaal Archief werkt onder [niveau van maatregelen](https://www.nationaalarchief.nl/archiveren/kennisbank/niveau-van-maatregelen-overwegingen-generiek-deel) uit welke overwegingen kunnen leiden tot een zwaarder of lichter niveau; daarbij hoort ook de handreiking DUTO-risicobeoordeling.
 
-In een beheerde omgeving [^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten [^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/05-betrouwbaar/), [gecontroleerd vernietigen](/normen/07-vernietigen/) en [metadateren](/normen/04-metadateren/) geeft direct richting aan de invulling van de benodigde functionaliteit [^kamerstukken-2021-22-35968].
+In een beheerde omgeving [^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten [^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/05-betrouwbaar/), [gecontroleerd vernietigen](/normen/07-vernietigen/) en [metadateren](/normen/04-metadateren/) geeft direct richting aan de invulling van de benodigde functionaliteit [^kamerstukken-2021-22-35968]. Voor de relatie met de architectuur en het applicatielandschap beschrijft het Nationaal Archief de [overwegingen bij implementatie](https://www.nationaalarchief.nl/archiveren/kennisbank/overwegingen-generiek-deel). Hoe die beheertaken in de praktijk worden uitgevoerd, staat hieronder onder [feitelijk beheer](/normen/01-beheer/#feitelijk-beheer).
 
 ## Normuitleg
 
@@ -181,7 +181,6 @@ Alle documenten moeten in beheer zijn. Ook de documenten die op elk moment mogen
 [^deze-toelichting-ontleend-kennisbank-nationaal-a]: Deze toelichting is ontleend aan de kennisbank van het Nationaal Archief. De algemene archiefnorm NEN-ISO 15489-1:2016 gebruikt andere begrippen die uitdrukken aan welke kenmerken documenten moeten voldoen om als gezaghebbend bewijs te kunnen dienen: documenten dienen authentiek, betrouwbaar, integer en bruikbaar te zijn en daartoe worden beheerd in systemen die betrouwbaar, veilig, afdoende, uitgebreid en systematisch zijn.
 [^kamerstukken-2018-19-35-112]: Kamerstukken II 2018/19, 35 112, nr. 2. Dit sluit tevens aan op artikel 6.1 van de novelle bij de Woo.
 [^aw-artikelen-4-1-4-2]: AW, artikelen 4.1 en 4.2 en de toelichting in de AR (AR, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen – pagina 36)
-[^verwijzing-kopje-risicoanalyse-introductie]: Verwijzing naar kopje risicoanalyse in de introductie.
 [^kamerstukken-2021-22-35968]: Kamerstukken II 2021/22, 35968, nr. 3, Beheerstrategie, p.15.
 [^aw-artikel-4-2-lid-1]: Aw, artikel 4.2, eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 [^categorie-vormvrij-maar-relatie-hebben-selectieb]: Categorie is vormvrij, maar moet wel een relatie hebben met het selectiebesluit.
@@ -192,7 +191,7 @@ Alle documenten moeten in beheer zijn. Ook de documenten die op elk moment mogen
 [^kamerstukken-2021-22-35968-2]: Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 4.3, Duurzame toegankelijkheid, beheerstrategie, 2e alinea.
 [^aw-artikel-4-2]: Aw, artikel 4.2. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 [^kamerstukken-2021-22-35968-3]: Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 2.2, Zorgdrager of verantwoordelijk overheidsorgaan.
-[^ar-toelichting-algemeen-deel-h1-eisen]: Ar, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten. Dit kan nog een hyperlink worden naar normblad over werken in de cloud.
+[^ar-toelichting-algemeen-deel-h1-eisen]: Ar, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten. Werken in de cloud valt op dit moment buiten de reikwijdte van het toetsingskader en wordt op een later moment toegevoegd.
 [^ar-toelichting-algemeen-deel-h1-eisen-2]: Ar, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten.
 [^ab-nota-toelichting-8]: Ab, Nota van Toelichting, 8. Implementatie, SIO.
 [^heet-aw1995-kwaliteitssyteem]: Dit heet in de AW1995 "kwaliteitssyteem".

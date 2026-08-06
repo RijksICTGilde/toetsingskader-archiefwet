@@ -13,6 +13,17 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Toegevoegd
 
+- Normen 2 tot en met 8 gevuld met de teksten uit de normbladen (4e iteratie):
+  kern, synoniemen, toelichting, voorschriften met criteria en indicatoren,
+  reikwijdte en "Zie ook". De PLACEHOLDER-stubs zijn daarmee weg; norm 1 was
+  al eerder gemigreerd.
+- Begrippenpagina's voor de termen waar de normbladen om een hover vroegen:
+  "Applicatie en systeem", "Structuur", "Verschijningsvorm" en "Strategisch
+  informatieoverleg (SIO)". De hover-opmerkingen zijn verwerkt als link naar
+  de begrippenindex of, bij een externe bron, als link naar de kennisbank van
+  het Nationaal Archief (niveau van maatregelen, overwegingen bij
+  implementatie, vindbaar, betrouwbaar, digitaal vernietigen,
+  overheidsinformatie binnen de informatiehuishouding).
 - Pagina "Samenhang van de normen" (`/samenhang/`) met het bollendiagram, de
   uitleg over richten/verrichten en de relatie met DUTO. Bevat een
   placeholder voor de nog te leveren procesplaat.
@@ -23,6 +34,9 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- De `kern` van de normen 1, 2, 3, 4 en 8 komt nu overeen met de
+  geactualiseerde inhoudsopgave uit "0) Introductie toetsingskader"; de
+  oudere formuleringen op de site zijn vervallen.
 - Normen hernoemd zodat bestandsnaam, `norm_id` en `norm_titel` overeenkomen
   met de volgorde uit de introductie van het toetsingskader:
   `03-ordeningsstructuur` → `03-ordenen`, `04-metadatering` →

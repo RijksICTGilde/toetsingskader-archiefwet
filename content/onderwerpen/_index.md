@@ -9,4 +9,4 @@ cascade:
   show_lastmod: true
 ---
 
-Deze index geeft toegang tot de begrippen die in het toetsingskader worden gebruikt. Elk begrip is los te lezen en wordt vanuit de normpagina's aangehaald. De index wordt stapsgewijs aangevuld met trefwoorden uit de normen.
+Deze index geeft toegang tot de begrippen die in het toetsingskader worden gebruikt. Elk begrip is los te lezen en wordt vanuit de normpagina's aangehaald. Naast de begrippen uit het document "Onderwerpen en verwijzingen" staan hier ook trefwoorden die in de normen zelf worden toegelicht, zoals applicatie en systeem, structuur, verschijningsvorm en het strategisch informatieoverleg.
