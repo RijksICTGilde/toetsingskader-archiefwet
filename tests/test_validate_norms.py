@@ -49,7 +49,7 @@ Alle documenten.
 
 ## Zie ook
 
-- [Ordenen](/normen/03-ordeningsstructuur/)
+- [Ordenen](/normen/03-ordenen/)
 """
 
 

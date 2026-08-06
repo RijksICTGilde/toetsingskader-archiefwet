@@ -54,8 +54,11 @@
             // ↩-backlink weglaten: betekenisloos in een PDF.
           } else if (cls.indexOf('footnote-ref') !== -1) {
             // Voetnoot-nummer: interne sprong naar de bron in de bronnenlijst.
+            // `sup` zet het nummer als superscript (kleiner en hoger, zoals op
+            // de site); pdfMake schaalt de fontSize dan zelf naar 0.58× mits we
+            // er géén expliciete fontSize op zetten.
             var dest = footnoteDest(child.getAttribute('href'))
-            var ref = { text: child.textContent, color: BRAND }
+            var ref = { text: child.textContent, color: BRAND, sup: true }
             if (dest) ref.linkToDestination = dest
             acc.push(ref)
           } else {

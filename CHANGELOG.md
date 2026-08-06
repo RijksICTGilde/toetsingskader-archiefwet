@@ -11,8 +11,68 @@ changelog volgt [Semantic Versioning][semver].
 
 ## [Unreleased]
 
+### Toegevoegd
+
+- Normen 2 tot en met 8 gevuld met de teksten uit de normbladen (4e iteratie):
+  kern, synoniemen, toelichting, voorschriften met criteria en indicatoren,
+  reikwijdte en "Zie ook". De PLACEHOLDER-stubs zijn daarmee weg; norm 1 was
+  al eerder gemigreerd.
+- Begrippenpagina's voor de termen waar de normbladen om een hover vroegen:
+  "Applicatie en systeem", "Structuur", "Verschijningsvorm" en "Strategisch
+  informatieoverleg (SIO)". De hover-opmerkingen zijn verwerkt als link naar
+  de begrippenindex of, bij een externe bron, als link naar de kennisbank van
+  het Nationaal Archief (niveau van maatregelen, overwegingen bij
+  implementatie, vindbaar, betrouwbaar, digitaal vernietigen,
+  overheidsinformatie binnen de informatiehuishouding).
+- Pagina "Samenhang van de normen" (`/samenhang/`) met het bollendiagram, de
+  uitleg over richten/verrichten en de relatie met DUTO. Bevat een
+  placeholder voor de nog te leveren procesplaat.
+- Sectie "Onderwerpen en begrippen" (`/onderwerpen/`): alfabetische index met
+  een pagina per begrip, op basis van het document "Onderwerpen en
+  verwijzingen". Eigen A-Z-template met letternavigatie. Passende maatregelen
+  en risicobenadering staat hier als een van de onderwerpen.
+
 ### Gewijzigd
 
+- Norm 1 (Inbeheername en beheer) bijgewerkt naar het herziene normblad
+  "1) Normanalyse beheer" (4e iteratie): toelichting aangevuld met archiveren
+  by design, de koppeling van categorieën aan het selectiebesluit en de
+  publicatie van de beheerregeling; criteria voor passende maatregelen
+  uitgebreid (alle opslagomgevingen, actueel, worden toegepast); het SIO is
+  verplaatst naar een indicator bij het voorschrift over de omschrijving van
+  passende maatregelen; het informatiebeheerplan is een indicator bij het
+  voorschrift over periodieke evaluatie geworden; migratie/conversie/
+  vervanging en vernietiging toegevoegd aan de beheertaken, en het opslaan en
+  verwerken binnen de Europese Unie daaruit verwijderd.
+- "Terug naar boven"-knop op elke pagina, zichtbaar zodra er meer dan een
+  schermhoogte is gescrold — bedoeld voor de lange normpagina's.
+- Versienummer van het toetsingskader staat nu ook als label in de paginavoet,
+  naast de laatst-gewijzigd-datum. Dat blijft staan wanneer de beta-banner
+  verdwijnt.
+- Navigatievolgorde: Onderwerpen vóór Samenhang.
+- De "Over"-index toont dezelfde boxed card-grid als de normen-index.
+- Voetnootnummers in de PDF staan als superscript (kleiner en hoger), zoals op
+  de site.
+- De `kern` van de normen 1, 2, 3, 4 en 8 komt nu overeen met de
+  geactualiseerde inhoudsopgave uit "0) Introductie toetsingskader"; de
+  oudere formuleringen op de site zijn vervallen.
+- Normen hernoemd zodat bestandsnaam, `norm_id` en `norm_titel` overeenkomen
+  met de volgorde uit de introductie van het toetsingskader:
+  `03-ordeningsstructuur` → `03-ordenen`, `04-metadatering` →
+  `04-metadateren`, `06-vernietigen` → `05-betrouwbaar` (titel nu
+  "Informatiebeveiliging en betrouwbaar"), `05-vindbaarheid` →
+  `06-vindbaar`, `07-informatiebeveiliging` → `07-vernietigen`. Oude URL's
+  blijven werken via aliases.
+- "Over" is een sectie geworden met losse pagina's per onderwerp (inleiding,
+  doel, wettelijk kader, opbouw en indeling, doelgroep, passende maatregelen
+  en risicobenadering), met de herziene teksten uit de introductie.
+- Homepage: tekst over beheer aangepast aan de actuele introductie; het
+  bollendiagram staat niet meer op de homepage maar op de samenhang-pagina,
+  met links naar samenhang, passende maatregelen en de index.
+- "Niet van toepassing" bij criteria en indicatoren vervangen door
+  "Bij dit voorschrift zijn geen aanvullende criteria/indicatoren"
+  (voorlopige formulering).
+- Navigatie uitgebreid met Samenhang en Onderwerpen.
 - Bollendiagram herontworpen naar een hub-and-spoke-visualisatie.
 - Navigatievolgorde: Normen vóór Over.
 - Footer beperkt tot contact, privacy, cookies, toegankelijkheid,
@@ -33,6 +93,13 @@ changelog volgt [Semantic Versioning][semver].
 ### Verwijderd
 
 - Feedback-blok van de normpagina's (de `params.feedback`-config blijft).
+- De placeholder voor de procesplaat op `/samenhang/`: het bollendiagram is de
+  enige plaat; het continue proces van richten en verrichten staat in tekst.
+- De card-grid naar de secties op de homepage: die dupliceerde de
+  hoofdnavigatie. De tegels ("Wat is het?", "Voor wie?", "Wanneer?", "Waar
+  beginnen?") blijven.
+- De leeswijzer-callout op `/normen/`: voorschrift, criterium en indicator
+  staan al uitgelegd op [Opbouw en indeling](/over/opbouw-en-indeling/).
 
 ### Opgelost
 
