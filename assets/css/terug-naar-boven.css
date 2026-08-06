@@ -10,7 +10,8 @@
    teruggezet op `auto` onder prefers-reduced-motion (met !important),
    dus dat hoeft hier niet nog eens.
 
-   Upstream-kandidaat: back-to-top als theme-component. */
+   Upstream: PR RijksICTGilde/hugo-theme-rijksoverheid#9 voegt dit als
+   theme-component toe (.back-to-top); daarna kan dit bestand weg. */
 
 html {
   scroll-behavior: smooth;
