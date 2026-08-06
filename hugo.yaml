@@ -68,11 +68,11 @@ menus:
     - name: Normen
       pageRef: /normen
       weight: 2
-    - name: Samenhang
-      pageRef: /samenhang
-      weight: 3
     - name: Onderwerpen
       pageRef: /onderwerpen
+      weight: 3
+    - name: Samenhang
+      pageRef: /samenhang
       weight: 4
     - name: Over
       pageRef: /over

@@ -19,7 +19,3 @@ tiles:
 ---
 
 {{< tiles columns="2" aria="Toetsingskader in het kort" >}}
-
-## Verder in dit toetsingskader
-
-{{< card-grid section="/" >}}

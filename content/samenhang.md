@@ -2,7 +2,7 @@
 title: "Samenhang van de normen"
 card_title: "Samenhang van de normen"
 description: "Hoe de normen uit het toetsingskader met elkaar samenhangen, en waarom beheer een continu proces is van richten en verrichten."
-weight: 2
+weight: 3
 show_lastmod: true
 ---
 
@@ -19,10 +19,6 @@ Van overheidsinformatie die in beheer is, wordt zowel de inrichting als de uitvo
 Duurzame toegankelijkheid ontstaat niet vanzelf. Hiervoor zijn beheerregels, de omschrijving van de passende maatregelen en een uitwerking van deze maatregelen nodig. Samen vormen zij het beleid voor de informatiehuishouding van de organisatie.
 
 Het feitelijk beheer wordt uitgevoerd op basis van de passende maatregelen. Op basis van [risicoanalyses]({{< relref "/onderwerpen/passende-maatregelen" >}}) en [periodieke evaluaties]({{< relref "/normen/08-periodieke-evaluatie" >}}) worden deze maatregelen waar nodig aangevuld, herzien of verbeterd. Het beheer van overheidsinformatie is daarmee een continu proces.
-
-{{< callout titel="Procesplaat volgt" variant="muted" >}}
-Op deze plek komt de procesplaat: een visualisatie van het continue proces van richten en verrichten. De plaat wordt in een volgende versie van het toetsingskader toegevoegd.
-{{< /callout >}}
 
 ## Relatie met DUTO
 
