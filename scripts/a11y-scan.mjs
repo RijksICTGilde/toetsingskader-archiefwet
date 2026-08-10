@@ -31,6 +31,34 @@ function htmlFiles(dir, acc = []) {
   return acc
 }
 
+// `alt=""` is de juiste waarde voor een decoratieve afbeelding, maar op een
+// informatieve afbeelding is het een 1.1.1-fout die geen enkele geautomatiseerde
+// controle vangt: axe leest een lege alt als "bewust decoratief" en .htmltest.yml
+// zet `IgnoreAltEmpty: true` sitebreed aan om de hero door te laten. Daarom hier
+// een expliciete lijst: wie een afbeelding decoratief noemt, zet hem erbij en
+// legt in één zin uit waarom. Alles daarbuiten met een lege alt is een fout.
+// Sleutel is het `src`-pad zonder fingerprint-hash.
+const DECORATIEF = new Map([
+  ['/images/hero', 'Hero op de homepage; de <h1> eronder zegt hetzelfde (bevinding 20).'],
+])
+// Van "/images/hero_hu_b08cab36f00ecf30.webp" naar "/images/hero": eerst de
+// extensie eraf, dan Hugo's image-processing-suffix (`_hu_<hex>`) en een
+// eventuele fingerprint-hash. Zonder dat verandert de sleutel bij elke
+// hercompressie van de afbeelding.
+const zonderHash = src => (src || '')
+  .replace(/\.[a-z0-9]+$/i, '')
+  .replace(/_hu_[0-9a-f]+$/i, '')
+  .replace(/\.[0-9a-f]{32,}$/i, '')
+
+function legeAltFouten(document) {
+  const fouten = []
+  for (const img of document.querySelectorAll('img[alt=""]')) {
+    const sleutel = zonderHash(img.getAttribute('src'))
+    if (!DECORATIEF.has(sleutel)) fouten.push(sleutel || '(zonder src)')
+  }
+  return fouten
+}
+
 const files = htmlFiles(root)
 let total = 0
 
@@ -48,6 +76,11 @@ for (const file of files) {
     total += v.nodes.length
     console.log(`${url} — ${v.id} [${v.impact}] ${v.nodes.length}x: ${v.help}`)
     for (const n of v.nodes.slice(0, 3)) console.log(`    ${n.target.join(' ')}`)
+  }
+  for (const src of legeAltFouten(dom.window.document)) {
+    total++
+    console.log(`${url} — lege-alt [serious] 1x: alt="" op een afbeelding die niet als decoratief is aangemerkt`)
+    console.log(`    ${src} — vul de alt, of zet het pad in DECORATIEF in ${path.relative(process.cwd(), new URL(import.meta.url).pathname)}`)
   }
   dom.window.close()
 }

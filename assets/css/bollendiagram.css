@@ -37,14 +37,19 @@
 }
 
 /* === Bollen (cirkels) === */
-.bd-bubble circle {
+/* `:not(.bd-focus-ring)` op elke regel die fill of stroke zet: de focusring is
+   een tweede <circle> bínnen dezelfde <a> (zie .bd-focus-ring verderop). Zonder
+   de uitzondering wint `.bd-bubble circle` (0,1,1) van `.bd-focus-ring` (0,1,0)
+   en krijgt de ring de bol-fill — dan is het geen ring meer maar een opake
+   schijf van r+4 óver de bol, en komt de 3px stroke-width nooit aan. */
+.bd-bubble circle:not(.bd-focus-ring) {
   fill: #8cc3e6;
   stroke: #66afdd;
   stroke-width: 1;
   transition: fill 0.18s ease, stroke 0.18s ease, stroke-width 0.18s ease;
 }
 
-.bd-main circle {
+.bd-main circle:not(.bd-focus-ring) {
   fill: #007bc7;
   stroke: light-dark(#01689b, #4ba3d8);
   stroke-width: 1.5;
@@ -128,11 +133,11 @@
   text-decoration: none;
 }
 
-.bd-bubble:hover circle {
+.bd-bubble:hover circle:not(.bd-focus-ring) {
   fill: #409cd5;
 }
 
-.bd-main:hover circle {
+.bd-main:hover circle:not(.bd-focus-ring) {
   fill: #01689b;
 }
 
@@ -179,10 +184,16 @@
 
 /* Forced-colors (Windows High Contrast) — vervang fills door systeem-kleuren. */
 @media (forced-colors: active) {
-  .bd-bubble circle,
+  .bd-bubble circle:not(.bd-focus-ring),
   .bd-bubble-outlined {
     fill: Canvas;
     stroke: CanvasText;
+  }
+
+  /* In forced-colors worden auteurskleuren genegeerd, dus var(--color-text)
+     komt hier niet aan. Highlight is de systeemkleur voor selectie/focus. */
+  .bd-bubble:focus-visible .bd-focus-ring {
+    stroke: Highlight;
   }
   .bd-spoke,
   .bd-divider {

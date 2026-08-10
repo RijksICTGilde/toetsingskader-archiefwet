@@ -44,13 +44,20 @@ body > footer a:focus-visible {
 }
 
 /* --- Bevinding 12: sneltoetshint in de balk (WCAG 1.4.3 AA) -----------------
-   De <kbd>/</kbd> in de zoekknop staat op `opacity: 0.7` — witte tekst op 70%
-   dekking over #007bc7 is 2,98:1 bij 12 px, waar 4,5:1 vereist is. Volle
-   dekking geeft 4,51:1; de iets grotere letter maakt hem daarnaast leesbaarder
-   zonder de eis te verlagen. */
+   De <kbd>/</kbd> in de zoekknop stond op `opacity: 0.7` — witte tekst op 70%
+   dekking over #007bc7 is 2,98:1 bij 12 px, waar 4,5:1 vereist is.
+
+   De hint is nu weg in plaats van leesbaarder gemaakt, omdat de sneltoets zelf
+   niet meer sitebreed werkt. Voor bevinding 10 (WCAG 2.1.4) is gekozen voor de
+   optie "alleen actief wanneer het component focus heeft"; zie
+   assets/js/toegankelijkheid.js. In precies die toestand — focus op de
+   zoekknop — opent Enter het venster ook. Een hint tonen voor een toets die
+   alleen werkt waar hij overbodig is, belooft iets wat de site niet doet.
+
+   Wil het team de sitebrede `/` terug, dan vraagt 2.1.4 een manier om hem uit
+   te zetten of te wijzigen; dan komt deze hint terug op `opacity: 1`. */
 .search-trigger .search-shortcut {
-  opacity: 1;
-  font-size: 0.8125rem;
+  display: none;
 }
 
 /* --- Bevinding 17: zwevende melding kan de focus afdekken (WCAG 2.4.11 AA) --

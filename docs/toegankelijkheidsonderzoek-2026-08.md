@@ -40,7 +40,7 @@ opgelost](#wat-er-is-opgelost-op-deze-branch) voor de gemaakte wijzigingen.
 | **9** | Zoekterm-markering wordt niet aangekondigd | 1.3.1, 4.1.3 | A, AA | ja | deels: melding wordt aangekondigd, `<mark>` open ([thema-issue #11](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/11)) |
 | **10** | Sneltoets `/` niet uit te zetten of te wijzigen | 2.1.4 | A | ja | opgelost (werkt nu alleen met focus op de zoekknop) |
 | **11** | Verbindingslijnen in het diagram: 1,23:1 | 1.4.11 | AA | ja | opgelost |
-| **12** | Sneltoetshint `/` in de balk: 2,98:1 | 1.4.3 | AA | ja | opgelost (override op het thema) |
+| **12** | Sneltoetshint `/` in de balk: 2,98:1 | 1.4.3 | AA | ja | opgelost (hint verwijderd; de sneltoets werkt sinds bevinding 10 alleen met focus op de zoekknop) |
 | **13** | Statusmelding tijdens PDF-generatie niet bepaalbaar | 4.1.3 | AA | ja | opgelost |
 | **14** | `lang`-fout en lege taxonomiepagina's | 3.1.2, 2.4.6 | AA | ja | opgelost (taxonomieën uitgezet) |
 | 15 | Ontbrekende `}` in `main.css` zet twee regels uit | — | — | nee | opgelost |
@@ -222,6 +222,55 @@ Vier van de zeven aanvankelijke meldingen waren meetfouten of dubbelingen.
 zag de `alt=""` van de decoratieve hero (de fix van bevinding 20) als fout,
 terwijl dat juist de correcte waarde is voor een decoratieve afbeelding.
 Ontbrekende `alt`-attributen blijven wél een fout.
+
+### Codereview-ronde 10 augustus 2026
+
+Een codereview over de hele branch (`main...chore/wcag-2.2-audit`) vond tien
+bevestigde defecten. Vijf ervan raken de toegankelijkheidsfixes hierboven; die
+waren geschreven maar deden niet wat ze beloofden. Ze zijn alle vijf hersteld:
+
+* **Focusring bollendiagram (bevinding 1e).** `.bd-focus-ring` (specificiteit
+  0,1,0) verloor van `.bd-bubble circle` en `.bd-main circle` (beide 0,1,1). De
+  ring erfde daardoor de bol-fill — een opake schijf van r+4 óver de bol — en
+  de `stroke-width: 3` kwam nooit aan: bij focus stond er een lijn van 1 à
+  1,5 px, dunner dan de 4 px die hij verving. Alle regels die fill of stroke op
+  een bol zetten sluiten de ring nu uit met `:not(.bd-focus-ring)`, ook in
+  `forced-colors`, waar de ring bovendien `Highlight` krijgt in plaats van een
+  auteurskleur die daar toch wordt genegeerd.
+* **Melding "opent in een nieuw venster" (bevinding 23).** De lus sloeg elke
+  link met een `aria-label` over. Sinds bevinding 27 heeft élke "Bekijk
+  bron"-link zo'n label: op `/normen/01-beheer/` 53 van de 61 externe links.
+  De melding ontbrak dus juist waar hij het meest nodig was. Een `<span>`
+  toevoegen helpt daar niet — een `aria-label` overschrijft onderliggende
+  tekst — dus wordt de melding nu achter het label zelf gezet. Achteraan, zodat
+  de zichtbare tekst het label blijft beginnen (WCAG 2.5.3 Label in Name).
+* **Sneltoetshint (bevindingen 10 en 12).** Bevinding 10 is opgelost met de
+  derde optie van WCAG 2.1.4: de `/` werkt alleen nog met focus op de zoekknop.
+  In precies die toestand opent Enter het venster ook, dus de hint `<kbd>/</kbd>`
+  beloofde een toets die nergens iets doet — en bevinding 12 maakte die belofte
+  juist beter leesbaar. De hint is daarom weg in plaats van contrastrijker. Wil
+  het team de sitebrede `/` terug, dan vraagt 2.1.4 een manier om hem uit te
+  zetten of te wijzigen; dat is een keuze, geen patch.
+* **Zoektermmarkering in een link (bevinding 31).** De oude regel
+  `#main-content a mark { color: inherit }` is terecht verwijderd, maar de regel
+  die ervoor in de plaats kwam was woordelijk gelijk aan `mark` in `base.css` van
+  het thema en veranderde dus niets. Het thema dekt dit geval al; er staat nu
+  alleen nog een toelichting waarom hier géén projectregel hoort.
+* **Lege `alt` (bevinding 20).** `IgnoreAltEmpty: true` in `.htmltest.yml` is
+  nodig voor de decoratieve hero, maar zette de enige geautomatiseerde controle
+  op lege alt-teksten sitebreed uit — axe leest `alt=""` als "bewust
+  decoratief". `scripts/a11y-scan.mjs` heeft nu een expliciete lijst
+  `DECORATIEF`; elke andere afbeelding met een lege alt is een fout. Negatief
+  getest met een ingevoegde `<img alt="">`: de scan meldt hem en geeft exit 1.
+
+Daarnaast buiten het toegankelijkheidsdomein: de statische assets kregen in
+`container/nginx.conf` geen CSP en HSTS mee (een `add_header` op
+location-niveau laat de headers van serverniveau vervallen), het
+draft-voorbehoud stond na het verdwijnen van de beta-banner alleen nog op de
+homepage in plaats van op elke normpagina, de afkortingen-pass kon een
+afkorting binnen een attribuutwaarde wrappen, en de voetnootvalidatie liet
+markeringen achter inline-markup (`**vet**[^x]`) door terwijl geen van de twee
+patronen in `normen/single.html` die kan matchen.
 
 ### Verificatie
 

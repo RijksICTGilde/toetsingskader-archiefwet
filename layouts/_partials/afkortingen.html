@@ -13,17 +13,41 @@
      handmatige `<abbr>`-tags vragen, en `unsafe: false` staat inline HTML
      in de content bovendien niet toe.
 
-     Let op de aanroeporde: doe deze pass vóórdat er attributen worden
-     toegevoegd die de brontekst als waarde bevatten (het `aria-label` van
-     bevinding 27). Anders wordt de afkorting binnen dat attribuut ook
-     gewrapt en breekt de markup.
+     De pass loopt alléén over tekst tussen de tags. Dat is nodig omdat de
+     invoer hier volledige HTML is, inclusief attribuutwaarden: de
+     referentielijst gaat er als hele `<ol>` doorheen, mét href's, en de
+     `aria-label`s van bevinding 27 bevatten de brontekst woordelijk. Een
+     kale `replaceRE` over de string wrapt een afkorting in zo'n waarde ook,
+     en dan staat er een `<abbr>`-tag binnen een attribuut: kapotte markup en
+     een dode link. Vandaag valt dat nog mee omdat de bron-URL's `duto` in
+     kleine letters schrijven, maar dat is een toevalligheid van de huidige
+     content, geen eigenschap van de code.
+
+     Omdat tags worden overgeslagen, is de aanroeporde niet langer kritisch:
+     deze pass mag ook ná het toevoegen van attributen draaien.
      --------------------------------------------------------------------- */}}
 {{- $html := . -}}
-{{- range $afkorting, $voluit := site.Data.afkortingen -}}
-  {{/* \b voorkomt treffers binnen een woord ("Ar" in "Archiefregeling").
-       De afkortingen zijn hoofdlettergevoelig en komen daardoor niet voor
-       in tagnamen, attribuutnamen of URL's, die hier allemaal kleine
-       letters gebruiken. */}}
-  {{- $html = replaceRE (printf `\b%s\b` $afkorting) (printf `<abbr title="%s">%s</abbr>` $voluit $afkorting) $html -}}
+{{- $out := slice -}}
+{{/* Splitsen op "<" geeft: chunk 0 is tekst, elke volgende chunk is
+     "taginhoud>tekst". Een chunk zonder ">" kan geen tag zijn (losse "<" in de
+     tekst) en wordt daarom in zijn geheel als tekst behandeld. Bij het
+     terugsplitsen op ">" wordt alleen het eerste stuk als tag gelezen; de rest
+     wordt weer aan elkaar geplakt, zodat een ">" in de tekst blijft staan. */}}
+{{- range $i, $chunk := split $html "<" -}}
+  {{- $tag := "" -}}
+  {{- $tekst := $chunk -}}
+  {{- if and (gt $i 0) (in $chunk ">") -}}
+    {{- $bits := split $chunk ">" -}}
+    {{- $tag = printf "<%s>" (index $bits 0) -}}
+    {{- $tekst = delimit (after 1 $bits) ">" -}}
+  {{- else if gt $i 0 -}}
+    {{- $tekst = printf "<%s" $chunk -}}
+  {{- end -}}
+  {{- range $afkorting, $voluit := site.Data.afkortingen -}}
+    {{/* \b voorkomt treffers binnen een woord ("Ar" in "Archiefregeling").
+         De match is hoofdlettergevoelig. */}}
+    {{- $tekst = replaceRE (printf `\b%s\b` $afkorting) (printf `<abbr title="%s">%s</abbr>` $voluit $afkorting) $tekst -}}
+  {{- end -}}
+  {{- $out = $out | append (printf "%s%s" $tag $tekst) -}}
 {{- end -}}
-{{- return $html -}}
+{{- return delimit $out "" -}}

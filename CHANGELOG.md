@@ -25,12 +25,11 @@ changelog volgt [Semantic Versioning][semver].
   implementatie, vindbaar, betrouwbaar, digitaal vernietigen,
   overheidsinformatie binnen de informatiehuishouding).
 - Pagina "Samenhang van de normen" (`/samenhang/`) met het bollendiagram, de
-  uitleg over richten/verrichten en de relatie met DUTO. Bevat een
-  placeholder voor de nog te leveren procesplaat.
+  uitleg over richten/verrichten en de relatie met DUTO.
 - Sectie "Onderwerpen en begrippen" (`/onderwerpen/`): alfabetische index met
   een pagina per begrip, op basis van het document "Onderwerpen en
-  verwijzingen". Eigen A-Z-template met letternavigatie. Passende maatregelen
-  en risicobenadering staat hier als een van de onderwerpen.
+  verwijzingen". Eigen A-Z-template, gegroepeerd per beginletter. Passende
+  maatregelen en risicobenadering staat hier als een van de onderwerpen.
 
 ### Gewijzigd
 
@@ -49,7 +48,6 @@ changelog volgt [Semantic Versioning][semver].
 - Versienummer van het toetsingskader staat nu ook als label in de paginavoet,
   naast de laatst-gewijzigd-datum. Dat blijft staan wanneer de beta-banner
   verdwijnt.
-- Navigatievolgorde: Onderwerpen vóór Samenhang.
 - De "Over"-index toont dezelfde boxed card-grid als de normen-index.
 - Voetnootnummers in de PDF staan als superscript (kleiner en hoger), zoals op
   de site.
@@ -72,9 +70,9 @@ changelog volgt [Semantic Versioning][semver].
 - "Niet van toepassing" bij criteria en indicatoren vervangen door
   "Bij dit voorschrift zijn geen aanvullende criteria/indicatoren"
   (voorlopige formulering).
-- Navigatie uitgebreid met Samenhang en Onderwerpen.
+- Hoofdnavigatie uitgebreid met Onderwerpen en Samenhang; de volgorde is nu
+  Home, Normen, Onderwerpen, Samenhang, Over.
 - Bollendiagram herontworpen naar een hub-and-spoke-visualisatie.
-- Navigatievolgorde: Normen vóór Over.
 - Footer beperkt tot contact, privacy, cookies, toegankelijkheid,
   kwetsbaarheid melden en terug naar hoofdsite.
 - Voorschriften worden genummerd (`<norm>.<n>`, bv. 1.1, 1.2).
@@ -93,8 +91,6 @@ changelog volgt [Semantic Versioning][semver].
 ### Verwijderd
 
 - Feedback-blok van de normpagina's (de `params.feedback`-config blijft).
-- De placeholder voor de procesplaat op `/samenhang/`: het bollendiagram is de
-  enige plaat; het continue proces van richten en verrichten staat in tekst.
 - De card-grid naar de secties op de homepage: die dupliceerde de
   hoofdnavigatie. De tegels ("Wat is het?", "Voor wie?", "Wanneer?", "Waar
   beginnen?") blijven.

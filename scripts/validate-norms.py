@@ -59,12 +59,21 @@ ID_RE = re.compile(r"^[a-z0-9-]+$")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*$")
 FN_DEF_RE = re.compile(r"^\[\^([^\]]+)\]:")
 FN_USE_RE = re.compile(r"\[\^([^\]]+)\]")
-# Twee markeringen zonder tekst ertussen; zie validate_footnotes.
-FN_ADJACENT_RE = re.compile(r"\[\^[^\]]+\]\[\^[^\]]+\]")
-# De markering met het "woord" ervoor (alles tot de vorige spatie); zie
-# validate_footnotes voor waarom een woord zonder letter of cijfer fout is.
-FN_WORD_RE = re.compile(r"(\S*?)\[\^[^\]]+\](?!:)")
 LETTER_OR_DIGIT_RE = re.compile(r"[^\W_]", re.UNICODE)
+
+# Een voetnootmarkering die geen definitie is (vandaar de lookahead op ":").
+# Het blok ervóór wordt uit `scan` zelf gesneden en niet in dit patroon
+# gevangen: finditer levert niet-overlappende treffers, dus een vorige
+# markering zou al opgegeten zijn en juist die moet zichtbaar blijven.
+FN_USE_INLINE_RE = re.compile(r"\[\^[^\]]+\](?!:)")
+# Het laatste blok niet-spatie-tekens van een string.
+FN_TRAILING_BLOK_RE = re.compile(r"\S*$")
+# Een markdown-link, eventueel gevolgd door leestekens: `[tekst](url).`
+FN_LINK_TAIL_RE = re.compile(r"\[[^\]]*\]\([^)]*\)[.,;:!?)]*$")
+# Tekens waarmee een blok niet mag eindigen: markdown-nadruk en code (`**`, `*`,
+# `_`, `` ` ``) sluiten met een tag, en `]` is het einde van een andere
+# voetnootmarkering. Zie validate_footnotes voor waarom dat de ref-term breekt.
+FN_BAD_TAIL = "*_`]"
 
 
 class Error:
@@ -254,34 +263,70 @@ def validate_footnotes(name, body_lines, body_start, errors):
             if not ID_RE.match(fid):
                 bad_ids.setdefault(fid, lineno)
 
-        # Twee markeringen tegen elkaar aan ([^a][^b]) hangen de tweede aan het
-        # sluit-tag van de eerste in plaats van aan een woord. Geen van de twee
-        # patronen in normen/single.html matcht dat, dus de tweede blijft als
-        # kaal superscript in de tekst staan: geen ref-term, geen tooltip.
-        # Zet ze op verschillende woorden, of voeg de bronnen samen in één noot.
-        if not dm and FN_ADJACENT_RE.search(scan):
-            errors.append(Error(
-                name,
-                "Twee voetnootmarkeringen direct achter elkaar ([^a][^b]): de tweede "
-                "krijgt geen ref-term en blijft als kaal superscript staan. Hang ze "
-                "aan verschillende woorden of voeg de bronnen samen in één voetnoot",
-                lineno))
+        # normen/single.html maakt van het stukje tekst vóór de markering de
+        # ref-term: de tekst met de stippellijn waar de tooltip aan hangt. Het
+        # doet dat met twee patronen, en wat geen van beide matcht blijft een
+        # kaal superscript zonder ref-term en zonder tooltip:
+        #
+        #   A) een markdown-link (plus eventueel een leesteken) vóór de
+        #      markering — de link wordt zelf de ref-term;
+        #   B) een blok niet-spatie-tekens vóór de markering, eventueel met een
+        #      spatie ertussen — dat blok wordt de ref-term.
+        #
+        # Patroon B matcht op `[^\s<>]+`, dus het blok mag in de gerenderde HTML
+        # niet op een tag eindigen. Dat sluit drie dingen uit:
+        #
+        #   * markdown-nadruk en code: `**vet**[^x]` wordt `</strong><sup>`;
+        #   * een andere voetnootmarkering: `[^a][^b]` én `[^a] [^b]` geven
+        #     `</sup><sup>` — de tweede noot verliest zijn term;
+        #   * een blok zonder letter of cijfer ("):"): dan is de ref-term alleen
+        #     interpunctie, een paar pixels breed, en haalt het klikdoel de 24px
+        #     van WCAG 2.5.8 niet.
+        #
+        # Bij een definitieregel is `scan` al ingekort tot de tekst ná de
+        # definitie-marker, zodat markeringen in de bróntekst van een voetnoot
+        # net zo goed worden nagelopen.
+        for um in FN_USE_INLINE_RE.finditer(scan):
+            prefix = scan[:um.start()]
+            blok = FN_TRAILING_BLOK_RE.search(prefix).group(0)
+            # Patroon B staat een spatie tussen tekst en markering toe; bij een
+            # leeg blok is het voorafgaande blok dus de ref-term.
+            if not blok:
+                velden = prefix.split()
+                if not velden:
+                    continue  # markering aan het begin van de regel; geen term
+                blok = velden[-1]
+                prefix = prefix.rstrip()
+            if FN_LINK_TAIL_RE.search(prefix):
+                continue  # patroon A: de link wordt de ref-term
 
-        # normen/single.html maakt van het woord vóór de markering de ref-term:
-        # het stukje tekst met de stippellijn waar de tooltip aan hangt. Staat er
-        # alleen interpunctie ("):"), dan is die term een paar pixels breed en
-        # haalt het klikdoel de 24px van WCAG 2.5.8 niet. Hang de markering aan
-        # een woord; de bron hoort meestal toch bij de zin, niet bij het haakje.
-        if not dm:
-            for wm in FN_WORD_RE.finditer(scan):
-                woord = wm.group(1)
-                if woord and not LETTER_OR_DIGIT_RE.search(woord):
-                    errors.append(Error(
-                        name,
-                        f"Voetnootmarkering staat achter '{woord}': de ref-term wordt dan "
-                        "alleen interpunctie en is te klein als klikdoel (WCAG 2.5.8). "
-                        "Zet de markering achter een woord",
-                        lineno))
+            # Patroon B matcht `[^\s<>]+`, dus het stopt bij de dichtstbijzijnde
+            # tag links van de markering. De ref-term is daarmee niet het hele
+            # blok maar het stuk ná het laatste teken dat een tag oplevert.
+            # "bron[^tweede]):" rendert als "…</sup>):<sup>" en levert dus de
+            # term "):" op, niet "bron[^tweede]):".
+            term = blok
+            for i in range(len(blok) - 1, -1, -1):
+                if blok[i] in FN_BAD_TAIL:
+                    term = blok[i + 1:]
+                    break
+
+            if not term:
+                errors.append(Error(
+                    name,
+                    f"Voetnootmarkering staat achter '{blok}': dat eindigt op een "
+                    "sluit-tag (nadruk, code of een andere voetnoot), waardoor de "
+                    "markering geen ref-term en geen tooltip krijgt en als kaal "
+                    "superscript blijft staan. Hang de markering aan gewone tekst "
+                    "of voeg de bronnen samen in één voetnoot",
+                    lineno))
+            elif not LETTER_OR_DIGIT_RE.search(term):
+                errors.append(Error(
+                    name,
+                    f"Voetnootmarkering staat achter '{term}': de ref-term wordt dan "
+                    "alleen interpunctie en is te klein als klikdoel (WCAG 2.5.8). "
+                    "Zet de markering achter een woord",
+                    lineno))
 
     for fid, lineno in bad_ids.items():
         errors.append(Error(name, f"Ongeldige voetnoot-id '{fid}': gebruik kleine letters, cijfers en koppeltekens", lineno))

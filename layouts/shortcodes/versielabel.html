@@ -18,6 +18,6 @@
      `render-link`, zodat de link dezelfde target/rel krijgt als elke andere
      externe link op de site.
      --------------------------------------------------------------------- */}}
-{{- with site.Params.versie -}}
-<p class="versielabel"><strong>{{ partial "render-link" (dict "href" site.Params.releases_url "text" (printf "Versie %s" .)) }}</strong> van het toetsingskader. De inhoud is nog in ontwikkeling en kan wijzigen.</p>
+{{- with partial "versie-zin.html" . -}}
+<p class="versielabel">{{ . }}</p>
 {{- end -}}

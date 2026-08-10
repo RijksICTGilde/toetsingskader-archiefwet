@@ -150,23 +150,18 @@ abbr[title] {
   cursor: help;
 }
 
-/* De zoektermmarkering op een pagina met ?q=… (WCAG 1.4.3). Het thema stylet
-   alléén `#main-content mark[data-search-highlight]` (search.css:215-218), maar
-   `highlightTextNodes` in de thema-JS maakt een kale <mark> zonder dat attribuut.
-   Resultaat: de UA-default (geel) met de geërfde linkkleur erop, wat in een
-   linklijst onder de 4,5:1 duikt. Zelfde tokenpaar als het thema gebruikt
-   (11,4:1). Upstream-kandidaat: selector en JS met elkaar in overeenstemming
-   brengen — hugo-theme-rijksoverheid#11.
+/* De zoektermmarkering op een pagina met ?q=… (WCAG 1.4.3, bevinding 31).
+   Hier stond `#main-content a mark { color: inherit }`, om een markering ín een
+   link de linkkleur te laten houden. Dat was juist de fout: de linkkleur op de
+   highlight-achtergrond haalt de 4,5:1 niet. Zonder die regel geldt `mark` uit
+   base.css:193 van het thema — `--color-highlight` met
+   `--color-highlight-text`, 11,4:1 — ook binnen een link, want de eigen
+   color-declaratie van `mark` wint van wat de <a> doorgeeft.
 
-   Bewust niet op `main mark` gescopet: de gemarkeerde treffer die axe vond zit
-   in een zoekresultaat (`li > a > mark`), en het zoekvenster is een <dialog>
-   buiten <main>. Het thema stylet dáár alleen `mark` binnen
-   `.search-result-title`/`.search-result-snippet`, niet een `mark` die een
-   direct kind van de resultaatlink is. */
-mark {
-  background-color: var(--color-highlight);
-  color: var(--color-highlight-text);
-}
+   Hier hoort dus géén projectregel te staan: het thema dekt zowel de kale
+   <mark> die `highlightTextNodes` maakt als de gestylede varianten in
+   search.css. Een kopie van dezelfde twee declaraties leest als een fix maar
+   verandert niets. */
 
 /* Doelgrootte van de inhoudsopgavelinks (WCAG 2.5.8, AA). Het thema zet
    `.toc ul ul li { margin-bottom: 0 }`, waardoor de subniveaus tegen elkaar aan

@@ -77,14 +77,27 @@
   // aanduiding is een CSS-icoon zonder tekstalternatief. Het thema kent het
   // patroon wél (bij besloten links voegt het een .visually-hidden-span toe),
   // maar past het hier niet toe.
+  var NIEUW_VENSTER = ' (opent in een nieuw venster)'
   var externals = document.querySelectorAll('a[target="_blank"]')
   for (var x = 0; x < externals.length; x++) {
     var link = externals[x]
     if (link.querySelector('.visually-hidden')) continue
-    if (link.getAttribute('aria-label')) continue
+    var label = link.getAttribute('aria-label')
+    if (label) {
+      // Een aria-label overschrijft de tekst van onderliggende elementen, dus
+      // een extra <span> zou hier niet worden voorgelezen. De melding moet in
+      // het label zelf. Dit raakt de meeste externe links op een normpagina:
+      // elke "Bekijk bron" heeft een aria-label (bevinding 27). Achteraan
+      // toevoegen, zodat de zichtbare tekst het label blijft beginnen en
+      // WCAG 2.5.3 Label in Name overeind blijft.
+      if (label.indexOf(NIEUW_VENSTER) === -1) {
+        link.setAttribute('aria-label', label + NIEUW_VENSTER)
+      }
+      continue
+    }
     var note = document.createElement('span')
     note.className = 'visually-hidden'
-    note.textContent = ' (opent in een nieuw venster)'
+    note.textContent = NIEUW_VENSTER
     link.appendChild(note)
   }
 
