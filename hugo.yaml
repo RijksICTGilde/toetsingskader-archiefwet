@@ -41,19 +41,19 @@ params:
   # git-release-tag via HUGO_PARAMS_VERSIE (zie workflows + Containerfile).
   # Bron voor de PDF-export (release-tag in elke gedownloade PDF).
   versie: "0.8"
+  # Waar het versienummer naartoe linkt: de releases op GitHub, met per versie
+  # de wijzigingen. Eén plek, want het label staat zowel op de homepage
+  # (shortcode `versielabel`) als in de paginavoet (`_partials/lastmod.html`).
+  releases_url: "https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases"
   feedback:
     email: toetsingskader@inspectie-oe.nl
   search:
     enable: true
     priority_sections:
       - normen
+      - onderwerpen
       - over
   tagline: "Normen voor duurzame toegankelijkheid"
-  page_banner:
-    type: warning
-    strong: "Let op:"
-    # {versie} wordt vervangen door params.versie (zie _partials/page-banner.html).
-    text: "Dit is versie {versie} van het toetsingskader. De inhoud is nog in ontwikkeling en kan wijzigen."
   footer:
     tagline: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."
     links: "Zie ook"
@@ -67,9 +67,15 @@ menus:
     - name: Normen
       pageRef: /normen
       weight: 2
+    - name: Onderwerpen
+      pageRef: /onderwerpen
+      weight: 3
+    - name: Samenhang
+      pageRef: /samenhang
+      weight: 4
     - name: Over
       pageRef: /over
-      weight: 3
+      weight: 5
 
   footer-links:
     - name: Contact

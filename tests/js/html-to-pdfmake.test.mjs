@@ -77,6 +77,8 @@ test('voetnoot-nummer wordt interne sprong (linkToDestination, met norm-prefix)'
   assert.equal(ref.linkToDestination, 'n1-fn-1')
   assert.equal(ref.text, '1')
   assert.ok(!ref.link, 'geen externe link')
+  assert.equal(ref.sup, true, 'voetnoot-nummer als superscript (kleiner en hoger)')
+  assert.equal(ref.fontSize, undefined, 'geen expliciete fontSize: pdfMake schaalt sup zelf')
 })
 
 test('bronnenlijst-item krijgt matching bestemming-id', () => {
@@ -92,6 +94,25 @@ test('interne norm-link wordt in-PDF-sprong als normDests gegeven (kader)', () =
   assert.ok(!link.link, 'geen externe link')
 })
 
+test('lijstitem dat alléén een norm-sprong is behoudt die sprong (kader)', () => {
+  // Regressie: het "Zie ook"-lijstje bestaat uit items die niets anders zijn
+  // dan één link. Als zo'n item wordt platgeslagen tot een kale string, is de
+  // verwijzing in de kader-PDF dode zwarte tekst.
+  const out = convertWith('<ul><li><a href="/normen/03-ordenen/">Ordenen</a></li></ul>', { origin: 'https://x.nl', normDests: { '03-ordenen': 'norm-03-ordenen' } })
+  const item = out[0].ul[0].text
+  assert.ok(Array.isArray(item), 'geen kale string: de run met linkToDestination moet blijven')
+  assert.equal(item[0].linkToDestination, 'norm-03-ordenen')
+  assert.equal(item[0].text, 'Ordenen')
+})
+
+test('alinea die alléén een voetnootnummer is behoudt superscript', () => {
+  const out = convertWith('<p><sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup></p>', { prefix: 'n1-' })
+  const runs = out[0].text
+  assert.ok(Array.isArray(runs), 'geen kale string: sup en linkToDestination moeten blijven')
+  assert.equal(runs[0].sup, true)
+  assert.equal(runs[0].linkToDestination, 'n1-fn-1')
+})
+
 test('interne norm-link wordt absolute site-link zonder normDests (losse norm-PDF)', () => {
   const out = convertWith('<p>zie <a href="/normen/06-vernietigen/">Norm 6</a></p>', { origin: 'https://x.nl', normDests: null })
   const link = out[0].text.find(r => r.link)
@@ -102,4 +123,27 @@ test('interne norm-link wordt absolute site-link zonder normDests (losse norm-PD
 test('externe link blijft extern', () => {
   const out = convertWith('<p><a href="https://nationaalarchief.nl/x">DUTO</a></p>', { origin: 'https://x.nl', normDests: null })
   assert.equal(out[0].text[0].link, 'https://nationaalarchief.nl/x')
+})
+
+test('bronnenlijst krijgt een kop en de voetnootstijl (klein), niet de body-lijststijl', () => {
+  const out = convertWith(
+    '<p>tekst</p><div class="footnotes" role="doc-endnotes"><hr><ol><li id="fn:1"><p>Aw, artikel 4.2. <a href="#x">Bekijk bron</a></p></li></ol></div>',
+    { prefix: 'n1-' }
+  )
+  const kop = out.find(b => b.style === 'footnotesH')
+  assert.ok(kop, 'kop boven de bronnenlijst')
+  assert.equal(kop.text, 'Bronnen')
+
+  const lijst = out.find(b => b.ol)
+  assert.ok(lijst, 'de bronnenlijst zelf')
+  assert.equal(lijst.style, 'footnotes', 'eigen stijl i.p.v. de body-lijststijl')
+  assert.equal(lijst.ol[0].id, 'n1-fn-1', 'bestemming blijft werken')
+
+  // De <hr> uit het footnotes-blok verdwijnt: de kop markeert de sectie al.
+  assert.ok(!out.some(b => b.canvas), 'geen scheidingslijn meer')
+})
+
+test('een gewone ol buiten het footnotes-blok houdt de body-lijststijl', () => {
+  const out = convert('<ol><li>een</li></ol>')
+  assert.equal(out[0].style, 'list')
 })
