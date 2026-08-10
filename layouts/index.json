@@ -3,7 +3,11 @@
        matter en `synoniemen` worden bewust niet getoond maar wel
        geïndexeerd. `markdownify | plainify` maakt er platte tekst van. */ -}}
 {{- $pages := slice -}}
-{{- $allPages := site.RegularPages | append site.Home -}}
+{{- /* site.Sections erbij: de landingspagina's /normen/, /onderwerpen/ en
+       /over/ zijn geen RegularPage, dus zonder dit vallen ze en hun introtekst
+       uit de zoekresultaten — terwijl `params.search.priority_sections` ze wel
+       noemt. */ -}}
+{{- $allPages := site.RegularPages | append site.Sections | append site.Home -}}
 {{- range $allPages -}}
   {{- $text := .Plain -}}
   {{- with .Params.kern }}{{ $text = printf "%s %s" $text (. | markdownify | plainify) }}{{ end -}}
@@ -13,8 +17,9 @@
     {{- $text = printf "%s %s" $text $synoniemen -}}
   {{- end -}}
   {{- $title := .Title -}}
-  {{- /* Section voor top-level pages: home → "home", overige top-level
-         (over.md, …) → file-basename zodat priority_sections per pagina kan. */ -}}
+  {{- /* Section voor pagina's zonder sectie: home → "home", een losse
+         top-level pagina (samenhang.md) → file-basename, zodat
+         priority_sections ook per losse pagina kan. */ -}}
   {{- $section := .Section -}}
   {{- if not $section -}}
     {{- if eq .Kind "home" -}}{{- $section = "home" -}}

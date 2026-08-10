@@ -17,7 +17,11 @@
   <svg class="bollendiagram"
        viewBox="80 0 480 525"
        xmlns="http://www.w3.org/2000/svg"
-       role="img"
+       {{/* role="group" en NIET role="img": een img is voor hulpsoftware één
+            bladknoop, waardoor de acht normlinks hieronder uit de
+            toegankelijkheidsboom vallen. Met group blijft de <title> de naam
+            van het geheel én blijven de links bereikbaar. */}}
+       role="group"
        aria-labelledby="bollendiagram-title">
     <title id="bollendiagram-title">Relatie tussen de normen van het Toetsingskader Archiefwet</title>
 
