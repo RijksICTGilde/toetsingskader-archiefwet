@@ -41,6 +41,10 @@ params:
   # git-release-tag via HUGO_PARAMS_VERSIE (zie workflows + Containerfile).
   # Bron voor de PDF-export (release-tag in elke gedownloade PDF).
   versie: "0.8"
+  # Waar het versienummer naartoe linkt: de releases op GitHub, met per versie
+  # de wijzigingen. Eén plek, want het label staat zowel op de homepage
+  # (shortcode `versielabel`) als in de paginavoet (`_partials/lastmod.html`).
+  releases_url: "https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases"
   feedback:
     email: toetsingskader@inspectie-oe.nl
   search:
