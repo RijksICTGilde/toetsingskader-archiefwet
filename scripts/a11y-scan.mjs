@@ -17,11 +17,16 @@ const axeSrc = fs.readFileSync(createRequire(import.meta.url).resolve('axe-core'
 const root = process.argv[2] || 'public'
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']
 
+// Alias-stubs van Hugo (<meta http-equiv="refresh">) bevatten geen inhoud om
+// te toetsen; ze overslaan houdt de telling gelijk aan het aantal echte
+// pagina's. Zelfde filter als in a11y-browser.mjs.
+const isRedirect = p => /http-equiv=["']?refresh/i.test(fs.readFileSync(p, 'utf8'))
+
 function htmlFiles(dir, acc = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, entry.name)
     if (entry.isDirectory()) htmlFiles(p, acc)
-    else if (entry.name.endsWith('.html')) acc.push(p)
+    else if (entry.name.endsWith('.html') && !isRedirect(p)) acc.push(p)
   }
   return acc
 }

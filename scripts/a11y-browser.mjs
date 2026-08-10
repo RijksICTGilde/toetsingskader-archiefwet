@@ -97,6 +97,13 @@ function readSite(dir) {
   const pages = []
   const toUrl = p => '/' + path.relative(abs, p).split(path.sep).join('/')
 
+  // Hugo genereert voor elke `aliases:` in de front matter een stub die met
+  // <meta http-equiv="refresh"> doorstuurt. Zo'n pagina navigeert weg terwijl
+  // axe wordt ingespoten ("Execution context was destroyed"), en er valt ook
+  // niets aan te toetsen: er staat geen inhoud in. Ze blijven wél in `files`,
+  // zodat een link ernaartoe gewoon oplost.
+  const isRedirect = p => /http-equiv=["']?refresh/i.test(fs.readFileSync(p, 'utf8'))
+
   const walk = d => {
     for (const entry of fs.readdirSync(d, { withFileTypes: true })) {
       const p = path.join(d, entry.name)
@@ -107,9 +114,9 @@ function readSite(dir) {
         const dirUrl = toUrl(path.dirname(p)).replace(/\/$/, '')
         files.set(dirUrl === '' ? '/' : `${dirUrl}/`, p)
         if (dirUrl !== '') files.set(dirUrl, p)
-        pages.push(dirUrl === '' ? '/' : `${dirUrl}/`)
+        if (!isRedirect(p)) pages.push(dirUrl === '' ? '/' : `${dirUrl}/`)
       } else if (entry.name.endsWith('.html')) {
-        pages.push(toUrl(p))
+        if (!isRedirect(p)) pages.push(toUrl(p))
       }
     }
   }
