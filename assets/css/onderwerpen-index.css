@@ -1,49 +1,10 @@
-/* Onderwerpen-index (layouts/onderwerpen/list.html): letternavigatie +
-   A-Z-groepen. Bewust een lijst i.p.v. de thema-card-grid, omdat een index
-   met korte begrippen sneller te scannen is dan kaarten.
+/* Onderwerpen-index (layouts/onderwerpen/list.html): A-Z-groepen. Bewust een
+   lijst i.p.v. de thema-card-grid, omdat een index met korte begrippen sneller
+   te scannen is dan kaarten.
 
    Eigen bestand i.p.v. main.css: dit hoort bij één template, net zoals
    bollendiagram.css bij de bollendiagram-shortcode hoort. Het thema globt
    `css/*.css` van de consumer, dus dit bestand laadt vanzelf mee. */
-
-.index-letters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-block: 1.5rem 2rem;
-}
-
-/* De balk toont het hele alfabet. Een letter zonder onderwerpen is een <span>
-   i.p.v. een <a> (zie onderwerpen/list.html), dus beide vormen krijgen dezelfde
-   doos en alleen de link krijgt interactie-styling. */
-.index-letters a,
-.index-letters .is-empty {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.25rem;
-  padding: 0.25rem 0.5rem;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.index-letters a:hover,
-.index-letters a:focus-visible {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: #fff;
-}
-
-/* Gedempt en zonder eigen achtergrond, zodat het verschil met een beschikbare
-   letter meteen zichtbaar is. `--color-text-muted` haalt ruim 4,5:1 op de
-   paginakleur, dus de letter blijft leesbaar in plaats van half onzichtbaar. */
-.index-letters .is-empty {
-  color: var(--color-text-muted);
-  border-style: dashed;
-  cursor: default;
-}
 
 .index-group h2 {
   border-block-end: 2px solid var(--color-primary);
