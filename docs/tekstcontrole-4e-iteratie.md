@@ -1,9 +1,11 @@
 # Tekstcontrole normbladen 4e iteratie
 
 Vergelijkt elke inhoudelijke alinea uit de normbladen met de sitecontent en
-classificeert het verschil. Gegenereerd met `scripts/tekstcontrole.py`; de
-normalisatie raakt alleen opmaak (typografische aanhalingstekens en streepjes,
-harde spaties, witruimte), nooit de woorden zelf.
+classificeert het verschil. Eenmalig gegenereerd met een script dat daarna is
+verwijderd; de normalisatie raakte alleen opmaak (typografische
+aanhalingstekens en streepjes, harde spaties, witruimte), nooit de woorden
+zelf. Dit rapport is dus een momentopname bij de 4e iteratie, geen check die
+meeloopt.
 
 Vier uitkomsten:
 
@@ -16,9 +18,7 @@ Vier uitkomsten:
 - **Woordverschil** / **Niet gevonden** — hier wijkt de tekst echt af, of staat
   hij nergens. Dit zijn de regels om na te lopen.
 
-De conclusie hieronder is met de hand getrokken uit die laatste twee categorieën
-en staat daarom in dit script, zodat rapport en conclusie bij regenereren bij
-elkaar blijven.
+De conclusie hieronder is met de hand getrokken uit die laatste twee categorieën.
 
 
 ## Conclusie
