@@ -59,6 +59,8 @@ ID_RE = re.compile(r"^[a-z0-9-]+$")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*$")
 FN_DEF_RE = re.compile(r"^\[\^([^\]]+)\]:")
 FN_USE_RE = re.compile(r"\[\^([^\]]+)\]")
+# Twee markeringen zonder tekst ertussen; zie validate_footnotes.
+FN_ADJACENT_RE = re.compile(r"\[\^[^\]]+\]\[\^[^\]]+\]")
 
 
 class Error:
@@ -247,6 +249,19 @@ def validate_footnotes(name, body_lines, body_start, errors):
             usages.setdefault(fid, lineno)
             if not ID_RE.match(fid):
                 bad_ids.setdefault(fid, lineno)
+
+        # Twee markeringen tegen elkaar aan ([^a][^b]) hangen de tweede aan het
+        # sluit-tag van de eerste in plaats van aan een woord. Geen van de twee
+        # patronen in normen/single.html matcht dat, dus de tweede blijft als
+        # kaal superscript in de tekst staan: geen ref-term, geen tooltip.
+        # Zet ze op verschillende woorden, of voeg de bronnen samen in één noot.
+        if not dm and FN_ADJACENT_RE.search(scan):
+            errors.append(Error(
+                name,
+                "Twee voetnootmarkeringen direct achter elkaar ([^a][^b]): de tweede "
+                "krijgt geen ref-term en blijft als kaal superscript staan. Hang ze "
+                "aan verschillende woorden of voeg de bronnen samen in één voetnoot",
+                lineno))
 
     for fid, lineno in bad_ids.items():
         errors.append(Error(name, f"Ongeldige voetnoot-id '{fid}': gebruik kleine letters, cijfers en koppeltekens", lineno))

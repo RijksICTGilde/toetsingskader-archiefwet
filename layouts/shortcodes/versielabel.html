@@ -1,0 +1,23 @@
+{{/* ---------------------------------------------------------------------
+     Versielabel — `{{< versielabel >}}`
+
+     Toont de versie van het toetsingskader. Bedoeld voor de homepage: die heeft
+     geen `show_lastmod` en dus geen paginavoet, waar op alle andere pagina's
+     "Versie X · laatst aangepast op …" staat (`_partials/lastmod.html`).
+
+     Bron is `site.Params.versie` — dezelfde als de PDF-export; lokaal de
+     default uit hugo.yaml, in CI de git-release-tag via HUGO_PARAMS_VERSIE. Eén
+     bron, dus de plekken kunnen niet uiteenlopen.
+
+     Bewust een shortcode en geen shadow van de thema-`hero.html`: shadows van
+     theme-templates lopen bij een theme-update uit de pas, en dit hoort bij de
+     inhoud van de pagina, niet bij de layout.
+
+     Het versienummer linkt naar `site.Params.releases_url`: de releases op
+     GitHub, waar per versie staat wat er is veranderd. Via de theme-partial
+     `render-link`, zodat de link dezelfde target/rel krijgt als elke andere
+     externe link op de site.
+     --------------------------------------------------------------------- */}}
+{{- with site.Params.versie -}}
+<p class="versielabel"><strong>{{ partial "render-link" (dict "href" site.Params.releases_url "text" (printf "Versie %s" .)) }}</strong> van het toetsingskader. De inhoud is nog in ontwikkeling en kan wijzigen.</p>
+{{- end -}}

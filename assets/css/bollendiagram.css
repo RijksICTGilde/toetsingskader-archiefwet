@@ -77,6 +77,12 @@
   font-weight: 500;
 }
 
+/* Lange normtitels ("Informatiebeveiliging en betrouwbaar") passen alleen op
+   meerdere regels én een graadje kleiner binnen een bol van r=55. */
+.bd-label-sm {
+  font-size: 12px;
+}
+
 .bd-label-main {
   fill: #ffffff;
   font-size: 20px;
@@ -153,6 +159,9 @@
   }
   .bd-label {
     font-size: 15px;
+  }
+  .bd-label-sm {
+    font-size: 13px;
   }
   .bd-label-main {
     font-size: 22px;

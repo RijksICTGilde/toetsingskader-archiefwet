@@ -54,8 +54,11 @@
             // ↩-backlink weglaten: betekenisloos in een PDF.
           } else if (cls.indexOf('footnote-ref') !== -1) {
             // Voetnoot-nummer: interne sprong naar de bron in de bronnenlijst.
+            // `sup` zet het nummer als superscript (kleiner en hoger, zoals op
+            // de site); pdfMake schaalt de fontSize dan zelf naar 0.58× mits we
+            // er géén expliciete fontSize op zetten.
             var dest = footnoteDest(child.getAttribute('href'))
-            var ref = { text: child.textContent, color: BRAND }
+            var ref = { text: child.textContent, color: BRAND, sup: true }
             if (dest) ref.linkToDestination = dest
             acc.push(ref)
           } else {
@@ -78,7 +81,13 @@
       runs[runs.length - 1].text = runs[runs.length - 1].text.replace(/\s+$/, '')
     }
     if (runs.length === 0) return ''
-    if (runs.length === 1 && !runs[0].link && !runs[0].bold && !runs[0].italics) return runs[0].text
+    // Eén run zonder opmaak mag een kale string worden; dat scheelt een laag in
+    // de pdfMake-boom. Toetsen op "heeft alleen een text-sleutel" en niet op een
+    // lijstje bekende sleutels: een run kan ook linkToDestination, color of sup
+    // dragen (in-PDF-sprong, voetnootnummer), en die vielen met zo'n lijstje weg
+    // zodra de run in zijn eentje in een alinea of lijstitem stond.
+    var keys = Object.keys(runs[0])
+    if (runs.length === 1 && keys.length === 1 && keys[0] === 'text') return runs[0].text
     return runs
   }
 
@@ -125,6 +134,18 @@
       else if (tag === 'ol') out.push({ ol: listItems(el), style: 'list' })
       else if (tag === 'blockquote') out.push({ text: inline(el), style: 'callout', margin: [8, 4, 0, 8] })
       else if (tag === 'hr') out.push({ canvas: [{ type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 0.5, lineColor: '#cccccc' }], margin: [0, 6, 0, 6] })
+      // Het footnotes-blok van Goldmark (<div class="footnotes"><hr><ol>…) is de
+      // bronnenlijst. Zonder eigen behandeling wordt dat een gewone <ol> op
+      // body-grootte, terwijl het inhoudelijk noten zijn: die horen klein en
+      // apart. Een kop vervangt de <hr>, want een lijn zonder label zegt niet
+      // wát er volgt.
+      else if ((el.getAttribute('class') || '').indexOf('footnotes') !== -1) {
+        var ol = el.querySelector && el.querySelector('ol')
+        if (ol) {
+          out.push({ text: 'Bronnen', style: 'footnotesH' })
+          out.push({ ol: listItems(ol), style: 'footnotes' })
+        }
+      }
       else if (tag === 'section' || tag === 'div' || tag === 'article' || tag === 'header' || tag === 'details') out.push.apply(out, elementToPdfContent(el))
       else { var t = el.textContent.trim(); if (t) out.push({ text: t }) }
     }

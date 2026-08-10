@@ -1,0 +1,29 @@
+/* Onderwerpen-index (layouts/onderwerpen/list.html): A-Z-groepen. Bewust een
+   lijst i.p.v. de thema-card-grid, omdat een index met korte begrippen sneller
+   te scannen is dan kaarten.
+
+   Eigen bestand i.p.v. main.css: dit hoort bij één template, net zoals
+   bollendiagram.css bij de bollendiagram-shortcode hoort. Het thema globt
+   `css/*.css` van de consumer, dus dit bestand laadt vanzelf mee. */
+
+.index-group h2 {
+  border-block-end: 2px solid var(--color-primary);
+  padding-block-end: 0.25rem;
+}
+
+.index-list {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.index-list > li + li {
+  margin-block-start: 1rem;
+}
+
+.index-list > li > a {
+  font-weight: 600;
+}
+
+.index-list p {
+  margin-block: 0.15rem 0;
+}

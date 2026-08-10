@@ -13,8 +13,8 @@
   tekst.
 
   Toegankelijkheid:
-  - De SVG heeft `role="group"`, NIET `role="img"`: dat laatste markeert de
-    inhoud als presentatie terwijl er acht focusbare links in staan
+  - De SVG heeft `role="group"`, NIET `role="img"`: een img is voor hulpsoftware
+    één bladknoop, waardoor de acht focusbare normlinks eruit vallen
     (axe: nested-interactive).
   - Elke <a> draagt een `aria-label`. Een SVG-<title> als kind van een SVG-<a>
     wordt niet betrouwbaar als toegankelijke naam gebruikt (axe: link-name);
@@ -23,17 +23,21 @@
     toekomst-onderwerpen staan daarom bij naam in de figcaption, en onder het
     diagram staat een gewone lijst met dezelfde acht normlinks — het diagram is
     dan niet de enige route naar de normen.
+
+  De volgorde van $normen volgt de tekenvolgorde van de bollen, niet het
+  normnummer: index 0 is de centrale bol, daarna met de klok mee vanaf boven.
+  De namen zijn de `norm_titel` uit de front matter van de normpagina's.
 */}}
 
 {{- $normen := slice
-  (dict "url" "normen/01-beheer/"                "naam" "Informatie in beheer")
-  (dict "url" "normen/02-overzicht/"             "naam" "Overzicht")
-  (dict "url" "normen/03-ordeningsstructuur/"    "naam" "Ordenen")
-  (dict "url" "normen/04-metadatering/"          "naam" "Metadateren")
-  (dict "url" "normen/05-vindbaarheid/"          "naam" "Vindbaar")
-  (dict "url" "normen/06-vernietigen/"           "naam" "Betrouwbaar")
-  (dict "url" "normen/07-informatiebeveiliging/" "naam" "Gecontroleerd vernietigen")
-  (dict "url" "normen/08-periodieke-evaluatie/"  "naam" "Periodieke evaluatie")
+  (dict "url" "normen/01-beheer/"               "naam" "Informatie in beheer")
+  (dict "url" "normen/02-overzicht/"            "naam" "Overzicht")
+  (dict "url" "normen/03-ordenen/"              "naam" "Ordenen")
+  (dict "url" "normen/04-metadateren/"          "naam" "Metadateren")
+  (dict "url" "normen/05-betrouwbaar/"          "naam" "Informatiebeveiliging en betrouwbaar")
+  (dict "url" "normen/06-vindbaar/"             "naam" "Vindbaar")
+  (dict "url" "normen/07-vernietigen/"          "naam" "Gecontroleerd vernietigen")
+  (dict "url" "normen/08-periodieke-evaluatie/" "naam" "Periodieke evaluatie")
 -}}
 
 <figure class="bollendiagram-wrapper">
@@ -119,8 +123,10 @@
       <text class="bd-label" x="320" y="60">Overzicht</text>
       <text class="bd-label" x="441" y="118">Ordenen</text>
       <text class="bd-label" x="471" y="249">Metadateren</text>
-      <text class="bd-label" x="387" y="355">Vindbaar</text>
-      <text class="bd-label" x="253" y="355">Betrouwbaar</text>
+      <text class="bd-label bd-label-sm" x="387" y="341">Informatie-</text>
+      <text class="bd-label bd-label-sm" x="387" y="355">beveiliging</text>
+      <text class="bd-label bd-label-sm" x="387" y="369">en betrouwbaar</text>
+      <text class="bd-label" x="253" y="355">Vindbaar</text>
       <text class="bd-label" x="169" y="240">Gecontroleerd</text>
       <text class="bd-label" x="169" y="258">vernietigen</text>
       <text class="bd-label" x="199" y="109">Periodieke</text>
