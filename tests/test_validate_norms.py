@@ -191,6 +191,25 @@ class FootnoteTests(unittest.TestCase):
         errors = run(content)
         self.assertTrue(any("direct achter elkaar" in e for e in errors), errors)
 
+    def test_footnote_after_punctuation_only(self):
+        # De ref-term wordt het woord vóór de markering; is dat alleen
+        # interpunctie, dan is het klikdoel een paar pixels breed (WCAG 2.5.8).
+        # Alleen de tekst ná een vorige markering telt: daar blijft ")" of "):"
+        # als losse term over. Staat er nog een woord voor, dan pakt het
+        # template dat woord mee en is er niets aan de hand.
+        content = replace(
+            "Een toelichting met een bron.[^aw-4-1-lid-1]",
+            "Een toelichting (met een bron[^tweede]):[^aw-4-1-lid-1]",
+        ) + "\n[^tweede]: Tweede bron.\n"
+        errors = run(content)
+        self.assertTrue(any("alleen interpunctie" in e for e in errors), errors)
+
+    def test_footnote_after_word_with_punctuation_is_fine(self):
+        # Een woord mét aanhangende interpunctie ("bron.") is wél een bruikbare
+        # term en mag geen melding geven.
+        errors = run(VALID_NORM)
+        self.assertEqual(errors, [])
+
     def test_definition_lines_may_follow_each_other(self):
         # Twee definities onder elkaar is normaal; alleen markeringen ín de
         # lopende tekst mogen niet aan elkaar plakken.

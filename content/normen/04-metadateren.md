@@ -61,7 +61,7 @@ Alle documenten, ongeacht de bewaartermijn, zijn voorzien van de volgende metada
 
 #### Voorschrift
 
-De Inspectie toetst of van ieder document minimaal het volgende in de metadata is vastgelegd (bij het document, of op het niveau van zaak, proces, bestand, dossier, database of dataset waartoe het document behoort[^ar-toelichting-algemene-eisen-ordening]):[^ar-artikel-2-5-lid-2]
+De Inspectie toetst of van ieder document minimaal het volgende in de metadata is vastgelegd[^ar-artikel-2-5-lid-2] (bij het document, of op het niveau van zaak, proces, bestand, dossier, database of dataset waartoe het document behoort[^ar-toelichting-algemene-eisen-ordening]):
 
 - de inhoud;
 - de [structuur](/onderwerpen/structuur/);
@@ -144,7 +144,7 @@ Over te brengen documenten zijn, uiterlijk voorafgaand aan overbrenging, voorzie
 
 #### Voorschrift
 
-De Inspectie toetst of van ieder document in de metadata kan worden vastgelegd (bij het document, of op het niveau van zaak, proces, bestand, dossier, database of dataset waartoe het document behoort[^ar-toelichting-algemene-eisen-ordening]):[^ar-artikel-2-12]
+De Inspectie toetst of van ieder document in de metadata kan worden vastgelegd[^ar-artikel-2-12] (bij het document, of op het niveau van zaak, proces, bestand, dossier, database of dataset waartoe het document behoort[^ar-toelichting-algemene-eisen-ordening]):
 
 - de status openbaar of beperkt openbaar;[^ar-artikel-2-12-onder-a]
 - de duur van de openbaarheidsbeperking;[^ar-artikel-2-12-onder-b]

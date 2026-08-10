@@ -61,6 +61,10 @@ FN_DEF_RE = re.compile(r"^\[\^([^\]]+)\]:")
 FN_USE_RE = re.compile(r"\[\^([^\]]+)\]")
 # Twee markeringen zonder tekst ertussen; zie validate_footnotes.
 FN_ADJACENT_RE = re.compile(r"\[\^[^\]]+\]\[\^[^\]]+\]")
+# De markering met het "woord" ervoor (alles tot de vorige spatie); zie
+# validate_footnotes voor waarom een woord zonder letter of cijfer fout is.
+FN_WORD_RE = re.compile(r"(\S*?)\[\^[^\]]+\](?!:)")
+LETTER_OR_DIGIT_RE = re.compile(r"[^\W_]", re.UNICODE)
 
 
 class Error:
@@ -262,6 +266,22 @@ def validate_footnotes(name, body_lines, body_start, errors):
                 "krijgt geen ref-term en blijft als kaal superscript staan. Hang ze "
                 "aan verschillende woorden of voeg de bronnen samen in één voetnoot",
                 lineno))
+
+        # normen/single.html maakt van het woord vóór de markering de ref-term:
+        # het stukje tekst met de stippellijn waar de tooltip aan hangt. Staat er
+        # alleen interpunctie ("):"), dan is die term een paar pixels breed en
+        # haalt het klikdoel de 24px van WCAG 2.5.8 niet. Hang de markering aan
+        # een woord; de bron hoort meestal toch bij de zin, niet bij het haakje.
+        if not dm:
+            for wm in FN_WORD_RE.finditer(scan):
+                woord = wm.group(1)
+                if woord and not LETTER_OR_DIGIT_RE.search(woord):
+                    errors.append(Error(
+                        name,
+                        f"Voetnootmarkering staat achter '{woord}': de ref-term wordt dan "
+                        "alleen interpunctie en is te klein als klikdoel (WCAG 2.5.8). "
+                        "Zet de markering achter een woord",
+                        lineno))
 
     for fid, lineno in bad_ids.items():
         errors.append(Error(name, f"Ongeldige voetnoot-id '{fid}': gebruik kleine letters, cijfers en koppeltekens", lineno))
