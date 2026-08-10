@@ -21,7 +21,7 @@
     // zodat ze als noot lezen en niet als doorlopende tekst. De nummers in de
     // tekst zijn al superscript (zie html-to-pdfmake.js).
     footnotesH: { fontSize: 10, bold: true, color: BRAND, margin: [0, 14, 0, 4] },
-    footnotes: { fontSize: 8, color: '#444444', margin: [8, 0, 0, 6], lineHeight: 1.15 },
+    footnotes: { fontSize: 8.5, color: '#444444', margin: [8, 0, 0, 6], lineHeight: 1.15 },
     callout: { fontSize: 11, italics: true, color: '#154273', margin: [0, 4, 0, 10] },
     section: { fontSize: 20, bold: true, color: BRAND, margin: [0, 0, 0, 12] },
     disclaimerH: { fontSize: 13, bold: true, color: BRAND, margin: [0, 18, 0, 6] },
