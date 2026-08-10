@@ -194,6 +194,30 @@ weg bij normale tekstgrootte en 108 px bij 200%. Omdat de fix in het thema zit
 elke PR rood en wordt de scan genegeerd in plaats van gelezen. Haal het item weg
 zodra #12 rond is.
 
+**Eindstand van de browserrun: 13 pagina's, 0 fouten, 3 waarschuwingen** — en die
+drie zijn alle drie bevinding 18 (dezelfde `div.hero`, gezien door de
+reflow-, tekstzoom- en tekstafstandsmeting).
+
+Twee waarschuwingen uit de eerste runs bleken fout-positieven van de test zelf,
+niet van de site. Ze staan hier omdat de meetfout leerzaam is:
+
+* **Focusindicator op 8 pagina's.** De check keek alleen naar `outline` en
+  `box-shadow` op het element zelf, maar `.card-grid.clickable` zet bewust
+  `outline: none` en plaatst de ring als `box-shadow` op `::after`
+  (`card-grid.css`). Dat is een deugdelijke vervanging — dit rapport noemde het
+  al bij [Wat goed gaat](#wat-goed-gaat). De check leest nu ook `::before` en
+  `::after`, en daarmee verdween de melding volledig.
+* **"Focus afgedekt" op elke bol van het bollendiagram.** De check meldde
+  afdekking zodra één hoek van de bounding box door een ander element werd
+  geraakt. Bij een ronde link liggen die hoeken buiten de bol en raken ze de
+  buren. Voor SVG-links telt nu alleen het midden. De labellaag is hier
+  onschuldig: die staat op `pointer-events: none`
+  (`assets/css/bollendiagram.css:65`), dus hij vangt geen kliks af.
+
+De les die daaruit volgt is dezelfde als bij de handmatige ronde: een
+geautomatiseerde uitspraak is pas een bevinding nadat je hem hebt nagetrokken.
+Vier van de zeven aanvankelijke meldingen waren meetfouten of dubbelingen.
+
 **htmltest-configuratie.** `IgnoreAltEmpty: true` in `.htmltest.yml`. htmltest
 zag de `alt=""` van de decoratieve hero (de fix van bevinding 20) als fout,
 terwijl dat juist de correcte waarde is voor een decoratieve afbeelding.
@@ -202,8 +226,10 @@ Ontbrekende `alt`-attributen blijven wél een fout.
 ### Verificatie
 
 `hugo && npm run test:a11y` → **12 pagina's, 0 overtredingen** (was: 9
-overtredingen op de homepage). De scan draait nu ook in CI. Wat axe niet dekt —
-contrast, doelgrootte, reflow, schermlezergedrag — is met de hand nagerekend
+overtredingen op de homepage). `npm run test:a11y:browser` → **13 pagina's,
+0 fouten, 3 waarschuwingen**, alle drie bevinding 18. Beide scans draaien in CI.
+Wat ook de browser niet dekt — schermlezergedrag, hoogcontrastmodus,
+begrijpelijkheid — is met de hand nagerekend
 zoals in [Methode](#methode) beschreven, en blijft de
 [beperking](#beperkingen-van-dit-onderzoek) die hij was: dit vervangt geen
 handmatige doorloop en geen gebruikerstest.
