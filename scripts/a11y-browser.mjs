@@ -186,7 +186,10 @@ function describeFocus() {
     return hit.tagName.toLowerCase() + cls
   }
   let coveredBy = hitAt(center)
-  if (!coveredBy) {
+  // Bij een SVG-link (de bollen in het bollendiagram) is de bounding box een
+  // rechthoek om een ronde vorm: de hoeken liggen buiten de bol en raken de
+  // buren. Daar telt alleen het midden.
+  if (!coveredBy && !(el.ownerSVGElement || el instanceof SVGElement)) {
     const tally = {}
     for (const c of corners) {
       const name = hitAt(c)
@@ -302,9 +305,11 @@ const fatal = all.filter(isFatal)
 const warn = all.filter(f => !isFatal(f))
 
 for (const f of [...fatal, ...warn]) {
-  const pages = f.count > 1 ? ` [${f.count} pagina's, o.a. ${f.url}]` : ` [${f.url}]`
+  // f.count telt trefférs, niet pagina's: één pagina kan dezelfde melding
+  // meerdere keren opleveren (acht diagramlinks, tien inhoudsopgavelinks).
+  const where = f.count > 1 ? ` [${f.count}x, o.a. ${f.url}]` : ` [${f.url}]`
   const belegd = known(f) ? ` — bekend: ${known(f).reason}` : ''
-  console.log(`${isFatal(f) ? 'FOUT' : 'WAAR'} [${f.category}] ${f.message}${pages}${belegd}`)
+  console.log(`${isFatal(f) ? 'FOUT' : 'WAAR'} [${f.category}] ${f.message}${where}${belegd}`)
 }
 console.log(`\n${urls.length + extra.length} pagina's: ${fatal.length} fout(en), ${warn.length} waarschuwing(en).`)
 if (!STRICT && warn.length) {
