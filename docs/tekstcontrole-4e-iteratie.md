@@ -1,9 +1,9 @@
 # Tekstcontrole normbladen 4e iteratie
 
 Vergelijkt elke inhoudelijke alinea uit de normbladen met de sitecontent en
-classificeert het verschil. Gegenereerd met een script; de normalisatie raakt
-alleen opmaak (typografische aanhalingstekens en streepjes, harde spaties,
-witruimte), nooit de woorden zelf.
+classificeert het verschil. Gegenereerd met `scripts/tekstcontrole.py`; de
+normalisatie raakt alleen opmaak (typografische aanhalingstekens en streepjes,
+harde spaties, witruimte), nooit de woorden zelf.
 
 Vier uitkomsten:
 
@@ -15,6 +15,77 @@ Vier uitkomsten:
   het normblad. Dat is een bewuste, sitebrede formulering van de voorschriften.
 - **Woordverschil** / **Niet gevonden** — hier wijkt de tekst echt af, of staat
   hij nergens. Dit zijn de regels om na te lopen.
+
+De conclusie hieronder is met de hand getrokken uit die laatste twee categorieën
+en staat daarom in dit script, zodat rapport en conclusie bij regenereren bij
+elkaar blijven.
+
+
+## Conclusie
+
+**Nee, niet alles staat er woord voor woord — maar er is geen tekst
+weggevallen en geen betekenis veranderd.**
+
+De 14 meldingen "Niet gevonden" zijn allemaal vals alarm. Vijf ervan zijn
+plaatsingsinstructies uit het Word-bestand ("NB: dit document bevat stukken
+tekst die …", "Inleiding -> andere naam voor het kopje") en horen niet op de
+site. De overige negen staan er wel, alleen niet in het bestand waar het script
+zocht of niet in dezelfde bewoording:
+
+| Normblad-alinea | Staat op |
+|---|---|
+| "Een document is in beheer … gehouden kan worden" | `content/normen/_index.md` |
+| "… in ieder geval per categorie documenten, een omschrijving …" | `content/normen/01-beheer.md` |
+| "Het overzicht bevat, in het geval … meerdere ordeningsstructuren …" | `content/normen/02-overzicht.md` |
+| "Er is een risicoanalyse … invulling van de redelijke termijn …" | `content/normen/06-vindbaar.md` (herschreven) |
+| "Het archiefbeheer wordt … periodiek geëvalueerd …" | `kern` van `content/normen/08-periodieke-evaluatie.md` |
+| "Het toetsingskader omvat momenteel de onderwerpen … wit gearceerde …" | `content/samenhang.md` (herschreven naar het bollendiagram) |
+| "Dat documenten in beheer moeten zijn, is het fundament …" | `content/samenhang.md` |
+| "Het overzicht is te vinden op de website van de Inspectie …" | `content/over/doelgroep.md` |
+| "Algemene introductie - Toetsingskader overheidsinformatie …" | is een kop, geen lopende tekst |
+
+De 59 woordverschillen vallen uiteen in vier groepen:
+
+1. **Correcties op het normblad (28)** — de site schrijft het goed waar het
+   normblad een fout heeft: "emailapplicaties" → "e-mailapplicaties",
+   "maateregelen" → "maatregelen", "informatie overleg" → "informatieoverleg",
+   "plaats vond" → "plaatsvond", "Tenminste" → "Ten minste", "gebruik gemaakt"
+   → "gebruikgemaakt", "Archiefwet-en" → "Archiefwet- en", "artikel 1.1." →
+   "1.1", en het ontbrekende haakje in "(digitaal of papier.". Ook
+   congruentiefouten: "metadata wordt" → "metadata worden", "de inhoud …
+   zijn" → "is". Letterlijk overnemen zou hier de fout overnemen.
+2. **Voorschrift-vorm (13)** — de site zet "De Inspectie toetst of …" voor de
+   normbladzin en verplaatst daarvoor het werkwoord. Sitebrede afspraak; het
+   script vangt de meeste hiervan al apart af (kolom "Voorschrift-vorm"), deze
+   dertien vallen alleen op doordat de woordvolgorde te ver verschuift.
+3. **Afkortingen en verwijzingen voluit (14)** — "Ar" → "Archiefregeling",
+   "SIO" → "strategisch informatieoverleg (SIO)", "WOO" → "Woo", "etc." →
+   "enzovoorts", en `<<…>>`-markeringen die een link of een volzin zijn
+   geworden ("technisch vernietigen (buiten scope, volgt op een later moment)"
+   → "Technisch vernietigen valt op dit moment buiten de reikwijdte …").
+4. **Redactionele keuzes — de lijst om na te lopen (4, plus de herschreven
+   indicator uit de tabel hierboven)**:
+   - `01-beheer.md`: de site voegt een zin toe die niet in het normblad staat
+     ("Het DUTO-raamwerk van het Nationaal Archief werkt onder niveau van
+     maatregelen uit …, daarbij hoort ook de handreiking DUTO-risicobeoordeling").
+   - `02-overzicht.md`: "zwaarder **(archief)beheer**" is "zwaarder beheer"
+     geworden; dat laat de nuance van het haakje vallen.
+   - `06-vindbaar.md`: de indicator is herschreven van "een passende maatregel
+     met hierin een concrete invulling van de redelijke termijn moeten krijgen"
+     naar "de concrete termijn voor de vindbaarheid … kan worden vastgesteld".
+   - `08-periodieke-evaluatie.md`: de opsomming van normen volgt de
+     sitenaamgeving ("informatiebeveiliging en betrouwbaarheid", "gecontroleerd
+     vernietigen") in plaats van die van het normblad ("Informatiebeveiliging",
+     "Vernietiging").
+   - `over/opbouw-en-indeling.md`: "In dit toetsingskader wordt onderscheid
+     gemaakt tussen voorschriften, criteria en indicatoren" komt als zin niet
+     terug; de pagina legt hetzelfde uit in eigen bewoording.
+
+Eén valkuil in het rapport zelf: bij normblad 4 lijken drie voorschriften tot
+één te zijn samengevat, doordat het script per alinea de best gelijkende
+passage toont. Dat is niet zo — `04-metadateren.md` heeft ze alle drie, mét het
+onderscheid tussen "is minimaal het volgende … vastgelegd", "is … vastgelegd"
+en "kan … worden vastgelegd".
 
 
 ## Normbladen 1 t/m 8
