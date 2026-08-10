@@ -227,7 +227,13 @@ for (const url of [...urls, ...extra]) {
   const res = await page.evaluate(
     tags => window.axe.run(document, { runOnly: { type: 'tag', values: tags } }), TAGS)
   for (const v of res.violations) {
-    add(url, `axe:${v.id}`, `${v.nodes.length}x ${v.help} — ${v.nodes.slice(0, 3).map(n => n.target.join(' ')).join(', ')}`)
+    // Bij color-contrast de gemeten kleuren en ratio meenemen: een
+    // contrastbevinding zonder getallen is niet na te trekken.
+    const detail = v.nodes.slice(0, 3).map(n => {
+      const d = n.any?.find(c => c.data?.contrastRatio)?.data
+      return n.target.join(' ') + (d ? ` (${d.fgColor} op ${d.bgColor} = ${d.contrastRatio}:1, nodig ${d.expectedContrastRatio})` : '')
+    }).join(', ')
+    add(url, `axe:${v.id}`, `${v.nodes.length}x ${v.help} — ${detail}`)
   }
 
   // 2. Toetsenborddoorloop: focusindicator (2.4.7) en focus-niet-afgedekt (2.4.11).
