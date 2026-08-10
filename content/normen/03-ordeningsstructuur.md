@@ -13,7 +13,7 @@ synoniemen:
 
 [PLACEHOLDER: vul toelichting in][^ab-artikel-2-1-lid-1]
 
-[^ab-artikel-2-1-lid-1]: AB, artikel 2.1, lid 1. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-1]: Ab, artikel 2.1, lid 1. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
 ## Normuitleg
 

@@ -1,0 +1,29 @@
+{{/* ---------------------------------------------------------------------
+     Afkortingen uitschrijven — WCAG 3.1.4 (bevinding 28).
+
+     Wrapt elke losse afkorting uit `data/afkortingen.yaml` in een
+     `<abbr title="…">`. Input en output zijn een HTML-string:
+
+       {{ $html = partial "afkortingen.html" $html }}
+
+     Waarom template-side en niet in de content: vrijwel alle afkortingen
+     staan in de bronteksten van de voetnoten ("Aw, artikel 4.2, eerste
+     lid"), die als tooltip én in de referentielijst worden hergebruikt.
+     Eén pass over die HTML dekt ze allemaal; in de markdown zou het 34
+     handmatige `<abbr>`-tags vragen, en `unsafe: false` staat inline HTML
+     in de content bovendien niet toe.
+
+     Let op de aanroeporde: doe deze pass vóórdat er attributen worden
+     toegevoegd die de brontekst als waarde bevatten (het `aria-label` van
+     bevinding 27). Anders wordt de afkorting binnen dat attribuut ook
+     gewrapt en breekt de markup.
+     --------------------------------------------------------------------- */}}
+{{- $html := . -}}
+{{- range $afkorting, $voluit := site.Data.afkortingen -}}
+  {{/* \b voorkomt treffers binnen een woord ("Ar" in "Archiefregeling").
+       De afkortingen zijn hoofdlettergevoelig en komen daardoor niet voor
+       in tagnamen, attribuutnamen of URL's, die hier allemaal kleine
+       letters gebruiken. */}}
+  {{- $html = replaceRE (printf `\b%s\b` $afkorting) (printf `<abbr title="%s">%s</abbr>` $voluit $afkorting) $html -}}
+{{- end -}}
+{{- return $html -}}

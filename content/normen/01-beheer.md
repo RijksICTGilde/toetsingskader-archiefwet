@@ -180,12 +180,12 @@ Alle documenten moeten in beheer zijn. Ook de documenten die op elk moment mogen
 [^functies-nationaal-archief]: Functies | Nationaal Archief [Bekijk bron](https://www.nationaalarchief.nl/archiveren/kennisbank/functies-registreren#collapse-162601)
 [^deze-toelichting-ontleend-kennisbank-nationaal-a]: Deze toelichting is ontleend aan de kennisbank van het Nationaal Archief. De algemene archiefnorm NEN-ISO 15489-1:2016 gebruikt andere begrippen die uitdrukken aan welke kenmerken documenten moeten voldoen om als gezaghebbend bewijs te kunnen dienen: documenten dienen authentiek, betrouwbaar, integer en bruikbaar te zijn en daartoe worden beheerd in systemen die betrouwbaar, veilig, afdoende, uitgebreid en systematisch zijn.
 [^kamerstukken-2018-19-35-112]: Kamerstukken II 2018/19, 35 112, nr. 2. Dit sluit tevens aan op artikel 6.1 van de novelle bij de Woo.
-[^aw-artikelen-4-1-4-2]: AW, artikelen 4.1 en 4.2 en de toelichting in de AR (AR, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen – pagina 36)
+[^aw-artikelen-4-1-4-2]: Aw, artikelen 4.1 en 4.2 en de toelichting in de Ar (Ar, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen – pagina 36)
 [^verwijzing-kopje-risicoanalyse-introductie]: Verwijzing naar kopje risicoanalyse in de introductie.
 [^kamerstukken-2021-22-35968]: Kamerstukken II 2021/22, 35968, nr. 3, Beheerstrategie, p.15.
 [^aw-artikel-4-2-lid-1]: Aw, artikel 4.2, eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 [^categorie-vormvrij-maar-relatie-hebben-selectieb]: Categorie is vormvrij, maar moet wel een relatie hebben met het selectiebesluit.
-[^aw-artikel-4-2-lid-2]: AW, artikel 4.2, tweede lid, sub b. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^aw-artikel-4-2-lid-2]: Aw, artikel 4.2, tweede lid, sub b. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 [^aw-geconsolideerde-versie-memorie-toelichting-4]: Aw, geconsolideerde versie, Memorie van toelichting, 4.3 Duurzame toegankelijkheid, beheerstrategie, p. 46.
 [^aw-artikel-4-2-lid-3]: Aw, artikel 4.2, derde lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 [^ab-artikelen-2-2-2-3]: Ab, artikelen 2.2, 2.3, 2.4. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
@@ -208,5 +208,5 @@ Alle documenten moeten in beheer zijn. Ook de documenten die op elk moment mogen
 [^ab-artikel-21-sub-d-ar]: Ab, artikel 21, sub d en Ar, artikel 2.2. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 [^ab-artikel-2-1-lid-1-6]: Ab, artikel 2.1, eerste lid, sub f en artikelen 2.2, 2.3 en 2.4. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 [^ab-artikel-2-1-lid-1-7]: Ab, artikel 2.1, eerste lid, sub e. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ab-art]: AB, art. 4.1, derde lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-art]: Ab, art. 4.1, derde lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 [^hyperlink-duto]: Hyperlink naar DUTO. [Bekijk bron](https://www.nationaalarchief.nl/archiveren/duto)

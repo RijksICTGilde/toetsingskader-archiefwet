@@ -3,6 +3,7 @@ public/
 resources/
 .hugo_build.lock
 .htmltest/
+.a11y/
 
 # Node.js
 node_modules/

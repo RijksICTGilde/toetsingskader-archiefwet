@@ -135,3 +135,15 @@
 .norm .references > details > summary {
   color: var(--color-text);
 }
+
+/* Afkortingen in de bronteksten krijgen een <abbr title="…"> met de
+   uitgeschreven vorm (WCAG 3.1.4, bevinding 28; zie
+   _partials/afkortingen.html). Alleen Chrome geeft `abbr[title]` van zichzelf
+   een stippellijn; deze regel maakt in elke browser zichtbaar dát er een uitleg
+   is. Bewust géén `border-bottom`: de omliggende `.ref-term` gebruikt al een
+   dotted underline en twee lijnen onder elkaar leest als een fout. */
+abbr[title] {
+  text-decoration: underline dotted;
+  text-underline-offset: 0.15em;
+  cursor: help;
+}
