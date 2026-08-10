@@ -13,13 +13,15 @@
   }
 }
 
-/* Zoek-highlight (?q=…) wikkelt matches in <mark>, óók binnen links. De
-   thema-mark-stijl overschrijft dan de linkkleur, waardoor de link "opgeknipt"
-   oogt. Hier behoudt een highlight ín een link de linkkleur (alleen de gele
-   achtergrond blijft). Project-CSS — raakt het thema niet. */
-#main-content a mark {
-  color: inherit;
-}
+/* Hier stond `#main-content a mark { color: inherit }`, zodat een zoek-highlight
+   ín een link de linkkleur hield en de link niet "opgeknipt" oogde. Die regel is
+   weg: de linkkleur `#01689b` op het highlightgeel `#ffd899` meet **4,49:1** en
+   4.5 is de eis (WCAG 1.4.3, AA). Net eronder is eronder. De markering gebruikt
+   nu overal hetzelfde tokenpaar (11,4:1, zie de regel op `mark` verderop).
+
+   De link blijft herkenbaar: het thema onderstreept elke `a`
+   (`base.css`: `text-decoration: underline`), dus kleur is niet de enige
+   aanduiding en 1.4.1 blijft gedekt. */
 
 /* Norm page: project-specifieke decoratie op de markdown-body-structuur.
    (Voorheen op .norm-* wrappers; in het markdown-formaat zijn de koppen
