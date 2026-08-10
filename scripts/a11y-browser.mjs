@@ -157,27 +157,44 @@ function describeFocus() {
   const id = el.tagName.toLowerCase() + (el.id ? `#${el.id}` : '') + cls
   // `outline-style: auto` is de UA-focusring van Chromium; die heeft geen
   // betrouwbare computed width, dus die apart accepteren.
-  const hasOutline = cs.outlineStyle === 'auto' || (cs.outlineStyle !== 'none' && parseFloat(cs.outlineWidth) > 0)
-  const hasShadow = Boolean(cs.boxShadow) && cs.boxShadow !== 'none'
-  let coveredBy = null
-  // Het midden plus de vier hoeken net binnen de rand: één afgedekte hoek maakt
-  // de indicator al onzichtbaar.
-  const probes = [
-    [r.left + r.width / 2, r.top + r.height / 2],
+  const ring = s => s.outlineStyle === 'auto' ||
+    (s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) > 0) ||
+    (Boolean(s.boxShadow) && s.boxShadow !== 'none')
+  // Ook op ::before/::after kijken: `.card-grid.clickable` zet bewust
+  // `outline: none` op de link en de ring als box-shadow op ::after. Zonder deze
+  // twee extra metingen is dat een systematische fout-positief.
+  const hasRing = ring(cs) ||
+    ring(getComputedStyle(el, '::after')) || ring(getComputedStyle(el, '::before'))
+
+  // Afdekking meten met het midden plus de vier hoeken. Eén afgedekte hoek is
+  // niet genoeg om te concluderen: bij een ronde link (de bollen in het
+  // bollendiagram) liggen de hoeken van de bounding box buiten de vorm en raken
+  // ze de buren. Daarom: het midden telt, of minstens twee hoeken die door
+  // hetzelfde element worden afgedekt.
+  const center = [r.left + r.width / 2, r.top + r.height / 2]
+  const corners = [
     [r.left + 2, r.top + 2], [r.right - 2, r.top + 2],
     [r.left + 2, r.bottom - 2], [r.right - 2, r.bottom - 2],
   ]
-  for (const [x, y] of probes) {
-    if (x < 0 || y < 0 || x > window.innerWidth || y > window.innerHeight) continue
+  const hitAt = ([x, y]) => {
+    if (x < 0 || y < 0 || x > window.innerWidth || y > window.innerHeight) return null
     const hit = document.elementFromPoint(x, y)
-    if (!hit || hit === el || el.contains(hit) || hit.contains(el)) continue
-    const hitCls = typeof hit.className === 'string' && hit.className.trim()
+    if (!hit || hit === el || el.contains(hit) || hit.contains(el)) return null
+    const cls = typeof hit.className === 'string' && hit.className.trim()
       ? '.' + hit.className.trim().split(/\s+/)[0]
       : ''
-    coveredBy = hit.tagName.toLowerCase() + hitCls
-    break
+    return hit.tagName.toLowerCase() + cls
   }
-  return { id, hasOutline, hasShadow, coveredBy, sized: r.width > 0 && r.height > 0 }
+  let coveredBy = hitAt(center)
+  if (!coveredBy) {
+    const tally = {}
+    for (const c of corners) {
+      const name = hitAt(c)
+      if (name) tally[name] = (tally[name] || 0) + 1
+    }
+    coveredBy = Object.keys(tally).find(name => tally[name] >= 2) || null
+  }
+  return { id, hasRing, coveredBy, sized: r.width > 0 && r.height > 0 }
 }
 
 const findings = new Map()
@@ -199,8 +216,8 @@ async function tabWalk(page, url) {
     if (first === null) first = info.id
     else if (info.id === first) break
     if (!info.sized) continue
-    if (!info.hasOutline && !info.hasShadow) {
-      add(url, 'focus-indicator', `${info.id} — geen outline en geen box-shadow bij toetsenbordfocus (2.4.7); controleer of een rand- of achtergrondwissel de indicator vormt`)
+    if (!info.hasRing) {
+      add(url, 'focus-indicator', `${info.id} — geen outline en geen box-shadow bij toetsenbordfocus, ook niet op ::before/::after (2.4.7); controleer of een rand- of achtergrondwissel de indicator vormt`)
     }
     if (info.coveredBy) {
       add(url, 'focus-obscured', `${info.id} — focus afgedekt door ${info.coveredBy} (2.4.11)`)
