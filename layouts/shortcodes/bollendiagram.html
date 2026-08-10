@@ -149,7 +149,14 @@
       <text class="bd-label" x="320" y="60">Overzicht</text>
       <text class="bd-label" x="441" y="118">Ordenen</text>
       <text class="bd-label" x="471" y="249">Metadateren</text>
-      <text class="bd-label bd-label-sm" x="387" y="341">Informatie-</text>
+      {{/* Geen koppelteken: de zichtbare tekst moet als string in de toegankelijke
+     naam voorkomen (WCAG 2.5.3 Label in Name). Een regelovergang voegt geen
+     teken toe, een afbreekstreepje wél — met "Informatie-" leest de plaat
+     "Informatie-beveiliging en betrouwbaar" en dat staat niet in het
+     aria-label "Informatiebeveiliging en betrouwbaar". Een gebruiker die de
+     bol met spraakbediening aanwijst, activeert hem dan niet. Zonder streepje
+     is de regel bovendien korter, dus de opmaak loopt geen risico. */}}
+<text class="bd-label bd-label-sm" x="387" y="341">Informatie</text>
       <text class="bd-label bd-label-sm" x="387" y="355">beveiliging</text>
       <text class="bd-label bd-label-sm" x="387" y="369">en betrouwbaar</text>
       <text class="bd-label" x="253" y="355">Vindbaar</text>
