@@ -13,7 +13,11 @@
   margin-block: 1.5rem 2rem;
 }
 
-.index-letters a {
+/* De balk toont het hele alfabet. Een letter zonder onderwerpen is een <span>
+   i.p.v. een <a> (zie onderwerpen/list.html), dus beide vormen krijgen dezelfde
+   doos en alleen de link krijgt interactie-styling. */
+.index-letters a,
+.index-letters .is-empty {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -30,6 +34,15 @@
   background-color: var(--color-primary);
   border-color: var(--color-primary);
   color: #fff;
+}
+
+/* Gedempt en zonder eigen achtergrond, zodat het verschil met een beschikbare
+   letter meteen zichtbaar is. `--color-text-muted` haalt ruim 4,5:1 op de
+   paginakleur, dus de letter blijft leesbaar in plaats van half onzichtbaar. */
+.index-letters .is-empty {
+  color: var(--color-text-muted);
+  border-style: dashed;
+  cursor: default;
 }
 
 .index-group h2 {

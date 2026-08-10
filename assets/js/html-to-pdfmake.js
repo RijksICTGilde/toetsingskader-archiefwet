@@ -128,6 +128,18 @@
       else if (tag === 'ol') out.push({ ol: listItems(el), style: 'list' })
       else if (tag === 'blockquote') out.push({ text: inline(el), style: 'callout', margin: [8, 4, 0, 8] })
       else if (tag === 'hr') out.push({ canvas: [{ type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 0.5, lineColor: '#cccccc' }], margin: [0, 6, 0, 6] })
+      // Het footnotes-blok van Goldmark (<div class="footnotes"><hr><ol>…) is de
+      // bronnenlijst. Zonder eigen behandeling wordt dat een gewone <ol> op
+      // body-grootte, terwijl het inhoudelijk noten zijn: die horen klein en
+      // apart. Een kop vervangt de <hr>, want een lijn zonder label zegt niet
+      // wát er volgt.
+      else if ((el.getAttribute('class') || '').indexOf('footnotes') !== -1) {
+        var ol = el.querySelector && el.querySelector('ol')
+        if (ol) {
+          out.push({ text: 'Bronnen', style: 'footnotesH' })
+          out.push({ ol: listItems(ol), style: 'footnotes' })
+        }
+      }
       else if (tag === 'section' || tag === 'div' || tag === 'article' || tag === 'header' || tag === 'details') out.push.apply(out, elementToPdfContent(el))
       else { var t = el.textContent.trim(); if (t) out.push({ text: t }) }
     }

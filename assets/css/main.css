@@ -125,3 +125,13 @@
 .norm .references > details > summary {
   color: var(--color-text);
 }
+
+/* Versielabel op de homepage (shortcode `versielabel`). De beta-banner is weg;
+   op alle andere pagina's staat de versie in de voet naast de laatst-gewijzigd-
+   datum (`_partials/lastmod.html`), maar de homepage heeft geen voet. Gedempt en
+   klein: het is context, geen mededeling die de pagina moet openen. */
+.versielabel {
+  margin-block-start: 2rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}

@@ -19,3 +19,5 @@ tiles:
 ---
 
 {{< tiles columns="2" aria="Toetsingskader in het kort" >}}
+
+{{< versielabel >}}

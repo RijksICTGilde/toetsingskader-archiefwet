@@ -4,6 +4,8 @@ card_title: "Samenhang van de normen"
 description: "Hoe de normen uit het toetsingskader met elkaar samenhangen, en waarom beheer een continu proces is van richten en verrichten."
 weight: 3
 show_lastmod: true
+# Zelfde breedte als /normen/ en /over/.
+wide: true
 ---
 
 Dat documenten in beheer moeten zijn, is het fundament van het toetsingskader. De norm [Inbeheername en beheer]({{< relref "/normen/01-beheer" >}}) staat daarom in het midden; de andere normen werken uit wat er in een beheerde omgeving geregeld moet zijn.

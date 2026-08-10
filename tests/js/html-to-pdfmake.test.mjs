@@ -105,3 +105,26 @@ test('externe link blijft extern', () => {
   const out = convertWith('<p><a href="https://nationaalarchief.nl/x">DUTO</a></p>', { origin: 'https://x.nl', normDests: null })
   assert.equal(out[0].text[0].link, 'https://nationaalarchief.nl/x')
 })
+
+test('bronnenlijst krijgt een kop en de voetnootstijl (klein), niet de body-lijststijl', () => {
+  const out = convertWith(
+    '<p>tekst</p><div class="footnotes" role="doc-endnotes"><hr><ol><li id="fn:1"><p>Aw, artikel 4.2. <a href="#x">Bekijk bron</a></p></li></ol></div>',
+    { prefix: 'n1-' }
+  )
+  const kop = out.find(b => b.style === 'footnotesH')
+  assert.ok(kop, 'kop boven de bronnenlijst')
+  assert.equal(kop.text, 'Bronnen')
+
+  const lijst = out.find(b => b.ol)
+  assert.ok(lijst, 'de bronnenlijst zelf')
+  assert.equal(lijst.style, 'footnotes', 'eigen stijl i.p.v. de body-lijststijl')
+  assert.equal(lijst.ol[0].id, 'n1-fn-1', 'bestemming blijft werken')
+
+  // De <hr> uit het footnotes-blok verdwijnt: de kop markeert de sectie al.
+  assert.ok(!out.some(b => b.canvas), 'geen scheidingslijn meer')
+})
+
+test('een gewone ol buiten het footnotes-blok houdt de body-lijststijl', () => {
+  const out = convert('<ol><li>een</li></ol>')
+  assert.equal(out[0].style, 'list')
+})

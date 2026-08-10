@@ -13,6 +13,18 @@
   {{ if not (in $letters $letter) }}{{ $letters = $letters | append $letter }}{{ end }}
 {{ end }}
 
+{{/* De letterbalk toont het hele alfabet, zodat de index niet lijkt te
+     verspringen als er onderwerpen bij komen en je in één blik ziet wat er
+     ontbreekt. Letters zonder onderwerp zijn géén link maar een <span>: niet
+     aanklikbaar, niet in de tabreeks, en dus ook geen link die naar een
+     bestemming wijst die niet bestaat.
+
+     $extra vangt beginletters die niet in het alfabet zitten (een cijfer of een
+     accentletter); die blijven achter het alfabet staan i.p.v. weg te vallen. */}}
+{{ $alfabet := split "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "" }}
+{{ $extra := slice }}
+{{ range $letters }}{{ if not (in $alfabet .) }}{{ $extra = $extra | append . }}{{ end }}{{ end }}
+
 <article class="wide">
   <header>
     <h1>{{ .Title }}</h1>
@@ -22,7 +34,14 @@
 
   {{ with $letters }}
   <nav class="index-letters" aria-label="Spring naar letter">
-    {{ range . }}<a href="#letter-{{ . | urlize }}">{{ . }}</a>{{ end }}
+    {{- range $alfabet -}}
+      {{- if in $letters . -}}
+        <a href="#letter-{{ . | urlize }}">{{ . }}</a>
+      {{- else -}}
+        <span class="is-empty">{{ . }}</span>
+      {{- end -}}
+    {{- end -}}
+    {{- range $extra -}}<a href="#letter-{{ . | urlize }}">{{ . }}</a>{{- end -}}
   </nav>
 
   {{ range $letter := . }}
