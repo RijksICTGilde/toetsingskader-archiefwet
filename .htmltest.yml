@@ -1,6 +1,14 @@
 DirectoryPath: .htmltest/public
 # Trage overheidssites krijgen ruimer de tijd dan de default (15s).
 ExternalTimeout: 45
+# htmltest ziet `alt=""` als een fout, maar voor een decoratieve afbeelding is
+# dat juist de correcte waarde: WCAG 1.1.1 vraagt dan een leeg alternatief,
+# zodat een schermlezer de afbeelding overslaat. De hero op de homepage is
+# decoratief en dupliceerde met een gevulde alt de <h1> eronder (bevinding 20
+# in docs/toegankelijkheidsonderzoek-2026-08.md). Ontbrekende alt-attributen
+# blijven wél een fout; die worden door een andere regel gedekt en door de
+# axe-scan.
+IgnoreAltEmpty: true
 IgnoreURLs:
   # Serveert een incomplete certificaatketen; client-side niet op te lossen,
   # htmltest faalt er hard op terwijl de links in de browser gewoon werken.

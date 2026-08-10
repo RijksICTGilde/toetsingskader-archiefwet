@@ -1,6 +1,9 @@
 # Toegankelijkheidsonderzoek — Toetsingskader Archiefwet
 
 **Datum:** 6 augustus 2026
+**Bijgewerkt:** 10 augustus 2026 — bevindingen 27 en 28 opgelost, thema-issues
+ingediend, browsertests toegevoegd; zie [Aanvulling 10 augustus
+2026](#aanvulling-10-augustus-2026)
 **Onderzochte versie:** `main` (`af40029`), gebouwd met Hugo 0.152.2 extended,
 thema `hugo-theme-rijksoverheid` v0.1.0
 **Norm:** WCAG 2.2 niveau AA (EN 301 549, Tijdelijk besluit digitale
@@ -32,9 +35,9 @@ opgelost](#wat-er-is-opgelost-op-deze-branch) voor de gemaakte wijzigingen.
 | **4** | Inhoudsopgave-knop meldt permanent "ingeklapt" | 4.1.2 | A | ja | opgelost |
 | **5** | Placeholderteksten als koppen en labels (7 normpagina's) | 2.4.6 | AA | ja | opgelost op `feat/herziening-over-index-procesplaat`, niet hier |
 | **6** | PDF-export levert een ongetagde PDF | EN 301 549 §10 | — | ja (PDF) | **open — besluit van het team nodig** |
-| **7** | Bron-tooltip: niet te sluiten én niet gekoppeld aan de term | 1.4.13, 1.3.1 | AA, A | ja | deels: koppeling opgelost, Escape open (thema) |
+| **7** | Bron-tooltip: niet te sluiten én niet gekoppeld aan de term | 1.4.13, 1.3.1 | AA, A | ja | deels: koppeling opgelost, Escape open ([thema-issue #10](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/10)) |
 | **8** | Toelichting, Referenties en Kern zijn geen koppen | 1.3.1 | A | ja | opgelost |
-| **9** | Zoekterm-markering wordt niet aangekondigd | 1.3.1, 4.1.3 | A, AA | ja | deels: melding wordt aangekondigd, `<mark>` open (thema) |
+| **9** | Zoekterm-markering wordt niet aangekondigd | 1.3.1, 4.1.3 | A, AA | ja | deels: melding wordt aangekondigd, `<mark>` open ([thema-issue #11](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/11)) |
 | **10** | Sneltoets `/` niet uit te zetten of te wijzigen | 2.1.4 | A | ja | opgelost (werkt nu alleen met focus op de zoekknop) |
 | **11** | Verbindingslijnen in het diagram: 1,23:1 | 1.4.11 | AA | ja | opgelost |
 | **12** | Sneltoetshint `/` in de balk: 2,98:1 | 1.4.3 | AA | ja | opgelost (override op het thema) |
@@ -43,7 +46,7 @@ opgelost](#wat-er-is-opgelost-op-deze-branch) voor de gemaakte wijzigingen.
 | 15 | Ontbrekende `}` in `main.css` zet twee regels uit | — | — | nee | opgelost |
 | 16 | Skip-link verplaatst de focus niet betrouwbaar | 2.4.1 | A | te bevestigen | opgelost (override op het thema) |
 | 17 | Zwevende melding kan de focus afdekken | 2.4.11 | AA | te bevestigen | opgelost via `scroll-margin`; nog in browser te bevestigen |
-| 18 | Hero-tekst kan bij 200% tekstvergroting afknippen | 1.4.4 | AA | te bevestigen | **open — vraagt browsertest en een thema-fix** |
+| 18 | Hero-tekst kan bij 200% tekstvergroting afknippen | 1.4.4 | AA | te bevestigen | open — [thema-issue #12](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/12); browsertest staat nu in CI |
 | 19 | PDF-downloadlink werkt niet zonder JavaScript | — | — | nee | opgelost |
 | 20 | Hero-`alt` dupliceert de `h1` eronder | 1.1.1 | A | nee | opgelost |
 | 21 | `aria-label="Zoeken"` dekt zichtbare tekst niet | 2.5.3 | A | ja | opgelost (override op het thema) |
@@ -52,8 +55,8 @@ opgelost](#wat-er-is-opgelost-op-deze-branch) voor de gemaakte wijzigingen.
 | 24 | Genest navigatielandmark, geen Escape op mobiel menu | 1.3.1 | A | nee | opgelost (override op het thema) |
 | 25 | `role="status"` op een statische banner | 4.1.2 | A | nee | opgelost |
 | 26 | Niet-tekstcontrast van de knopranden in de balk | 1.4.11 | AA | nee (zie toelichting) | ongewijzigd — geen fail |
-| 27 | Herhaalde linktekst "Bekijk bron" | 2.4.9 | AAA | nee | open (buiten AA) |
-| 28 | Afkortingen Aw, Ab, Ar, DUTO, SIO nergens uitgeschreven | 3.1.4 | AAA | nee | open (buiten AA) |
+| 27 | Herhaalde linktekst "Bekijk bron" | 2.4.9 | AAA | nee | opgelost (10 augustus 2026) |
+| 28 | Afkortingen Aw, Ab, Ar, DUTO, SIO nergens uitgeschreven | 3.1.4 | AAA | nee | opgelost (10 augustus 2026) |
 
 **Kern van het beeld:** het fundament is goed (semantiek, koppenhiërarchie,
 tekstcontrast, `prefers-reduced-motion`, een echte `<dialog>` voor zoeken), maar
@@ -74,8 +77,11 @@ Alle bevindingen die met code op te lossen zijn, zijn opgelost. Wat overblijft:
   met `overflow: hidden` zit in het thema en het herschrijven ervan (naar een
   grid-overlay die mee kan groeien) raakt de positionering op drie breekpunten.
   Dat is niet verantwoord zonder browser om het resultaat te controleren.
-* **De AAA-bevindingen 27 en 28** — buiten de scope van AA.
 * **Bevinding 5** — al opgelost op een andere openstaande branch.
+
+De AAA-bevindingen 27 en 28 stonden hier eerst als "buiten scope"; ze zijn op
+10 augustus alsnog opgelost, zie [Aanvulling 10 augustus
+2026](#aanvulling-10-augustus-2026).
 
 ### Wijzigingen in dit project
 
@@ -107,7 +113,52 @@ het thema is bijgewerkt.
 
 Nog niet vanuit dit project op te lossen en dus een thema-issue: de
 `<mark>`-helft van bevinding 9, de Escape-afhandeling van de tooltip
-(bevinding 7) en bevinding 18.
+(bevinding 7) en bevinding 18. Die drie zijn op 10 augustus 2026 ingediend als
+[#10](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/10),
+[#11](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/11) en
+[#12](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/12).
+
+### Aanvulling 10 augustus 2026
+
+**Bevinding 27 — bronlinks krijgen een eigen naam.** Elke "Bekijk bron"-link
+krijgt een `aria-label` van de vorm `Bekijk bron: <brontekst>`, op de tooltip én
+in de referentielijst (`layouts/normen/single.html`). Het label begint met de
+zichtbare tekst, zodat 2.5.3 Label in Name intact blijft. Gecontroleerd op
+`/normen/01-beheer/`: 46 links, 46 labels, allemaal verschillend.
+
+**Bevinding 28 — afkortingen uitgeschreven.** Een nieuw partial
+(`layouts/_partials/afkortingen.html`) wrapt Aw, Ab, Ar, DUTO en SIO in
+`<abbr title="…">`, met de lijst in `data/afkortingen.yaml`. Template-side, want
+de afkortingen staan vrijwel allemaal in de bronteksten van de voetnoten, die
+zowel als tooltip als in de referentielijst worden hergebruikt; met
+`unsafe: false` kan het ook niet in de markdown. Twee dingen om te weten bij
+onderhoud:
+
+* De lijst staat bewust in `data/` en niet in `params:` van `hugo.yaml`. Hugo
+  lowercaset configuratiesleutels, waardoor `DUTO` als `duto` matchte — en dat
+  raakte ook het pad `/archiveren/duto` in een bronlink. Sleutels in
+  data-bestanden blijven ongewijzigd.
+* De abbr-pass moet lopen **vóór** het `aria-label` van bevinding 27 wordt
+  gezet. Omgekeerd komt er markup in een attribuutwaarde terecht.
+
+In de content zijn daarnaast de varianten `AW`/`AB`/`AR` genormaliseerd naar
+`Aw`/`Ab`/`Ar` (de match is hoofdlettergevoelig) en is DUTO bij eerste gebruik in
+`content/over.md` uitgeschreven. `abbr[title]` krijgt een stippellijn in
+`assets/css/main.css`; alleen Chrome doet dat van zichzelf.
+
+**Browsertests toegevoegd.** `scripts/a11y-browser.mjs` (Playwright + Chromium)
+dekt wat jsdom niet kan en wat hieronder als
+[beperking](#beperkingen-van-dit-onderzoek) staat: axe mét contrast en
+doelgrootte, reflow op 320 px, tekstvergroting tot 200%, tekstafstand (1.4.12) en
+een toetsenborddoorloop op focusindicator en focus-niet-afgedekt — inclusief de
+variant `?q=…`, de situatie van bevinding 17. Draait in CI naast de jsdom-scan
+(`npm run test:a11y:browser`). Bouwt apart met `--baseURL /`, anders verwijzen CSS
+en JS naar het productiedomein en meet je een pagina zonder stylesheet.
+
+**htmltest-configuratie.** `IgnoreAltEmpty: true` in `.htmltest.yml`. htmltest
+zag de `alt=""` van de decoratieve hero (de fix van bevinding 20) als fout,
+terwijl dat juist de correcte waarde is voor een decoratieve afbeelding.
+Ontbrekende `alt`-attributen blijven wél een fout.
 
 ### Verificatie
 
@@ -396,7 +447,9 @@ inhoud niet — maar conformiteit wel.
 (`assets/css/components/references.css`), maar de **markup komt uit dit project**:
 `layouts/normen/single.html:49` en `:52` genereren `.ref-wrapper`/`.ref-tooltip`
 rondom de Goldmark-voetnoten. De thema-partial `reftext.html` wordt niet gebruikt.
-`aria-describedby` is dus een projectfix; de Escape-afhandeling hoort in het thema.
+`aria-describedby` is dus een projectfix; de Escape-afhandeling hoort in het thema
+en staat sinds 10 augustus 2026 als
+[thema-issue #10](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/10).
 
 ---
 
@@ -440,6 +493,10 @@ hier om de markering te verwijderen." Twee problemen:
 
 Netto hoort een schermlezergebruiker niet dat er iets gemarkeerd is, en ook niet
 dat Escape de markering weghaalt.
+
+De `<mark>`-helft is vanuit een consumer niet betrouwbaar te repareren — de
+elementen worden door de thema-JS aangemaakt — en staat sinds 10 augustus 2026 als
+[thema-issue #11](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/11).
 
 ---
 
@@ -553,7 +610,10 @@ De balk is overigens zelf wél te sluiten, met klik én Escape.
 `height: 300px` met `overflow: hidden` en een absoluut gepositioneerd tekstblok.
 Statisch gerekend past de tekst op 320 px breed nog net (~245 px); bij 200%
 tekstgrootte verdubbelt dat naar circa 490 px en wordt de kop plus de paragraaf
-weggeknipt, zonder scrollmogelijkheid. Concreet te testen in een browser.
+weggeknipt, zonder scrollmogelijkheid. Sinds 10 augustus 2026 meet
+`scripts/a11y-browser.mjs` dit in Chromium (categorie `tekstzoom-200`) en staat de
+thema-fix als
+[thema-issue #12](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/12).
 
 ### 19. De PDF-downloadlink werkt niet zonder JavaScript
 
@@ -626,6 +686,10 @@ de zichtbare pagina suggereert. Binnen de context van het lijstitem is het doel
 duidelijk, dus AA is gehaald. Een `aria-label` per link ("Bekijk bron: Aw, artikel
 4.2, eerste lid") lost het op zonder de zichtbare tekst te veranderen.
 
+**Opgelost op 10 augustus 2026** — precies zo, op beide plekken waar de link
+staat (tooltip en referentielijst). De brontekst wordt afgekapt op 90 tekens,
+zodat een label van een lange voetnoot niet een halve alinea wordt.
+
 ### 28. Afkortingen nergens uitgeschreven
 
 **WCAG 3.1.4 (AAA)** — `content/` bevat 8× "Aw", 12× "Ab", 8× "Ar", 4× "DUTO", 2×
@@ -633,6 +697,11 @@ duidelijk, dus AA is gehaald. Een `aria-label` per link ("Bekijk bron: Aw, artik
 tooltips bestaan grotendeels úít deze afkortingen. Voor de doelgroep "onder
 toezicht staande organisaties" — niet uitsluitend archiefjuristen — is dat een
 reële begripsbarrière. Buiten AA, maar goedkoop en inhoudelijk zinvol.
+
+**Opgelost op 10 augustus 2026** — `_partials/afkortingen.html` +
+`data/afkortingen.yaml`; zie [Aanvulling 10 augustus
+2026](#aanvulling-10-augustus-2026) voor de twee valkuilen (Hugo lowercaset
+configuratiesleutels; de abbr-pass moet vóór het `aria-label` van bevinding 27).
 
 ---
 
@@ -702,17 +771,19 @@ beoordeeld.
 
 | Onderwerp | Waarom niet vastgesteld |
 |---|---|
-| 1.4.10 Reflow (320 px / 400% zoom) | vereist een browser met layout; bevinding 18 is het concrete aanknopingspunt |
+| 1.4.10 Reflow (320 px / 400% zoom) | ~~vereist een browser met layout~~ — sinds 10 augustus 2026 gedekt door `scripts/a11y-browser.mjs` in CI |
 | 1.4.12 Tekstafstand | idem |
-| 2.4.11 Focus niet afgedekt (bevinding 17) | vereist runtime-scrollgedrag |
+| 1.4.4 Tekstvergroting 200% (bevinding 18) | idem |
+| 2.4.11 Focus niet afgedekt (bevinding 17) | idem, inclusief de `?q=`-variant waarin de meldbalk verschijnt |
 | Schermlezergedrag (NVDA, JAWS, VoiceOver) | vereist hulpsoftware; de uitspraken over AT in dit rapport zijn afgeleid uit spec en code, niet waargenomen |
 | Windows hoogcontrastmodus | er is één `forced-colors`-blok in de hele codebase (`assets/css/bollendiagram.css:127`), dus alleen voor het diagram; de rest is niet gedekt en niet getest |
-| Bediening met alleen toetsenbord in de praktijk | code-review gedaan, geen handmatige doorloop |
+| Bediening met alleen toetsenbord in de praktijk | de geautomatiseerde doorloop dekt tab-orde, focusindicator en afdekking; een menselijke doorloop op begrijpelijkheid van de route staat nog open |
 | Taalniveau (B1-Nederlands) en begrijpelijkheid | vraagt redactionele toetsing en gebruikersonderzoek |
 
-De axe-scan draaide op jsdom, niet in een echte browser. Structuur-, naam- en
-ARIA-regels zijn daarmee volwaardig gecontroleerd; layout-afhankelijke regels
-niet — die zijn met de hand nagerekend.
+De axe-scan van 6 augustus draaide op jsdom, niet in een echte browser.
+Structuur-, naam- en ARIA-regels zijn daarmee volwaardig gecontroleerd;
+layout-afhankelijke regels niet — die zijn toen met de hand nagerekend en worden
+sinds 10 augustus 2026 in Chromium gemeten.
 
 ---
 
@@ -720,13 +791,24 @@ niet — die zijn met de hand nagerekend.
 
 1. **Keuze maken over de PDF (6)** — leg keuze én motivering vast; dit is de enige
    bevinding die niet met een patch is op te lossen.
-2. **Thema-issues indienen** voor 9, 10, 16, 17, 18, 21, 23, 24 en de thema-helft
-   van 1 en 7, op `RijksICTGilde/hugo-theme-rijksoverheid`. Alles wat hier in
-   `assets/css/toegankelijkheid.css` en `assets/js/toegankelijkheid.js` staat is
-   een tijdelijke reparatie op thema-code en hoort daar te verdwijnen.
-3. **Bevinding 18 in een browser natrekken** — de hero op 320 px bij 200%
-   tekstvergroting. Dit is de laatste openstaande AA-bevinding die met code op
-   te lossen is.
+2. **Thema-issues indienen** op `RijksICTGilde/hugo-theme-rijksoverheid`. De drie
+   die vanuit dit project niet op te lossen waren, staan er:
+   [#10](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/10)
+   (7, Escape op de tooltip),
+   [#11](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/11)
+   (9, `<mark>` en de live region) en
+   [#12](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/12)
+   (18, hero-hoogte). **Nog te doen:** 10, 16, 17, 21, 23, 24 en de thema-helft
+   van 1. Alles wat hier in `assets/css/toegankelijkheid.css` en
+   `assets/js/toegankelijkheid.js` staat is een tijdelijke reparatie op
+   thema-code en hoort daar te verdwijnen; zolang die issues er niet staan,
+   verdwijnt de override zonder dat het thema is bijgewerkt.
+3. **De browsertests laten meewegen** — `npm run test:a11y:browser` draait in CI.
+   Bevinding 18 verschijnt daar als categorie `tekstzoom-200`; zodra thema-issue
+   #12 is opgelost, hoort die regel te verdwijnen. De categorie
+   `focus-indicator` is bewust een waarschuwing en geen fout: een element zonder
+   `outline` of `box-shadow` kan focus ook met een rand- of achtergrondwissel
+   aangeven, en dat onderscheid vraagt een oog.
 4. **Toegankelijkheidsverklaring** — de footer verwijst naar de verklaring van
    inspectie-oe.nl. Op grond van het Tijdelijk besluit digitale toegankelijkheid
    overheid heeft deze site een eigen verklaring nodig in het register van
