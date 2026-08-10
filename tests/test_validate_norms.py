@@ -180,6 +180,19 @@ class FootnoteTests(unittest.TestCase):
         errors = run(content)
         self.assertTrue(any("Ongeldige voetnoot-id" in e for e in errors), errors)
 
+    def test_definition_with_only_a_link(self):
+        # Zonder brontekst vóór de link is de tooltip leeg en verwijst
+        # aria-describedby naar een lege <span>; zie normen/single.html.
+        content = replace(
+            "[^aw-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://example.org)",
+            "[^aw-4-1-lid-1]: [Bekijk bron](https://example.org)",
+        )
+        errors = run(content)
+        self.assertTrue(any("bestaat alleen uit een 'Bekijk bron'-link" in e for e in errors), errors)
+
+    def test_definition_with_source_text_is_fine(self):
+        self.assertEqual(run(VALID_NORM), [])
+
     def test_definition_lines_may_follow_each_other(self):
         # Twee definities onder elkaar is normaal en mag geen melding geven.
         # Of een markering in de lopende tekst een ref-term krijgt, wordt niet

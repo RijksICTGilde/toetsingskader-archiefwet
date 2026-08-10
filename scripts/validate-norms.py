@@ -59,6 +59,8 @@ ID_RE = re.compile(r"^[a-z0-9-]+$")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*$")
 FN_DEF_RE = re.compile(r"^\[\^([^\]]+)\]:")
 FN_USE_RE = re.compile(r"\[\^([^\]]+)\]")
+# Een definitieregel die na de marker niets anders bevat dan de bronlink.
+FN_DEF_ALLEEN_LINK_RE = re.compile(r"^\[[^\]]*\]\([^)]*\)\s*$")
 
 # Waar de controle op voetnootplaatsing gebleven is
 # -------------------------------------------------
@@ -257,6 +259,23 @@ def validate_footnotes(name, body_lines, body_start, errors):
                 bad_ids.setdefault(fid, lineno)
             # Verwijder de definitie-marker zodat hij niet als gebruik telt.
             scan = raw[dm.end():]
+
+            # De definitie moet brontekst hebben vóór de "Bekijk bron"-link.
+            # normen/single.html splitst die twee (findRESubmatch op
+            # `^(.*?)\s*(<a …>Bekijk bron</a>)$`): de brontekst wordt de
+            # tooltip én het doel van aria-describedby, de link komt ernaast.
+            # Bestaat de definitie alleen uit de link, dan is de brontekst leeg
+            # en verwijst aria-describedby naar een lege <span>: wie de ref-term
+            # focust, hoort de bron niet — precies wat de tooltip moet leveren.
+            # Het aria-label van de link wordt dan bovendien "Bekijk bron: ",
+            # waarmee bevinding 27 (elke bronlink een eigen naam) weer stuk is.
+            if FN_DEF_ALLEEN_LINK_RE.match(scan.strip()):
+                errors.append(Error(
+                    name,
+                    f"Voetnoot [^{fid}] bestaat alleen uit een 'Bekijk bron'-link. Zet de "
+                    "brontekst ervóór (bijvoorbeeld 'Aw, artikel 4.1, eerste lid.'), anders "
+                    "krijgt de verwijzing in de tekst een lege tooltip en een naamloze bronlink",
+                    lineno))
 
         for um in FN_USE_RE.finditer(scan):
             fid = um.group(1)

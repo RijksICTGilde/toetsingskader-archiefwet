@@ -54,11 +54,22 @@
        en niet van deze code; het bestand nodigt uit tot uitbreiden. */}}
   {{- range $afkorting, $voluit := site.Data.afkortingen -}}
     {{/* \b voorkomt treffers binnen een woord ("Ar" in "Archiefregeling").
-         De match is hoofdlettergevoelig. */}}
-    {{- $tekst = replaceRE (printf `\b%s\b` $afkorting) (printf "\x00%s\x01" $afkorting) $tekst -}}
+         De match is hoofdlettergevoelig.
+
+         De sleutel wordt geëscaped vóór hij in het patroon gaat: hij komt
+         ongezien uit een datafile en gaat als Go-RE2-expressie de compiler in.
+         Een voor de hand liggende uitbreiding als `art.: "artikel"` zou anders
+         `\bart.\b` opleveren, waarin de punt elk teken matcht — dan krijgt
+         "arts" de uitleg "artikel" en wordt "art." zelf juist gemist. */}}
+    {{- $patroon := replaceRE `([.\\+*?()|\[\]{}^$])` `\${1}` $afkorting -}}
+    {{- $tekst = replaceRE (printf `\b%s\b` $patroon) (printf "\x00%s\x01" $afkorting) $tekst -}}
   {{- end -}}
   {{- range $afkorting, $voluit := site.Data.afkortingen -}}
-    {{- $tekst = replace $tekst (printf "\x00%s\x01" $afkorting) (printf `<abbr title="%s">%s</abbr>` $voluit $afkorting) -}}
+    {{/* `htmlEscape` op de uitgeschreven vorm: die gaat een attribuutwaarde in.
+         Een aanhalingsteken of ampersand in de YAML zou de <abbr>-tag anders
+         openbreken, en dan is de uitleg die dit partial bestaansrecht geeft
+         (WCAG 3.1.4) stilzwijgend weg — zonder buildfout en zonder scanmelding. */}}
+    {{- $tekst = replace $tekst (printf "\x00%s\x01" $afkorting) (printf `<abbr title="%s">%s</abbr>` (htmlEscape $voluit) $afkorting) -}}
   {{- end -}}
   {{- $out = $out | append (printf "%s%s" $tag $tekst) -}}
 {{- end -}}

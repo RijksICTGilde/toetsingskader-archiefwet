@@ -29,6 +29,19 @@
   De namen zijn de `norm_titel` uit de front matter van de normpagina's.
 */}}
 
+{{/* `naam` is de tekst die in de bol staat (de <text>-laag hieronder, met de
+     hand over regels verdeeld en op coördinaat gezet) én de toegankelijke naam
+     van de link. Die twee moeten gelijk blijven: WCAG 2.5.3 Label in Name eist
+     dat de toegankelijke naam de zichtbare tekst bevat. Daarom staat de naam
+     hier en wordt hij niet uit de front matter gelezen — anders zou een
+     hernoemde norm wél de aria-label veranderen en niet het label in de plaat.
+
+     Wat de front matter zegt, wordt wel gecontroleerd: de lus onder deze slice
+     waarschuwt bij elke bol waarvan de naam afwijkt van `norm_titel`. Vandaag
+     is dat er één — norm 1 heet in de plaat "Informatie in beheer" en in de
+     front matter "Inbeheername en beheer". Dat is geen fout in de code maar een
+     keuze die iemand met een browser moet maken: het langere woord moet binnen
+     de bol passen. */}}
 {{- $normen := slice
   (dict "url" "normen/01-beheer/"               "naam" "Informatie in beheer")
   (dict "url" "normen/02-overzicht/"            "naam" "Overzicht")
@@ -39,6 +52,19 @@
   (dict "url" "normen/07-vernietigen/"          "naam" "Gecontroleerd vernietigen")
   (dict "url" "normen/08-periodieke-evaluatie/" "naam" "Periodieke evaluatie")
 -}}
+
+{{/* Drift-controle: elke bol wijst naar een echte normpagina, en de naam in de
+     plaat hoort de `norm_titel` van die pagina te zijn. Een waarschuwing en
+     geen fout, omdat het herstellen ervan een zichtbare tekst in een SVG raakt
+     die op maat is gezet; de build hoort daar niet op te breken. */}}
+{{- range $normen -}}
+  {{- $p := site.GetPage (printf "/%s" .url) -}}
+  {{- if not $p -}}
+    {{- warnf "bollendiagram: geen pagina gevonden voor %q" .url -}}
+  {{- else if ne $p.Params.norm_titel .naam -}}
+    {{- warnf "bollendiagram: label %q wijkt af van norm_titel %q (%s)" .naam $p.Params.norm_titel .url -}}
+  {{- end -}}
+{{- end -}}
 
 <figure class="bollendiagram-wrapper">
   <svg class="bollendiagram"

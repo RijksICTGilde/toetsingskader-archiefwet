@@ -12,6 +12,11 @@ import { JSDOM } from 'jsdom'
 import fs from 'node:fs'
 import path from 'node:path'
 import { createRequire } from 'node:module'
+import {
+  zwevendeVoetnootFouten, korteRefTermFouten,
+  voorbehoudFout, voorbehoudBronFout, VOORBEHOUD,
+  legeAltFouten,
+} from './a11y-checks.mjs'
 
 const axeSrc = fs.readFileSync(createRequire(import.meta.url).resolve('axe-core'), 'utf8')
 const root = process.argv[2] || 'public'
@@ -31,70 +36,17 @@ function htmlFiles(dir, acc = []) {
   return acc
 }
 
-// `alt=""` is de juiste waarde voor een decoratieve afbeelding, maar op een
-// informatieve afbeelding is het een 1.1.1-fout die geen enkele geautomatiseerde
-// controle vangt: axe leest een lege alt als "bewust decoratief" en .htmltest.yml
-// zet `IgnoreAltEmpty: true` sitebreed aan om de hero door te laten. Daarom hier
-// een expliciete lijst: wie een afbeelding decoratief noemt, zet hem erbij en
-// legt in één zin uit waarom. Alles daarbuiten met een lege alt is een fout.
-// Sleutel is het `src`-pad zonder fingerprint-hash.
-const DECORATIEF = new Map([
-  ['/images/hero', 'Hero op de homepage; de <h1> eronder zegt hetzelfde (bevinding 20).'],
-])
-// Van "/images/hero_hu_b08cab36f00ecf30.webp" naar "/images/hero": eerst de
-// extensie eraf, dan Hugo's image-processing-suffix (`_hu_<hex>`) en een
-// eventuele fingerprint-hash. Zonder dat verandert de sleutel bij elke
-// hercompressie van de afbeelding.
-const zonderHash = src => (src || '')
-  .replace(/\.[a-z0-9]+$/i, '')
-  .replace(/_hu_[0-9a-f]+$/i, '')
-  .replace(/\.[0-9a-f]{32,}$/i, '')
-
-// `layouts/normen/single.html` vervangt elke voetnootmarkering door een
-// ref-term met tooltip (`.ref-wrapper` + `aria-describedby`). Dat gebeurt met
-// twee replaceRE-patronen; wat geen van beide matcht, blijft staan als het kale
-// `<sup><a class="footnote-ref">N</a></sup>` van Goldmark: een zwevend nummer
-// zonder brontekst, en voor een schermlezergebruiker een verwijzing naar niets.
-//
-// Dit is bewust een controle op de gerenderde HTML en niet op de markdown. De
-// oorzaken lopen uiteen — nadruk, code, doorhaling, een link met opgemaakte
-// linktekst, twee markeringen achter elkaar, een markering aan het begin van
-// een regel — en ze voorspellen vraagt om het namaken van Goldmark. Achteraf
-// kijken of er nog een `footnote-ref` in de pagina staat, dekt ze allemaal en
-// kan geen geldige tekst weigeren. Zie ook scripts/validate-norms.py.
-function zwevendeVoetnootFouten(document) {
-  return [...document.querySelectorAll('a.footnote-ref')].map(a => a.getAttribute('href') || '(zonder href)')
-}
-
-// Het draft-voorbehoud ("De inhoud is nog in ontwikkeling en kan wijzigen")
-// bereikt een pagina via `_partials/versie-zin.html`, aangeroepen vanuit de
-// paginavoet en vanuit de shortcode `versielabel` op de homepage. De voet hangt
-// aan `.Params.show_lastmod`; wie dat op een nieuwe pagina vergeet, publiceert
-// normatief ogende tekst zonder voorbehoud, en niets merkt dat op. Vandaar deze
-// controle. De uitzonderingen dragen geen inhoud uit het toetsingskader.
-const GEEN_VOORBEHOUD_NODIG = new Map([
-  ['/404.html', 'foutpagina; toont geen normtekst maar vier ingangen'],
-  ['/tags/', 'lege taxonomiepagina (disableKinds, bevinding 14)'],
-  ['/categories/', 'lege taxonomiepagina (disableKinds, bevinding 14)'],
-])
-const VOORBEHOUD = 'in ontwikkeling en kan wijzigen'
-
-function voorbehoudFout(document, url) {
-  if (GEEN_VOORBEHOUD_NODIG.has(url)) return null
-  return document.body.textContent.includes(VOORBEHOUD) ? null : url
-}
-
-function legeAltFouten(document) {
-  const fouten = []
-  for (const img of document.querySelectorAll('img[alt=""]')) {
-    const sleutel = zonderHash(img.getAttribute('src'))
-    if (!DECORATIEF.has(sleutel)) fouten.push(sleutel || '(zonder src)')
-  }
-  return fouten
-}
-
 const files = htmlFiles(root)
 let total = 0
+
+// Eén keer vooraf: klopt de zin in a11y-checks.mjs nog met de partial die hem
+// rendert? Zo niet, dan zou elke pagina hieronder rood worden met een melding
+// die naar de verkeerde oorzaak wijst.
+const bronFout = voorbehoudBronFout(fs.readFileSync('layouts/_partials/versie-zin.html', 'utf8'))
+if (bronFout) {
+  total++
+  console.log(`— draft-voorbehoud [moderate] 1x: ${bronFout}`)
+}
 
 for (const file of files) {
   const url = '/' + path.relative(root, file).replace(/index\.html$/, '')
@@ -116,10 +68,15 @@ for (const file of files) {
     console.log(`${url} — draft-voorbehoud [moderate] 1x: pagina zonder "${VOORBEHOUD}"`)
     console.log(`    zet show_lastmod: true in de front matter, of neem de pagina op in GEEN_VOORBEHOUD_NODIG met een reden`)
   }
-  for (const href of zwevendeVoetnootFouten(dom.window.document)) {
+  for (const href of zwevendeVoetnootFouten(dom.window.document, url)) {
     total++
     console.log(`${url} — zwevende-voetnoot [serious] 1x: voetnootmarkering zonder ref-term en zonder tooltip`)
     console.log(`    ${href} — de markering staat achter opmaak of aan het begin van een regel; hang hem aan gewone tekst`)
+  }
+  for (const tekst of korteRefTermFouten(dom.window.document)) {
+    total++
+    console.log(`${url} — korte-ref-term [serious] 1x: ref-term bestaat alleen uit interpunctie`)
+    console.log(`    "${tekst}" — te klein als klikdoel (WCAG 2.5.8); zet de voetnootmarkering achter een woord`)
   }
   for (const src of legeAltFouten(dom.window.document)) {
     total++
