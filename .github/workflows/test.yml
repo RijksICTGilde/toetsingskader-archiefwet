@@ -89,5 +89,15 @@ jobs:
         # zitten er niet in — zie docs/toegankelijkheidsonderzoek-2026-08.md.
         run: npm run test:a11y
 
+      - name: Toegankelijkheidsscan in de browser (axe + reflow/zoom/focus)
+        # Wat jsdom niet kan: contrast, doelgrootte, reflow op 320px,
+        # tekstvergroting tot 200%, tekstafstand en echte toetsenbordfocus.
+        # Bouwt apart met `--baseURL /`, anders verwijzen CSS en JS naar het
+        # productiedomein en meet je een pagina zonder stylesheet.
+        run: |
+          npx playwright install --with-deps chromium
+          hugo --minify --quiet --baseURL / --destination .a11y/public
+          npm run test:a11y:browser
+
       - name: Test links
         run: hugo --minify --quiet --baseURL / --destination .htmltest/public && htmltest
