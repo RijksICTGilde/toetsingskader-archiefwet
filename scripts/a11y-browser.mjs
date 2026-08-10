@@ -80,31 +80,57 @@ const MIME = {
   '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml',
 }
 
-function serve(dir) {
+/* De site één keer inlezen en indexeren: URL-pad → absoluut bestandspad.
+
+   Deze opzet is er om padinjectie onmogelijk te maken in plaats van hem af te
+   weren. Een `path.join(root, req.url)` met een controle achteraf is fragiel —
+   `startsWith(root)` zonder padscheider laat `/tmp/pub` door voor
+   `/tmp/publiek-geheim`, en na een tweede `join` (map → index.html) moet je
+   opnieuw controleren. Hier komt het bestandspad altijd uit onze eigen
+   directory-walk; het verzoek is alleen een sleutel in een Map. Er ís dus geen
+   padexpressie waar gebruikersinvoer in zit.
+
+   Retourneert ook de lijst met te testen pagina's, uit dezelfde walk. */
+function readSite(dir) {
   const abs = path.resolve(dir)
-  const server = http.createServer((req, res) => {
-    let p = path.join(abs, decodeURIComponent(req.url.split('?')[0]))
-    if (!p.startsWith(abs)) return res.writeHead(403).end()
-    if (fs.existsSync(p) && fs.statSync(p).isDirectory()) p = path.join(p, 'index.html')
-    if (!fs.existsSync(p)) return res.writeHead(404).end('not found')
-    res.writeHead(200, { 'content-type': MIME[path.extname(p)] || 'application/octet-stream' })
-    fs.createReadStream(p).pipe(res)
-  })
-  return new Promise(resolve => server.listen(0, '127.0.0.1', () => resolve(server)))
+  const files = new Map()
+  const pages = []
+  const toUrl = p => '/' + path.relative(abs, p).split(path.sep).join('/')
+
+  const walk = d => {
+    for (const entry of fs.readdirSync(d, { withFileTypes: true })) {
+      const p = path.join(d, entry.name)
+      if (entry.isDirectory()) { walk(p); continue }
+      files.set(toUrl(p), p)
+      if (entry.name === 'index.html') {
+        // Een map is opvraagbaar met én zonder afsluitende slash.
+        const dirUrl = toUrl(path.dirname(p)).replace(/\/$/, '')
+        files.set(dirUrl === '' ? '/' : `${dirUrl}/`, p)
+        if (dirUrl !== '') files.set(dirUrl, p)
+        pages.push(dirUrl === '' ? '/' : `${dirUrl}/`)
+      } else if (entry.name.endsWith('.html')) {
+        pages.push(toUrl(p))
+      }
+    }
+  }
+  walk(abs)
+  return { files, pages }
 }
 
-// `base` is de root van de site en blijft bij het afdalen gelijk; anders wordt
-// elke submap relatief aan zichzelf en levert elke index.html "/" op.
-function pages(dir, base = dir, acc = []) {
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const p = path.join(dir, entry.name)
-    if (entry.isDirectory()) pages(p, base, acc)
-    else if (entry.name === 'index.html') {
-      const rel = path.relative(base, path.dirname(p))
-      acc.push(rel === '' ? '/' : `/${rel}/`)
-    } else if (entry.name.endsWith('.html')) acc.push(`/${path.relative(base, p)}`)
-  }
-  return acc
+function serve(files) {
+  const server = http.createServer((req, res) => {
+    let urlPath
+    try {
+      urlPath = decodeURIComponent(req.url.split('?')[0])
+    } catch {
+      return res.writeHead(400).end('bad request')
+    }
+    const file = files.get(urlPath)
+    if (!file) return res.writeHead(404).end('not found')
+    res.writeHead(200, { 'content-type': MIME[path.extname(file)] || 'application/octet-stream' })
+    fs.createReadStream(file).pipe(res)
+  })
+  return new Promise(resolve => server.listen(0, '127.0.0.1', () => resolve(server)))
 }
 
 /* Elementen waarvan de inhoud niet meer past én die de overloop wegknippen.
@@ -228,10 +254,10 @@ async function tabWalk(page, url) {
   }
 }
 
-const server = await serve(root)
+const { files, pages: urls } = readSite(root)
+const server = await serve(files)
 const base = `http://127.0.0.1:${server.address().port}`
 const browser = await chromium.launch()
-const urls = pages(root)
 // De meldbalk van de zoekfunctie verschijnt alleen met een ?q=-parameter; dat is
 // de situatie van bevinding 17 (zwevende melding dekt de focus af).
 const extra = ['/normen/01-beheer/?q=beheer']
