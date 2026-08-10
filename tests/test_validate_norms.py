@@ -180,6 +180,23 @@ class FootnoteTests(unittest.TestCase):
         errors = run(content)
         self.assertTrue(any("Ongeldige voetnoot-id" in e for e in errors), errors)
 
+    def test_adjacent_footnote_markers(self):
+        # De tweede markering plakt aan het sluit-tag van de eerste, waardoor
+        # normen/single.html er geen ref-term van kan maken en het nummer als
+        # kaal superscript in de lopende tekst blijft staan.
+        content = replace(
+            "Een toelichting met een bron.[^aw-4-1-lid-1]",
+            "Een toelichting met een bron.[^aw-4-1-lid-1][^tweede]",
+        ) + "\n[^tweede]: Tweede bron.\n"
+        errors = run(content)
+        self.assertTrue(any("direct achter elkaar" in e for e in errors), errors)
+
+    def test_definition_lines_may_follow_each_other(self):
+        # Twee definities onder elkaar is normaal; alleen markeringen ín de
+        # lopende tekst mogen niet aan elkaar plakken.
+        errors = run(VALID_NORM)
+        self.assertEqual(errors, [])
+
 
 class FormatTests(unittest.TestCase):
     def test_error_includes_line_number(self):

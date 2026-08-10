@@ -182,7 +182,7 @@ De Inspectie toetst of het verantwoordelijke overheidsorgaan in de beheerregels 
 
 #### Voorschrift
 
-De Inspectie toetst of het verantwoordelijke overheidsorgaan alle[^aw-artikel-4-1-lid-2] opgemaakte en ontvangen documenten heeft opgenomen in een beheerde omgeving[^ab-artikel-2-1-aw-4-1-4-2][^hoeft-geen-systeem-zoals-documentmanagementsyste], waar zij duurzaam toegankelijk worden gemaakt en gehouden tot het moment van overbrenging of vernietiging.[^aw-artikel-4-1-ab-artikel]
+De Inspectie toetst of het verantwoordelijke overheidsorgaan alle[^aw-artikel-4-1-lid-2] opgemaakte en ontvangen documenten heeft opgenomen in een beheerde[^hoeft-geen-systeem-zoals-documentmanagementsyste] omgeving[^ab-artikel-2-1-aw-4-1-4-2], waar zij duurzaam toegankelijk worden gemaakt en gehouden tot het moment van overbrenging of vernietiging.[^aw-artikel-4-1-ab-artikel]
 
 [^aw-artikel-4-1-lid-2]: Aw, artikel 4.1, tweede lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 [^ab-artikel-2-1-aw-4-1-4-2]: Ab, artikel 2.1; Aw, artikel 4.1, eerste lid en Aw, artikel 4.2, eerste lid, sub b. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)

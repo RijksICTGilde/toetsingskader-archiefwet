@@ -81,7 +81,13 @@
       runs[runs.length - 1].text = runs[runs.length - 1].text.replace(/\s+$/, '')
     }
     if (runs.length === 0) return ''
-    if (runs.length === 1 && !runs[0].link && !runs[0].bold && !runs[0].italics) return runs[0].text
+    // Eén run zonder opmaak mag een kale string worden; dat scheelt een laag in
+    // de pdfMake-boom. Toetsen op "heeft alleen een text-sleutel" en niet op een
+    // lijstje bekende sleutels: een run kan ook linkToDestination, color of sup
+    // dragen (in-PDF-sprong, voetnootnummer), en die vielen met zo'n lijstje weg
+    // zodra de run in zijn eentje in een alinea of lijstitem stond.
+    var keys = Object.keys(runs[0])
+    if (runs.length === 1 && keys.length === 1 && keys[0] === 'text') return runs[0].text
     return runs
   }
 

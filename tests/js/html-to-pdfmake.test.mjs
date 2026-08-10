@@ -94,6 +94,25 @@ test('interne norm-link wordt in-PDF-sprong als normDests gegeven (kader)', () =
   assert.ok(!link.link, 'geen externe link')
 })
 
+test('lijstitem dat alléén een norm-sprong is behoudt die sprong (kader)', () => {
+  // Regressie: het "Zie ook"-lijstje bestaat uit items die niets anders zijn
+  // dan één link. Als zo'n item wordt platgeslagen tot een kale string, is de
+  // verwijzing in de kader-PDF dode zwarte tekst.
+  const out = convertWith('<ul><li><a href="/normen/03-ordenen/">Ordenen</a></li></ul>', { origin: 'https://x.nl', normDests: { '03-ordenen': 'norm-03-ordenen' } })
+  const item = out[0].ul[0].text
+  assert.ok(Array.isArray(item), 'geen kale string: de run met linkToDestination moet blijven')
+  assert.equal(item[0].linkToDestination, 'norm-03-ordenen')
+  assert.equal(item[0].text, 'Ordenen')
+})
+
+test('alinea die alléén een voetnootnummer is behoudt superscript', () => {
+  const out = convertWith('<p><sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup></p>', { prefix: 'n1-' })
+  const runs = out[0].text
+  assert.ok(Array.isArray(runs), 'geen kale string: sup en linkToDestination moeten blijven')
+  assert.equal(runs[0].sup, true)
+  assert.equal(runs[0].linkToDestination, 'n1-fn-1')
+})
+
 test('interne norm-link wordt absolute site-link zonder normDests (losse norm-PDF)', () => {
   const out = convertWith('<p>zie <a href="/normen/06-vernietigen/">Norm 6</a></p>', { origin: 'https://x.nl', normDests: null })
   const link = out[0].text.find(r => r.link)
