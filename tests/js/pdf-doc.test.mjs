@@ -75,6 +75,11 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.match(JSON.stringify(wordmark), /Ministerie van Onderwijs, Cultuur en Wetenschap/)
   assert.ok(wordmark.absolutePosition.x > lint.absolutePosition.x + lint.width, 'woordmerk rechts van het lint')
   assert.ok(dd.header(2, 6, A4).find(c => c.svg), 'logo ook op pagina 2 (running letterhead)')
+  // De viewer moet de documenttitel tonen, niet de bestandsnaam. `tagged` blijft
+  // uit: zonder structuurboom zou die vlag een onwaarheid zijn (bevinding 6).
+  assert.equal(dd.info.title, norm.titel, 'documenttitel in de Info-dictionary')
+  assert.equal(dd.displayTitle, true, 'ViewerPreferences /DisplayDocTitle')
+  assert.ok(!dd.tagged, 'niet als getagd gemarkeerd zolang er geen structuurboom is')
 })
 
 test('kader-doc: inhoudsopgave + 8 normen op eigen pagina, in toc opgenomen', async () => {

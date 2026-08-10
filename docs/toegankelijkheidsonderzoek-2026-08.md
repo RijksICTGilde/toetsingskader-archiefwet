@@ -34,7 +34,7 @@ opgelost](#wat-er-is-opgelost-op-deze-branch) voor de gemaakte wijzigingen.
 | **3** | Bollendiagram: vier onderwerpen bestaan alleen visueel | 1.1.1, 1.3.1, 1.4.1 | A | ja | opgelost |
 | **4** | Inhoudsopgave-knop meldt permanent "ingeklapt" | 4.1.2 | A | ja | opgelost |
 | **5** | Placeholderteksten als koppen en labels (7 normpagina's) | 2.4.6 | AA | ja | opgelost op `feat/herziening-over-index-procesplaat`, niet hier |
-| **6** | PDF-export levert een ongetagde PDF | EN 301 549 §10 | — | ja (PDF) | **open — besluit van het team nodig** |
+| **6** | PDF-export levert een ongetagde PDF | EN 301 549 §10 | — | ja (PDF) | **open — besluit van het team nodig** (documenttitel wel gezet, 10 augustus 2026) |
 | **7** | Bron-tooltip: niet te sluiten én niet gekoppeld aan de term | 1.4.13, 1.3.1 | AA, A | ja | deels: koppeling opgelost, Escape open ([thema-issue #10](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/10)) |
 | **8** | Toelichting, Referenties en Kern zijn geen koppen | 1.3.1 | A | ja | opgelost |
 | **9** | Zoekterm-markering wordt niet aangekondigd | 1.3.1, 4.1.3 | A, AA | ja | deels: melding wordt aangekondigd, `<mark>` open ([thema-issue #11](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/11)) |
@@ -478,6 +478,24 @@ is geen instelling die aan kan. Dit is geen bugfix maar een keuze uit drie route
    publicatieketen van de Inspectie.
 
 Deze keuze hoort bij het team en de opdrachtgever, niet bij de techniek.
+
+**Wat in de tussentijd wél is gezet (10 augustus 2026).** pdfMake kent twee
+document-opties die hier los van de routekeuze staan:
+
+* `displayTitle: true` — zet `ViewerPreferences /DisplayDocTitle true`, zodat de
+  viewer de documenttitel uit de Info-dictionary toont in plaats van de
+  bestandsnaam. Dat is de PDF-tegenhanger van een paginatitel en een eis in
+  PDF/UA. Gemeten op de gerenderde bytes: `/DisplayDocTitle` afwezig vóór,
+  aanwezig ná (147 888 → 147 985 bytes). Vastgelegd in `tests/js/pdf-doc.test.mjs`.
+* `tagged: true` — **bewust niet gezet.** Die vlag schrijft alleen
+  `/MarkInfo <</Marked true>>`; pdfMake bouwt geen `/StructTreeRoot`. Een
+  document als getagd markeren zonder structuurboom is een onwaarheid tegen
+  hulpsoftware en maakt de situatie slechter dan een eerlijk ongetagde PDF.
+
+Dit verandert niets aan de bevinding zelf: er is nog steeds geen tagstructuur en
+geen `/Lang` — pdfMake 0.2.18 heeft daar geen optie voor (`language:` in de
+bundel zijn cmap-subtabellen van de fonts, geen document-optie). De routekeuze
+blijft open.
 
 ---
 

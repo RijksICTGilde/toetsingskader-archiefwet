@@ -129,6 +129,12 @@
     base.defaultStyle = { font: 'ROSans', fontSize: 10.5, color: '#1a1a1a' }
     base.styles = styles
     base.info = { title: data.titel, author: 'Inspectie Overheidsinformatie en Erfgoed', subject: 'Versie: ' + (data.versie || '') }
+    // Laat de viewer de documenttitel tonen in plaats van de bestandsnaam
+    // (ViewerPreferences /DisplayDocTitle). Zet géén `tagged: true`: pdfMake
+    // bouwt geen structuurboom, en een document als getagd markeren zonder
+    // /StructTreeRoot misleidt hulpsoftware. Zie bevinding 6 in
+    // docs/toegankelijkheidsonderzoek-2026-08.md.
+    base.displayTitle = true
     base.header = function (currentPage, pageCount, pageSize) {
       // Rijkshuisstijl-lockup bovenaan elke pagina (running letterhead), zonder
       // lijn: lint + organisatienaam + ministerie, zoals de header van
