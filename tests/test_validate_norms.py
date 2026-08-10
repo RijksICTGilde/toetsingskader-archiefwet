@@ -180,98 +180,13 @@ class FootnoteTests(unittest.TestCase):
         errors = run(content)
         self.assertTrue(any("Ongeldige voetnoot-id" in e for e in errors), errors)
 
-    def test_adjacent_footnote_markers(self):
-        # De tweede markering plakt aan het sluit-tag van de eerste, waardoor
-        # normen/single.html er geen ref-term van kan maken en het nummer als
-        # kaal superscript in de lopende tekst blijft staan.
-        content = replace(
-            "Een toelichting met een bron.[^aw-4-1-lid-1]",
-            "Een toelichting met een bron.[^aw-4-1-lid-1][^tweede]",
-        ) + "\n[^tweede]: Tweede bron.\n"
-        errors = run(content)
-        self.assertTrue(any("sluit-tag" in e for e in errors), errors)
-
-    def test_footnote_after_punctuation_only(self):
-        # De ref-term wordt het woord vóór de markering; is dat alleen
-        # interpunctie, dan is het klikdoel een paar pixels breed (WCAG 2.5.8).
-        # Alleen de tekst ná een vorige markering telt: daar blijft ")" of "):"
-        # als losse term over. Staat er nog een woord voor, dan pakt het
-        # template dat woord mee en is er niets aan de hand.
-        content = replace(
-            "Een toelichting met een bron.[^aw-4-1-lid-1]",
-            "Een toelichting (met een bron[^tweede]):[^aw-4-1-lid-1]",
-        ) + "\n[^tweede]: Tweede bron.\n"
-        errors = run(content)
-        self.assertTrue(any("alleen interpunctie" in e for e in errors), errors)
-
-    def test_footnote_after_word_with_punctuation_is_fine(self):
-        # Een woord mét aanhangende interpunctie ("bron.") is wél een bruikbare
-        # term en mag geen melding geven.
-        errors = run(VALID_NORM)
-        self.assertEqual(errors, [])
-
     def test_definition_lines_may_follow_each_other(self):
-        # Twee definities onder elkaar is normaal; alleen markeringen ín de
-        # lopende tekst mogen niet aan elkaar plakken.
+        # Twee definities onder elkaar is normaal en mag geen melding geven.
+        # Of een markering in de lopende tekst een ref-term krijgt, wordt niet
+        # hier gecontroleerd maar op de gerenderde HTML; zie de toelichting in
+        # scripts/validate-norms.py en de check in scripts/a11y-scan.mjs.
         errors = run(VALID_NORM)
         self.assertEqual(errors, [])
-
-    def test_footnote_after_bold(self):
-        # "**vet**[^x]" rendert als "</strong><sup>". Patroon B in
-        # normen/single.html matcht `[^\s<>]+` en stopt dus op het sluit-tag:
-        # geen ref-term, geen tooltip, kaal superscript.
-        content = replace(
-            "Een toelichting met een bron.[^aw-4-1-lid-1]",
-            "Een toelichting met een **bron**[^aw-4-1-lid-1]",
-        )
-        errors = run(content)
-        self.assertTrue(any("sluit-tag" in e for e in errors), errors)
-
-    def test_footnote_after_inline_code(self):
-        # Zelfde mechanisme met code: "`x`[^y]" wordt "</code><sup>".
-        content = replace(
-            "Een toelichting met een bron.[^aw-4-1-lid-1]",
-            "Een toelichting met `beheerregel`[^aw-4-1-lid-1]",
-        )
-        errors = run(content)
-        self.assertTrue(any("sluit-tag" in e for e in errors), errors)
-
-    def test_footnote_after_marker_with_space(self):
-        # "[^a] [^b]" is net zo stuk als "[^a][^b]": patroon B laat een spatie
-        # toe, dus het blok vóór de tweede markering is de eerste markering.
-        content = replace(
-            "Een toelichting met een bron.[^aw-4-1-lid-1]",
-            "Een toelichting met een bron.[^aw-4-1-lid-1] [^tweede]",
-        ) + "\n[^tweede]: Tweede bron.\n"
-        errors = run(content)
-        self.assertTrue(any("sluit-tag" in e for e in errors), errors)
-
-    def test_footnote_after_link_is_fine(self):
-        # Patroon A vangt de markdown-link: die wordt zelf de ref-term.
-        content = replace(
-            "Een toelichting met een bron.[^aw-4-1-lid-1]",
-            "Een toelichting met [een bron](https://example.org).[^aw-4-1-lid-1]",
-        )
-        self.assertEqual(run(content), [])
-
-    def test_footnote_after_word_following_bold_is_fine(self):
-        # "**vet**tekst[^x]" is wél goed: na het sluit-tag staat nog "tekst",
-        # en dát wordt de ref-term.
-        content = replace(
-            "Een toelichting met een bron.[^aw-4-1-lid-1]",
-            "Een toelichting met **vet**tekst[^aw-4-1-lid-1]",
-        )
-        self.assertEqual(run(content), [])
-
-    def test_footnote_in_definition_body_is_checked(self):
-        # De brontekst van een voetnoot wordt op dezelfde manier gerenderd;
-        # markeringen dáárin worden dus net zo goed nagelopen.
-        content = replace(
-            "[^aw-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://example.org)",
-            "[^aw-4-1-lid-1]: Aw, **artikel 4.1**[^tweede]. [Bekijk bron](https://example.org)\n[^tweede]: Tweede bron.",
-        )
-        errors = run(content)
-        self.assertTrue(any("sluit-tag" in e for e in errors), errors)
 
 
 class FormatTests(unittest.TestCase):

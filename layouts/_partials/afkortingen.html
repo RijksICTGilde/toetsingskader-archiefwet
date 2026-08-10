@@ -43,10 +43,22 @@
   {{- else if gt $i 0 -}}
     {{- $tekst = printf "<%s" $chunk -}}
   {{- end -}}
+  {{/* Twee fasen. Fase 1 zet elke afkorting om in een sentinel die geen enkele
+       andere afkorting kan bevatten; fase 2 maakt daar de <abbr>-tags van.
+       In één fase zou de lus de markup lezen die hij zelf net heeft
+       geschreven: een volgende afkorting kan dan matchen binnen een
+       `title="…"` die er al staat, en dan komt er een <abbr> in een
+       attribuutwaarde — precies wat het tagsgewijs lopen hierboven voorkomt
+       voor de invoer. Vandaag komt geen enkele afkorting voor in de uitgeschreven
+       vorm van een andere, maar dat is een eigenschap van data/afkortingen.yaml
+       en niet van deze code; het bestand nodigt uit tot uitbreiden. */}}
   {{- range $afkorting, $voluit := site.Data.afkortingen -}}
     {{/* \b voorkomt treffers binnen een woord ("Ar" in "Archiefregeling").
          De match is hoofdlettergevoelig. */}}
-    {{- $tekst = replaceRE (printf `\b%s\b` $afkorting) (printf `<abbr title="%s">%s</abbr>` $voluit $afkorting) $tekst -}}
+    {{- $tekst = replaceRE (printf `\b%s\b` $afkorting) (printf "\x00%s\x01" $afkorting) $tekst -}}
+  {{- end -}}
+  {{- range $afkorting, $voluit := site.Data.afkortingen -}}
+    {{- $tekst = replace $tekst (printf "\x00%s\x01" $afkorting) (printf `<abbr title="%s">%s</abbr>` $voluit $afkorting) -}}
   {{- end -}}
   {{- $out = $out | append (printf "%s%s" $tag $tekst) -}}
 {{- end -}}

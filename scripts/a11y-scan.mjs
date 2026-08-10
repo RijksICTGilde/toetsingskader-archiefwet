@@ -50,6 +50,40 @@ const zonderHash = src => (src || '')
   .replace(/_hu_[0-9a-f]+$/i, '')
   .replace(/\.[0-9a-f]{32,}$/i, '')
 
+// `layouts/normen/single.html` vervangt elke voetnootmarkering door een
+// ref-term met tooltip (`.ref-wrapper` + `aria-describedby`). Dat gebeurt met
+// twee replaceRE-patronen; wat geen van beide matcht, blijft staan als het kale
+// `<sup><a class="footnote-ref">N</a></sup>` van Goldmark: een zwevend nummer
+// zonder brontekst, en voor een schermlezergebruiker een verwijzing naar niets.
+//
+// Dit is bewust een controle op de gerenderde HTML en niet op de markdown. De
+// oorzaken lopen uiteen — nadruk, code, doorhaling, een link met opgemaakte
+// linktekst, twee markeringen achter elkaar, een markering aan het begin van
+// een regel — en ze voorspellen vraagt om het namaken van Goldmark. Achteraf
+// kijken of er nog een `footnote-ref` in de pagina staat, dekt ze allemaal en
+// kan geen geldige tekst weigeren. Zie ook scripts/validate-norms.py.
+function zwevendeVoetnootFouten(document) {
+  return [...document.querySelectorAll('a.footnote-ref')].map(a => a.getAttribute('href') || '(zonder href)')
+}
+
+// Het draft-voorbehoud ("De inhoud is nog in ontwikkeling en kan wijzigen")
+// bereikt een pagina via `_partials/versie-zin.html`, aangeroepen vanuit de
+// paginavoet en vanuit de shortcode `versielabel` op de homepage. De voet hangt
+// aan `.Params.show_lastmod`; wie dat op een nieuwe pagina vergeet, publiceert
+// normatief ogende tekst zonder voorbehoud, en niets merkt dat op. Vandaar deze
+// controle. De uitzonderingen dragen geen inhoud uit het toetsingskader.
+const GEEN_VOORBEHOUD_NODIG = new Map([
+  ['/404.html', 'foutpagina; toont geen normtekst maar vier ingangen'],
+  ['/tags/', 'lege taxonomiepagina (disableKinds, bevinding 14)'],
+  ['/categories/', 'lege taxonomiepagina (disableKinds, bevinding 14)'],
+])
+const VOORBEHOUD = 'in ontwikkeling en kan wijzigen'
+
+function voorbehoudFout(document, url) {
+  if (GEEN_VOORBEHOUD_NODIG.has(url)) return null
+  return document.body.textContent.includes(VOORBEHOUD) ? null : url
+}
+
 function legeAltFouten(document) {
   const fouten = []
   for (const img of document.querySelectorAll('img[alt=""]')) {
@@ -76,6 +110,16 @@ for (const file of files) {
     total += v.nodes.length
     console.log(`${url} — ${v.id} [${v.impact}] ${v.nodes.length}x: ${v.help}`)
     for (const n of v.nodes.slice(0, 3)) console.log(`    ${n.target.join(' ')}`)
+  }
+  if (voorbehoudFout(dom.window.document, url)) {
+    total++
+    console.log(`${url} — draft-voorbehoud [moderate] 1x: pagina zonder "${VOORBEHOUD}"`)
+    console.log(`    zet show_lastmod: true in de front matter, of neem de pagina op in GEEN_VOORBEHOUD_NODIG met een reden`)
+  }
+  for (const href of zwevendeVoetnootFouten(dom.window.document)) {
+    total++
+    console.log(`${url} — zwevende-voetnoot [serious] 1x: voetnootmarkering zonder ref-term en zonder tooltip`)
+    console.log(`    ${href} — de markering staat achter opmaak of aan het begin van een regel; hang hem aan gewone tekst`)
   }
   for (const src of legeAltFouten(dom.window.document)) {
     total++

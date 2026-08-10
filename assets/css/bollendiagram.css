@@ -151,7 +151,14 @@
 .bd-focus-ring {
   fill: none;
   stroke: none;
-  stroke-width: 3;
+  /* `vector-effect: non-scaling-stroke` houdt de lijndikte in CSS-pixels in
+     plaats van SVG-gebruikerseenheden. Zonder dat schaalt de ring mee met de
+     viewBox (480 breed) op de gerenderde breedte (maximaal 600px): 3
+     eenheden worden dan 3,75px op een breed scherm en circa 2px op 320px —
+     precies waar een focusindicator het meest nodig is. Met deze regel is hij
+     overal 3px. */
+  vector-effect: non-scaling-stroke;
+  stroke-width: 3px;
 }
 
 .bd-bubble:focus-visible .bd-focus-ring {
@@ -201,8 +208,5 @@
   }
   .bd-labels text {
     fill: CanvasText;
-  }
-  .bd-bubble:focus-visible .bd-focus-ring {
-    stroke: Highlight;
   }
 }

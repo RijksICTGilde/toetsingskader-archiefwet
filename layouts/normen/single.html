@@ -70,10 +70,15 @@
        toegankelijkheidsboom. De naamberekening van aria-describedby leest de
        verwijzing wél, ook als het doel verborgen is. */}}
   {{ $linkPat := printf `<a ([^>]*)>([^<]*)</a>([.,;:!?)]*)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
-  {{ $linkRepl := printf `<span class="ref-wrapper" id="${4}"><a ${1} class="ref-term" aria-describedby="${4}-bron">${2}</a><span class="ref-tooltip" role="note" id="${4}-bron"><span>%s</span>%s</span></span>${3}` $textOnly $linkHTML }}
+  {{/* Het `aria-describedby`-doel is de bróntekst, niet de hele tooltip. De
+       tooltip bevat sinds bevinding 27 ook de "Bekijk bron"-link, en díé heeft
+       een aria-label dat dezelfde brontekst woordelijk herhaalt. Wees het doel
+       de tooltip aan, dan leest een schermlezer bij elke ref-term de bron twee
+       keer voor — plus, sinds de nieuw-venster-melding, een derde zinsdeel. */}}
+  {{ $linkRepl := printf `<span class="ref-wrapper" id="${4}"><a ${1} class="ref-term" aria-describedby="${4}-bron">${2}</a><span class="ref-tooltip" role="note"><span id="${4}-bron">%s</span>%s</span></span>${3}` $textOnly $linkHTML }}
   {{ $content = replaceRE $linkPat $linkRepl $content }}
   {{ $wordPat := printf `([^\s<>]+)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
-  {{ $wordRepl := printf `<span class="ref-wrapper" id="$2"><a href="#fn:%s" class="ref-term" aria-describedby="$2-bron">$1</a><span class="ref-tooltip" role="note" id="$2-bron"><span>%s</span>%s</span></span>` $n $textOnly $linkHTML }}
+  {{ $wordRepl := printf `<span class="ref-wrapper" id="$2"><a href="#fn:%s" class="ref-term" aria-describedby="$2-bron">$1</a><span class="ref-tooltip" role="note"><span id="$2-bron">%s</span>%s</span></span>` $n $textOnly $linkHTML }}
   {{ $content = replaceRE $wordPat $wordRepl $content }}
 {{ end }}
 
@@ -101,7 +106,13 @@
   {{/* De <summary> is visueel een h2 (1.75rem/700) maar zat niet in de
        kopstructuur: wie op koppen navigeert sloeg de bronnen over (WCAG 1.3.1).
        Een <h2> ín de <summary> is toegestaan en herstelt dat. */}}
-  {{ $refs = printf `<section id="referenties" class="references"><details><summary><h2>Referenties</h2></summary>%s</details></section>` $ol }}
+  {{/* `aria-label` blijft nodig náást de <h2>. Een <section> zonder
+       toegankelijke naam is geen region-landmark en verdwijnt uit de
+       landmark-lijst; en omdat <summary> als knop wordt weergegeven, zijn de
+       kinderen ervan presentational — de <h2> komt bij de meeste combinaties
+       dus ook niet in de koppenlijst. Zonder deze naam heeft een
+       schermlezergebruiker geen enkele sprong naar de bronnenlijst. */}}
+  {{ $refs = printf `<section id="referenties" class="references" aria-label="Referenties"><details><summary><h2>Referenties</h2></summary>%s</details></section>` $ol }}
   {{ $content = replaceRE `(?s)<div class="footnotes" role="doc-endnotes">.*?</ol>\s*</div>` "" $content }}
 {{ end }}
 

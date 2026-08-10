@@ -81,7 +81,11 @@
   var externals = document.querySelectorAll('a[target="_blank"]')
   for (var x = 0; x < externals.length; x++) {
     var link = externals[x]
-    if (link.querySelector('.visually-hidden')) continue
+    // Alleen onze eigen melding overslaan, niet elke .visually-hidden. Het
+    // thema zet die class ook op " (besloten omgeving)" bij private links
+    // (render-link.html), en die hebben net zo goed target="_blank"; op de
+    // oude guard verloren juist zij de nieuw-venster-melding.
+    if (link.querySelector('.nieuw-venster-melding')) continue
     var label = link.getAttribute('aria-label')
     if (label) {
       // Een aria-label overschrijft de tekst van onderliggende elementen, dus
@@ -96,7 +100,7 @@
       continue
     }
     var note = document.createElement('span')
-    note.className = 'visually-hidden'
+    note.className = 'visually-hidden nieuw-venster-melding'
     note.textContent = NIEUW_VENSTER
     link.appendChild(note)
   }
