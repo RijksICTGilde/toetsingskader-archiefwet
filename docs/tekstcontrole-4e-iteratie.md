@@ -26,10 +26,12 @@ elkaar blijven.
 **Nee, niet alles staat er woord voor woord — maar er is geen tekst
 weggevallen en geen betekenis veranderd.**
 
-De 14 meldingen "Niet gevonden" zijn allemaal vals alarm. Vijf ervan zijn
+Van de oorspronkelijke veertien meldingen "Niet gevonden" was er één echt: het
+derde criterium bij het eerste voorschrift van normblad 5 stond niet op de site.
+Dat is toegevoegd. De overige dertien zijn vals alarm. Vijf ervan zijn
 plaatsingsinstructies uit het Word-bestand ("NB: dit document bevat stukken
 tekst die …", "Inleiding -> andere naam voor het kopje") en horen niet op de
-site. De overige negen staan er wel, alleen niet in het bestand waar het script
+site. De andere acht staan er wel, alleen niet in het bestand waar het script
 zocht of niet in dezelfde bewoording:
 
 | Normblad-alinea | Staat op |
@@ -37,14 +39,13 @@ zocht of niet in dezelfde bewoording:
 | "Een document is in beheer … gehouden kan worden" | `content/normen/_index.md` |
 | "… in ieder geval per categorie documenten, een omschrijving …" | `content/normen/01-beheer.md` |
 | "Het overzicht bevat, in het geval … meerdere ordeningsstructuren …" | `content/normen/02-overzicht.md` |
-| "Er is een risicoanalyse … invulling van de redelijke termijn …" | `content/normen/06-vindbaar.md` (herschreven) |
 | "Het archiefbeheer wordt … periodiek geëvalueerd …" | `kern` van `content/normen/08-periodieke-evaluatie.md` |
 | "Het toetsingskader omvat momenteel de onderwerpen … wit gearceerde …" | `content/samenhang.md` (herschreven naar het bollendiagram) |
 | "Dat documenten in beheer moeten zijn, is het fundament …" | `content/samenhang.md` |
 | "Het overzicht is te vinden op de website van de Inspectie …" | `content/over/doelgroep.md` |
 | "Algemene introductie - Toetsingskader overheidsinformatie …" | is een kop, geen lopende tekst |
 
-De 59 woordverschillen vallen uiteen in vier groepen:
+De 55 resterende woordverschillen vallen uiteen in vier groepen:
 
 1. **Correcties op het normblad (28)** — de site schrijft het goed waar het
    normblad een fout heeft: "emailapplicaties" → "e-mailapplicaties",
@@ -58,28 +59,24 @@ De 59 woordverschillen vallen uiteen in vier groepen:
    normbladzin en verplaatst daarvoor het werkwoord. Sitebrede afspraak; het
    script vangt de meeste hiervan al apart af (kolom "Voorschrift-vorm"), deze
    dertien vallen alleen op doordat de woordvolgorde te ver verschuift.
-3. **Afkortingen en verwijzingen voluit (14)** — "Ar" → "Archiefregeling",
+3. **Afkortingen en verwijzingen voluit (13)** — "Ar" → "Archiefregeling",
    "SIO" → "strategisch informatieoverleg (SIO)", "WOO" → "Woo", "etc." →
    "enzovoorts", en `<<…>>`-markeringen die een link of een volzin zijn
    geworden ("technisch vernietigen (buiten scope, volgt op een later moment)"
    → "Technisch vernietigen valt op dit moment buiten de reikwijdte …").
-4. **Redactionele keuzes — de lijst om na te lopen (4, plus de herschreven
-   indicator uit de tabel hierboven)**:
-   - `01-beheer.md`: de site voegt een zin toe die niet in het normblad staat
-     ("Het DUTO-raamwerk van het Nationaal Archief werkt onder niveau van
-     maatregelen uit …, daarbij hoort ook de handreiking DUTO-risicobeoordeling").
-   - `02-overzicht.md`: "zwaarder **(archief)beheer**" is "zwaarder beheer"
-     geworden; dat laat de nuance van het haakje vallen.
-   - `06-vindbaar.md`: de indicator is herschreven van "een passende maatregel
-     met hierin een concrete invulling van de redelijke termijn moeten krijgen"
-     naar "de concrete termijn voor de vindbaarheid … kan worden vastgesteld".
-   - `08-periodieke-evaluatie.md`: de opsomming van normen volgt de
-     sitenaamgeving ("informatiebeveiliging en betrouwbaarheid", "gecontroleerd
-     vernietigen") in plaats van die van het normblad ("Informatiebeveiliging",
-     "Vernietiging").
-   - `over/opbouw-en-indeling.md`: "In dit toetsingskader wordt onderscheid
-     gemaakt tussen voorschriften, criteria en indicatoren" komt als zin niet
-     terug; de pagina legt hetzelfde uit in eigen bewoording.
+4. **Redactionele keuze (1)** — `08-periodieke-evaluatie.md` somt de normen op
+   in de sitenaamgeving ("informatiebeveiliging en betrouwbaarheid",
+   "gecontroleerd vernietigen") in plaats van die van het normblad
+   ("Informatiebeveiliging", "Vernietiging"). Bewust zo gelaten: de site voert
+   die namen overal.
+
+De andere redactionele keuzes zijn wél teruggedraaid naar de brontekst: de
+toegevoegde DUTO-zin in `01-beheer.md` is verwijderd, "zwaarder beheer" in
+`02-overzicht.md` is weer "zwaarder (archief)beheer", `06-vindbaar.md` schrijft
+weer "functie/rol" en heeft het ontbrekende derde criterium terug, en
+`over/opbouw-en-indeling.md` heeft de zin "In dit toetsingskader wordt
+onderscheid gemaakt tussen voorschriften, criteria en indicatoren" weer
+letterlijk.
 
 Eén valkuil in het rapport zelf: bij normblad 4 lijken drie voorschriften tot
 één te zijn samengevat, doordat het script per alinea de best gelijkende
@@ -92,11 +89,11 @@ en "kan … worden vastgelegd".
 
 | Normblad | Letterlijk | Alleen `<<…>>` | Voorschrift-vorm | Woordverschil | Niet gevonden |
 |---|---:|---:|---:|---:|---:|
-| 1) Normanalyse beheer | 16 | 9 | 4 | 8 | 2 |
-| 2) Normanalyse overzicht | 15 | 4 | 0 | 10 | 1 |
+| 1) Normanalyse beheer | 16 | 10 | 4 | 7 | 2 |
+| 2) Normanalyse overzicht | 15 | 5 | 0 | 9 | 1 |
 | 3) Normanalyse ordeningsstructuur | 9 | 2 | 1 | 3 | 0 |
 | 4) Normanalyse metadatering | 23 | 2 | 1 | 12 | 0 |
-| 5) Normanalyse vindbaarheid | 10 | 3 | 3 | 2 | 1 |
+| 5) Normanalyse vindbaarheid | 12 | 3 | 3 | 1 | 0 |
 | 6) Normanalyse vernietigen | 17 | 5 | 4 | 8 | 0 |
 | 7) Normanalyse Informatiebeveiliging | 12 | 4 | 0 | 4 | 0 |
 | 8) Normanalyse periodieke evaluatie | 10 | 1 | 2 | 5 | 1 |
@@ -124,9 +121,6 @@ en "kan … worden vastgelegd".
 - **Woordverschil** (65%): normblad **worden, en hiervoor**; site **worden; daarvoor**; normblad **beschreven zijn**; normblad **'document'.**; site **document beschreven zijn.**
   - normblad: "De beheerregeling moet samen met de omschrijving van de passende maatregelen worden gepubliceerd. Vervolgens moeten de passende maatregelen getroffen worden, en hiervoor moeten deze passende maatregelen in ieder geval beschreven zijn in een 'document'."
   - site: "De beheerregeling moet samen met de omschrijving van de passende maatregelen worden gepubliceerd. Vervolgens moeten de passende maatregelen getroffen worden; daarvoor moeten deze passende maatregelen in ieder geval in een document beschreven zijn."
-- **Woordverschil** (65%): site **invulling krijgen**; normblad **informatiebeheerplan invulling krijgen.**; site **informatiebeheerplan. Het DUTO-raamwerk van het Nationaal Archief werkt onder niveau van maatregelen uit welke overwegingen kunnen leiden tot een zwaarder of lichter niveau; daarbij hoort ook de handreiking DUTO-risicobeoordeling.**
-  - normblad: "Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een <<risicoanalyse>>, de <<periodieke evaluatie>> en eventueel ook op basis van een informatiebeheerplan invulling krijgen."
-  - site: "Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen invulling krijgen op basis van een risicoanalyse, de periodieke evaluatie en eventueel ook op basis van een informatiebeheerplan. Het DUTO-raamwerk van het Nationaal Archief werkt onder niveau van maatregelen uit welke overwegingen kunnen leiden tot een zwaarder of lichter niveau; daarbij hoort ook de handreiking DUTO-risicobeoordeling."
 - **Niet gevonden**: "Een document is in beheer van het verantwoordelijke overheidsorgaan zodat het duurzaam toegankelijk gemaakt en gehouden kan worden."
 - **Niet gevonden**: "Het verantwoordelijk overheidsorgaan heeft in de beheerregels, in ieder geval per categorie documenten, een omschrijving opgenomen van de passende maatregelen die het verantwoordelijke overheidsorgaan neemt om de documenten:"
 
@@ -147,9 +141,6 @@ en "kan … worden vastgelegd".
 - **Woordverschil** (97%): normblad **Dit**; site **Het**
   - normblad: "Dit overzicht bevat, indien van toepassing, de vindplaats van:"
   - site: "Het overzicht bevat, indien van toepassing, de vindplaats van:"
-- **Woordverschil** (95%): normblad **(archief)beheer**; site **beheer**
-  - normblad: "het onderbouwd keuzes maken welke documenten onder zwaarder <<(archief)beheer>> worden gebracht;"
-  - site: "het onderbouwd keuzes maken welke documenten onder zwaarder beheer worden gebracht;"
 - **Woordverschil** (79%): normblad **Het**; site **De Inspectie toetst of het**; normblad **geeft**; normblad **weer.**; site **weergeeft.**
   - normblad: "Het overzicht geeft de samenhang tussen (categorieën) documenten weer."
   - site: "De Inspectie toetst of het overzicht de samenhang tussen (categorieën) documenten weergeeft."
@@ -217,13 +208,9 @@ en "kan … worden vastgelegd".
 
 ### 5) Normanalyse vindbaarheid → `content/normen/06-vindbaar.md`
 
-- **Woordverschil** (98%): normblad **functie/rol.**; site **functie of rol.**
-  - normblad: "Document- en zoeksystemen passen deze bevoegdheden aantoonbaar toe, waardoor zoekresultaten verschillen per functie/rol."
-  - site: "Document- en zoeksystemen passen deze bevoegdheden aantoonbaar toe, waardoor zoekresultaten verschillen per functie of rol."
 - **Woordverschil** (76%): normblad **Indicatoren:Gebruikers met een vastgestelde bevoegdheid kunnen documenten (terug)vinden.**
   - normblad: "De organisatie hanteert interne normen of afspraken over de (maximale) tijd waarbinnen bevoegde gebruikers documenten moeten kunnen terugvinden. Indicatoren:Gebruikers met een vastgestelde bevoegdheid kunnen documenten (terug)vinden."
   - site: "De organisatie hanteert interne normen of afspraken over de (maximale) tijd waarbinnen bevoegde gebruikers documenten moeten kunnen terugvinden."
-- **Niet gevonden**: "Er is een risicoanalyse op basis waarvan kan worden bepaald welke categorieën documenten een passende maatregel met hierin een concrete invulling van de redelijke termijn moeten krijgen."
 
 ### 6) Normanalyse vernietigen → `content/normen/07-vernietigen.md`
 
@@ -290,7 +277,7 @@ en "kan … worden vastgelegd".
 
 | Normblad | Letterlijk | Alleen `<<…>>` | Voorschrift-vorm | Woordverschil | Niet gevonden |
 |---|---:|---:|---:|---:|---:|
-| 0) Introductie toetsingskader | 32 | 9 | 0 | 5 | 9 |
+| 0) Introductie toetsingskader | 33 | 9 | 0 | 4 | 9 |
 | 9) Onderwerpen en Verwijzingen | 15 | 0 | 0 | 2 | 0 |
 
 ### 0) Introductie toetsingskader → `de hele contentboom`
@@ -307,9 +294,6 @@ en "kan … worden vastgelegd".
 - **Woordverschil** (93%): normblad **Een**; site **Informatiebeveiliging en betrouwbaar: een**; normblad **categorieën**; site **categorie**
   - normblad: "Een risicobenadering voor de beveiliging is verplicht. De risicobenadering moet leiden tot passende maatregelen in de vorm van beheerregels voor de beveiliging van documenten. Hierbij is het mogelijk dat per categorieën verschillende beveiligingsregimes gelden."
   - site: "Informatiebeveiliging en betrouwbaar: een risicobenadering voor de beveiliging is verplicht. De risicobenadering moet leiden tot passende maatregelen in de vorm van beheerregels voor de beveiliging van documenten. Hierbij is het mogelijk dat per categorie verschillende beveiligingsregimes gelden."
-- **Woordverschil** (69%): normblad **In dit**; site **Hoe het**; normblad **wordt onderscheid gemaakt**; site **is opgebouwd en wat het verschil is**; normblad **voorschriften, criteria**; site **een voorschrift, een criterium**; normblad **indicatoren.**; site **een indicator.**
-  - normblad: "In dit toetsingskader wordt onderscheid gemaakt tussen voorschriften, criteria en indicatoren."
-  - site: "Hoe het toetsingskader is opgebouwd en wat het verschil is tussen een voorschrift, een criterium en een indicator."
 - **Niet gevonden**: "NB: dit document bevat stukken tekst die op een plek op de website worden gepubliceerd. De hieronder aangehouden volgorde is niet de volgorde op de website. Ieder "brok" tekst staat op zichzelf. De commentaarballonnen dienen als reminders bij het verwerken op de website."
 - **Niet gevonden**: "Op de website onder het kopje "Over" komen drie blokken tekst:"
 - **Niet gevonden**: "Inleiding -> andere naam voor het kopje"

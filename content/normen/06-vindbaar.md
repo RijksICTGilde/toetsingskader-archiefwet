@@ -44,6 +44,7 @@ De Inspectie toetst of het verantwoordelijke overheidsorgaan in de passende maat
 
 - Er zijn passende maatregelen met een concrete termijn voor de vindbaarheid van categorieën documenten.
 - Er is een risicoanalyse op basis waarvan de concrete termijn voor de vindbaarheid van categorieën documenten kan worden vastgesteld.
+- Er is een [risicoanalyse](/onderwerpen/passende-maatregelen/) op basis waarvan kan worden bepaald welke categorieën documenten een [passende maatregel](/onderwerpen/passende-maatregelen/) met hierin een concrete invulling van de redelijke termijn moeten krijgen.
 
 #### Indicatoren
 
@@ -92,7 +93,7 @@ De Inspectie toetst of documenten binnen een redelijke termijn vindbaar zijn voo
 #### Indicatoren
 
 - Gebruikers met een vastgestelde bevoegdheid kunnen documenten (terug)vinden.
-- Document- en zoeksystemen passen deze bevoegdheden aantoonbaar toe, waardoor zoekresultaten verschillen per functie of rol.
+- Document- en zoeksystemen passen deze bevoegdheden aantoonbaar toe, waardoor zoekresultaten verschillen per functie/rol.
 - Er zijn geen structurele omwegen nodig, zoals delen via e-mail of netwerkschijven, om documenten te vinden waarvoor men geautoriseerd is.
 
 ## Reikwijdte

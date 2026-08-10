@@ -32,7 +32,7 @@ In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurz
 [^aw-artikelen-4-1-4-2]: Aw, artikelen 4.1 en 4.2 en de toelichting in de Ar (Ar, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen – pagina 36).
 [^ab-nota-toelichting-passende-maatregelen]: Ab, Nota van toelichting, 1 Algemeen deel, Inleiding, passende maatregelen. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
-Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen invulling krijgen op basis van een [risicoanalyse](/onderwerpen/passende-maatregelen/), de [periodieke evaluatie](/normen/08-periodieke-evaluatie/) en eventueel ook op basis van een informatiebeheerplan.[^aw-memorie-toelichting-4-3-beheerstrategie] Het DUTO-raamwerk van het Nationaal Archief werkt onder [niveau van maatregelen](https://www.nationaalarchief.nl/archiveren/kennisbank/niveau-van-maatregelen-overwegingen-generiek-deel) uit welke overwegingen kunnen leiden tot een zwaarder of lichter niveau; daarbij hoort ook de handreiking DUTO-risicobeoordeling.
+Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](/onderwerpen/passende-maatregelen/), de [periodieke evaluatie](/normen/08-periodieke-evaluatie/) en eventueel ook op basis van een informatiebeheerplan invulling krijgen.[^aw-memorie-toelichting-4-3-beheerstrategie]
 
 [^aw-memorie-toelichting-4-3-beheerstrategie]: Aw, Memorie van toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 4.3 Duurzame toegankelijkheid, beheerstrategie.
 

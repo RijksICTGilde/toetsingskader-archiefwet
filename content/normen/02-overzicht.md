@@ -29,7 +29,7 @@ Een overzicht van de informatiehuishouding draagt bij aan:
 - de [vindbaarheid](/normen/06-vindbaar/) van documenten;[^ar-toelichting-overzicht-p34]
 - het herkennen van afhankelijkheden tussen [systemen](/onderwerpen/applicatie-en-systeem/);[^ar-toelichting-overzicht-p34]
 - het kennen van de samenhang tussen processen, documenten en systemen;[^ar-toelichting-overzicht-p34]
-- het onderbouwd keuzes maken welke documenten onder zwaarder [beheer](/normen/01-beheer/) worden gebracht;[^ar-toelichting-overzicht-p34]
+- het onderbouwd keuzes maken welke documenten onder zwaarder [(archief)beheer](/normen/01-beheer/) worden gebracht;[^ar-toelichting-overzicht-p34]
 - het bepalen en treffen van [passende maatregelen](/onderwerpen/passende-maatregelen/) voor duurzame toegankelijkheid;[^ar-toelichting-overzicht-p34]
 - het toepassen van geldende bewaartermijnen, zoals vastgelegd in [selectiebesluiten](/normen/07-vernietigen/).[^ar-toelichting-overzicht-p34]
 

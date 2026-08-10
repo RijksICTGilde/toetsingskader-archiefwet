@@ -246,10 +246,12 @@ print("""
 **Nee, niet alles staat er woord voor woord — maar er is geen tekst
 weggevallen en geen betekenis veranderd.**
 
-De 14 meldingen "Niet gevonden" zijn allemaal vals alarm. Vijf ervan zijn
+Van de oorspronkelijke veertien meldingen "Niet gevonden" was er één echt: het
+derde criterium bij het eerste voorschrift van normblad 5 stond niet op de site.
+Dat is toegevoegd. De overige dertien zijn vals alarm. Vijf ervan zijn
 plaatsingsinstructies uit het Word-bestand ("NB: dit document bevat stukken
 tekst die …", "Inleiding -> andere naam voor het kopje") en horen niet op de
-site. De overige negen staan er wel, alleen niet in het bestand waar het script
+site. De andere acht staan er wel, alleen niet in het bestand waar het script
 zocht of niet in dezelfde bewoording:
 
 | Normblad-alinea | Staat op |
@@ -257,14 +259,13 @@ zocht of niet in dezelfde bewoording:
 | "Een document is in beheer … gehouden kan worden" | `content/normen/_index.md` |
 | "… in ieder geval per categorie documenten, een omschrijving …" | `content/normen/01-beheer.md` |
 | "Het overzicht bevat, in het geval … meerdere ordeningsstructuren …" | `content/normen/02-overzicht.md` |
-| "Er is een risicoanalyse … invulling van de redelijke termijn …" | `content/normen/06-vindbaar.md` (herschreven) |
 | "Het archiefbeheer wordt … periodiek geëvalueerd …" | `kern` van `content/normen/08-periodieke-evaluatie.md` |
 | "Het toetsingskader omvat momenteel de onderwerpen … wit gearceerde …" | `content/samenhang.md` (herschreven naar het bollendiagram) |
 | "Dat documenten in beheer moeten zijn, is het fundament …" | `content/samenhang.md` |
 | "Het overzicht is te vinden op de website van de Inspectie …" | `content/over/doelgroep.md` |
 | "Algemene introductie - Toetsingskader overheidsinformatie …" | is een kop, geen lopende tekst |
 
-De 59 woordverschillen vallen uiteen in vier groepen:
+De 55 resterende woordverschillen vallen uiteen in vier groepen:
 
 1. **Correcties op het normblad (28)** — de site schrijft het goed waar het
    normblad een fout heeft: "emailapplicaties" → "e-mailapplicaties",
@@ -278,28 +279,24 @@ De 59 woordverschillen vallen uiteen in vier groepen:
    normbladzin en verplaatst daarvoor het werkwoord. Sitebrede afspraak; het
    script vangt de meeste hiervan al apart af (kolom "Voorschrift-vorm"), deze
    dertien vallen alleen op doordat de woordvolgorde te ver verschuift.
-3. **Afkortingen en verwijzingen voluit (14)** — "Ar" → "Archiefregeling",
+3. **Afkortingen en verwijzingen voluit (13)** — "Ar" → "Archiefregeling",
    "SIO" → "strategisch informatieoverleg (SIO)", "WOO" → "Woo", "etc." →
    "enzovoorts", en `<<…>>`-markeringen die een link of een volzin zijn
    geworden ("technisch vernietigen (buiten scope, volgt op een later moment)"
    → "Technisch vernietigen valt op dit moment buiten de reikwijdte …").
-4. **Redactionele keuzes — de lijst om na te lopen (4, plus de herschreven
-   indicator uit de tabel hierboven)**:
-   - `01-beheer.md`: de site voegt een zin toe die niet in het normblad staat
-     ("Het DUTO-raamwerk van het Nationaal Archief werkt onder niveau van
-     maatregelen uit …, daarbij hoort ook de handreiking DUTO-risicobeoordeling").
-   - `02-overzicht.md`: "zwaarder **(archief)beheer**" is "zwaarder beheer"
-     geworden; dat laat de nuance van het haakje vallen.
-   - `06-vindbaar.md`: de indicator is herschreven van "een passende maatregel
-     met hierin een concrete invulling van de redelijke termijn moeten krijgen"
-     naar "de concrete termijn voor de vindbaarheid … kan worden vastgesteld".
-   - `08-periodieke-evaluatie.md`: de opsomming van normen volgt de
-     sitenaamgeving ("informatiebeveiliging en betrouwbaarheid", "gecontroleerd
-     vernietigen") in plaats van die van het normblad ("Informatiebeveiliging",
-     "Vernietiging").
-   - `over/opbouw-en-indeling.md`: "In dit toetsingskader wordt onderscheid
-     gemaakt tussen voorschriften, criteria en indicatoren" komt als zin niet
-     terug; de pagina legt hetzelfde uit in eigen bewoording.
+4. **Redactionele keuze (1)** — `08-periodieke-evaluatie.md` somt de normen op
+   in de sitenaamgeving ("informatiebeveiliging en betrouwbaarheid",
+   "gecontroleerd vernietigen") in plaats van die van het normblad
+   ("Informatiebeveiliging", "Vernietiging"). Bewust zo gelaten: de site voert
+   die namen overal.
+
+De andere redactionele keuzes zijn wél teruggedraaid naar de brontekst: de
+toegevoegde DUTO-zin in `01-beheer.md` is verwijderd, "zwaarder beheer" in
+`02-overzicht.md` is weer "zwaarder (archief)beheer", `06-vindbaar.md` schrijft
+weer "functie/rol" en heeft het ontbrekende derde criterium terug, en
+`over/opbouw-en-indeling.md` heeft de zin "In dit toetsingskader wordt
+onderscheid gemaakt tussen voorschriften, criteria en indicatoren" weer
+letterlijk.
 
 Eén valkuil in het rapport zelf: bij normblad 4 lijken drie voorschriften tot
 één te zijn samengevat, doordat het script per alinea de best gelijkende
