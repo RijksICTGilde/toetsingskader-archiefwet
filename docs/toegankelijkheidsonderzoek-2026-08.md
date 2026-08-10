@@ -272,6 +272,48 @@ afkorting binnen een attribuutwaarde wrappen, en de voetnootvalidatie liet
 markeringen achter inline-markup (`**vet**[^x]`) door terwijl geen van de twee
 patronen in `normen/single.html` die kan matchen.
 
+### Tweede reviewronde 10 augustus 2026
+
+Een tweede ronde over dezelfde branch vond opnieuw tien defecten, waarvan de
+helft in de fixes van de eerste ronde. Dat is op zichzelf het vermelden waard:
+toegankelijkheidsfixes die niet worden nagemeten, doen vaak net niet wat ze
+beloven.
+
+* **Referenties was landmark noch kop (bevinding 8).** De `<h2>` in de
+  `<summary>` bleek niet te werken: HTML-AAM geeft `<summary>` de rol `button`,
+  en de kinderen van een knop zijn presentational. De `<section>` had bovendien
+  zijn `aria-label` verloren, en een section zonder naam is geen landmark. Wie
+  op koppen of landmarks navigeerde, had dus géén sprong naar de bronnenlijst —
+  precies het gat dat bevinding 8 dichtte. De `aria-label` staat er weer bij.
+* **Elke bron werd twee keer voorgelezen (bevindingen 7 en 27).**
+  `aria-describedby` wees naar de hele tooltip. Daar zit sinds bevinding 27 ook
+  de "Bekijk bron"-link in, met een `aria-label` dat de brontekst woordelijk
+  herhaalt — en sinds de nieuw-venster-melding kwam daar een derde zinsdeel bij.
+  Het doel is nu alleen de brontekst.
+* **Besloten links misten de nieuw-venster-melding (bevinding 23).** De guard
+  sloeg elke link met een `.visually-hidden`-span over. Het thema zet die class
+  op " (besloten omgeving)" bij private links, en die openen óók in een nieuw
+  venster. De guard kijkt nu naar een eigen markerclass.
+* **De focusring was dunner dan bedoeld (bevinding 1e).** `stroke-width: 3` is
+  in SVG-gebruikerseenheden. Met een viewBox van 480 op maximaal 600px
+  gerenderd is dat 3,75px op een breed scherm en circa 2px op 320px. Nu 3px
+  overal, met `vector-effect: non-scaling-stroke`.
+* **Het draft-voorbehoud hing aan `show_lastmod`.** Een nieuwe pagina zonder
+  dat veld verliest het voorbehoud zonder dat iets dat opmerkt.
+  `scripts/a11y-scan.mjs` controleert het nu per pagina.
+
+**De voetnootcontrole is verhuisd.** De controle die in de eerste ronde in
+`scripts/validate-norms.py` werd geschreven, probeerde te voorspellen wat
+Goldmark en `normen/single.html` van een markering zouden maken. Dat werkte
+twee kanten op verkeerd: het weigerde geldige tekst (`veld_[^x]` is een liggend
+streepje, geen cursief) en liet stukke tekst door (`~~doorhaling~~[^x]`, een
+link met opgemaakte linktekst, een markering aan het begin van een regel). Die
+controle is vervangen door een controle op de gerenderde HTML: elke
+`a.footnote-ref` die na de transformatie nog in de pagina staat, is een
+markering zonder ref-term en zonder tooltip. Dat is geen voorspelling maar een
+waarneming, dekt ook de oorzaken die niemand heeft bedacht, en kan per definitie
+geen geldige content weigeren.
+
 ### Verificatie
 
 `hugo && npm run test:a11y` → **12 pagina's, 0 overtredingen** (was: 9
