@@ -154,8 +154,14 @@ abbr[title] {
    Resultaat: de UA-default (geel) met de geërfde linkkleur erop, wat in een
    linklijst onder de 4,5:1 duikt. Zelfde tokenpaar als het thema gebruikt
    (11,4:1). Upstream-kandidaat: selector en JS met elkaar in overeenstemming
-   brengen — hugo-theme-rijksoverheid#11. */
-main mark {
+   brengen — hugo-theme-rijksoverheid#11.
+
+   Bewust niet op `main mark` gescopet: de gemarkeerde treffer die axe vond zit
+   in een zoekresultaat (`li > a > mark`), en het zoekvenster is een <dialog>
+   buiten <main>. Het thema stylet dáár alleen `mark` binnen
+   `.search-result-title`/`.search-result-snippet`, niet een `mark` die een
+   direct kind van de resultaatlink is. */
+mark {
   background-color: var(--color-highlight);
   color: var(--color-highlight-text);
 }
