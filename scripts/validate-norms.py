@@ -59,8 +59,13 @@ ID_RE = re.compile(r"^[a-z0-9-]+$")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*$")
 FN_DEF_RE = re.compile(r"^\[\^([^\]]+)\]:")
 FN_USE_RE = re.compile(r"\[\^([^\]]+)\]")
-# Een definitieregel die na de marker niets anders bevat dan de bronlink.
-FN_DEF_ALLEEN_LINK_RE = re.compile(r"^\[[^\]]*\]\([^)]*\)\s*$")
+# Een definitieregel waarvan het hele lichaam de "Bekijk bron"-link is. De
+# linktekst moet er letterlijk in staan: normen/single.html splitst alléén een
+# link met precies die tekst af (`^(.*?)\s*(<a …>Bekijk bron</a>)\s*$`). Een
+# definitie met een beschrijvende linktekst — `[Module 1 - De waarde van …](…)`
+# — matcht dat patroon niet, houdt de hele <a> als brontekst en levert dus een
+# gevulde tooltip op. Die mag hier niet worden afgekeurd.
+FN_DEF_ALLEEN_BRONLINK_RE = re.compile(r"^\[Bekijk bron\]\([^)]*\)\s*$")
 
 # Waar de controle op voetnootplaatsing gebleven is
 # -------------------------------------------------
@@ -269,7 +274,15 @@ def validate_footnotes(name, body_lines, body_start, errors):
             # focust, hoort de bron niet — precies wat de tooltip moet leveren.
             # Het aria-label van de link wordt dan bovendien "Bekijk bron: ",
             # waarmee bevinding 27 (elke bronlink een eigen naam) weer stuk is.
-            if FN_DEF_ALLEEN_LINK_RE.match(scan.strip()):
+            lichaam = scan.strip()
+            if not lichaam:
+                errors.append(Error(
+                    name,
+                    f"Voetnoot [^{fid}] heeft geen brontekst. Zet de bron achter de marker "
+                    "(bijvoorbeeld 'Aw, artikel 4.1, eerste lid.'), anders krijgt de "
+                    "verwijzing in de tekst een lege tooltip",
+                    lineno))
+            elif FN_DEF_ALLEEN_BRONLINK_RE.match(lichaam):
                 errors.append(Error(
                     name,
                     f"Voetnoot [^{fid}] bestaat alleen uit een 'Bekijk bron'-link. Zet de "

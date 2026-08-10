@@ -28,6 +28,19 @@
      --------------------------------------------------------------------- */}}
 {{- $html := . -}}
 {{- $out := slice -}}
+{{/* Sleutels mogen alleen letters en cijfers bevatten. De match hieronder staat
+     tussen `\b`-grenzen, en een `\b` na een leesteken vraagt een woordteken aan
+     de andere kant — `\bart\.\b` matcht daarom nóóit "art. 5". Een sleutel als
+     `art.` zou dus stilzwijgend niets doen: geen buildfout, geen <abbr>, en de
+     3.1.4-uitleg die dit partial moet leveren blijft weg. Vandaar een harde
+     controle in plaats van een belofte in een commentaar. */}}
+{{- $sleutels := slice -}}
+{{- range $afkorting, $voluit := site.Data.afkortingen -}}
+  {{- if not (findRE `^[\p{L}\p{N}]+$` $afkorting) -}}
+    {{- errorf "data/afkortingen.yaml: sleutel %q mag alleen letters en cijfers bevatten; met een leesteken erin matcht \\b…\\b nooit" $afkorting -}}
+  {{- end -}}
+  {{- $sleutels = $sleutels | append $afkorting -}}
+{{- end -}}
 {{/* Splitsen op "<" geeft: chunk 0 is tekst, elke volgende chunk is
      "taginhoud>tekst". Een chunk zonder ">" kan geen tag zijn (losse "<" in de
      tekst) en wordt daarom in zijn geheel als tekst behandeld. Bij het
@@ -52,24 +65,24 @@
        voor de invoer. Vandaag komt geen enkele afkorting voor in de uitgeschreven
        vorm van een andere, maar dat is een eigenschap van data/afkortingen.yaml
        en niet van deze code; het bestand nodigt uit tot uitbreiden. */}}
-  {{- range $afkorting, $voluit := site.Data.afkortingen -}}
+  {{/* De sentinel is het volgnummer, niet de afkorting zelf. Met de afkorting
+       erin zou fase 1 alsnog binnen een al geschreven sentinel kunnen matchen
+       zodra één sleutel als heel woord in een andere voorkomt — precies wat
+       twee fasen moeten uitsluiten. Een cijfer tussen \x00 en \x01 kan door geen
+       enkele sleutel worden geraakt, want sleutels bestaan uit letters en
+       cijfers en `\b` slaat niet aan op \x00. */}}
+  {{- range $i, $afkorting := $sleutels -}}
     {{/* \b voorkomt treffers binnen een woord ("Ar" in "Archiefregeling").
-         De match is hoofdlettergevoelig.
-
-         De sleutel wordt geëscaped vóór hij in het patroon gaat: hij komt
-         ongezien uit een datafile en gaat als Go-RE2-expressie de compiler in.
-         Een voor de hand liggende uitbreiding als `art.: "artikel"` zou anders
-         `\bart.\b` opleveren, waarin de punt elk teken matcht — dan krijgt
-         "arts" de uitleg "artikel" en wordt "art." zelf juist gemist. */}}
-    {{- $patroon := replaceRE `([.\\+*?()|\[\]{}^$])` `\${1}` $afkorting -}}
-    {{- $tekst = replaceRE (printf `\b%s\b` $patroon) (printf "\x00%s\x01" $afkorting) $tekst -}}
+         De match is hoofdlettergevoelig. */}}
+    {{- $tekst = replaceRE (printf `\b%s\b` $afkorting) (printf "\x00%d\x01" $i) $tekst -}}
   {{- end -}}
-  {{- range $afkorting, $voluit := site.Data.afkortingen -}}
+  {{- range $i, $afkorting := $sleutels -}}
     {{/* `htmlEscape` op de uitgeschreven vorm: die gaat een attribuutwaarde in.
          Een aanhalingsteken of ampersand in de YAML zou de <abbr>-tag anders
          openbreken, en dan is de uitleg die dit partial bestaansrecht geeft
          (WCAG 3.1.4) stilzwijgend weg — zonder buildfout en zonder scanmelding. */}}
-    {{- $tekst = replace $tekst (printf "\x00%s\x01" $afkorting) (printf `<abbr title="%s">%s</abbr>` (htmlEscape $voluit) $afkorting) -}}
+    {{- $voluit := index site.Data.afkortingen $afkorting -}}
+    {{- $tekst = replace $tekst (printf "\x00%d\x01" $i) (printf `<abbr title="%s">%s</abbr>` (htmlEscape $voluit) $afkorting) -}}
   {{- end -}}
   {{- $out = $out | append (printf "%s%s" $tag $tekst) -}}
 {{- end -}}

@@ -22,8 +22,10 @@
 // Goldmark-voetnoot correct en volledig toegankelijk: nummer, link naar de
 // bronnenlijst en een backlink terug. Die hier melden zou een CI-fout opleveren
 // die alleen te verhelpen is door de bronvermelding weg te halen.
+// `/normen/` zelf hoort er níét bij: dat is de sectie-index, gerenderd door een
+// list-template, en ook daar draait de transformatie niet.
 export function zwevendeVoetnootFouten(document, url) {
-  if (!url.startsWith('/normen/')) return []
+  if (!url.startsWith('/normen/') || url === '/normen/') return []
   return [...document.querySelectorAll('a.footnote-ref')].map(a => a.getAttribute('href') || '(zonder href)')
 }
 
@@ -91,10 +93,18 @@ export const DECORATIEF = new Map([
 // extensie eraf, dan Hugo's image-processing-suffix (`_hu_<hex>`) en een
 // eventuele fingerprint-hash. Zonder dat verandert de sleutel bij elke
 // hercompressie van de afbeelding.
-export const zonderHash = src => (src || '')
-  .replace(/\.[a-z0-9]+$/i, '')
-  .replace(/_hu_[0-9a-f]+$/i, '')
-  .replace(/\.[0-9a-f]{32,}$/i, '')
+// Beide suffixen kunnen samen voorkomen (Hugo verwerkt de afbeelding én zet er
+// een fingerprint op), en in beide volgordes. Daarom in een lus tot er niets
+// meer af gaat, en niet één keer per patroon: `$`-geankerde vervangingen op een
+// vaste volgorde laten de tweede combinatie ongemoeid.
+export const zonderHash = src => {
+  let s = (src || '').replace(/\.[a-z0-9]+$/i, '')
+  for (let vorig = null; vorig !== s;) {
+    vorig = s
+    s = s.replace(/_hu_[0-9a-f]+$/i, '').replace(/\.[0-9a-f]{32,}$/i, '')
+  }
+  return s
+}
 
 export function legeAltFouten(document) {
   return [...document.querySelectorAll('img[alt=""]')]

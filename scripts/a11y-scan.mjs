@@ -42,7 +42,10 @@ let total = 0
 // Eén keer vooraf: klopt de zin in a11y-checks.mjs nog met de partial die hem
 // rendert? Zo niet, dan zou elke pagina hieronder rood worden met een melding
 // die naar de verkeerde oorzaak wijst.
-const bronFout = voorbehoudBronFout(fs.readFileSync('layouts/_partials/versie-zin.html', 'utf8'))
+// Pad relatief aan dit script, niet aan de werkdirectory: de scan wordt ook
+// vanuit een andere map aangeroepen en zou daar met ENOENT klappen.
+const versieZinPad = new URL('../layouts/_partials/versie-zin.html', import.meta.url)
+const bronFout = voorbehoudBronFout(fs.readFileSync(versieZinPad, 'utf8'))
 if (bronFout) {
   total++
   console.log(`— draft-voorbehoud [moderate] 1x: ${bronFout}`)
@@ -81,7 +84,7 @@ for (const file of files) {
   for (const src of legeAltFouten(dom.window.document)) {
     total++
     console.log(`${url} — lege-alt [serious] 1x: alt="" op een afbeelding die niet als decoratief is aangemerkt`)
-    console.log(`    ${src} — vul de alt, of zet het pad in DECORATIEF in ${path.relative(process.cwd(), new URL(import.meta.url).pathname)}`)
+    console.log(`    ${src} — vul de alt, of zet het pad in DECORATIEF in scripts/a11y-checks.mjs`)
   }
   dom.window.close()
 }
