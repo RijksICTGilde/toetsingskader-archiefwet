@@ -57,6 +57,9 @@ opgelost](#wat-er-is-opgelost-op-deze-branch) voor de gemaakte wijzigingen.
 | 26 | Niet-tekstcontrast van de knopranden in de balk | 1.4.11 | AA | nee (zie toelichting) | ongewijzigd — geen fail |
 | 27 | Herhaalde linktekst "Bekijk bron" | 2.4.9 | AAA | nee | opgelost (10 augustus 2026) |
 | 28 | Afkortingen Aw, Ab, Ar, DUTO, SIO nergens uitgeschreven | 3.1.4 | AAA | nee | opgelost (10 augustus 2026) |
+| **29** | Inhoudsopgavelinks halen de doelgrootte niet | 2.5.8 | AA | ja | opgelost (10 augustus 2026) |
+| **30** | Gesloten bron-tooltip veroorzaakt 175px horizontale overloop op 320px | 1.4.10 | AA | ja | opgelost voor ≤480px; positionering open tooltip = [thema-issue #10](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/10) |
+| **31** | Zoektermmarkering in een link: contrast onder 4,5:1 | 1.4.3 | AA | ja | opgelost (10 augustus 2026) |
 
 **Kern van het beeld:** het fundament is goed (semantiek, koppenhiërarchie,
 tekstcontrast, `prefers-reduced-motion`, een echte `<dialog>` voor zoeken), maar
@@ -154,6 +157,42 @@ een toetsenborddoorloop op focusindicator en focus-niet-afgedekt — inclusief d
 variant `?q=…`, de situatie van bevinding 17. Draait in CI naast de jsdom-scan
 (`npm run test:a11y:browser`). Bouwt apart met `--baseURL /`, anders verwijzen CSS
 en JS naar het productiedomein en meet je een pagina zonder stylesheet.
+
+**Drie nieuwe bevindingen uit de eerste browserrun (29, 30, 31).** Alle drie
+AA-blokkerend, alle drie onvindbaar zonder layout-engine — precies waarom deze
+tests er zijn. Het handmatige rekenwerk van 6 augustus miste ze: de doelgrootte
+van de inhoudsopgavelinks stond in dit rapport zelfs als "voldoet".
+
+* **29 — inhoudsopgavelinks halen de doelgrootte niet (2.5.8, AA).** Het thema
+  zet `.toc ul ul li { margin-bottom: 0 }` (`layout.css:203-205`), waardoor de
+  subniveaus tegen elkaar aan staan: de links zijn geen 24 px hoog en hebben ook
+  geen 24 px onderlinge ruimte, dus beide routes van 2.5.8 falen. Opgelost met
+  `display: block` plus `padding-block: 0.25rem` op `.toc nav a` in `main.css`.
+* **30 — de gesloten bron-tooltip rekt de pagina op (1.4.10, AA).**
+  `.ref-tooltip` is `position: absolute` met `min-inline-size: 14rem` en
+  `inset-inline-start: 0`; `visibility: hidden` haalt hem niet uit de layout. Op
+  320 px levert dat **175 px horizontale overloop**, dus een horizontale
+  scrollbalk voor de hele pagina terwijl er niets breed te zien is. Hier
+  opgelost door de gesloten tooltip op ≤480 px uit de layout te halen
+  (`display: none`); dat raakt `aria-describedby` niet, want de naamberekening
+  leest verborgen doelen wel. De positionering van de *open* tooltip op smalle
+  schermen hoort bij de ongebruikte thema-hook `--ref-offset-x` en staat als
+  aanvulling op [thema-issue
+  #10](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/10).
+* **31 — de zoektermmarkering in een link haalt het contrast niet (1.4.3, AA).**
+  Het thema stylet alleen `#main-content mark[data-search-highlight]`
+  (`search.css:215-218`), maar `highlightTextNodes` maakt een kale `<mark>`
+  zonder dat attribuut. Zonder styling geldt de UA-default (geel) met de geërfde
+  linkkleur erop. Hier opgelost met een eigen regel op `main mark` met hetzelfde
+  tokenpaar (11,4:1); de selector/JS-mismatch staat als aanvulling op [thema-issue
+  #11](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/11).
+
+Bevinding 18 blijft staan en is nu ook gemeten: de hero knipt op 320 px al 8 px
+weg bij normale tekstgrootte en 108 px bij 200%. Omdat de fix in het thema zit
+(#12), staat die ene regel in de `KNOWN`-lijst van
+`scripts/a11y-browser.mjs` en degradeert hij tot waarschuwing — anders houdt hij
+elke PR rood en wordt de scan genegeerd in plaats van gelezen. Haal het item weg
+zodra #12 rond is.
 
 **htmltest-configuratie.** `IgnoreAltEmpty: true` in `.htmltest.yml`. htmltest
 zag de `alt=""` van de decoratieve hero (de fix van bevinding 20) als fout,
@@ -732,7 +771,9 @@ Expliciet gecontroleerd en in orde:
 * **Doelgroottes (2.5.8, AA)** voldoen: header-knoppen 32 px, mobiele knoppen
   `min-height: 55px`, inhoudsopgave-knop 40 px, sluitknop zoekvenster 28 px,
   zoekresultaten ≥46 px, diagrambollen r=42–80. Breadcrumblinks komen op ~22 px
-  maar vallen onder de inline-uitzondering.
+  maar vallen onder de inline-uitzondering. **Correctie 10 augustus 2026:** de
+  *links* in de inhoudsopgave voldeden niet — zie bevinding 29. Dit is met de
+  hand nagerekend en fout gerekend; de browserrun vond het wel.
 * **Zoom** — `width=device-width, initial-scale=1.0`, geen `maximum-scale` of
   `user-scalable=no`.
 * **2.4.5 Multiple Ways (AA)** — hoofdnavigatie, zoekfunctie, breadcrumb,

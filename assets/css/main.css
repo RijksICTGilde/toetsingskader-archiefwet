@@ -147,3 +147,50 @@ abbr[title] {
   text-underline-offset: 0.15em;
   cursor: help;
 }
+
+/* De zoektermmarkering op een pagina met ?q=… (WCAG 1.4.3). Het thema stylet
+   alléén `#main-content mark[data-search-highlight]` (search.css:215-218), maar
+   `highlightTextNodes` in de thema-JS maakt een kale <mark> zonder dat attribuut.
+   Resultaat: de UA-default (geel) met de geërfde linkkleur erop, wat in een
+   linklijst onder de 4,5:1 duikt. Zelfde tokenpaar als het thema gebruikt
+   (11,4:1). Upstream-kandidaat: selector en JS met elkaar in overeenstemming
+   brengen — hugo-theme-rijksoverheid#11. */
+main mark {
+  background-color: var(--color-highlight);
+  color: var(--color-highlight-text);
+}
+
+/* Doelgrootte van de inhoudsopgavelinks (WCAG 2.5.8, AA). Het thema zet
+   `.toc ul ul li { margin-bottom: 0 }`, waardoor de subniveaus tegen elkaar aan
+   staan: de links zijn geen 24px hoog en hebben ook geen 24px onderlinge
+   ruimte, dus beide routes van 2.5.8 falen. Als block-element met verticale
+   padding is de link zelf ruim 24px, en dat vergroot en-passant het klikvlak. */
+.toc nav a {
+  display: block;
+  padding-block: 0.25rem;
+}
+
+/* Reflow op 320px (WCAG 1.4.10). Een gesloten `.ref-tooltip` is
+   `position: absolute` met `min-inline-size: 14rem` (224px) en
+   `inset-inline-start: 0` ten opzichte van de term. Staat die term rechts in de
+   regel, dan rekt de tooltip de scrollbare breedte op — op 320px levert dat
+   ~175px horizontale overloop, en dus een horizontale scrollbalk voor de hele
+   pagina terwijl er niets breed te zien is. Het thema heeft er een hook voor
+   (`--ref-offset-x`) maar zet die nergens.
+
+   Op smalle schermen halen we de gesloten tooltip daarom uit de layout. Dat
+   raakt de toegankelijke beschrijving niet: `aria-describedby` verwijst naar de
+   tooltip, en de naamberekening leest verborgen doelen wel. Alleen op ≤480px,
+   zodat de fade op desktop intact blijft. */
+@media (max-width: 480px) {
+  .ref-tooltip {
+    display: none;
+  }
+
+  .ref-wrapper:hover > .ref-tooltip,
+  .ref-wrapper:focus-within > .ref-tooltip {
+    display: block;
+    min-inline-size: 0;
+    max-inline-size: calc(100vw - 2rem);
+  }
+}

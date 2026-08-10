@@ -27,6 +27,9 @@
 //                     #12). Fataal maken zou elke PR rood maken tot upstream
 //                     het oplost.
 //   tekstafstand    — zelfde meting, andere trigger (1.4.12)
+// Losse bevindingen die elders belegd zijn, staan in `KNOWN` en worden ook
+// gedegradeerd tot waarschuwing, mét de reden in de log.
+//
 // Zet A11Y_BROWSER_STRICT=1 om álle categorieën fataal te maken; doe dat zodra
 // thema-issue #12 rond is.
 import { chromium } from 'playwright'
@@ -40,6 +43,18 @@ const STRICT = process.env.A11Y_BROWSER_STRICT === '1'
 const axeSrc = fs.readFileSync(createRequire(import.meta.url).resolve('axe-core'), 'utf8')
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']
 const FATAL = ['axe:', 'reflow-320']
+
+// Bekende bevindingen die elders belegd zijn. Ze blijven in de log staan, maar
+// als waarschuwing: fataal maken zou elke PR rood houden tot het thema is
+// bijgewerkt, en dan wordt de scan genegeerd in plaats van gelezen. Elk item
+// verwijst naar het issue dat het afhandelt; haal het weg zodra dat rond is.
+const KNOWN = [
+  {
+    category: 'reflow-320',
+    match: /^div\.hero\b/,
+    reason: 'hugo-theme-rijksoverheid#12 — .hero heeft een vaste hoogte met overflow hidden',
+  },
+]
 
 // 320 x 512 CSS-px is de reflow-eis van 1.4.10 (1280px bij 400% zoom).
 const REFLOW = { width: 320, height: 512 }
@@ -257,14 +272,16 @@ for (const url of [...urls, ...extra]) {
 await browser.close()
 server.close()
 
-const isFatal = f => STRICT || FATAL.some(prefix => f.category.startsWith(prefix))
+const known = f => KNOWN.find(k => k.category === f.category && k.match.test(f.message))
+const isFatal = f => STRICT || (FATAL.some(prefix => f.category.startsWith(prefix)) && !known(f))
 const all = [...findings.values()]
 const fatal = all.filter(isFatal)
 const warn = all.filter(f => !isFatal(f))
 
 for (const f of [...fatal, ...warn]) {
   const pages = f.count > 1 ? ` [${f.count} pagina's, o.a. ${f.url}]` : ` [${f.url}]`
-  console.log(`${isFatal(f) ? 'FOUT' : 'WAAR'} [${f.category}] ${f.message}${pages}`)
+  const belegd = known(f) ? ` — bekend: ${known(f).reason}` : ''
+  console.log(`${isFatal(f) ? 'FOUT' : 'WAAR'} [${f.category}] ${f.message}${pages}${belegd}`)
 }
 console.log(`\n${urls.length + extra.length} pagina's: ${fatal.length} fout(en), ${warn.length} waarschuwing(en).`)
 if (!STRICT && warn.length) {
