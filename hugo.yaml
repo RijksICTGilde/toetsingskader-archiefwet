@@ -57,7 +57,9 @@ params:
     priority_sections:
       - normen
       - onderwerpen
+      - samenhang
       - over
+      - home
   back_to_top: true
   tagline: "Normen voor duurzame toegankelijkheid"
   footer:
