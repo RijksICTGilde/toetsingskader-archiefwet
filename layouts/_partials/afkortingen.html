@@ -1,39 +1,22 @@
 {{/* ---------------------------------------------------------------------
      Afkortingen uitschrijven — WCAG 3.1.4 (bevinding 28).
 
-     Wrapt elke losse afkorting uit `data/afkortingen.yaml` in een
-     `<abbr title="…">`. Input en output zijn een HTML-string:
+     Wrapt elke afkorting uit `data/afkortingen.yaml` in een `<abbr title="…">`.
+     HTML-string in, HTML-string uit: {{ $html = partial "afkortingen.html" $html }}
 
-       {{ $html = partial "afkortingen.html" $html }}
+     Template-side, omdat de afkortingen vooral in de bronteksten van de
+     voetnoten staan, die als tooltip én in de referentielijst terugkomen. In de
+     markdown zou het 34 tags vragen, en `unsafe: false` verbiedt inline HTML.
 
-     Waarom template-side en niet in de content: vrijwel alle afkortingen
-     staan in de bronteksten van de voetnoten ("Aw, artikel 4.2, eerste
-     lid"), die als tooltip én in de referentielijst worden hergebruikt.
-     Eén pass over die HTML dekt ze allemaal; in de markdown zou het 34
-     handmatige `<abbr>`-tags vragen, en `unsafe: false` staat inline HTML
-     in de content bovendien niet toe.
-
-     De pass loopt alléén over tekst tussen de tags. Dat is nodig omdat de
-     invoer hier volledige HTML is, inclusief attribuutwaarden: de
-     referentielijst gaat er als hele `<ol>` doorheen, mét href's, en de
-     `aria-label`s van bevinding 27 bevatten de brontekst woordelijk. Een
-     kale `replaceRE` over de string wrapt een afkorting in zo'n waarde ook,
-     en dan staat er een `<abbr>`-tag binnen een attribuut: kapotte markup en
-     een dode link. Vandaag valt dat nog mee omdat de bron-URL's `duto` in
-     kleine letters schrijven, maar dat is een toevalligheid van de huidige
-     content, geen eigenschap van de code.
-
-     Omdat tags worden overgeslagen, is de aanroeporde niet langer kritisch:
-     deze pass mag ook ná het toevoegen van attributen draaien.
+     De pass slaat tags over. De invoer is volledige HTML, inclusief href's en de
+     aria-labels van bevinding 27; een kale replaceRE zou een `<abbr>` binnen een
+     attribuutwaarde zetten. Daardoor is ook de aanroeporde niet kritisch.
      --------------------------------------------------------------------- */}}
 {{- $html := . -}}
 {{- $out := slice -}}
-{{/* Sleutels mogen alleen letters en cijfers bevatten. De match hieronder staat
-     tussen `\b`-grenzen, en een `\b` na een leesteken vraagt een woordteken aan
-     de andere kant — `\bart\.\b` matcht daarom nóóit "art. 5". Een sleutel als
-     `art.` zou dus stilzwijgend niets doen: geen buildfout, geen <abbr>, en de
-     3.1.4-uitleg die dit partial moet leveren blijft weg. Vandaar een harde
-     controle in plaats van een belofte in een commentaar. */}}
+{{/* Alleen letters en cijfers in sleutels: de match staat tussen `\b`-grenzen en
+     `\bart\.\b` matcht nooit "art. 5". Zo'n sleutel zou stilzwijgend niets doen,
+     dus een harde controle in plaats van een belofte. */}}
 {{- $sleutels := slice -}}
 {{- range $afkorting, $voluit := site.Data.afkortingen -}}
   {{- if not (findRE `^[\p{L}\p{N}]+$` $afkorting) -}}

@@ -1,20 +1,14 @@
 // Scroll-spy voor de "Op deze pagina"-TOC: highlight de sectie waar je bent.
 //
-// Het thema heeft een eigen scroll-spy (toc.js), maar die kijkt naar álle
-// h2/h3/h4[id]-koppen — óók de voorschrift/criteria/indicatoren (h4) die niet in
-// de TOC staan, en niet naar de Toelichting (die is een <summary>, geen <h2>).
-// Zit je in een h4-blok, dan vindt het thema geen TOC-link en verdwijnt de
-// highlight (sporadisch, springerig gedrag).
-//
-// Deze versie kijkt alléén naar koppen die écht een TOC-link hebben (de
-// link-targets), zodat de actieve sectie vloeiend meeloopt. Registratie op
-// `load` zodat hij ná de thema-scroll-spy draait en wint.
+// De scroll-spy van het thema (toc.js) kijkt naar álle h2/h3/h4[id], ook naar
+// koppen zonder TOC-link; in zo'n blok verdwijnt de highlight. Deze versie volgt
+// alleen de link-targets. Registratie op `load`, zodat hij van het thema wint.
 (function () {
   function setup() {
     var toc = document.getElementById('toc');
     if (!toc) return;
 
-    // TOC-links → hun doelkop, in documentvolgorde.
+    // TOC-links → doelkop, in documentvolgorde.
     var entries = [];
     toc.querySelectorAll('a[href^="#"]').forEach(function (link) {
       var id = decodeURIComponent(link.getAttribute('href').slice(1));

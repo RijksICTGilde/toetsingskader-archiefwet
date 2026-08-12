@@ -1,47 +1,29 @@
 {{/*
-  Shortcode: bollendiagram
-  Hub-and-spoke-visualisatie van "Informatie in beheer" met de samenhangende
-  normen. De norm in beheer staat centraal; de zeven andere normen liggen
-  gelijkmatig in een cirkel eromheen, verbonden via dunne spokes.
-  De gevulde bollen zijn toetsenbord-navigeerbaar (focus zichtbaar via een
-  losse ring buiten de bol, zie .bd-focus-ring). Onder een scheidingslijn staan
-  de vervaagde onderwerpen die later worden toegevoegd.
+  Shortcode: bollendiagram — hub-and-spoke met "Informatie in beheer" centraal en
+  de zeven samenhangende normen eromheen. Onder een scheidingslijn staan de
+  vervaagde onderwerpen die later komen.
 
-  Tekenvolgorde (paint-order): eerst de spokes, dan de cirkels eroverheen (de
-  opake fills verbergen de spoke-uiteinden), dan de toekomst-bollen en als
-  laatste alle labels in een aparte groep bovenop. Zo overschildert niets de
-  tekst.
+  Tekenvolgorde: spokes, dan de cirkels (opake fills verbergen de spoke-uiteinden),
+  dan de toekomst-bollen, en als laatste alle labels in een eigen groep bovenop.
 
   Toegankelijkheid:
-  - De SVG heeft `role="group"`, NIET `role="img"`: een img is voor hulpsoftware
-    één bladknoop, waardoor de acht focusbare normlinks eruit vallen
-    (axe: nested-interactive).
-  - Elke <a> draagt een `aria-label`. Een SVG-<title> als kind van een SVG-<a>
-    wordt niet betrouwbaar als toegankelijke naam gebruikt (axe: link-name);
-    de <title> blijft staan voor de browser-tooltip.
-  - De labellaag is aria-hidden (zou de linknamen dupliceren). De vier
-    toekomst-onderwerpen staan daarom bij naam in de figcaption, en onder het
-    diagram staat een gewone lijst met dezelfde acht normlinks — het diagram is
-    dan niet de enige route naar de normen.
+  - `role="group"`, NIET `role="img"`: een img is één bladknoop en de acht
+    normlinks vallen er dan uit (axe: nested-interactive).
+  - Elke <a> draagt een `aria-label`; een SVG-<title> in een SVG-<a> geldt niet
+    betrouwbaar als naam (axe: link-name). De <title> blijft voor de tooltip.
+  - De labellaag is aria-hidden. De toekomst-onderwerpen staan daarom in de
+    figcaption, en onder het diagram staat dezelfde lijst normlinks.
 
-  De volgorde van $normen volgt de tekenvolgorde van de bollen, niet het
-  normnummer: index 0 is de centrale bol, daarna met de klok mee vanaf boven.
-  De namen zijn de `norm_titel` uit de front matter van de normpagina's.
+  $normen volgt de tekenvolgorde, niet het normnummer: index 0 is de centrale
+  bol, daarna met de klok mee vanaf boven.
 */}}
 
-{{/* `naam` is de tekst die in de bol staat (de <text>-laag hieronder, met de
-     hand over regels verdeeld en op coördinaat gezet) én de toegankelijke naam
-     van de link. Die twee moeten gelijk blijven: WCAG 2.5.3 Label in Name eist
-     dat de toegankelijke naam de zichtbare tekst bevat. Daarom staat de naam
-     hier en wordt hij niet uit de front matter gelezen — anders zou een
-     hernoemde norm wél de aria-label veranderen en niet het label in de plaat.
-
-     Wat de front matter zegt, wordt wel gecontroleerd: de lus onder deze slice
-     waarschuwt bij elke bol waarvan de naam afwijkt van `norm_titel`. Vandaag
-     is dat er één — norm 1 heet in de plaat "Informatie in beheer" en in de
-     front matter "Inbeheername en beheer". Dat is geen fout in de code maar een
-     keuze die iemand met een browser moet maken: het langere woord moet binnen
-     de bol passen. */}}
+{{/* `naam` is zowel de zichtbare tekst in de bol (de <text>-laag, met de hand
+     over regels verdeeld) als de toegankelijke naam van de link; WCAG 2.5.3 eist
+     dat die twee samenvallen. Daarom staat de naam hier en niet in de front
+     matter: anders verandert een hernoemde norm wel het label en niet de plaat.
+     De lus hieronder waarschuwt bij afwijking van `norm_titel` — vandaag één
+     keer, norm 1, omdat het langere woord niet in de bol past. */}}
 {{- $normen := slice
   (dict "url" "normen/01-beheer/"               "naam" "Informatie in beheer")
   (dict "url" "normen/02-overzicht/"            "naam" "Overzicht")
@@ -53,10 +35,8 @@
   (dict "url" "normen/08-periodieke-evaluatie/" "naam" "Periodieke evaluatie")
 -}}
 
-{{/* Drift-controle: elke bol wijst naar een echte normpagina, en de naam in de
-     plaat hoort de `norm_titel` van die pagina te zijn. Een waarschuwing en
-     geen fout, omdat het herstellen ervan een zichtbare tekst in een SVG raakt
-     die op maat is gezet; de build hoort daar niet op te breken. */}}
+{{/* Drift-controle op url en naam. Waarschuwing, geen fout: herstellen raakt
+     tekst die op maat in de SVG is gezet. */}}
 {{- range $normen -}}
   {{- $p := site.GetPage (printf "/%s" .url) -}}
   {{- if not $p -}}

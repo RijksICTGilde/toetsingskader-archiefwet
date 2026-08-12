@@ -6,10 +6,9 @@ title: Toetsingskader Archiefwet
 enableRobotsTXT: true
 enableGitInfo: true
 
-# Het toetsingskader gebruikt geen tags of categorieën. Hugo genereerde er wel
-# twee lege taxonomiepagina's voor, met "Categories" als Engelse kop binnen
-# <html lang="nl"> (WCAG 3.1.2) en zonder beschrijvende titel (2.4.6) — en ze
-# stonden in sitemap.xml. Uitzetten is hier de juiste oplossing.
+# Geen tags of categorieën. Hugo maakte er twee lege taxonomiepagina's voor, met
+# een Engelse kop in <html lang="nl"> (3.1.2), zonder beschrijvende titel (2.4.6)
+# en wél in sitemap.xml.
 disableKinds:
   - taxonomy
   - term
@@ -45,13 +44,11 @@ markup:
     endLevel: 4
 
 params:
-  # Versie van het toetsingskader. Lokale default; in CI overschreven met de
-  # git-release-tag via HUGO_PARAMS_VERSIE (zie workflows + Containerfile).
-  # Bron voor de PDF-export (release-tag in elke gedownloade PDF).
+  # Lokale default; in CI de git-release-tag via HUGO_PARAMS_VERSIE. Ook de bron
+  # voor de PDF-export.
   versie: "0.8"
-  # Waar het versienummer naartoe linkt: de releases op GitHub, met per versie
-  # de wijzigingen. Eén plek, want het label staat zowel op de homepage
-  # (shortcode `versielabel`) als in de paginavoet (`_partials/lastmod.html`).
+  # Doel van het versienummer. Eén plek: het label staat op de homepage
+  # (`versielabel`) én in de paginavoet (`_partials/lastmod.html`).
   releases_url: "https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases"
   feedback:
     email: toetsingskader@inspectie-oe.nl

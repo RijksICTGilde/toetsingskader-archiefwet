@@ -1,10 +1,6 @@
-/* Onderwerpen-index (layouts/onderwerpen/list.html): A-Z-groepen. Bewust een
-   lijst i.p.v. de thema-card-grid, omdat een index met korte begrippen sneller
-   te scannen is dan kaarten.
-
-   Eigen bestand i.p.v. main.css: dit hoort bij één template, net zoals
-   bollendiagram.css bij de bollendiagram-shortcode hoort. Het thema globt
-   `css/*.css` van de consumer, dus dit bestand laadt vanzelf mee. */
+/* A-Z-groepen bij layouts/onderwerpen/list.html; een lijst scant sneller dan de
+   card-grid van het thema. Eigen bestand omdat het bij één template hoort — het
+   thema globt `css/*.css`, dus het laadt vanzelf mee. */
 
 .index-group h2 {
   border-block-end: 2px solid var(--color-primary);

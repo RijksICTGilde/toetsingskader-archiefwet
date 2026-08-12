@@ -3,11 +3,8 @@
 // Gebruik:  hugo && node scripts/a11y-scan.mjs public
 // Exit 1 zodra er een violation is, zodat dit in CI kan draaien.
 //
-// Beperking: jsdom heeft geen layout-engine. Regels die afmetingen of
-// berekende kleuren nodig hebben (color-contrast, target-size) komen als
-// "incomplete" terug en moeten handmatig worden nagelopen — zie
-// docs/toegankelijkheidsonderzoek-2026-08.md. Structuur-, naam- en
-// ARIA-regels draaien wel volwaardig.
+// Beperking: jsdom heeft geen layout-engine, dus color-contrast en target-size
+// komen als "incomplete" terug. Die dekt scripts/a11y-browser.mjs af.
 import { JSDOM } from 'jsdom'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -22,9 +19,8 @@ const axeSrc = fs.readFileSync(createRequire(import.meta.url).resolve('axe-core'
 const root = process.argv[2] || 'public'
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']
 
-// Alias-stubs van Hugo (<meta http-equiv="refresh">) bevatten geen inhoud om
-// te toetsen; ze overslaan houdt de telling gelijk aan het aantal echte
-// pagina's. Zelfde filter als in a11y-browser.mjs.
+// Alias-stubs bevatten geen inhoud; overslaan houdt de telling zuiver.
+// Zelfde filter als in a11y-browser.mjs.
 const isRedirect = p => /http-equiv=["']?refresh/i.test(fs.readFileSync(p, 'utf8'))
 
 function htmlFiles(dir, acc = []) {
@@ -39,11 +35,9 @@ function htmlFiles(dir, acc = []) {
 const files = htmlFiles(root)
 let total = 0
 
-// Eén keer vooraf: klopt de zin in a11y-checks.mjs nog met de partial die hem
-// rendert? Zo niet, dan zou elke pagina hieronder rood worden met een melding
-// die naar de verkeerde oorzaak wijst.
-// Pad relatief aan dit script, niet aan de werkdirectory: de scan wordt ook
-// vanuit een andere map aangeroepen en zou daar met ENOENT klappen.
+// Klopt de zin in a11y-checks.mjs nog met de partial? Zo niet, dan wordt elke
+// pagina hieronder rood met een melding die de verkeerde oorzaak noemt. Pad
+// relatief aan dit script: de scan draait ook vanuit een andere map.
 const versieZinPad = new URL('../layouts/_partials/versie-zin.html', import.meta.url)
 const bronFout = voorbehoudBronFout(fs.readFileSync(versieZinPad, 'utf8'))
 if (bronFout) {
@@ -57,8 +51,7 @@ for (const file of files) {
   dom.window.eval(axeSrc)
   const res = await dom.window.axe.run(dom.window.document, {
     runOnly: { type: 'tag', values: TAGS },
-    // color-contrast heeft een layout-engine nodig; in jsdom levert die regel
-    // alleen ruis op. Contrast is handmatig nagerekend uit de design tokens.
+    // Zonder layout-engine levert color-contrast alleen ruis op.
     rules: { 'color-contrast': { enabled: false } },
   })
   for (const v of res.violations) {

@@ -1,21 +1,15 @@
 /* ============================================================================
-   Toegankelijkheidsaanpassingen bovenop het thema (hugo-theme-rijksoverheid).
+   Toegankelijkheidsaanpassingen bovenop het thema.
 
-   Wat hier stond aan themadefecten is upstream opgelost in v0.2.0 (PR #19:
-   focusindicatoren in de zoekresultaten, het zoekveld en de footer, het
-   contrast van de sneltoetshint, en de toast die de focus kon afdekken). Wat
-   overblijft zijn geen themadefecten maar gevolgen van onze eigen templates en
-   scripts; die horen hier thuis en blijven staan.
-
-   De consumer-CSS wordt door het thema ná de thema-CSS geconcat (zie
-   _partials/head.html), dus deze regels winnen bij gelijke specificiteit.
+   De themadefecten die hier stonden zijn opgelost in v0.2.0 (PR #19). Wat
+   overblijft zijn gevolgen van onze eigen templates en scripts en blijft dus
+   staan. Consumer-CSS wordt ná de thema-CSS geconcat, dus deze regels winnen
+   bij gelijke specificiteit.
    ========================================================================= */
 
-/* --- Aanpassing bij de <h2>-in-<summary> (bevinding 8) ----------------------
-   Gevolg van onze eigen fix in normen/single.html: "Toelichting" en
-   "Referenties" zijn nu echte koppen ín de <summary>. De <summary> is een
-   flex-container die de kopstijl al levert, dus de h2 moet zijn eigen
-   typografie en marges loslaten — anders verspringt de kop. */
+/* --- <h2> in <summary> (bevinding 8) ---------------------------------------
+   De <summary> is een flex-container die de kopstijl al levert, dus de h2 moet
+   zijn eigen typografie en marges loslaten. */
 .references > details > summary h2 {
   font: inherit;
   color: inherit;
@@ -23,8 +17,7 @@
   padding: 0;
 }
 
-/* Idem voor "Kern van de norm": was een <span class="title">, is nu een <h2>
-   met dezelfde class. De thema-.title-stijl blijft leidend. */
+/* Idem voor "Kern van de norm", nu een <h2> met dezelfde class. */
 blockquote.callout header h2.title {
   margin: 0;
   font-size: 1.7rem;
@@ -32,25 +25,19 @@ blockquote.callout header h2.title {
   line-height: 1.2;
 }
 
-/* --- Sneltoetshint in de balk (gevolg van bevinding 10) --------------------
-   Het thema toont de <kbd>/</kbd>-hint sinds v0.2.0 op vol contrast (was
-   `opacity: 0.7`, 2,98:1 — bevinding 12, upstream opgelost). Dit project laat
-   de hint toch weg: voor bevinding 10 (WCAG 2.1.4) is gekozen voor de optie
-   "alleen actief wanneer het component focus heeft", zie
-   assets/js/toegankelijkheid.js. In precies die toestand — focus op de
-   zoekknop — opent Enter het venster ook. Een hint tonen voor een toets die
-   alleen werkt waar hij overbodig is, belooft iets wat de site niet doet.
-
-   Gaat de sitebrede `/` in het thema ooit uit of wordt hij daar instelbaar,
-   dan kan dit blok weg samen met die JS-listener. */
+/* --- Sneltoetshint (gevolg van bevinding 10) -------------------------------
+   Het thema toont de <kbd>/</kbd>-hint sinds v0.2.0 op vol contrast, maar
+   toegankelijkheid.js neutraliseert de sitebrede sneltoets (2.1.4). Een hint
+   voor een toets die alleen werkt op de zoekknop zelf — waar Enter hetzelfde
+   doet — belooft iets wat de site niet doet. Weg zodra `/` upstream instelbaar
+   is. */
 .search-trigger .search-shortcut {
   display: none;
 }
 
-/* --- Bevinding 19: PDF-knop is pas bruikbaar mét JavaScript -----------------
-   De knop staat `hidden` in de markup en wordt door pdf-export.js zichtbaar
-   gemaakt. `.pdf-download.button` zet `display: inline-flex`, wat het
-   user-agent-`[hidden] { display: none }` overschrijft; daarom expliciet. */
+/* --- Bevinding 19: PDF-knop vraagt JavaScript ------------------------------
+   `.pdf-download.button` zet `display: inline-flex` en wint daarmee van de
+   UA-regel voor [hidden]; daarom expliciet. */
 .pdf-download.button[hidden] {
   display: none;
 }

@@ -1,6 +1,5 @@
-// Integratietest: bouwt een echte doc-definition uit gegenereerde norm-JSON.
-// pdfMake-renderer wordt gestubt; DOMParser komt van linkedom. Valideert dat
-// converter + builder + pdfMake-API-aanroepen samen een geldige structuur leveren.
+// Integratietest: doc-definition uit echte norm-JSON, met gestubte
+// pdfMake-renderer en linkedom als DOMParser.
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
@@ -49,8 +48,7 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.match(coverText, /Gedownload op/)
   assert.match(coverText, /Bron/)
   assert.equal(cover.pageBreak, 'after')
-  // "Kern van de norm" als sectiekop (h2, zoals Toelichting) + de kerntekst
-  // als normale alinea (niet leeg).
+  // Kern als h2 (zoals Toelichting) + kerntekst als alinea.
   const kernIdx = dd.content.findIndex(b => b.text === 'Kern van de norm')
   assert.ok(kernIdx !== -1, 'kern-kop aanwezig')
   assert.equal(dd.content[kernIdx].style, 'h2', 'kern-kop als sectiekop (h2)')

@@ -1,6 +1,5 @@
-// Genereert assets/js/pdf-assets.js: base64-vfs (RO Sans fonts + logo) en de
-// pdfMake-fontmap, als globals op window.TKPDF (de bundel is geen ES-module).
-// Re-run alleen als fonts/logo wijzigen:  node scripts/build-pdf-assets.mjs
+// Genereert assets/js/pdf-assets.js: base64-vfs (fonts + logo) en fontmap als
+// globals op window.TKPDF. Alleen opnieuw draaien als fonts of logo wijzigen.
 import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
@@ -14,7 +13,7 @@ const vfs = {
   'ro-sans-italic.ttf': b64('assets/fonts/ro-sans-italic.ttf')
 }
 
-// Officieel Rijksoverheid-lint-logo (SVG) — scherp in de PDF via pdfMake.
+// Rijksoverheid-lint-logo; als SVG scherp in de PDF.
 const logoSvg = readFileSync(join(root, 'assets/images/logo-rijksoverheid.svg'), 'utf8').trim()
 
 const fonts = {

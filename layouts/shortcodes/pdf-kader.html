@@ -1,7 +1,6 @@
 {{- $pdf := .Page.OutputFormats.Get "pdf" -}}
 {{- with $pdf -}}
-{{/* <button> i.p.v. <a href="…json" download>: zonder JavaScript downloadde de
-     link een JSON-bestand. pdf-export.js maakt de knop zichtbaar. */}}
+{{/* <button>, want een <a download> leverde zonder JS een JSON-bestand op. */}}
 <p class="pdf-kader">
   <button type="button" class="button pdf-download" data-pdf-url="{{ .RelPermalink }}" hidden>
     {{- partial "icon.html" "download" -}}<span>Download het volledige kader als PDF</span>

@@ -1,19 +1,11 @@
 {{/*
-  Versie + draft-voorbehoud als één zin, gedeeld door de twee plekken waar hij
-  staat: `_partials/lastmod.html` (de voet van elke inhoudspagina) en de
-  shortcode `versielabel` (de homepage, die geen voet heeft).
+  Versie + draft-voorbehoud als één zin, gedeeld door `_partials/lastmod.html`
+  (voet van elke inhoudspagina) en de shortcode `versielabel` (homepage, geen
+  voet). Eén bron, want los overgetikt stond het voorbehoud alleen nog op de
+  homepage en lazen de normpagina's als vastgesteld beleid.
 
-  Waarom gedeeld: dit is de tekst die de weggehaalde beta-banner verving. Toen
-  hij op twee plekken los werd overgetikt, stond het voorbehoud alleen nog op de
-  homepage en lazen de normpagina's als vastgesteld beleid. Eén bron, dus de
-  twee kunnen niet meer uiteenlopen.
-
-  Bron van het nummer is site.Params.versie — dezelfde als de PDF-export; lokaal
-  de default uit hugo.yaml, in CI de git-release-tag via HUGO_PARAMS_VERSIE.
-  Het nummer linkt naar site.Params.releases_url via de theme-partial
-  render-link, zodat de link dezelfde target/rel krijgt als elke externe link.
-
-  Rendert niets zonder site.Params.versie.
+  Nummer uit site.Params.versie (lokaal hugo.yaml, in CI de release-tag), gelinkt
+  via render-link. Rendert niets zonder dat param.
 */}}
 {{- with site.Params.versie -}}
 <strong>{{ partial "render-link" (dict "href" site.Params.releases_url "text" (printf "Versie %s" .)) }}</strong> van het toetsingskader. De inhoud is nog in ontwikkeling en kan wijzigen.

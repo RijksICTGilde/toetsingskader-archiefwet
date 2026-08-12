@@ -1,15 +1,10 @@
 {{/*
-  Project-shadow van _partials/scripts.html uit het thema.
+  Shadow van de theme-scripts; enige verschil is js/toegankelijkheid.js achteraan
+  de bundel. Dat patcht themadefecten die niet uit CSS of onze templates op te
+  lossen zijn (zie docs/toegankelijkheidsonderzoek-2026-08.md).
 
-  Enige verschil: js/toegankelijkheid.js wordt achteraan de bundel geplakt. Dat
-  script patcht een aantal toegankelijkheidsdefecten in het thema die niet vanuit
-  CSS of vanuit onze eigen templates zijn op te lossen (skip-link-focus, label in
-  name op de zoekknop, genest navigatielandmark, de "/"-sneltoets, externe-link-
-  melding). Zie docs/toegankelijkheidsonderzoek-2026-08.md.
-
-  TIJDELIJK: zodra die fixes upstream zitten, vervalt zowel het script als deze
-  shadow. Vergelijk dit bestand bij elke `just update-theme` met de thema-versie
-  en neem wijzigingen over — anders mist de site stilletjes nieuwe thema-JS.
+  TIJDELIJK. Bij elke `just update-theme` vergelijken met de thema-versie, anders
+  mist de site stilletjes nieuwe thema-JS.
 */}}
 {{- $baseJs := resources.Get "js/base.js" -}}
 {{- $tocJs := resources.Get "js/toc.js" -}}

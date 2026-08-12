@@ -181,8 +181,7 @@ class FootnoteTests(unittest.TestCase):
         self.assertTrue(any("Ongeldige voetnoot-id" in e for e in errors), errors)
 
     def test_definition_with_only_a_link(self):
-        # Zonder brontekst vóór de link is de tooltip leeg en verwijst
-        # aria-describedby naar een lege <span>; zie normen/single.html.
+        # Zonder brontekst vóór de link blijft de tooltip leeg.
         content = replace(
             "[^aw-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://example.org)",
             "[^aw-4-1-lid-1]: [Bekijk bron](https://example.org)",
@@ -194,10 +193,8 @@ class FootnoteTests(unittest.TestCase):
         self.assertEqual(run(VALID_NORM), [])
 
     def test_definition_with_descriptive_link_text_is_fine(self):
-        # normen/single.html splitst alléén een link met de letterlijke tekst
-        # "Bekijk bron" af. Een beschrijvende linktekst blijft dus gewoon de
-        # brontekst en levert een gevulde tooltip op; afkeuren zou de redacteur
-        # dwingen geldige, toegankelijke content te herschrijven.
+        # Alleen een link met de letterlijke tekst "Bekijk bron" wordt
+        # afgesplitst; een beschrijvende linktekst blijft brontekst.
         content = replace(
             "[^aw-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://example.org)",
             "[^aw-4-1-lid-1]: [Module 1 - De waarde van duurzame toegankelijkheid](https://example.org)",
@@ -213,10 +210,8 @@ class FootnoteTests(unittest.TestCase):
         self.assertTrue(any("heeft geen brontekst" in e for e in errors), errors)
 
     def test_definition_lines_may_follow_each_other(self):
-        # Twee definities onder elkaar is normaal en mag geen melding geven.
-        # Of een markering in de lopende tekst een ref-term krijgt, wordt niet
-        # hier gecontroleerd maar op de gerenderde HTML; zie de toelichting in
-        # scripts/validate-norms.py en de check in scripts/a11y-scan.mjs.
+        # Twee definities onder elkaar is normaal. Of een markering een ref-term
+        # krijgt, wordt op de gerenderde HTML gecontroleerd (a11y-scan.mjs).
         errors = run(VALID_NORM)
         self.assertEqual(errors, [])
 

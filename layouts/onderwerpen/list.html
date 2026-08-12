@@ -1,11 +1,7 @@
 {{ define "main" }}
-{{/* Alfabetische index op de onderwerpen/begrippen. Het thema levert een
-     card-grid-list; voor een index met tientallen korte items leest een A-Z
-     lijst beter dan kaarten. Kandidaat voor upstream als het thema ooit een
-     index-component krijgt.
-
-     Groeperen zonder GroupBy: .Pages.ByTitle staat al alfabetisch, dus de
-     beginletters in leesvolgorde vormen vanzelf de gesorteerde letterlijst. */}}
+{{/* A-Z-index op de begrippen; leest bij tientallen korte items beter dan de
+     card-grid van het thema. Groeperen kan zonder GroupBy: .Pages.ByTitle staat
+     al alfabetisch, dus de beginletters komen vanzelf gesorteerd. */}}
 {{ $pages := .Pages.ByTitle }}
 {{ $letters := slice }}
 {{ range $pages }}

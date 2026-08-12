@@ -1,25 +1,20 @@
 #!/usr/bin/env python3
 """Validate norm pages in content/normen/.
 
-Het nieuwe contentformaat:
+Contentformaat:
 
-  - Front matter bevat alléén machinaal gebruikte velden
-    (`title`, `weight`, `norm_id`, `norm_titel`, `versie`, `kern`,
-    `synoniemen`). `kern` en `synoniemen` bevatten geen voetnoten of
-    markdown.
-  - Alle proza staat in de markdown-body met vaste koppen:
-    `## Toelichting` (verplicht), `## Normuitleg` (verplicht; daarbinnen
-    `### <thema>` -> `#### Voorschrift` -> optioneel `#### Criteria` /
-    `#### Indicatoren`), `## Reikwijdte` (optioneel), `## Zie ook`
-    (optioneel). Geen `#`-kop (titel komt uit front matter) en geen
-    koppen dieper dan h4.
-  - Bronnen zijn Goldmark-voetnoten: `[^id]` in de tekst, definitie
-    `[^id]: Brontekst.` eronder. Elke gebruikte voetnoot heeft een
-    definitie en andersom; ids zijn kleine letters, cijfers en
-    koppeltekens.
+  - Front matter: alleen machinaal gebruikte velden (`title`, `weight`,
+    `norm_id`, `norm_titel`, `versie`, `kern`, `synoniemen`), zonder
+    voetnoten of markdown in `kern`/`synoniemen`.
+  - Body: vaste koppen `## Toelichting` en `## Normuitleg` (verplicht,
+    met `### <thema>` -> `#### Voorschrift` -> optioneel `#### Criteria`
+    / `#### Indicatoren`), `## Reikwijdte` en `## Zie ook` (optioneel).
+    Geen `#`-kop, geen koppen dieper dan h4.
+  - Bronnen zijn Goldmark-voetnoten: elke `[^id]` heeft een definitie en
+    andersom; ids zijn kleine letters, cijfers en koppeltekens.
 
-Foutmeldingen zijn in het Nederlands en bevatten waar mogelijk een
-regelnummer, in de vorm `bestandsnaam:regel: melding`.
+Foutmeldingen zijn Nederlands, met regelnummer waar mogelijk:
+`bestandsnaam:regel: melding`.
 """
 
 import re
@@ -35,8 +30,8 @@ except ImportError:
 # Front matter: alleen machinaal gebruikte velden.
 REQUIRED_FIELDS = ["title", "weight", "norm_id", "norm_titel", "versie", "kern", "synoniemen"]
 
-# Velden die in het oude formaat in de front matter stonden en nu in de
-# body horen. Aanwezigheid is een fout, zodat migraties niet half blijven.
+# Stonden in het oude formaat in de front matter, horen nu in de body.
+# Aanwezigheid is een fout, zodat migraties niet half blijven.
 DEPRECATED_FIELDS = [
     "toelichting",
     "normuitleg",
@@ -51,7 +46,7 @@ REQUIRED_SECTIONS = ["Toelichting", "Normuitleg"]
 OPTIONAL_SECTIONS = ["Reikwijdte", "Zie ook"]
 ALLOWED_SECTIONS = REQUIRED_SECTIONS + OPTIONAL_SECTIONS
 
-# Toegestane h4-subkoppen binnen een thema, met de enkelvoud-vergissing.
+# h4-subkoppen binnen een thema, plus de enkelvoud-vergissing.
 ALLOWED_SUBHEADINGS = ["Voorschrift", "Criteria", "Indicatoren"]
 SINGULAR_FIX = {"Criterium": "Criteria", "Indicator": "Indicatoren"}
 
@@ -59,29 +54,15 @@ ID_RE = re.compile(r"^[a-z0-9-]+$")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*$")
 FN_DEF_RE = re.compile(r"^\[\^([^\]]+)\]:")
 FN_USE_RE = re.compile(r"\[\^([^\]]+)\]")
-# Een definitieregel waarvan het hele lichaam de "Bekijk bron"-link is. De
-# linktekst moet er letterlijk in staan: normen/single.html splitst alléén een
-# link met precies die tekst af (`^(.*?)\s*(<a …>Bekijk bron</a>)\s*$`). Een
-# definitie met een beschrijvende linktekst — `[Module 1 - De waarde van …](…)`
-# — matcht dat patroon niet, houdt de hele <a> als brontekst en levert dus een
-# gevulde tooltip op. Die mag hier niet worden afgekeurd.
+# Definitieregel die alleen uit de "Bekijk bron"-link bestaat: die laat een lege
+# tooltip achter. Letterlijk die linktekst, want normen/single.html splitst
+# alleen díé af; een beschrijvende linktekst blijft brontekst en is dus goed.
 FN_DEF_ALLEEN_BRONLINK_RE = re.compile(r"^\[Bekijk bron\]\([^)]*\)\s*$")
 
-# Waar de controle op voetnootplaatsing gebleven is
-# -------------------------------------------------
-# Hier stond een controle die probeerde te voorspellen of `normen/single.html`
-# van een voetnootmarkering een ref-term zou kunnen maken: markering achter
-# `**vet**`, achter een andere markering, achter alleen interpunctie. Dat vroeg
-# om het namaken van Goldmark in reguliere expressies, en dat werkte twee
-# kanten op verkeerd. Het weigerde geldige tekst (`veld_[^x]` is gewoon een
-# liggend streepje, geen cursief) en liet stukke tekst door (`~~ingetrokken~~`,
-# een link met opgemaakte linktekst).
-#
-# De controle staat nu in `scripts/a11y-scan.mjs`, op de gerenderde HTML. Daar
-# is het geen voorspelling meer maar een waarneming: elke `a.footnote-ref` die
-# na de transformatie nog in de pagina staat, is een markering die geen
-# ref-term heeft gekregen. Dat dekt álle oorzaken, ook de oorzaken die niemand
-# heeft bedacht, en het kan per definitie geen geldige tekst weigeren.
+# De controle op voetnootplaatsing staat nu in `scripts/a11y-scan.mjs`, op de
+# gerenderde HTML: elke overgebleven `a.footnote-ref` is een markering zonder
+# ref-term. Hier voorspellen vroeg om Goldmark namaken in regex en werkte twee
+# kanten op verkeerd — geldige tekst geweigerd, stukke tekst doorgelaten.
 
 
 class Error:
@@ -262,18 +243,12 @@ def validate_footnotes(name, body_lines, body_start, errors):
                 definitions[fid] = lineno
             if not ID_RE.match(fid):
                 bad_ids.setdefault(fid, lineno)
-            # Verwijder de definitie-marker zodat hij niet als gebruik telt.
+            # Definitie-marker weg, anders telt hij als gebruik.
             scan = raw[dm.end():]
 
-            # De definitie moet brontekst hebben vóór de "Bekijk bron"-link.
-            # normen/single.html splitst die twee (findRESubmatch op
-            # `^(.*?)\s*(<a …>Bekijk bron</a>)$`): de brontekst wordt de
-            # tooltip én het doel van aria-describedby, de link komt ernaast.
-            # Bestaat de definitie alleen uit de link, dan is de brontekst leeg
-            # en verwijst aria-describedby naar een lege <span>: wie de ref-term
-            # focust, hoort de bron niet — precies wat de tooltip moet leveren.
-            # Het aria-label van de link wordt dan bovendien "Bekijk bron: ",
-            # waarmee bevinding 27 (elke bronlink een eigen naam) weer stuk is.
+            # Zonder brontekst vóór de "Bekijk bron"-link houdt normen/single.html
+            # een lege tooltip over (aria-describedby wijst naar een lege <span>)
+            # en heet de link "Bekijk bron: " — bevinding 27 weer stuk.
             lichaam = scan.strip()
             if not lichaam:
                 errors.append(Error(

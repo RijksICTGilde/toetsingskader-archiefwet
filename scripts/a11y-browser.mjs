@@ -3,35 +3,20 @@
 // Gebruik:  hugo --baseURL / --destination .a11y/public
 //           node scripts/a11y-browser.mjs .a11y/public      (of: npm run test:a11y:browser)
 //
-// Waarom naast scripts/a11y-scan.mjs: die draait op jsdom en heeft dus geen
-// layout-engine. Alles wat afmetingen, berekende kleuren of echte
-// toetsenbordfocus nodig heeft — contrast, reflow, tekstvergroting,
-// tekstafstand, focus-niet-afgedekt — kan daar niet worden vastgesteld en stond
-// in docs/toegankelijkheidsonderzoek-2026-08.md als "nog te doen". Dit script
-// dekt die categorieën met Chromium via Playwright.
+// Aanvulling op scripts/a11y-scan.mjs: dat draait op jsdom, dus zonder
+// layout-engine. Contrast, reflow, tekstvergroting, tekstafstand en
+// focus-niet-afgedekt vragen echte afmetingen en focus; die meet dit script in
+// Chromium.
 //
-// Bouw de site met `--baseURL /`: met de productie-baseURL verwijzen de CSS- en
-// JS-links naar het live domein, laden ze hier niet, en meet je een pagina
-// zonder stylesheet.
+// Bouwen met `--baseURL /`, anders wijzen de CSS- en JS-links naar het live
+// domein en meet je een pagina zonder stylesheet.
 //
-// Exit-gedrag. Fataal (exit 1) zijn de categorieën zonder interpretatieruimte:
-//   axe:*        — een axe-violation is een violation
-//   reflow-320   — horizontale overloop op 320px is meetbaar en eenduidig
-// Waarschuwing (exit 0, wel in de log) zijn de categorieën waar een mens naar
-// moet kijken:
-//   focus-indicator — een element zonder outline of box-shadow kan focus ook met
-//                     een rand- of achtergrondwissel aangeven
-//   focus-obscured  — een sticky header of meldbalk over een element is soms
-//                     bedoeld gedrag en soms bevinding 17
-//   tekstzoom-200   — dit is bevinding 18, een bekende thema-bug (thema-issue
-//                     #12). Fataal maken zou elke PR rood maken tot upstream
-//                     het oplost.
-//   tekstafstand    — zelfde meting, andere trigger (1.4.12)
-// Losse bevindingen die elders belegd zijn, staan in `KNOWN` en worden ook
-// gedegradeerd tot waarschuwing, mét de reden in de log.
-//
-// Zet A11Y_BROWSER_STRICT=1 om álle categorieën fataal te maken; doe dat zodra
-// thema-issue #12 rond is.
+// Fataal (exit 1): axe:* en reflow-320 — geen interpretatieruimte. De rest is
+// waarschuwing, omdat er een mens naar moet kijken: focus kan ook uit een rand-
+// of achtergrondwissel komen, een balk over een element is soms bedoeld, en
+// tekstzoom-200/tekstafstand is bevinding 18 (thema-issue #12) die elke PR rood
+// zou houden. `KNOWN` degradeert losse bevindingen op dezelfde grond.
+// A11Y_BROWSER_STRICT=1 maakt alles fataal; aanzetten zodra #12 rond is.
 import { chromium } from 'playwright'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -44,10 +29,8 @@ const axeSrc = fs.readFileSync(createRequire(import.meta.url).resolve('axe-core'
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']
 const FATAL = ['axe:', 'reflow-320']
 
-// Bekende bevindingen die elders belegd zijn. Ze blijven in de log staan, maar
-// als waarschuwing: fataal maken zou elke PR rood houden tot het thema is
-// bijgewerkt, en dan wordt de scan genegeerd in plaats van gelezen. Elk item
-// verwijst naar het issue dat het afhandelt; haal het weg zodra dat rond is.
+// Elders belegde bevindingen: wel in de log, niet fataal, met het issue erbij.
+// Weghalen zodra dat rond is.
 const KNOWN = [
   {
     category: 'reflow-320',
@@ -60,15 +43,13 @@ const KNOWN = [
 const REFLOW = { width: 320, height: 512 }
 const DESKTOP = { width: 1280, height: 900 }
 
-// WCAG 1.4.12 Text Spacing — de waarden die een gebruiker moet kunnen forceren
-// zonder verlies van inhoud of functionaliteit.
+// WCAG 1.4.12 — de tekstafstand die een gebruiker moet kunnen forceren.
 const TEXT_SPACING_CSS = `
   * { line-height: 1.5 !important; letter-spacing: 0.12em !important; word-spacing: 0.16em !important; }
   p { margin-block-end: 2em !important; }
 `
-// WCAG 1.4.4 — tekst tot 200% vergroten. Alleen de wortelfontgrootte verdubbelen
-// bootst tekst-only zoom na: rem-gebaseerde layouts groeien mee, vaste
-// px-hoogtes niet. Dat laatste is precies bevinding 18.
+// WCAG 1.4.4 — alleen de wortelfontgrootte verdubbelen bootst tekst-only zoom na:
+// rem groeit mee, vaste px-hoogtes niet. Dat laatste is bevinding 18.
 const TEXT_ZOOM_CSS = `html { font-size: 200% !important; }`
 
 const MIME = {
@@ -80,28 +61,18 @@ const MIME = {
   '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml',
 }
 
-/* De site één keer inlezen en indexeren: URL-pad → absoluut bestandspad.
-
-   Deze opzet is er om padinjectie onmogelijk te maken in plaats van hem af te
-   weren. Een `path.join(root, req.url)` met een controle achteraf is fragiel —
-   `startsWith(root)` zonder padscheider laat `/tmp/pub` door voor
-   `/tmp/publiek-geheim`, en na een tweede `join` (map → index.html) moet je
-   opnieuw controleren. Hier komt het bestandspad altijd uit onze eigen
-   directory-walk; het verzoek is alleen een sleutel in een Map. Er ís dus geen
-   padexpressie waar gebruikersinvoer in zit.
-
-   Retourneert ook de lijst met te testen pagina's, uit dezelfde walk. */
+/* De site indexeren: URL-pad → absoluut bestandspad, plus de lijst te testen
+   pagina's. Padinjectie is onmogelijk in plaats van afgeweerd: elk pad komt uit
+   onze eigen walk en het verzoek is enkel een sleutel in een Map, dus er is geen
+   padexpressie met gebruikersinvoer. */
 function readSite(dir) {
   const abs = path.resolve(dir)
   const files = new Map()
   const pages = []
   const toUrl = p => '/' + path.relative(abs, p).split(path.sep).join('/')
 
-  // Hugo genereert voor elke `aliases:` in de front matter een stub die met
-  // <meta http-equiv="refresh"> doorstuurt. Zo'n pagina navigeert weg terwijl
-  // axe wordt ingespoten ("Execution context was destroyed"), en er valt ook
-  // niets aan te toetsen: er staat geen inhoud in. Ze blijven wél in `files`,
-  // zodat een link ernaartoe gewoon oplost.
+  // Alias-stubs (`<meta http-equiv="refresh">`) navigeren weg terwijl axe wordt
+  // ingespoten en bevatten geen inhoud. Niet toetsen, wel serveren.
   const isRedirect = p => /http-equiv=["']?refresh/i.test(fs.readFileSync(p, 'utf8'))
 
   const walk = d => {
@@ -110,7 +81,7 @@ function readSite(dir) {
       if (entry.isDirectory()) { walk(p); continue }
       files.set(toUrl(p), p)
       if (entry.name === 'index.html') {
-        // Een map is opvraagbaar met én zonder afsluitende slash.
+        // Map opvraagbaar met én zonder afsluitende slash.
         const dirUrl = toUrl(path.dirname(p)).replace(/\/$/, '')
         files.set(dirUrl === '' ? '/' : `${dirUrl}/`, p)
         if (dirUrl !== '') files.set(dirUrl, p)
@@ -140,20 +111,15 @@ function serve(files) {
   return new Promise(resolve => server.listen(0, '127.0.0.1', () => resolve(server)))
 }
 
-/* Elementen waarvan de inhoud niet meer past én die de overloop wegknippen.
-   Dit is de standaardmeting voor "verlies van inhoud" bij 1.4.4 en 1.4.12:
-   `overflow: hidden` plus scrollHeight > clientHeight betekent dat er tekst
-   buiten beeld valt zonder scrollmogelijkheid.
-
-   Deze functie wordt in de browser uitgevoerd, dus geen imports en geen
-   afhankelijkheden op modulescope. */
+/* Standaardmeting voor "verlies van inhoud" (1.4.4, 1.4.12): `overflow: hidden`
+   plus scrollHeight > clientHeight = tekst buiten beeld zonder scroll.
+   Draait in de browser, dus geen imports of modulescope. */
 function clippedElements() {
   const out = []
   for (const el of document.querySelectorAll('body *')) {
     const cs = getComputedStyle(el)
     if (cs.display === 'none' || cs.visibility === 'hidden') continue
-    // Visueel-verborgen tekst (`.visually-hidden` en varianten) is per definitie
-    // 1x1px met overflow hidden; die zou anders elke pagina vervuilen.
+    // Visueel-verborgen tekst is per definitie 1x1px met overflow hidden.
     if (el.clientWidth <= 4 || el.clientHeight <= 4) continue
     const overY = (cs.overflowY === 'hidden' || cs.overflowY === 'clip') && el.scrollHeight > el.clientHeight + 2
     const overX = (cs.overflowX === 'hidden' || cs.overflowX === 'clip') && el.scrollWidth > el.clientWidth + 2
@@ -175,10 +141,9 @@ function clippedElements() {
   }
 }
 
-/* Eén Tab-stop beschrijven: heeft het gefocuste element een focusindicator, en
-   ligt er iets over? elementFromPoint geeft het bovenste element op een punt;
-   is dat niet het gefocuste element, geen kind en geen ouder ervan, dan ligt er
-   iets over (WCAG 2.4.11). */
+/* Eén Tab-stop: heeft het element een focusindicator, en ligt er iets over?
+   elementFromPoint geeft het bovenste element; is dat geen kind of ouder van het
+   gefocuste element, dan dekt het af (WCAG 2.4.11). */
 function describeFocus() {
   const el = document.activeElement
   if (!el || el === document.body || el === document.documentElement) return null
@@ -188,22 +153,17 @@ function describeFocus() {
     ? '.' + el.className.trim().split(/\s+/).join('.')
     : ''
   const id = el.tagName.toLowerCase() + (el.id ? `#${el.id}` : '') + cls
-  // `outline-style: auto` is de UA-focusring van Chromium; die heeft geen
-  // betrouwbare computed width, dus die apart accepteren.
+  // `outline-style: auto` (UA-ring van Chromium) heeft geen bruikbare width.
   const ring = s => s.outlineStyle === 'auto' ||
     (s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) > 0) ||
     (Boolean(s.boxShadow) && s.boxShadow !== 'none')
-  // Ook op ::before/::after kijken: `.card-grid.clickable` zet bewust
-  // `outline: none` op de link en de ring als box-shadow op ::after. Zonder deze
-  // twee extra metingen is dat een systematische fout-positief.
+  // Ook ::before/::after: `.card-grid.clickable` zet de ring als box-shadow op
+  // ::after. Zonder die metingen een systematische fout-positief.
   const hasRing = ring(cs) ||
     ring(getComputedStyle(el, '::after')) || ring(getComputedStyle(el, '::before'))
 
-  // Afdekking meten met het midden plus de vier hoeken. Eén afgedekte hoek is
-  // niet genoeg om te concluderen: bij een ronde link (de bollen in het
-  // bollendiagram) liggen de hoeken van de bounding box buiten de vorm en raken
-  // ze de buren. Daarom: het midden telt, of minstens twee hoeken die door
-  // hetzelfde element worden afgedekt.
+  // Midden plus vier hoeken. Bij een ronde link liggen de hoeken buiten de vorm
+  // en raken ze de buren, dus: het midden telt, of twee hoeken met dezelfde dader.
   const center = [r.left + r.width / 2, r.top + r.height / 2]
   const corners = [
     [r.left + 2, r.top + 2], [r.right - 2, r.top + 2],
@@ -219,9 +179,7 @@ function describeFocus() {
     return hit.tagName.toLowerCase() + cls
   }
   let coveredBy = hitAt(center)
-  // Bij een SVG-link (de bollen in het bollendiagram) is de bounding box een
-  // rechthoek om een ronde vorm: de hoeken liggen buiten de bol en raken de
-  // buren. Daar telt alleen het midden.
+  // Bij SVG (de bollen) telt alleen het midden; zie hierboven.
   if (!coveredBy && !(el.ownerSVGElement || el instanceof SVGElement)) {
     const tally = {}
     for (const c of corners) {
@@ -248,7 +206,7 @@ async function tabWalk(page, url) {
     await page.keyboard.press('Tab')
     const info = await page.evaluate(describeFocus)
     if (!info) break
-    // Terug bij de eerste stop: de tabring is rond, stoppen.
+    // Tabring is rond.
     if (first === null) first = info.id
     else if (info.id === first) break
     if (!info.sized) continue
@@ -265,8 +223,7 @@ const { files, pages: urls } = readSite(root)
 const server = await serve(files)
 const base = `http://127.0.0.1:${server.address().port}`
 const browser = await chromium.launch()
-// De meldbalk van de zoekfunctie verschijnt alleen met een ?q=-parameter; dat is
-// de situatie van bevinding 17 (zwevende melding dekt de focus af).
+// De meldbalk verschijnt alleen met ?q= — de situatie van bevinding 17.
 const extra = ['/normen/01-beheer/?q=beheer']
 
 console.log(`${urls.length} pagina's + ${extra.length} variant(en) in Chromium${STRICT ? ' (strict)' : ''}\n`)
@@ -275,13 +232,12 @@ for (const url of [...urls, ...extra]) {
   const page = await browser.newPage({ viewport: DESKTOP })
   await page.goto(base + url, { waitUntil: 'load' })
 
-  // 1. axe-core mét de layout-afhankelijke regels (contrast, doelgrootte).
+  // 1. axe-core, incl. de layout-afhankelijke regels.
   await page.addScriptTag({ content: axeSrc })
   const res = await page.evaluate(
     tags => window.axe.run(document, { runOnly: { type: 'tag', values: tags } }), TAGS)
   for (const v of res.violations) {
-    // Bij color-contrast de gemeten kleuren en ratio meenemen: een
-    // contrastbevinding zonder getallen is niet na te trekken.
+    // Kleuren en ratio meenemen; anders is de bevinding niet na te trekken.
     const detail = v.nodes.slice(0, 3).map(n => {
       const d = n.any?.find(c => c.data?.contrastRatio)?.data
       return n.target.join(' ') + (d ? ` (${d.fgColor} op ${d.bgColor} = ${d.contrastRatio}:1, nodig ${d.expectedContrastRatio})` : '')
@@ -338,8 +294,7 @@ const fatal = all.filter(isFatal)
 const warn = all.filter(f => !isFatal(f))
 
 for (const f of [...fatal, ...warn]) {
-  // f.count telt trefférs, niet pagina's: één pagina kan dezelfde melding
-  // meerdere keren opleveren (acht diagramlinks, tien inhoudsopgavelinks).
+  // f.count telt treffers, niet pagina's.
   const where = f.count > 1 ? ` [${f.count}x, o.a. ${f.url}]` : ` [${f.url}]`
   const belegd = known(f) ? ` — bekend: ${known(f).reason}` : ''
   console.log(`${isFatal(f) ? 'FOUT' : 'WAAR'} [${f.category}] ${f.message}${where}${belegd}`)

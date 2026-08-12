@@ -1,21 +1,12 @@
 {{/*
-  Project-override van de theme-lastmod.
-
-  Verschil met het thema: het versienummer van het toetsingskader staat hier
-  naast de laatst-gewijzigd-datum. Sinds de beta-banner weg is, is dit de plek
-  waar de versie staat; de homepage heeft geen voet en gebruikt daarvoor de
-  shortcode `versielabel`. Bron is in beide gevallen site.Params.versie —
-  dezelfde als de PDF-export (in CI de git-release-tag).
-
-  Verder identiek aan _partials/lastmod.html van het thema.
-  Upstream-kandidaat: versielabel als optie in de theme-lastmod.
+  Shadow van de theme-lastmod; enige verschil is het versienummer naast de
+  laatst-gewijzigd-datum. De homepage heeft geen voet en gebruikt daarvoor de
+  shortcode `versielabel`. Upstream-kandidaat: versielabel als theme-optie.
 */}}
 {{- if .Params.show_lastmod -}}
 <p class="page-meta">
-  {{- /* Versie + draft-voorbehoud komen uit _partials/versie-zin.html, gedeeld
-         met de shortcode `versielabel` op de homepage. Het voorbehoud hoort op
-         élke inhoudspagina: normpagina's worden rechtstreeks gedeeld en
-         geciteerd, en lezen zonder die zin als vastgesteld beleid. */ -}}
+  {{- /* Uit _partials/versie-zin.html. Het voorbehoud hoort op élke
+         inhoudspagina: normpagina's worden los gedeeld en geciteerd. */ -}}
   {{- with partial "versie-zin.html" . }}{{ . }} {{ end -}}
   Deze pagina is voor het laatst aangepast op <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod | time.Format ":date_full" }}</time>.
 </p>

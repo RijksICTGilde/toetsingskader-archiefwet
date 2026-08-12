@@ -1,10 +1,8 @@
 // Unittests voor de projecteigen controles uit scripts/a11y-checks.mjs.
 //
-// Waarom deze er zijn: de controle op voetnootplaatsing is verhuisd van
-// scripts/validate-norms.py (dat een eigen unittest-suite had) naar een controle
-// op de gerenderde HTML. Zonder tests kan zo'n detector stilzwijgend stoppen met
-// detecteren — hij meldt dan niets, en dat ziet er precies zo uit als "alles in
-// orde". Elke controle heeft daarom een positief én een negatief geval.
+// Een detector die stilzwijgend stopt met detecteren meldt niets, en dat ziet er
+// uit als "alles in orde". Elke controle heeft daarom een positief én een
+// negatief geval.
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { parseHTML } from 'linkedom'
@@ -28,9 +26,8 @@ test('zwevende voetnoot: een omgezette ref-term is geen fout', () => {
 })
 
 test('zwevende voetnoot: buiten /normen/ telt een kale markering niet', () => {
-  // De ref-term-transformatie zit alleen in layouts/normen/single.html. Op een
-  // gewone pagina is een Goldmark-voetnoot correct; hem hier melden zou een
-  // CI-fout opleveren die alleen te verhelpen is door de bron weg te halen.
+  // De transformatie zit alleen in normen/single.html; elders is een
+  // Goldmark-voetnoot correct en zou melden alleen de bron kosten.
   assert.deepEqual(zwevendeVoetnootFouten(dom(KALE_MARKERING), '/samenhang/'), [])
   assert.deepEqual(zwevendeVoetnootFouten(dom(KALE_MARKERING), '/onderwerpen/audittrail/'), [])
 })

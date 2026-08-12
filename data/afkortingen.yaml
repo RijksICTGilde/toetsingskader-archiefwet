@@ -1,15 +1,12 @@
-# Afkortingen die in de bronteksten van de voetnoten voorkomen. Het partial
-# `_partials/afkortingen.html` wrapt ze in <abbr title="…"> (WCAG 3.1.4,
-# bevinding 28 uit docs/toegankelijkheidsonderzoek-2026-08.md).
+# Afkortingen uit de bronteksten van de voetnoten; `_partials/afkortingen.html`
+# wrapt ze in <abbr title="…"> (WCAG 3.1.4, bevinding 28).
 #
-# Dit staat bewust in `data/` en niet in `params:` van hugo.yaml: Hugo
-# lowercaset configuratiesleutels, waardoor "DUTO" als "duto" zou matchen —
-# en dat raakt ook het pad `/archiveren/duto` in een bronlink. Sleutels in
-# data-bestanden blijven ongewijzigd.
+# In `data/` en niet in `params:`, omdat Hugo configuratiesleutels lowercaset:
+# "DUTO" zou dan als "duto" matchen, inclusief het pad `/archiveren/duto` in een
+# bronlink.
 #
-# De match is hoofdlettergevoelig en op heel woord (\b…\b). Nieuwe afkorting
-# toevoegen is één regel hier; schrijf de afkorting in de content dan wel
-# consistent met de sleutel.
+# De match is hoofdlettergevoelig en op heel woord (\b…\b), dus schrijf de
+# afkorting in de content net als de sleutel.
 Aw: "Archiefwet 2026"
 Ab: "Archiefbesluit 2026"
 Ar: "Archiefregeling"

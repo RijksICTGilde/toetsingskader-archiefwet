@@ -11,18 +11,14 @@
   overflow: visible;
 }
 
-/* Lijnkleur van het diagram. De spokes en de scheidingslijn dragen betekenis
-   ("deze zeven normen hangen aan informatie in beheer", "onder de lijn staat
-   wat later komt") en zijn dus grafische objecten die 3:1 moeten halen
-   (WCAG 1.4.11 AA). --color-border (#e2e8f0) haalde 1,23:1 op wit; deze twee
-   waarden halen 4,8:1 (licht) en 7,0:1 (donker) tegen de paginaachtergrond. */
+/* Spokes en scheidingslijn dragen betekenis, dus grafische objecten die 3:1
+   moeten halen (1.4.11). --color-border haalde 1,23:1; dit 4,8:1 en 7,0:1. */
 .bollendiagram {
   --bd-line: light-dark(#6b7280, #94a3b8);
 }
 
 /* === Verbindingslijnen (spokes) ===
-   Getekend ONDER de bollen; de opake fills verbergen de uiteinden zodat alleen
-   het stukje tussen centrum-bol en norm-bol zichtbaar blijft. */
+   Onder de bollen; de opake fills verbergen de uiteinden. */
 .bd-spoke {
   stroke: var(--bd-line);
   stroke-width: 1.5;
@@ -37,11 +33,9 @@
 }
 
 /* === Bollen (cirkels) === */
-/* `:not(.bd-focus-ring)` op elke regel die fill of stroke zet: de focusring is
-   een tweede <circle> bínnen dezelfde <a> (zie .bd-focus-ring verderop). Zonder
-   de uitzondering wint `.bd-bubble circle` (0,1,1) van `.bd-focus-ring` (0,1,0)
-   en krijgt de ring de bol-fill — dan is het geen ring meer maar een opake
-   schijf van r+4 óver de bol, en komt de 3px stroke-width nooit aan. */
+/* `:not(.bd-focus-ring)` op elke fill/stroke-regel: de ring is een tweede
+   <circle> in dezelfde <a>, en `.bd-bubble circle` (0,1,1) wint anders van
+   `.bd-focus-ring` (0,1,0) — de ring wordt dan een opake schijf óver de bol. */
 .bd-bubble circle:not(.bd-focus-ring) {
   fill: #8cc3e6;
   stroke: #66afdd;
@@ -55,9 +49,7 @@
   stroke-width: 1.5;
 }
 
-/* Toekomst-cluster: vervaagde, gestippelde cirkels onder de scheidingslijn.
-   In light mode lichte fill, in dark mode transparant zodat alleen de
-   gestippelde stroke leesbaar blijft tegen de donkere achtergrond. */
+/* Toekomst-cluster. Dark mode transparant, anders verdwijnt de stippelstroke. */
 .bd-bubble-outlined {
   fill: light-dark(#eef5fb, transparent);
   stroke: var(--bd-line);
@@ -82,8 +74,7 @@
   font-weight: 500;
 }
 
-/* Lange normtitels ("Informatiebeveiliging en betrouwbaar") passen alleen op
-   meerdere regels én een graadje kleiner binnen een bol van r=55. */
+/* Lange normtitels passen alleen kleiner én over meerdere regels in r=55. */
 .bd-label-sm {
   font-size: 12px;
 }
@@ -95,7 +86,7 @@
   letter-spacing: 0.01em;
 }
 
-/* Toekomst-labels staan op de (vervaagde) cirkel; eigen, gedempte kleur. */
+/* Toekomst-labels: eigen, gedempte kleur. */
 .bd-label-outlined {
   fill: light-dark(#5a7184, #aebfcf);
   font-size: 13px;
@@ -103,8 +94,7 @@
 }
 
 /* === Tekstuele normenlijst onder het diagram ===
-   Zelfde acht links als de bollen, zodat het diagram niet de enige route naar
-   de normen is. Compacte chip-rij, zodat hij de figcaption niet overstemt. */
+   Zelfde acht links, zodat het diagram niet de enige route is. */
 .bd-normenlijst ul {
   display: flex;
   flex-wrap: wrap;
@@ -141,22 +131,15 @@
   fill: #01689b;
 }
 
-/* Focus: een losse ring op r+4, dus volledig BUITEN de bol (het SVG-equivalent
-   van outline-offset). De enige aangrenzende kleur is de paginaachtergrond;
-   --color-text haalt daar 17,9:1 (licht) en 14,5:1 (donker) tegen.
-   Eerder werd alleen de bol-stroke verdikt naar #01689b: dat was in lichte
-   modus dezelfde kleur als de rustkleur (alleen dikker) en verlaagde in donkere
-   modus het contrast van de centrale bol van 6,4:1 naar 2,9:1 — de indicator
-   maakte de bol dus minder zichtbaar dan hij in rust was (WCAG 2.4.7 A). */
+/* Losse ring op r+4, dus buiten de bol (SVG-equivalent van outline-offset).
+   Grenst alleen aan de paginaachtergrond: 17,9:1 licht, 14,5:1 donker. De
+   bol-stroke verdikken werkte niet — in donkere modus zakte het contrast van de
+   centrale bol van 6,4:1 naar 2,9:1 (2.4.7). */
 .bd-focus-ring {
   fill: none;
   stroke: none;
-  /* `vector-effect: non-scaling-stroke` houdt de lijndikte in CSS-pixels in
-     plaats van SVG-gebruikerseenheden. Zonder dat schaalt de ring mee met de
-     viewBox (480 breed) op de gerenderde breedte (maximaal 600px): 3
-     eenheden worden dan 3,75px op een breed scherm en circa 2px op 320px —
-     precies waar een focusindicator het meest nodig is. Met deze regel is hij
-     overal 3px. */
+  /* non-scaling-stroke houdt de dikte in CSS-pixels; anders schaalt de ring mee
+     met de viewBox en wordt hij ~2px op 320px. */
   vector-effect: non-scaling-stroke;
   stroke-width: 3px;
 }
@@ -197,8 +180,7 @@
     stroke: CanvasText;
   }
 
-  /* In forced-colors worden auteurskleuren genegeerd, dus var(--color-text)
-     komt hier niet aan. Highlight is de systeemkleur voor selectie/focus. */
+  /* Auteurskleuren worden genegeerd; Highlight is de systeemkleur voor focus. */
   .bd-bubble:focus-visible .bd-focus-ring {
     stroke: Highlight;
   }
