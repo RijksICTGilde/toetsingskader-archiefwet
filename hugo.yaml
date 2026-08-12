@@ -61,6 +61,7 @@ params:
       - normen
       - onderwerpen
       - over
+  back_to_top: true
   tagline: "Normen voor duurzame toegankelijkheid"
   footer:
     tagline: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."

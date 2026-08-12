@@ -33,6 +33,11 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Thema bijgewerkt naar `hugo-theme-rijksoverheid` v0.2.0. Daarin zitten vijf
+  toegankelijkheidsfixes die hier als tijdelijke overrides stonden
+  (focusindicatoren in de zoekresultaten, het zoekveld en de footerlinks; het
+  contrast van de sneltoetshint; de meldbalk die de focus kon afdekken) plus
+  de "naar boven"-knop als theme-component.
 - Norm 1 (Inbeheername en beheer) bijgewerkt naar het herziene normblad
   "1) Normanalyse beheer" (4e iteratie): toelichting aangevuld met archiveren
   by design, de koppeling van categorieën aan het selectiebesluit en de
@@ -90,6 +95,11 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Verwijderd
 
+- De project-eigen "naar boven"-knop (`layouts/baseof.html`,
+  `_partials/terug-naar-boven.html`, `js/back-to-top.js`,
+  `css/terug-naar-boven.css`). De knop komt nu uit het thema, aangezet met
+  `back_to_top: true`. Daarmee vervalt ook de baseof-shadow. Het thema zet
+  geen `scroll-behavior: smooth` meer, dus anchors springen direct.
 - Feedback-blok van de normpagina's (de `params.feedback`-config blijft).
 - De card-grid naar de secties op de homepage: die dupliceerde de
   hoofdnavigatie. De tegels ("Wat is het?", "Voor wie?", "Wanneer?", "Waar

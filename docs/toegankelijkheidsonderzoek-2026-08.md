@@ -4,6 +4,10 @@
 **Bijgewerkt:** 10 augustus 2026 — bevindingen 27 en 28 opgelost, thema-issues
 ingediend, browsertests toegevoegd; zie [Aanvulling 10 augustus
 2026](#aanvulling-10-augustus-2026)
+**Bijgewerkt:** 12 augustus 2026 — bevindingen 1a, 1b, 1c, 12 en 17 zijn
+upstream opgelost in thema v0.2.0
+([PR #19](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/pull/19));
+de bijbehorende overrides zijn uit dit project verwijderd
 **Onderzochte versie:** `main` (`af40029`), gebouwd met Hugo 0.152.2 extended,
 thema `hugo-theme-rijksoverheid` v0.1.0
 **Norm:** WCAG 2.2 niveau AA (EN 301 549, Tijdelijk besluit digitale
@@ -103,14 +107,21 @@ De AAA-bevindingen 27 en 28 stonden hier eerst als "buiten scope"; ze zijn op
 
 ### Tijdelijke overrides op het thema
 
-Deze bevindingen zitten in `hugo-theme-rijksoverheid` v0.1.0. Ze zijn hier
+Deze bevindingen zaten in `hugo-theme-rijksoverheid` v0.1.0. Ze zijn hier
 gerepareerd zodat de site nu voldoet, maar horen upstream te worden opgelost.
 Beide bestanden hebben een kop die dat expliciet vermeldt; ze verdwijnen zodra
 het thema is bijgewerkt.
 
+Op 12 augustus 2026 is dat voor de CSS-helft gebeurd: 1a, 1b, 1c, 12 en 17 zijn
+opgelost in thema v0.2.0 en de overrides zijn hier weggehaald. De hint van
+bevinding 12 blijft in dit project wél verborgen, omdat `toegankelijkheid.js`
+de sitebrede `/`-sneltoets nog neutraliseert (bevinding 10); die binding zit nog
+steeds in de theme-`search.js` en is daarmee de volgende upstream-kandidaat.
+
 | Bestand | Bevinding |
 |---|---|
-| `assets/css/toegankelijkheid.css` | 1a, 1b, 1c (focusindicatoren), 12 (contrast sneltoetshint), 17 (`scroll-margin` onder de meldbalk) |
+| ~~`assets/css/toegankelijkheid.css`~~ | ~~1a, 1b, 1c (focusindicatoren), 12 (contrast sneltoetshint), 17 (`scroll-margin` onder de meldbalk)~~ — opgelost in thema v0.2.0 |
+| `assets/css/toegankelijkheid.css` | Rest: de `<h2>`-in-`<summary>`-correctie (bevinding 8), de PDF-knop (bevinding 19) en het verbergen van de sneltoetshint zolang bevinding 10 lokaal wordt opgelost |
 | `assets/js/toegankelijkheid.js` | 16 (skip-link), 21 (label in name), 24 (genest landmark + Escape), 10 (`/`-sneltoets), 23 (externe-linkmelding), 9 (aankondiging van de markering) |
 | `layouts/_partials/scripts.html` | shadow van het thema, alleen om het script hierboven te laden |
 
