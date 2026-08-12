@@ -1,26 +1,55 @@
 {{/*
-  Shortcode: bollendiagram
-  Hub-and-spoke-visualisatie van "Informatie in beheer" met de samenhangende
-  normen. De norm in beheer staat centraal; de zeven andere normen liggen
-  gelijkmatig in een cirkel eromheen, verbonden via dunne spokes.
-  De gevulde bollen zijn toetsenbord-navigeerbaar (focus zichtbaar via stroke).
-  Onder een scheidingslijn staan de vervaagde onderwerpen die later worden
-  toegevoegd.
+  Shortcode: bollendiagram — hub-and-spoke met "Informatie in beheer" centraal en
+  de zeven samenhangende normen eromheen. Onder een scheidingslijn staan de
+  vervaagde onderwerpen die later komen.
 
-  Tekenvolgorde (paint-order): eerst de spokes, dan de cirkels eroverheen (de
-  opake fills verbergen de spoke-uiteinden), dan de toekomst-bollen en als
-  laatste alle labels in een aparte groep bovenop. Zo overschildert niets de
-  tekst.
+  Tekenvolgorde: spokes, dan de cirkels (opake fills verbergen de spoke-uiteinden),
+  dan de toekomst-bollen, en als laatste alle labels in een eigen groep bovenop.
+
+  Toegankelijkheid:
+  - `role="group"`, NIET `role="img"`: een img is één bladknoop en de acht
+    normlinks vallen er dan uit (axe: nested-interactive).
+  - Elke <a> draagt een `aria-label`; een SVG-<title> in een SVG-<a> geldt niet
+    betrouwbaar als naam (axe: link-name). De <title> blijft voor de tooltip.
+  - De labellaag is aria-hidden. De toekomst-onderwerpen staan daarom in de
+    figcaption, en onder het diagram staat dezelfde lijst normlinks.
+
+  $normen volgt de tekenvolgorde, niet het normnummer: index 0 is de centrale
+  bol, daarna met de klok mee vanaf boven.
 */}}
+
+{{/* `naam` is zowel de zichtbare tekst in de bol (de <text>-laag, met de hand
+     over regels verdeeld) als de toegankelijke naam van de link; WCAG 2.5.3 eist
+     dat die twee samenvallen. Daarom staat de naam hier en niet in de front
+     matter: anders verandert een hernoemde norm wel het label en niet de plaat.
+     De lus hieronder waarschuwt bij afwijking van `norm_titel` — vandaag één
+     keer, norm 1, omdat het langere woord niet in de bol past. */}}
+{{- $normen := slice
+  (dict "url" "normen/01-beheer/"               "naam" "Informatie in beheer")
+  (dict "url" "normen/02-overzicht/"            "naam" "Overzicht")
+  (dict "url" "normen/03-ordenen/"              "naam" "Ordenen")
+  (dict "url" "normen/04-metadateren/"          "naam" "Metadateren")
+  (dict "url" "normen/05-betrouwbaar/"          "naam" "Informatiebeveiliging en betrouwbaar")
+  (dict "url" "normen/06-vindbaar/"             "naam" "Vindbaar")
+  (dict "url" "normen/07-vernietigen/"          "naam" "Gecontroleerd vernietigen")
+  (dict "url" "normen/08-periodieke-evaluatie/" "naam" "Periodieke evaluatie")
+-}}
+
+{{/* Drift-controle op url en naam. Waarschuwing, geen fout: herstellen raakt
+     tekst die op maat in de SVG is gezet. */}}
+{{- range $normen -}}
+  {{- $p := site.GetPage (printf "/%s" .url) -}}
+  {{- if not $p -}}
+    {{- warnf "bollendiagram: geen pagina gevonden voor %q" .url -}}
+  {{- else if ne $p.Params.norm_titel .naam -}}
+    {{- warnf "bollendiagram: label %q wijkt af van norm_titel %q (%s)" .naam $p.Params.norm_titel .url -}}
+  {{- end -}}
+{{- end -}}
 
 <figure class="bollendiagram-wrapper">
   <svg class="bollendiagram"
        viewBox="80 0 480 525"
        xmlns="http://www.w3.org/2000/svg"
-       {{/* role="group" en NIET role="img": een img is voor hulpsoftware één
-            bladknoop, waardoor de acht normlinks hieronder uit de
-            toegankelijkheidsboom vallen. Met group blijft de <title> de naam
-            van het geheel én blijven de links bereikbaar. */}}
        role="group"
        aria-labelledby="bollendiagram-title">
     <title id="bollendiagram-title">Relatie tussen de normen van het Toetsingskader Archiefwet</title>
@@ -36,44 +65,52 @@
     </g>
 
     <g class="bd-cluster">
-      <a class="bd-bubble bd-main" href="{{ relURL "normen/01-beheer/" }}">
-        <title>Informatie in beheer</title>
+      <a class="bd-bubble bd-main" href="{{ relURL (index $normen 0).url }}" aria-label="{{ (index $normen 0).naam }}">
+        <title>{{ (index $normen 0).naam }}</title>
         <circle cx="320" cy="215" r="80"/>
+        <circle class="bd-focus-ring" cx="320" cy="215" r="84"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/02-overzicht/" }}">
-        <title>Overzicht</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 1).url }}" aria-label="{{ (index $normen 1).naam }}">
+        <title>{{ (index $normen 1).naam }}</title>
         <circle cx="320" cy="60" r="55"/>
+        <circle class="bd-focus-ring" cx="320" cy="60" r="59"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/03-ordenen/" }}">
-        <title>Ordenen</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 2).url }}" aria-label="{{ (index $normen 2).naam }}">
+        <title>{{ (index $normen 2).naam }}</title>
         <circle cx="441" cy="118" r="55"/>
+        <circle class="bd-focus-ring" cx="441" cy="118" r="59"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/04-metadateren/" }}">
-        <title>Metadateren</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 3).url }}" aria-label="{{ (index $normen 3).naam }}">
+        <title>{{ (index $normen 3).naam }}</title>
         <circle cx="471" cy="249" r="55"/>
+        <circle class="bd-focus-ring" cx="471" cy="249" r="59"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/05-betrouwbaar/" }}">
-        <title>Informatiebeveiliging en betrouwbaar</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 4).url }}" aria-label="{{ (index $normen 4).naam }}">
+        <title>{{ (index $normen 4).naam }}</title>
         <circle cx="387" cy="355" r="55"/>
+        <circle class="bd-focus-ring" cx="387" cy="355" r="59"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/06-vindbaar/" }}">
-        <title>Vindbaar</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 5).url }}" aria-label="{{ (index $normen 5).naam }}">
+        <title>{{ (index $normen 5).naam }}</title>
         <circle cx="253" cy="355" r="55"/>
+        <circle class="bd-focus-ring" cx="253" cy="355" r="59"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/07-vernietigen/" }}">
-        <title>Gecontroleerd vernietigen</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 6).url }}" aria-label="{{ (index $normen 6).naam }}">
+        <title>{{ (index $normen 6).naam }}</title>
         <circle cx="169" cy="249" r="55"/>
+        <circle class="bd-focus-ring" cx="169" cy="249" r="59"/>
       </a>
 
-      <a class="bd-bubble" href="{{ relURL "normen/08-periodieke-evaluatie/" }}">
-        <title>Periodieke evaluatie</title>
+      <a class="bd-bubble" href="{{ relURL (index $normen 7).url }}" aria-label="{{ (index $normen 7).naam }}">
+        <title>{{ (index $normen 7).naam }}</title>
         <circle cx="199" cy="118" r="55"/>
+        <circle class="bd-focus-ring" cx="199" cy="118" r="59"/>
       </a>
     </g>
 
@@ -92,7 +129,14 @@
       <text class="bd-label" x="320" y="60">Overzicht</text>
       <text class="bd-label" x="441" y="118">Ordenen</text>
       <text class="bd-label" x="471" y="249">Metadateren</text>
-      <text class="bd-label bd-label-sm" x="387" y="341">Informatie-</text>
+      {{/* Geen koppelteken: de zichtbare tekst moet als string in de toegankelijke
+     naam voorkomen (WCAG 2.5.3 Label in Name). Een regelovergang voegt geen
+     teken toe, een afbreekstreepje wél — met "Informatie-" leest de plaat
+     "Informatie-beveiliging en betrouwbaar" en dat staat niet in het
+     aria-label "Informatiebeveiliging en betrouwbaar". Een gebruiker die de
+     bol met spraakbediening aanwijst, activeert hem dan niet. Zonder streepje
+     is de regel bovendien korter, dus de opmaak loopt geen risico. */}}
+<text class="bd-label bd-label-sm" x="387" y="341">Informatie</text>
       <text class="bd-label bd-label-sm" x="387" y="355">beveiliging</text>
       <text class="bd-label bd-label-sm" x="387" y="369">en betrouwbaar</text>
       <text class="bd-label" x="253" y="355">Vindbaar</text>
@@ -109,6 +153,16 @@
   </svg>
 
   <figcaption class="bollendiagram-caption">
-    Het toetsingskader bevat nu acht onderwerpen die de inspectie als fundamenteel voor de duurzame toegankelijkheid beschouwt. De norm <a href="{{ relURL "normen/01-beheer/" }}">in beheer</a> vormt de basis; de zeven andere normen hangen daar direct mee samen. De vier vervaagde onderwerpen onderaan horen hier ook bij en worden op een later moment aan het toetsingskader toegevoegd.
+    Het toetsingskader bevat nu acht onderwerpen die de inspectie als fundamenteel voor de duurzame toegankelijkheid beschouwt. De norm <a href="{{ relURL "normen/01-beheer/" }}">in beheer</a> vormt de basis; de zeven andere normen hangen daar direct mee samen. Vier onderwerpen worden op een later moment aan het toetsingskader toegevoegd: leesbaar, migreren, converteren en beschikbaar.
   </figcaption>
+
+  {{/* Tekstuele route naar dezelfde acht normen: het diagram is daarmee niet
+       de enige ingang (WCAG 1.1.1 / 1.3.1). */}}
+  <nav class="bd-normenlijst" aria-label="Normen in het diagram">
+    <ul>
+      {{- range $normen }}
+      <li><a href="{{ relURL .url }}">{{ .naam }}</a></li>
+      {{- end }}
+    </ul>
+  </nav>
 </figure>

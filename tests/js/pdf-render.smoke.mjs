@@ -25,9 +25,8 @@ vm.runInContext(read('assets/js/pdf-assets.js'), sandbox)
 
 async function renderVendored(json, out){
   const dd = await build(json)
-  // De echte header-functie (uit pdf-export.js) gebruiken — die test de
-  // werkelijke logo-opmaak. Hij refereert outer window.TKPDF.PDF_LOGO_SVG
-  // (een string), wat prima door de sandbox-pdfMake gerenderd wordt.
+  // De echte header-functie uit pdf-export.js, zodat de logo-opmaak meegetest
+  // wordt; PDF_LOGO_SVG is een string en rendert prima in de sandbox.
   return await new Promise((resolve,reject)=>{
     try {
       sandbox.addVirtualFileSystem(sandbox.window.TKPDF.PDF_VFS)

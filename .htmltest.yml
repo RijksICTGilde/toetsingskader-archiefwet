@@ -1,7 +1,11 @@
 DirectoryPath: .htmltest/public
 # Trage overheidssites krijgen ruimer de tijd dan de default (15s).
 ExternalTimeout: 45
+# Voor een decoratieve afbeelding is `alt=""` juist correct (1.1.1): de hero
+# dupliceerde met een gevulde alt de <h1> eronder (bevinding 20). Ontbrekende
+# alt-attributen blijven een fout, gedekt door een andere regel en de axe-scan.
+IgnoreAltEmpty: true
 IgnoreURLs:
-  # Serveert een incomplete certificaatketen; client-side niet op te lossen,
-  # htmltest faalt er hard op terwijl de links in de browser gewoon werken.
+  # Incomplete certificaatketen: htmltest faalt er hard op terwijl de links
+  # in de browser werken.
   - '^https://zoek\.officielebekendmakingen\.nl/'

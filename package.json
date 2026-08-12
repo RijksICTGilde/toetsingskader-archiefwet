@@ -5,9 +5,14 @@
   "scripts": {
     "test": "node --test tests/js/*.test.mjs",
     "build:pdf-assets": "node scripts/build-pdf-assets.mjs",
-    "smoke:pdf": "node tests/js/pdf-render.smoke.mjs"
+    "smoke:pdf": "node tests/js/pdf-render.smoke.mjs",
+    "test:a11y": "node scripts/a11y-scan.mjs public",
+    "test:a11y:browser": "node scripts/a11y-browser.mjs .a11y/public"
   },
   "devDependencies": {
-    "linkedom": "^0.18.12"
+    "axe-core": "^4.10.2",
+    "jsdom": "^25.0.1",
+    "linkedom": "^0.18.12",
+    "playwright": "^1.62.1"
   }
 }

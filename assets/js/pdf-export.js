@@ -5,7 +5,7 @@
   var BRAND = '#007bc7'
   // Rijkshuisstijl-donkerblauw: kleur van het lint en het woordmerk ernaast.
   var LOGO_BLUE = '#154273'
-  // Breedte van het lint in punten; de SVG is 1:2, dus de hoogte is het dubbele.
+  // Lintbreedte in punten; SVG is 1:2, dus hoogte is het dubbele.
   var LOGO_W = 26
   var dateFmt = new Intl.DateTimeFormat('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })
 
@@ -17,9 +17,8 @@
     h6: { fontSize: 10.5, bold: true, italics: true, margin: [0, 6, 0, 2] },
     para: { fontSize: 10.5, margin: [0, 0, 0, 6], lineHeight: 1.25 },
     list: { fontSize: 10.5, margin: [8, 0, 0, 6] },
-    // Bronnenlijst als voetnoten: kleiner en gedempt, met krappere regelafstand,
-    // zodat ze als noot lezen en niet als doorlopende tekst. De nummers in de
-    // tekst zijn al superscript (zie html-to-pdfmake.js).
+    // Bronnenlijst leest als noot, niet als doorlopende tekst. Nummers zijn al
+    // superscript (html-to-pdfmake.js).
     footnotesH: { fontSize: 10, bold: true, color: BRAND, margin: [0, 14, 0, 4] },
     footnotes: { fontSize: 8.5, color: '#444444', margin: [8, 0, 0, 6], lineHeight: 1.15 },
     callout: { fontSize: 11, italics: true, color: '#154273', margin: [0, 4, 0, 10] },
@@ -44,9 +43,8 @@
     try { return new URL(url).origin } catch (e) { return '' }
   }
 
-  // Titelpagina (zoals de DPIA-/AI-verordening-PDF's): gecentreerde stack met
-  // titel, downloaddatum, bron en versie; logo komt uit de running header.
-  // pageBreak: 'after' → de inhoud begint op pagina 2.
+  // Titelpagina: titel, downloaddatum, bron, versie. Logo komt uit de running
+  // header; pageBreak 'after' zet de inhoud op pagina 2.
   function cover(data) {
     return [{
       stack: [
@@ -69,21 +67,19 @@
   }
 
   function normSection(n, asSection, pageBreak, ctx) {
-    // Linkcontext per norm: unieke voetnoot-prefix (anders botsen #fn:N van
-    // verschillende normen in de kader-PDF) + site-origin + norm-bestemmingen.
+    // Prefix per norm, anders botsen de #fn:N van verschillende normen in de
+    // kader-PDF.
     var opts = { prefix: 'n' + (n.norm_id || '') + '-', origin: ctx.origin, normDests: ctx.normDests }
     var blocks = []
     if (asSection) {
-      // tocItem: opgenomen in de inhoudsopgave (kader-PDF); id: doel voor
-      // kruisverwijzingen vanuit andere normen.
+      // tocItem → inhoudsopgave; id → doel voor kruisverwijzingen.
       var head = { text: n.titel, style: 'section', tocItem: true }
       if (pageBreak) head.pageBreak = 'before'
       if (n.slug) head.id = 'norm-' + n.slug
       blocks.push(head)
     }
     if (n.kern_html) {
-      // "Kern van de norm" als sectiekop (h2) en de tekst als normale alinea —
-      // net als Toelichting (klantfeedback: kern was te klein/dikgedrukt).
+      // Kern als h2 + normale alinea, net als Toelichting (klantfeedback).
       blocks.push({ text: 'Kern van de norm', style: 'h2' })
       blocks = blocks.concat(parse(n.kern_html, opts))
     }
@@ -92,24 +88,20 @@
   }
 
   function buildNorm(data) {
-    // Titelpagina → inhoud → disclaimer (colofon) achteraan. Geen in-PDF-
-    // norm-sprongen (normDests null) → kruisverwijzingen worden site-links.
+    // normDests null → kruisverwijzingen worden site-links.
     var ctx = { origin: originOf(data.url), normDests: null }
     return { content: cover(data).concat(normSection(data, false, false, ctx)).concat(disclaimer()) }
   }
 
   function buildKader(data) {
-    // Titelpagina → normen (eerste sluit aan op de cover, rest op nieuwe
-    // pagina) → disclaimer. Geen losse intro-pagina.
-    // Kruisverwijzingen tussen normen → in-PDF-sprong naar de norm-sectie.
+    // Kruisverwijzingen tussen normen worden in-PDF-sprongen.
     var normDests = {}
     for (var j = 0; j < data.normen.length; j++) {
       if (data.normen[j].slug) normDests[data.normen[j].slug] = 'norm-' + data.normen[j].slug
     }
     var ctx = { origin: originOf(data.url), normDests: normDests }
     var content = cover(data)
-    // Klikbare inhoudsopgave op pagina 2 (pdfMake verzamelt de tocItem-koppen
-    // met paginanummers; entries springen naar de norm-sectie).
+    // Klikbare inhoudsopgave op pagina 2, uit de tocItem-koppen.
     content.push({
       toc: {
         title: { text: 'Inhoudsopgave', style: 'section', margin: [0, 0, 0, 16] },
@@ -117,7 +109,7 @@
         numberStyle: { fontSize: 11, color: '#666666' }
       }
     })
-    // Elke norm op een eigen pagina (de inhoudsopgave vult pagina 2).
+    // Elke norm op een eigen pagina.
     for (var i = 0; i < data.normen.length; i++) content = content.concat(normSection(data.normen[i], true, true, ctx))
     return { content: content.concat(disclaimer()) }
   }
@@ -129,18 +121,15 @@
     base.defaultStyle = { font: 'ROSans', fontSize: 10.5, color: '#1a1a1a' }
     base.styles = styles
     base.info = { title: data.titel, author: 'Inspectie Overheidsinformatie en Erfgoed', subject: 'Versie: ' + (data.versie || '') }
+    // /DisplayDocTitle: viewer toont de titel i.p.v. de bestandsnaam. Géén
+    // `tagged: true` — pdfMake bouwt geen structuurboom, en getagd markeren zonder
+    // /StructTreeRoot misleidt hulpsoftware (bevinding 6).
+    base.displayTitle = true
     base.header = function (currentPage, pageCount, pageSize) {
-      // Rijkshuisstijl-lockup bovenaan elke pagina (running letterhead), zonder
-      // lijn: lint + organisatienaam + ministerie, zoals de header van
-      // inspectie-oe.nl. De tekst staat in RO Sans (al in de VFS) i.p.v. een
+      // Rijkshuisstijl-lockup als running letterhead. Tekst in RO Sans i.p.v. een
       // woordmerk-SVG, zodat hij scherp en selecteerbaar blijft.
-      // Het lint is 1:2 (viewBox 50x100), dus LOGO_W breed → 2x zo hoog.
-      // Beide onderdelen staan met absolutePosition op de pagina (zoals de
-      // logolockup in de AI-verordening-beslishulp) i.p.v. in de header-flow:
-      // zo ligt het lint gegarandeerd tegen de bovenrand (y = 0) en precies in
-      // het paginamidden, los van pageMargins. In de huisstijl loopt het lint
-      // af aan de bovenrand; het mag er niet los onder zweven. De tekst sluit
-      // rechts op het lint aan en staat er verticaal op gecentreerd.
+      // absolutePosition i.p.v. de header-flow: het lint moet aflopen tegen de
+      // bovenrand (y = 0) en in het paginamidden staan, los van pageMargins.
       var lintX = (pageSize.width - LOGO_W) / 2
       return [
         { svg: window.TKPDF.PDF_LOGO_SVG, width: LOGO_W, absolutePosition: { x: lintX, y: 0 } },
@@ -155,8 +144,7 @@
       ]
     }
     base.footer = function (currentPage, pageCount) {
-      // Dunne scheidingslijn + alleen paginanummer (versie/datum staan op de
-      // titelpagina, niet in de voet).
+      // Alleen paginanummer; versie en datum staan op de titelpagina.
       return {
         stack: [
           { canvas: [{ type: 'line', x1: 48, y1: 0, x2: 547, y2: 0, lineWidth: 0.5, lineColor: '#dddddd' }] },
@@ -183,21 +171,39 @@
     })
   }
 
+  // Knoppen staan `hidden` in de markup: zonder JS is er geen PDF.
+  var hiddenButtons = document.querySelectorAll('[data-pdf-url][hidden]')
+  for (var b = 0; b < hiddenButtons.length; b++) hiddenButtons[b].removeAttribute('hidden')
+
+  // Live region voor de voortgang (4.1.3). Knoplabel + aria-busy volstaat niet:
+  // aria-busy wordt meestal genegeerd en genereren duurt seconden. Staat vanaf
+  // lading leeg in de DOM, anders wordt de wijziging niet aangekondigd.
+  var statusRegion = document.createElement('p')
+  statusRegion.className = 'visually-hidden'
+  statusRegion.setAttribute('role', 'status')
+  document.body.appendChild(statusRegion)
+
+  function announce(msg) { statusRegion.textContent = msg }
+
   document.addEventListener('click', function (e) {
     var btn = e.target.closest ? e.target.closest('[data-pdf-url]') : null
     if (!btn) return
     e.preventDefault()
-    // Dubbelklik tijdens genereren negeren (voorheen via CSS pointer-events).
+    // Dubbelklik tijdens genereren negeren.
     if (btn.getAttribute('aria-busy') === 'true') return
     btn.setAttribute('aria-busy', 'true')
-    // Alleen het tekstlabel wisselen, niet de hele knop — anders sneuvelt het
-    // icoon (textContent bevat geen <svg>). Val terug op de knop zelf als er
-    // geen apart label-<span> is.
+    // Alleen het tekstlabel wisselen; textContent op de knop sloopt het icoon.
     var label = btn.querySelector('span') || btn
     var original = label.textContent
     label.textContent = 'PDF wordt gemaakt…'
+    announce('De PDF wordt gemaakt. Dit kan enkele seconden duren.')
     generate(btn.getAttribute('data-pdf-url'))
-      .catch(function (err) { console.error(err); window.alert('Het maken van de PDF is mislukt. Probeer het later opnieuw.') })
+      .then(function () { announce('De PDF is gemaakt en wordt gedownload.') })
+      .catch(function (err) {
+        console.error(err)
+        announce('Het maken van de PDF is mislukt.')
+        window.alert('Het maken van de PDF is mislukt. Probeer het later opnieuw.')
+      })
       .then(function () { btn.removeAttribute('aria-busy'); label.textContent = original })
   })
 })();

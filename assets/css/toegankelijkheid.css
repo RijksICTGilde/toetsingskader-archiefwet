@@ -1,0 +1,43 @@
+/* ============================================================================
+   Toegankelijkheidsaanpassingen bovenop het thema.
+
+   De themadefecten die hier stonden zijn opgelost in v0.2.0 (PR #19). Wat
+   overblijft zijn gevolgen van onze eigen templates en scripts en blijft dus
+   staan. Consumer-CSS wordt ná de thema-CSS geconcat, dus deze regels winnen
+   bij gelijke specificiteit.
+   ========================================================================= */
+
+/* --- <h2> in <summary> (bevinding 8) ---------------------------------------
+   De <summary> is een flex-container die de kopstijl al levert, dus de h2 moet
+   zijn eigen typografie en marges loslaten. */
+.references > details > summary h2 {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* Idem voor "Kern van de norm", nu een <h2> met dezelfde class. */
+blockquote.callout header h2.title {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* --- Sneltoetshint (gevolg van bevinding 10) -------------------------------
+   Het thema toont de <kbd>/</kbd>-hint sinds v0.2.0 op vol contrast, maar
+   toegankelijkheid.js neutraliseert de sitebrede sneltoets (2.1.4). Een hint
+   voor een toets die alleen werkt op de zoekknop zelf — waar Enter hetzelfde
+   doet — belooft iets wat de site niet doet. Weg zodra `/` upstream instelbaar
+   is. */
+.search-trigger .search-shortcut {
+  display: none;
+}
+
+/* --- Bevinding 19: PDF-knop vraagt JavaScript ------------------------------
+   `.pdf-download.button` zet `display: inline-flex` en wint daarmee van de
+   UA-regel voor [hidden]; daarom expliciet. */
+.pdf-download.button[hidden] {
+  display: none;
+}

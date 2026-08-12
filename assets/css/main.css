@@ -3,9 +3,8 @@
   --color-banner: #007bc7;
 }
 
-/* "Over deze site" kolom expliciet breder voor het langste label
-   ("Kwetsbaarheid melden"). Theme nav { min-width: 10rem } is voor
-   alle navs hetzelfde; deze override forceert breder ipv groeien. */
+/* Breder dan de thema-nav (10rem) voor het langste label, "Kwetsbaarheid
+   melden": forceren i.p.v. laten groeien. */
 @media (min-width: 700px) {
   body > footer .footer-columns > nav[aria-label="Over deze site"] {
     min-width: 14rem;
@@ -13,17 +12,8 @@
   }
 }
 
-/* Zoek-highlight (?q=…) wikkelt matches in <mark>, óók binnen links. De
-   thema-mark-stijl overschrijft dan de linkkleur, waardoor de link "opgeknipt"
-   oogt. Hier behoudt een highlight ín een link de linkkleur (alleen de gele
-   achtergrond blijft). Project-CSS — raakt het thema niet. */
-#main-content a mark {
-  color: inherit;
-}
-
-/* Norm page: project-specifieke decoratie op de markdown-body-structuur.
-   (Voorheen op .norm-* wrappers; in het markdown-formaat zijn de koppen
-   gewone h2/h3/h4, dus we scopen via .norm + heading-ids.) */
+/* Norm page: project-specifieke decoratie op de markdown-body. De koppen zijn
+   gewone h2/h3/h4, dus scopen via .norm + heading-ids. */
 
 /* Normuitleg-kop met accentlijn. */
 .norm h2#normuitleg {
@@ -31,8 +21,7 @@
   padding-block-end: 0.5rem;
 }
 
-/* Nieuw thema (h3): duidelijke overgang met ruimte + scheidingslijn (zoals
-   tussen voorschriften), behalve het eerste thema direct onder Normuitleg. */
+/* Nieuw thema (h3): ruimte + scheidingslijn, behalve het eerste. */
 .norm h3 {
   margin-block-start: 2.5rem;
   padding-block-start: 1.25rem;
@@ -45,8 +34,7 @@
   border-block-start: none;
 }
 
-/* Normuitleg (h2) en thema (h3) staan in de thema-standaardkleur (donker);
-   het Voorschrift is de blauwe accent-kop. */
+/* Alleen het Voorschrift is de blauwe accent-kop; h2 en h3 blijven donker. */
 .norm h4[id^="voorschrift"] {
   color: var(--color-primary);
   padding-block-start: 0.75rem;
@@ -58,9 +46,8 @@
   padding-block-start: 0;
 }
 
-/* Criteria en Indicatoren: sub-items van het voorschrift — iets kleiner en
-   ingesprongen (zowel de kop als de eropvolgende inhoud; margin i.p.v.
-   padding zodat lijst-bullets op hun plek blijven). */
+/* Criteria en Indicatoren zijn sub-items: kleiner en ingesprongen. Margin i.p.v.
+   padding, anders verspringen de lijst-bullets. */
 .norm h4[id^="criteria"],
 .norm h4[id^="indicatoren"] {
   font-size: 1.15rem;
@@ -73,17 +60,14 @@
   margin-inline-start: 1rem;
 }
 
-/* Referentie-term: klikbaar naar het lijstitem, maar in tekstkleur i.p.v.
-   de standaard linkkleur (de dotted underline komt uit het thema). */
+/* Ref-term in tekstkleur; de dotted underline komt uit het thema. */
 .norm a.ref-term,
 .norm a.ref-term:hover {
   color: inherit;
 }
 
-/* PDF-downloadknop in de "Op deze pagina"-sidebar: solide brand-knop met
-   download-icoon + tekstlabel. Bouwt op de thema-.button (padding/radius/font/
-   icoon-grootte); alleen brand-kleur + icoon-uitlijning is project-specifiek.
-   Border == achtergrond, dus geen contrasterend randje op hover. */
+/* PDF-knop bouwt op de thema-.button; alleen brand-kleur en icoon-uitlijning
+   zijn project-specifiek. Border == achtergrond, dus geen randje op hover. */
 .toc .pdf-download.button {
   width: 100%;
   margin-bottom: 1.25rem;
@@ -107,29 +91,70 @@
   filter: brightness(0.9);
 }
 
-/* Een ref-term die óók een interne navigatielink is (voetnoot + link naar een
-   andere pagina) krijgt de linkkleur (blauw), zodat zichtbaar is dat je erheen
-   kunt klikken; de dotted underline (voetnoot-indicator) blijft uit het thema.
-   Plain footnote-termen (href="#fn:…") blijven in tekstkleur. */
+/* Hover alleen (brightness 0.9) haalt 1,19:1 tegen de rustkleur, en de
+   thema-.button zet `outline: none` (2.4.7, 1.4.11). --color-text contrasteert in
+   beide modi met knop én pagina. */
+.pdf-download.button:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 2px;
+  filter: none;
+}
+
+/* Ref-term die óók naar een andere pagina linkt, krijgt de linkkleur. Termen
+   met href="#fn:…" blijven in tekstkleur. */
 .norm a.ref-term[href^="/"],
 .norm a.ref-term[href^="/"]:hover {
   color: var(--color-primary);
 }
 
-/* De inklapbare Toelichting hergebruikt de thema-`.references`-accordeonstijl
-   (zie single.html). Enige project-override: de kop (én chevron via
-   currentColor) in de thema-standaardkleur (donker) i.p.v. het thema-blauw.
-   Geldt voor beide accordeons (Toelichting + Referenties).
-   Upstream-kandidaat: thema de referenties-summary-kleur als token laten zetten
-   zodat dit zonder override kan. */
+/* Toelichting hergebruikt de `.references`-accordeon van het thema; alleen de
+   kop (en chevron) donker i.p.v. blauw. Upstream-kandidaat: die kleur als
+   token. */
 .norm .references > details > summary {
   color: var(--color-text);
 }
 
-/* Versielabel op de homepage (shortcode `versielabel`). De beta-banner is weg;
-   op alle andere pagina's staat de versie in de voet naast de laatst-gewijzigd-
-   datum (`_partials/lastmod.html`), maar de homepage heeft geen voet. Gedempt en
-   klein: het is context, geen mededeling die de pagina moet openen. */
+/* <abbr title> uit _partials/afkortingen.html (3.1.4, bevinding 28). Alleen
+   Chrome stippelt die vanzelf. Géén `border-bottom`: de omliggende `.ref-term`
+   heeft al een dotted underline, en twee lijnen leest als een fout. */
+abbr[title] {
+  text-decoration: underline dotted;
+  text-underline-offset: 0.15em;
+  cursor: help;
+}
+
+/* Zoektermmarkering (1.4.3, bevinding 31): hier hoort géén projectregel. Een
+   eerdere `#main-content a mark { color: inherit }` gaf de markering in een link
+   de linkkleur, en die haalt 4,5:1 niet. Zonder die regel wint `mark` uit
+   base.css van het thema (11,4:1), ook binnen een link. */
+
+/* Het thema zet `.toc ul ul li { margin-bottom: 0 }`, waardoor de sublinks noch
+   24px hoog zijn noch 24px uit elkaar staan — beide routes van 2.5.8 falen. Als
+   block met verticale padding haalt de link zelf ruim 24px. */
+.toc nav a {
+  display: block;
+  padding-block: 0.25rem;
+}
+
+/* Reflow op 320px (1.4.10): een gesloten `.ref-tooltip` is absoluut gepositioneerd
+   met min-inline-size 14rem en rekt vanaf een term rechts in de regel de pagina
+   ~175px op. Daarom onder 480px uit de layout. `aria-describedby` blijft werken —
+   de naamberekening leest verborgen doelen. */
+@media (max-width: 480px) {
+  .ref-tooltip {
+    display: none;
+  }
+
+  .ref-wrapper:hover > .ref-tooltip,
+  .ref-wrapper:focus-within > .ref-tooltip {
+    display: block;
+    min-inline-size: 0;
+    max-inline-size: calc(100vw - 2rem);
+  }
+}
+
+/* Versielabel op de homepage: die heeft geen voet, waar de versie elders staat
+   (`_partials/lastmod.html`). Gedempt, want context en geen mededeling. */
 .versielabel {
   margin-block-start: 2rem;
   color: var(--color-text-muted);

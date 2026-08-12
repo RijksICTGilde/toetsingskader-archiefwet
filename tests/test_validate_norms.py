@@ -180,20 +180,38 @@ class FootnoteTests(unittest.TestCase):
         errors = run(content)
         self.assertTrue(any("Ongeldige voetnoot-id" in e for e in errors), errors)
 
-    def test_adjacent_footnote_markers(self):
-        # De tweede markering plakt aan het sluit-tag van de eerste, waardoor
-        # normen/single.html er geen ref-term van kan maken en het nummer als
-        # kaal superscript in de lopende tekst blijft staan.
+    def test_definition_with_only_a_link(self):
+        # Zonder brontekst vóór de link blijft de tooltip leeg.
         content = replace(
-            "Een toelichting met een bron.[^aw-4-1-lid-1]",
-            "Een toelichting met een bron.[^aw-4-1-lid-1][^tweede]",
-        ) + "\n[^tweede]: Tweede bron.\n"
+            "[^aw-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://example.org)",
+            "[^aw-4-1-lid-1]: [Bekijk bron](https://example.org)",
+        )
         errors = run(content)
-        self.assertTrue(any("direct achter elkaar" in e for e in errors), errors)
+        self.assertTrue(any("bestaat alleen uit een 'Bekijk bron'-link" in e for e in errors), errors)
+
+    def test_definition_with_source_text_is_fine(self):
+        self.assertEqual(run(VALID_NORM), [])
+
+    def test_definition_with_descriptive_link_text_is_fine(self):
+        # Alleen een link met de letterlijke tekst "Bekijk bron" wordt
+        # afgesplitst; een beschrijvende linktekst blijft brontekst.
+        content = replace(
+            "[^aw-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://example.org)",
+            "[^aw-4-1-lid-1]: [Module 1 - De waarde van duurzame toegankelijkheid](https://example.org)",
+        )
+        self.assertEqual(run(content), [])
+
+    def test_definition_without_any_text(self):
+        content = replace(
+            "[^aw-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://example.org)",
+            "[^aw-4-1-lid-1]:",
+        )
+        errors = run(content)
+        self.assertTrue(any("heeft geen brontekst" in e for e in errors), errors)
 
     def test_definition_lines_may_follow_each_other(self):
-        # Twee definities onder elkaar is normaal; alleen markeringen ín de
-        # lopende tekst mogen niet aan elkaar plakken.
+        # Twee definities onder elkaar is normaal. Of een markering een ref-term
+        # krijgt, wordt op de gerenderde HTML gecontroleerd (a11y-scan.mjs).
         errors = run(VALID_NORM)
         self.assertEqual(errors, [])
 

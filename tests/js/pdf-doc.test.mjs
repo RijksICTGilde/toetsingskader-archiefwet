@@ -1,6 +1,5 @@
-// Integratietest: bouwt een echte doc-definition uit gegenereerde norm-JSON.
-// pdfMake-renderer wordt gestubt; DOMParser komt van linkedom. Valideert dat
-// converter + builder + pdfMake-API-aanroepen samen een geldige structuur leveren.
+// Integratietest: doc-definition uit echte norm-JSON, met gestubte
+// pdfMake-renderer en linkedom als DOMParser.
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
@@ -49,8 +48,7 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.match(coverText, /Gedownload op/)
   assert.match(coverText, /Bron/)
   assert.equal(cover.pageBreak, 'after')
-  // "Kern van de norm" als sectiekop (h2, zoals Toelichting) + de kerntekst
-  // als normale alinea (niet leeg).
+  // Kern als h2 (zoals Toelichting) + kerntekst als alinea.
   const kernIdx = dd.content.findIndex(b => b.text === 'Kern van de norm')
   assert.ok(kernIdx !== -1, 'kern-kop aanwezig')
   assert.equal(dd.content[kernIdx].style, 'h2', 'kern-kop als sectiekop (h2)')
@@ -75,6 +73,11 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.match(JSON.stringify(wordmark), /Ministerie van Onderwijs, Cultuur en Wetenschap/)
   assert.ok(wordmark.absolutePosition.x > lint.absolutePosition.x + lint.width, 'woordmerk rechts van het lint')
   assert.ok(dd.header(2, 6, A4).find(c => c.svg), 'logo ook op pagina 2 (running letterhead)')
+  // De viewer moet de documenttitel tonen, niet de bestandsnaam. `tagged` blijft
+  // uit: zonder structuurboom zou die vlag een onwaarheid zijn (bevinding 6).
+  assert.equal(dd.info.title, norm.titel, 'documenttitel in de Info-dictionary')
+  assert.equal(dd.displayTitle, true, 'ViewerPreferences /DisplayDocTitle')
+  assert.ok(!dd.tagged, 'niet als getagd gemarkeerd zolang er geen structuurboom is')
 })
 
 test('kader-doc: inhoudsopgave + 8 normen op eigen pagina, in toc opgenomen', async () => {

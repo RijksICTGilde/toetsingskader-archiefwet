@@ -17,10 +17,8 @@
     return m ? linkPrefix + 'fn-' + m[1] : null
   }
 
-  // Kruisverwijzing/interne link: in de kader-PDF een sprong naar de norm-sectie,
-  // anders een absolute link naar de live site. Externe links blijven extern.
-  // Geen onderstreping (alleen brand-kleur als signaal) — consistent met de
-  // voetnoten, en omdat een sprong in een losse norm-PDF niet kan bestaan.
+  // Interne link: in de kader-PDF een sprong naar de norm-sectie, anders een
+  // absolute link naar de site. Alleen kleur als signaal, geen onderstreping.
   function crossRefLink(text, href) {
     var run = { text: text, color: BRAND }
     if (!href) { return { text: text } }
@@ -39,9 +37,8 @@
     for (var i = 0; i < children.length; i++) {
       var child = children[i]
       if (child.nodeType === 3) {
-        // Witruimte samenvouwen tot één spatie (zoals HTML); voorkomt dat
-        // opmaak-newlines in de bron als regeleinden in de PDF belanden
-        // (bv. lijstnummer los van de tekst in de bronnenlijst).
+        // Witruimte samenvouwen zoals HTML; anders worden opmaak-newlines
+        // regeleinden in de PDF.
         var t = child.textContent.replace(/\s+/g, ' ')
         if (t) acc.push(Object.assign({ text: t }, style))
       } else if (child.nodeType === 1) {
@@ -53,10 +50,8 @@
           if (cls.indexOf('footnote-backref') !== -1) {
             // ↩-backlink weglaten: betekenisloos in een PDF.
           } else if (cls.indexOf('footnote-ref') !== -1) {
-            // Voetnoot-nummer: interne sprong naar de bron in de bronnenlijst.
-            // `sup` zet het nummer als superscript (kleiner en hoger, zoals op
-            // de site); pdfMake schaalt de fontSize dan zelf naar 0.58× mits we
-            // er géén expliciete fontSize op zetten.
+            // Sprong naar de bronnenlijst. `sup` schaalt pdfMake zelf naar
+            // 0.58×, mits er geen expliciete fontSize op staat.
             var dest = footnoteDest(child.getAttribute('href'))
             var ref = { text: child.textContent, color: BRAND, sup: true }
             if (dest) ref.linkToDestination = dest
@@ -72,8 +67,7 @@
 
   function inline(node) {
     var runs = inlineRuns(node, [], {})
-    // Witruimte-runs aan de randen weghalen en de buitenste tekst trimmen
-    // (block-gedrag van HTML), zodat tekst niet met een spatie/regel begint.
+    // Randwitruimte weg (block-gedrag van HTML).
     while (runs.length && /^\s*$/.test(runs[0].text)) runs.shift()
     while (runs.length && /^\s*$/.test(runs[runs.length - 1].text)) runs.pop()
     if (runs.length) {
@@ -81,11 +75,8 @@
       runs[runs.length - 1].text = runs[runs.length - 1].text.replace(/\s+$/, '')
     }
     if (runs.length === 0) return ''
-    // Eén run zonder opmaak mag een kale string worden; dat scheelt een laag in
-    // de pdfMake-boom. Toetsen op "heeft alleen een text-sleutel" en niet op een
-    // lijstje bekende sleutels: een run kan ook linkToDestination, color of sup
-    // dragen (in-PDF-sprong, voetnootnummer), en die vielen met zo'n lijstje weg
-    // zodra de run in zijn eentje in een alinea of lijstitem stond.
+    // Eén kale run mag een string worden. Toetsen op "alleen een text-sleutel",
+    // niet op een lijstje: linkToDestination, color en sup vielen daarmee weg.
     var keys = Object.keys(runs[0])
     if (runs.length === 1 && keys.length === 1 && keys[0] === 'text') return runs[0].text
     return runs
@@ -98,8 +89,7 @@
       var li = children[i]
       if (li.tagName.toLowerCase() !== 'li') continue
       var item = { text: inline(li) }
-      // Bronnenlijst-item met id="fn:N" → pdfMake-bestemming, zodat de
-      // voetnoot-nummers ernaartoe kunnen springen.
+      // id="fn:N" → bestemming voor de voetnoot-nummers.
       var liId = li.getAttribute && li.getAttribute('id')
       var m = liId && liId.match(/^fn:?(.+)$/)
       if (m) item.id = linkPrefix + 'fn-' + m[1]
@@ -109,7 +99,7 @@
   }
 
   function elementToPdfContent(root, opts) {
-    // Alleen de top-level aanroep zet de linkcontext; recursie erft 'm.
+    // Alleen top-level zet de linkcontext; recursie erft 'm.
     if (opts) {
       if (typeof opts.prefix === 'string') linkPrefix = opts.prefix
       if (typeof opts.origin === 'string') linkOrigin = opts.origin
@@ -119,8 +109,7 @@
     var children = root.childNodes
     for (var i = 0; i < children.length; i++) {
       var el = children[i]
-      // Losse tekst op blokniveau (bv. een ééngeregelde markdownify-output
-      // zonder <p>, zoals de kern) als alinea opnemen i.p.v. negeren.
+      // Losse tekst op blokniveau (kern zonder <p>) als alinea, niet negeren.
       if (el.nodeType === 3) {
         var bare = el.textContent.replace(/\s+/g, ' ').trim()
         if (bare) out.push({ text: bare, style: 'para' })
@@ -134,11 +123,9 @@
       else if (tag === 'ol') out.push({ ol: listItems(el), style: 'list' })
       else if (tag === 'blockquote') out.push({ text: inline(el), style: 'callout', margin: [8, 4, 0, 8] })
       else if (tag === 'hr') out.push({ canvas: [{ type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 0.5, lineColor: '#cccccc' }], margin: [0, 6, 0, 6] })
-      // Het footnotes-blok van Goldmark (<div class="footnotes"><hr><ol>…) is de
-      // bronnenlijst. Zonder eigen behandeling wordt dat een gewone <ol> op
-      // body-grootte, terwijl het inhoudelijk noten zijn: die horen klein en
-      // apart. Een kop vervangt de <hr>, want een lijn zonder label zegt niet
-      // wát er volgt.
+      // Goldmarks footnotes-blok is de bronnenlijst; zonder eigen behandeling
+      // wordt het een <ol> op body-grootte. Kop i.p.v. <hr>: een lijn zonder
+      // label zegt niet wát er volgt.
       else if ((el.getAttribute('class') || '').indexOf('footnotes') !== -1) {
         var ol = el.querySelector && el.querySelector('ol')
         if (ol) {

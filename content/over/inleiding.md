@@ -11,7 +11,7 @@ Wanneer overheidsinformatie wordt beheerd volgens de normen van de Archiefwet, i
 
 ## Duurzame toegankelijkheid volgens DUTO
 
-Het Nationaal Archief definieert duurzame toegankelijkheid in het [DUTO-raamwerk](https://www.nationaalarchief.nl/archiveren/duto) als volgt:
+Het Nationaal Archief definieert duurzame toegankelijkheid in het [DUTO-raamwerk](https://www.nationaalarchief.nl/archiveren/duto) (Duurzaam Toegankelijke Overheidsinformatie) als volgt:
 
 {{< callout titel="Definitie duurzame toegankelijkheid" >}}
 "Een document is duurzaam toegankelijk als het [vindbaar]({{< relref "/normen/06-vindbaar" >}}), beschikbaar, leesbaar, [interpreteerbaar]({{< relref "/onderwerpen/samenhang-en-interpreteerbaarheid" >}}), [betrouwbaar]({{< relref "/normen/05-betrouwbaar" >}}) en toekomstbestendig is. Voor iedereen die daar recht op heeft en voor zo lang als noodzakelijk."

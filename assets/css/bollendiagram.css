@@ -11,42 +11,48 @@
   overflow: visible;
 }
 
+/* Spokes en scheidingslijn dragen betekenis, dus grafische objecten die 3:1
+   moeten halen (1.4.11). --color-border haalde 1,23:1; dit 4,8:1 en 7,0:1. */
+.bollendiagram {
+  --bd-line: light-dark(#6b7280, #94a3b8);
+}
+
 /* === Verbindingslijnen (spokes) ===
-   Getekend ONDER de bollen; de opake fills verbergen de uiteinden zodat alleen
-   het stukje tussen centrum-bol en norm-bol zichtbaar blijft. */
+   Onder de bollen; de opake fills verbergen de uiteinden. */
 .bd-spoke {
-  stroke: var(--color-border, #cdd5df);
+  stroke: var(--bd-line);
   stroke-width: 1.5;
   fill: none;
 }
 
 .bd-divider {
-  stroke: var(--color-border, #cdd5df);
-  stroke-width: 1;
+  stroke: var(--bd-line);
+  stroke-width: 1.5;
   stroke-dasharray: 2 6;
   stroke-linecap: round;
 }
 
 /* === Bollen (cirkels) === */
-.bd-bubble circle {
+/* `:not(.bd-focus-ring)` op elke fill/stroke-regel: de ring is een tweede
+   <circle> in dezelfde <a>, en `.bd-bubble circle` (0,1,1) wint anders van
+   `.bd-focus-ring` (0,1,0) — de ring wordt dan een opake schijf óver de bol. */
+.bd-bubble circle:not(.bd-focus-ring) {
   fill: #8cc3e6;
   stroke: #66afdd;
   stroke-width: 1;
   transition: fill 0.18s ease, stroke 0.18s ease, stroke-width 0.18s ease;
 }
 
-.bd-main circle {
+.bd-main circle:not(.bd-focus-ring) {
   fill: #007bc7;
   stroke: light-dark(#01689b, #4ba3d8);
   stroke-width: 1.5;
 }
 
-/* Toekomst-cluster: vervaagde, gestippelde cirkels onder de scheidingslijn.
-   In light mode lichte fill, in dark mode transparant zodat alleen de
-   gestippelde stroke leesbaar blijft tegen de donkere achtergrond. */
+/* Toekomst-cluster. Dark mode transparant, anders verdwijnt de stippelstroke. */
 .bd-bubble-outlined {
   fill: light-dark(#eef5fb, transparent);
-  stroke: light-dark(#9ec9e8, #6c8aa3);
+  stroke: var(--bd-line);
   stroke-width: 1.5;
   stroke-dasharray: 4 4;
 }
@@ -68,8 +74,7 @@
   font-weight: 500;
 }
 
-/* Lange normtitels ("Informatiebeveiliging en betrouwbaar") passen alleen op
-   meerdere regels én een graadje kleiner binnen een bol van r=55. */
+/* Lange normtitels passen alleen kleiner én over meerdere regels in r=55. */
 .bd-label-sm {
   font-size: 12px;
 }
@@ -81,11 +86,34 @@
   letter-spacing: 0.01em;
 }
 
-/* Toekomst-labels staan op de (vervaagde) cirkel; eigen, gedempte kleur. */
+/* Toekomst-labels: eigen, gedempte kleur. */
 .bd-label-outlined {
   fill: light-dark(#5a7184, #aebfcf);
   font-size: 13px;
   font-style: italic;
+}
+
+/* === Tekstuele normenlijst onder het diagram ===
+   Zelfde acht links, zodat het diagram niet de enige route is. */
+.bd-normenlijst ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.bd-normenlijst li {
+  margin: 0;
+}
+
+.bd-normenlijst a {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.9375rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
 }
 
 /* === Interactie === */
@@ -95,17 +123,29 @@
   text-decoration: none;
 }
 
-.bd-bubble:hover circle {
+.bd-bubble:hover circle:not(.bd-focus-ring) {
   fill: #409cd5;
 }
 
-.bd-main:hover circle {
+.bd-main:hover circle:not(.bd-focus-ring) {
   fill: #01689b;
 }
 
-.bd-bubble:focus-visible circle {
-  stroke: var(--rijkshuisstijl-color-donkerblauw-500, #01689b);
-  stroke-width: 4;
+/* Losse ring op r+4, dus buiten de bol (SVG-equivalent van outline-offset).
+   Grenst alleen aan de paginaachtergrond: 17,9:1 licht, 14,5:1 donker. De
+   bol-stroke verdikken werkte niet — in donkere modus zakte het contrast van de
+   centrale bol van 6,4:1 naar 2,9:1 (2.4.7). */
+.bd-focus-ring {
+  fill: none;
+  stroke: none;
+  /* non-scaling-stroke houdt de dikte in CSS-pixels; anders schaalt de ring mee
+     met de viewBox en wordt hij ~2px op 320px. */
+  vector-effect: non-scaling-stroke;
+  stroke-width: 3px;
+}
+
+.bd-bubble:focus-visible .bd-focus-ring {
+  stroke: var(--color-text);
 }
 
 @media (max-width: 640px) {
@@ -134,10 +174,15 @@
 
 /* Forced-colors (Windows High Contrast) — vervang fills door systeem-kleuren. */
 @media (forced-colors: active) {
-  .bd-bubble circle,
+  .bd-bubble circle:not(.bd-focus-ring),
   .bd-bubble-outlined {
     fill: Canvas;
     stroke: CanvasText;
+  }
+
+  /* Auteurskleuren worden genegeerd; Highlight is de systeemkleur voor focus. */
+  .bd-bubble:focus-visible .bd-focus-ring {
+    stroke: Highlight;
   }
   .bd-spoke,
   .bd-divider {
@@ -145,9 +190,5 @@
   }
   .bd-labels text {
     fill: CanvasText;
-  }
-  .bd-bubble:focus-visible circle {
-    stroke: Highlight;
-    stroke-width: 4;
   }
 }

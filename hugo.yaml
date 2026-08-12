@@ -6,6 +6,13 @@ title: Toetsingskader Archiefwet
 enableRobotsTXT: true
 enableGitInfo: true
 
+# Geen tags of categorieën. Hugo maakte er twee lege taxonomiepagina's voor, met
+# een Engelse kop in <html lang="nl"> (3.1.2), zonder beschrijvende titel (2.4.6)
+# en wél in sitemap.xml.
+disableKinds:
+  - taxonomy
+  - term
+
 outputFormats:
   pdf:
     mediaType: application/json
@@ -37,13 +44,11 @@ markup:
     endLevel: 4
 
 params:
-  # Versie van het toetsingskader. Lokale default; in CI overschreven met de
-  # git-release-tag via HUGO_PARAMS_VERSIE (zie workflows + Containerfile).
-  # Bron voor de PDF-export (release-tag in elke gedownloade PDF).
+  # Lokale default; in CI de git-release-tag via HUGO_PARAMS_VERSIE. Ook de bron
+  # voor de PDF-export.
   versie: "0.8"
-  # Waar het versienummer naartoe linkt: de releases op GitHub, met per versie
-  # de wijzigingen. Eén plek, want het label staat zowel op de homepage
-  # (shortcode `versielabel`) als in de paginavoet (`_partials/lastmod.html`).
+  # Doel van het versienummer. Eén plek: het label staat op de homepage
+  # (`versielabel`) én in de paginavoet (`_partials/lastmod.html`).
   releases_url: "https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases"
   feedback:
     email: toetsingskader@inspectie-oe.nl
@@ -53,6 +58,7 @@ params:
       - normen
       - onderwerpen
       - over
+  back_to_top: true
   tagline: "Normen voor duurzame toegankelijkheid"
   footer:
     tagline: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."

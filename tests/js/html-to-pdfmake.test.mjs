@@ -95,9 +95,8 @@ test('interne norm-link wordt in-PDF-sprong als normDests gegeven (kader)', () =
 })
 
 test('lijstitem dat alléén een norm-sprong is behoudt die sprong (kader)', () => {
-  // Regressie: het "Zie ook"-lijstje bestaat uit items die niets anders zijn
-  // dan één link. Als zo'n item wordt platgeslagen tot een kale string, is de
-  // verwijzing in de kader-PDF dode zwarte tekst.
+  // Regressie: een lijstitem dat alleen een link is, mag niet worden
+  // platgeslagen tot een string — dan is het dode zwarte tekst.
   const out = convertWith('<ul><li><a href="/normen/03-ordenen/">Ordenen</a></li></ul>', { origin: 'https://x.nl', normDests: { '03-ordenen': 'norm-03-ordenen' } })
   const item = out[0].ul[0].text
   assert.ok(Array.isArray(item), 'geen kale string: de run met linkToDestination moet blijven')

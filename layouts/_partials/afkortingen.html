@@ -1,0 +1,72 @@
+{{/* ---------------------------------------------------------------------
+     Afkortingen uitschrijven — WCAG 3.1.4 (bevinding 28).
+
+     Wrapt elke afkorting uit `data/afkortingen.yaml` in een `<abbr title="…">`.
+     HTML-string in, HTML-string uit: {{ $html = partial "afkortingen.html" $html }}
+
+     Template-side, omdat de afkortingen vooral in de bronteksten van de
+     voetnoten staan, die als tooltip én in de referentielijst terugkomen. In de
+     markdown zou het 34 tags vragen, en `unsafe: false` verbiedt inline HTML.
+
+     De pass slaat tags over. De invoer is volledige HTML, inclusief href's en de
+     aria-labels van bevinding 27; een kale replaceRE zou een `<abbr>` binnen een
+     attribuutwaarde zetten. Daardoor is ook de aanroeporde niet kritisch.
+     --------------------------------------------------------------------- */}}
+{{- $html := . -}}
+{{- $out := slice -}}
+{{/* Alleen letters en cijfers in sleutels: de match staat tussen `\b`-grenzen en
+     `\bart\.\b` matcht nooit "art. 5". Zo'n sleutel zou stilzwijgend niets doen,
+     dus een harde controle in plaats van een belofte. */}}
+{{- $sleutels := slice -}}
+{{- range $afkorting, $voluit := site.Data.afkortingen -}}
+  {{- if not (findRE `^[\p{L}\p{N}]+$` $afkorting) -}}
+    {{- errorf "data/afkortingen.yaml: sleutel %q mag alleen letters en cijfers bevatten; met een leesteken erin matcht \\b…\\b nooit" $afkorting -}}
+  {{- end -}}
+  {{- $sleutels = $sleutels | append $afkorting -}}
+{{- end -}}
+{{/* Splitsen op "<" geeft: chunk 0 is tekst, elke volgende chunk is
+     "taginhoud>tekst". Een chunk zonder ">" kan geen tag zijn (losse "<" in de
+     tekst) en wordt daarom in zijn geheel als tekst behandeld. Bij het
+     terugsplitsen op ">" wordt alleen het eerste stuk als tag gelezen; de rest
+     wordt weer aan elkaar geplakt, zodat een ">" in de tekst blijft staan. */}}
+{{- range $i, $chunk := split $html "<" -}}
+  {{- $tag := "" -}}
+  {{- $tekst := $chunk -}}
+  {{- if and (gt $i 0) (in $chunk ">") -}}
+    {{- $bits := split $chunk ">" -}}
+    {{- $tag = printf "<%s>" (index $bits 0) -}}
+    {{- $tekst = delimit (after 1 $bits) ">" -}}
+  {{- else if gt $i 0 -}}
+    {{- $tekst = printf "<%s" $chunk -}}
+  {{- end -}}
+  {{/* Twee fasen. Fase 1 zet elke afkorting om in een sentinel die geen enkele
+       andere afkorting kan bevatten; fase 2 maakt daar de <abbr>-tags van.
+       In één fase zou de lus de markup lezen die hij zelf net heeft
+       geschreven: een volgende afkorting kan dan matchen binnen een
+       `title="…"` die er al staat, en dan komt er een <abbr> in een
+       attribuutwaarde — precies wat het tagsgewijs lopen hierboven voorkomt
+       voor de invoer. Vandaag komt geen enkele afkorting voor in de uitgeschreven
+       vorm van een andere, maar dat is een eigenschap van data/afkortingen.yaml
+       en niet van deze code; het bestand nodigt uit tot uitbreiden. */}}
+  {{/* De sentinel is het volgnummer, niet de afkorting zelf. Met de afkorting
+       erin zou fase 1 alsnog binnen een al geschreven sentinel kunnen matchen
+       zodra één sleutel als heel woord in een andere voorkomt — precies wat
+       twee fasen moeten uitsluiten. Een cijfer tussen \x00 en \x01 kan door geen
+       enkele sleutel worden geraakt, want sleutels bestaan uit letters en
+       cijfers en `\b` slaat niet aan op \x00. */}}
+  {{- range $i, $afkorting := $sleutels -}}
+    {{/* \b voorkomt treffers binnen een woord ("Ar" in "Archiefregeling").
+         De match is hoofdlettergevoelig. */}}
+    {{- $tekst = replaceRE (printf `\b%s\b` $afkorting) (printf "\x00%d\x01" $i) $tekst -}}
+  {{- end -}}
+  {{- range $i, $afkorting := $sleutels -}}
+    {{/* `htmlEscape` op de uitgeschreven vorm: die gaat een attribuutwaarde in.
+         Een aanhalingsteken of ampersand in de YAML zou de <abbr>-tag anders
+         openbreken, en dan is de uitleg die dit partial bestaansrecht geeft
+         (WCAG 3.1.4) stilzwijgend weg — zonder buildfout en zonder scanmelding. */}}
+    {{- $voluit := index site.Data.afkortingen $afkorting -}}
+    {{- $tekst = replace $tekst (printf "\x00%d\x01" $i) (printf `<abbr title="%s">%s</abbr>` (htmlEscape $voluit) $afkorting) -}}
+  {{- end -}}
+  {{- $out = $out | append (printf "%s%s" $tag $tekst) -}}
+{{- end -}}
+{{- return delimit $out "" -}}
