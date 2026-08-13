@@ -1,0 +1,286 @@
+/* Opmaak van de PDF-versie. Wordt door scripts/pdf-build.mjs in Chromium
+   gerenderd; op de site komt dit bestand niet voor.
+Waarom niet in assets/css/: het thema globt `css/*.css` van de consumer en
+   plakt alles achter de sitestylesheet. Een bestand dáár zou de site raken.
+Waarom geen thema-CSS hergebruikt: de sitestylesheet werkt met `light-dark()`
+   en design tokens die in een headless Chromium op het donkere schema kunnen
+   uitkomen. Een PDF heeft één vaste presentatie, dus staan de kleuren hier
+   letterlijk. De lettertypen komen wel uit het thema (static/fonts/). */
+
+@font-face {
+  font-family: "RO-Sans";
+  src: url("/fonts/RO-SansWebText-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RO-Sans";
+  src: url("/fonts/RO-SansWebText-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RO-Sans";
+  src: url("/fonts/RO-SansWebText-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Chromium kent van de paginamedia-specificatie alleen `size` en `margin`;
+   marge-boxen (@top-center en verwanten) niet. Het briefhoofd en de
+   paginanummers komen daarom uit de header- en footerTemplate van
+   scripts/pdf-build.mjs. De bovenmarge is ruim genoeg voor dat briefhoofd. */
+@page {
+  size: A4;
+  margin: 24mm 20mm 20mm;
+}
+
+:root {
+  --brand: #007bc7;
+  --tekst: #000000;
+  --gedempt: #4a4a4a;
+  --lijn: #cfcfcf;
+  --vlak: #f3f6f8;
+}
+
+body {
+  font-family: "RO-Sans", Verdana, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.5;
+  color: var(--tekst);
+  margin: 0;
+  /* Zwarte tekst op wit, ongeacht het schema van de renderende omgeving. */
+  background: #ffffff;
+  color-scheme: light;
+}
+
+/* --- Koppen ------------------------------------------------------------
+   De structuurboom van de PDF volgt deze elementen. Niveaus overslaan is
+   dus geen opmaakkwestie maar een structuurfout: Acrobat rapporteert dat
+   als "Juiste insluiting via nesting" — de regel waarop de auto-getagde
+   PDF in docs/toegankelijkheid/ struikelt. Grootte hoort daarom bij het
+   niveau, en niet andersom. */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--brand);
+  line-height: 1.25;
+  /* Een kop onderaan een pagina met zijn tekst op de volgende leest slecht
+     en is in de PDF niet te herstellen. */
+  break-after: avoid;
+  break-inside: avoid;
+}
+
+h1 {
+  font-size: 22pt;
+  margin: 0 0 6mm;
+}
+
+h2 {
+  font-size: 15pt;
+  margin: 8mm 0 3mm;
+}
+
+h3 {
+  font-size: 12.5pt;
+  margin: 6mm 0 2mm;
+}
+
+h4 {
+  font-size: 11pt;
+  margin: 5mm 0 1.5mm;
+}
+
+h5 {
+  font-size: 10.5pt;
+  margin: 4mm 0 1.5mm;
+  color: var(--gedempt);
+}
+
+p {
+  margin: 0 0 3mm;
+  orphans: 2;
+  widows: 2;
+}
+
+/* --- Lijsten -----------------------------------------------------------
+   Criteria en indicatoren zijn echte lijsten, zodat ze als L/LI/LBody in de
+   structuurboom belanden. In de huidige export zijn het losse regels. */
+
+ul,
+ol {
+  margin: 0 0 3mm;
+  padding-inline-start: 6mm;
+}
+
+li {
+  margin-bottom: 1mm;
+}
+
+/* --- Tabellen ---------------------------------------------------------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 4mm;
+  font-size: 9.5pt;
+  break-inside: avoid;
+}
+
+th,
+td {
+  border: 0.3mm solid var(--lijn);
+  padding: 1.5mm 2mm;
+  text-align: start;
+  vertical-align: top;
+}
+
+th {
+  background: var(--vlak);
+  font-weight: 700;
+}
+
+/* --- Links -------------------------------------------------------------
+   Op papier is een gekleurde link zonder adres waardeloos, maar de URL
+   erachter zetten maakt een norm­tekst met 142 bronlinks onleesbaar. De
+   bronnenlijst bevat de adressen al voluit; in de lopende tekst blijft de
+   link dus een gewone verwijzing. */
+
+a {
+  color: var(--brand);
+  text-decoration: underline;
+}
+
+/* --- Titelpagina ------------------------------------------------------- */
+
+.pdf-cover {
+  break-after: page;
+  padding-top: 30mm;
+}
+
+.pdf-cover h1 {
+  font-size: 28pt;
+  margin-bottom: 8mm;
+}
+
+.pdf-cover .pdf-meta {
+  color: var(--gedempt);
+  font-size: 10pt;
+}
+
+.pdf-cover .pdf-meta dt {
+  float: left;
+  clear: left;
+  width: 30mm;
+  font-weight: 700;
+}
+
+.pdf-cover .pdf-meta dd {
+  margin: 0 0 1.5mm 30mm;
+}
+
+/* --- Inhoudsopgave ----------------------------------------------------- */
+
+.pdf-toc {
+  break-after: page;
+}
+
+.pdf-toc ol {
+  list-style: none;
+  padding: 0;
+}
+
+.pdf-toc li {
+  margin-bottom: 2mm;
+  border-bottom: 0.2mm dotted var(--lijn);
+  padding-bottom: 1mm;
+}
+
+/* --- Kern van de norm --------------------------------------------------
+   Visueel een uitgelicht blok, in de structuur een gewone sectie met kop.
+   Geen <blockquote>: dit is geen citaat, en Chromium tagt het dan als
+   BlockQuote. */
+
+.pdf-kern {
+  background: var(--vlak);
+  border-inline-start: 1mm solid var(--brand);
+  padding: 3mm 4mm;
+  margin: 0 0 5mm;
+  break-inside: avoid;
+}
+
+.pdf-kern h2 {
+  margin-top: 0;
+  font-size: 12pt;
+}
+
+.pdf-kern p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Normen in het kaderdocument --------------------------------------- */
+
+.pdf-norm {
+  break-before: page;
+}
+
+/* --- Bronnen -----------------------------------------------------------
+   Goldmark zet de voetnoten onderaan in <div class="footnotes"> met een <hr>
+   ervoor. Die streep is decoratief; de kop erboven doet het werk. */
+
+.footnotes {
+  font-size: 9pt;
+  color: var(--gedempt);
+  margin-top: 6mm;
+}
+
+.footnotes hr {
+  display: none;
+}
+
+.footnotes li {
+  margin-bottom: 1.5mm;
+}
+
+/* Backlink-pijltjes (↩) hebben op papier geen doel. `display: none` haalt ze
+   ook uit de structuurboom, wat hier de bedoeling is. */
+.footnote-backref {
+  display: none;
+}
+
+/* --- Colofon ----------------------------------------------------------- */
+
+.pdf-colofon {
+  margin-top: 8mm;
+  padding-top: 3mm;
+  border-top: 0.3mm solid var(--lijn);
+  font-size: 9pt;
+  color: var(--gedempt);
+  break-inside: avoid;
+}
+
+/* --- Diagram -----------------------------------------------------------
+   Het bollendiagram gaat als SVG mee. De tekstalternatieven staan in de
+   HTML (<title>/<desc>); dit regelt alleen dat het op de pagina past. */
+
+figure {
+  margin: 0 0 5mm;
+  break-inside: avoid;
+}
+
+figure svg,
+figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+figcaption {
+  font-size: 9pt;
+  color: var(--gedempt);
+  margin-top: 1.5mm;
+}

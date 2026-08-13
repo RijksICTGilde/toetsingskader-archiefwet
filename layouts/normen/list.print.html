@@ -1,0 +1,84 @@
+{{- /* ---------------------------------------------------------------------
+     Print-HTML van het hele kader: titelpagina, inhoudsopgave, de acht normen
+     achter elkaar. Invoer voor scripts/pdf-build.mjs.
+
+     Twee dingen die alleen hier spelen, allebei structuur en geen opmaak:
+
+     1. Kopniveaus. Elke norm is in dit document een <h2>, dus de <h2>'s uit de
+        normtekst moeten <h3> worden, enzovoort. Zonder die verschuiving staan
+        "Toelichting" en de normtitel op hetzelfde niveau en klopt de koppenboom
+        niet — precies de regel waarop de auto-getagde PDF in
+        docs/toegankelijkheid/ struikelt.
+
+     2. Ankers. Goldmark nummert voetnoten per pagina, dus acht normen in één
+        document leveren acht keer `fn:1`. Alle id's en interne verwijzingen
+        krijgen daarom een prefix per norm.
+
+     De inleiding komt uit `description` en niet uit de body van
+     normen/_index.md: die body bestaat uit de shortcodes `pdf-kader` en
+     `normen-grid` — een downloadknop en een klikbaar raster, die in een
+     document niets doen.
+     --------------------------------------------------------------------- */ -}}
+{{- $normen := where .Pages "Params.norm_id" "!=" nil -}}
+{{- $normen = sort $normen "Weight" -}}
+<!DOCTYPE html>
+<html lang="{{ or site.Language.LanguageCode "nl-NL" }}">
+<head>
+<meta charset="utf-8">
+{{- /* Tussenproduct, geen sitepagina; zie single.print.html. */ -}}
+<meta name="robots" content="noindex">
+<title>{{ site.Title }}</title>
+{{- $css := resources.Get "print/print.css" | fingerprint "md5" -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+</head>
+<body>
+<header class="pdf-cover">
+  <h1>{{ site.Title }}</h1>
+  <dl class="pdf-meta">
+    {{- with site.Params.versie }}<dt>Versie</dt><dd>{{ . }}</dd>{{ end }}
+    <dt>Bijgewerkt</dt><dd>{{ .Lastmod | time.Format ":date_full" }}</dd>
+    <dt>Normen</dt><dd>{{ len $normen }}</dd>
+  </dl>
+  {{- with .Description }}<p>{{ . }}</p>{{ end }}
+</header>
+
+<nav class="pdf-toc" aria-labelledby="inhoud">
+  <h2 id="inhoud">Inhoud</h2>
+  <ol>
+    {{- range $normen }}
+    <li><a href="#norm-{{ .Params.norm_id }}">{{ .Title }}</a></li>
+    {{- end }}
+  </ol>
+</nav>
+
+<main>
+  {{- range $normen }}
+  {{- $id := .Params.norm_id -}}
+  {{- $content := partial "nummer-voorschriften.html" (dict "content" .Content "norm_id" $id) -}}
+  {{- /* Van diep naar ondiep, anders verschuift een kop twee keer. */ -}}
+  {{- $content = replaceRE `<(/?)h4([ >])` (printf `<${1}h5${2}`) $content -}}
+  {{- $content = replaceRE `<(/?)h3([ >])` (printf `<${1}h4${2}`) $content -}}
+  {{- $content = replaceRE `<(/?)h2([ >])` (printf `<${1}h3${2}`) $content -}}
+  {{- $content = replaceRE `id="([^"]+)"` (printf `id="n%s-${1}"` $id) $content -}}
+  {{- /* Alleen ankers binnen het document; externe links beginnen niet met #. */ -}}
+  {{- $content = replaceRE `href="#([^"]+)"` (printf `href="#n%s-${1}"` $id) $content -}}
+  <section class="pdf-norm" id="norm-{{ $id }}" aria-labelledby="norm-{{ $id }}-titel">
+    <h2 id="norm-{{ $id }}-titel">{{ .Title }}</h2>
+    {{- with .Params.kern }}
+    <section class="pdf-kern" aria-labelledby="n{{ $id }}-kern">
+      <h3 id="n{{ $id }}-kern">Kern van de norm</h3>
+      {{ . | markdownify }}
+    </section>
+    {{- end }}
+    {{ $content | safeHTML }}
+  </section>
+  {{- end }}
+</main>
+
+<footer class="pdf-colofon">
+  {{- with partial "versie-zin.html" . }}<p>{{ . }}</p>{{ end }}
+  <p>Deze PDF is gegenereerd uit <a href="{{ .Permalink }}">{{ .Permalink }}</a>.
+  Die pagina's zijn de actuele versie; controleer daar of deze tekst nog geldt.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{{- /* ---------------------------------------------------------------------
+     Print-HTML van één norm. Invoer voor scripts/pdf-build.mjs, dat hier met
+     Chromium een getagde PDF van maakt. Zie docs/besluit-toegankelijke-pdf.md.
+
+     Waarom een eigen, volledige HTML-pagina en niet de site-layout: de
+     structuurboom van de PDF volgt de DOM. Alles wat op de site staat maar in
+     een document niets doet — navigatie, zoekknop, inhoudsopgave-aside,
+     terug-naar-boven — zou als tags in de PDF belanden en een schermlezer door
+     de koppenlijst laten waden. Deze pagina bevat daarom alleen het document.
+
+     Wat hier bewust NIET gebeurt, in tegenstelling tot normen/single.html: de
+     voetnoten worden niet omgebouwd tot tooltips met een accordeon. Die UX is
+     voor een scherm. Op papier is de Goldmark-standaard — genummerd superscript
+     plus een bronnenlijst onderaan — precies goed, en hij tagt als Note.
+     --------------------------------------------------------------------- */ -}}
+{{- if .Params.norm_id -}}
+{{- $content := partial "nummer-voorschriften.html" (dict "content" .Content "norm_id" .Params.norm_id) -}}
+<!DOCTYPE html>
+{{- /* `lang` is de bron van /Lang in de PDF: zonder dat leest een schermlezer
+       Nederlandse wettekst met een Engelse stem. */ -}}
+<html lang="{{ or site.Language.LanguageCode "nl-NL" }}">
+<head>
+<meta charset="utf-8">
+{{- /* Dit bestand komt wél in `public/` terecht, maar is een tussenproduct: de
+       leesbare versie is de normpagina, de deelbare versie is de PDF. Zonder
+       `noindex` concurreert een kale kopie van dezelfde tekst in de
+       zoekresultaten met het origineel. */ -}}
+<meta name="robots" content="noindex">
+{{- /* <title> wordt de documenttitel van de PDF, die de viewer in de titelbalk
+       toont in plaats van de bestandsnaam. */ -}}
+<title>{{ .Title }} | {{ site.Title }}</title>
+{{- $css := resources.Get "print/print.css" | fingerprint "md5" -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+</head>
+<body>
+<header class="pdf-cover">
+  <h1>{{ .Title }}</h1>
+  <dl class="pdf-meta">
+    <dt>Onderdeel van</dt><dd>{{ site.Title }}</dd>
+    {{- with site.Params.versie }}<dt>Versie</dt><dd>{{ . }}</dd>{{ end }}
+    <dt>Bijgewerkt</dt><dd>{{ .Lastmod | time.Format ":date_full" }}</dd>
+  </dl>
+</header>
+
+<main>
+  {{- with .Params.kern }}
+  {{- /* Geen <blockquote>: dit is geen citaat, en Chromium zou het als
+         BlockQuote tagen. Een sectie met een kop is wat het is. */ -}}
+  <section class="pdf-kern" aria-labelledby="kern">
+    <h2 id="kern">Kern van de norm</h2>
+    {{ . | markdownify }}
+  </section>
+  {{- end }}
+
+  {{ $content | safeHTML }}
+</main>
+
+<footer class="pdf-colofon">
+  {{- with partial "versie-zin.html" . }}<p>{{ . }}</p>{{ end }}
+  <p>Deze PDF is gegenereerd uit <a href="{{ .Permalink }}">{{ .Permalink }}</a>.
+  Die pagina is de actuele versie; controleer daar of deze tekst nog geldt.</p>
+</footer>
+</body>
+</html>
+{{- end -}}
