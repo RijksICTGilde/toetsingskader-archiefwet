@@ -245,6 +245,17 @@ for (const url of [...urls, ...extra]) {
     add(url, `axe:${v.id}`, `${v.nodes.length}x ${v.help} — ${detail}`)
   }
 
+  // De print-HTML (`…/index.print.html`) is de invoer voor de PDF-generatie.
+  // Axe hierboven telt onverkort mee: contrast en semantiek gaan mee de PDF in,
+  // en de kern-callout zakte daar precies op door (#007bc7 op #f3f6f8 = 4,15:1).
+  // Alles hieronder meet schermgedrag — toetsenbordfocus, tekstvergroting,
+  // tekstafstand, reflow op 320 px. Een document op A4 heeft geen viewport en
+  // geen focus; die metingen zouden alleen ruis opleveren.
+  if (url.endsWith('.print.html')) {
+    await page.close()
+    continue
+  }
+
   // 2. Toetsenborddoorloop: focusindicator (2.4.7) en focus-niet-afgedekt (2.4.11).
   await tabWalk(page, url)
 

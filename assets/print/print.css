@@ -38,7 +38,13 @@ Waarom geen thema-CSS hergebruikt: de sitestylesheet werkt met `light-dark()`
 }
 
 :root {
+  /* Hemelblauw haalt op wit net 4,5:1 (4,51) en op het vlak van de kern-callout
+     niet meer (4,15) — gemeten door de browserscan op de print-HTML. Tekst
+     krijgt daarom het donkerblauw van de huisstijl, dat overal ruim boven de
+     eis zit (9,4:1 op het vlak). Hemelblauw blijft als accent op randen en
+     lijnen, waar geen contrasteis voor tekst geldt. */
   --brand: #007bc7;
+  --brand-tekst: #154273;
   --tekst: #000000;
   --gedempt: #4a4a4a;
   --lijn: #cfcfcf;
@@ -54,6 +60,9 @@ body {
   /* Zwarte tekst op wit, ongeacht het schema van de renderende omgeving. */
   background: #ffffff;
   color-scheme: light;
+  /* Een lange bron-URL kan niet afbreken en schuift dan buiten de pagina. Op een
+     scherm scrol je daar langs; in een PDF is de tekst simpelweg weg. */
+  overflow-wrap: break-word;
 }
 
 /* --- Koppen ------------------------------------------------------------
@@ -68,7 +77,7 @@ h2,
 h3,
 h4,
 h5 {
-  color: var(--brand);
+  color: var(--brand-tekst);
   line-height: 1.25;
   /* Een kop onderaan een pagina met zijn tekst op de volgende leest slecht
      en is in de PDF niet te herstellen. */
@@ -152,7 +161,7 @@ th {
    link dus een gewone verwijzing. */
 
 a {
-  color: var(--brand);
+  color: var(--brand-tekst);
   text-decoration: underline;
 }
 
