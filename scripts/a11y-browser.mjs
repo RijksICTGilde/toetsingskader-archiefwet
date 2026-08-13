@@ -233,9 +233,17 @@ for (const url of [...urls, ...extra]) {
   await page.goto(base + url, { waitUntil: 'load' })
 
   // 1. axe-core, incl. de layout-afhankelijke regels.
+  //
+  // `target-size` (2.5.8) gaat over aanwijsdoelen: 24 CSS-px, of genoeg ruimte
+  // ertussen. De print-HTML wordt een PDF op A4 en heeft geen aanwijsdoelen —
+  // regelafstand oprekken tot de links 24 px uit elkaar staan zou de opmaak
+  // veranderen voor een probleem dat op papier niet bestaat. Alle andere regels
+  // blijven staan, contrast voorop.
+  const rules = url.endsWith('.print.html') ? { 'target-size': { enabled: false } } : {}
   await page.addScriptTag({ content: axeSrc })
   const res = await page.evaluate(
-    tags => window.axe.run(document, { runOnly: { type: 'tag', values: tags } }), TAGS)
+    ([tags, rules]) => window.axe.run(document, { runOnly: { type: 'tag', values: tags }, rules }),
+    [TAGS, rules])
   for (const v of res.violations) {
     // Kleuren en ratio meenemen; anders is de bevinding niet na te trekken.
     const detail = v.nodes.slice(0, 3).map(n => {

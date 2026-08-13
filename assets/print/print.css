@@ -274,6 +274,16 @@ a {
   margin-bottom: 2pt;
 }
 
+/* Wél onderstreept, anders dan in de lopende tekst. De bronnenlijst staat in
+   #444444, en hemelblauw verschilt daar maar 2,16:1 van — onder de 3:1 die
+   1.4.1 vraagt als kleur het enige onderscheid is. In de zwarte lopende tekst
+   is dat verschil 3,86:1 en mag de onderstreping weg. Dit is het enige punt
+   waarop deze PDF van de oude export afwijkt; die had de combinatie ook, maar
+   werd nooit gemeten. */
+.footnotes a {
+  text-decoration: underline;
+}
+
 /* Backlink-pijltjes (↩) hebben op papier geen doel. `display: none` haalt ze ook
    uit de structuurboom, wat hier de bedoeling is. */
 .footnote-backref {
