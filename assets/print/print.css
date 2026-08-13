@@ -240,6 +240,17 @@ a {
 .pdf-toc li {
   font-size: 11pt;
   margin-bottom: 6pt;
+  /* Titel links, paginanummer rechts. De nummers komen uit de tweede doorloop
+     in scripts/pdf-build.mjs; zonder die stap blijft alleen de titel staan en
+     klopt deze regel nog steeds. */
+  display: flex;
+  justify-content: space-between;
+  gap: 8pt;
+}
+
+.pdf-toc-pagina {
+  color: var(--meta);
+  white-space: nowrap;
 }
 
 /* --- Kern van de norm --------------------------------------------------
