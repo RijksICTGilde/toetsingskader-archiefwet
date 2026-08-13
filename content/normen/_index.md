@@ -12,14 +12,12 @@ wide: true
 # docs/besluit-toegankelijke-pdf.md.
 outputs:
   - HTML
-  - pdf
   - print
 cascade:
   show_lastmod: true
   show_referenties: true
   outputs:
     - HTML
-    - pdf
     - print
 ---
 

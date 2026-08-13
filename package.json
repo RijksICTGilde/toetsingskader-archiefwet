@@ -4,9 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test tests/js/*.test.mjs",
-    "build:pdf-assets": "node scripts/build-pdf-assets.mjs",
     "build:pdf": "node scripts/pdf-build.mjs public",
-    "smoke:pdf": "node tests/js/pdf-render.smoke.mjs",
     "test:a11y": "node scripts/a11y-scan.mjs public",
     "test:pdf-ua": "node scripts/pdf-ua-check.mjs public/normen/index.pdf public/normen/*/index.pdf",
     "test:a11y:browser": "node scripts/a11y-browser.mjs .a11y/public"

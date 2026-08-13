@@ -76,12 +76,10 @@ jobs:
         with:
           node-version: "22"
 
-      - name: PDF-export tests (converter + doc-definition + render-smoke)
-        # Draait ná de Hugo-build: de tests lezen de gegenereerde pdf.json-endpoints.
+      - name: Unittests (projecteigen a11y-controles)
         run: |
           npm ci
           npm test
-          npm run smoke:pdf
 
       - name: Toegankelijkheidsscan (axe-core)
         # Draait ná de Hugo-build over public/. Faalt bij elke WCAG-overtreding
@@ -122,4 +120,10 @@ jobs:
           if-no-files-found: warn
 
       - name: Test links
-        run: hugo --minify --quiet --baseURL / --destination .htmltest/public && htmltest
+        # htmltest bouwt zijn eigen kopie van de site; de PDF's uit de stap
+        # hierboven moeten mee, want de downloadknop linkt er rechtstreeks naar
+        # en een ontbrekend bestand is voor htmltest een gebroken link.
+        run: |
+          hugo --minify --quiet --baseURL / --destination .htmltest/public
+          (cd public && find . -name index.pdf -exec cp --parents {} ../.htmltest/public/ \;)
+          htmltest

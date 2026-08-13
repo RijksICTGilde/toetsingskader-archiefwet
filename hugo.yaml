@@ -14,11 +14,6 @@ disableKinds:
   - term
 
 outputFormats:
-  pdf:
-    mediaType: application/json
-    baseName: index.pdf
-    isPlainText: true
-    notAlternative: true
   # Print-HTML: de invoer waar scripts/pdf-build.mjs met Chromium een getagde
   # PDF van maakt. Alleen aangezet op de normen (front matter van
   # content/normen/_index.md), want alleen die worden als document aangeboden.
@@ -36,10 +31,8 @@ outputs:
     - JSON
   page:
     - HTML
-    - pdf
   section:
     - HTML
-    - pdf
 
 markup:
   goldmark:
