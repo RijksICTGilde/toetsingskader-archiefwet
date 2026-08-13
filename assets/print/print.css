@@ -1,11 +1,20 @@
 /* Opmaak van de PDF-versie. Wordt door scripts/pdf-build.mjs in Chromium
    gerenderd; op de site komt dit bestand niet voor.
-Waarom niet in assets/css/: het thema globt `css/*.css` van de consumer en
+
+   Waarom niet in assets/css/: het thema globt `css/*.css` van de consumer en
    plakt alles achter de sitestylesheet. Een bestand dáár zou de site raken.
-Waarom geen thema-CSS hergebruikt: de sitestylesheet werkt met `light-dark()`
+
+   Waarom geen thema-CSS hergebruikt: de sitestylesheet werkt met `light-dark()`
    en design tokens die in een headless Chromium op het donkere schema kunnen
    uitkomen. Een PDF heeft één vaste presentatie, dus staan de kleuren hier
-   letterlijk. De lettertypen komen wel uit het thema (static/fonts/). */
+   letterlijk. De lettertypen komen wel uit het thema (static/fonts/).
+
+   De maten hieronder zijn overgenomen uit de pdfMake-export die dit vervangt
+   (`assets/js/pdf-export.js`, verwijderd in ba41540): punten, kleuren, marges
+   en de koppenschaal zijn dezelfde, zodat het document er hetzelfde uitziet als
+   wat er tot nu toe werd gedownload. Het briefhoofd en de voetregel komen uit
+   scripts/pdf-build.mjs — Chromium kent geen marge-boxen uit de
+   paginamedia-specificatie. */
 
 @font-face {
   font-family: "RO-Sans";
@@ -28,36 +37,31 @@ Waarom geen thema-CSS hergebruikt: de sitestylesheet werkt met `light-dark()`
   font-style: italic;
 }
 
-/* Chromium kent van de paginamedia-specificatie alleen `size` en `margin`;
-   marge-boxen (@top-center en verwanten) niet. Het briefhoofd en de
-   paginanummers komen daarom uit de header- en footerTemplate van
-   scripts/pdf-build.mjs. De bovenmarge is ruim genoeg voor dat briefhoofd. */
+/* Gelijk aan pageMargins [48, 92, 48, 56] uit de oude export. De ruime
+   bovenmarge is er voor het briefhoofd, de ondermarge voor de voetregel. */
 @page {
   size: A4;
-  margin: 24mm 20mm 20mm;
+  margin: 92pt 48pt 56pt;
 }
 
 :root {
-  /* Hemelblauw haalt op wit net 4,5:1 (4,51) en op het vlak van de kern-callout
-     niet meer (4,15) — gemeten door de browserscan op de print-HTML. Tekst
-     krijgt daarom het donkerblauw van de huisstijl, dat overal ruim boven de
-     eis zit (9,4:1 op het vlak). Hemelblauw blijft als accent op randen en
-     lijnen, waar geen contrasteis voor tekst geldt. */
   --brand: #007bc7;
-  --brand-tekst: #154273;
-  --tekst: #000000;
-  --gedempt: #4a4a4a;
-  --lijn: #cfcfcf;
+  /* Kleur van het lint en het woordmerk in het briefhoofd. */
+  --brand-donker: #154273;
+  --tekst: #1a1a1a;
+  --meta: #666666;
+  --noot: #444444;
+  --lijn: #dddddd;
   --vlak: #f3f6f8;
 }
 
 body {
   font-family: "RO-Sans", Verdana, sans-serif;
   font-size: 10.5pt;
-  line-height: 1.5;
+  line-height: 1.25;
   color: var(--tekst);
   margin: 0;
-  /* Zwarte tekst op wit, ongeacht het schema van de renderende omgeving. */
+  /* Donkere tekst op wit, ongeacht het schema van de renderende omgeving. */
   background: #ffffff;
   color-scheme: light;
   /* Een lange bron-URL kan niet afbreken en schuift dan buiten de pagina. Op een
@@ -66,69 +70,100 @@ body {
 }
 
 /* --- Koppen ------------------------------------------------------------
-   De structuurboom van de PDF volgt deze elementen. Niveaus overslaan is
-   dus geen opmaakkwestie maar een structuurfout: Acrobat rapporteert dat
-   als "Juiste insluiting via nesting" — de regel waarop de auto-getagde
-   PDF in docs/toegankelijkheid/ struikelt. Grootte hoort daarom bij het
-   niveau, en niet andersom. */
+   De structuurboom van de PDF volgt deze elementen, dus het kopniveau ligt vast
+   door de inhoud en niet door het formaat. Dat botst met de opmaak: in het
+   kaderdocument is elke norm een <h2> en schuift de normtekst een niveau op, dus
+   daar is "Toelichting" een <h3> waar hij in de losse norm-PDF een <h2> is.
+
+   Vandaar dat de schaal aan de context hangt en niet aan het niveau: `.pdf-norm`
+   bestaat alleen in het kaderdocument. Zo zien beide documenten er hetzelfde uit
+   zonder dat er één kopniveau wordt overgeslagen — de fout waarop de auto-getagde
+   PDF in docs/toegankelijkheid/ struikelt ("Juiste insluiting via nesting"). */
 
 h1,
 h2,
 h3,
 h4,
 h5 {
-  color: var(--brand-tekst);
   line-height: 1.25;
-  /* Een kop onderaan een pagina met zijn tekst op de volgende leest slecht
-     en is in de PDF niet te herstellen. */
+  /* Een kop onderaan een pagina met zijn tekst op de volgende leest slecht en is
+     in de PDF niet te herstellen. */
   break-after: avoid;
   break-inside: avoid;
 }
 
-h1 {
-  font-size: 22pt;
-  margin: 0 0 6mm;
+/* Documenttitel op de titelpagina (coverTitle: 26pt). */
+.pdf-cover h1 {
+  font-size: 26pt;
+  font-weight: 700;
+  color: var(--brand);
+  margin: 0 0 24pt;
 }
 
-h2 {
-  font-size: 15pt;
-  margin: 8mm 0 3mm;
+/* Normtitel in het kaderdocument en de kop van de inhoudsopgave (section: 20pt). */
+.pdf-norm > h2,
+.pdf-toc > h2 {
+  font-size: 20pt;
+  font-weight: 700;
+  color: var(--brand);
+  margin: 0 0 16pt;
 }
 
-h3 {
-  font-size: 12.5pt;
-  margin: 6mm 0 2mm;
+/* Sectiekop: Kern van de norm, Toelichting, Normuitleg, Reikwijdte, Zie ook,
+   Bronnen (h2: 16pt). */
+main > h2,
+main > .pdf-kern > h2,
+.pdf-norm h3 {
+  font-size: 16pt;
+  font-weight: 700;
+  color: var(--brand);
+  margin: 14pt 0 6pt;
 }
 
-h4 {
+/* Colofon achterin (disclaimerH: 13pt). */
+.pdf-colofon > h2 {
+  font-size: 13pt;
+  font-weight: 700;
+  color: var(--brand);
+  margin: 18pt 0 6pt;
+}
+
+/* Thema binnen de normuitleg, bijvoorbeeld "Besturing" (h3: 13pt). */
+main > h3,
+.pdf-norm h4 {
+  font-size: 13pt;
+  font-weight: 700;
+  color: var(--tekst);
+  margin: 10pt 0 4pt;
+}
+
+/* Voorschrift, Criteria, Indicatoren (h4: 11pt). */
+main > h4,
+.pdf-norm h5 {
   font-size: 11pt;
-  margin: 5mm 0 1.5mm;
-}
-
-h5 {
-  font-size: 10.5pt;
-  margin: 4mm 0 1.5mm;
-  color: var(--gedempt);
+  font-weight: 700;
+  color: var(--tekst);
+  margin: 8pt 0 2pt;
 }
 
 p {
-  margin: 0 0 3mm;
+  margin: 0 0 6pt;
   orphans: 2;
   widows: 2;
 }
 
 /* --- Lijsten -----------------------------------------------------------
    Criteria en indicatoren zijn echte lijsten, zodat ze als L/LI/LBody in de
-   structuurboom belanden. In de huidige export zijn het losse regels. */
+   structuurboom belanden. In de oude export waren het losse regels. */
 
 ul,
 ol {
-  margin: 0 0 3mm;
-  padding-inline-start: 6mm;
+  margin: 0 0 6pt 8pt;
+  padding-inline-start: 14pt;
 }
 
 li {
-  margin-bottom: 1mm;
+  margin-bottom: 1pt;
 }
 
 /* --- Tabellen ---------------------------------------------------------- */
@@ -136,15 +171,15 @@ li {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0 0 4mm;
+  margin: 0 0 8pt;
   font-size: 9.5pt;
   break-inside: avoid;
 }
 
 th,
 td {
-  border: 0.3mm solid var(--lijn);
-  padding: 1.5mm 2mm;
+  border: 0.5pt solid var(--lijn);
+  padding: 4pt 5pt;
   text-align: start;
   vertical-align: top;
 }
@@ -155,45 +190,35 @@ th {
 }
 
 /* --- Links -------------------------------------------------------------
-   Op papier is een gekleurde link zonder adres waardeloos, maar de URL
-   erachter zetten maakt een norm­tekst met 142 bronlinks onleesbaar. De
-   bronnenlijst bevat de adressen al voluit; in de lopende tekst blijft de
-   link dus een gewone verwijzing. */
+   Blauw en zonder onderstreping, net als in de oude export. Het verschil met de
+   lopende tekst is 4,7:1 en daarmee ruim boven de 3:1 die 1.4.1 vraagt als
+   kleur het enige onderscheid is. De adressen staan voluit in de bronnenlijst;
+   ze achter elke verwijzing zetten maakt een normtekst met tientallen bronnen
+   onleesbaar. */
 
 a {
-  color: var(--brand-tekst);
-  text-decoration: underline;
+  color: var(--brand);
+  text-decoration: none;
 }
 
 /* --- Titelpagina ------------------------------------------------------- */
 
 .pdf-cover {
   break-after: page;
-  padding-top: 30mm;
-}
-
-.pdf-cover h1 {
-  font-size: 28pt;
-  margin-bottom: 8mm;
+  text-align: center;
+  padding-top: 120pt;
 }
 
 .pdf-cover .pdf-meta {
-  color: var(--gedempt);
-  font-size: 10pt;
+  font-size: 12pt;
+  color: var(--meta);
+  margin: 4pt 0 0;
 }
 
-.pdf-cover .pdf-meta dt {
-  float: left;
-  clear: left;
-  width: 30mm;
-  font-weight: 700;
-}
-
-.pdf-cover .pdf-meta dd {
-  margin: 0 0 1.5mm 30mm;
-}
-
-/* --- Inhoudsopgave ----------------------------------------------------- */
+/* --- Inhoudsopgave -----------------------------------------------------
+   Zonder paginanummers: Chromium kent `target-counter()` niet, dus die zijn uit
+   HTML niet te berekenen. De bladwijzers in de PDF (outline) vangen dat op — die
+   maken elke norm rechtstreeks aanspringbaar. */
 
 .pdf-toc {
   break-after: page;
@@ -201,35 +226,23 @@ a {
 
 .pdf-toc ol {
   list-style: none;
+  margin: 0;
   padding: 0;
 }
 
 .pdf-toc li {
-  margin-bottom: 2mm;
-  border-bottom: 0.2mm dotted var(--lijn);
-  padding-bottom: 1mm;
+  font-size: 11pt;
+  margin-bottom: 6pt;
 }
 
 /* --- Kern van de norm --------------------------------------------------
-   Visueel een uitgelicht blok, in de structuur een gewone sectie met kop.
-   Geen <blockquote>: dit is geen citaat, en Chromium tagt het dan als
-   BlockQuote. */
+   Een sectie met een kop, net als Toelichting — geen uitgelicht blok. Zo stond
+   het ook in de oude export (klantfeedback: de kern was te klein en te dik).
+   Geen <blockquote> in de HTML: dit is geen citaat, en Chromium tagt het dan
+   als BlockQuote. */
 
 .pdf-kern {
-  background: var(--vlak);
-  border-inline-start: 1mm solid var(--brand);
-  padding: 3mm 4mm;
-  margin: 0 0 5mm;
-  break-inside: avoid;
-}
-
-.pdf-kern h2 {
-  margin-top: 0;
-  font-size: 12pt;
-}
-
-.pdf-kern p:last-child {
-  margin-bottom: 0;
+  margin: 0;
 }
 
 /* --- Normen in het kaderdocument --------------------------------------- */
@@ -243,42 +256,53 @@ a {
    ervoor. Die streep is decoratief; de kop erboven doet het werk. */
 
 .footnotes {
-  font-size: 9pt;
-  color: var(--gedempt);
-  margin-top: 6mm;
+  font-size: 8.5pt;
+  line-height: 1.15;
+  color: var(--noot);
+  margin-top: 14pt;
 }
 
 .footnotes hr {
   display: none;
 }
 
-.footnotes li {
-  margin-bottom: 1.5mm;
+.footnotes ol {
+  margin-left: 8pt;
 }
 
-/* Backlink-pijltjes (↩) hebben op papier geen doel. `display: none` haalt ze
-   ook uit de structuurboom, wat hier de bedoeling is. */
+.footnotes li {
+  margin-bottom: 2pt;
+}
+
+/* Backlink-pijltjes (↩) hebben op papier geen doel. `display: none` haalt ze ook
+   uit de structuurboom, wat hier de bedoeling is. */
 .footnote-backref {
   display: none;
 }
 
-/* --- Colofon ----------------------------------------------------------- */
+/* Voetnootmarkeringen in de tekst: superscript, zonder onderstreping. */
+sup a {
+  text-decoration: none;
+}
+
+/* --- Colofon -----------------------------------------------------------
+   "Belangrijke informatie" met het voorbehoud, zoals in de oude export. */
 
 .pdf-colofon {
-  margin-top: 8mm;
-  padding-top: 3mm;
-  border-top: 0.3mm solid var(--lijn);
-  font-size: 9pt;
-  color: var(--gedempt);
   break-inside: avoid;
 }
 
+.pdf-colofon ul {
+  font-size: 9.5pt;
+  color: var(--noot);
+}
+
 /* --- Diagram -----------------------------------------------------------
-   Het bollendiagram gaat als SVG mee. De tekstalternatieven staan in de
-   HTML (<title>/<desc>); dit regelt alleen dat het op de pagina past. */
+   Het bollendiagram gaat als SVG mee. De tekstalternatieven staan in de HTML
+   (<title>/<desc>); dit regelt alleen dat het op de pagina past. */
 
 figure {
-  margin: 0 0 5mm;
+  margin: 0 0 8pt;
   break-inside: avoid;
 }
 
@@ -290,6 +314,6 @@ figure img {
 
 figcaption {
   font-size: 9pt;
-  color: var(--gedempt);
-  margin-top: 1.5mm;
+  color: var(--noot);
+  margin-top: 3pt;
 }

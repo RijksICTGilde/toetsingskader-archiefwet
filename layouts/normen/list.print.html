@@ -32,18 +32,20 @@
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 </head>
 <body>
+{{- /* Titelpagina met dezelfde regels als de export die dit vervangt. De
+       titel is "Toetsingskader Archiefwet 2026", zoals in de oude
+       kader-PDF — `site.Title` laat het jaartal weg. */ -}}
 <header class="pdf-cover">
-  <h1>{{ site.Title }}</h1>
-  <dl class="pdf-meta">
-    {{- with site.Params.versie }}<dt>Versie</dt><dd>{{ . }}</dd>{{ end }}
-    <dt>Bijgewerkt</dt><dd>{{ .Lastmod | time.Format ":date_full" }}</dd>
-    <dt>Normen</dt><dd>{{ len $normen }}</dd>
-  </dl>
-  {{- with .Description }}<p>{{ . }}</p>{{ end }}
+  <h1>{{ site.Title }} 2026</h1>
+  <p class="pdf-meta">Gegenereerd op {{ now | time.Format ":date_long" }}</p>
+  <p class="pdf-meta">Bron: <a href="{{ .Permalink }}">{{ .Permalink }}</a></p>
+  <p class="pdf-meta">Versie: {{ site.Params.versie | default "onbekend" }}</p>
 </header>
 
-<nav class="pdf-toc" aria-labelledby="inhoud">
-  <h2 id="inhoud">Inhoud</h2>
+{{- /* Zonder paginanummers: Chromium kent `target-counter()` niet. De
+       bladwijzers in de PDF maken elke norm wel rechtstreeks aanspringbaar. */ -}}
+<nav class="pdf-toc" aria-labelledby="inhoudsopgave">
+  <h2 id="inhoudsopgave">Inhoudsopgave</h2>
   <ol>
     {{- range $normen }}
     <li><a href="#norm-{{ .Params.norm_id }}">{{ .Title }}</a></li>
@@ -75,10 +77,6 @@
   {{- end }}
 </main>
 
-<footer class="pdf-colofon">
-  {{- with partial "versie-zin.html" . }}<p>{{ . }}</p>{{ end }}
-  <p>Deze PDF is gegenereerd uit <a href="{{ .Permalink }}">{{ .Permalink }}</a>.
-  Die pagina's zijn de actuele versie; controleer daar of deze tekst nog geldt.</p>
-</footer>
+{{ partial "pdf-colofon.html" . }}
 </body>
 </html>

@@ -33,13 +33,15 @@
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 </head>
 <body>
+{{- /* Titelpagina, inhoud, colofon — dezelfde opzet als de export die dit
+       vervangt. De datum is de bouwdatum: in de oude export stond hier
+       "Gedownload op", maar er wordt nu niets meer bij de bezoeker
+       gegenereerd. */ -}}
 <header class="pdf-cover">
   <h1>{{ .Title }}</h1>
-  <dl class="pdf-meta">
-    <dt>Onderdeel van</dt><dd>{{ site.Title }}</dd>
-    {{- with site.Params.versie }}<dt>Versie</dt><dd>{{ . }}</dd>{{ end }}
-    <dt>Bijgewerkt</dt><dd>{{ .Lastmod | time.Format ":date_full" }}</dd>
-  </dl>
+  <p class="pdf-meta">Gegenereerd op {{ now | time.Format ":date_long" }}</p>
+  <p class="pdf-meta">Bron: <a href="{{ .Permalink }}">{{ .Permalink }}</a></p>
+  <p class="pdf-meta">Versie: {{ site.Params.versie | default "onbekend" }}</p>
 </header>
 
 <main>
@@ -55,11 +57,7 @@
   {{ $content | safeHTML }}
 </main>
 
-<footer class="pdf-colofon">
-  {{- with partial "versie-zin.html" . }}<p>{{ . }}</p>{{ end }}
-  <p>Deze PDF is gegenereerd uit <a href="{{ .Permalink }}">{{ .Permalink }}</a>.
-  Die pagina is de actuele versie; controleer daar of deze tekst nog geldt.</p>
-</footer>
+{{ partial "pdf-colofon.html" . }}
 </body>
 </html>
 {{- end -}}

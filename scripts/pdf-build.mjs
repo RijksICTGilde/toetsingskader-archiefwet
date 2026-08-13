@@ -71,28 +71,95 @@ function serve(files) {
   return new Promise(resolve => server.listen(0, '127.0.0.1', () => resolve(server)))
 }
 
-// Kop- en voetregel staan buiten de inhoud en komen dus niet in de
-// structuurboom terecht. Wat hier staat mag daarom nooit de enige plek zijn waar
-// iets staat: het paginanummer is navigatiehulp op papier, de titel herhaalt de
-// <h1>. Chromium wisselt de placeholders (title, pageNumber, totalPages) in.
-const KOPREGEL = `
-  <div style="width:100%;font-family:sans-serif;font-size:7pt;color:#4a4a4a;
-              padding:0 20mm;border-bottom:0.2mm solid #cfcfcf;margin-bottom:3mm;">
-    <span class="title"></span>
-  </div>`
+// --- Briefhoofd en voetregel ------------------------------------------------
+//
+// Chromium kent geen marge-boxen uit de paginamedia-specificatie (@top-center en
+// verwanten), dus de running header en footer komen uit deze templates. Ze
+// worden in een eigen document gerenderd: geen stylesheet, geen lettertypen en
+// géén externe bestanden — alleen `data:`-URI's worden geladen. Vandaar dat het
+// lint en RO Sans hieronder worden ingebed.
+//
+// Wat hier staat valt buiten de structuurboom van de PDF en is voor een
+// schermlezer dus onzichtbaar. Daarom staat er niets in wat nergens anders
+// staat: het briefhoofd is huisstijl en het paginanummer is navigatiehulp op
+// papier. De maten komen uit de oude export (`assets/js/pdf-export.js`,
+// verwijderd in ba41540): lint 26pt breed op de horizontale paginamidden, het
+// woordmerk 8pt ernaast, de voetregel 8pt met een lijn erboven.
 
-const VOETREGEL = `
-  <div style="width:100%;font-family:sans-serif;font-size:7pt;color:#4a4a4a;
-              padding:0 20mm;display:flex;justify-content:space-between;">
-    <span>Toetsingskader Archiefwet</span>
-    <span><span class="pageNumber"></span> van <span class="totalPages"></span></span>
+const PT = 96 / 72 // Kop- en voetregel rekenen in CSS-px op 96 dpi.
+const pt = n => `${(n * PT).toFixed(2)}px`
+
+// Het lint is 1:2, dus 26pt breed is 52pt hoog. In de oude export stond de
+// linkerrand op de horizontale paginamidden; `margin-left: 50%` doet hetzelfde,
+// ongeacht het paginaformaat.
+function koptekst(lintDataUri, fontCss) {
+  return `<style>${fontCss}
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .lockup { margin-left: 50%; display: flex; align-items: flex-start; }
+    .lockup img { width: ${pt(26)}; height: ${pt(52)}; display: block; }
+    .naam { padding: ${pt(16)} 0 0 ${pt(8)}; color: #154273;
+            font-family: "RO-Sans", Verdana, sans-serif; line-height: 1.15; }
+    .naam b { font-size: ${pt(9.5)}; font-weight: 700; display: block; }
+    .naam span { font-size: ${pt(8)}; display: block; margin-top: ${pt(1)}; }
+  </style>
+  <div style="width:100%">
+    <div class="lockup">
+      <img src="${lintDataUri}" alt="">
+      <div class="naam">
+        <b>Inspectie Overheidsinformatie en Erfgoed</b>
+        <span>Ministerie van Onderwijs, Cultuur en Wetenschap</span>
+      </div>
+    </div>
   </div>`
+}
+
+// Alleen het paginanummer; versie en datum staan op de titelpagina. De lijn
+// loopt van marge tot marge, net als de canvas-lijn in de oude export.
+function voettekst(fontCss) {
+  return `<style>${fontCss}
+    body { margin: 0; }
+    .voet { margin: 0 ${pt(48)}; padding-top: ${pt(5)}; border-top: 0.5pt solid #dddddd;
+            text-align: center; font-size: ${pt(8)}; color: #999999;
+            font-family: "RO-Sans", Verdana, sans-serif; }
+  </style>
+  <div style="width:100%">
+    <div class="voet">Pagina <span class="pageNumber"></span> van <span class="totalPages"></span></div>
+  </div>`
+}
+
+// Het lint en de twee lettersneden komen uit de gebouwde site, zodat ze niet
+// nog een keer in de repository staan. Ontbreekt er iets, dan is dat een
+// bouwfout: een briefhoofd zonder lint is geen briefhoofd.
+function dataUri(pad, mime) {
+  return `data:${mime};base64,${fs.readFileSync(pad).toString('base64')}`
+}
+
+function briefhoofdAssets(root) {
+  const lint = path.join(root, 'images/logo-rijksoverheid.svg')
+  const regular = path.join(root, 'fonts/RO-SansWebText-Regular.woff2')
+  const bold = path.join(root, 'fonts/RO-SansWebText-Bold.woff2')
+  for (const p of [lint, regular, bold]) {
+    if (!fs.existsSync(p)) throw new Error(`Ontbreekt voor het briefhoofd: ${p}`)
+  }
+  const face = (bestand, gewicht) => `@font-face{font-family:"RO-Sans";` +
+    `src:url("${dataUri(bestand, 'font/woff2')}") format("woff2");` +
+    `font-weight:${gewicht};font-style:normal;}`
+  return {
+    lint: dataUri(lint, 'image/svg+xml'),
+    fontCss: face(regular, 400) + face(bold, 700),
+  }
+}
 
 const { files, prints } = readSite(root)
 if (prints.length === 0) {
   console.error(`Geen index.print.html gevonden onder ${root}. Is de site gebouwd?`)
   process.exit(1)
 }
+
+const { lint, fontCss } = briefhoofdAssets(root)
+const KOPREGEL = koptekst(lint, fontCss)
+const VOETREGEL = voettekst(fontCss)
 
 const server = await serve(files)
 const { port } = server.address()
@@ -128,6 +195,8 @@ for (const { url, bestand } of prints) {
     displayHeaderFooter: true,
     headerTemplate: KOPREGEL,
     footerTemplate: VOETREGEL,
+    // Kop- en voetregel worden anders op 80% geschaald.
+    scale: 1,
   })
   const kb = Math.round(fs.statSync(doel).size / 1024)
   console.log(`${path.relative(root, doel)} — ${kb} kB`)
