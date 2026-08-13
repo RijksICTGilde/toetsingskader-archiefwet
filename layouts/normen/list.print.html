@@ -62,6 +62,18 @@
   {{- /* `string`: bij een ongequote norm_id levert %s anders "%!s(int=1)". */ -}}
   {{- $id := string .Params.norm_id -}}
   {{- $content := partial "nummer-voorschriften.html" (dict "content" .Content "norm_id" $id) -}}
+  {{- /* Voetnoot-items plat maken. Goldmark zet de brontekst in een <p> binnen
+         de <li> en hangt er terugspringpijlen achter. Chromium tagt zo'n item als
+         NonStruct in plaats van LI: gemeten op de gegenereerde PDF waren dat 134
+         van de 371 lijstitems in het kaderdocument, precies de voetnoten. Een
+         controle als PAC leest dat als "Lbl en LBody moeten onderliggende items
+         van LI zijn".
+
+         De pijlen staan op `display: none` in print.css en hebben op papier geen
+         doel, dus die gaan er hier helemaal uit — schelen ook drie linkannotaties
+         per bron. */ -}}
+  {{- $content = replaceRE `(?s)<a href="#fnref[^"]*" class="footnote-backref"[^>]*>.*?</a>` "" $content -}}
+  {{- $content = replaceRE `(?s)(<li id="[^"]*fn:[^"]*">)\s*<p>(.*?)</p>\s*</li>` `${1}${2}</li>` $content -}}
   {{- /* "Bronnen" boven de voetnotenlijst; zie single.print.html. Vóór de
          verschuiving hieronder, zodat hij hier vanzelf een h3 wordt. */ -}}
   {{- $content = replaceRE `<div class="footnotes" role="doc-endnotes">` `<h2 class="pdf-bronnen">Bronnen</h2><div class="footnotes" role="doc-endnotes">` $content 1 -}}
