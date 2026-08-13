@@ -59,7 +59,8 @@
 
 <main>
   {{- range $normen }}
-  {{- $id := .Params.norm_id -}}
+  {{- /* `string`: bij een ongequote norm_id levert %s anders "%!s(int=1)". */ -}}
+  {{- $id := string .Params.norm_id -}}
   {{- $content := partial "nummer-voorschriften.html" (dict "content" .Content "norm_id" $id) -}}
   {{- /* "Bronnen" boven de voetnotenlijst; zie single.print.html. Vóór de
          verschuiving hieronder, zodat hij hier vanzelf een h3 wordt. */ -}}
@@ -71,6 +72,14 @@
   {{- $content = replaceRE `id="([^"]+)"` (printf `id="n%s-${1}"` $id) $content -}}
   {{- /* Alleen ankers binnen het document; externe links beginnen niet met #. */ -}}
   {{- $content = replaceRE `href="#([^"]+)"` (printf `href="#n%s-${1}"` $id) $content -}}
+  {{- /* Interne verwijzingen absoluut maken. Chromium lost een root-relatieve
+         href op tegen de URL van het document, en dat is tijdens de generatie de
+         wegwerpserver uit scripts/pdf-build.mjs: zonder deze stap staan er in de
+         PDF links naar http://127.0.0.1:<poort>/… Gemeten op het kaderdocument:
+         139 stuks. Ankers (#…) blijven relatief, dat zijn sprongen binnen het
+         document. */ -}}
+  {{- $basis := strings.TrimSuffix "/" site.BaseURL -}}
+  {{- $content = replaceRE `href="(/[^"]*)"` (printf `href="%s${1}"` $basis) $content -}}
   <section class="pdf-norm" id="norm-{{ $id }}" aria-labelledby="norm-{{ $id }}-titel">
     <h2 id="norm-{{ $id }}-titel">{{ .Title }}</h2>
     {{- with .Params.kern }}

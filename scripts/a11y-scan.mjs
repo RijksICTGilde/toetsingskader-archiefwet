@@ -38,6 +38,16 @@ function htmlFiles(dir, acc = []) {
 const files = htmlFiles(root)
 let total = 0
 
+// De print-HTML wordt door scripts/pdf-build.mjs opgeruimd zodra de PDF's er
+// staan. Draait deze scan dáárna, dan zijn er geen bestanden meer om de
+// kopvolgorde en de dubbele id's op te controleren en meldt hij "0
+// overtredingen" over een lege verzameling. Dat ziet eruit als goed nieuws.
+if (!files.some(isPrint)) {
+  console.log('LET OP: geen *.print.html gevonden; de controles op kopvolgorde en')
+  console.log('dubbele id\'s hebben niets gezien. Bouw de site opnieuw en draai deze')
+  console.log('scan vóór `npm run build:pdf`.\n')
+}
+
 // Klopt de zin in a11y-checks.mjs nog met de partial? Zo niet, dan wordt elke
 // pagina hieronder rood met een melding die de verkeerde oorzaak noemt. Pad
 // relatief aan dit script: de scan draait ook vanuit een andere map.

@@ -86,6 +86,11 @@ function serve(files) {
 // papier. De maten komen uit de oude export (`assets/js/pdf-export.js`,
 // verwijderd in ba41540): lint 26pt breed op de horizontale paginamidden, het
 // woordmerk 8pt ernaast, de voetregel 8pt met een lijn erboven.
+//
+// Eén afwijking van die export: het paginanummer stond daar in #999999, wat op
+// wit 2,85:1 haalt. Hier is dat #666666 (5,74:1). Geen enkele controle kijkt
+// hiernaar — axe ziet alleen de print-HTML en pdf-ua-check alleen de vier
+// markers — dus dit is met de hand nagerekend.
 
 const PT = 96 / 72 // Kop- en voetregel rekenen in CSS-px op 96 dpi.
 const pt = n => `${(n * PT).toFixed(2)}px`
@@ -117,7 +122,7 @@ function voettekst() {
   return `<style>
     body { margin: 0; }
     .voet { margin: 0 ${pt(48)}; padding-top: ${pt(5)}; border-top: 0.5pt solid #dddddd;
-            text-align: center; font-size: 8pt; color: #999999;
+            text-align: center; font-size: 8pt; color: #666666;
             font-family: Verdana, sans-serif; }
   </style>
   <div style="width:100%">
@@ -224,7 +229,9 @@ async function vulInhoudsopgave(page, pdfBytes) {
 
 const { files, prints } = readSite(root)
 if (prints.length === 0) {
-  console.error(`Geen index.print.html gevonden onder ${root}. Is de site gebouwd?`)
+  console.error(`Geen index.print.html gevonden onder ${root}.`)
+  console.error('Deze stap ruimt zijn eigen invoer op, dus draait één keer per')
+  console.error('Hugo-build. Bouw de site opnieuw en probeer het dan nog eens.')
   process.exit(1)
 }
 
