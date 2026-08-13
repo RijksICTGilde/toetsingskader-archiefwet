@@ -29,16 +29,18 @@ LINT = WORTEL / "assets/images/logo-rijksoverheid.svg"
 DOEL = WORTEL / "assets/print/briefhoofd.svg"
 
 # Maten uit de oude export (assets/js/pdf-export.js, verwijderd in ba41540):
-# lint 26pt breed (1:2, dus 52pt hoog), tekst 8pt ernaast, eerste regel op 16pt
-# vanaf de bovenkant.
+# lint 26pt breed (1:2, dus 52pt hoog), tekst 8pt ernaast. Daar stond y=16 voor
+# de bovenkant van het tekstblok; hier staat de basislijn, dus de waarden
+# hieronder zijn nagemeten op de gerenderde PDF tegen de oude export: de
+# bovenkant van de inkt komt op 17,9pt en 32,1pt uit.
 LINT_BREED = 26.0
 LINT_HOOG = 52.0
 TEKST_X = LINT_BREED + 8.0
 BLAUW = "#154273"
 
 REGELS = [
-    ("assets/fonts/ro-sans-bold.ttf", "Inspectie Overheidsinformatie en Erfgoed", 9.5, 16.0),
-    ("assets/fonts/ro-sans-regular.ttf", "Ministerie van Onderwijs, Cultuur en Wetenschap", 8.0, 27.5),
+    ("assets/fonts/ro-sans-bold.ttf", "Inspectie Overheidsinformatie en Erfgoed", 9.5, 24.6),
+    ("assets/fonts/ro-sans-regular.ttf", "Ministerie van Onderwijs, Cultuur en Wetenschap", 8.0, 37.8),
 ]
 
 
