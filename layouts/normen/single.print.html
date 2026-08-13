@@ -15,6 +15,10 @@
      --------------------------------------------------------------------- */ -}}
 {{- if .Params.norm_id -}}
 {{- $content := partial "nummer-voorschriften.html" (dict "content" .Content "norm_id" .Params.norm_id) -}}
+{{- /* Goldmark zet de voetnoten onderaan zonder kop. De oude export had er
+       "Bronnen" boven staan, en zonder die kop valt wie op koppen navigeert
+       midden in een genummerde lijst. */ -}}
+{{- $content = replaceRE `<div class="footnotes" role="doc-endnotes">` `<h2 class="pdf-bronnen">Bronnen</h2><div class="footnotes" role="doc-endnotes">` $content 1 -}}
 <!DOCTYPE html>
 {{- /* `lang` is de bron van /Lang in de PDF: zonder dat leest een schermlezer
        Nederlandse wettekst met een Engelse stem. */ -}}

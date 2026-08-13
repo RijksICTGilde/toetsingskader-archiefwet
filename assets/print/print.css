@@ -258,6 +258,14 @@ a {
   break-before: page;
 }
 
+/* Kop boven de bronnenlijst (footnotesH: 10pt). Met een klasse, want het
+   kopniveau verschilt per document en de schaal hangt hier aan de context. */
+main > h2.pdf-bronnen,
+.pdf-norm h3.pdf-bronnen {
+  font-size: 10pt;
+  margin: 14pt 0 4pt;
+}
+
 /* --- Bronnen -----------------------------------------------------------
    Goldmark zet de voetnoten onderaan in <div class="footnotes"> met een <hr>
    ervoor. Die streep is decoratief; de kop erboven doet het werk. */
