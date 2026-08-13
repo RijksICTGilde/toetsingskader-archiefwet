@@ -89,19 +89,26 @@ function serve(files) {
 const PT = 96 / 72 // Kop- en voetregel rekenen in CSS-px op 96 dpi.
 const pt = n => `${(n * PT).toFixed(2)}px`
 
-// Het lint is 1:2, dus 26pt breed is 52pt hoog. In de oude export stond de
-// linkerrand op de horizontale paginamidden; `margin-left: 50%` doet hetzelfde,
-// ongeacht het paginaformaat.
+// Het lint is 1:2, dus 26pt breed is 52pt hoog. In de oude export stond het
+// gecentreerd op de pagina ((breedte - 26) / 2), tegen de bovenrand aan.
+// Vandaar `calc(50% - 13pt)` en de negatieve bovenmarge: Chromium zet de
+// koptekst standaard een stuk onder de paginarand.
+//
+// Lengtes staan in px (pt * 96/72), lettergroottes in pt. Gemeten op de
+// gerenderde PDF: boxmaten in px komen kloppend uit, lettergroottes in px
+// vielen 1,33x te groot uit — de koptekst wordt in een eigen document met een
+// eigen schaal gerenderd.
 function koptekst(lintDataUri, fontCss) {
   return `<style>${fontCss}
     * { box-sizing: border-box; }
     body { margin: 0; }
-    .lockup { margin-left: 50%; display: flex; align-items: flex-start; }
+    .lockup { margin-left: calc(50% - ${pt(13)}); margin-top: ${pt(-15)};
+              display: flex; align-items: flex-start; }
     .lockup img { width: ${pt(26)}; height: ${pt(52)}; display: block; }
     .naam { padding: ${pt(16)} 0 0 ${pt(8)}; color: #154273;
             font-family: "RO-Sans", Verdana, sans-serif; line-height: 1.15; }
-    .naam b { font-size: ${pt(9.5)}; font-weight: 700; display: block; }
-    .naam span { font-size: ${pt(8)}; display: block; margin-top: ${pt(1)}; }
+    .naam b { font-size: 9.5pt; font-weight: 700; display: block; }
+    .naam span { font-size: 8pt; display: block; margin-top: ${pt(1)}; }
   </style>
   <div style="width:100%">
     <div class="lockup">
@@ -120,7 +127,7 @@ function voettekst(fontCss) {
   return `<style>${fontCss}
     body { margin: 0; }
     .voet { margin: 0 ${pt(48)}; padding-top: ${pt(5)}; border-top: 0.5pt solid #dddddd;
-            text-align: center; font-size: ${pt(8)}; color: #999999;
+            text-align: center; font-size: 8pt; color: #999999;
             font-family: "RO-Sans", Verdana, sans-serif; }
   </style>
   <div style="width:100%">
@@ -199,6 +206,12 @@ for (const { url, bestand } of prints) {
     scale: 1,
   })
   const kb = Math.round(fs.statSync(doel).size / 1024)
+  // De print-HTML is invoer, geen pagina. Laten staan betekent een kale kopie
+  // van elke normtekst op de gedeployde site, en een tweede ronde externe
+  // links voor htmltest — dat laatste maakte de linkcontrole in CI ruim tien
+  // keer zo traag. Wie het bestand wil bekijken, bouwt de site opnieuw; deze
+  // stap draait dus één keer per build.
+  fs.rmSync(bestand)
   console.log(`${path.relative(root, doel)} — ${kb} kB`)
 }
 

@@ -206,7 +206,8 @@ a {
 .pdf-cover {
   break-after: page;
   text-align: center;
-  padding-top: 120pt;
+  /* Gelijk aan de marge van 170pt boven de titel in de oude export. */
+  padding-top: 168pt;
 }
 
 .pdf-cover .pdf-meta {
