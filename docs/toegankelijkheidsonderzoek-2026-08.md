@@ -599,6 +599,14 @@ geen `/Lang` — pdfMake 0.2.18 heeft daar geen optie voor (`language:` in de
 bundel zijn cmap-subtabellen van de fonts, geen document-optie). De routekeuze
 blijft open.
 
+**Status 13 augustus 2026: besloten (route 2).** De PDF's worden bij de build
+gegenereerd uit print-HTML, met de Chromium die al voor de browsertests in CI
+staat — niet met WeasyPrint, zoals eerst voorgesteld. De client-side
+pdfMake-keten is verwijderd. Motivering, acceptatiecriterium en de conceptzin
+voor de toegankelijkheidsverklaring staan in
+[het besluit](besluit-toegankelijke-pdf.md). Wat openblijft is de vraag of er
+een NLDoc- of vergelijkbare publicatieketen bestaat waar dit kader in past.
+
 ---
 
 ## 7. Bron-tooltip: niet te sluiten én niet gekoppeld aan de term
@@ -738,6 +746,10 @@ wordt `aria-busy="true"` gezet. Er is geen `role="status"` of live region, en
 genereren duurt meerdere seconden; in die tijd krijgt een AT-gebruiker geen enkele
 terugkoppeling.
 
+**Status 13 augustus 2026: vervallen.** Er wordt in de browser niets meer
+gegenereerd, dus er is geen wachttijd om te melden: de link wijst naar een
+bestand dat er al staat. Zie [het besluit](besluit-toegankelijke-pdf.md).
+
 ---
 
 ## 14. `lang`-fout en lege taxonomiepagina's
@@ -808,6 +820,11 @@ onder de naam "Download als PDF". Geen WCAG-fout — de link heeft naam en rol �
 maar wel een gebroken belofte. Speelt op twee plekken:
 `layouts/normen/single.html:119` én `layouts/shortcodes/pdf-kader.html:4`.
 Oplossing: een `<button>` die alleen verschijnt wanneer JavaScript beschikbaar is.
+
+**Status 13 augustus 2026: vervallen.** De PDF's worden bij de build gemaakt en
+staan als bestand naast de pagina, dus de knop is weer een gewone
+`<a href="…/index.pdf" download>` die zonder JavaScript werkt. Zie
+[het besluit](besluit-toegankelijke-pdf.md).
 
 ### 20. De hero-`alt` dupliceert de `h1` eronder
 

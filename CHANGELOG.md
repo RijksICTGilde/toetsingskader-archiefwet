@@ -33,6 +33,15 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- De PDF-export wordt bij de build gemaakt in plaats van in de browser van de
+  bezoeker, en levert een getagde PDF: structuurboom, bladwijzers, taal en
+  documenttitel. Daarmee is de download navigeerbaar met een schermlezer —
+  koppen, lijsten en leesvolgorde — waar het eerder één doorlopende lap tekst
+  was (EN 301 549 §10, onderliggend WCAG 1.3.1 en 4.1.2, niveau A). De
+  motivering en de afweging staan in `docs/besluit-toegankelijke-pdf.md`; de
+  markers worden in CI gemeten met `scripts/pdf-ua-check.mjs`.
+- De downloadknop is een gewone link naar een bestand en werkt daarmee ook
+  zonder JavaScript.
 - Thema bijgewerkt naar `hugo-theme-rijksoverheid` v0.2.0. Daarin zitten vijf
   toegankelijkheidsfixes die hier als tijdelijke overrides stonden
   (focusindicatoren in de zoekresultaten, het zoekveld en de footerlinks; het
@@ -95,6 +104,11 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Verwijderd
 
+- De client-side PDF-generatie met pdfMake: de gevendorde bibliotheek (1,3 MB),
+  de base64-lettertypen (228 kB), de HTML→pdfMake-converter, de doc-definitie,
+  de `index.pdf.json`-endpoints en de bijbehorende tests. Dat scheelt een
+  blokkerend script van ruim anderhalve megabyte op elke normpagina, ook voor
+  wie nooit iets downloadt.
 - De project-eigen "naar boven"-knop (`layouts/baseof.html`,
   `_partials/terug-naar-boven.html`, `js/back-to-top.js`,
   `css/terug-naar-boven.css`). De knop komt nu uit het thema, aangezet met
