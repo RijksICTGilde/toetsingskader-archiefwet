@@ -223,9 +223,9 @@ a {
 }
 
 /* --- Inhoudsopgave -----------------------------------------------------
-   Zonder paginanummers: Chromium kent `target-counter()` niet, dus die zijn uit
-   HTML niet te berekenen. De bladwijzers in de PDF (outline) vangen dat op — die
-   maken elke norm rechtstreeks aanspringbaar. */
+   De paginanummers komen niet uit CSS: Chromium kent `target-counter()` niet.
+   scripts/pdf-build.mjs vult ze in een tweede doorloop aan, uit de bladwijzers
+   van de eerste. */
 
 .pdf-toc {
   break-after: page;

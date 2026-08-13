@@ -44,8 +44,10 @@
   <p class="pdf-meta">Versie: {{ site.Params.versie | default "onbekend" }}</p>
 </header>
 
-{{- /* Zonder paginanummers: Chromium kent `target-counter()` niet. De
-       bladwijzers in de PDF maken elke norm wel rechtstreeks aanspringbaar. */ -}}
+{{- /* De paginanummers worden hier niet gezet: Chromium kent
+       `target-counter()` niet. scripts/pdf-build.mjs vult ze in een tweede
+       doorloop aan, uit de bladwijzers van de eerste. Blijft die stap uit, dan
+       staat hier een werkende inhoudsopgave zonder nummers. */ -}}
 <nav class="pdf-toc" aria-labelledby="inhoudsopgave">
   <h2 id="inhoudsopgave">Inhoudsopgave</h2>
   <ol>
