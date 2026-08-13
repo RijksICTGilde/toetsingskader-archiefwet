@@ -120,10 +120,13 @@ jobs:
           if-no-files-found: warn
 
       - name: Test links
-        # htmltest bouwt zijn eigen kopie van de site; de PDF's uit de stap
+        # htmltest bouwt zijn eigen kopie van de site. De PDF's uit de stap
         # hierboven moeten mee, want de downloadknop linkt er rechtstreeks naar
-        # en een ontbrekend bestand is voor htmltest een gebroken link.
+        # en een ontbrekend bestand is voor htmltest een gebroken link. De
+        # print-HTML gaat er juist uit: dat is invoer voor de PDF en zou elke
+        # externe bron een tweede keer laten controleren.
         run: |
           hugo --minify --quiet --baseURL / --destination .htmltest/public
           (cd public && find . -name index.pdf -exec cp --parents {} ../.htmltest/public/ \;)
+          find .htmltest/public -name index.print.html -delete
           htmltest
