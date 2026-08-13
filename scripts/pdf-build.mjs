@@ -142,19 +142,27 @@ function dataUri(pad, mime) {
   return `data:${mime};base64,${fs.readFileSync(pad).toString('base64')}`
 }
 
+// Dezelfde print-snede als de inhoud (ro-sans-*.ttf), niet de Web Text-variant
+// van de site. Hugo publiceert die met een fingerprint in de naam, dus zoeken op
+// voorvoegsel in plaats van op een vast pad.
+function zoekFont(dir, voorvoegsel) {
+  const bestanden = fs.existsSync(dir) ? fs.readdirSync(dir) : []
+  const treffer = bestanden.find(n => n.startsWith(voorvoegsel) && n.endsWith('.ttf'))
+  if (!treffer) throw new Error(`Ontbreekt voor het briefhoofd: ${dir}/${voorvoegsel}*.ttf`)
+  return path.join(dir, treffer)
+}
+
 function briefhoofdAssets(root) {
   const lint = path.join(root, 'images/logo-rijksoverheid.svg')
-  const regular = path.join(root, 'fonts/RO-SansWebText-Regular.woff2')
-  const bold = path.join(root, 'fonts/RO-SansWebText-Bold.woff2')
-  for (const p of [lint, regular, bold]) {
-    if (!fs.existsSync(p)) throw new Error(`Ontbreekt voor het briefhoofd: ${p}`)
-  }
+  if (!fs.existsSync(lint)) throw new Error(`Ontbreekt voor het briefhoofd: ${lint}`)
+  const fontDir = path.join(root, 'fonts')
   const face = (bestand, gewicht) => `@font-face{font-family:"RO-Sans";` +
-    `src:url("${dataUri(bestand, 'font/woff2')}") format("woff2");` +
+    `src:url("${dataUri(bestand, 'font/ttf')}") format("truetype");` +
     `font-weight:${gewicht};font-style:normal;}`
   return {
     lint: dataUri(lint, 'image/svg+xml'),
-    fontCss: face(regular, 400) + face(bold, 700),
+    fontCss: face(zoekFont(fontDir, 'ro-sans-regular'), 400) +
+             face(zoekFont(fontDir, 'ro-sans-bold'), 700),
   }
 }
 

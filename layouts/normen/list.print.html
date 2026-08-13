@@ -28,7 +28,9 @@
 {{- /* Tussenproduct, geen sitepagina; zie single.print.html. */ -}}
 <meta name="robots" content="noindex">
 <title>{{ site.Title }}</title>
-{{- $css := resources.Get "print/print.css" | fingerprint "md5" -}}
+{{- /* ExecuteAsTemplate: print.css verwijst naar de lettertypen via
+       resources.Get, zodat Hugo ze publiceert. */ -}}
+{{- $css := resources.Get "print/print.css" | resources.ExecuteAsTemplate "print/print.css" . | fingerprint "md5" -}}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 </head>
 <body>

@@ -29,7 +29,9 @@
 {{- /* <title> wordt de documenttitel van de PDF, die de viewer in de titelbalk
        toont in plaats van de bestandsnaam. */ -}}
 <title>{{ .Title }} | {{ site.Title }}</title>
-{{- $css := resources.Get "print/print.css" | fingerprint "md5" -}}
+{{- /* ExecuteAsTemplate: print.css verwijst naar de lettertypen via
+       resources.Get, zodat Hugo ze publiceert. */ -}}
+{{- $css := resources.Get "print/print.css" | resources.ExecuteAsTemplate "print/print.css" . | fingerprint "md5" -}}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 </head>
 <body>

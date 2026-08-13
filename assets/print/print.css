@@ -16,23 +16,29 @@
    scripts/pdf-build.mjs — Chromium kent geen marge-boxen uit de
    paginamedia-specificatie. */
 
+{{/* De print-snede van Rijksoverheid Sans (assets/fonts/ro-sans-*.ttf), niet de
+    Web Text-variant die de site gebruikt. Web Text is breder en heeft een grotere
+    x-hoogte: op dezelfde korpsgrootte breken regels anders en werd het
+    kaderdocument twee pagina's korter dan de export die dit vervangt. Deze
+    bestanden stonden al in de repository; de oude export laadde ze als base64 uit
+    assets/js/pdf-assets.js. Vandaar dat dit bestand door ExecuteAsTemplate gaat. */}}
 @font-face {
   font-family: "RO-Sans";
-  src: url("/fonts/RO-SansWebText-Regular.woff2") format("woff2");
+  src: url("{{ (resources.Get "fonts/ro-sans-regular.ttf").RelPermalink }}") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "RO-Sans";
-  src: url("/fonts/RO-SansWebText-Bold.woff2") format("woff2");
+  src: url("{{ (resources.Get "fonts/ro-sans-bold.ttf").RelPermalink }}") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "RO-Sans";
-  src: url("/fonts/RO-SansWebText-Italic.woff2") format("woff2");
+  src: url("{{ (resources.Get "fonts/ro-sans-italic.ttf").RelPermalink }}") format("truetype");
   font-weight: 400;
   font-style: italic;
 }
