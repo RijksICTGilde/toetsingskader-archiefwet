@@ -59,7 +59,9 @@ def regel_naar_pad(font_pad, tekst, korps, basislijn_y):
         naam = cmap.get(ord(teken))
         if naam is None:
             raise SystemExit(f"Teken {teken!r} ontbreekt in {font_pad}")
-        pen = SVGPathPen(glyfset)
+        # Eén decimaal is op 9,5pt ruim onder een beeldpunt. Chromium zet dit
+        # briefhoofd op élke pagina opnieuw in de PDF, dus elke byte telt 28x.
+        pen = SVGPathPen(glyfset, ntos=lambda n: f'{n:.0f}')
         glyfset[naam].draw(pen)
         d = pen.getCommands()
         if d:
@@ -81,7 +83,10 @@ def lint_inhoud():
     bron = LINT.read_text(encoding="utf-8")
     binnen = bron[bron.index(">", bron.index("<svg")) + 1 : bron.rindex("</svg>")]
     # De <title> hoort bij het bronbestand; het uitvoer-SVG krijgt zijn eigen.
-    return re.sub(r"<title>.*?</title>", "", binnen, flags=re.S).strip()
+    binnen = re.sub(r"<title>.*?</title>", "", binnen, flags=re.S).strip()
+    # Het wapen staat in een viewBox van 50x100 en wordt op 26pt getekend, dus
+    # twee decimalen zijn ruim genoeg. Scheelt een derde in bestandsgrootte.
+    return re.sub(r"\d+\.\d{3,}", lambda m: f"{float(m.group()):.2f}", binnen)
 
 
 def main():
