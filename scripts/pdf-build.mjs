@@ -96,7 +96,17 @@ if (prints.length === 0) {
 
 const server = await serve(files)
 const { port } = server.address()
-const browser = await chromium.launch()
+
+// In CI komt de browser van `npx playwright install chromium`. De container-
+// build gebruikt de Chromium uit Alpine, want die staat er al voor een fractie
+// van de download — dan wijst PDF_CHROMIUM naar het binaire bestand. Daar draait
+// de build als root, en Chromium weigert dat zonder --no-sandbox. Buiten die
+// situatie blijft de sandbox gewoon aan.
+const executablePath = process.env.PDF_CHROMIUM || undefined
+const browser = await chromium.launch({
+  executablePath,
+  args: executablePath ? ['--no-sandbox'] : [],
+})
 const page = await browser.newPage()
 
 // Eén vaste presentatie: geen schermmedia, geen donker schema uit de omgeving.

@@ -1,7 +1,7 @@
 FROM golang:1.26.5-alpine@sha256:0178a641fbb4858c5f1b48e34bdaabe0350a330a1b1149aabd498d0699ff5fb2 AS build
 ARG HUGO_VERSION=0.162.1
 ARG HUGO_SHA256=4bfcdb092d0306586f1b72e5687787ead053faab2d71f09951d3c5fecde66873
-RUN apk add --no-cache git wget tar \
+RUN apk add --no-cache git wget tar nodejs npm chromium \
   && wget -qO /tmp/hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.tar.gz" \
   && echo "${HUGO_SHA256}  /tmp/hugo.tar.gz" | sha256sum -c - \
   && tar -xzf /tmp/hugo.tar.gz -C /usr/local/bin \
@@ -19,6 +19,25 @@ RUN if [ -n "$VERSIE" ]; then export HUGO_PARAMS_VERSIE="$VERSIE"; fi; \
     else \
       hugo --minify; \
     fi
+
+# De PDF's horen bij de site en worden hier gemaakt, niet meer in de browser van
+# de bezoeker. Zie docs/besluit-toegankelijke-pdf.md.
+#
+# Chromium komt uit Alpine in plaats van uit `playwright install`: die download
+# is een veelvoud, en het enige wat we nodig hebben is printToPDF. Vandaar
+# PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD; PDF_CHROMIUM wijst pdf-build.mjs naar het
+# systeempad. Dit alles zit in de buildfase — het uitgeleverde image bevat
+# alleen nginx en public/.
+# De naam van het binaire bestand verschilt per Alpine-versie (`chromium` dan wel
+# `chromium-browser`); vandaar opzoeken in plaats van vastleggen. Niet gevonden =
+# bouwfout, geen stille terugval op een PDF zonder tags.
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+RUN PDF_CHROMIUM="$(command -v chromium-browser || command -v chromium)"; \
+    export PDF_CHROMIUM; \
+    echo "Chromium: $PDF_CHROMIUM"; \
+    npm ci --no-audit --no-fund \
+    && node scripts/pdf-build.mjs public \
+    && node scripts/pdf-ua-check.mjs public/normen/index.pdf public/normen/*/index.pdf
 
 FROM nginxinc/nginx-unprivileged:stable-alpine-slim@sha256:e88d990b349df8cf4aa82f16642d7a23375016638c9ace4e5c6ca25028e62e65
 # Patch Alpine-packages onafhankelijk van de (soms achterlopende) base-image
