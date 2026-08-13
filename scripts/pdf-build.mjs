@@ -89,81 +89,57 @@ function serve(files) {
 const PT = 96 / 72 // Kop- en voetregel rekenen in CSS-px op 96 dpi.
 const pt = n => `${(n * PT).toFixed(2)}px`
 
-// Het lint is 1:2, dus 26pt breed is 52pt hoog. In de oude export stond het
-// gecentreerd op de pagina ((breedte - 26) / 2), tegen de bovenrand aan.
-// Vandaar `calc(50% - 13pt)` en de negatieve bovenmarge: Chromium zet de
-// koptekst standaard een stuk onder de paginarand.
+// Het briefhoofd is één SVG: het lint met het woordmerk als contouren ernaast
+// (assets/print/briefhoofd.svg, gemaakt door scripts/build-briefhoofd.py). Dat
+// moet, want in dit document laadt geen enkel lettertype — ook niet als
+// data:-URI. Gemeten op de gegenereerde PDF viel de tekst terug op DejaVu Sans,
+// een derde breder dan Rijksoverheid Sans.
 //
-// Lengtes staan in px (pt * 96/72), lettergroottes in pt. Gemeten op de
-// gerenderde PDF: boxmaten in px komen kloppend uit, lettergroottes in px
-// vielen 1,33x te groot uit — de koptekst wordt in een eigen document met een
-// eigen schaal gerenderd.
-function koptekst(lintDataUri, fontCss) {
-  return `<style>${fontCss}
-    * { box-sizing: border-box; }
+// In de oude export stond het lint gecentreerd op de pagina ((breedte - 26) / 2)
+// en tegen de bovenrand aan. Vandaar `calc(50% - 13pt)` en de negatieve
+// bovenmarge: Chromium zet de koptekst standaard een stuk onder de paginarand.
+function koptekst({ uri, breed, hoog }) {
+  return `<style>
     body { margin: 0; }
-    .lockup { margin-left: calc(50% - ${pt(13)}); margin-top: ${pt(-15)};
-              display: flex; align-items: flex-start; }
-    .lockup img { width: ${pt(26)}; height: ${pt(52)}; display: block; }
-    .naam { padding: ${pt(16)} 0 0 ${pt(8)}; color: #154273;
-            font-family: "RO-Sans", Verdana, sans-serif; line-height: 1.15; }
-    .naam b { font-size: 9.5pt; font-weight: 700; display: block; }
-    .naam span { font-size: 8pt; display: block; margin-top: ${pt(1)}; }
+    img { margin-left: calc(50% - ${pt(13)}); margin-top: ${pt(-15)};
+          width: ${pt(breed)}; height: ${pt(hoog)}; display: block; }
   </style>
-  <div style="width:100%">
-    <div class="lockup">
-      <img src="${lintDataUri}" alt="">
-      <div class="naam">
-        <b>Inspectie Overheidsinformatie en Erfgoed</b>
-        <span>Ministerie van Onderwijs, Cultuur en Wetenschap</span>
-      </div>
-    </div>
-  </div>`
+  <div style="width:100%"><img src="${uri}" alt=""></div>`
 }
 
 // Alleen het paginanummer; versie en datum staan op de titelpagina. De lijn
-// loopt van marge tot marge, net als de canvas-lijn in de oude export.
-function voettekst(fontCss) {
-  return `<style>${fontCss}
+// loopt van marge tot marge, net als de canvas-lijn in de oude export. De tekst
+// staat in de standaard schreefloze van de renderende omgeving: het paginanummer
+// verandert per pagina en kan dus geen contour zijn, en een lettertype laden kan
+// hier niet. Acht punt grijs, dus het verschil is klein.
+function voettekst() {
+  return `<style>
     body { margin: 0; }
     .voet { margin: 0 ${pt(48)}; padding-top: ${pt(5)}; border-top: 0.5pt solid #dddddd;
             text-align: center; font-size: 8pt; color: #999999;
-            font-family: "RO-Sans", Verdana, sans-serif; }
+            font-family: Verdana, sans-serif; }
   </style>
   <div style="width:100%">
     <div class="voet">Pagina <span class="pageNumber"></span> van <span class="totalPages"></span></div>
   </div>`
 }
 
-// Het lint en de twee lettersneden komen uit de gebouwde site, zodat ze niet
-// nog een keer in de repository staan. Ontbreekt er iets, dan is dat een
-// bouwfout: een briefhoofd zonder lint is geen briefhoofd.
 function dataUri(pad, mime) {
   return `data:${mime};base64,${fs.readFileSync(pad).toString('base64')}`
 }
 
-// Dezelfde print-snede als de inhoud (ro-sans-*.ttf), niet de Web Text-variant
-// van de site. Hugo publiceert die met een fingerprint in de naam, dus zoeken op
-// voorvoegsel in plaats van op een vast pad.
-function zoekFont(dir, voorvoegsel) {
-  const bestanden = fs.existsSync(dir) ? fs.readdirSync(dir) : []
-  const treffer = bestanden.find(n => n.startsWith(voorvoegsel) && n.endsWith('.ttf'))
-  if (!treffer) throw new Error(`Ontbreekt voor het briefhoofd: ${dir}/${voorvoegsel}*.ttf`)
-  return path.join(dir, treffer)
-}
-
-function briefhoofdAssets(root) {
-  const lint = path.join(root, 'images/logo-rijksoverheid.svg')
-  if (!fs.existsSync(lint)) throw new Error(`Ontbreekt voor het briefhoofd: ${lint}`)
-  const fontDir = path.join(root, 'fonts')
-  const face = (bestand, gewicht) => `@font-face{font-family:"RO-Sans";` +
-    `src:url("${dataUri(bestand, 'font/ttf')}") format("truetype");` +
-    `font-weight:${gewicht};font-style:normal;}`
-  return {
-    lint: dataUri(lint, 'image/svg+xml'),
-    fontCss: face(zoekFont(fontDir, 'ro-sans-regular'), 400) +
-             face(zoekFont(fontDir, 'ro-sans-bold'), 700),
-  }
+// Uit de repository en niet uit de gebouwde site: het briefhoofd hoort bij de
+// PDF-generatie en wordt door geen enkele pagina gebruikt, dus Hugo publiceert
+// het niet. Ontbreekt het, dan is dat een bouwfout — een briefhoofd zonder lint
+// is geen briefhoofd.
+function briefhoofd() {
+  const pad = new URL('../assets/print/briefhoofd.svg', import.meta.url)
+  const svg = fs.readFileSync(pad, 'utf8')
+  const maat = attr => Number(svg.match(new RegExp(`${attr}="([\\d.]+)"`))?.[1])
+  const breed = maat('width')
+  const hoog = maat('height')
+  if (!breed || !hoog) throw new Error(`Geen bruikbare afmetingen in ${pad}`)
+  return { uri: dataUri(pad, 'image/svg+xml'), breed, hoog }
 }
 
 const { files, prints } = readSite(root)
@@ -172,9 +148,8 @@ if (prints.length === 0) {
   process.exit(1)
 }
 
-const { lint, fontCss } = briefhoofdAssets(root)
-const KOPREGEL = koptekst(lint, fontCss)
-const VOETREGEL = voettekst(fontCss)
+const KOPREGEL = koptekst(briefhoofd())
+const VOETREGEL = voettekst()
 
 const server = await serve(files)
 const { port } = server.address()
