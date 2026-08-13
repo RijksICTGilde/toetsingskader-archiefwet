@@ -27,6 +27,11 @@
        per bron. */ -}}
 {{- $content = replaceRE `(?s)<a href="#fnref[^"]*" class="footnote-backref"[^>]*>.*?</a>` "" $content -}}
 {{- $content = replaceRE `(?s)(<li id="[^"]*fn:[^"]*">)\s*<p>(.*?)</p>\s*</li>` `${1}${2}</li>` $content -}}
+{{- /* De rol `doc-endnotes` van Goldmark eraf. Vermoeden, te toetsen op de
+       volgende CI-run: Chromium tagt de items van deze <ol> als NonStruct in
+       plaats van LI, terwijl de <ol> van de inhoudsopgave — zonder rol eromheen
+       — wél goed tagt. De rol heeft in een PDF geen equivalent. */ -}}
+{{- $content = replaceRE `<div class="footnotes" role="doc-endnotes">` `<div class="footnotes">` $content -}}
 {{- /* Goldmark zet de voetnoten onderaan zonder kop. De oude export had er
        "Bronnen" boven staan, en zonder die kop valt wie op koppen navigeert
        midden in een genummerde lijst. */ -}}
