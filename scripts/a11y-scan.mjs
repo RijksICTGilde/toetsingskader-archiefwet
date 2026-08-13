@@ -12,7 +12,7 @@ import { createRequire } from 'node:module'
 import {
   zwevendeVoetnootFouten, korteRefTermFouten,
   voorbehoudFout, voorbehoudBronFout, VOORBEHOUD,
-  legeAltFouten, kopvolgordeFouten, dubbeleIdFouten,
+  legeAltFouten, kopvolgordeFouten, dubbeleIdFouten, bronnenKopFouten,
 } from './a11y-checks.mjs'
 
 const axeSrc = fs.readFileSync(createRequire(import.meta.url).resolve('axe-core'), 'utf8')
@@ -82,6 +82,11 @@ for (const file of files) {
       total++
       console.log(`${url} — kopvolgorde [serious] 1x: ${fout}`)
       console.log('    Chromium leidt de structuurboom van de PDF uit de koppen af; een sprong is daar een structuurfout')
+    }
+    for (const ervoor of bronnenKopFouten(dom.window.document)) {
+      total++
+      console.log(`${url} — bronnenkop [serious] 1x: voetnotenblok zonder kop "Bronnen" erboven`)
+      console.log(`    ervoor staat <${ervoor}>; controleer de replaceRE-volgorde in de print-template`)
     }
     for (const id of dubbeleIdFouten(dom.window.document)) {
       total++

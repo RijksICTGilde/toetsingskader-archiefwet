@@ -35,7 +35,7 @@
 {{- /* Goldmark zet de voetnoten onderaan zonder kop. De oude export had er
        "Bronnen" boven staan, en zonder die kop valt wie op koppen navigeert
        midden in een genummerde lijst. */ -}}
-{{- $content = replaceRE `<div class="footnotes" role="doc-endnotes">` `<h2 class="pdf-bronnen">Bronnen</h2><div class="footnotes" role="doc-endnotes">` $content 1 -}}
+{{- $content = replaceRE `<div class="footnotes">` `<h2 class="pdf-bronnen">Bronnen</h2><div class="footnotes">` $content 1 -}}
 {{- /* Interne verwijzingen absoluut maken. Chromium lost een root-relatieve
        href op tegen de URL van het document, en dat is tijdens de generatie de
        wegwerpserver uit scripts/pdf-build.mjs: zonder deze stap staan er in de

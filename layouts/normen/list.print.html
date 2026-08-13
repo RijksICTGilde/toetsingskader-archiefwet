@@ -81,7 +81,7 @@
   {{- $content = replaceRE `<div class="footnotes" role="doc-endnotes">` `<div class="footnotes">` $content -}}
   {{- /* "Bronnen" boven de voetnotenlijst; zie single.print.html. Vóór de
          verschuiving hieronder, zodat hij hier vanzelf een h3 wordt. */ -}}
-  {{- $content = replaceRE `<div class="footnotes" role="doc-endnotes">` `<h2 class="pdf-bronnen">Bronnen</h2><div class="footnotes" role="doc-endnotes">` $content 1 -}}
+  {{- $content = replaceRE `<div class="footnotes">` `<h2 class="pdf-bronnen">Bronnen</h2><div class="footnotes">` $content 1 -}}
   {{- /* Van diep naar ondiep, anders verschuift een kop twee keer. */ -}}
   {{- $content = replaceRE `<(/?)h4([ >])` (printf `<${1}h5${2}`) $content -}}
   {{- $content = replaceRE `<(/?)h3([ >])` (printf `<${1}h4${2}`) $content -}}

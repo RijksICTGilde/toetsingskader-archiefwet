@@ -9,7 +9,7 @@ import { parseHTML } from 'linkedom'
 import {
   zwevendeVoetnootFouten, korteRefTermFouten,
   voorbehoudFout, voorbehoudBronFout, VOORBEHOUD,
-  legeAltFouten, zonderHash, kopvolgordeFouten, dubbeleIdFouten,
+  legeAltFouten, zonderHash, kopvolgordeFouten, dubbeleIdFouten, bronnenKopFouten,
 } from '../../scripts/a11y-checks.mjs'
 
 const dom = (body) => parseHTML(`<!DOCTYPE html><html><body>${body}</body></html>`).document
@@ -115,4 +115,16 @@ test('dubbele id: geprefixte ankers per norm botsen niet', () => {
 
 test('dubbele id: hetzelfde anker twee keer is een fout', () => {
   assert.deepEqual(dubbeleIdFouten(dom('<p id="fn:1">a</p><p id="fn:1">b</p>')), ['fn:1'])
+})
+
+test('bronnenkop: een kop "Bronnen" vlak voor het blok is goed', () => {
+  assert.deepEqual(bronnenKopFouten(dom('<h3>Bronnen</h3><div class="footnotes"><ol></ol></div>')), [])
+})
+
+test('bronnenkop: zonder kop ertussen is een fout', () => {
+  assert.deepEqual(bronnenKopFouten(dom('<p>tekst</p><div class="footnotes"><ol></ol></div>')), ['p'])
+})
+
+test('bronnenkop: een andere kop telt niet als bronnenkop', () => {
+  assert.deepEqual(bronnenKopFouten(dom('<h3>Zie ook</h3><div class="footnotes"></div>')), ['h3'])
 })
