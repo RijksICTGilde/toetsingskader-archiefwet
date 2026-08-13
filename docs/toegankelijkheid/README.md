@@ -8,11 +8,15 @@ bijgewerkt.
 |---|---|
 | `__toetsingskader-archiefwet-2026.pdf.accreport.html` | Toegankelijkheidsrapport van Adobe Acrobat XI over een van de site gedownloade `toetsingskader-archiefwet-2026.pdf` |
 
-Acrobat zet in zo'n rapport het volledige bronpad van het gecontroleerde
-bestand. Dat is hier vervangen door een toelichting: het ging om een intern
-netwerkpad met een accountnaam erin, en deze repository is openbaar. Wie een
-nieuw rapport toevoegt: haal die regel eruit, en controleer ook de velden
-"Rapport gemaakt door" en "Bedrijf".
+Wie hier een nieuw rapport neerzet, let op twee dingen:
+
+- **Het bronpad eruit.** Acrobat zet het volledige pad van het gecontroleerde
+  bestand bovenin. Bij dit rapport was dat een intern netwerkpad met een
+  accountnaam erin, en deze repository is openbaar. Controleer ook de velden
+  "Rapport gemaakt door" en "Bedrijf".
+- **Regeleindes naar LF.** Acrobat schrijft CRLF; de `mixed-line-ending`-hook
+  zet dat lokaal om, maar in CI kan die de wijziging niet committen en faalt de
+  run.
 
 ## Over het Acrobat-rapport
 
