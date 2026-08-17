@@ -26,7 +26,7 @@ Een periodieke evaluatie moet worden ingericht met een [planning- en controlcycl
 
 Op deze manier kunnen maatregelen voor duurzame toegankelijkheid, bescherming van persoonsgegevens, informatiebeveiliging en openbaarmaking in samenhang worden geëvalueerd en verbeterd.[^kamerstukken-35968-nr-3-beheerstrategie]
 
-## Voorschriften
+## Normuitleg
 
 ### Inrichting van de periodieke evaluatie
 

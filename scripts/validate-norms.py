@@ -5,9 +5,8 @@ Contentformaat:
 
   - Front matter: alleen machinaal gebruikte velden (`title`, `weight`,
     `norm_id`, `norm_titel`, `versie`, `kern`, `synoniemen`), zonder
-    voetnoten of markdown in `kern`/`synoniemen`. Optioneel: `kern_bron`
-    en `kern_bron_url`, de bronvermelding onder de kern.
-  - Body: vaste koppen `## Toelichting` en `## Voorschriften` (verplicht,
+    voetnoten of markdown in `kern`/`synoniemen`.
+  - Body: vaste koppen `## Toelichting` en `## Normuitleg` (verplicht,
     met `### <thema>` -> `#### Voorschrift` -> optioneel `#### Criteria`
     / `#### Indicatoren`), `## Reikwijdte` en `## Zie ook` (optioneel).
     Geen `#`-kop, geen koppen dieper dan h4.
@@ -43,7 +42,7 @@ DEPRECATED_FIELDS = [
     "show_referenties",
 ]
 
-REQUIRED_SECTIONS = ["Toelichting", "Voorschriften"]
+REQUIRED_SECTIONS = ["Toelichting", "Normuitleg"]
 OPTIONAL_SECTIONS = ["Reikwijdte", "Zie ook"]
 ALLOWED_SECTIONS = REQUIRED_SECTIONS + OPTIONAL_SECTIONS
 
@@ -148,39 +147,6 @@ def validate_front_matter(name, fm_text, errors):
         errors.append(Error(name, "'kern' mag geen voetnoten ([^...]) bevatten",
                             line=find_field_line(fm_text, "kern")))
 
-    # De bron bij de kern staat als los veld en niet als voetnoot in `kern`:
-    # front matter gaat ook naar de zoekindex, en een voetnootmarker die
-    # nergens naar wijst is daar ruis. normen/single.html rendert dit als
-    # bronregel onder de kern-callout.
-    kern_bron = fm.get("kern_bron")
-    if kern_bron is not None:
-        if not isinstance(kern_bron, str):
-            errors.append(Error(name, "'kern_bron' moet een tekst zijn",
-                                line=find_field_line(fm_text, "kern_bron")))
-        elif "[^" in kern_bron or "](" in kern_bron:
-            errors.append(Error(name, "'kern_bron' mag geen voetnoten of markdown-links bevatten; "
-                                      "de link staat in 'kern_bron_url'",
-                                line=find_field_line(fm_text, "kern_bron")))
-
-    # De korte omschrijving op de normenkaart komt uit het introductiedocument
-    # en wijkt bewust af van de kerntekst uit het normblad; zonder dit veld
-    # toont de kaart `kern` (layouts/shortcodes/normen-grid.html).
-    kern_kaart = fm.get("kern_kaart")
-    if kern_kaart is not None and (not isinstance(kern_kaart, str) or "[^" in kern_kaart):
-        errors.append(Error(name, "'kern_kaart' moet een tekst zonder voetnoten ([^...]) zijn",
-                            line=find_field_line(fm_text, "kern_kaart")))
-
-    kern_bron_url = fm.get("kern_bron_url")
-    if kern_bron_url is not None and not (
-        isinstance(kern_bron_url, str) and kern_bron_url.startswith(("http://", "https://"))
-    ):
-        errors.append(Error(name, "'kern_bron_url' moet een http(s)-URL zijn",
-                            line=find_field_line(fm_text, "kern_bron_url")))
-
-    if kern_bron_url is not None and kern_bron is None:
-        errors.append(Error(name, "'kern_bron_url' zonder 'kern_bron': de link heeft geen brontekst",
-                            line=find_field_line(fm_text, "kern_bron_url")))
-
     return fm
 
 
@@ -189,7 +155,7 @@ def validate_headings(name, body_lines, body_start, errors):
     in_code = False
     seen_sections = []
     current_h2 = None         # naam van de actieve ## sectie
-    current_theme_line = None  # regel van de actieve ### thema (binnen Voorschriften)
+    current_theme_line = None  # regel van de actieve ### thema (binnen Normuitleg)
     theme_has_voorschrift = {}  # regel-van-thema -> bool
 
     for offset, raw in enumerate(body_lines):
@@ -227,14 +193,14 @@ def validate_headings(name, body_lines, body_start, errors):
             seen_sections.append(title)
 
         elif level == 3:
-            if current_h2 != "Voorschriften":
-                errors.append(Error(name, "Een '###'-thema mag alleen binnen '## Voorschriften' staan", lineno))
+            if current_h2 != "Normuitleg":
+                errors.append(Error(name, "Een '###'-thema mag alleen binnen '## Normuitleg' staan", lineno))
             current_theme_line = lineno
             theme_has_voorschrift[lineno] = False
 
         elif level == 4:
-            if current_h2 != "Voorschriften" or current_theme_line is None:
-                errors.append(Error(name, f"'#### {title}' mag alleen onder een '###'-thema binnen '## Voorschriften' staan", lineno))
+            if current_h2 != "Normuitleg" or current_theme_line is None:
+                errors.append(Error(name, f"'#### {title}' mag alleen onder een '###'-thema binnen '## Normuitleg' staan", lineno))
             if title in SINGULAR_FIX:
                 errors.append(Error(name, f"Gebruik '#### {SINGULAR_FIX[title]}' (meervoud) in plaats van '#### {title}'", lineno))
             elif title not in ALLOWED_SUBHEADINGS:

@@ -122,26 +122,11 @@
   </header>
 
   {{ with .Params.kern }}
-  {{/* "Kern van <norm>" is visueel een kop en staat als zodanig in de
-       inhoudsopgave; als <span> ontbrak hij in de kopstructuur (WCAG 1.3.1).
-       De kop volgt `norm_titel`, zodat hij de norm noemt en niet "de norm";
-       de kleine letter hoort bij de zin "Kern van ordenen". */}}
+  {{/* "Kern van de norm" is visueel een kop en staat als zodanig in de
+       inhoudsopgave; als <span> ontbrak hij in de kopstructuur (WCAG 1.3.1). */}}
   <blockquote id="kern" class="callout">
-    <header><h2 class="title">{{ partial "kern-kop.html" $page }}</h2></header>
+    <header><h2 class="title">Kern van de norm</h2></header>
     <div class="content">{{ . | markdownify }}</div>
-    {{/* De bron staat als los front-matter-veld en niet als voetnoot in
-         `kern`: die tekst gaat ook naar de zoekindex en naar de PDF, en een
-         voetnootmarker zonder definitie is daar ruis. */}}
-    {{- with $page.Params.kern_bron }}
-    {{/* Zelfde behandeling als een voetnootbron: afkortingen uitgeschreven
-         (3.1.4) en een bronlink die in een linkoverzicht te onderscheiden is
-         (2.4.9, bevinding 27). */}}
-    <p class="kern-bron">Bron: {{ partial "afkortingen.html" . | safeHTML }}
-      {{- with $page.Params.kern_bron_url }}
-      <a href="{{ . }}" aria-label="Bekijk bron: {{ $page.Params.kern_bron | plainify | strings.TrimRight " .;:" }}">Bekijk bron</a>
-      {{- end -}}
-    </p>
-    {{- end }}
   </blockquote>
   {{ end }}
 
@@ -173,7 +158,7 @@
   <h2>Op deze pagina</h2>
   <nav>
     <ul>
-      {{- with .Params.kern }}<li><a href="#kern">{{ partial "kern-kop.html" $page }}</a></li>{{ end -}}
+      {{- with .Params.kern }}<li><a href="#kern">Kern van de norm</a></li>{{ end -}}
       {{- range $headings -}}
       <li>
         <a href="#{{ .ID }}">{{ .Title }}</a>

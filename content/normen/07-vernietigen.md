@@ -34,7 +34,7 @@ Daarbij geldt dat documenten die vernietigd hadden moeten worden en die niet ver
 [^aw-artikel-5-1]: Aw, artikel 5.1. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 [^aw-artikel-5-3]: Aw, artikel 5.3. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
-## Voorschriften
+## Normuitleg
 
 ### Selectiebesluit en passende maatregelen
 

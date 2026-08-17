@@ -37,7 +37,7 @@ Het overzicht kan op verschillende niveaus worden ingericht. Dit kan op het nive
 
 Ook voor andere wetgeving, zoals de AVG en de Woo, is een overzicht essentieel. Het overzicht draagt bij aan de vindbaarheid van documenten, waardoor de termijnen van de Woo (beter) kunnen worden gehaald. Een overzicht van de informatiehuishouding volgens de Archiefregeling is niet hetzelfde als een verwerkingsregister, zoals is vereist op grond van de AVG. Dit instrument dient een ander doel,[^ar-toelichting-overzicht-p35] al draagt het AVG-verwerkingsregister wel bij aan het overzicht.
 
-## Voorschriften
+## Normuitleg
 
 ### Overzicht van de informatiehuishouding
 
