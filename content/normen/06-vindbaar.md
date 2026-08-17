@@ -30,7 +30,7 @@ De redelijke termijn voor categorieën documenten moet in de [passende maatregel
 
 De Inspectie kijkt bij vindbaarheid vooral naar hoe essentiële randvoorwaarden zoals metadata, ordening en een actueel overzicht van de informatiehuishouding bijdragen aan de vindbaarheid van documenten.
 
-## Normuitleg
+## Voorschriften
 
 ### Vindbaarheid binnen een redelijke termijn
 

@@ -1,0 +1,19 @@
+{{- /* De bronregel onder de kern als HTML-fragment, voor de PDF-export.
+
+     De website rendert deze regel in normen/single.html; de PDF bouwt zijn
+     documentdefinitie uit HTML (assets/js/html-to-pdfmake.js) en krijgt hem
+     daarom als los veld in de pdf.json-uitvoer. Eén partial, zodat de twee
+     niet uiteen lopen.
+
+     Leeg wanneer `kern_bron` ontbreekt: de aanroeper zet dan niets neer.
+
+     Aanroep: {{ partial "kern-bron-html.html" . }}
+*/ -}}
+{{- with .Params.kern_bron -}}
+  {{- $tekst := partial "afkortingen.html" . -}}
+  {{- with $.Params.kern_bron_url -}}
+    {{- printf `<p>Bron: %s <a href="%s">Bekijk bron</a></p>` $tekst . | safeHTML -}}
+  {{- else -}}
+    {{- printf `<p>Bron: %s</p>` $tekst | safeHTML -}}
+  {{- end -}}
+{{- end -}}
