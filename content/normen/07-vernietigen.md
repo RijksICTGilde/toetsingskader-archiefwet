@@ -1,9 +1,10 @@
 ---
-title: "Norm 7: Gecontroleerd vernietigen"
+title: "Normanalyse vernietigen"
 versie: "0.8"
 weight: 7
 norm_id: "7"
 norm_titel: "Gecontroleerd vernietigen"
+kern_kop: "Kern van vernietigen"
 aliases:
   - /normen/07-informatiebeveiliging/
 kern: "Het verantwoordelijke overheidsorgaan vernietigt documenten waarvan de bewaartermijn is verstreken. Om aan de eisen voor vernietiging te voldoen is een procesbeschrijving van vernietiging noodzakelijk. Ook moet er een verklaring van vernietiging worden opgesteld."
@@ -14,15 +15,13 @@ synoniemen:
   - "Wissen"
   - "Verwijderen"
   - "Ontoegankelijk maken"
-  - "Selectiebesluit"
-  - "Bewaartermijn"
 ---
 
 ## Toelichting
 
 Vernietigen van documenten is het wissen, verwijderen of ontoegankelijk maken. De gegevens waaruit het document bestaat zijn niet meer te reconstrueren, waardoor het document als geheel niet meer toegankelijk (te maken) is.[^kamerstukken-35968-nr-3-selectie]
 
-[^kamerstukken-35968-nr-3-selectie]: Aw, Memorie van toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen deel, 4.4 Selectie, Toepassen van het selectiebesluit en vernietiging. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^kamerstukken-35968-nr-3-selectie]: Aw, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen deel, 4.4 Selectie, Toepassen van het selectiebesluit en vernietiging. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
 Om de duurzame toegankelijkheid van een archief te borgen, is gecontroleerd vernietigen een voorwaarde. Zonder regelmatige vernietiging duren zoekopdrachten steeds langer, worden overzichten en ordeningen steeds groter en dreigt uiteindelijk informatiechaos. Ook neemt het risico op problemen met systeemperformance toe en daarmee op vertraging van de dienstverlening.
 
@@ -33,15 +32,13 @@ Daarbij geldt dat documenten die vernietigd hadden moeten worden en die niet ver
 
 ## Voorschriften
 
-### Selectiebesluit en passende maatregelen
-
 #### Voorschrift
 
 Het verantwoordelijke overheidsorgaan heeft in ieder geval één selectiebesluit voor de documenten waarvoor het verantwoordelijk is.[^aw-artikel-5-1-lid-1]
 
 [^aw-artikel-5-1-lid-1]: Aw, artikel 5.1, eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
-#### Criteria
+#### Criterium
 
 - Het selectiebesluit:
   - voldoet aan de eisen voor reikwijdte, vorm en inhoud voor het selectiebesluit;[^ab-artikel-3-1]
@@ -49,9 +46,9 @@ Het verantwoordelijke overheidsorgaan heeft in ieder geval één selectiebesluit
   - heeft per categorie tijdelijk te bewaren documenten vastgelegd wat het [aangrijpingspunt](/onderwerpen/aangrijpingspunt/) voor de bewaartermijn is;[^ab-nota-van-toelichting-aangrijpingspunt-p16]
   - bevat voor documenten die op elk moment mogen worden vernietigd een categorie in een selectiebesluit.[^aw-artikel-5-1-lid-4]
 
-[^ab-artikel-3-1]: Ab, artikel 3.1. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-3-1]: Ab artikel 3.1. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 [^ab-artikel-3-1-lid-4]: Ab, artikel 3.1, vierde lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ab-nota-van-toelichting-aangrijpingspunt-p16]: Ab, Nota van toelichting, Algemeen deel, 3. Selectiebesluiten, Aangrijpingspunt voor start bewaartermijnen, p. 16. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-nota-van-toelichting-aangrijpingspunt-p16]: Ab, nota van toelichting, Algemeen deel, 3. Selectiebesluiten, Aangrijpingspunt voor start bewaartermijnen, p.16. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 [^aw-artikel-5-1-lid-4]: Aw, artikel 5.1, vierde lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
 #### Indicatoren
@@ -66,17 +63,15 @@ Het verantwoordelijke overheidsorgaan heeft [passende maatregelen](/onderwerpen/
 [^documenten-aw-artikel-5-1-lid-2-onderdeel-b]: Documenten als bedoeld in Aw, artikel 5.1, tweede lid, onderdeel b.
 [^aw-artikel-5-3-lid-1]: Aw, artikel 5.3, eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
-#### Criteria
+#### Criterium
 
 - In de [beheerregels](/normen/01-beheer/) zijn passende maatregelen voor vernietiging vastgelegd.
 
-#### Indicatoren
+#### Indicator
 
 - De passende maatregelen zijn van toepassing op alle omgevingen waarin te vernietigen documenten worden opgeslagen. Denk hierbij aan bijvoorbeeld documentmanagementsystemen, maar ook back-ups,[^kamerstukken-35968-nr-3-selectie-backups] cloudomgevingen, samenwerkingsruimtes en emailapplicaties.
 
-[^kamerstukken-35968-nr-3-selectie-backups]: Aw, Memorie van toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen deel, 4.4 Selectie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
-
-### Procesbeschrijving en uitvoering van de vernietiging
+[^kamerstukken-35968-nr-3-selectie-backups]: Aw, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen Deel, 4.4 selectie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
 #### Voorschrift
 
@@ -87,11 +82,11 @@ Het verantwoordelijke overheidsorgaan beschrijft in de procesbeschrijving van ve
 - de rollen en verantwoordelijkheden in het vernietigingsproces;[^ar-artikel-4-1-lid-c]
 - de wijze waarop het verantwoordelijke overheidsorgaan zich ervan vergewist dat documenten zijn vernietigd.[^ar-artikel-4-1-lid-d]
 
-[^ar-artikel-4-1-eisen-procesbeschrijving]: Ar, artikel 4.1, Eisen procesbeschrijving vernietiging. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-4-1-eisen-procesbeschrijving]: Ar, Artikel 4.1 Eisen procesbeschrijving vernietiging. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ar-artikel-4-1-lid-a]: Ar, artikel 4.1, lid a. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ar-artikel-4-1-lid-b]: Ar, artikel 4.1, lid b. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ar-artikel-4-1-lid-c]: Ar, artikel 4.1, lid c. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
-[^ar-artikel-4-1-lid-d]: Ar, artikel 4.1, lid d. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-4-1-lid-d]: Ar, artikel 4.1 lid d. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 #### Criteria
 
@@ -110,7 +105,7 @@ Documenten worden na het verstrijken van de bewaartermijn gecontroleerd worden v
 
 #### Criteria
 
-- Documenten worden alleen vernietigd als hiervoor een grondslag bestaat in een selectiebesluit van het verantwoordelijke overheidsorgaan.[^aw-artikel-5-1-lid-1]
+- Documenten worden alleen vernietigd als hiervoor een grondslag bestaat in een selectiebesluit van het verantwoordelijke overheidsorgaan;[^aw-artikel-5-1-lid-1]
 - Er is een verklaring van vernietiging opgesteld.
 - Indien wenselijk of noodzakelijk, worden bepaalde [metagegevens](/normen/04-metadateren/) behouden om te bewijzen dat de vernietigde documenten hebben bestaan of zijn vernietigd.[^kamerstukken-35968-nr-3-selectie]
 
@@ -145,7 +140,7 @@ Bij vernietiging van documenten, uitgezonderd de documenten die op elk moment mo
 
 De eisen voor vernietiging gelden voor alle tijdelijk te bewaren documenten van alle organisatieonderdelen van het verantwoordelijke overheidsorgaan, ongeacht de vorm (digitaal of papier.[^ar-hoofdstuk-2-hoofdlijnen-p30]
 
-[^ar-hoofdstuk-2-hoofdlijnen-p30]: Ar, Hoofdstuk 2, Hoofdlijnen van de regeling, p. 30. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-hoofdstuk-2-hoofdlijnen-p30]: Ar, Hoofdstuk 2. Hoofdlijnen van de regeling, p.30. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 Voor documenten die op elk moment kunnen worden vernietigd gelden niet alle eisen voor vernietiging. Voor deze documenten geldt dat:
 
@@ -155,13 +150,6 @@ Voor documenten die op elk moment kunnen worden vernietigd gelden niet alle eise
 
 [^ab-artikel-4-1-lid-3]: Ab, artikel 4.1, derde lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
-## Zie ook
+## Gerelateerde onderwerpen
 
-- [Overzicht](/normen/02-overzicht/)
-- [Ordenen](/normen/03-ordenen/)
-- [Metadateren](/normen/04-metadateren/)
-- [Inbeheername en beheer](/normen/01-beheer/)
-- [Aangrijpingspunt](/onderwerpen/aangrijpingspunt/)
-- [Passende maatregelen en risicobenadering](/onderwerpen/passende-maatregelen/)
-
-Technisch vernietigen (buiten scope, volgt op een later moment)
+- technisch vernietigen (buiten scope, volgt op een later moment)

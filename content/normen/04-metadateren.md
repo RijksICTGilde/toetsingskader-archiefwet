@@ -1,9 +1,10 @@
 ---
-title: "Norm 4: Metadateren"
+title: "Normanalyse Metadata"
 versie: "0.8"
 weight: 4
 norm_id: "4"
 norm_titel: "Metadateren"
+kern_kop: "Kern van metadata"
 aliases:
   - /normen/04-metadatering/
 kern: "Het verantwoordelijke overheidsorgaan stelt één of meerdere metadataschema's vast. Conform het metadataschema worden de juiste metadata aan documenten gekoppeld."
@@ -12,8 +13,6 @@ kern_bron_url: "https://www.internetconsultatie.nl/archiefregeling/b1"
 kern_kaart: "Documenten zijn gemetadateerd zodat de inhoud, structuur en context van documenten en het beheer ervan door de tijd heen zijn beschreven en vastgelegd."
 synoniemen:
   - "Metagegevens"
-  - "Metadata"
-  - "Metadataschema"
 ---
 
 ## Toelichting
@@ -21,9 +20,9 @@ synoniemen:
 Metadata zijn gegevens die de inhoud, [structuur](/onderwerpen/structuur/) en context van documenten en het beheer ervan door de tijd heen beschrijven.[^ab-artikel-1-1-begripsbepalingen] Het koppelen van de juiste metadata aan documenten is van belang om de duurzame toegankelijkheid van overheidsinformatie te borgen. Daarom moeten alle documenten bij inbeheername en gedurende het beheer worden voorzien van metadata.[^ar-artikel-2-5-lid-2] Metadata kunnen op het niveau van individuele documenten worden vastgelegd, maar ook op een hoger [aggregatieniveau](/onderwerpen/classificatie-en-aggregatie/), bijvoorbeeld op het niveau van een dossier, database of dataset. Welk niveau passend is, is afhankelijk van de technische aard van de (categorieën) documenten.[^ar-toelichting-h2-metadata-p37] Het is ook mogelijk om de metadata vast te leggen in een externe registratie. Dit is met name van toepassing bij fysieke documenten.[^ar-toelichting-algemene-eisen-ordening]
 
 [^ar-artikel-2-5-lid-2]: Ar, artikel 2.5, tweede lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
-[^ab-artikel-1-1-begripsbepalingen]: Ab, artikel 1.1, begripsbepalingen, p. 1. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ar-toelichting-h2-metadata-p37]: Ar, Toelichting, Hoofdstuk 2, Metadata, p. 37. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
-[^ar-toelichting-algemene-eisen-ordening]: Ar, Toelichting, Algemene eisen, ordening, p. 34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ab-artikel-1-1-begripsbepalingen]: Ab, artikel 1.1 begripsbepalingen, p. 1. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ar-toelichting-h2-metadata-p37]: Ar, Toelichting, Hoofdstuk 2, Metadata, p.37. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-toelichting-algemene-eisen-ordening]: Ar, Toelichting, Algemene eisen, ordening, p.34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 De Archiefregeling onderscheidt drie categorieën documenten, die ieder andere eisen hebben voor metadata. Er zijn metadata die van toepassing zijn op alle documenten, ongeacht de bewaartermijn.[^ar-artikel-2-5-lid-2] Aanvullend daarop zijn er nog metadata die alleen vereist zijn voor de categorieën:
 
@@ -35,13 +34,11 @@ De Archiefregeling onderscheidt drie categorieën documenten, die ieder andere e
 
 ## Voorschriften
 
-### Metadataschema
-
 #### Voorschrift
 
 Het verantwoordelijke overheidsorgaan heeft één of meerdere metadataschema's zoals bedoeld in NEN-ISO 23081-1:2017[^nen-iso-23081-1-2017] vastgesteld.[^ar-artikel-2-5-lid-1]
 
-[^nen-iso-23081-1-2017]: NEN-ISO 23081-1:2017, Informatie en documentatie - Metagegevens voor archiefbescheiden.
+[^nen-iso-23081-1-2017]: NEN-ISO 23081-1 2017.PDF | Downloaden
 [^ar-artikel-2-5-lid-1]: Ar, artikel 2.5, eerste lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 #### Criteria
@@ -55,9 +52,7 @@ Het verantwoordelijke overheidsorgaan heeft één of meerdere metadataschema's z
 - Het metadataschema heeft betrekking op alle documenten van het verantwoordelijke overheidsorgaan.
 - Het metadataschema bevat ten minste de metadata die wettelijk verplicht zijn voor de drie verschillende categorieën documenten.
 
-### Metadata voor alle documenten, ongeacht de bewaartermijn
-
-Alle documenten, ongeacht de bewaartermijn, zijn voorzien van de volgende metadata die zijn vastgelegd in een metadataschema.
+Alle documenten, ongeacht de bewaartermijn, zijn voorzien van de volgende metadata die zijn vastgelegd in een metadataschema:
 
 #### Voorschrift
 
@@ -72,7 +67,7 @@ Van ieder document is minimaal het volgende in de metadata (bij het document, of
 - de toepasselijke categorie uit het selectiebesluit;
 - de bewaartermijn.
 
-[^ab-artikel-2-1-lid-1-sub-d]: Ab, artikel 2.1, eerste lid, sub d. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-1-sub-d]: Ab, artikel 2.1, eerste lid, sub d [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
 Indien relevant:
 
@@ -102,7 +97,7 @@ Indien gebruik is gemaakt van een elektronische handtekening:
 [^ar-artikel-2-6-onder-b]: Ar, artikel 2.6, onder b. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ar-artikel-2-6-onder-c]: Ar, artikel 2.6, onder c. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
-#### Criteria
+#### Criterium
 
 - De vereiste metadata worden zo snel mogelijk na creatie of ontvangst vastgelegd bij documenten. Bij wijzigingen of creatie van nieuwe metadata moet deze ook zo snel mogelijk worden toegevoegd aan de documenten.
 
@@ -111,9 +106,7 @@ Indien gebruik is gemaakt van een elektronische handtekening:
 - Er zijn instructies voor het toekennen van de vereiste metadata aan documenten.
 - Metadata wordt zoveel mogelijk automatisch toegekend aan documenten.
 
-### Metadata voor digitale documenten met een bewaartermijn langer dan tien jaar
-
-Digitale documenten met een bewaartermijn langer dan tien jaar zijn voorzien van de volgende metadata die zijn vastgelegd in een metadataschema.[^ar-artikel-2-8]
+Digitale documenten met een bewaartermijn langer dan tien jaar zijn voorzien van de volgende metadata die zijn vastgelegd in een metadataschema:[^ar-artikel-2-8]
 
 [^ar-artikel-2-8]: Ar, artikel 2.8. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
@@ -127,9 +120,9 @@ Van ieder document is in de metadata (bij het document, of op het niveau van zaa
 
 [^ar-artikel-2-8-onder-a]: Ar, artikel 2.8, onder a. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ar-artikel-2-8-onder-b]: Ar, artikel 2.8, onder b. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
-[^ar-artikel-2-7-reikwijdte]: Ar, artikel 2.7, reikwijdte, p. 3 en Ar, Toelichting, § 2.2 Aanvullende eisen voor langdurig te bewaren documenten in digitale vorm, artikel 2.8 aanvullende metadata. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-2-7-reikwijdte]: Ar, artikel 2.7 reikwijdte, p.3 en Archiefregeling, toelichting §2.2 Aanvullende eisen voor langdurig te bewaren documenten in digitale vorm, artikel 2.8 aanvullende metadata. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
-#### Criteria
+#### Criterium
 
 - De vereiste metadata worden zo snel mogelijk na creatie of ontvangst vastgelegd bij documenten. Bij wijzigingen of creatie van nieuwe metadata moet deze ook zo snel mogelijk worden toegevoegd aan de documenten.
 
@@ -138,9 +131,7 @@ Van ieder document is in de metadata (bij het document, of op het niveau van zaa
 - Er zijn instructies voor het toekennen van de vereiste metadata aan documenten.
 - Metadata wordt zoveel als mogelijk automatisch toegekend aan documenten.
 
-### Metadata voor over te brengen documenten
-
-Over te brengen documenten zijn, uiterlijk voorafgaand aan overbrenging, voorzien van de volgende metadata die zijn vastgelegd in een metadataschema.
+Over te brengen documenten zijn, uiterlijk voorafgaand aan overbrenging, voorzien van de volgende metadata die zijn vastgelegd in een metadataschema:
 
 #### Voorschrift
 
@@ -156,7 +147,7 @@ Van ieder document kan in de metadata (bij het document, of op het niveau van za
 [^ar-artikel-2-12-onder-c]: Ar, artikel 2.12, onder c. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ar-artikel-2-12-onder-d]: Ar, artikel 2.12, onder d. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
-#### Criteria
+#### Criterium
 
 - De vereiste metadata wordt toegevoegd aan documenten, voordat die worden overgebracht naar een archiefbewaarplaats.
 
@@ -169,13 +160,13 @@ Van ieder document kan in de metadata (bij het document, of op het niveau van za
 
 Alle documenten die onder de reikwijdte van de Archiefwet vallen moeten worden voorzien van de vereiste metadata.[^ar-artikel-2-5-lid-2] Dit geldt ook voor de documenten die op elk moment mogen worden vernietigd.
 
-## Zie ook
+## Gerelateerde onderwerpen
 
 - [Document](/onderwerpen/document/)
-- [Ordenen](/normen/03-ordenen/)
-- [Gecontroleerd vernietigen](/normen/07-vernietigen/)
-- [Samenhang en interpreteerbaarheid](/onderwerpen/samenhang-en-interpreteerbaarheid/)
-- [Metadata: integriteitscheck](/onderwerpen/metadata-integriteitscheck/)
-- [Metadata: hardware en programmatuur](/onderwerpen/metadata-hardware-en-programmatuur/)
-- [Structuur](/onderwerpen/structuur/)
-- [Verschijningsvorm](/onderwerpen/verschijningsvorm/)
+- Informatieobject
+- Zaak
+- Taak en werkproces
+- [Ordening](/normen/03-ordenen/)
+- [Vernietiging](/normen/07-vernietigen/)
+- Vervanging
+- Conversie

@@ -74,9 +74,33 @@ changelog volgt [Semantic Versioning][semver].
   te linken (architectuur/overwegingen bij implementatie, niveau van
   maatregelen, digitaal vernietigen, aangrijpingspunt) staan niet in de
   normbladen en zijn eruit; die vier externe links vervallen daarmee.
-  Buiten deze regel blijven de bronvermeldingen in de voetnoten, de
-  synoniemen, de `### <thema>`-koppen en de "Zie ook"-linklabels — en
-  "overbrengen" in norm 3, want die correctie vroeg de reviewer zelf.
+  Vervolgens is ook de rest gelijkgetrokken, zodat de normpagina's nu op elk
+  punt het normblad volgen:
+  - **Koppen.** De paginatitel is de normbladtitel ("Normanalyse Metadata"),
+    de kop boven de kern komt uit het nieuwe front-matter-veld `kern_kop`
+    ("Kern van Ordeningsstructuur" — die titels wijken af van de normnamen die
+    de site verder voert, dus `norm_titel` blijft ongemoeid en daarmee ook het
+    bollendiagram, de kaarten op `/normen/` en de navigatie). `## Zie ook`
+    heet `## Gerelateerde onderwerpen`, norm 1 heeft weer
+    `## Reikwijdte inbeheername en beheer`, en `#### Criteria`/`#### Indicatoren`
+    staan in het enkelvoud waar het normblad dat schrijft. De dertien
+    `### <thema>`-koppen die de site zelf had bedacht zijn weg; alleen
+    "Besturing" en "Feitelijk beheer" blijven, want die staan in normblad 1.
+  - **Voetnoten.** 57 bronvermeldingen zijn letterlijk de normbladtekst
+    geworden ("Aw, Memorie van Toelichting", "AW1995", "p.34", "t.b.v.").
+    Twee blijven afwijken: `hyperlink-duto` (het normblad geeft daar de
+    instructie "Hyperlink naar DUTO", geen bron) en de bron bij voorschrift
+    3.3, waarvan de reviewer expliciet de volgorde vroeg.
+  - **Synoniemen en gerelateerde onderwerpen** volgen de lijsten uit het
+    normblad. Norm 5 verliest daarmee zijn sectie, want normblad 7 heeft er
+    geen; termen zonder eigen pagina staan als platte tekst.
+  - De validator, de unittests, de PDF-export, de training en `CONTRIBUTING.md`
+    zijn op het nieuwe formaat gezet. `### <thema>` is optioneel geworden en
+    enkelvoudige subkoppen zijn niet langer een fout.
+
+  Buiten de regel blijft alleen "overbrengen" in norm 3 — die correctie vroeg
+  de reviewer zelf — en de `<<…>>`-markeringen, die een linkinstructie zijn en
+  geen tekst.
 - Thema bijgewerkt naar `hugo-theme-rijksoverheid` v0.2.0. Daarin zitten vijf
   toegankelijkheidsfixes die hier als tijdelijke overrides stonden
   (focusindicatoren in de zoekresultaten, het zoekveld en de footerlinks; het

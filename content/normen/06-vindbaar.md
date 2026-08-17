@@ -1,9 +1,10 @@
 ---
-title: "Norm 6: Vindbaar"
+title: "Normanalyse Vindbaarheid"
 versie: "0.8"
 weight: 6
 norm_id: "6"
 norm_titel: "Vindbaar"
+kern_kop: "Kern van vindbaarheid"
 aliases:
   - /normen/05-vindbaarheid/
 kern: "Het verantwoordelijke overheidsorgaan zorgt ervoor dat documenten binnen een redelijke termijn gevonden kunnen worden."
@@ -13,8 +14,6 @@ kern_kaart: "Een document moet binnen een redelijke termijn na creatie of ontvan
 synoniemen:
   - "Zoeken"
   - "Vinden"
-  - "Vindbaarheid"
-  - "Redelijke termijn"
 ---
 
 ## Toelichting
@@ -24,23 +23,21 @@ Het verantwoordelijke overheidsorgaan richt zijn informatiehuishouding zodanig i
 [Vindbaarheid](https://www.nationaalarchief.nl/archiveren/kennisbank/vindbaar) is een kenmerk van duurzame toegankelijkheid.[^ab-artikel-2-1-lid-1-onder-a] Documenten moeten binnen een redelijke termijn vindbaar zijn voor gebruikers die daar recht toe hebben en bevoegd zijn, bij voorkeur ongeacht tijd en systeem, en zodanig dat inzage, openbaarmaking en verantwoording binnen redelijke termijn mogelijk zijn.[^ab-nota-van-toelichting-vindbaar-p10]
 
 [^ab-artikel-2-1-lid-1-onder-a]: Ab, artikel 2.1, eerste lid, onder a. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ab-nota-van-toelichting-vindbaar-p10]: Ab, Nota van toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p. 10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-nota-van-toelichting-vindbaar-p10]: Ab, Nota van Toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p.10 [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
 De redelijke termijn voor categorieën documenten moet in de [passende maatregelen](/onderwerpen/passende-maatregelen/) geconcretiseerd worden.[^aw-artikel-4-1-lid-1] De invulling van de redelijke termijn gebeurt op basis van de [risicoanalyse](/onderwerpen/passende-maatregelen/).
 
-[^aw-artikel-4-1-lid-1]: Aw, artikel 4.1, eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^aw-artikel-4-1-lid-1]: Aw, artikel 4.1 eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
 De Inspectie kijkt bij vindbaarheid vooral naar hoe essentiële randvoorwaarden zoals metadata, ordening en een actueel overzicht van de informatiehuishouding bijdragen aan de vindbaarheid van documenten.
 
 ## Voorschriften
 
-### Vindbaarheid binnen een redelijke termijn
-
 #### Voorschrift
 
 Het verantwoordelijke overheidsorgaan heeft in de passende maatregelen opgenomen wat de redelijke termijn is voor de vindbaarheid van documenten.[^aw-artikel-4-1-4-2-ar-toelichting-vinden]
 
-[^aw-artikel-4-1-4-2-ar-toelichting-vinden]: Aw, artikel 4.1 en 4.2 en Ar, Toelichting, Algemeen deel, onder Vinden, weergeven, exporteren en raadplegen, p. 36. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^aw-artikel-4-1-4-2-ar-toelichting-vinden]: Aw, artikel 4.1 en 4.2 en Ar, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen, p. 36. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
 #### Criteria
 
@@ -56,9 +53,9 @@ Het verantwoordelijke overheidsorgaan heeft in de passende maatregelen opgenomen
 
 Het verantwoordelijke overheidsorgaan kan documenten binnen een redelijke termijn vinden.[^ab-artikel-2-1-lid-a-nota-vindbaar]
 
-[^ab-artikel-2-1-lid-a-nota-vindbaar]: Ab, artikel 2.1, lid a en Ab, Nota van toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p. 10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-a-nota-vindbaar]: Ab, artikel 2.1, lid a en Ab, Nota van Toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p.10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
-#### Criteria
+#### Criterium
 
 - Er is een overzicht van passende maatregelen bij categorieën documenten met de redelijke termijn voor de vindbaarheid.
 
@@ -72,13 +69,13 @@ Het verantwoordelijke overheidsorgaan kan documenten binnen een redelijke termij
 
 Documenten kunnen door de organisatie, op basis van de eisen die gesteld worden aan metadata, de ordening en het overzicht, binnen een redelijke termijn worden gevonden.[^ab-artikel-2-1-ar-toelichting-p34-50-53]
 
-[^ab-artikel-2-1-ar-toelichting-p34-50-53]: Ab, artikel 2.1, eerste lid; Ar, Toelichting, p. 34, artikelen 2.2, 2.3 en 2.5 en Ar, Toelichting, p. 50 en 53. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-ar-toelichting-p34-50-53]: Ab, artikel 2.1, eerste lid; Ar, Toelichting, p. 34, artikel 2.2, 2.3 en 2.5 en Ar, Toelichting, p.50 en 53. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
 #### Criteria
 
 *Bij dit voorschrift zijn geen aanvullende criteria.*
 
-#### Indicatoren
+#### Indicator
 
 - De ordening en overzicht(en) van de informatiehuishouding sluiten aantoonbaar aan op de werkprocessen.
 
@@ -86,9 +83,9 @@ Documenten kunnen door de organisatie, op basis van de eisen die gesteld worden 
 
 Documenten zijn binnen een redelijke termijn vindbaar voor gebruikers die daar recht op hebben.[^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar]
 
-[^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar]: Ab, artikel 2.1, eerste lid, onder a en Ab, Nota van toelichting, Vindbaar, p. 10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar]: Ab, artikel 2.1, eerste lid, onder a en Ab, Nota van Toelichting, Vindbaar, p.10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
-#### Criteria
+#### Criterium
 
 - De organisatie hanteert interne normen of afspraken over de (maximale) tijd waarbinnen bevoegde gebruikers documenten moeten kunnen terugvinden.
 
@@ -102,11 +99,11 @@ Documenten zijn binnen een redelijke termijn vindbaar voor gebruikers die daar r
 
 Alle documenten moeten binnen een redelijke termijn vindbaar zijn. Dit geldt ook voor documenten die op elk moment mogen worden vernietigd.
 
-## Zie ook
+## Gerelateerde onderwerpen
 
 - [Overzicht](/normen/02-overzicht/)
-- [Ordenen](/normen/03-ordenen/)
-- [Metadateren](/normen/04-metadateren/)
-- [Inbeheername en beheer](/normen/01-beheer/)
-- [Informatiebeveiliging en betrouwbaar](/normen/05-betrouwbaar/)
-- [Passende maatregelen en risicobenadering](/onderwerpen/passende-maatregelen/)
+- [Ordening](/normen/03-ordenen/)
+- [Metadata](/normen/04-metadateren/)
+- [Beheer](/normen/01-beheer/)
+- [Beveiliging](/normen/05-betrouwbaar/)
+- Migratie

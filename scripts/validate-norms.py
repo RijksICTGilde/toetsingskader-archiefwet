@@ -8,9 +8,11 @@ Contentformaat:
     voetnoten of markdown in `kern`/`synoniemen`. Optioneel: `kern_bron`
     en `kern_bron_url`, de bronvermelding onder de kern.
   - Body: vaste koppen `## Toelichting` en `## Voorschriften` (verplicht,
-    met `### <thema>` -> `#### Voorschrift` -> optioneel `#### Criteria`
-    / `#### Indicatoren`), `## Reikwijdte` en `## Zie ook` (optioneel).
-    Geen `#`-kop, geen koppen dieper dan h4.
+    met `#### Voorschrift` -> optioneel `#### Criteria`/`#### Criterium` en
+    `#### Indicatoren`/`#### Indicator`, eventueel gegroepeerd onder een
+    `### <thema>`), `## Reikwijdte` (mag een achtervoegsel hebben) en
+    `## Gerelateerde onderwerpen` (optioneel). Geen `#`-kop, geen koppen
+    dieper dan h4. De koppen volgen het normblad woord voor woord.
   - Bronnen zijn Goldmark-voetnoten: elke `[^id]` heeft een definitie en
     andersom; ids zijn kleine letters, cijfers en koppeltekens.
 
@@ -44,12 +46,18 @@ DEPRECATED_FIELDS = [
 ]
 
 REQUIRED_SECTIONS = ["Toelichting", "Voorschriften"]
-OPTIONAL_SECTIONS = ["Reikwijdte", "Zie ook"]
+OPTIONAL_SECTIONS = ["Reikwijdte", "Gerelateerde onderwerpen"]
 ALLOWED_SECTIONS = REQUIRED_SECTIONS + OPTIONAL_SECTIONS
 
-# h4-subkoppen binnen een thema, plus de enkelvoud-vergissing.
-ALLOWED_SUBHEADINGS = ["Voorschrift", "Criteria", "Indicatoren"]
-SINGULAR_FIX = {"Criterium": "Criteria", "Indicator": "Indicatoren"}
+# Normblad 1 heet de sectie "Reikwijdte inbeheername en beheer". De koppen komen
+# woord voor woord uit het normblad, dus een achtervoegsel achter "Reikwijdte"
+# is goed; de sectie telt mee als "Reikwijdte".
+SECTION_PREFIXES = ["Reikwijdte"]
+
+# h4-subkoppen. Enkelvoud én meervoud zijn goed: de normbladen gebruiken
+# "Criterium:"/"Indicator:" waar het er één is en "Criteria:"/"Indicatoren:"
+# waar het er meer zijn, en de site volgt dat.
+ALLOWED_SUBHEADINGS = ["Voorschrift", "Criteria", "Criterium", "Indicatoren", "Indicator"]
 
 ID_RE = re.compile(r"^[a-z0-9-]+$")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*$")
@@ -170,6 +178,14 @@ def validate_front_matter(name, fm_text, errors):
         errors.append(Error(name, "'kern_kaart' moet een tekst zonder voetnoten ([^...]) zijn",
                             line=find_field_line(fm_text, "kern_kaart")))
 
+    # De kop boven de kern-callout, woord voor woord uit het normblad
+    # ("Kern van Ordeningsstructuur"). Ontbreekt het veld, dan valt
+    # _partials/kern-kop.html terug op "Kern van <norm_titel>".
+    kern_kop = fm.get("kern_kop")
+    if kern_kop is not None and (not isinstance(kern_kop, str) or "[^" in kern_kop):
+        errors.append(Error(name, "'kern_kop' moet een tekst zonder voetnoten ([^...]) zijn",
+                            line=find_field_line(fm_text, "kern_kop")))
+
     kern_bron_url = fm.get("kern_bron_url")
     if kern_bron_url is not None and not (
         isinstance(kern_bron_url, str) and kern_bron_url.startswith(("http://", "https://"))
@@ -191,6 +207,14 @@ def validate_headings(name, body_lines, body_start, errors):
     current_h2 = None         # naam van de actieve ## sectie
     current_theme_line = None  # regel van de actieve ### thema (binnen Voorschriften)
     theme_has_voorschrift = {}  # regel-van-thema -> bool
+    voorschriften_has_h4 = False  # '#### Voorschrift' direct onder '## Voorschriften'
+
+    def section_name(title):
+        """De sectienaam waaronder een h2 meetelt; vangt 'Reikwijdte <extra>'."""
+        for prefix in SECTION_PREFIXES:
+            if title == prefix or title.startswith(prefix + " "):
+                return prefix
+        return title
 
     for offset, raw in enumerate(body_lines):
         lineno = body_start + offset
@@ -217,14 +241,14 @@ def validate_headings(name, body_lines, body_start, errors):
             continue
 
         if level == 2:
-            current_h2 = title
+            current_h2 = section_name(title)
             current_theme_line = None
-            if title not in ALLOWED_SECTIONS:
+            if current_h2 not in ALLOWED_SECTIONS:
                 allowed = ", ".join(f"'## {s}'" for s in ALLOWED_SECTIONS)
                 errors.append(Error(name, f"Onbekende sectie '## {title}'. Toegestaan: {allowed}", lineno))
-            elif title in seen_sections:
+            elif current_h2 in seen_sections:
                 errors.append(Error(name, f"Sectie '## {title}' komt meer dan één keer voor", lineno))
-            seen_sections.append(title)
+            seen_sections.append(current_h2)
 
         elif level == 3:
             if current_h2 != "Voorschriften":
@@ -233,15 +257,18 @@ def validate_headings(name, body_lines, body_start, errors):
             theme_has_voorschrift[lineno] = False
 
         elif level == 4:
-            if current_h2 != "Voorschriften" or current_theme_line is None:
-                errors.append(Error(name, f"'#### {title}' mag alleen onder een '###'-thema binnen '## Voorschriften' staan", lineno))
-            if title in SINGULAR_FIX:
-                errors.append(Error(name, f"Gebruik '#### {SINGULAR_FIX[title]}' (meervoud) in plaats van '#### {title}'", lineno))
-            elif title not in ALLOWED_SUBHEADINGS:
+            # Een '###'-thema is optioneel: de meeste normbladen groeperen de
+            # voorschriften niet, en de koppen komen uit het normblad.
+            if current_h2 != "Voorschriften":
+                errors.append(Error(name, f"'#### {title}' mag alleen binnen '## Voorschriften' staan", lineno))
+            if title not in ALLOWED_SUBHEADINGS:
                 allowed = ", ".join(f"'#### {s}'" for s in ALLOWED_SUBHEADINGS)
                 errors.append(Error(name, f"Onbekende subkop '#### {title}'. Toegestaan: {allowed}", lineno))
-            if title == "Voorschrift" and current_theme_line is not None:
-                theme_has_voorschrift[current_theme_line] = True
+            if title == "Voorschrift":
+                if current_theme_line is not None:
+                    theme_has_voorschrift[current_theme_line] = True
+                elif current_h2 == "Voorschriften":
+                    voorschriften_has_h4 = True
 
     for section in REQUIRED_SECTIONS:
         if section not in seen_sections:
@@ -250,6 +277,9 @@ def validate_headings(name, body_lines, body_start, errors):
     for theme_line, has_vs in theme_has_voorschrift.items():
         if not has_vs:
             errors.append(Error(name, "Een '###'-thema moet minstens één '#### Voorschrift' bevatten", theme_line))
+
+    if "Voorschriften" in seen_sections and not voorschriften_has_h4 and not theme_has_voorschrift:
+        errors.append(Error(name, "Sectie '## Voorschriften' bevat geen enkel '#### Voorschrift'"))
 
 
 def validate_footnotes(name, body_lines, body_start, errors):

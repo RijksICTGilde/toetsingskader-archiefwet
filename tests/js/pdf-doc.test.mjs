@@ -35,6 +35,36 @@ function clickWith(json) {
   return new Promise((r) => setTimeout(r, 50)).then(() => captured)
 }
 
+test('kern-kop komt uit kern_kop, niet uit norm_titel', async () => {
+  // De koppen volgen het normblad woord voor woord: normblad 3 heet
+  // "Kern van Ordeningsstructuur" terwijl de norm op de site "Ordenen" heet.
+  // De PDF moet dezelfde kop tonen als de pagina en de inhoudsopgave.
+  const dd = await clickWith({
+    kind: 'norm',
+    titel: 'Norm 3: Ordenen',
+    norm_id: '3',
+    norm_titel: 'Ordenen',
+    kern_kop: 'Kern van Ordeningsstructuur',
+    kern_html: '<p>Een kerntekst van voldoende lengte.</p>',
+    body_html: '<h2>Toelichting</h2><p>Tekst.</p>',
+  })
+  const kop = dd.content.find(b => typeof b.text === 'string' && b.text.startsWith('Kern van '))
+  assert.equal(kop.text, 'Kern van Ordeningsstructuur')
+})
+
+test('kern-kop valt terug op norm_titel als kern_kop ontbreekt', async () => {
+  const dd = await clickWith({
+    kind: 'norm',
+    titel: 'Norm 3: Ordenen',
+    norm_id: '3',
+    norm_titel: 'Ordenen',
+    kern_html: '<p>Een kerntekst van voldoende lengte.</p>',
+    body_html: '<h2>Toelichting</h2><p>Tekst.</p>',
+  })
+  const kop = dd.content.find(b => typeof b.text === 'string' && b.text.startsWith('Kern van '))
+  assert.equal(kop.text, 'Kern van ordenen')
+})
+
 test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   const norm = JSON.parse(read('public/normen/01-beheer/index.pdf.json'))
   const dd = await clickWith(norm)
