@@ -4,7 +4,10 @@ versie: "0.8"
 weight: 1
 norm_id: "1"
 norm_titel: "Inbeheername en beheer"
-kern: "Er zijn beheerregels en passende maatregelen die de duurzame toegankelijkheid van documenten borgen. Een document bevindt zich in een beheerde omgeving, zodat de beheertaken kunnen worden uitgevoerd waarmee documenten duurzaam toegankelijk gemaakt worden en blijven."
+kern: "Een document is in beheer van het verantwoordelijke overheidsorgaan zodat het duurzaam toegankelijk gemaakt en gehouden kan worden."
+kern_bron: "Ab, artikel 2.1, eerste lid; Aw, artikel 4.1, eerste lid."
+kern_bron_url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
+kern_kaart: "Er zijn beheerregels en passende maatregelen die de duurzame toegankelijkheid van documenten borgen. Een document bevindt zich in een beheerde omgeving, zodat de beheertaken kunnen worden uitgevoerd waarmee documenten duurzaam toegankelijk gemaakt worden en blijven."
 synoniemen:
   - "Opname (DUTO)"
   - "Duurzaam toegankelijk (DUTO)"
@@ -36,9 +39,9 @@ Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. 
 
 [^aw-memorie-toelichting-4-3-beheerstrategie]: Aw, Memorie van toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 4.3 Duurzame toegankelijkheid, beheerstrategie.
 
-De beheerregeling moet samen met de omschrijving van de passende maatregelen worden gepubliceerd. Vervolgens moeten de passende maatregelen getroffen worden; daarvoor moeten deze passende maatregelen in ieder geval in een document beschreven zijn.
+De beheerregeling moet samen met de omschrijving van de passende maatregelen worden gepubliceerd. Vervolgens moeten de passende maatregelen getroffen worden, en hiervoor moeten deze passende maatregelen in ieder geval beschreven zijn in een 'document'.
 
-In een beheerde omgeving[^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten[^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/05-betrouwbaar/), [gecontroleerd vernietigen](/normen/07-vernietigen/) en [metadateren](/normen/04-metadateren/) geeft direct richting aan de invulling van de benodigde functionaliteiten.[^kamerstukken-2021-22-35968] Voor de relatie met de architectuur en het applicatielandschap beschrijft het Nationaal Archief de [overwegingen bij implementatie](https://www.nationaalarchief.nl/archiveren/kennisbank/overwegingen-generiek-deel). Hoe die beheertaken in de praktijk worden uitgevoerd, staat hieronder onder [feitelijk beheer](/normen/01-beheer/#feitelijk-beheer).
+In een beheerde omgeving[^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten[^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/05-betrouwbaar/), [gecontroleerd vernietigen](/normen/07-vernietigen/) en [metadateren](/normen/04-metadateren/) geeft direct richting aan de invulling van de benodigde functionaliteiten.[^kamerstukken-2021-22-35968]
 
 [^kamerstukken-2021-22-35968]: Kamerstukken II 2021/22, 35968, nr. 3, Beheerstrategie, p. 15.
 
@@ -48,7 +51,7 @@ In een beheerde omgeving[^functies-nationaal-archief] zijn functionaliteiten bes
 
 #### Voorschrift
 
-De Inspectie toetst of het verantwoordelijke overheidsorgaan regels heeft vastgesteld over het archiefbeheer van documenten.[^aw-artikel-4-2-lid-1]
+Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefbeheer van documenten.[^aw-artikel-4-2-lid-1]
 
 [^aw-artikel-4-2-lid-1]: Aw, artikel 4.2, eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
@@ -65,7 +68,7 @@ De Inspectie toetst of het verantwoordelijke overheidsorgaan regels heeft vastge
 
 #### Voorschrift
 
-De Inspectie toetst of het verantwoordelijke overheidsorgaan in de beheerregels, in ieder geval per categorie[^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten, een omschrijving heeft opgenomen van de passende maatregelen die het neemt om de documenten:[^aw-artikel-4-2-lid-2]
+Het verantwoordelijk overheidsorgaan heeft in de beheerregels, in ieder geval per categorie[^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten, een omschrijving opgenomen van de passende maatregelen die het verantwoordelijke overheidsorgaan neemt om de documenten:[^aw-artikel-4-2-lid-2]
 
 a) duurzaam toegankelijk te maken en te houden,[^aw-artikel-4-2-lid-2]
 
@@ -80,22 +83,22 @@ b) te [vernietigen](/normen/07-vernietigen/). [^aw-artikel-4-2-lid-2]
 
 #### Indicatoren
 
-- In een strategisch informatieoverleg (SIO), of een soortgelijk overleg,[^ab-nota-toelichting-8] worden keuzes gemaakt over het ontwerp en de inrichting van de informatiehuishouding die van invloed zijn op de duurzame toegankelijkheid van documenten.[^ab-nota-toelichting-8]
+- In een strategisch informatie overleg (SIO), of een soortgelijk overleg,[^ab-nota-toelichting-8] worden keuzes gemaakt over het ontwerp en de inrichting van de informatiehuishouding die van invloed zijn op de duurzame toegankelijkheid van documenten.[^ab-nota-toelichting-8]
 
 [^ab-nota-toelichting-8]: Ab, Nota van toelichting, 8. Implementatie, SIO. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
 #### Voorschrift
 
-De Inspectie toetst of het verantwoordelijke overheidsorgaan per categorie[^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten passende maatregelen heeft getroffen om documenten:[^aw-artikel-4-1-lid-1]
+Het verantwoordelijk overheidsorgaan heeft per categorie[^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten passende maatregelen getroffen om documenten:[^aw-artikel-4-1-lid-1]
 
-a) duurzaam toegankelijk te maken en te houden,
+a) duurzaam toegankelijk te maken en te houden
 
-b) te [vernietigen](/normen/07-vernietigen/).
+b) te [vernietigen](/normen/07-vernietigen/)
 
 #### Criteria
 
 - In de passende maatregelen is beschreven dat documenten zich in een beheerde omgeving moeten bevinden.
-- De passende maatregelen zijn van toepassing op alle omgevingen waarin overheidsinformatie wordt opgeslagen. Denk hierbij aan bijvoorbeeld documentmanagementsystemen, maar ook back-ups[^kamerstukken-2021-22-35968-4-4-selectie], cloudomgevingen, samenwerkingsruimtes en e-mailapplicaties.
+- De passende maatregelen zijn van toepassing op alle omgevingen waarin overheidsinformatie wordt opgeslagen. Denk hierbij aan bijvoorbeeld documentmanagementsystemen, maar ook back-ups[^kamerstukken-2021-22-35968-4-4-selectie], cloudomgevingen, samenwerkingsruimtes en emailapplicaties.
 - In de passende maatregelen zijn in ieder geval de onderwerpen [overzicht](/normen/02-overzicht/), [vinden](/normen/06-vindbaar/) en beschikbaarstellen, [ordenen](/normen/03-ordenen/), [metadateren](/normen/04-metadateren/), [vernietigen](/normen/07-vernietigen/) en [betrouwbaarheid](/normen/05-betrouwbaar/) beschreven.
 - De passende maatregelen zijn opgesteld op basis van een [risicobenadering](/onderwerpen/passende-maatregelen/).
 - Een categorie, waarvoor passende maatregelen zijn genomen, heeft een relatie met een selectiebesluit.
@@ -112,7 +115,7 @@ b) te [vernietigen](/normen/07-vernietigen/).
 
 #### Voorschrift
 
-De Inspectie toetst of het verantwoordelijke overheidsorgaan de door hem vastgestelde beheerregels, inclusief de omschrijving van de passende maatregelen, openbaar heeft gemaakt.[^aw-artikel-4-2-lid-3]
+Het verantwoordelijke overheidsorgaan heeft de door hem vastgestelde beheerregels, inclusief de omschrijving van de passende maatregelen, openbaar gemaakt.[^aw-artikel-4-2-lid-3]
 
 [^aw-artikel-4-2-lid-3]: Aw, artikel 4.2, derde lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
@@ -126,7 +129,7 @@ De Inspectie toetst of het verantwoordelijke overheidsorgaan de door hem vastges
 
 #### Voorschrift
 
-De Inspectie toetst of het verantwoordelijke overheidsorgaan inzichtelijk heeft welke categorieën documenten gemigreerd, geconverteerd of vervangen moeten worden.[^ab-artikelen-2-2-2-3] Alleen wanneer dergelijke categorieën bestaan, toetst de Inspectie of in de beheerregels een omschrijving is opgenomen van de passende maatregelen voor migratie, conversie en vervanging.
+Het verantwoordelijke overheidsorgaan heeft inzichtelijk welke categorieën documenten gemigreerd, geconverteerd of vervangen moeten worden.[^ab-artikelen-2-2-2-3] Alleen wanneer dergelijke categorieën bestaan, heeft de organisatie in de beheerregels een omschrijving opgenomen van de passende maatregelen voor migratie, conversie en vervanging.
 
 [^ab-artikelen-2-2-2-3]: Ab, artikelen 2.2, 2.3 en 2.4. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
@@ -140,7 +143,7 @@ De Inspectie toetst of het verantwoordelijke overheidsorgaan inzichtelijk heeft 
 
 #### Voorschrift
 
-De Inspectie toetst of het verantwoordelijke overheidsorgaan in de beheerregels[^aw-artikel-4-2-lid-2-sub-a] de beheertaken op zowel leidinggevend als uitvoerend niveau heeft beschreven.[^kamerstukken-2021-22-35968-2]
+Het verantwoordelijke overheidsorgaan heeft in de beheerregels[^aw-artikel-4-2-lid-2-sub-a] de beheertaken op zowel leidinggevend als uitvoerend niveau beschreven.[^kamerstukken-2021-22-35968-2]
 
 [^aw-artikel-4-2-lid-2-sub-a]: Aw, artikel 4.2, tweede lid, sub a. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 [^kamerstukken-2021-22-35968-2]: Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 4.3, Duurzame toegankelijkheid, beheerstrategie, 2e alinea.
@@ -148,11 +151,11 @@ De Inspectie toetst of het verantwoordelijke overheidsorgaan in de beheerregels[
 #### Criteria
 
 - In ieder geval de volgende beheertaken zijn zowel op leidinggevend als uitvoerend niveau beschreven:
-  - het (doen) ontwerpen van selectiebesluiten;[^kamerstukken-2021-22-35968-3]
-  - het (doen) overbrengen van documenten naar een archiefdienst en (eventueel) het stellen van openbaarheidsbeperkingen voor documenten van die overbrenging;[^kamerstukken-2021-22-35968-3]
-  - het maken van een [overzicht](/normen/02-overzicht/), het [ordenen](/normen/03-ordenen/) en het [metadateren](/normen/04-metadateren/);[^ar-toelichting-algemeen-deel-h1-eisen-2]
-  - migratie, conversie en vervanging;[^ar-toelichting-algemeen-deel-h1-eisen-2]
-  - [vernietiging](/normen/07-vernietigen/).[^aw-artikel-4-2-lid-2]
+  - Het (doen) ontwerpen van selectiebesluiten;[^kamerstukken-2021-22-35968-3]
+  - Het (doen) overbrengen van documenten naar een archiefdienst en (eventueel) het stellen van openbaarheidsbeperkingen voor documenten van die overbrenging;[^kamerstukken-2021-22-35968-3]
+  - Het maken van een [overzicht](/normen/02-overzicht/), het [ordenen](/normen/03-ordenen/) en het [metadateren](/normen/04-metadateren/);[^ar-toelichting-algemeen-deel-h1-eisen-2]
+  - Migratie, conversie, vervanging;[^ar-toelichting-algemeen-deel-h1-eisen-2]
+  - [Vernietiging](/normen/07-vernietigen/).[^aw-artikel-4-2-lid-2]
 - De beheerregels voor de beheertaken zijn actueel.
 - De beheerregels voor de beheertaken zijn volledig.
 
@@ -161,11 +164,11 @@ De Inspectie toetst of het verantwoordelijke overheidsorgaan in de beheerregels[
 
 #### Indicatoren
 
-- In de beheerregels staan de dienstonderdelen en de verantwoordelijke functies of rollen die belast zijn met de beheertaken, op zowel sturingsniveau als uitvoeringsniveau.
+- In de beheerregels staan de dienstonderdelen en de verantwoordelijke functies/rollen die belast zijn met de beheertaken op zowel sturingsniveau als uitvoeringsniveau.
 
 #### Voorschrift
 
-De Inspectie toetst of het verantwoordelijke overheidsorgaan in de beheerregels een nadere omschrijving heeft opgenomen over de wijze waarop het archiefbeheer van documenten [periodiek](/normen/08-periodieke-evaluatie/) wordt geëvalueerd[^heet-aw1995-kwaliteitssyteem], onderzocht en indien nodig bijgesteld.[^aw-artikel-4-2-lid-2-2]
+Het verantwoordelijk overheidsorgaan heeft in de beheerregels nadere omschrijving opgenomen over de wijze waarop het archiefbeheer van documenten [periodiek](/normen/08-periodieke-evaluatie/) wordt geëvalueerd[^heet-aw1995-kwaliteitssyteem], onderzocht en indien nodig bijgesteld.[^aw-artikel-4-2-lid-2-2]
 
 [^heet-aw1995-kwaliteitssyteem]: Dit heet in de Aw 1995 "kwaliteitssysteem".
 [^aw-artikel-4-2-lid-2-2]: Aw, artikel 4.2, tweede lid, sub c. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
@@ -182,7 +185,7 @@ De Inspectie toetst of het verantwoordelijke overheidsorgaan in de beheerregels 
 
 #### Voorschrift
 
-De Inspectie toetst of het verantwoordelijke overheidsorgaan alle[^aw-artikel-4-1-lid-2] opgemaakte en ontvangen documenten heeft opgenomen in een beheerde[^hoeft-geen-systeem-zoals-documentmanagementsyste] omgeving[^ab-artikel-2-1-aw-4-1-4-2], waar zij duurzaam toegankelijk worden gemaakt en gehouden tot het moment van overbrenging of vernietiging.[^aw-artikel-4-1-ab-artikel]
+Het verantwoordelijke overheidsorgaan heeft alle[^aw-artikel-4-1-lid-2] opgemaakte en ontvangen documenten opgenomen in een beheerde[^hoeft-geen-systeem-zoals-documentmanagementsyste] omgeving[^ab-artikel-2-1-aw-4-1-4-2], waar zij duurzaam toegankelijk worden gemaakt en gehouden tot het moment van overbrenging of vernietiging.[^aw-artikel-4-1-ab-artikel]
 
 [^aw-artikel-4-1-lid-2]: Aw, artikel 4.1, tweede lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 [^ab-artikel-2-1-aw-4-1-4-2]: Ab, artikel 2.1; Aw, artikel 4.1, eerste lid en Aw, artikel 4.2, eerste lid, sub b. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
@@ -228,6 +231,6 @@ Alle documenten moeten in beheer zijn. Ook de documenten die op elk moment mogen
 - [Metadata](/normen/04-metadateren/)
 - [Overzicht](/normen/02-overzicht/)
 - [Ordening](/normen/03-ordenen/)
-- [Kwaliteitssysteem / periodieke evaluatie](/normen/08-periodieke-evaluatie/)
+- [Kwaliteitssysteem/ periodieke evaluatie](/normen/08-periodieke-evaluatie/)
 
 [^hyperlink-duto]: Archiveren by design, DUTO | Nationaal Archief. [Bekijk bron](https://www.nationaalarchief.nl/archiveren/duto)

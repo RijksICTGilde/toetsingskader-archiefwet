@@ -31,7 +31,7 @@ Een ordeningsstructuur bevat waarden die de logische plaats van documenten in de
 [^ar-artikel-2-2-lid-2]: Ar, artikel 2.2, tweede lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ar-artikel-2-2-lid-3]: Ar, artikel 2.2, derde lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
-Om documenten duurzaam toegankelijk te maken en te houden is het van belang dat deze zijn gekoppeld aan een ordening. Een geordend archief is onder andere belangrijk voor het uitvoeren van beheertaken als het selecteren, [vernietigen](/normen/07-vernietigen/) en overbrengen van documenten. Het verantwoordelijke overheidsorgaan beschikt over ten minste één door de organisatie vastgestelde ordeningsstructuur, bijvoorbeeld in een [strategisch informatieoverleg (SIO)](/onderwerpen/strategisch-informatieoverleg/), die aansluit bij de taken en werkprocessen van het verantwoordelijke overheidsorgaan.[^ar-artikel-2-2-ordening-p2] Daarnaast mogen aanvullende ordeningen bestaan, die niet hoeven aan te sluiten bij de taken en werkprocessen.[^ar-artikel-2-2-ordening-p2] Dit mogen bijvoorbeeld cliëntgerichte, locatiegerichte of objectgerichte ordeningsstructuren zijn. Voor specifieke [verschijningsvormen](/onderwerpen/verschijningsvorm/) van documenten, denk aan e-mail of websites, zijn aanvullende ordeningen mogelijk.
+Om documenten duurzaam toegankelijk te maken en houden is het van belang dat deze zijn gekoppeld aan een ordening. Een geordend archief is onder andere belangrijk voor het uitvoeren van beheertaken als het selecteren, [vernietigen](/normen/07-vernietigen/) en overbrengen van documenten. Het verantwoordelijke overheidsorgaan beschikt over tenminste één door de organisatie (bijvoorbeeld in een [SIO](/onderwerpen/strategisch-informatieoverleg/)) vastgestelde ordeningsstructuur, die aansluit bij de taken en werkprocessen van het verantwoordelijke overheidsorgaan.[^ar-artikel-2-2-ordening-p2] Daarnaast mogen aanvullende ordeningen bestaan, die niet hoeven aan te sluiten bij de taken en werkprocessen.[^ar-artikel-2-2-ordening-p2] Dit mogen bijvoorbeeld cliëntgerichte, locatiegerichte of objectgerichte ordeningsstructuren zijn. Voor specifieke [verschijningsvormen](/onderwerpen/verschijningsvorm/) van documenten, denk aan e-mail of websites, zijn aanvullende ordeningen mogelijk.
 
 [^ar-artikel-2-2-ordening-p2]: Ar, artikel 2.2, Ordening, p. 2. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
@@ -60,7 +60,7 @@ Het verantwoordelijke overheidsorgaan beschikt over één of meerdere ordeningss
 
 - Er is een verantwoordelijke aangewezen voor het actualiseren van de ordeningsstructuur.
 - Er is een door de organisatie vastgestelde procedure voor het actualiseren van de ordeningsstructuur.
-- Ten minste één ordeningsstructuur komt overeen met de structuur in het selectiebesluit.
+- Tenminste één ordeningsstructuur komt overeen met de structuur in het selectiebesluit.
 
 #### Voorschrift
 

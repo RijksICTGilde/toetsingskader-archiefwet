@@ -6,7 +6,10 @@ norm_id: "4"
 norm_titel: "Metadateren"
 aliases:
   - /normen/04-metadatering/
-kern: "Documenten zijn gemetadateerd zodat de inhoud, structuur en context van documenten en het beheer ervan door de tijd heen zijn beschreven en vastgelegd."
+kern: "Het verantwoordelijke overheidsorgaan stelt één of meerdere metadataschema's vast. Conform het metadataschema worden de juiste metadata aan documenten gekoppeld."
+kern_bron: "Ar, artikel 2.5, eerste en tweede lid."
+kern_bron_url: "https://www.internetconsultatie.nl/archiefregeling/b1"
+kern_kaart: "Documenten zijn gemetadateerd zodat de inhoud, structuur en context van documenten en het beheer ervan door de tijd heen zijn beschreven en vastgelegd."
 synoniemen:
   - "Metagegevens"
   - "Metadata"
@@ -15,13 +18,9 @@ synoniemen:
 
 ## Toelichting
 
-Het verantwoordelijke overheidsorgaan stelt één of meerdere metadataschema's vast.[^ar-artikel-2-5-lid-1] Conform het metadataschema worden de juiste metadata aan documenten gekoppeld.[^ar-artikel-2-5-lid-2]
-
-[^ar-artikel-2-5-lid-1]: Ar, artikel 2.5, eerste lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
-[^ar-artikel-2-5-lid-2]: Ar, artikel 2.5, tweede lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
-
 Metadata zijn gegevens die de inhoud, [structuur](/onderwerpen/structuur/) en context van documenten en het beheer ervan door de tijd heen beschrijven.[^ab-artikel-1-1-begripsbepalingen] Het koppelen van de juiste metadata aan documenten is van belang om de duurzame toegankelijkheid van overheidsinformatie te borgen. Daarom moeten alle documenten bij inbeheername en gedurende het beheer worden voorzien van metadata.[^ar-artikel-2-5-lid-2] Metadata kunnen op het niveau van individuele documenten worden vastgelegd, maar ook op een hoger [aggregatieniveau](/onderwerpen/classificatie-en-aggregatie/), bijvoorbeeld op het niveau van een dossier, database of dataset. Welk niveau passend is, is afhankelijk van de technische aard van de (categorieën) documenten.[^ar-toelichting-h2-metadata-p37] Het is ook mogelijk om de metadata vast te leggen in een externe registratie. Dit is met name van toepassing bij fysieke documenten.[^ar-toelichting-algemene-eisen-ordening]
 
+[^ar-artikel-2-5-lid-2]: Ar, artikel 2.5, tweede lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ab-artikel-1-1-begripsbepalingen]: Ab, artikel 1.1, begripsbepalingen, p. 1. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 [^ar-toelichting-h2-metadata-p37]: Ar, Toelichting, Hoofdstuk 2, Metadata, p. 37. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ar-toelichting-algemene-eisen-ordening]: Ar, Toelichting, Algemene eisen, ordening, p. 34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
@@ -40,9 +39,10 @@ De Archiefregeling onderscheidt drie categorieën documenten, die ieder andere e
 
 #### Voorschrift
 
-De Inspectie toetst of het verantwoordelijke overheidsorgaan één of meerdere metadataschema's zoals bedoeld in NEN-ISO 23081-1:2017[^nen-iso-23081-1-2017] heeft vastgesteld.[^ar-artikel-2-5-lid-1]
+Het verantwoordelijke overheidsorgaan heeft één of meerdere metadataschema's zoals bedoeld in NEN-ISO 23081-1:2017[^nen-iso-23081-1-2017] vastgesteld.[^ar-artikel-2-5-lid-1]
 
 [^nen-iso-23081-1-2017]: NEN-ISO 23081-1:2017, Informatie en documentatie - Metagegevens voor archiefbescheiden.
+[^ar-artikel-2-5-lid-1]: Ar, artikel 2.5, eerste lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 #### Criteria
 
@@ -61,7 +61,7 @@ Alle documenten, ongeacht de bewaartermijn, zijn voorzien van de volgende metada
 
 #### Voorschrift
 
-De Inspectie toetst of van ieder document minimaal het volgende in de metadata is vastgelegd[^ar-artikel-2-5-lid-2] (bij het document, of op het niveau van zaak, proces, bestand, dossier, database of dataset waartoe het document behoort[^ar-toelichting-algemene-eisen-ordening]):
+Van ieder document is minimaal het volgende in de metadata (bij het document, of op het niveau van zaak, proces, bestand, dossier, database of dataset waartoe het document behoort[^ar-toelichting-algemene-eisen-ordening]) vastgelegd:[^ar-artikel-2-5-lid-2]
 
 - de inhoud;
 - de [structuur](/onderwerpen/structuur/);
@@ -104,12 +104,12 @@ Indien gebruik is gemaakt van een elektronische handtekening:
 
 #### Criteria
 
-- De vereiste metadata worden zo snel mogelijk na creatie of ontvangst vastgelegd bij documenten. Bij wijzigingen of creatie van nieuwe metadata moeten deze ook zo snel mogelijk worden toegevoegd aan de documenten.
+- De vereiste metadata worden zo snel mogelijk na creatie of ontvangst vastgelegd bij documenten. Bij wijzigingen of creatie van nieuwe metadata moet deze ook zo snel mogelijk worden toegevoegd aan de documenten.
 
 #### Indicatoren
 
 - Er zijn instructies voor het toekennen van de vereiste metadata aan documenten.
-- Metadata worden zoveel mogelijk automatisch toegekend aan documenten.
+- Metadata wordt zoveel mogelijk automatisch toegekend aan documenten.
 
 ### Metadata voor digitale documenten met een bewaartermijn langer dan tien jaar
 
@@ -119,7 +119,7 @@ Digitale documenten met een bewaartermijn langer dan tien jaar zijn voorzien van
 
 #### Voorschrift
 
-De Inspectie toetst of van ieder document in de metadata is vastgelegd (bij het document, of op het niveau van zaak, proces, bestand, dossier, database of dataset waartoe het document behoort[^ar-toelichting-algemene-eisen-ordening]):
+Van ieder document is in de metadata (bij het document, of op het niveau van zaak, proces, bestand, dossier, database of dataset waartoe het document behoort[^ar-toelichting-algemene-eisen-ordening]) vastgelegd:
 
 - een omschrijving van de gebruikte [hardware, besturingsprogrammatuur en toepassingsprogrammatuur](/onderwerpen/metadata-hardware-en-programmatuur/);[^ar-artikel-2-8-onder-a]
 - een vermelding van de resultaten van uitgevoerde [integriteitschecks](/onderwerpen/metadata-integriteitscheck/);[^ar-artikel-2-8-onder-b]
@@ -131,12 +131,12 @@ De Inspectie toetst of van ieder document in de metadata is vastgelegd (bij het 
 
 #### Criteria
 
-- De vereiste metadata worden zo snel mogelijk na creatie of ontvangst vastgelegd bij documenten. Bij wijzigingen of creatie van nieuwe metadata moeten deze ook zo snel mogelijk worden toegevoegd aan de documenten.
+- De vereiste metadata worden zo snel mogelijk na creatie of ontvangst vastgelegd bij documenten. Bij wijzigingen of creatie van nieuwe metadata moet deze ook zo snel mogelijk worden toegevoegd aan de documenten.
 
 #### Indicatoren
 
 - Er zijn instructies voor het toekennen van de vereiste metadata aan documenten.
-- Metadata worden zoveel mogelijk automatisch toegekend aan documenten.
+- Metadata wordt zoveel als mogelijk automatisch toegekend aan documenten.
 
 ### Metadata voor over te brengen documenten
 
@@ -144,7 +144,7 @@ Over te brengen documenten zijn, uiterlijk voorafgaand aan overbrenging, voorzie
 
 #### Voorschrift
 
-De Inspectie toetst of van ieder document in de metadata kan worden vastgelegd[^ar-artikel-2-12] (bij het document, of op het niveau van zaak, proces, bestand, dossier, database of dataset waartoe het document behoort[^ar-toelichting-algemene-eisen-ordening]):
+Van ieder document kan in de metadata (bij het document, of op het niveau van zaak, proces, bestand, dossier, database of dataset waartoe het document behoort[^ar-toelichting-algemene-eisen-ordening]) worden vastgelegd:[^ar-artikel-2-12]
 
 - de status openbaar of beperkt openbaar;[^ar-artikel-2-12-onder-a]
 - de duur van de openbaarheidsbeperking;[^ar-artikel-2-12-onder-b]
@@ -158,12 +158,12 @@ De Inspectie toetst of van ieder document in de metadata kan worden vastgelegd[^
 
 #### Criteria
 
-- De vereiste metadata worden toegevoegd aan documenten, voordat die worden overgebracht naar een archiefbewaarplaats.
+- De vereiste metadata wordt toegevoegd aan documenten, voordat die worden overgebracht naar een archiefbewaarplaats.
 
 #### Indicatoren
 
 - Er zijn instructies voor het toekennen van de vereiste metadata aan documenten.
-- Metadata worden zoveel mogelijk automatisch toegekend aan documenten.
+- Metadata wordt zoveel als mogelijk automatisch toegekend aan documenten.
 
 ## Reikwijdte
 

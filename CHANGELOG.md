@@ -50,6 +50,33 @@ changelog volgt [Semantic Versioning][semver].
 - De kaart op `/normen/` houdt de kortere omschrijving uit het
   introductiedocument (front matter `kern_kaart`), zodat de normpagina de
   normbladtekst kan tonen zonder dat de index verandert.
+- De review op normblad Ordenen gold expliciet voor alle normbladen; die twee
+  punten zijn nu ook op de normen 1, 2 en 4 tot en met 8 doorgevoerd:
+  - De `kern` is de kerntekst uit het normblad zelf, met bronvermelding
+    (`kern_bron`/`kern_bron_url`). De kortere zin uit "0) Introductie" die er
+    stond staat nu in `kern_kaart` en blijft dus op de kaart in `/normen/`.
+    Waar die normbladtekst ook als eerste alinea onder `## Toelichting` stond
+    (normen 2, 4, 5, 6 en 7) is die dubbeling weg.
+  - De voorschriften zijn letterlijk de normbladtekst en staan als eis
+    geformuleerd ("Het verantwoordelijke overheidsorgaan heeft …") in plaats
+    van als toetsvraag ("De Inspectie toetst of …"). De bronvoetnoten bleven
+    gelijk. `CONTRIBUTING.md` en de training voor contentbeheer beschrijven
+    die vorm nu ook; `CONTRIBUTING.md` noemde daar bovendien nog de oude kop
+    `## Normuitleg`.
+- De tekst van de normbladen staat nu woord voor woord op de site. De
+  redactionele bewerkingen die er tot nu toe op zaten zijn teruggedraaid: de
+  spellings- en congruentiecorrecties op het normblad ("emailapplicaties",
+  "maateregelen", "plaats vond", "Metadata wordt", "de inhoud … zijn", het
+  ontbrekende haakje in "(digitaal of papier."), de uitgeschreven afkortingen
+  in de lopende tekst ("WOO", "etc.", "SIO", "functies/rollen"), en de
+  normnamen uit normblad 8 in plaats van de sitenaamgeving. Ook de vier zinnen
+  die de site had toegevoegd om naar de kennisbank van het Nationaal Archief
+  te linken (architectuur/overwegingen bij implementatie, niveau van
+  maatregelen, digitaal vernietigen, aangrijpingspunt) staan niet in de
+  normbladen en zijn eruit; die vier externe links vervallen daarmee.
+  Buiten deze regel blijven de bronvermeldingen in de voetnoten, de
+  synoniemen, de `### <thema>`-koppen en de "Zie ook"-linklabels — en
+  "overbrengen" in norm 3, want die correctie vroeg de reviewer zelf.
 - Thema bijgewerkt naar `hugo-theme-rijksoverheid` v0.2.0. Daarin zitten vijf
   toegankelijkheidsfixes die hier als tijdelijke overrides stonden
   (focusindicatoren in de zoekresultaten, het zoekveld en de footerlinks; het

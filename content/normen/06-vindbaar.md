@@ -6,7 +6,10 @@ norm_id: "6"
 norm_titel: "Vindbaar"
 aliases:
   - /normen/05-vindbaarheid/
-kern: "Een document moet binnen een redelijke termijn na creatie of ontvangst vindbaar, beschikbaar en leesbaar zijn."
+kern: "Het verantwoordelijke overheidsorgaan zorgt ervoor dat documenten binnen een redelijke termijn gevonden kunnen worden."
+kern_bron: "Ab, artikel 2.1, eerste lid, onder a."
+kern_bron_url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
+kern_kaart: "Een document moet binnen een redelijke termijn na creatie of ontvangst vindbaar, beschikbaar en leesbaar zijn."
 synoniemen:
   - "Zoeken"
   - "Vinden"
@@ -16,15 +19,14 @@ synoniemen:
 
 ## Toelichting
 
-Het verantwoordelijke overheidsorgaan zorgt ervoor dat documenten binnen een redelijke termijn gevonden kunnen worden.[^ab-artikel-2-1-lid-1-onder-a] Het verantwoordelijke overheidsorgaan richt zijn informatiehuishouding zodanig in dat documenten doelgericht, snel en eenvoudig kunnen worden teruggevonden gedurende hun gehele bewaartermijn. Vindbaarheid wordt geborgd door een duidelijke [ordening](/normen/03-ordenen/), consistente toepassing van [metadata](/normen/04-metadateren/) en een actueel [overzicht](/normen/02-overzicht/) van de informatiehuishouding.
-
-[^ab-artikel-2-1-lid-1-onder-a]: Ab, artikel 2.1, eerste lid, onder a. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+Het verantwoordelijke overheidsorgaan richt zijn informatiehuishouding zodanig in dat documenten doelgericht, snel en eenvoudig kunnen worden teruggevonden gedurende hun gehele bewaartermijn. Vindbaarheid wordt geborgd door een duidelijke [ordening](/normen/03-ordenen/), consistente toepassing van [metadata](/normen/04-metadateren/) en een actueel [overzicht](/normen/02-overzicht/) van de informatiehuishouding.
 
 [Vindbaarheid](https://www.nationaalarchief.nl/archiveren/kennisbank/vindbaar) is een kenmerk van duurzame toegankelijkheid.[^ab-artikel-2-1-lid-1-onder-a] Documenten moeten binnen een redelijke termijn vindbaar zijn voor gebruikers die daar recht toe hebben en bevoegd zijn, bij voorkeur ongeacht tijd en systeem, en zodanig dat inzage, openbaarmaking en verantwoording binnen redelijke termijn mogelijk zijn.[^ab-nota-van-toelichting-vindbaar-p10]
 
+[^ab-artikel-2-1-lid-1-onder-a]: Ab, artikel 2.1, eerste lid, onder a. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 [^ab-nota-van-toelichting-vindbaar-p10]: Ab, Nota van toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p. 10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
-De redelijke termijn voor categorieën documenten moet in de [passende maatregelen](/onderwerpen/passende-maatregelen/) geconcretiseerd worden.[^aw-artikel-4-1-lid-1] De invulling van de redelijke termijn gebeurt op basis van de [risicoanalyse](/onderwerpen/passende-maatregelen/). Bij het bepalen van het [niveau van maatregelen](https://www.nationaalarchief.nl/archiveren/kennisbank/niveau-van-maatregelen-overwegingen-generiek-deel) biedt het DUTO-raamwerk van het Nationaal Archief houvast.
+De redelijke termijn voor categorieën documenten moet in de [passende maatregelen](/onderwerpen/passende-maatregelen/) geconcretiseerd worden.[^aw-artikel-4-1-lid-1] De invulling van de redelijke termijn gebeurt op basis van de [risicoanalyse](/onderwerpen/passende-maatregelen/).
 
 [^aw-artikel-4-1-lid-1]: Aw, artikel 4.1, eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
@@ -36,7 +38,7 @@ De Inspectie kijkt bij vindbaarheid vooral naar hoe essentiële randvoorwaarden 
 
 #### Voorschrift
 
-De Inspectie toetst of het verantwoordelijke overheidsorgaan in de passende maatregelen heeft opgenomen wat de redelijke termijn is voor de vindbaarheid van documenten.[^aw-artikel-4-1-4-2-ar-toelichting-vinden]
+Het verantwoordelijke overheidsorgaan heeft in de passende maatregelen opgenomen wat de redelijke termijn is voor de vindbaarheid van documenten.[^aw-artikel-4-1-4-2-ar-toelichting-vinden]
 
 [^aw-artikel-4-1-4-2-ar-toelichting-vinden]: Aw, artikel 4.1 en 4.2 en Ar, Toelichting, Algemeen deel, onder Vinden, weergeven, exporteren en raadplegen, p. 36. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
@@ -52,7 +54,7 @@ De Inspectie toetst of het verantwoordelijke overheidsorgaan in de passende maat
 
 #### Voorschrift
 
-De Inspectie toetst of het verantwoordelijke overheidsorgaan documenten binnen een redelijke termijn kan vinden.[^ab-artikel-2-1-lid-a-nota-vindbaar]
+Het verantwoordelijke overheidsorgaan kan documenten binnen een redelijke termijn vinden.[^ab-artikel-2-1-lid-a-nota-vindbaar]
 
 [^ab-artikel-2-1-lid-a-nota-vindbaar]: Ab, artikel 2.1, lid a en Ab, Nota van toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p. 10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
@@ -68,7 +70,7 @@ De Inspectie toetst of het verantwoordelijke overheidsorgaan documenten binnen e
 
 #### Voorschrift
 
-De Inspectie toetst of documenten door de organisatie, op basis van de eisen die gesteld worden aan metadata, de ordening en het overzicht, binnen een redelijke termijn kunnen worden gevonden.[^ab-artikel-2-1-ar-toelichting-p34-50-53]
+Documenten kunnen door de organisatie, op basis van de eisen die gesteld worden aan metadata, de ordening en het overzicht, binnen een redelijke termijn worden gevonden.[^ab-artikel-2-1-ar-toelichting-p34-50-53]
 
 [^ab-artikel-2-1-ar-toelichting-p34-50-53]: Ab, artikel 2.1, eerste lid; Ar, Toelichting, p. 34, artikelen 2.2, 2.3 en 2.5 en Ar, Toelichting, p. 50 en 53. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
@@ -82,7 +84,7 @@ De Inspectie toetst of documenten door de organisatie, op basis van de eisen die
 
 #### Voorschrift
 
-De Inspectie toetst of documenten binnen een redelijke termijn vindbaar zijn voor gebruikers die daar recht op hebben.[^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar]
+Documenten zijn binnen een redelijke termijn vindbaar voor gebruikers die daar recht op hebben.[^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar]
 
 [^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar]: Ab, artikel 2.1, eerste lid, onder a en Ab, Nota van toelichting, Vindbaar, p. 10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
