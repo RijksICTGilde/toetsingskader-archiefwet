@@ -36,7 +36,7 @@ Het risico van onvoldoende beveiliging is dat documenten kunnen worden gestolen,
 
 [^ab-nota-van-toelichting-p11]: Ab, Nota van toelichting, p. 11. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
-## Normuitleg
+## Voorschriften
 
 ### Informatiebeveiliging en betrouwbaarheid
 

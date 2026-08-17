@@ -9,7 +9,11 @@
         <a href="{{ .RelPermalink }}">{{ .Params.norm_id }}. {{ .Params.norm_titel | default .Title }}</a>
       </h2>
     </header>
-    {{ with .Params.kern }}
+    {{/* De kaart toont de korte omschrijving uit het introductiedocument
+         (`kern_kaart`); `kern` is de kerntekst uit het normblad zelf en staat
+         voluit op de normpagina. Zolang een norm geen eigen `kern_kaart`
+         heeft, zijn ze hetzelfde en valt de kaart terug op `kern`. */}}
+    {{ with .Params.kern_kaart | default .Params.kern }}
     <p>{{ . }}</p>
     {{ end }}
   </article>

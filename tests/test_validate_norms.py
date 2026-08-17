@@ -31,7 +31,7 @@ Een toelichting met een bron.[^aw-4-1-lid-1]
 
 [^aw-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://example.org)
 
-## Normuitleg
+## Voorschriften
 
 ### Besturing
 
@@ -97,6 +97,38 @@ class FrontMatterTests(unittest.TestCase):
         errors = run(content)
         self.assertTrue(any("'kern' mag geen voetnoten" in e for e in errors), errors)
 
+    def test_kern_bron_is_optional(self):
+        errors = run(VALID_NORM)
+        self.assertFalse(any("kern_bron" in e for e in errors), errors)
+
+    def test_kern_bron_with_markdown_link(self):
+        content = replace(
+            'kern: "De organisatie heeft een overzicht van haar documenten."',
+            'kern: "De organisatie heeft een overzicht van haar documenten."\n'
+            'kern_bron: "Aw, artikel 4.1. [Bekijk bron](https://example.org)"',
+        )
+        errors = run(content)
+        self.assertTrue(any("'kern_bron' mag geen voetnoten of markdown-links" in e for e in errors), errors)
+
+    def test_kern_bron_url_must_be_http(self):
+        content = replace(
+            'kern: "De organisatie heeft een overzicht van haar documenten."',
+            'kern: "De organisatie heeft een overzicht van haar documenten."\n'
+            'kern_bron: "Aw, artikel 4.1, eerste lid."\n'
+            'kern_bron_url: "example.org/bron"',
+        )
+        errors = run(content)
+        self.assertTrue(any("'kern_bron_url' moet een http(s)-URL zijn" in e for e in errors), errors)
+
+    def test_kern_bron_url_without_kern_bron(self):
+        content = replace(
+            'kern: "De organisatie heeft een overzicht van haar documenten."',
+            'kern: "De organisatie heeft een overzicht van haar documenten."\n'
+            'kern_bron_url: "https://example.org/bron"',
+        )
+        errors = run(content)
+        self.assertTrue(any("'kern_bron_url' zonder 'kern_bron'" in e for e in errors), errors)
+
     def test_invalid_yaml(self):
         content = replace('norm_titel: "Overzicht"', 'norm_titel: "Overzicht')  # ongesloten quote
         errors = run(content)
@@ -149,11 +181,11 @@ class HeadingTests(unittest.TestCase):
         errors = run(content)
         self.assertTrue(any("Onbekende subkop '#### Onbekend'" in e for e in errors), errors)
 
-    def test_theme_outside_normuitleg(self):
+    def test_theme_outside_voorschriften(self):
         content = replace("## Reikwijdte\n\nAlle documenten.\n",
                           "## Reikwijdte\n\n### Verdwaald thema\n\nAlle documenten.\n")
         errors = run(content)
-        self.assertTrue(any("mag alleen binnen '## Normuitleg'" in e for e in errors), errors)
+        self.assertTrue(any("mag alleen binnen '## Voorschriften'" in e for e in errors), errors)
 
     def test_theme_without_voorschrift(self):
         content = replace("#### Voorschrift\n\nDe Inspectie toetst of beheerregels zijn vastgesteld.\n\n", "")

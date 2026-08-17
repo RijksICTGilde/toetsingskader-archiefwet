@@ -42,7 +42,7 @@ In een beheerde omgeving[^functies-nationaal-archief] zijn functionaliteiten bes
 
 [^kamerstukken-2021-22-35968]: Kamerstukken II 2021/22, 35968, nr. 3, Beheerstrategie, p. 15.
 
-## Normuitleg
+## Voorschriften
 
 ### Besturing
 
