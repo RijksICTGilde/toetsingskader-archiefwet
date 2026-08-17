@@ -14,10 +14,14 @@ disableKinds:
   - term
 
 outputFormats:
-  pdf:
-    mediaType: application/json
-    baseName: index.pdf
-    isPlainText: true
+  # Print-HTML: de invoer waar scripts/pdf-build.mjs met Chromium een getagde
+  # PDF van maakt. Alleen aangezet op de normen (front matter van
+  # content/normen/_index.md), want alleen die worden als document aangeboden.
+  # `notAlternative` houdt het uit de <link rel="alternate"> van de site: het is
+  # een tussenproduct, geen tweede versie van de pagina om naartoe te linken.
+  print:
+    mediaType: text/html
+    baseName: index.print
     notAlternative: true
 
 outputs:
@@ -27,10 +31,8 @@ outputs:
     - JSON
   page:
     - HTML
-    - pdf
   section:
     - HTML
-    - pdf
 
 markup:
   goldmark:

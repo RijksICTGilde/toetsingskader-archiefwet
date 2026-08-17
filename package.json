@@ -4,15 +4,16 @@
   "type": "module",
   "scripts": {
     "test": "node --test tests/js/*.test.mjs",
-    "build:pdf-assets": "node scripts/build-pdf-assets.mjs",
-    "smoke:pdf": "node tests/js/pdf-render.smoke.mjs",
+    "build:pdf": "node scripts/pdf-build.mjs public",
     "test:a11y": "node scripts/a11y-scan.mjs public",
+    "test:pdf-ua": "node scripts/pdf-ua-check.mjs public/normen/index.pdf public/normen/*/index.pdf",
     "test:a11y:browser": "node scripts/a11y-browser.mjs .a11y/public"
   },
   "devDependencies": {
     "axe-core": "^4.10.2",
     "jsdom": "^25.0.1",
     "linkedom": "^0.18.12",
+    "pdf-lib": "^1.17.1",
     "playwright": "^1.62.1"
   }
 }

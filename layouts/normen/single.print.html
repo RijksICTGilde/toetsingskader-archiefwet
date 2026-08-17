@@ -1,0 +1,94 @@
+{{- /* ---------------------------------------------------------------------
+     Print-HTML van één norm. Invoer voor scripts/pdf-build.mjs, dat hier met
+     Chromium een getagde PDF van maakt. Zie docs/besluit-toegankelijke-pdf.md.
+
+     Waarom een eigen, volledige HTML-pagina en niet de site-layout: de
+     structuurboom van de PDF volgt de DOM. Alles wat op de site staat maar in
+     een document niets doet — navigatie, zoekknop, inhoudsopgave-aside,
+     terug-naar-boven — zou als tags in de PDF belanden en een schermlezer door
+     de koppenlijst laten waden. Deze pagina bevat daarom alleen het document.
+
+     Wat hier bewust NIET gebeurt, in tegenstelling tot normen/single.html: de
+     voetnoten worden niet omgebouwd tot tooltips met een accordeon. Die UX is
+     voor een scherm. Op papier is de Goldmark-standaard — genummerd superscript
+     plus een bronnenlijst onderaan — precies goed, en hij tagt als Note.
+     --------------------------------------------------------------------- */ -}}
+{{- if .Params.norm_id -}}
+{{- $content := partial "nummer-voorschriften.html" (dict "content" .Content "norm_id" .Params.norm_id) -}}
+{{- /* Voetnoot-items plat maken. Goldmark zet de brontekst in een <p> binnen
+       de <li> en hangt er terugspringpijlen achter. Chromium tagt zo'n item als
+       NonStruct in plaats van LI: gemeten op de gegenereerde PDF waren dat 134
+       van de 371 lijstitems in het kaderdocument, precies de voetnoten. Een
+       controle als PAC leest dat als "Lbl en LBody moeten onderliggende items
+       van LI zijn".
+
+       De pijlen staan op `display: none` in print.css en hebben op papier geen
+       doel, dus die gaan er hier helemaal uit — schelen ook drie linkannotaties
+       per bron. */ -}}
+{{- $content = replaceRE `(?s)<a href="#fnref[^"]*" class="footnote-backref"[^>]*>.*?</a>` "" $content -}}
+{{- $content = replaceRE `(?s)(<li id="[^"]*fn:[^"]*">)\s*<p>(.*?)</p>\s*</li>` `${1}${2}</li>` $content -}}
+{{- /* De rol `doc-endnotes` van Goldmark eraf. Vermoeden, te toetsen op de
+       volgende CI-run: Chromium tagt de items van deze <ol> als NonStruct in
+       plaats van LI, terwijl de <ol> van de inhoudsopgave — zonder rol eromheen
+       — wél goed tagt. De rol heeft in een PDF geen equivalent. */ -}}
+{{- $content = replaceRE `<div class="footnotes" role="doc-endnotes">` `<div class="footnotes">` $content -}}
+{{- /* Goldmark zet de voetnoten onderaan zonder kop. De oude export had er
+       "Bronnen" boven staan, en zonder die kop valt wie op koppen navigeert
+       midden in een genummerde lijst. */ -}}
+{{- $content = replaceRE `<div class="footnotes">` `<h2 class="pdf-bronnen">Bronnen</h2><div class="footnotes">` $content 1 -}}
+{{- /* Interne verwijzingen absoluut maken. Chromium lost een root-relatieve
+       href op tegen de URL van het document, en dat is tijdens de generatie de
+       wegwerpserver uit scripts/pdf-build.mjs: zonder deze stap staan er in de
+       PDF links naar http://127.0.0.1:<poort>/… Gemeten op het kaderdocument:
+       139 stuks. Ankers (#…) blijven relatief, dat zijn sprongen binnen het
+       document. */ -}}
+{{- $basis := strings.TrimSuffix "/" site.BaseURL -}}
+{{- $content = replaceRE `href="(/[^"]*)"` (printf `href="%s${1}"` $basis) $content -}}
+<!DOCTYPE html>
+{{- /* `lang` is de bron van /Lang in de PDF: zonder dat leest een schermlezer
+       Nederlandse wettekst met een Engelse stem. */ -}}
+<html lang="{{ or site.Language.LanguageCode "nl-NL" }}">
+<head>
+<meta charset="utf-8">
+{{- /* Dit bestand komt wél in `public/` terecht, maar is een tussenproduct: de
+       leesbare versie is de normpagina, de deelbare versie is de PDF. Zonder
+       `noindex` concurreert een kale kopie van dezelfde tekst in de
+       zoekresultaten met het origineel. */ -}}
+<meta name="robots" content="noindex">
+{{- /* <title> wordt de documenttitel van de PDF, die de viewer in de titelbalk
+       toont in plaats van de bestandsnaam. */ -}}
+<title>{{ .Title }} | {{ site.Title }}</title>
+{{- /* ExecuteAsTemplate: print.css verwijst naar de lettertypen via
+       resources.Get, zodat Hugo ze publiceert. */ -}}
+{{- $css := resources.Get "print/print.css" | resources.ExecuteAsTemplate "print/print.css" . | fingerprint "md5" -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+</head>
+<body>
+{{- /* Titelpagina, inhoud, colofon — dezelfde opzet als de export die dit
+       vervangt. De datum is de bouwdatum: in de oude export stond hier
+       "Gedownload op", maar er wordt nu niets meer bij de bezoeker
+       gegenereerd. */ -}}
+<header class="pdf-cover">
+  <h1>{{ .Title }}</h1>
+  <p class="pdf-meta">Gegenereerd op {{ now | time.Format ":date_long" }}</p>
+  <p class="pdf-meta">Bron: <a href="{{ .Permalink }}">{{ .Permalink }}</a></p>
+  <p class="pdf-meta">Versie: {{ site.Params.versie | default "onbekend" }}</p>
+</header>
+
+<main>
+  {{- with .Params.kern }}
+  {{- /* Geen <blockquote>: dit is geen citaat, en Chromium zou het als
+         BlockQuote tagen. Een sectie met een kop is wat het is. */ -}}
+  <section class="pdf-kern" aria-labelledby="kern">
+    <h2 id="kern">Kern van de norm</h2>
+    {{ . | markdownify }}
+  </section>
+  {{- end }}
+
+  {{ $content | safeHTML }}
+</main>
+
+{{ partial "pdf-colofon.html" . }}
+</body>
+</html>
+{{- end -}}

@@ -233,9 +233,17 @@ for (const url of [...urls, ...extra]) {
   await page.goto(base + url, { waitUntil: 'load' })
 
   // 1. axe-core, incl. de layout-afhankelijke regels.
+  //
+  // `target-size` (2.5.8) gaat over aanwijsdoelen: 24 CSS-px, of genoeg ruimte
+  // ertussen. De print-HTML wordt een PDF op A4 en heeft geen aanwijsdoelen —
+  // regelafstand oprekken tot de links 24 px uit elkaar staan zou de opmaak
+  // veranderen voor een probleem dat op papier niet bestaat. Alle andere regels
+  // blijven staan, contrast voorop.
+  const rules = url.endsWith('.print.html') ? { 'target-size': { enabled: false } } : {}
   await page.addScriptTag({ content: axeSrc })
   const res = await page.evaluate(
-    tags => window.axe.run(document, { runOnly: { type: 'tag', values: tags } }), TAGS)
+    ([tags, rules]) => window.axe.run(document, { runOnly: { type: 'tag', values: tags }, rules }),
+    [TAGS, rules])
   for (const v of res.violations) {
     // Kleuren en ratio meenemen; anders is de bevinding niet na te trekken.
     const detail = v.nodes.slice(0, 3).map(n => {
@@ -243,6 +251,17 @@ for (const url of [...urls, ...extra]) {
       return n.target.join(' ') + (d ? ` (${d.fgColor} op ${d.bgColor} = ${d.contrastRatio}:1, nodig ${d.expectedContrastRatio})` : '')
     }).join(', ')
     add(url, `axe:${v.id}`, `${v.nodes.length}x ${v.help} — ${detail}`)
+  }
+
+  // De print-HTML (`…/index.print.html`) is de invoer voor de PDF-generatie.
+  // Axe hierboven telt onverkort mee: contrast en semantiek gaan mee de PDF in,
+  // en de kern-callout zakte daar precies op door (#007bc7 op #f3f6f8 = 4,15:1).
+  // Alles hieronder meet schermgedrag — toetsenbordfocus, tekstvergroting,
+  // tekstafstand, reflow op 320 px. Een document op A4 heeft geen viewport en
+  // geen focus; die metingen zouden alleen ruis opleveren.
+  if (url.endsWith('.print.html')) {
+    await page.close()
+    continue
   }
 
   // 2. Toetsenborddoorloop: focusindicator (2.4.7) en focus-niet-afgedekt (2.4.11).

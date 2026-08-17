@@ -1,10 +1,25 @@
-{{- $pdf := .Page.OutputFormats.Get "pdf" -}}
-{{- with $pdf -}}
-{{/* <button>, want een <a download> leverde zonder JS een JSON-bestand op. */}}
+{{- /* ---------------------------------------------------------------------
+     Downloadknop voor het hele kader — `{{< pdf-kader >}}`
+
+     Een gewone link naar een bestaand bestand: de PDF wordt bij de build
+     gemaakt (scripts/pdf-build.mjs) en staat als index.pdf naast de
+     sectiepagina. Dat was eerder een <button> die JavaScript zichtbaar moest
+     maken, omdat er achter de link een JSON-endpoint zat en `download` dan een
+     .json opleverde onder de naam "Download als PDF". Die omweg is weg: dit
+     werkt nu ook zonder JavaScript.
+
+     `download` met een naam erin, want het bestand heet op schijf index.pdf.
+     Zelfde naam als de oude export, zodat verwijzingen ernaar blijven kloppen.
+     --------------------------------------------------------------------- */ -}}
+{{- /* Alleen tonen waar de PDF ook gemaakt wordt. Het `print`-outputformat
+     staat aan via de front matter van content/normen/_index.md; zonder die
+     controle levert deze shortcode op een andere pagina een volledig opgemaakte
+     knop naar een 404 op. */ -}}
+{{- with .Page.OutputFormats.Get "print" -}}
 <p class="pdf-kader">
-  <button type="button" class="button pdf-download" data-pdf-url="{{ .RelPermalink }}" hidden>
+  <a class="button pdf-download" href="{{ $.Page.RelPermalink }}index.pdf"
+     download="toetsingskader-archiefwet-2026.pdf">
     {{- partial "icon.html" "download" -}}<span>Download het volledige kader als PDF</span>
-  </button>
+  </a>
 </p>
-{{ partial "pdf-scripts.html" $.Page }}
 {{- end -}}

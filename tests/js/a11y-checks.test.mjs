@@ -9,7 +9,7 @@ import { parseHTML } from 'linkedom'
 import {
   zwevendeVoetnootFouten, korteRefTermFouten,
   voorbehoudFout, voorbehoudBronFout, VOORBEHOUD,
-  legeAltFouten, zonderHash,
+  legeAltFouten, zonderHash, kopvolgordeFouten, dubbeleIdFouten, bronnenKopFouten,
 } from '../../scripts/a11y-checks.mjs'
 
 const dom = (body) => parseHTML(`<!DOCTYPE html><html><body>${body}</body></html>`).document
@@ -81,4 +81,50 @@ test('zonderHash haalt extensie, Hugo-suffix en fingerprint weg', () => {
   assert.equal(zonderHash('/images/hero_hu_b08cab36f00ecf30.webp'), '/images/hero')
   assert.equal(zonderHash('/images/logo.9f2a1c4e8b7d6a5f0e3c2b1a09876543.svg'), '/images/logo')
   assert.equal(zonderHash('/images/plaat.png'), '/images/plaat')
+})
+
+// --- Print-HTML: kopvolgorde en dubbele id's --------------------------------
+// Beide controles bestaan voor de PDF-generatie: Chromium leidt de
+// structuurboom uit de koppen af, en het kaderdocument zet acht normen met
+// eigen voetnootnummering achter elkaar.
+
+test('kopvolgorde: een oplopende reeks zonder sprongen is goed', () => {
+  assert.deepEqual(kopvolgordeFouten(dom('<h1>A</h1><h2>B</h2><h3>C</h3><h2>D</h2>')), [])
+})
+
+test('kopvolgorde: een overgeslagen niveau is een fout', () => {
+  const fouten = kopvolgordeFouten(dom('<h1>A</h1><h3>C</h3>'))
+  assert.equal(fouten.length, 1)
+  assert.match(fouten[0], /h1 → h3/)
+})
+
+test('kopvolgorde: terugspringen naar een hoger niveau mag', () => {
+  assert.deepEqual(kopvolgordeFouten(dom('<h1>A</h1><h2>B</h2><h4>X</h4>')).length, 1)
+  assert.deepEqual(kopvolgordeFouten(dom('<h1>A</h1><h2>B</h2><h3>C</h3><h2>D</h2><h3>E</h3>')), [])
+})
+
+test('kopvolgorde: een tweede h1 is een fout, een derde telt niet nog eens mee', () => {
+  const fouten = kopvolgordeFouten(dom('<h1>A</h1><h1>B</h1><h1>C</h1>'))
+  assert.equal(fouten.length, 1)
+  assert.match(fouten[0], /meer dan één <h1>/)
+})
+
+test('dubbele id: geprefixte ankers per norm botsen niet', () => {
+  assert.deepEqual(dubbeleIdFouten(dom('<p id="n1-fn:1">a</p><p id="n2-fn:1">b</p>')), [])
+})
+
+test('dubbele id: hetzelfde anker twee keer is een fout', () => {
+  assert.deepEqual(dubbeleIdFouten(dom('<p id="fn:1">a</p><p id="fn:1">b</p>')), ['fn:1'])
+})
+
+test('bronnenkop: een kop "Bronnen" vlak voor het blok is goed', () => {
+  assert.deepEqual(bronnenKopFouten(dom('<h3>Bronnen</h3><div class="footnotes"><ol></ol></div>')), [])
+})
+
+test('bronnenkop: zonder kop ertussen is een fout', () => {
+  assert.deepEqual(bronnenKopFouten(dom('<p>tekst</p><div class="footnotes"><ol></ol></div>')), ['p'])
+})
+
+test('bronnenkop: een andere kop telt niet als bronnenkop', () => {
+  assert.deepEqual(bronnenKopFouten(dom('<h3>Zie ook</h3><div class="footnotes"></div>')), ['h3'])
 })

@@ -1,6 +1,4 @@
 {{ define "main" }}
-{{ $page := . }}
-
 {{/* ---------------------------------------------------------------------
      Voetnoten → thema-referentie-UX.
 
@@ -146,14 +144,18 @@
 
 {{- if $hasToc -}}
 <aside id="toc" class="toc is-open" aria-label="Op deze pagina">
-  {{/* De PDF wordt client-side uit de JSON-output gebouwd. Als <a href="…json"
-       download> leverde dat zonder JavaScript een JSON-bestand op onder de naam
-       "Download als PDF" — een gebroken belofte. Daarom een <button> die
-       standaard `hidden` is en door pdf-export.js zichtbaar wordt gemaakt. */}}
-  {{- with .OutputFormats.Get "pdf" -}}
-  <button type="button" class="button pdf-download" data-pdf-url="{{ .RelPermalink }}" hidden>
+  {{/* Een gewone link naar een bestaand bestand: de PDF wordt bij de build
+       gemaakt (scripts/pdf-build.mjs) en staat als index.pdf naast de pagina.
+       Hiervoor stond hier een <button hidden> die JavaScript zichtbaar moest
+       maken, omdat de link naar een JSON-endpoint wees. Dat is niet meer nodig,
+       en daarmee werkt de download ook zonder JavaScript. */}}
+  {{- /* Alleen waar het `print`-outputformat aanstaat; daar wordt de PDF
+         gemaakt. Anders wijst de knop naar een bestand dat er niet is. */ -}}
+  {{- with .OutputFormats.Get "print" -}}
+  <a class="button pdf-download" href="{{ $.RelPermalink }}index.pdf"
+     download="{{ $.Title | urlize }}.pdf">
     {{- partial "icon.html" "download" -}}<span>Download als PDF</span>
-  </button>
+  </a>
   {{- end -}}
   <h2>Op deze pagina</h2>
   <nav>
@@ -180,5 +182,4 @@
 <script src="{{ $spy.RelPermalink }}"></script>
 {{- end -}}
 
-{{- with .OutputFormats.Get "pdf" }}{{ partial "pdf-scripts.html" $page }}{{ end -}}
 {{ end }}

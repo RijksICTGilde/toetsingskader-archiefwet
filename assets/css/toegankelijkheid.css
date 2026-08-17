@@ -35,9 +35,7 @@ blockquote.callout header h2.title {
   display: none;
 }
 
-/* --- Bevinding 19: PDF-knop vraagt JavaScript ------------------------------
-   `.pdf-download.button` zet `display: inline-flex` en wint daarmee van de
-   UA-regel voor [hidden]; daarom expliciet. */
-.pdf-download.button[hidden] {
-  display: none;
-}
+/* Bevinding 19 (PDF-knop vraagt JavaScript) is vervallen: de download is een
+   gewone link naar een bestand dat bij de build wordt gemaakt, dus er is geen
+   `[hidden]`-knop meer die JavaScript zichtbaar moet maken. Zie
+   docs/besluit-toegankelijke-pdf.md. */

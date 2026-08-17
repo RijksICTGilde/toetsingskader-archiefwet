@@ -77,3 +77,70 @@ export function legeAltFouten(document) {
     .filter(sleutel => !DECORATIEF.has(sleutel))
     .map(sleutel => sleutel || '(zonder src)')
 }
+
+// --- Kopvolgorde ------------------------------------------------------------
+// Voor de print-HTML (`*.print.html`), waar Chromium de structuurboom van de PDF
+// uit de koppen afleidt. Een overgeslagen niveau is daar geen opmaakkwestie maar
+// een structuurfout: Acrobat rapporteert hem als "Juiste insluiting via nesting",
+// en dat is precies waarop de auto-getagde PDF in docs/toegankelijkheid/
+// struikelt. Axe dekt dit niet: `heading-order` valt onder best-practice en de
+// scan draait alleen de WCAG-tags.
+//
+// Twee fouten, want ze hebben verschillende oorzaken: meer dan één <h1> betekent
+// dat een template twee documenttitels zet, een sprong betekent dat er een
+// niveau ontbreekt tussen kop en subkop.
+export function kopvolgordeFouten(document) {
+  const koppen = [...document.querySelectorAll('h1, h2, h3, h4, h5, h6')]
+  const fouten = []
+  let vorig = 0
+  let h1s = 0
+  for (const kop of koppen) {
+    const niveau = Number(kop.tagName[1])
+    if (niveau === 1 && ++h1s === 2) {
+      fouten.push(`meer dan één <h1>; de tweede is "${tekst(kop)}"`)
+    }
+    if (vorig && niveau > vorig + 1) {
+      fouten.push(`h${vorig} → h${niveau} slaat een niveau over bij "${tekst(kop)}"`)
+    }
+    vorig = niveau
+  }
+  return fouten
+}
+
+const tekst = el => (el.textContent || '').trim().slice(0, 60)
+
+// --- Dubbele id's -----------------------------------------------------------
+// Ook voor de print-HTML. Het kaderdocument zet acht normen achter elkaar en
+// Goldmark nummert voetnoten per pagina, dus zonder prefix per norm bestaat
+// `fn:1` acht keer. Elke verwijzing landt dan op de eerste — in een document van
+// tachtig pagina's stuurt dat de lezer naar de verkeerde bron. Axe's
+// `duplicate-id` is in axe 4.10 best-practice geworden en draait hier dus niet.
+export function dubbeleIdFouten(document) {
+  const gezien = new Set()
+  const dubbel = new Set()
+  for (const el of document.querySelectorAll('[id]')) {
+    const id = el.getAttribute('id')
+    if (gezien.has(id)) dubbel.add(id)
+    else gezien.add(id)
+  }
+  return [...dubbel]
+}
+
+// --- Kop boven de bronnenlijst ----------------------------------------------
+// Ook voor de print-HTML. De kop wordt met een `replaceRE` vóór het
+// voetnotenblok gezet, en dat blok wordt in dezelfde template nog een paar keer
+// bewerkt. Verschuift één van die bewerkingen, dan matcht het patroon niet meer
+// en verdwijnt de kop zonder dat er iets faalt — precies wat er gebeurde toen de
+// rol `doc-endnotes` eerder werd weggehaald dan de kop werd ingevoegd. Wie op
+// koppen navigeert valt dan midden in een genummerde lijst met tientallen
+// bronnen.
+export function bronnenKopFouten(document) {
+  const fouten = []
+  for (const blok of document.querySelectorAll('.footnotes')) {
+    const vorige = blok.previousElementSibling
+    const isKop = vorige && /^H[1-6]$/.test(vorige.tagName) &&
+      (vorige.textContent || '').trim() === 'Bronnen'
+    if (!isKop) fouten.push(vorige ? vorige.tagName.toLowerCase() : '(niets ervoor)')
+  }
+  return fouten
+}
