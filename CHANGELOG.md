@@ -17,9 +17,6 @@ changelog volgt [Semantic Versioning][semver].
   kern, synoniemen, toelichting, voorschriften met criteria en indicatoren,
   reikwijdte en "Zie ook". De PLACEHOLDER-stubs zijn daarmee weg; norm 1 was
   al eerder gemigreerd.
-- Begrippenpagina "Werkproces", met de definitie die als losse zin onder norm 3
-  stond. Het woord "werkproces" in de toelichting linkt ernaar — dezelfde
-  hover-oplossing als bij de begrippen hieronder.
 - Begrippenpagina's voor de termen waar de normbladen om een hover vroegen:
   "Applicatie en systeem", "Structuur", "Verschijningsvorm" en "Strategisch
   informatieoverleg (SIO)". De hover-opmerkingen zijn verwerkt als link naar
@@ -36,20 +33,6 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
-- Kop boven de kern noemt de norm: "Kern van ordenen" in plaats van "Kern van
-  de norm", op de normpagina, in de inhoudsopgave en in de PDF. Uit
-  `norm_titel`, dus voor alle acht normen tegelijk.
-- Sectiekop `## Normuitleg` heet `## Voorschriften`, in alle acht normbladen
-  en in de validator, de training voor contentbeheer en de accentlijn-CSS.
-- Norm 3 (Ordenen) verwerkt naar het herziene normblad: de kern is de
-  kerntekst uit het normblad zelf, met bronvermelding (Ar, artikel 2.2,
-  eerste lid); de drie voorschriften staan als norm geformuleerd in plaats
-  van als toetsvraag ("De Inspectie toetst of …"); "overdragen" is
-  "overbrengen" in de toelichting; de twee bronnen bij voorschrift 3.3 staan
-  in de volgorde van het normblad (artikel vóór toelichting).
-- De kaart op `/normen/` houdt de kortere omschrijving uit het
-  introductiedocument (front matter `kern_kaart`), zodat de normpagina de
-  normbladtekst kan tonen zonder dat de index verandert.
 - Thema bijgewerkt naar `hugo-theme-rijksoverheid` v0.2.0. Daarin zitten vijf
   toegankelijkheidsfixes die hier als tijdelijke overrides stonden
   (focusindicatoren in de zoekresultaten, het zoekveld en de footerlinks; het
