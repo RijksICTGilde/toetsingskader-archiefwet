@@ -34,7 +34,7 @@ De Archiefregeling onderscheidt drie categorieën documenten, die ieder andere e
 [^ar-artikel-2-7]: Ar, artikel 2.7. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ar-artikel-2-12]: Ar, artikel 2.12. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
-## Normuitleg
+## Voorschriften
 
 ### Metadataschema
 

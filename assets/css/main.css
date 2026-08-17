@@ -12,11 +12,20 @@
   }
 }
 
+/* Bronvermelding onder de kern-callout: kleiner dan de kerntekst, maar niet
+   grijs — op het callout-vlak zou dat het contrast onder 4.5:1 duwen. */
+blockquote.callout .kern-bron {
+  margin-block-start: 0.75rem;
+  margin-block-end: 0;
+  font-size: 0.875rem;
+}
+
 /* Norm page: project-specifieke decoratie op de markdown-body. De koppen zijn
    gewone h2/h3/h4, dus scopen via .norm + heading-ids. */
 
-/* Normuitleg-kop met accentlijn. */
-.norm h2#normuitleg {
+/* Voorschriften-kop met accentlijn. Het id volgt de koptekst, dus deze
+   selector hoort bij '## Voorschriften' in content/normen/*.md. */
+.norm h2#voorschriften {
   border-block-end: 2px solid var(--color-primary);
   padding-block-end: 0.5rem;
 }

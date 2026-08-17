@@ -80,8 +80,14 @@
     }
     if (n.kern_html) {
       // Kern als h2 + normale alinea, net als Toelichting (klantfeedback).
-      blocks.push({ text: 'Kern van de norm', style: 'h2' })
+      // De kop noemt de norm ("Kern van ordenen"), gelijk aan de website en de
+      // inhoudsopgave daar; zie layouts/_partials/kern-kop.html.
+      var kernKop = n.norm_titel ? 'Kern van ' + n.norm_titel.toLowerCase() : 'Kern van de norm'
+      blocks.push({ text: kernKop, style: 'h2' })
       blocks = blocks.concat(parse(n.kern_html, opts))
+      // De bron bij de kern staat los van de kerntekst (front matter
+      // `kern_bron`), dus die komt hier als eigen alinea achteraan.
+      if (n.kern_bron_html) blocks = blocks.concat(parse(n.kern_bron_html, opts))
     }
     blocks = blocks.concat(parse(n.body_html, opts))
     return blocks
