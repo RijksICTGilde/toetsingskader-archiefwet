@@ -92,9 +92,26 @@ incidenten (voorkomen van), metadata – integriteitscheck, metadata – hardwar
 programmatuur, planning- en controlcyclus, samenhang en interpreteerbaarheid.
 Hun tekst is woord voor woord terug te vinden in dat bestand.
 
-Daarnaast blijft *Passende maatregelen en risicobenadering* staan. Die pagina
-komt niet uit bestand 9 maar uit de over-sectie van de site; de tekst is
-herleidbaar tot het introductiedocument.
+### De elfde pagina: Passende maatregelen en risicobenadering
+
+Na het opruimen staan er **elf** begrippenpagina's, terwijl bestand 9 er tien
+definieert. De elfde is *Passende maatregelen en risicobenadering*. Die is niet
+per ongeluk blijven staan; hij heeft een andere, maar aanwijsbare herkomst:
+
+- **De tekst komt uit "0) Introductie toetsingskader".** 25 van de 26 zinnen zijn
+  daar letterlijk terug te vinden. Het is dus aangeleverde tekst, alleen niet uit
+  bestand 9.
+- **Drie normbladen vragen zelf om een link naar dit begrip.** De linkinstructie
+  `<<passende maatregelen>>` staat in "1) Normanalyse beheer", "2) Normanalyse
+  overzicht" en "6) Normanalyse vernietigen". Zo'n instructie vraagt juist wél om
+  een pagina om naartoe te linken — anders dan de vijf hover-ballonnen hierboven.
+- **De pagina stond eerst in de over-sectie**, op `/over/passende-maatregelen/`,
+  en is later naar `/onderwerpen/` verhuisd. De oude adressen werken nog, zodat
+  bestaande links niet breken.
+
+Daarmee heeft de index nu twee herkomsten door elkaar: tien begrippen uit bestand
+9 en één uit het introductiedocument. Dat is verdedigbaar, maar het is een keuze.
+Zie vraag 6.
 
 ## De termen zijn nu letterlijk overgenomen
 
@@ -165,3 +182,14 @@ De webadressen zijn ongewijzigd gebleven, zodat bestaande links blijven werken.
    Nationaal Archief** ("Niveau van maatregelen", "Overheidsinformatie binnen
    Informatiehuishouding"). Die staan nu als gewone link in de tekst, niet als
    hover. Akkoord, of moeten ook die een hover worden?
+
+6. **Hoort Passende maatregelen en risicobenadering in de begrippenindex?** Het is
+   de enige pagina daar die niet uit bestand 9 komt. Twee opties:
+   - **Laten staan.** De index is dan "alle begrippen waarnaar de normen linken",
+     en drie normbladen vragen met `<<passende maatregelen>>` om zo'n link.
+   - **Terug naar de over-sectie.** De index is dan strikt bestand 9. De drie
+     verwijzingen vanuit de normen blijven werken via een doorverwijzing.
+
+   Wij hebben hem voorlopig laten staan. Als bestand 9 in een volgende iteratie
+   wordt uitgebreid, is dit meteen de vraag of passende maatregelen daarin
+   thuishoort.
