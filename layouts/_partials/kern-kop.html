@@ -4,24 +4,24 @@
      ("Op deze pagina") en in de PDF-export; liepen die uiteen, dan wees de
      TOC-link naar een kop die anders heet (WCAG 2.4.6 / 2.5.3).
 
-     Staat `kern_kop` in de front matter, dan wint die: de kop komt woord voor
-     woord uit het normblad ("Kern van Ordeningsstructuur"), en die titels wijken
-     af van de normnamen die de site verder voert.
+     De kop is `norm_titel` in kleine letters, want het is een zin ("Kern van
+     ordenen") en de normtitels beginnen niet met een eigennaam.
 
-     Zonder `kern_kop`: `norm_titel` in kleine letters, want de kop is een zin
-     ("Kern van ordenen") en de normtitels beginnen niet met een eigennaam. Valt
-     terug op "de norm" als `norm_titel` ontbreekt — die situatie vangt
-     scripts/validate-norms.py al af, maar een template hoort geen kop
-     "Kern van " op te leveren.
+     Het normblad heeft hier een eigen Kop2 ("Kern van Ordeningsstructuur"), en
+     die is er via het front-matter-veld `kern_kop` ook even geweest. De review
+     op normblad Ordenen vraagt echter expliciet om de normnaam, voor álle
+     normen — en de review gaat vóór de woord-voor-woord-regel. `kern_kop` is
+     daarom vervallen; scripts/validate-norms.py wijst het veld af, zodat de kop
+     niet stilzwijgend opnieuw kan gaan afwijken. Zie
+     docs/afwijkingen-van-het-normblad.md.
+
+     Valt terug op "de norm" als `norm_titel` ontbreekt — die situatie vangt de
+     validator al af, maar een template hoort geen kop "Kern van " op te leveren.
 
      Aanroep: {{ partial "kern-kop.html" $page }}
 */ -}}
-{{- with .Params.kern_kop -}}
-{{ . }}
-{{- else -}}
 {{- with .Params.norm_titel -}}
 Kern van {{ lower . }}
 {{- else -}}
 Kern van de norm
-{{- end -}}
 {{- end -}}

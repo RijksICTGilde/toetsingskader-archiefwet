@@ -4,7 +4,6 @@ versie: "0.8"
 weight: 2
 norm_id: "2"
 norm_titel: "Overzicht"
-kern_kop: "Kern van overzicht"
 kern: "Het verantwoordelijke overheidsorgaan beschikt over een actueel overzicht van de informatiehuishouding. Dit overzicht geeft aan welke (categorieën) documenten zich bij het overheidsorgaan bevinden en waar ze te vinden zijn. Een overzicht kan zowel individuele documenten als documenten op een hoger aggregatieniveau bevatten."
 kern_bron: "Ar, artikel 2.3, aanhef; Ar, Toelichting, Algemene eisen, overzicht informatiehuishouding, p. 33-35."
 kern_bron_url: "https://www.internetconsultatie.nl/archiefregeling/b1"

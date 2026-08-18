@@ -178,12 +178,16 @@ def validate_front_matter(name, fm_text, errors):
         errors.append(Error(name, "'kern_kaart' moet een tekst zonder voetnoten ([^...]) zijn",
                             line=find_field_line(fm_text, "kern_kaart")))
 
-    # De kop boven de kern-callout, woord voor woord uit het normblad
-    # ("Kern van Ordeningsstructuur"). Ontbreekt het veld, dan valt
-    # _partials/kern-kop.html terug op "Kern van <norm_titel>".
-    kern_kop = fm.get("kern_kop")
-    if kern_kop is not None and (not isinstance(kern_kop, str) or "[^" in kern_kop):
-        errors.append(Error(name, "'kern_kop' moet een tekst zonder voetnoten ([^...]) zijn",
+    # De kop boven de kern-callout komt altijd uit `norm_titel`, afgeleid door
+    # _partials/kern-kop.html ("Kern van ordenen"). Het normblad voert hier een
+    # eigen Kop2 ("Kern van Ordeningsstructuur") en die stond even in het veld
+    # `kern_kop`, maar de review vraagt expliciet om de normnaam en gaat vóór de
+    # woord-voor-woord-regel. Zonder deze afwijzing zou het veld de kop
+    # stilzwijgend opnieuw laten afwijken.
+    if "kern_kop" in fm:
+        errors.append(Error(name, "'kern_kop' bestaat niet meer: de kop boven de kern volgt "
+                                  "'norm_titel' ('Kern van ordenen'). Zie "
+                                  "docs/afwijkingen-van-het-normblad.md",
                             line=find_field_line(fm_text, "kern_kop")))
 
     kern_bron_url = fm.get("kern_bron_url")
