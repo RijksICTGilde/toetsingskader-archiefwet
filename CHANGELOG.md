@@ -50,6 +50,57 @@ changelog volgt [Semantic Versioning][semver].
 - De kaart op `/normen/` houdt de kortere omschrijving uit het
   introductiedocument (front matter `kern_kaart`), zodat de normpagina de
   normbladtekst kan tonen zonder dat de index verandert.
+- De review op normblad Ordenen gold expliciet voor alle normbladen; die twee
+  punten zijn nu ook op de normen 1, 2 en 4 tot en met 8 doorgevoerd:
+  - De `kern` is de kerntekst uit het normblad zelf, met bronvermelding
+    (`kern_bron`/`kern_bron_url`). De kortere zin uit "0) Introductie" die er
+    stond staat nu in `kern_kaart` en blijft dus op de kaart in `/normen/`.
+    Waar die normbladtekst ook als eerste alinea onder `## Toelichting` stond
+    (normen 2, 4, 5, 6 en 7) is die dubbeling weg.
+  - De voorschriften zijn letterlijk de normbladtekst en staan als eis
+    geformuleerd ("Het verantwoordelijke overheidsorgaan heeft …") in plaats
+    van als toetsvraag ("De Inspectie toetst of …"). De bronvoetnoten bleven
+    gelijk. `CONTRIBUTING.md` en de training voor contentbeheer beschrijven
+    die vorm nu ook; `CONTRIBUTING.md` noemde daar bovendien nog de oude kop
+    `## Normuitleg`.
+- De tekst van de normbladen staat nu woord voor woord op de site. De
+  redactionele bewerkingen die er tot nu toe op zaten zijn teruggedraaid: de
+  spellings- en congruentiecorrecties op het normblad ("emailapplicaties",
+  "maateregelen", "plaats vond", "Metadata wordt", "de inhoud … zijn", het
+  ontbrekende haakje in "(digitaal of papier."), de uitgeschreven afkortingen
+  in de lopende tekst ("WOO", "etc.", "SIO", "functies/rollen"), en de
+  normnamen uit normblad 8 in plaats van de sitenaamgeving. Ook de vier zinnen
+  die de site had toegevoegd om naar de kennisbank van het Nationaal Archief
+  te linken (architectuur/overwegingen bij implementatie, niveau van
+  maatregelen, digitaal vernietigen, aangrijpingspunt) staan niet in de
+  normbladen en zijn eruit; die vier externe links vervallen daarmee.
+  Vervolgens is ook de rest gelijkgetrokken, zodat de normpagina's nu op elk
+  punt het normblad volgen:
+  - **Koppen.** De paginatitel is de normbladtitel ("Normanalyse Metadata"),
+    de kop boven de kern komt uit het nieuwe front-matter-veld `kern_kop`
+    ("Kern van Ordeningsstructuur" — die titels wijken af van de normnamen die
+    de site verder voert, dus `norm_titel` blijft ongemoeid en daarmee ook het
+    bollendiagram, de kaarten op `/normen/` en de navigatie). `## Zie ook`
+    heet `## Gerelateerde onderwerpen`, norm 1 heeft weer
+    `## Reikwijdte inbeheername en beheer`, en `#### Criteria`/`#### Indicatoren`
+    staan in het enkelvoud waar het normblad dat schrijft. De dertien
+    `### <thema>`-koppen die de site zelf had bedacht zijn weg; alleen
+    "Besturing" en "Feitelijk beheer" blijven, want die staan in normblad 1.
+  - **Voetnoten.** 57 bronvermeldingen zijn letterlijk de normbladtekst
+    geworden ("Aw, Memorie van Toelichting", "AW1995", "p.34", "t.b.v.").
+    Twee blijven afwijken: `hyperlink-duto` (het normblad geeft daar de
+    instructie "Hyperlink naar DUTO", geen bron) en de bron bij voorschrift
+    3.3, waarvan de reviewer expliciet de volgorde vroeg.
+  - **Synoniemen en gerelateerde onderwerpen** volgen de lijsten uit het
+    normblad. Norm 5 verliest daarmee zijn sectie, want normblad 7 heeft er
+    geen; termen zonder eigen pagina staan als platte tekst.
+  - De validator, de unittests, de PDF-export, de training en `CONTRIBUTING.md`
+    zijn op het nieuwe formaat gezet. `### <thema>` is optioneel geworden en
+    enkelvoudige subkoppen zijn niet langer een fout.
+
+  Buiten de regel blijft alleen "overbrengen" in norm 3 — die correctie vroeg
+  de reviewer zelf — en de `<<…>>`-markeringen, die een linkinstructie zijn en
+  geen tekst.
 - Thema bijgewerkt naar `hugo-theme-rijksoverheid` v0.2.0. Daarin zitten vijf
   toegankelijkheidsfixes die hier als tijdelijke overrides stonden
   (focusindicatoren in de zoekresultaten, het zoekveld en de footerlinks; het

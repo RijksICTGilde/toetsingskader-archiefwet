@@ -50,22 +50,28 @@ blockquote.callout .kern-bron {
   border-block-start: 1px solid var(--color-border);
 }
 
-.norm h3 + h4[id^="voorschrift"] {
+/* Het eerste voorschrift na een thema (h3) of direct na '## Voorschriften'
+   krijgt geen scheidingslijn: die staat er al. De meeste normbladen groeperen
+   niet, dus zonder de h2-variant kreeg het eerste voorschrift een dubbele lijn. */
+.norm h3 + h4[id^="voorschrift"],
+.norm h2#voorschriften + h4[id^="voorschrift"] {
   border-block-start: none;
   padding-block-start: 0;
 }
 
 /* Criteria en Indicatoren zijn sub-items: kleiner en ingesprongen. Margin i.p.v.
-   padding, anders verspringen de lijst-bullets. */
-.norm h4[id^="criteria"],
-.norm h4[id^="indicatoren"] {
+   padding, anders verspringen de lijst-bullets. De prefixen dekken zowel
+   enkelvoud als meervoud ("criterium"/"criteria", "indicator"/"indicatoren"),
+   want de koppen volgen het normblad. */
+.norm h4[id^="criteri"],
+.norm h4[id^="indicator"] {
   font-size: 1.15rem;
 }
 
-.norm h4[id^="criteria"],
-.norm h4[id^="indicatoren"],
-.norm h4[id^="criteria"] + *,
-.norm h4[id^="indicatoren"] + * {
+.norm h4[id^="criteri"],
+.norm h4[id^="indicator"],
+.norm h4[id^="criteri"] + *,
+.norm h4[id^="indicator"] + * {
   margin-inline-start: 1rem;
 }
 

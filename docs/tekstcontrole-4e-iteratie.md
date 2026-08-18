@@ -1,5 +1,25 @@
 # Tekstcontrole normbladen 4e iteratie
 
+> **Achterhaald.** De conclusie hieronder — "niet alles staat er woord voor
+> woord, maar er is geen betekenis veranderd" — is niet meer het uitgangspunt.
+> Op verzoek van de opdrachtgever wordt de tekst van de normbladen nu wél
+> woord voor woord overgenomen. Alle vier de groepen woordverschillen zijn
+> teruggedraaid naar de brontekst: de correcties op het normblad (groep 1), de
+> voorschrift-vorm (groep 2), de uitgeschreven afkortingen in de lopende tekst
+> (groep 3) en de redactionele keuze in normblad 8 (groep 4). Ook de zinnen die
+> de site had toegevoegd om een externe link te dragen zijn weg, en de `kern`
+> van elke norm komt uit het normblad zelf (de kortere zin uit "0) Introductie"
+> staat op de kaart in `/normen/`, via `kern_kaart`).
+>
+> Buiten die regel blijven: de bronvermeldingen in de voetnoten, de
+> `<<…>>`-markeringen (linkinstructies, geen tekst), de synoniemen (onzichtbaar,
+> voeden alleen de zoekindex), de `### <thema>`-koppen (het contentformaat eist
+> ze, de normbladen hebben ze niet), de "Zie ook"-linklabels, en "overbrengen"
+> in normblad 3 — die correctie vroeg de reviewer zelf.
+>
+> Dit rapport is daarmee alleen nog een momentopname van hoe de situatie
+> vóór die omslag was.
+
 Vergelijkt elke inhoudelijke alinea uit de normbladen met de sitecontent en
 classificeert het verschil. Eenmalig gegenereerd met een script dat daarna is
 verwijderd; de normalisatie raakte alleen opmaak (typografische

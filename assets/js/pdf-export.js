@@ -80,9 +80,10 @@
     }
     if (n.kern_html) {
       // Kern als h2 + normale alinea, net als Toelichting (klantfeedback).
-      // De kop noemt de norm ("Kern van ordenen"), gelijk aan de website en de
-      // inhoudsopgave daar; zie layouts/_partials/kern-kop.html.
-      var kernKop = n.norm_titel ? 'Kern van ' + n.norm_titel.toLowerCase() : 'Kern van de norm'
+      // De kop komt uit de JSON en is daar door _partials/kern-kop.html gezet,
+      // zodat de PDF exact dezelfde kop toont als de website en de
+      // inhoudsopgave daar. De fallbacks zijn alleen voor oude JSON.
+      var kernKop = n.kern_kop || (n.norm_titel ? 'Kern van ' + n.norm_titel.toLowerCase() : 'Kern van de norm')
       blocks.push({ text: kernKop, style: 'h2' })
       blocks = blocks.concat(parse(n.kern_html, opts))
       // De bron bij de kern staat los van de kerntekst (front matter

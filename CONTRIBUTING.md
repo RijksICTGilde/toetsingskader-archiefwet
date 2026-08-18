@@ -41,13 +41,13 @@ geïnstalleerd te worden. Zie ook de training in
 | Kop | Betekenis |
 |---|---|
 | `## Toelichting` | uitleg van de norm (verplicht) |
-| `## Normuitleg` | uitwerking (verplicht), met daarbinnen: |
-| `### <thema>` | subkop, bijvoorbeeld "Besturing" |
-| `#### Voorschrift` | wat de Inspectie toetst |
-| `#### Criteria` | waaraan getoetst wordt (lijst met `-`) |
-| `#### Indicatoren` | hoe vastgesteld wordt of aan het criterium is voldaan (lijst met `-`) |
-| `## Reikwijdte` | op welke documenten de norm van toepassing is (optioneel) |
-| `## Zie ook` | verwijzingen naar andere normen of onderwerpen (optioneel) |
+| `## Voorschriften` | uitwerking (verplicht), met daarbinnen: |
+| `### <thema>` | optionele subkop, alleen als het normblad er een heeft (bijvoorbeeld "Besturing") |
+| `#### Voorschrift` | de norm zelf, als eis geformuleerd ("Het verantwoordelijke overheidsorgaan heeft …"), niet als toetsvraag |
+| `#### Criteria` / `#### Criterium` | waaraan getoetst wordt (lijst met `-`); enkelvoud als het normblad dat schrijft |
+| `#### Indicatoren` / `#### Indicator` | hoe vastgesteld wordt of aan het criterium is voldaan (lijst met `-`); enkelvoud als het normblad dat schrijft |
+| `## Reikwijdte` | op welke documenten de norm van toepassing is (optioneel; mag een achtervoegsel hebben, zoals "Reikwijdte inbeheername en beheer") |
+| `## Gerelateerde onderwerpen` | verwijzingen naar andere normen of onderwerpen (optioneel) |
 
 ### Bronnen (voetnoten)
 
