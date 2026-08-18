@@ -86,11 +86,12 @@ die ook met het toetsenbord en met een schermlezer bereikbaar is.
 
 ## Wat blijft staan
 
-De tien onderwerpen uit "9) Onderwerpen en Verwijzingen" blijven ongewijzigd:
-aangrijpingspunt, audittrail, classificatie en aggregatie, document, hashfunctie,
-incidenten (voorkomen van), metadata – integriteitscheck, metadata – hardware en
-programmatuur, planning- en controlcyclus, samenhang en interpreteerbaarheid.
-Hun tekst is woord voor woord terug te vinden in dat bestand.
+De tien onderwerpen uit "9) Onderwerpen en Verwijzingen" blijven staan:
+Aangrijpingspunt, Audittrail, Classificatie, aggregatie, Document, Hashfunctie,
+Incidenten (voorkomen van), Metadata - integriteitscheck, Metadata - hardware,
+besturingsprogrammatuur en toepassingsprogrammatuur, Planning- en controlcyclus,
+Samenhang, interpreteerbaar. Hun tekst is woord voor woord terug te vinden in dat
+bestand; alleen de titels zijn bijgewerkt (zie hieronder).
 
 ### De elfde pagina: Passende maatregelen en risicobenadering
 
