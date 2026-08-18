@@ -57,7 +57,7 @@ Het verantwoordelijk overheidsorgaan evalueert het archiefbeheer periodiek (mini
 - Het proces van periodieke kwaliteitszorg wordt minimaal tweejaarlijks geëvalueerd.
 - De organisatie brengt, op basis van een periodieke evaluatie, in kaart in hoeverre het archiefbeheer voldoet aan de wet- en regelgeving.
 - De organisatie stelt, indien nodig, één of meerdere verbeterplannen op met toetsbare doelstellingen om (op termijn) te voldoen aan de regelgeving voor de informatiehuishouding.
-- De verbeterplannen worden op het juiste managementniveau in de organisatie vastgesteld, bijvoorbeeld in het [SIO](/onderwerpen/strategisch-informatieoverleg/) of een soortgelijk overleg.
+- De verbeterplannen worden op het juiste managementniveau in de organisatie vastgesteld, bijvoorbeeld in het SIO of een soortgelijk overleg.
 - De organisatie monitort de voortgang van de verbeterplannen en rapporteert hierover op het juiste managementniveau en stuurt waar nodig proactief bij.
 - De organisatie voert een [risicoanalyse](/onderwerpen/passende-maatregelen/) uit, gericht op de informatiehuishouding.
 
