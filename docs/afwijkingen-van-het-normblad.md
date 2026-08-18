@@ -1,69 +1,43 @@
 # Afwijkingen van het normblad
 
-De normteksten op deze site worden **woord voor woord** overgenomen uit de
-normbladen in `docs/normbladen …/`: spelfouten, congruentiefouten en afkortingen
-blijven staan zoals de opdrachtgever ze schrijft, en er komen geen zinnen bij.
+Normteksten komen woord voor woord uit de normbladen in `docs/normbladen …/`.
+Spelfouten, congruentiefouten en afkortingen blijven staan. Er komen geen zinnen
+bij.
 
-Op een paar punten wijkt de site daar bewust van af. Dit document legt vast
-welke, en waarom.
+Hieronder de punten waar de site daar bewust van afwijkt.
 
-## Review gaat vóór woord voor woord
+## Regel: review gaat vóór woord voor woord
 
-Vraagt een review van de opdrachtgever iets anders dan het normblad, dan wint de
-review.
+Vraagt een review iets anders dan het normblad, dan wint de review. Het normblad
+is een momentopname, de review is de latere uitspraak over dezelfde tekst.
 
-Het normblad is een momentopname; de review is de latere uitspraak van dezelfde
-opdrachtgever over diezelfde tekst. De woord-voor-woord-regel bestaat om te
-voorkomen dat wij de tekst gaan redigeren — niet om een correctie van de auteur
-tegen te houden.
+Bij elke afwijking hoort:
 
-Daar hoort een verplichting bij, want zonder uitleg draait de volgende
-vergelijking met het normblad zo'n afwijking ongemerkt terug. Dat is één keer
-gebeurd: de kern-kop hieronder was al conform de review verwerkt en is daarna
-door een woord-voor-woord-ronde opnieuw op de normbladtekst gezet. Dus:
+1. **Een regel hieronder, met reden.** Zonder uitleg draait de volgende
+   vergelijking met het normblad de afwijking terug. Dat is één keer gebeurd, met
+   de kern-kop.
+2. **Een controle, als de afwijking machinaal kan terugkomen.**
 
-1. **Leg elke afwijking hieronder vast, met de reden.** Een normpagina die zonder
-   uitleg van het normblad afwijkt, leest bij de volgende controle als een fout
-   en wordt dan "hersteld".
-2. **Kan de afwijking machinaal terugkomen, zet er dan een controle op.**
+## De afwijkingen
 
-## Vastgelegde afwijkingen
+| Wat | In plaats van | Geborgd door |
+|---|---|---|
+| Kop boven de kern volgt `norm_titel`: "Kern van ordenen" | Kop2 van het normblad: "Kern van Ordeningsstructuur" | `validate-norms.py` weigert het veld `kern_kop` |
+| Norm 3, toelichting 3e alinea: "overbrengen" | "overdragen" | — |
+| Norm 3, voorschrift 3.3: bron "Ar, artikel 2.5, tweede lid, sub k" eerst | omgekeerde volgorde | — |
 
-### De kop boven de kern
+De kern-kop geldt voor alle acht normen. `_partials/kern-kop.html` leidt hem af
+uit `norm_titel`, zodat pagina, inhoudsopgave en PDF dezelfde tekst voeren. Pas
+`norm_titel` niet aan om die kop te sturen: dat veld stuurt ook het
+bollendiagram, de kaarten op `/normen/` en de navigatie.
 
-De kop is "Kern van " + `norm_titel` in kleine letters — "Kern van ordenen" —
-en niet de Kop2 van het normblad, die per norm een andere naam voert
-("Kern van Ordeningsstructuur", "Kern van metadata", "Kern van vindbaarheid").
+## Geen afwijking
 
-De review op normblad Ordenen vraagt expliciet om de normnaam, en merkt daarbij
-op dat dit voor alle normbladen geldt. De kerntékst eronder komt wél uit het
-normblad in kwestie; alleen de kop volgt de normnaam.
-
-`layouts/_partials/kern-kop.html` leidt de kop af uit `norm_titel`, zodat de
-normpagina, de inhoudsopgave en de PDF dezelfde tekst voeren. Het
-front-matter-veld `kern_kop`, waarmee de normbladkop die afleiding kon
-overrulen, is vervallen: `scripts/validate-norms.py` wijst het af zodra het
-terugkomt.
-
-Pas `norm_titel` niet aan om de kop te sturen — dat veld voert de normnamen uit
-"0) Introductie" en stuurt ook het bollendiagram, de kaarten op `/normen/` en de
-navigatie aan.
-
-### Norm 3, Toelichting, derde alinea
-
-"overdragen" is op verzoek vervangen door "overbrengen".
-
-### Norm 3, voorschrift 3.3
-
-De twee bronnen in de voetnoot staan in omgekeerde volgorde ten opzichte van het
-normblad, op verzoek: eerst "Ar, artikel 2.5, tweede lid, sub k", dan
-"Ar, Toelichting, Hoofdstuk 2, Algemene Eisen ordening, p.34".
-
-## Wat géén afwijking is
-
-- `<<…>>` in het normblad is een linkinstructie, geen tekst. Verwerk het als link
-  naar `/onderwerpen/…`, of laat het weg. Hetzelfde geldt voor een voetnoot die
-  een instructie is ("Hyperlink naar DUTO").
-- Enkelvoud en meervoud in `#### Criteria`/`#### Criterium` en
-  `#### Indicatoren`/`#### Indicator` wisselen in de normbladen zelf. De site
-  volgt per voorschrift het normblad; de validator staat beide toe.
+- `<<…>>` is een linkinstructie, geen tekst. Wordt een link naar `/onderwerpen/…`
+  of vervalt. Idem voor een voetnoot die een instructie is ("Hyperlink naar
+  DUTO").
+- Een ballon die om een *hoover* vraagt wordt een hover, geen begrippenpagina.
+  Zie `onderwerpen-en-hovers.md`.
+- Enkelvoud/meervoud in `#### Criteria` / `#### Criterium` en `#### Indicatoren` /
+  `#### Indicator` wisselt in de normbladen zelf. De site volgt per voorschrift
+  het normblad. De validator staat beide toe.

@@ -1,26 +1,23 @@
 # Toegankelijkheidsonderzoek — Toetsingskader Archiefwet
 
-**Datum:** 6 augustus 2026
-**Bijgewerkt:** 10 augustus 2026 — bevindingen 27 en 28 opgelost, thema-issues
-ingediend, browsertests toegevoegd; zie [Aanvulling 10 augustus
-2026](#aanvulling-10-augustus-2026)
-**Bijgewerkt:** 12 augustus 2026 — bevindingen 1a, 1b, 1c, 12 en 17 zijn
-upstream opgelost in thema v0.2.0
-([PR #19](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/pull/19));
-de bijbehorende overrides zijn uit dit project verwijderd
-**Onderzochte versie:** `main` (`af40029`), gebouwd met Hugo 0.152.2 extended,
-thema `hugo-theme-rijksoverheid` v0.1.0
-**Norm:** WCAG 2.2 niveau AA (EN 301 549, Tijdelijk besluit digitale
-toegankelijkheid overheid)
-**Omvang:** alle 14 gegenereerde HTML-pagina's (homepage, `/normen/`, 8
-normpagina's, `/over/`, `/tags/`, `/categories/`, `404.html`)
+**Vooronderzoek, geen toegankelijkheidsverklaring.** Een deel van WCAG is niet
+vast te stellen zonder browser, hulpsoftware en echte gebruikers; zie
+[Beperkingen](#beperkingen-van-dit-onderzoek).
 
-Dit is een **vooronderzoek**, geen toegankelijkheidsverklaring. Een deel van
-WCAG is niet vast te stellen zonder browser, hulpsoftware en echte gebruikers;
-zie [Beperkingen](#beperkingen-van-dit-onderzoek).
+- **Norm:** WCAG 2.2 AA (EN 301 549, Tijdelijk besluit digitale toegankelijkheid
+  overheid)
+- **Omvang:** alle 14 gegenereerde pagina's van `main` (`af40029`), Hugo 0.152.2
+  extended, thema v0.1.0
+- **Reproduceren:** `hugo && npm run test:a11y` (`scripts/a11y-scan.mjs`)
 
-De scan is reproduceerbaar: `hugo && npm run test:a11y`
-(`scripts/a11y-scan.mjs`).
+6 augustus 2026, twee keer bijgewerkt:
+
+- **10 augustus** — bevindingen 27 en 28 opgelost, drie thema-issues ingediend,
+  browsertests toegevoegd; die leverden meteen drie nieuwe AA-bevindingen op
+  (29, 30, 31).
+- **12 augustus** — 1a, 1b, 1c, 12 en 17 upstream opgelost in thema v0.2.0
+  ([PR #19](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/pull/19));
+  de overrides zijn hier weggehaald.
 
 ---
 
@@ -65,30 +62,24 @@ opgelost](#wat-er-is-opgelost-op-deze-branch) voor de gemaakte wijzigingen.
 | **30** | Gesloten bron-tooltip veroorzaakt 175px horizontale overloop op 320px | 1.4.10 | AA | ja | opgelost voor ≤480px; positionering open tooltip = [thema-issue #10](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/10) |
 | **31** | Zoektermmarkering in een link: contrast onder 4,5:1 | 1.4.3 | AA | ja | opgelost (10 augustus 2026) |
 
-**Kern van het beeld:** het fundament is goed (semantiek, koppenhiërarchie,
-tekstcontrast, `prefers-reduced-motion`, een echte `<dialog>` voor zoeken), maar
-er zit één systematisch probleem in: **focus is op vijf plekken niet of
-nauwelijks zichtbaar**. Alle vijf zijn los van elkaar met een paar regels CSS op
-te lossen. Daarnaast is de PDF-export het enige punt dat een keuze van het team
-vraagt in plaats van een patch.
+**Kern van het beeld:** het fundament is goed — semantiek, koppenhiërarchie,
+tekstcontrast, `prefers-reduced-motion`, een echte `<dialog>` voor zoeken. Eén
+systematisch probleem: focus is op vijf plekken niet of nauwelijks zichtbaar.
+Alle vijf met een paar regels CSS op te lossen. De PDF-export is het enige punt
+dat een keuze vraagt in plaats van een patch.
 
 ---
 
 ## Wat er is opgelost op deze branch
 
-Alle bevindingen die met code op te lossen zijn, zijn opgelost. Wat overblijft:
+Alles wat met code op te lossen was. Wat overblijft:
 
-* **Bevinding 6 (PDF ongetagd)** — geen patch maar een keuze uit drie routes;
-  zie [§6](#6-de-pdf-export-levert-een-ongetagde-pdf).
-* **Bevinding 18 (hero bij 200% tekstvergroting)** — de vaste `height: 300px`
-  met `overflow: hidden` zit in het thema en het herschrijven ervan (naar een
-  grid-overlay die mee kan groeien) raakt de positionering op drie breekpunten.
-  Dat is niet verantwoord zonder browser om het resultaat te controleren.
-* **Bevinding 5** — al opgelost op een andere openstaande branch.
-
-De AAA-bevindingen 27 en 28 stonden hier eerst als "buiten scope"; ze zijn op
-10 augustus alsnog opgelost, zie [Aanvulling 10 augustus
-2026](#aanvulling-10-augustus-2026).
+* **6 (PDF ongetagd)** — keuze uit drie routes, zie
+  [§6](#6-de-pdf-export-levert-een-ongetagde-pdf).
+* **18 (hero bij 200% tekstvergroting)** — de vaste `height: 300px` met
+  `overflow: hidden` zit in het thema. Herschrijven raakt de positionering op
+  drie breekpunten; niet verantwoord zonder browser.
+* **5** — opgelost op een andere branch.
 
 ### Wijzigingen in dit project
 
@@ -134,45 +125,40 @@ Nog niet vanuit dit project op te lossen en dus een thema-issue: de
 
 ### Aanvulling 10 augustus 2026
 
-**Bevinding 27 — bronlinks krijgen een eigen naam.** Elke "Bekijk bron"-link
-krijgt een `aria-label` van de vorm `Bekijk bron: <brontekst>`, op de tooltip én
-in de referentielijst (`layouts/normen/single.html`). Het label begint met de
-zichtbare tekst, zodat 2.5.3 Label in Name intact blijft. Gecontroleerd op
-`/normen/01-beheer/`: 46 links, 46 labels, allemaal verschillend.
+**27 — bronlinks krijgen een eigen naam.** Elke "Bekijk bron"-link krijgt
+`aria-label="Bekijk bron: <brontekst>"`, op de tooltip én in de referentielijst
+(`layouts/normen/single.html`). Het label begint met de zichtbare tekst, zodat
+2.5.3 Label in Name intact blijft. Op `/normen/01-beheer/`: 46 links, 46 labels,
+allemaal verschillend.
 
-**Bevinding 28 — afkortingen uitgeschreven.** Een nieuw partial
-(`layouts/_partials/afkortingen.html`) wrapt Aw, Ab, Ar, DUTO en SIO in
-`<abbr title="…">`, met de lijst in `data/afkortingen.yaml`. Template-side, want
-de afkortingen staan vrijwel allemaal in de bronteksten van de voetnoten, die
-zowel als tooltip als in de referentielijst worden hergebruikt; met
-`unsafe: false` kan het ook niet in de markdown. Twee dingen om te weten bij
-onderhoud:
+**28 — afkortingen uitgeschreven.** `layouts/_partials/afkortingen.html` wrapt
+Aw, Ab, Ar, DUTO en SIO in `<abbr title="…">`, lijst in `data/afkortingen.yaml`.
+Template-side, want de afkortingen staan vooral in de bronteksten van de
+voetnoten, en `unsafe: false` verbiedt inline HTML in de markdown. Twee
+onderhoudsvallen:
 
-* De lijst staat bewust in `data/` en niet in `params:` van `hugo.yaml`. Hugo
-  lowercaset configuratiesleutels, waardoor `DUTO` als `duto` matchte — en dat
-  raakte ook het pad `/archiveren/duto` in een bronlink. Sleutels in
-  data-bestanden blijven ongewijzigd.
-* De abbr-pass moet lopen **vóór** het `aria-label` van bevinding 27 wordt
-  gezet. Omgekeerd komt er markup in een attribuutwaarde terecht.
+* De lijst hoort in `data/` en niet in `params:`. Hugo lowercaset
+  configuratiesleutels, waardoor `DUTO` als `duto` matchte — inclusief het pad
+  `/archiveren/duto` in een bronlink.
+* De abbr-pass loopt **vóór** het `aria-label` van bevinding 27. Omgekeerd komt
+  er markup in een attribuutwaarde.
 
-In de content zijn daarnaast de varianten `AW`/`AB`/`AR` genormaliseerd naar
-`Aw`/`Ab`/`Ar` (de match is hoofdlettergevoelig) en is DUTO bij eerste gebruik in
-`content/over.md` uitgeschreven. `abbr[title]` krijgt een stippellijn in
-`assets/css/main.css`; alleen Chrome doet dat van zichzelf.
+In de content zijn `AW`/`AB`/`AR` genormaliseerd naar `Aw`/`Ab`/`Ar` (de match is
+hoofdlettergevoelig). `abbr[title]` krijgt een stippellijn in `main.css`; alleen
+Chrome doet dat vanzelf.
 
 **Browsertests toegevoegd.** `scripts/a11y-browser.mjs` (Playwright + Chromium)
-dekt wat jsdom niet kan en wat hieronder als
-[beperking](#beperkingen-van-dit-onderzoek) staat: axe mét contrast en
-doelgrootte, reflow op 320 px, tekstvergroting tot 200%, tekstafstand (1.4.12) en
-een toetsenborddoorloop op focusindicator en focus-niet-afgedekt — inclusief de
-variant `?q=…`, de situatie van bevinding 17. Draait in CI naast de jsdom-scan
-(`npm run test:a11y:browser`). Bouwt apart met `--baseURL /`, anders verwijzen CSS
-en JS naar het productiedomein en meet je een pagina zonder stylesheet.
+dekt wat jsdom niet kan: axe mét contrast en doelgrootte, reflow op 320 px,
+tekstvergroting tot 200%, tekstafstand (1.4.12) en een toetsenborddoorloop op
+focusindicator en focus-niet-afgedekt, inclusief de variant `?q=…` (bevinding
+17). Draait in CI naast de jsdom-scan (`npm run test:a11y:browser`). Bouwt apart
+met `--baseURL /`, anders wijzen CSS en JS naar het productiedomein en meet je
+een pagina zonder stylesheet.
 
 **Drie nieuwe bevindingen uit de eerste browserrun (29, 30, 31).** Alle drie
-AA-blokkerend, alle drie onvindbaar zonder layout-engine — precies waarom deze
-tests er zijn. Het handmatige rekenwerk van 6 augustus miste ze: de doelgrootte
-van de inhoudsopgavelinks stond in dit rapport zelfs als "voldoet".
+AA-blokkerend, alle drie onvindbaar zonder layout-engine. Het handmatige
+rekenwerk van 6 augustus miste ze: de doelgrootte van de inhoudsopgavelinks
+stond hier zelfs als "voldoet".
 
 * **29 — inhoudsopgavelinks halen de doelgrootte niet (2.5.8, AA).** Het thema
   zet `.toc ul ul li { margin-bottom: 0 }` (`layout.css:203-205`), waardoor de
@@ -209,25 +195,18 @@ zodra #12 rond is.
 drie zijn alle drie bevinding 18 (dezelfde `div.hero`, gezien door de
 reflow-, tekstzoom- en tekstafstandsmeting).
 
-Twee waarschuwingen uit de eerste runs bleken fout-positieven van de test zelf,
-niet van de site. Ze staan hier omdat de meetfout leerzaam is:
+Twee waarschuwingen bleken fout-positieven van de test zelf:
 
-* **Focusindicator op 8 pagina's.** De check keek alleen naar `outline` en
+* **Focusindicator op 8 pagina's.** De check las alleen `outline` en
   `box-shadow` op het element zelf, maar `.card-grid.clickable` zet bewust
-  `outline: none` en plaatst de ring als `box-shadow` op `::after`
-  (`card-grid.css`). Dat is een deugdelijke vervanging — dit rapport noemde het
-  al bij [Wat goed gaat](#wat-goed-gaat). De check leest nu ook `::before` en
-  `::after`, en daarmee verdween de melding volledig.
+  `outline: none` en plaatst de ring als `box-shadow` op `::after`. De check
+  leest nu ook `::before` en `::after`.
 * **"Focus afgedekt" op elke bol van het bollendiagram.** De check meldde
-  afdekking zodra één hoek van de bounding box door een ander element werd
-  geraakt. Bij een ronde link liggen die hoeken buiten de bol en raken ze de
-  buren. Voor SVG-links telt nu alleen het midden. De labellaag is hier
-  onschuldig: die staat op `pointer-events: none`
-  (`assets/css/bollendiagram.css:65`), dus hij vangt geen kliks af.
+  afdekking zodra één hoek van de bounding box werd geraakt; bij een ronde link
+  liggen die hoeken buiten de bol. Voor SVG-links telt nu alleen het midden.
 
-De les die daaruit volgt is dezelfde als bij de handmatige ronde: een
+Vier van de zeven aanvankelijke meldingen waren meetfout of dubbeling. Een
 geautomatiseerde uitspraak is pas een bevinding nadat je hem hebt nagetrokken.
-Vier van de zeven aanvankelijke meldingen waren meetfouten of dubbelingen.
 
 **htmltest-configuratie.** `IgnoreAltEmpty: true` in `.htmltest.yml`. htmltest
 zag de `alt=""` van de decoratieve hero (de fix van bevinding 20) als fout,
@@ -236,9 +215,9 @@ Ontbrekende `alt`-attributen blijven wél een fout.
 
 ### Codereview-ronde 10 augustus 2026
 
-Een codereview over de hele branch (`main...chore/wcag-2.2-audit`) vond tien
-bevestigde defecten. Vijf ervan raken de toegankelijkheidsfixes hierboven; die
-waren geschreven maar deden niet wat ze beloofden. Ze zijn alle vijf hersteld:
+Codereview over `main...chore/wcag-2.2-audit`: tien bevestigde defecten, vijf
+daarvan in de fixes hierboven. Die waren geschreven maar deden niet wat ze
+beloofden. Alle vijf hersteld:
 
 * **Focusring bollendiagram (bevinding 1e).** `.bd-focus-ring` (specificiteit
   0,1,0) verloor van `.bd-bubble circle` en `.bd-main circle` (beide 0,1,1). De
@@ -285,9 +264,8 @@ patronen in `normen/single.html` die kan matchen.
 
 ### Tweede reviewronde 10 augustus 2026
 
-Een tweede ronde over dezelfde branch vond opnieuw tien defecten, waarvan de
-helft in de fixes van de eerste ronde. Dat is op zichzelf het vermelden waard:
-toegankelijkheidsfixes die niet worden nagemeten, doen vaak net niet wat ze
+Tweede ronde, opnieuw tien defecten, de helft in de fixes van de eerste ronde.
+Toegankelijkheidsfixes die niet worden nagemeten doen vaak net niet wat ze
 beloven.
 
 * **Referenties was landmark noch kop (bevinding 8).** De `<h2>` in de
@@ -340,32 +318,26 @@ handmatige doorloop en geen gebruikerstest.
 
 ## Methode
 
-**Geautomatiseerd** — axe-core over alle 14 pagina's met de regelsets `wcag2a`,
-`wcag2aa`, `wcag21a`, `wcag21aa` en `wcag22aa`. Het scanscript staat in de
-repository (`scripts/a11y-scan.mjs`, `npm run test:a11y`) en geeft exit 1 bij
-een overtreding, zodat het in CI kan draaien. Resultaat: **9 overtredingen, alle
-op de homepage** — 8× `link-name` en 1× `nested-interactive`, beide in het
-bollendiagram. De overige 13 pagina's zijn schoon volgens axe.
+**Geautomatiseerd** — axe-core over alle 14 pagina's, regelsets `wcag2a`,
+`wcag2aa`, `wcag21a`, `wcag21aa`, `wcag22aa` (`scripts/a11y-scan.mjs`, exit 1 bij
+een overtreding). Resultaat bij de eerste run: 9 overtredingen, alle op de
+homepage — 8× `link-name`, 1× `nested-interactive`, beide in het bollendiagram.
 
-De scan draait op jsdom en niet in een echte browser, omdat er geen Chromium
-voor arm64 beschikbaar was. Structuur-, naam- en ARIA-regels draaien daarmee
-volwaardig; de `color-contrast`-regel is uitgezet omdat die een layout-engine
-nodig heeft.
+Die scan draait op jsdom, want er was geen Chromium voor arm64. Structuur-, naam-
+en ARIA-regels draaien volwaardig; `color-contrast` staat uit, die vraagt een
+layout-engine. Sinds 10 augustus dekt `a11y-browser.mjs` dat gat.
 
-**Handmatig** — broncode-review van de gegenereerde HTML, de gebundelde CSS en
-JavaScript (thema én project) op semantiek, focusbeheer, toetsenbordafhandeling,
-ARIA en de WCAG 2.2-criteria. Alle contrastverhoudingen in dit rapport zijn
-berekend met de WCAG-formule voor relatieve luminantie, uit de daadwerkelijke
-kleurwaarden in de gebundelde CSS (inclusief alfa-compositie waar met `opacity`
-of `rgba()` wordt gewerkt).
+**Handmatig** — review van de gegenereerde HTML, de gebundelde CSS en JS (thema
+én project) op semantiek, focusbeheer, toetsenbord, ARIA en de WCAG
+2.2-criteria. Contrastverhoudingen berekend met de WCAG-formule voor relatieve
+luminantie, uit de kleurwaarden in de gebundelde CSS, inclusief alfa-compositie.
 
-**PDF** — de export gegenereerd met de bestaande smoke-test, en de bytes van
-beide PDF's gecontroleerd op `/StructTreeRoot`, `/MarkInfo`, `/Marked` en
-`/Lang`, inclusief het decomprimeren van de streams.
+**PDF** — export uit de smoke-test, bytes gecontroleerd op `/StructTreeRoot`,
+`/MarkInfo`, `/Marked` en `/Lang`, streams gedecomprimeerd.
 
-Geautomatiseerde tests dekken ongeveer 20–30% van de succescriteria en vinden in
-de praktijk ongeveer de helft van de daadwerkelijke problemen. Van de 28
-bevindingen hieronder komen er 2 uit de scan.
+Geautomatiseerde tests dekken 20–30% van de succescriteria en vinden ongeveer de
+helft van de echte problemen. Van de bevindingen hieronder komen er 2 uit de
+scan.
 
 ---
 
