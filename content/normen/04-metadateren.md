@@ -16,7 +16,7 @@ synoniemen:
 
 ## Toelichting
 
-Metadata zijn gegevens die de inhoud, [structuur](/onderwerpen/structuur/) en context van documenten en het beheer ervan door de tijd heen beschrijven.[^ab-artikel-1-1-begripsbepalingen] Het koppelen van de juiste metadata aan documenten is van belang om de duurzame toegankelijkheid van overheidsinformatie te borgen. Daarom moeten alle documenten bij inbeheername en gedurende het beheer worden voorzien van metadata.[^ar-artikel-2-5-lid-2] Metadata kunnen op het niveau van individuele documenten worden vastgelegd, maar ook op een hoger [aggregatieniveau](/onderwerpen/classificatie-en-aggregatie/), bijvoorbeeld op het niveau van een dossier, database of dataset. Welk niveau passend is, is afhankelijk van de technische aard van de (categorieën) documenten.[^ar-toelichting-h2-metadata-p37] Het is ook mogelijk om de metadata vast te leggen in een externe registratie. Dit is met name van toepassing bij fysieke documenten.[^ar-toelichting-algemene-eisen-ordening]
+Metadata zijn gegevens die de inhoud, structuur en context van documenten en het beheer ervan door de tijd heen beschrijven.[^ab-artikel-1-1-begripsbepalingen] Het koppelen van de juiste metadata aan documenten is van belang om de duurzame toegankelijkheid van overheidsinformatie te borgen. Daarom moeten alle documenten bij inbeheername en gedurende het beheer worden voorzien van metadata.[^ar-artikel-2-5-lid-2] Metadata kunnen op het niveau van individuele documenten worden vastgelegd, maar ook op een hoger [aggregatieniveau](/onderwerpen/classificatie-en-aggregatie/), bijvoorbeeld op het niveau van een dossier, database of dataset. Welk niveau passend is, is afhankelijk van de technische aard van de (categorieën) documenten.[^ar-toelichting-h2-metadata-p37] Het is ook mogelijk om de metadata vast te leggen in een externe registratie. Dit is met name van toepassing bij fysieke documenten.[^ar-toelichting-algemene-eisen-ordening]
 
 [^ar-artikel-2-5-lid-2]: Ar, artikel 2.5, tweede lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ab-artikel-1-1-begripsbepalingen]: Ab, artikel 1.1 begripsbepalingen, p. 1. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
@@ -58,7 +58,7 @@ Alle documenten, ongeacht de bewaartermijn, zijn voorzien van de volgende metada
 Van ieder document is minimaal het volgende in de metadata (bij het document, of op het niveau van zaak, proces, bestand, dossier, database of dataset waartoe het document behoort[^ar-toelichting-algemene-eisen-ordening]) vastgelegd:[^ar-artikel-2-5-lid-2]
 
 - de inhoud;
-- de [structuur](/onderwerpen/structuur/);
+- de structuur[^structuur];
 - een uniek identificatienummer;
 - wanneer, door wie en uit hoofde van welke taak het door het verantwoordelijke overheidsorgaan is ontvangen of opgemaakt;
 - de [samenhang](/onderwerpen/samenhang-en-interpreteerbaarheid/) en de aard daarvan met andere door het verantwoordelijke overheidsorgaan opgemaakte en ontvangen documenten;[^ab-artikel-2-1-lid-1-sub-d]
@@ -67,12 +67,13 @@ Van ieder document is minimaal het volgende in de metadata (bij het document, of
 - de bewaartermijn.
 
 [^ab-artikel-2-1-lid-1-sub-d]: Ab, artikel 2.1, eerste lid, sub d [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^structuur]: Bij het metadataveld “structuur” kan worden gedacht aan het beschrijven van de onderlinge samenhang van de onderdelen waaruit één informatie-object bestaat. Bijvoorbeeld als een applicatie op basis van meerdere informatie-objecten een overzicht toont, of een dashboard maakt. Maar ook kan gedacht worden aan bericht dat bijlagen bevat.
 
 Indien relevant:
 
-- de [verschijningsvorm](/onderwerpen/verschijningsvorm/).[^ar-artikel-2-5-lid-2-sub-c]
+- de verschijningsvorm[^verschijningsvorm].
 
-[^ar-artikel-2-5-lid-2-sub-c]: Ar, artikel 2.5, tweede lid, sub c. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^verschijningsvorm]: De “verschijningsvorm” hangt samen met welke soft- en hardware benodigd is om een informatieobject te kunnen representeren, inclusief het gedrag. Welke hardware is nodig om het te laden? Voor standaard tekstdocumenten is het genoeg om te weten wat het bestandsformaat is, maar bij samengestelde informatieobjecten, zoals dashboards of overzichten, of bewegende / dynamische informatie-objecten moet in de metadata worden vastgelegd wat de verschijningsvorm is. Ar, artikel 2.5, tweede lid, sub c. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 Indien beschikbaar:
 

@@ -22,7 +22,7 @@ Een overzicht van de informatiehuishouding draagt bij aan:
 
 - de samenhang tussen processen onderling;
 - de [vindbaarheid](/normen/06-vindbaar/) van documenten;[^ar-toelichting-overzicht-p34]
-- het herkennen van afhankelijkheden tussen [systemen](/onderwerpen/applicatie-en-systeem/);[^ar-toelichting-overzicht-p34]
+- het herkennen van afhankelijkheden tussen systemen;[^ar-toelichting-overzicht-p34]
 - het kennen van de samenhang tussen processen, documenten en systemen;[^ar-toelichting-overzicht-p34]
 - het onderbouwd keuzes maken welke documenten onder zwaarder [(archief)beheer](/normen/01-beheer/) worden gebracht;[^ar-toelichting-overzicht-p34]
 - het bepalen en treffen van [passende maatregelen](/onderwerpen/passende-maatregelen/) voor duurzame toegankelijkheid;[^ar-toelichting-overzicht-p34]
@@ -69,7 +69,10 @@ Het verantwoordelijke overheidsorgaan heeft een omschrijving van de taken van he
 - De taken, zoals beschreven in het selectiebesluit, komen terug in het overzicht, en omgekeerd komen de taken in het overzicht terug in het selectiebesluit.
 - Het overzicht bevat alle overheidsinformatie, dus databestanden, gegevensverzamelingen, websites, sociale media, applicaties, netwerklocaties, etc.
 - Het is mogelijk om meerdere soorten overzichten op te stellen, afhankelijk van de vraag en behoefte van de organisatie.
-- Het overzicht maakt de samenhang en dwarsverbanden tussen documenten, processen, [applicaties en systemen](/onderwerpen/applicatie-en-systeem/) inzichtelijk.
+- Het overzicht maakt de samenhang en dwarsverbanden tussen documenten, processen, applicaties[^applicatie] en systemen[^systeem] inzichtelijk.
+
+[^applicatie]: “Applicatie” wordt meestal gebruikt als het gaat om een of meer zelfstandige programmamodules die rechtstreeks met de gebruikers communiceren. De taken die we met applicaties uitvoeren zijn meestal zakelijk en administratief. Welcome IT professional.
+[^systeem]: Een (informatie)systeem “is een geïntegreerde oplossing voor een organisatorisch probleem. Daarom kan je de software, de applicatie of het tool geen systeem noemen. Een systeem is bijvoorbeeld een reeks onderling verbonden componenten (modules, subsystemen, enz.) die samenwerken om een samenhangend geheel te vormen.” Welcome IT professional.
 
 #### Voorschrift
 
