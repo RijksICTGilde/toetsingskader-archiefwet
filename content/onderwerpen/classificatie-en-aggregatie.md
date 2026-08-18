@@ -1,6 +1,6 @@
 ---
-title: "Classificatie en aggregatie"
-card_title: "Classificatie en aggregatie"
+title: "Classificatie, aggregatie"
+card_title: "Classificatie, aggregatie"
 description: "Documenten die bij elkaar horen vormen samen een aggregatie, bijvoorbeeld een zaak, dossier, serie of deelarchief."
 synoniemen:
   - "Aggregatieniveau"

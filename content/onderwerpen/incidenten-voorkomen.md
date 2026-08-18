@@ -1,6 +1,6 @@
 ---
-title: "Incidenten voorkomen"
-card_title: "Incidenten voorkomen"
+title: "Incidenten (voorkomen van)"
+card_title: "Incidenten (voorkomen van)"
 description: "Risico's als hacks, virussen en gijzelsoftware kunnen leiden tot informatieverlies en onrechtmatige vernietiging."
 synoniemen:
   - "Beveiligingsincident"
