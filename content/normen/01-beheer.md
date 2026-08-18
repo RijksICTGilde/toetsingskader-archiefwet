@@ -4,7 +4,6 @@ versie: "0.8"
 weight: 1
 norm_id: "1"
 norm_titel: "Inbeheername en beheer"
-kern_kop: "Kern van inbeheername en beheer"
 kern: "Een document is in beheer van het verantwoordelijke overheidsorgaan zodat het duurzaam toegankelijk gemaakt en gehouden kan worden."
 kern_bron: "Ab, artikel 2.1, eerste lid; Aw, artikel 4.1, eerste lid."
 kern_bron_url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"

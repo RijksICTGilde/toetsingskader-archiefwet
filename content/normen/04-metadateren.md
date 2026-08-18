@@ -4,7 +4,6 @@ versie: "0.8"
 weight: 4
 norm_id: "4"
 norm_titel: "Metadateren"
-kern_kop: "Kern van metadata"
 aliases:
   - /normen/04-metadatering/
 kern: "Het verantwoordelijke overheidsorgaan stelt één of meerdere metadataschema's vast. Conform het metadataschema worden de juiste metadata aan documenten gekoppeld."
