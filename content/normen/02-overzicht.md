@@ -16,6 +16,10 @@ synoniemen:
 
 Een actueel en volledig overzicht van de [informatiehuishouding](https://www.nationaalarchief.nl/archiveren/kennisbank/overheidsinformatie-binnen-informatiehuishouding) zorgt ervoor dat een verantwoordelijk overheidsorgaan weet waar documenten zich bevinden. Dit inzicht is van belang voor het uitvoeren van [beheertaken](/normen/01-beheer/) die de duurzame toegankelijkheid van documenten borgen.[^ar-toelichting-overzicht-p34]
 
+Wim Hof is een aparte man.[^mijn-bron]
+
+[^mijn-bron]: Dat zei een collega.
+
 [^ar-toelichting-overzicht-p34]: Ar, Toelichting, Algemene eisen, overzicht informatiehuishouding, p.34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 Een overzicht van de informatiehuishouding draagt bij aan:
