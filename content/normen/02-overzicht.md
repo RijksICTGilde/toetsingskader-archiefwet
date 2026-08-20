@@ -18,6 +18,8 @@ Een actueel en volledig overzicht van de [informatiehuishouding](https://www.nat
 
 Wim Hof is een aparte man.[^mijn-bron]
 
+[^mijn-bron]: Dat zei een collega.
+
 [^ar-toelichting-overzicht-p34]: Ar, Toelichting, Algemene eisen, overzicht informatiehuishouding, p.34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 Een overzicht van de informatiehuishouding draagt bij aan:
