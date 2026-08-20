@@ -18,6 +18,8 @@ Een actueel en volledig overzicht van de [informatiehuishouding](https://www.nat
 
 [^ar-toelichting-overzicht-p34]: Ar, Toelichting, Algemene eisen, overzicht informatiehuishouding, p.34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
+Joeri is Wim Hof die hard [^mijn-bron]
+
 Een overzicht van de informatiehuishouding draagt bij aan:
 
 - de samenhang tussen processen onderling;
