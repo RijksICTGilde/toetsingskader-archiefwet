@@ -316,35 +316,11 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
   <h2>Deel 4: Vervolgsessie</h2>
 
   <p>De eerste sessie ging over de <em>route</em>: een pagina bewerken, een
-  voorstel indienen, de controle lezen. Deze sessie gaat over de <em>inhoud</em>:
-  waar de tekst vandaan komt, wat je wel en niet mag veranderen, en de handelingen
-  die daarbij horen.</p>
+  voorstel indienen, de controle lezen. Deze sessie gaat over de <em>onderdelen</em>
+  die daarbij horen: hovers, onderwerpenpagina's, links, de regels bovenin een
+  bestand, de toegankelijkheidscontrole en het verwerken van een review.</p>
 
-  <h3>4.1 Waar de tekst vandaan komt</h3>
-  <p>De normteksten komen <strong>woord voor woord</strong> uit de normbladen in
-  <code>docs/normbladen …/</code>. Dat is een afspraak met de opdrachtgever, en
-  hij gaat verder dan je zou denken:</p>
-  <ul>
-    <li><strong>Spelfouten blijven staan.</strong> Schrijft het normblad
-        "maateregelen" of "emailapplicaties", dan schrijft de site dat ook.</li>
-    <li><strong>Congruentiefouten blijven staan.</strong> "metadata wordt" wordt
-        niet "metadata worden".</li>
-    <li><strong>Er komen geen zinnen bij.</strong> Ook niet om een link te kunnen
-        plaatsen of om iets te verduidelijken.</li>
-  </ul>
-  <p>Dat voelt tegennatuurlijk — je bent redacteur, je ziet een fout, je wilt hem
-  herstellen. Doe het niet. De tekst is van de opdrachtgever; de site is de
-  weergave.</p>
-
-  <div class="tip"><strong>De uitzondering:</strong> vraagt een review van de
-  opdrachtgever iets anders dan het normblad, dan wint de review. Het normblad is
-  een momentopname, de review is de latere uitspraak over dezelfde tekst.
-  <strong>Schrijf zo'n afwijking wel op</strong> in
-  <code>docs/afwijkingen-van-het-normblad.md</code>, met de reden. Anders draait
-  de volgende vergelijking met het normblad hem terug — dat is al eens
-  gebeurd.</div>
-
-  <h3>4.2 <code>&lt;&lt;…&gt;&gt;</code> en "hoover" in het normblad</h3>
+  <h3>4.1 <code>&lt;&lt;…&gt;&gt;</code> en "hoover" in het normblad</h3>
   <p>In de normbladen staan twee soorten aanwijzingen die géén tekst zijn:</p>
   <table>
     <tr><th>In het normblad</th><th>Wat het betekent</th><th>Wat je doet</th></tr>
@@ -355,7 +331,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
             nooit op de site.</td></tr>
     <tr><td>Een commentaarballon met "Hoover: …"</td>
         <td>"toon deze uitleg als de lezer over het woord gaat"</td>
-        <td>Maak er een <strong>hover</strong> van (4.3). <strong>Geen</strong>
+        <td>Maak er een <strong>hover</strong> van (4.2). <strong>Geen</strong>
             aparte onderwerpenpagina.</td></tr>
   </table>
   <p>Die tweede regel is er niet altijd geweest. Er zijn vijf begrippenpagina's
@@ -363,7 +339,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
   opgeruimd. De verantwoording staat in
   <code>docs/onderwerpen-en-hovers.md</code>.</p>
 
-  <h3>4.3 Een hover maken</h3>
+  <h3>4.2 Een hover maken</h3>
   <p>Een hover is hetzelfde gereedschap als de voetnoot uit 2.3, alleen zet je er
   een uitleg in plaats van een bron in. Op een normpagina wordt het woord
   onderstreept en klapt de tekst open bij aanwijzen, met het toetsenbord en in
@@ -384,7 +360,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
   <div class="gerust">Werkt alleen op normpagina's. Op andere pagina's blijft een
   voetnoot gewoon een voetnoot onderaan de pagina.</div>
 
-  <h3>4.4 Wanneer maak je wél een onderwerpenpagina?</h3>
+  <h3>4.3 Wanneer maak je wél een onderwerpenpagina?</h3>
   <p><code>/onderwerpen/</code> is de begrippenindex. Daar hoort een pagina
   alleen als het begrip in <strong>"9) Onderwerpen en Verwijzingen"</strong>
   staat, of als een normblad er met <code>&lt;&lt;…&gt;&gt;</code> naartoe wil
@@ -408,7 +384,7 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
         vorige/volgende-knoppen lopen dan niet meer gelijk met de index.</li>
   </ul>
 
-  <h3>4.5 Links, hernoemen en verwijderen</h3>
+  <h3>4.4 Links, hernoemen en verwijderen</h3>
   <p>Interne links wijzen naar het adres, niet naar het bestand:
   <code>[ordening](/normen/03-ordenen/)</code>,
   <code>[document](/onderwerpen/document/)</code>. De linktekst volgt de zin uit
@@ -422,7 +398,7 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
   <pre><code>aliases:
   - /normen/03-ordeningsstructuur/</code></pre></div>
 
-  <h3>4.6 De regels bovenin (front matter)</h3>
+  <h3>4.5 De regels bovenin (front matter)</h3>
   <p>In sessie 1 heette dit "titel, kern en synoniemen". Compleet:</p>
   <table>
     <tr><th>Veld</th><th>Wat erin staat</th></tr>
@@ -435,7 +411,7 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
     <tr><td><code>weight</code>, <code>norm_id</code>, <code>versie</code></td><td>nummer en volgorde van de norm; laat staan</td></tr>
   </table>
 
-  <h3>4.7 De tweede controle: toegankelijkheid</h3>
+  <h3>4.6 De tweede controle: toegankelijkheid</h3>
   <p>Naast de contentcontrole uit 2.5 draait een toegankelijkheidsscan. Drie
   meldingen kun je zelf veroorzaken:</p>
   <table>
@@ -450,7 +426,7 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
         <td>Vul de alt-tekst, of meld de afbeelding aan als decoratief.</td></tr>
   </table>
 
-  <h3>4.8 Een review verwerken</h3>
+  <h3>4.7 Een review verwerken</h3>
   <ol>
     <li>Opmerkingen van je collega staan onder het tabblad
         <strong>"Files changed"</strong>, bij de betreffende regel.</li>
@@ -460,11 +436,12 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
         conversation"</strong>, zodat zichtbaar blijft wat nog open staat.</li>
     <li>Ben je het oneens? Schrijf het eronder in plaats van het stil te laten.
         Een afwijking van het normblad die je bewust maakt, hoort in
-        <code>docs/afwijkingen-van-het-normblad.md</code> (4.1).</li>
+        <code>docs/afwijkingen-van-het-normblad.md</code>, met de reden erbij.
+        Anders draait de volgende vergelijking met het normblad hem terug.</li>
   </ol>
 
   <h3>Oefeningen</h3>
-  <p>Net als in deel 3: de trainer ruimt de oefen-voorstellen na afloop op.</p>
+  <p>Net als in deel 3: ik ruim de oefen-voorstellen na afloop op.</p>
 
   <details open>
     <summary>Oefening E: Van ballon naar hover</summary>
@@ -476,7 +453,7 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
       <li>Zet onder de alinea:
           <pre><code>[^oefening]: Korte uitleg als oefening.</code></pre></li>
       <li>Bekijk de preview. Die toont een voetnootnummer; de hover zie je pas op
-          de gebouwde site, dus dat controleert de trainer.</li>
+          de gebouwde site, dus dat controleer ik.</li>
     </ol>
     <p><strong>Klaar wanneer:</strong> de markering staat achter een woord en niet
     achter een leesteken.</p>
@@ -484,7 +461,7 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
 
   <details>
     <summary>Oefening F: Hover of pagina?</summary>
-    <p><strong>Doel:</strong> de regel uit 4.2 en 4.4 toepassen. Denkoefening, je
+    <p><strong>Doel:</strong> de regel uit 4.1 en 4.3 toepassen. Denkoefening, je
     verandert niets.</p>
     <p>Drie gevallen. Wat maak je ervan?</p>
     <ol>
@@ -499,8 +476,9 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
     <details>
       <summary>Antwoord</summary>
       <p>1: hover. 2: onderwerpenpagina, want het begrip staat in bestand 9 én er
-      wordt met punthaken naar gelinkt. 3: niets doen — vraag het aan de
-      opdrachtgever. Zelfbedachte uitleg hoort niet op de site.</p>
+      wordt met punthaken naar gelinkt. 3: niets op de site. Een begrip dat
+      nergens is vastgelegd uitleggen is een inhoudelijke keuze; die hoort eerst
+      in het normblad thuis en komt daarna vanzelf hierheen.</p>
     </details>
   </details>
 
@@ -518,6 +496,61 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
     <p><strong>Klaar wanneer:</strong> je kunt uitleggen waarom "het woord laten
     staan, de link weghalen" hier de juiste oplossing is en niet "de zin
     herschrijven".</p>
+  </details>
+
+  <details>
+    <summary>Oefening H: Een tegel op de homepage</summary>
+    <p><strong>Doel:</strong> de regels bovenin een bestand bewerken (4.5) en zien
+    wat er gebeurt als de inspringing niet klopt.</p>
+    <ol>
+      <li>Open <code>content/_index.md</code> met het potlood. Boven in het bestand,
+          onder <code>tiles:</code>, staan vier blokken van twee regels.</li>
+      <li>Zet er een vijfde onder, met <strong>precies dezelfde inspringing</strong>
+          — twee spaties voor het streepje, vier voor <code>body</code>:
+          <pre><code>  - title: "Oefening"
+    body: "Vijfde tegel als proef."</code></pre></li>
+      <li>Dien het voorstel in en wacht tot de controles groen zijn.</li>
+      <li>Haal nu <strong>expres</strong> het afsluitende aanhalingsteken achter
+          <code>"Oefening</code> weg en commit opnieuw.</li>
+      <li>Lees de melding onder "Details".</li>
+    </ol>
+    <div class="tip"><strong>Let op:</strong> deze melding is de enige in de hele
+    training die niet in het Nederlands is en niet uitlegt wat je moet doen. Hij
+    komt niet van onze eigen controle maar van de sitebouwer, en ziet er zo uit:
+    <pre><code>content/_index.md:15:13: [14:13] value is not allowed in this context. map key-value is pre-defined</code></pre>
+    Het bruikbare deel is het regelnummer. Bijna altijd is de oorzaak een
+    ontbrekend aanhalingsteken of een verkeerd aantal spaties.</div>
+    <p><strong>Klaar wanneer:</strong> de controle eerst groen was, daarna rood, en
+    je in de melding het regelnummer terugvindt van de regel die je kapotmaakte.</p>
+  </details>
+
+  <details>
+    <summary>Oefening I: Een blokje op de normen-pagina</summary>
+    <p><strong>Doel:</strong> een blok toevoegen aan de tekst van een pagina, en
+    het verschil zien met oefening H.</p>
+    <ol>
+      <li>Open <code>content/normen/_index.md</code>. Onder de regels bovenin staat
+          de inleidende tekst, daaronder <code>{{&lt; pdf-kader &gt;}}</code> en
+          <code>{{&lt; normen-grid &gt;}}</code>. Dat zijn <strong>blokken</strong>:
+          korte opdrachten die de site ter plekke iets laten neerzetten.</li>
+      <li>Zet er zelf een boven <code>{{&lt; normen-grid &gt;}}</code>:
+          <pre><code>{{&lt; callout titel="Leeswijzer" &gt;}}
+Eigen tekst. Gewoon Markdown, dus **vet** mag.
+{{&lt; /callout &gt;}}</code></pre>
+          De regel met de <code>/</code> sluit het blok. Vergeet je die, dan komt
+          er: <code>shortcode "callout" must be closed or self-closed</code>.</li>
+      <li>Dien in en wacht op groen.</li>
+      <li>Maak van de eerste regel
+          <code>{{&lt; callout titel="Leeswijzer" variant="warning" &gt;}}</code>
+          en commit. Het blok krijgt een andere kleur.</li>
+      <li>Zet er nu <code>variant="info"</code> van en commit. Lees de melding:
+          <pre><code>callout: variant "info" ongeldig (kies: muted, warning, success, danger)</code></pre></li>
+      <li>Zet <code>variant</code> terug op <code>warning</code>, of haal hem weg.</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> je kunt uitleggen waarom de melding uit deze
+    oefening bruikbaarder is dan die uit H: dit blok controleert zijn eigen
+    parameters en noemt de waarden die wél mogen. Waar zo'n controle ontbreekt, val
+    je terug op een regelnummer.</p>
   </details>
 </section>
 
