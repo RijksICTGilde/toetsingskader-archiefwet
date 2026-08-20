@@ -41,6 +41,7 @@
     <a href="#deel1">1.&nbsp;Wat is GitHub?</a>
     <a href="#deel2">2.&nbsp;Handleiding</a>
     <a href="#deel3">3.&nbsp;Oefeningen</a>
+    <a href="#deel4">4.&nbsp;Vervolgsessie</a>
   </nav>
 </header>
 
@@ -178,7 +179,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
         van een collega.</li>
     <li><strong>Rood kruis</strong>: klik op <strong>"Details"</strong>. Je
         ziet dan een melding zoals:
-        <pre><code>04-metadateren.md:23: Gebruik '#### Criteria' (meervoud) in plaats van '#### Criterium'</code></pre>
+        <pre><code>04-metadateren.md:23: Voetnoot [^ar-artikel-2-5-lid-2] wordt gebruikt maar is nergens gedefinieerd</code></pre>
         Dat betekent: bestand <code>04-metadateren.md</code>, regel 23.
         Open het bestand opnieuw via het potlood-icoon <em>in dezelfde pull
         request</em> (tabblad "Files changed" → potlood), herstel het, en
@@ -188,9 +189,9 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
   <h3>2.6 Veelgemaakte fouten</h3>
   <table>
     <tr><th>Fout</th><th>Wat de controle zegt</th><th>Oplossing</th></tr>
-    <tr><td><code>#### Criterium</code> (enkelvoud)</td>
-        <td>"Gebruik '#### Criteria' (meervoud)…"</td>
-        <td>Kop hernoemen naar <code>#### Criteria</code></td></tr>
+    <tr><td>Zelfbedachte kop, bijvoorbeeld <code>## Uitleg</code></td>
+        <td>"Onbekende sectie '## Uitleg'. Toegestaan: …"</td>
+        <td>Een kop uit de lijst in 2.2 gebruiken</td></tr>
     <tr><td>Voetnoot gebruikt, definitieregel vergeten</td>
         <td>"…wordt gebruikt maar is nergens gedefinieerd"</td>
         <td>Regel <code>[^naam]: Bron.</code> toevoegen onder de alinea</td></tr>
@@ -308,6 +309,215 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
     </ol>
     <p><strong>Klaar wanneer:</strong> je het huidige versienummer kunt noemen en
     in eigen woorden kunt zeggen wat er in die release zat.</p>
+  </details>
+</section>
+
+<section id="deel4">
+  <h2>Deel 4: Vervolgsessie</h2>
+
+  <p>De eerste sessie ging over de <em>route</em>: een pagina bewerken, een
+  voorstel indienen, de controle lezen. Deze sessie gaat over de <em>inhoud</em>:
+  waar de tekst vandaan komt, wat je wel en niet mag veranderen, en de handelingen
+  die daarbij horen.</p>
+
+  <h3>4.1 Waar de tekst vandaan komt</h3>
+  <p>De normteksten komen <strong>woord voor woord</strong> uit de normbladen in
+  <code>docs/normbladen …/</code>. Dat is een afspraak met de opdrachtgever, en
+  hij gaat verder dan je zou denken:</p>
+  <ul>
+    <li><strong>Spelfouten blijven staan.</strong> Schrijft het normblad
+        "maateregelen" of "emailapplicaties", dan schrijft de site dat ook.</li>
+    <li><strong>Congruentiefouten blijven staan.</strong> "metadata wordt" wordt
+        niet "metadata worden".</li>
+    <li><strong>Er komen geen zinnen bij.</strong> Ook niet om een link te kunnen
+        plaatsen of om iets te verduidelijken.</li>
+  </ul>
+  <p>Dat voelt tegennatuurlijk — je bent redacteur, je ziet een fout, je wilt hem
+  herstellen. Doe het niet. De tekst is van de opdrachtgever; de site is de
+  weergave.</p>
+
+  <div class="tip"><strong>De uitzondering:</strong> vraagt een review van de
+  opdrachtgever iets anders dan het normblad, dan wint de review. Het normblad is
+  een momentopname, de review is de latere uitspraak over dezelfde tekst.
+  <strong>Schrijf zo'n afwijking wel op</strong> in
+  <code>docs/afwijkingen-van-het-normblad.md</code>, met de reden. Anders draait
+  de volgende vergelijking met het normblad hem terug — dat is al eens
+  gebeurd.</div>
+
+  <h3>4.2 <code>&lt;&lt;…&gt;&gt;</code> en "hoover" in het normblad</h3>
+  <p>In de normbladen staan twee soorten aanwijzingen die géén tekst zijn:</p>
+  <table>
+    <tr><th>In het normblad</th><th>Wat het betekent</th><th>Wat je doet</th></tr>
+    <tr><td><code>&lt;&lt;aggregatieniveau&gt;&gt;</code></td>
+        <td>"hier moet een link komen"</td>
+        <td>Maak er een link van naar de onderwerpenpagina, of laat het woord
+            gewoon staan als die pagina niet bestaat. De punthaken zelf komen
+            nooit op de site.</td></tr>
+    <tr><td>Een commentaarballon met "Hoover: …"</td>
+        <td>"toon deze uitleg als de lezer over het woord gaat"</td>
+        <td>Maak er een <strong>hover</strong> van (4.3). <strong>Geen</strong>
+            aparte onderwerpenpagina.</td></tr>
+  </table>
+  <p>Die tweede regel is er niet altijd geweest. Er zijn vijf begrippenpagina's
+  gemaakt van ballonnen die om een hover vroegen; die zijn in augustus 2026 weer
+  opgeruimd. De verantwoording staat in
+  <code>docs/onderwerpen-en-hovers.md</code>.</p>
+
+  <h3>4.3 Een hover maken</h3>
+  <p>Een hover is hetzelfde gereedschap als de voetnoot uit 2.3, alleen zet je er
+  een uitleg in plaats van een bron in. Op een normpagina wordt het woord
+  onderstreept en klapt de tekst open bij aanwijzen, met het toetsenbord en in
+  een schermlezer.</p>
+  <pre><code>… documenten die behoren tot hetzelfde werkproces[^werkproces].
+
+[^werkproces]: Een werkproces is een samenhangend geheel van stappen en procedures in het kader van de uitvoering van een taak. Ar, artikel 1.1, begripsbepalingen. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)</code></pre>
+  <p>Twee dingen die makkelijk misgaan:</p>
+  <ul>
+    <li><strong>Zet de markering direct achter het woord</strong>, vóór de komma
+        of punt. Achter een leesteken wordt dat leesteken het klikbare doel; de
+        toegankelijkheidscontrole geeft dan een fout.</li>
+    <li><strong>Nooit twee markeringen naast elkaar</strong>
+        (<code>woord[^a].[^b]</code>). Hoort er ook een bron bij, zet die dan in
+        dezelfde voetnoot achter de uitleg — zoals hierboven bij
+        <code>[^werkproces]</code>.</li>
+  </ul>
+  <div class="gerust">Werkt alleen op normpagina's. Op andere pagina's blijft een
+  voetnoot gewoon een voetnoot onderaan de pagina.</div>
+
+  <h3>4.4 Wanneer maak je wél een onderwerpenpagina?</h3>
+  <p><code>/onderwerpen/</code> is de begrippenindex. Daar hoort een pagina
+  alleen als het begrip in <strong>"9) Onderwerpen en Verwijzingen"</strong>
+  staat, of als een normblad er met <code>&lt;&lt;…&gt;&gt;</code> naartoe wil
+  linken. Zelf een begrip bedenken dat je nuttig lijkt: niet doen.</p>
+  <p>Een nieuwe pagina is een bestand in <code>content/onderwerpen/</code>:</p>
+  <pre><code>---
+title: "Aangrijpingspunt"
+card_title: "Aangrijpingspunt"
+description: "Eén zin, wordt getoond op de indexkaart."
+synoniemen:
+  - "Startmoment"
+---
+
+De tekst, letterlijk uit het bronbestand.</code></pre>
+  <ul>
+    <li><strong>De titel is de term uit het bronbestand</strong>, met een
+        hoofdletter aan het begin. Dus "Classificatie, aggregatie" en niet
+        "Classificatie en aggregatie".</li>
+    <li><strong>Geef een onderwerp nooit een <code>weight</code>.</strong> De
+        index sorteert op titel; één gewogen pagina verspringt naar voren en de
+        vorige/volgende-knoppen lopen dan niet meer gelijk met de index.</li>
+  </ul>
+
+  <h3>4.5 Links, hernoemen en verwijderen</h3>
+  <p>Interne links wijzen naar het adres, niet naar het bestand:
+  <code>[ordening](/normen/03-ordenen/)</code>,
+  <code>[document](/onderwerpen/document/)</code>. De linktekst volgt de zin uit
+  het normblad — je verandert de zin niet om een mooiere linktekst te
+  krijgen.</p>
+  <p>Verwijder je een pagina, zoek dan eerst wie ernaar linkt. Blijft er een link
+  staan, dan wordt de linkcontrole rood. Meestal is de oplossing: het woord laten
+  staan en de link eromheen weghalen.</p>
+  <div class="tip"><strong>Hernoemen?</strong> Zet het oude adres als
+  <code>aliases</code> in de front matter, zodat links van buiten blijven werken:
+  <pre><code>aliases:
+  - /normen/03-ordeningsstructuur/</code></pre></div>
+
+  <h3>4.6 De regels bovenin (front matter)</h3>
+  <p>In sessie 1 heette dit "titel, kern en synoniemen". Compleet:</p>
+  <table>
+    <tr><th>Veld</th><th>Wat erin staat</th></tr>
+    <tr><td><code>title</code></td><td>de titel van het normblad ("Normanalyse Metadata")</td></tr>
+    <tr><td><code>norm_titel</code></td><td>de normnaam uit de introductie ("Metadateren"). Stuurt het bollendiagram, de kaarten en de kop "Kern van metadateren". <strong>Niet aanpassen om een kop te veranderen.</strong></td></tr>
+    <tr><td><code>kern</code></td><td>de kerntekst <em>uit het normblad zelf</em>, zonder voetnoten</td></tr>
+    <tr><td><code>kern_bron</code> / <code>kern_bron_url</code></td><td>de bron onder de kern (optioneel, maar een url zonder brontekst mag niet)</td></tr>
+    <tr><td><code>kern_kaart</code></td><td>de kortere zin uit de introductie, voor de kaart op <code>/normen/</code> (optioneel)</td></tr>
+    <tr><td><code>synoniemen</code></td><td>zoekwoorden; staan niet op de pagina, voeden alleen de zoekfunctie</td></tr>
+    <tr><td><code>weight</code>, <code>norm_id</code>, <code>versie</code></td><td>nummer en volgorde van de norm; laat staan</td></tr>
+  </table>
+
+  <h3>4.7 De tweede controle: toegankelijkheid</h3>
+  <p>Naast de contentcontrole uit 2.5 draait een toegankelijkheidsscan. Drie
+  meldingen kun je zelf veroorzaken:</p>
+  <table>
+    <tr><th>Melding</th><th>Wat er aan de hand is</th></tr>
+    <tr><td>"voetnootmarkering zonder ref-term en zonder tooltip"</td>
+        <td>De markering staat aan het begin van een regel of achter opmaak. Hang
+            hem aan gewoon tekst.</td></tr>
+    <tr><td>"ref-term bestaat alleen uit interpunctie"</td>
+        <td>De markering staat achter een leesteken. Zet hem achter het
+            woord.</td></tr>
+    <tr><td>"lege alt op een afbeelding die niet als decoratief is aangemerkt"</td>
+        <td>Vul de alt-tekst, of meld de afbeelding aan als decoratief.</td></tr>
+  </table>
+
+  <h3>4.8 Een review verwerken</h3>
+  <ol>
+    <li>Opmerkingen van je collega staan onder het tabblad
+        <strong>"Files changed"</strong>, bij de betreffende regel.</li>
+    <li>Pas de tekst aan via het potlood <em>in dezelfde pull request</em> en
+        commit opnieuw. De controles draaien vanzelf opnieuw.</li>
+    <li>Klik bij een verwerkte opmerking op <strong>"Resolve
+        conversation"</strong>, zodat zichtbaar blijft wat nog open staat.</li>
+    <li>Ben je het oneens? Schrijf het eronder in plaats van het stil te laten.
+        Een afwijking van het normblad die je bewust maakt, hoort in
+        <code>docs/afwijkingen-van-het-normblad.md</code> (4.1).</li>
+  </ol>
+
+  <h3>Oefeningen</h3>
+  <p>Net als in deel 3: de trainer ruimt de oefen-voorstellen na afloop op.</p>
+
+  <details open>
+    <summary>Oefening E: Van ballon naar hover</summary>
+    <p><strong>Doel:</strong> een hover maken op het juiste woord.</p>
+    <ol>
+      <li>Open <code>content/normen/06-vindbaar.md</code> met het potlood.</li>
+      <li>Kies in de toelichting een woord en zet er direct achter
+          <code>[^oefening]</code> — vóór de punt of komma.</li>
+      <li>Zet onder de alinea:
+          <pre><code>[^oefening]: Korte uitleg als oefening.</code></pre></li>
+      <li>Bekijk de preview. Die toont een voetnootnummer; de hover zie je pas op
+          de gebouwde site, dus dat controleert de trainer.</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> de markering staat achter een woord en niet
+    achter een leesteken.</p>
+  </details>
+
+  <details>
+    <summary>Oefening F: Hover of pagina?</summary>
+    <p><strong>Doel:</strong> de regel uit 4.2 en 4.4 toepassen. Denkoefening, je
+    verandert niets.</p>
+    <p>Drie gevallen. Wat maak je ervan?</p>
+    <ol>
+      <li>Het normblad Vindbaarheid heeft een ballon "Hoover: categorieën met een
+          relatie met het selectiebesluit".</li>
+      <li>"9) Onderwerpen en Verwijzingen" beschrijft het begrip
+          <em>hashfunctie</em>, en normblad 7 verwijst ernaar met
+          <code>&lt;&lt;hashfunctie&gt;&gt;</code>.</li>
+      <li>Je vindt de term "capstone-methodiek" onduidelijk en wilt hem uitleggen.
+          Er staat geen ballon bij en het begrip staat niet in bestand 9.</li>
+    </ol>
+    <details>
+      <summary>Antwoord</summary>
+      <p>1: hover. 2: onderwerpenpagina, want het begrip staat in bestand 9 én er
+      wordt met punthaken naar gelinkt. 3: niets doen — vraag het aan de
+      opdrachtgever. Zelfbedachte uitleg hoort niet op de site.</p>
+    </details>
+  </details>
+
+  <details>
+    <summary>Oefening G: Een link opruimen</summary>
+    <p><strong>Doel:</strong> zien wat er gebeurt als een link naar een
+    niet-bestaande pagina wijst.</p>
+    <ol>
+      <li>Open <code>content/normen/02-overzicht.md</code> en maak van een woord
+          een link naar <code>/onderwerpen/bestaat-niet/</code>.</li>
+      <li>Dien het voorstel in en wacht op de controles.</li>
+      <li>Lees welke controle rood wordt en wat de melding zegt.</li>
+      <li>Herstel het: haal de link weg, laat het woord staan.</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> je kunt uitleggen waarom "het woord laten
+    staan, de link weghalen" hier de juiste oplossing is en niet "de zin
+    herschrijven".</p>
   </details>
 </section>
 
