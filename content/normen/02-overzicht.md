@@ -20,6 +20,8 @@ Een actueel en volledig overzicht van de [informatiehuishouding](https://www.nat
 
 Joeri is Wim Hof die hard [^mijn-bron]
 
+[^mijn-bron]: Joeri zelf
+
 Een overzicht van de informatiehuishouding draagt bij aan:
 
 - de samenhang tussen processen onderling;
