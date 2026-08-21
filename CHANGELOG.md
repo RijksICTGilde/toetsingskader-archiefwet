@@ -36,6 +36,36 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Feedbackronde op de normbladen ordenen, metadateren en informatiebeveiliging
+  verwerkt:
+  - De paginatitels volgen het normblad: "Normanalyse ordenen", "Normanalyse
+    metadateren" en "Normanalyse informatiebeveiliging en betrouwbaar" (was
+    "Normanalyse Ordeningsstructuur", "Normanalyse Metadata" en "Normanalyse
+    informatiebeveiliging en betrouwbaarheid van documenten").
+  - Norm 4: de bron bij NEN-ISO 23081-1:2017 wees naar een DMS-bestand dat
+    buiten de organisatie niet te openen is; hij wijst nu naar
+    <https://www.nen.nl/nen-iso-23081-1-2017-nl-269387>.
+  - Norm 4: de drie zinnen die de categorieën documenten inleiden ("Alle
+    documenten, ongeacht de bewaartermijn …", "Digitale documenten met een
+    bewaartermijn langer dan tien jaar …", "Over te brengen documenten …") zijn
+    tussenkopjes (`###`) op hetzelfde niveau als "Feitelijk beheer" bij norm 1.
+    Ze liepen als losse alinea door in het voorschrift ervoor.
+  - Norm 4: hover bij "structuur" leest "aan een bericht dat bijlagen bevat";
+    de bron bij het permanent uniek identificatiekenmerk (voorschrift 4.3) is
+    "Ar, artikel 2.7; Ar, artikel 2.8; Archiefregeling, Toelichting, 2.2
+    Aanvullende eisen voor langdurig te bewaren documenten in digitale vorm,
+    p.37."
+  - Norm 5: de hover bij "informatiebeveiliging" in de toelichting noemt nu de
+    onderwerpen waar de Inspectie zich niet op richt (firewalls, encryptie,
+    antivirussoftware, MFA, patchen). Toegevoegd aan de bestaande bronvoetnoot
+    op dat woord in plaats van als tweede voetnoot: twee voetnootmarkeringen
+    achter elkaar geven één zwevend nummer, omdat de tooltip-transformatie in
+    `layouts/normen/single.html` het voorafgaande woord pakt.
+  - Norm 5: de twee back-upindicatoren bij voorschrift 5.1 stonden ingesprongen
+    en staan nu op hetzelfde niveau als de andere indicatoren; de bron bij 5.1
+    scheidt de twee vindplaatsen met een puntkomma; de bron bij het laatste
+    criterium van 5.4 legt uit wat "ongeoorloofd" betekent en is niet langer
+    een half afgemaakte notitie.
 - Kop boven de kern noemt de norm: "Kern van ordenen" in plaats van "Kern van
   de norm", op de normpagina, in de inhoudsopgave en in de PDF. Uit
   `norm_titel`, dus voor alle acht normen tegelijk.
