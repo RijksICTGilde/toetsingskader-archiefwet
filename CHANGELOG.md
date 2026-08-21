@@ -44,7 +44,8 @@ changelog volgt [Semantic Versioning][semver].
     informatiebeveiliging en betrouwbaarheid van documenten").
   - Norm 4: de bron bij NEN-ISO 23081-1:2017 wees naar een DMS-bestand dat
     buiten de organisatie niet te openen is; hij wijst nu naar
-    <https://www.nen.nl/nen-iso-23081-1-2017-nl-269387>.
+    [NEN-ISO 23081-1:2017 nl](https://www.nen.nl/nen-iso-23081-1-2017-nl-269387)
+    op nen.nl.
   - Norm 4: de drie zinnen die de categorieën documenten inleiden ("Alle
     documenten, ongeacht de bewaartermijn …", "Digitale documenten met een
     bewaartermijn langer dan tien jaar …", "Over te brengen documenten …") zijn
