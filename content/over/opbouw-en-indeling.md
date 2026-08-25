@@ -2,7 +2,7 @@
 title: "Opbouw en indeling"
 card_title: "Opbouw en indeling"
 description: "Hoe het toetsingskader is opgebouwd en wat het verschil is tussen een voorschrift, een criterium en een indicator."
-weight: 4
+weight: 5
 ---
 
 Het toetsingskader omvat momenteel de onderwerpen die de Inspectie als fundamenteel beschouwt voor de duurzame toegankelijkheid van overheidsinformatie. Deze onderwerpen staan in de [normen]({{< relref "/normen" >}}). Hoe zij zich tot elkaar verhouden, staat op de pagina over [de samenhang van de normen]({{< relref "/samenhang" >}}). Daar staan ook de onderwerpen die op een later moment aan het toetsingskader worden toegevoegd.

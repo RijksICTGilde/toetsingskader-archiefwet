@@ -1,13 +1,13 @@
 ---
 title: "Over het toetsingskader"
 card_title: "Over het toetsingskader"
-description: "Achtergrond bij het toetsingskader: inleiding, doel, wettelijk kader, opbouw, doelgroep en passende maatregelen."
+description: "Achtergrond bij het toetsingskader: inleiding, duurzame toegankelijkheid, doel, wettelijk kader, opbouw en doelgroep."
 weight: 4
 show_lastmod: true
 manual_layout: true
 # Maakt de sectie doorklikbaar met vorige/volgende, net als /onderwerpen/: van
 # de index naar Inleiding, en op Doelgroep terug naar de index. De volgorde is
-# de `weight` van de subpagina's (1 t/m 5), dezelfde als die van de card-grid.
+# de `weight` van de subpagina's (1 t/m 6), dezelfde als die van de card-grid.
 prev_next: true
 # Zelfde breedte als /normen/: het thema haalt de max-width van de kolom weg
 # zodra `wide` staat (article.wide in layout.css).

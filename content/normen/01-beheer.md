@@ -1,5 +1,5 @@
 ---
-title: "Normanalyse inbeheername en beheer"
+title: "1. Inbeheername en beheer"
 versie: "0.8"
 weight: 1
 norm_id: "1"
@@ -67,7 +67,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
 
 #### Voorschrift
 
-Het verantwoordelijk overheidsorgaan heeft in de beheerregels, in ieder geval per categorie[^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten, een omschrijving opgenomen van de passende maatregelen die het verantwoordelijke overheidsorgaan neemt om de documenten:[^aw-artikel-4-2-lid-2]
+Het verantwoordelijk overheidsorgaan heeft in de beheerregels, in ieder geval per categorie[^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten, een **omschrijving** opgenomen van de passende maatregelen die het verantwoordelijke overheidsorgaan neemt om de documenten:[^aw-artikel-4-2-lid-2]
 
 a) duurzaam toegankelijk te maken en te houden,[^aw-artikel-4-2-lid-2]
 
@@ -102,7 +102,7 @@ b) te [vernietigen](/normen/07-vernietigen/)
 - De passende maatregelen zijn opgesteld op basis van een [risicobenadering](/onderwerpen/passende-maatregelen/).
 - Een categorie, waarvoor passende maatregelen zijn genomen, heeft een relatie met een selectiebesluit.
 - De passende maatregelen zijn actueel.
-- De passende maatregelen worden toegepast.
+- De passende maatregelen worden [toegepast](#feitelijk-beheer).
 
 [^kamerstukken-2021-22-35968-4-4-selectie]: Aw, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen Deel, 4.4 selectie.
 
@@ -128,7 +128,7 @@ Het verantwoordelijke overheidsorgaan heeft de door hem vastgestelde beheerregel
 
 #### Voorschrift
 
-Het verantwoordelijke overheidsorgaan heeft inzichtelijk welke categorieën documenten gemigreerd, geconverteerd of vervangen moeten worden.[^ab-artikelen-2-2-2-3] Alleen wanneer dergelijke categorieën bestaan, heeft de organisatie in de beheerregels een omschrijving opgenomen van de passende maatregelen voor migratie, conversie en vervanging.
+Het verantwoordelijke overheidsorgaan heeft inzichtelijk welke categorieën documenten gemigreerd, geconverteerd of vervangen moeten worden.[^ab-artikelen-2-2-2-3] **Alleen wanneer dergelijke categorieën bestaan**, heeft de organisatie in de beheerregels een omschrijving opgenomen van de passende maatregelen voor migratie, conversie en vervanging.
 
 [^ab-artikelen-2-2-2-3]: Ab, artikelen 2.2, 2.3, 2.4. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 

@@ -13,6 +13,12 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Toegevoegd
 
+- Pagina "Duurzame toegankelijkheid" onder Over, met de DUTO-definitie en de
+  duiding welke kenmerken als norm zijn uitgewerkt. Die tekst stond dubbel in
+  de inleiding en op de samenhangpagina.
+- Bronvoetnoten op de onderwerpenpagina's aangrijpingspunt, audittrail,
+  classificatie/aggregatie, document en samenhang/interpreteerbaar, uit het
+  brondocument "Onderwerpen en verwijzingen".
 - Normen 2 tot en met 8 gevuld met de teksten uit de normbladen (4e iteratie):
   kern, synoniemen, toelichting, voorschriften met criteria en indicatoren,
   reikwijdte en "Zie ook". De PLACEHOLDER-stubs zijn daarmee weg; norm 1 was
@@ -36,6 +42,23 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Derde feedbackronde verwerkt (`docs/feedback-algemeen-normblad-1-2-onderwerpen.md`):
+  - Paginatitels van de normen zijn "<nummer>. <norm>", bijvoorbeeld
+    "1. Inbeheername en beheer", in plaats van "Normanalyse …". Het nummer
+    boven de pagina maakt "Voorschrift 1.1" eronder logisch.
+  - Een link die ook een hover draagt is blauw met doorgetrokken lijn; een
+    pure hover blijft zwart met stippellijn. Versiezin en datum in de voet
+    kleiner en gedempt.
+  - Inleiding zonder "centrale"; DUTO-sectie verhuisd naar de nieuwe pagina.
+    Samenhangpagina zonder "Relatie met DUTO". Kopje "Invloed per onderwerp"
+    heet "De risicobenadering per norm".
+  - Norm 1: "omschrijving" (1.2) en "Alleen wanneer dergelijke categorieën
+    bestaan" (1.5) vet; het laatste criterium van 1.3 linkt naar "Feitelijk
+    beheer".
+  - Norm 2: zin over aggregatieniveau uit de kern; punt achter 2.1; hovers
+    bij applicatie en systeem met bronlink naar itpedia.nl.
+  - Norm 5: "incidenten" in de kern linkt naar het onderwerp Incidenten, dat
+    niet langer "(voorkomen van)" heet. Eerste zin van de onderwerpenindex weg.
 - Kop boven de kern noemt de norm: "Kern van ordenen" in plaats van "Kern van
   de norm", op de normpagina, in de inhoudsopgave en in de PDF. Uit
   `norm_titel`, dus voor alle acht normen tegelijk.

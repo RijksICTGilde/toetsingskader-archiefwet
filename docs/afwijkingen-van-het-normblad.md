@@ -41,3 +41,10 @@ bollendiagram, de kaarten op `/normen/` en de navigatie.
 - Enkelvoud/meervoud in `#### Criteria` / `#### Criterium` en `#### Indicatoren` /
   `#### Indicator` wisselt in de normbladen zelf. De site volgt per voorschrift
   het normblad. De validator staat beide toe.
+
+## Nadruk (vet) in normblad 1
+
+Op verzoek (feedback 25 augustus 2026) staan in `content/normen/01-beheer.md`
+twee stukken tekst vet die in het normblad niet vet zijn: "omschrijving" in
+voorschrift 1.2 en "Alleen wanneer dergelijke categorieën bestaan" in
+voorschrift 1.5. Verantwoording in `feedback-algemeen-normblad-1-2-onderwerpen.md`.

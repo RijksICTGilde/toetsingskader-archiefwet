@@ -24,7 +24,7 @@ Daarbij geldt steeds dat de passende maatregelen moeten voldoen aan de eisen van
 
 Voor informatiebeveiliging is een risicobenadering verplicht. Voor de overige onderwerpen binnen dit toetsingskader is een risicobenadering niet verplicht, maar wel een voorwaarde om gemotiveerd onderscheid te kunnen maken in de inrichting en uitvoering van het beheer.
 
-## Invloed per onderwerp
+## De risicobenadering per norm
 
 De risicobenadering kan onder meer van invloed zijn op de volgende onderwerpen:
 

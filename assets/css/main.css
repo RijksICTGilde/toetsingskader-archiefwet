@@ -115,11 +115,23 @@ blockquote.callout .kern-bron {
   filter: none;
 }
 
-/* Ref-term die óók naar een andere pagina linkt, krijgt de linkkleur. Termen
-   met href="#fn:…" blijven in tekstkleur. */
+/* Ref-term die óók naar een andere pagina linkt, leest als link: linkkleur en
+   een doorgetrokken lijn. Termen met href="#fn:…" (alleen een hover) houden
+   de tekstkleur en de dotted lijn uit het thema, zodat hover en link uit
+   elkaar te houden zijn (feedback normblad 1, criteria 1.6 en 1.8). */
 .norm a.ref-term[href^="/"],
 .norm a.ref-term[href^="/"]:hover {
   color: var(--color-primary);
+  text-decoration: underline solid;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+}
+
+/* Versiezin en laatst-gewijzigd-datum in de voet: naslag, geen kop. Kleiner
+   en gedempt, zodat de zin niet met de inhoud concurreert. */
+.page-meta {
+  font-size: 0.875rem;
+  color: var(--color-text-muted, #555);
 }
 
 /* Toelichting hergebruikt de `.references`-accordeon van het thema; alleen de

@@ -1,5 +1,5 @@
 ---
-title: "Normanalyse Vindbaarheid"
+title: "6. Vindbaar"
 versie: "0.8"
 weight: 6
 norm_id: "6"

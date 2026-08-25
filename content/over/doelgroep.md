@@ -2,7 +2,7 @@
 title: "Doelgroep"
 card_title: "Doelgroep"
 description: "Welke organisaties onder de Archiefwet 2026 en het toezicht van de Inspectie vallen."
-weight: 5
+weight: 6
 ---
 
 Alle organisaties van de centrale overheid vallen onder de werking van de Archiefwet 2026 en het toezicht van de Inspectie Overheidsinformatie en Erfgoed. Dat zijn:

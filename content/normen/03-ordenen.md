@@ -1,5 +1,5 @@
 ---
-title: "Normanalyse Ordeningsstructuur"
+title: "3. Ordenen"
 versie: "0.8"
 weight: 3
 norm_id: "3"

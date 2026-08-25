@@ -1,5 +1,5 @@
 ---
-title: "Normanalyse Metadata"
+title: "4. Metadateren"
 versie: "0.8"
 weight: 4
 norm_id: "4"
