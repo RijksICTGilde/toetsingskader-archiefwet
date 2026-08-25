@@ -52,6 +52,9 @@ changelog volgt [Semantic Versioning][semver].
     versiezin (voet van elke pagina, homepage) en uit de PDF.
   - Zoeken: synoniemen wegen zwaarder dan titel en tekst (projectoverride van
     `search.js`), zodat een norm op zijn synoniem bovenaan komt.
+- Nieuwe hero-afbeelding op de homepage: brede banner (4000×1056,
+  `assets/images/hero.jpg`) in plaats van de 1000×600 png. Decoratief, alt
+  blijft leeg.
 - Kop boven de kern noemt de norm: "Kern van ordenen" in plaats van "Kern van
   de norm", op de normpagina, in de inhoudsopgave en in de PDF. Uit
   `norm_titel`, dus voor alle acht normen tegelijk.
