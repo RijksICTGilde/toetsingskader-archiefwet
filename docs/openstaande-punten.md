@@ -20,6 +20,8 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 
 ## Versiezin
 
+- [x] **"De inhoud is nog in ontwikkeling en kan wijzigen." weg**, op de site
+      en in de PDF.
 - [ ] **Versiezin in de voet** ("Versie v0.2.0 … laatst aangepast op …") in de
       kleine opmaak van de homepage, overal. Nu al kleiner en gedempt in #79
       (`.page-meta` in `main.css`); nog gelijktrekken met de homepage

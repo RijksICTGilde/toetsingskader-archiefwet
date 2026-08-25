@@ -55,7 +55,8 @@
 
   // Eén alinea in plaats van het blok "Belangrijke informatie" (feedback 25
   // augustus 2026): versie plus link naar de actuele versie. Het voorbehoud
-  // (in ontwikkeling, geen rechten) blijft; alleen de kop en de bulletvorm
+  // (geen rechten) blijft; "in ontwikkeling" is op verzoek weg, alleen de kop
+  // en de bulletvorm
   // zijn weg. De link gaat naar de site-root, niet naar de pagina: bij de
   // kader-PDF is data.url de /normen/-sectie.
   function disclaimer(data) {
@@ -64,7 +65,7 @@
       text: [
         { text: 'Dit is versie ' + (data.versie || 'onbekend') + ' van het toetsingskader. Bekijk voor de actuele versie ' },
         { text: site, link: site, color: BRAND },
-        { text: '. De inhoud is in ontwikkeling en kan wijzigen; aan dit document kunnen geen rechten worden ontleend.' }
+        { text: '. Aan dit document kunnen geen rechten worden ontleend.' }
       ],
       fontSize: 9.5, color: '#444444', margin: [0, 16, 0, 0]
     }]

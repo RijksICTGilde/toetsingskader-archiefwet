@@ -48,6 +48,8 @@ changelog volgt [Semantic Versioning][semver].
     uitgeklapt (`toc_open`).
   - PDF: blok "Belangrijke informatie" vervangen door één regel met het
     versienummer en een link naar de actuele versie.
+  - De zin "De inhoud is nog in ontwikkeling en kan wijzigen." is weg uit de
+    versiezin (voet van elke pagina, homepage) en uit de PDF.
   - Zoeken: synoniemen wegen zwaarder dan titel en tekst (projectoverride van
     `search.js`), zodat een norm op zijn synoniem bovenaan komt.
 - Kop boven de kern noemt de norm: "Kern van ordenen" in plaats van "Kern van
