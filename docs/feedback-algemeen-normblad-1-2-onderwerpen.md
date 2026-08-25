@@ -68,8 +68,8 @@ De feedback staat hieronder woord voor woord.
 
 | # | Punt | Verwerkt in |
 |---|---|---|
-| 1 | Kop "Normanalyse …" weg | `title` van alle acht normen is nu "<nummer>. <norm>", bijv. "1. Inbeheername en beheer" |
-| 2 | Nummer bij de kern | zit in de paginakop uit punt 1; de kop "Kern van …" zelf is niet genummerd, zie "Keuzes" |
+| 1 | Kop "Normanalyse …" weg | `title` van alle acht normen is nu de normnaam, bijv. "Inbeheername en beheer" |
+| 2 | Nummer bij de kern | **nog te doen**: layout (`layouts/_partials/kern-kop.html`), staat op de lijst in de PR |
 | 3 | Versiezin te groot | `assets/css/main.css`, `.page-meta`: kleiner en gedempt |
 | 4 | "centrale" weg uit de eerste zin | `content/over/inleiding.md` |
 | 5 | DUTO-tekst weg bij Samenhang | `content/samenhang.md`: sectie "Relatie met DUTO" vervangen door een korte "Beschikbaar en leesbaar" met verwijzing |
@@ -92,15 +92,6 @@ Punt 18 en 19 zijn waarschijnlijk tegen de gepubliceerde v0.2.0 gecontroleerd;
 op `main` staan die links sinds de migratie van de normbladen.
 
 ## Keuzes bij de vragen
-
-**Paginatitel "1. Inbeheername en beheer" in plaats van "Normanalyse
-inbeheername en beheer".** Dat haalt "Normanalyse" weg (punt 1) en zet het
-normnummer boven de pagina, zodat "Voorschrift 1.1" eronder vanzelf klopt
-(punt 2). De kop "Kern van inbeheername en beheer" is niet apart genummerd:
-één nummer bovenaan volstaat, en "1. Kern van …" zou in de inhoudsopgave naast
-"Voorschrift 1.1" verwarren. Geldt ook voor de PDF, die dezelfde
-`norm_titel` gebruikt. Wil je toch een nummer op de kern, dan is dat één regel
-in `layouts/_partials/kern-kop.html`.
 
 **Hover versus link.** De site kent drie gevallen: een gewone link (blauw,
 doorgetrokken), een hover (zwart, stippellijn) en een woord dat beide is —

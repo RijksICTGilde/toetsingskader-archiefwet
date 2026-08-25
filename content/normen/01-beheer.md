@@ -1,5 +1,5 @@
 ---
-title: "1. Inbeheername en beheer"
+title: "Inbeheername en beheer"
 versie: "0.8"
 weight: 1
 norm_id: "1"

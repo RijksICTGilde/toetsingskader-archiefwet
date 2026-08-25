@@ -1,5 +1,5 @@
 ---
-title: "4. Metadateren"
+title: "Metadateren"
 versie: "0.8"
 weight: 4
 norm_id: "4"

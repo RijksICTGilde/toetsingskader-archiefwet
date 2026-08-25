@@ -1,5 +1,5 @@
 ---
-title: "5. Informatiebeveiliging en betrouwbaar"
+title: "Informatiebeveiliging en betrouwbaar"
 versie: "0.8"
 weight: 5
 norm_id: "5"

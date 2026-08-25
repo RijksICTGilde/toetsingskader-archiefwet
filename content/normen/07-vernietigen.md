@@ -1,5 +1,5 @@
 ---
-title: "7. Gecontroleerd vernietigen"
+title: "Gecontroleerd vernietigen"
 versie: "0.8"
 weight: 7
 norm_id: "7"

@@ -43,9 +43,8 @@ changelog volgt [Semantic Versioning][semver].
 ### Gewijzigd
 
 - Derde feedbackronde verwerkt (`docs/feedback-algemeen-normblad-1-2-onderwerpen.md`):
-  - Paginatitels van de normen zijn "<nummer>. <norm>", bijvoorbeeld
-    "1. Inbeheername en beheer", in plaats van "Normanalyse …". Het nummer
-    boven de pagina maakt "Voorschrift 1.1" eronder logisch.
+  - Paginatitels van de normen zijn de normnaam, bijvoorbeeld "Inbeheername
+    en beheer", in plaats van "Normanalyse …".
   - Een link die ook een hover draagt is blauw met doorgetrokken lijn; een
     pure hover blijft zwart met stippellijn. Versiezin en datum in de voet
     kleiner en gedempt.
