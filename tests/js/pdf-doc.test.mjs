@@ -79,15 +79,16 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.match(coverText, /Bron/)
   assert.equal(cover.pageBreak, 'after')
   // Kern als h2 (zoals Toelichting) + kerntekst als alinea.
-  // De kop noemt de norm, net als op de website (layouts/_partials/kern-kop.html).
-  const kernIdx = dd.content.findIndex(b => typeof b.text === 'string' && b.text.startsWith('Kern van '))
+  // De kop noemt de norm en het normnummer, net als op de website
+  // (layouts/_partials/kern-kop.html): "1. Kern van …".
+  const kernIdx = dd.content.findIndex(b => typeof b.text === 'string' && /^(\d+\. )?Kern van /.test(b.text))
   assert.ok(kernIdx !== -1, 'kern-kop aanwezig')
   assert.equal(dd.content[kernIdx].style, 'h2', 'kern-kop als sectiekop (h2)')
   const kernBlock = dd.content[kernIdx + 1]
   assert.equal(kernBlock.style, 'para')
   assert.ok(typeof kernBlock.text === 'string' && kernBlock.text.length > 10, 'kerntekst gerenderd')
-  // disclaimer
-  assert.ok(dd.content.some(b => b.ul && typeof b.ul[0] === 'string' && b.ul[0].includes('automatisch gegenereerd')))
+  // versieregel i.p.v. disclaimerblok: "Dit is versie … Bekijk voor de actuele versie <url>."
+  assert.ok(dd.content.some(b => Array.isArray(b.text) && JSON.stringify(b.text).includes('Bekijk voor de actuele versie')), 'versieregel aanwezig')
   // header (logo op elke pagina) + footer (stack met paginanummer)
   assert.match(JSON.stringify(dd.footer(2, 5)), /Pagina 2 van 5/)
   const A4 = { width: 595.28, height: 841.89 }

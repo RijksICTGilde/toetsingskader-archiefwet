@@ -6,9 +6,9 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 
 ## Normpagina's
 
-- [ ] **Nummer op "Kern van …"**, zodat de nummering van de voorschriften erop
+- [x] **Nummer op "Kern van …"**, zodat de nummering van de voorschriften erop
       aansluit. `layouts/_partials/kern-kop.html`; werkt door in TOC en PDF.
-- [ ] **Gerelateerde onderwerpen**: de niet-gelinkte items onder dat kopje
+- [x] **Gerelateerde onderwerpen** (ongelinkte items weg; kopje blijft waar nog links staan): de niet-gelinkte items onder dat kopje
       kunnen weg. Volgende stap: kopje en hele lijst weg, want de gelinkte
       woorden staan al in de tekst. Content (alle acht normbladen) én
       `scripts/validate-norms.py` (sectie is daar optioneel toegestaan).
@@ -27,13 +27,13 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 
 ## Onderwerpen
 
-- [ ] **Regel tekst per onderwerp op de indexpagina weg**: niet iedereen ziet
+- [x] **Regel tekst per onderwerp op de indexpagina weg**: niet iedereen ziet
       dat je op het onderwerp moet klikken. `layouts/onderwerpen/list.html`
       (de `description` op de kaart).
-- [ ] **"Zie ook" per onderwerp: de normbladen waar het onderwerp in voorkomt.**
+- [x] **"Zie ook" per onderwerp: de normbladen waar het onderwerp in voorkomt.**
       Content per onderwerpenpagina, of automatisch uit de backlinks.
-- [ ] **Onderwerpen niet in een carousel.** Layout.
-- [ ] **Menu'tje (vorige/volgende) weg.** `prev_next` in
+- [ ] **Onderwerpen niet in een carousel.** Onduidelijk wat bedoeld wordt: op `main` staat geen carousel (A-Z-lijst). Navragen.
+- [x] **Menu'tje (vorige/volgende) weg.** `prev_next` in
       `content/onderwerpen/_index.md` en de page-nav in de layout.
 - [ ] **Hover op "document" (Wettelijk kader)**: de tooltip-transformatie zit
       alleen in `layouts/normen/single.html`; nu een voetnoot onderaan. Vraagt
@@ -41,27 +41,27 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 
 ## Samenhang
 
-- [ ] **Bollendiagram kleiner.** `assets/css/bollendiagram.css`.
-- [ ] **Menu'tje standaard uitgeklapt.** Layout.
+- [x] **Bollendiagram kleiner.** `assets/css/bollendiagram.css`.
+- [x] **Menu'tje standaard uitgeklapt.** `toc_open: true` + shadow `article.html`.
 
 ## Over
 
 - [ ] **Pagina "Totstandkoming" komt er nog bij.** Tekst volgt van de Inspectie.
-- [ ] **Menu'tjes per pagina weg.** `prev_next` in `content/over/_index.md`.
+- [x] **Menu'tjes per pagina weg.** `prev_next` in `content/over/_index.md`.
 - [ ] **Bron in het blauwe definitieblok als voetnoot op "noodzakelijk"**: de
       callout-shortcode rendert voetnoten niet; nu een "Bron: …"-regel in het
       blok. Vraagt een eigen callout-shortcode.
 
 ## PDF
 
-- [ ] **"Belangrijke informatie" kan weg.** `assets/js/pdf-export.js`.
-- [ ] **Toevoegen: "Dit is versie 1.0.0, bekijk voor de actuele versie …"** met
+- [x] **"Belangrijke informatie" kan weg.** `assets/js/pdf-export.js`.
+- [x] **Toevoegen: "Dit is versie 1.0.0, bekijk voor de actuele versie …"** met
       link naar de site. `assets/js/pdf-export.js`; versienummer uit
       `site.Params.versie`.
 
 ## Zoeken
 
-- [ ] **Synoniemen wegen niet mee** (norm 6 op "vinden" pas tweede): het
+- [x] **Synoniemen wegen niet mee** (norm 6 op "vinden" pas tweede): het
       thema-script weegt alleen `title` en `content`. Lokale override
       `assets/js/search.js` met een `synoniemen`-key en hoger gewicht.
 

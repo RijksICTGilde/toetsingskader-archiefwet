@@ -24,8 +24,10 @@
       {{ range $pages }}
         {{ if eq (upper (substr .Title 0 1)) $letter }}
         <li>
+          {{/* Alleen de titel: de regel tekst eronder (`description`) las als de
+               hele toelichting, waardoor niet duidelijk was dat je moet doorklikken
+               (feedback 25 augustus 2026). */}}
           <a href="{{ .RelPermalink }}">{{ .Params.card_title | default .Title }}</a>
-          {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
         </li>
         {{ end }}
       {{ end }}
@@ -36,9 +38,6 @@
   <p>Er zijn nog geen onderwerpen beschikbaar.</p>
   {{ end }}
 
-  {{/* page-nav maakt de reeks doorklikbaar: vanaf de index naar het eerste
-       begrip, en op het laatste begrip terug naar de index. Vereist
-       `prev_next: true` op deze sectie. */}}
   {{- $pageNav := partial "page-nav.html" . -}}
   {{- $lastmod := partial "lastmod.html" . -}}
   {{- if or (trim $lastmod " \n\t") (trim $pageNav " \n\t") -}}

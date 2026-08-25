@@ -222,11 +222,8 @@ Alle documenten moeten in beheer zijn. Ook de documenten die op elk moment mogen
 
 ## Gerelateerde onderwerpen
 
-- Opname
 - Archiveren by design[^hyperlink-duto]
-- Beheerbeleid
 - [Vindbaar](/normen/06-vindbaar/)
-- Migratie en conversie
 - [Metadata](/normen/04-metadateren/)
 - [Overzicht](/normen/02-overzicht/)
 - [Ordening](/normen/03-ordenen/)
