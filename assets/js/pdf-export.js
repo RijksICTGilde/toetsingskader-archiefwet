@@ -23,16 +23,10 @@
     footnotes: { fontSize: 8.5, color: '#444444', margin: [8, 0, 0, 6], lineHeight: 1.15 },
     callout: { fontSize: 11, italics: true, color: '#154273', margin: [0, 4, 0, 10] },
     section: { fontSize: 20, bold: true, color: BRAND, margin: [0, 0, 0, 12] },
-    disclaimerH: { fontSize: 13, bold: true, color: BRAND, margin: [0, 18, 0, 6] },
     coverTitle: { fontSize: 26, bold: true, color: BRAND, margin: [0, 0, 0, 24] },
     coverMeta: { fontSize: 12, color: '#666666', margin: [0, 4, 0, 0] }
   }
 
-  var DISCLAIMER = [
-    'Dit is een automatisch gegenereerd document op basis van de online versie van het toetsingskader.',
-    'De inhoud is in ontwikkeling en kan wijzigen; raadpleeg voor de actuele tekst altijd de website.',
-    'Aan dit document kunnen geen rechten worden ontleend.'
-  ]
 
   function parse(html, opts) {
     var doc = new DOMParser().parseFromString('<!DOCTYPE html><html><body>' + (html || '') + '</body></html>', 'text/html')
@@ -59,11 +53,22 @@
     }]
   }
 
-  function disclaimer() {
-    return [
-      { text: 'Belangrijke informatie', style: 'disclaimerH' },
-      { ul: DISCLAIMER, fontSize: 9.5, color: '#444444' }
-    ]
+  // Eén alinea in plaats van het blok "Belangrijke informatie" (feedback 25
+  // augustus 2026): versie plus link naar de actuele versie. Het voorbehoud
+  // (geen rechten) blijft; "in ontwikkeling" is op verzoek weg, alleen de kop
+  // en de bulletvorm
+  // zijn weg. De link gaat naar de site-root, niet naar de pagina: bij de
+  // kader-PDF is data.url de /normen/-sectie.
+  function disclaimer(data) {
+    var site = data.site_url || data.url
+    return [{
+      text: [
+        { text: 'Dit is versie ' + (data.versie || 'onbekend') + ' van het toetsingskader. Bekijk voor de actuele versie ' },
+        { text: site, link: site, color: BRAND },
+        { text: '. Aan dit document kunnen geen rechten worden ontleend.' }
+      ],
+      fontSize: 9.5, color: '#444444', margin: [0, 16, 0, 0]
+    }]
   }
 
   function normSection(n, asSection, pageBreak, ctx) {
@@ -97,7 +102,7 @@
   function buildNorm(data) {
     // normDests null → kruisverwijzingen worden site-links.
     var ctx = { origin: originOf(data.url), normDests: null }
-    return { content: cover(data).concat(normSection(data, false, false, ctx)).concat(disclaimer()) }
+    return { content: cover(data).concat(normSection(data, false, false, ctx)).concat(disclaimer(data)) }
   }
 
   function buildKader(data) {
@@ -118,7 +123,7 @@
     })
     // Elke norm op een eigen pagina.
     for (var i = 0; i < data.normen.length; i++) content = content.concat(normSection(data.normen[i], true, true, ctx))
-    return { content: content.concat(disclaimer()) }
+    return { content: content.concat(disclaimer(data)) }
   }
 
   function docDefinition(data) {

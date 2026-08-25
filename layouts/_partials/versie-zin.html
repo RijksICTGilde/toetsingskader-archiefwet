@@ -1,5 +1,6 @@
 {{/*
-  Versie + draft-voorbehoud als één zin, gedeeld door `_partials/lastmod.html`
+  Versienummer als één zin (het voorbehoud "nog in ontwikkeling" is op verzoek
+  weg, 25 augustus 2026), gedeeld door `_partials/lastmod.html`
   (voet van elke inhoudspagina) en de shortcode `versielabel` (homepage, geen
   voet). Eén bron, want los overgetikt stond het voorbehoud alleen nog op de
   homepage en lazen de normpagina's als vastgesteld beleid.
@@ -8,5 +9,5 @@
   via render-link. Rendert niets zonder dat param.
 */}}
 {{- with site.Params.versie -}}
-<strong>{{ partial "render-link" (dict "href" site.Params.releases_url "text" (printf "Versie %s" .)) }}</strong> van het toetsingskader. De inhoud is nog in ontwikkeling en kan wijzigen.
+<strong>{{ partial "render-link" (dict "href" site.Params.releases_url "text" (printf "Versie %s" .)) }}</strong> van het toetsingskader.
 {{- end -}}

@@ -80,7 +80,9 @@
         (in orde) of rood kruis (er klopt iets niet, met uitleg in het
         Nederlands, inclusief regelnummer).</li>
     <li>Een <strong>collega keurt goed</strong>.</li>
-    <li>Daarna pas komt de wijziging op de website.</li>
+    <li>Een collega <strong>voert de wijziging door</strong> (mergen, zie 4.8).</li>
+    <li>Bij de eerstvolgende <strong>release</strong> komt de wijziging op de
+        website.</li>
   </ol>
 
   <p>Losse wijzigingen worden van tijd tot tijd gebundeld tot een
@@ -318,7 +320,8 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
   <p>De eerste sessie ging over de <em>route</em>: een pagina bewerken, een
   voorstel indienen, de controle lezen. Deze sessie gaat over de <em>onderdelen</em>
   die daarbij horen: hovers, onderwerpenpagina's, links, de regels bovenin een
-  bestand, de toegankelijkheidscontrole en het verwerken van een review.</p>
+  bestand, de toegankelijkheidscontrole, het verwerken van een review en zelf een
+  review doen en mergen.</p>
 
   <h3>4.1 <code>&lt;&lt;…&gt;&gt;</code> en "hoover" in het normblad</h3>
   <p>In de normbladen staan twee soorten aanwijzingen die géén tekst zijn:</p>
@@ -439,6 +442,83 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
         <code>docs/afwijkingen-van-het-normblad.md</code>, met de reden erbij.
         Anders draait de volgende vergelijking met het normblad hem terug.</li>
   </ol>
+
+  <h3>4.8 Zelf een review doen en mergen</h3>
+  <p>4.7 ging over de kant van de schrijver. Dit is de andere kant: een collega
+  vraagt jou als reviewer. Jij kijkt na, en als het goed is voer jij de wijziging
+  door (<strong>mergen</strong>).</p>
+
+  <p><strong>Stap 1: de review</strong></p>
+  <ol>
+    <li>Open de pull request (tabblad <strong>"Pull requests"</strong> bovenin de
+        repository, of via de melding die je van GitHub kreeg).</li>
+    <li>Kijk eerst onderaan: zijn alle controles <strong>groen</strong>? Bij een
+        rood kruis is de schrijver aan zet, niet jij. Laat dat dan weten en wacht.</li>
+    <li>Ga naar het tabblad <strong>"Files changed"</strong>. Rood is weggehaald,
+        groen is toegevoegd. Lees alleen wat gewijzigd is.</li>
+    <li>Heb je een opmerking bij een regel? Beweeg over de regel, klik op het
+        blauwe <strong>+</strong> en typ je opmerking. Kies
+        <strong>"Start a review"</strong> (niet "Add single comment"), zodat de
+        schrijver al je opmerkingen in één keer krijgt.</li>
+    <li>Klaar met lezen? Klik rechtsboven op <strong>"Review changes"</strong>
+        en kies:
+        <table>
+          <tr><th>Keuze</th><th>Wanneer</th></tr>
+          <tr><td><strong>Approve</strong></td>
+              <td>In orde, mag door. Ook als je alleen kleine opmerkingen hebt
+                  die de schrijver zelf kan afhandelen.</td></tr>
+          <tr><td><strong>Request changes</strong></td>
+              <td>Er moet eerst iets aangepast worden voordat het door mag.</td></tr>
+          <tr><td><strong>Comment</strong></td>
+              <td>Je hebt vragen, maar geen oordeel. Gebruik dit spaarzaam: de
+                  schrijver weet dan niet of hij door mag.</td></tr>
+        </table></li>
+    <li>Klik <strong>"Submit review"</strong>.</li>
+  </ol>
+
+  <p><strong>Waar je op let</strong> (de controle doet de opbouw, jij doet de
+  inhoud):</p>
+  <ul>
+    <li>Klopt de tekst met het normblad? Een bewuste afwijking hoort in
+        <code>docs/afwijkingen-van-het-normblad.md</code> (zie 4.7).</li>
+    <li>Staat een bron of hover achter het <em>woord</em>, niet achter een
+        leesteken (4.2)?</li>
+    <li>Is er iets aangepast dat niet in de omschrijving van de pull request
+        staat? Vraag dan waarom.</li>
+    <li>Bekijk de <strong>preview</strong>: bij elke pull request zet de
+        deploy-controle een tijdelijke versie van de site neer. De link staat
+        in een automatische reactie onderaan de pull request (tabblad
+        "Conversation"). Zo zie je hovers en opmaak zoals de lezer ze ziet.</li>
+  </ul>
+
+  <p><strong>Stap 2: mergen</strong></p>
+  <ol>
+    <li>Voorwaarden: alle controles groen, minstens één <strong>Approve</strong>,
+        en geen open opmerkingen meer (alle "Resolve conversation" gedaan).</li>
+    <li>Onderaan de pull request staat een groene knop. Klik op het pijltje
+        ernaast en kies <strong>"Squash and merge"</strong>. Dat voegt alle
+        losse commits van het voorstel samen tot één regel in de geschiedenis.
+        De andere twee keuzes ("Create a merge commit", "Rebase and merge")
+        gebruiken we niet.</li>
+    <li>Controleer de omschrijving die GitHub voorstelt: één korte regel die
+        zegt wat er veranderd is (bijv. <code>content(normen): toelichting
+        norm 2 aangevuld</code>). GitHub plakt er zelf het nummer van de pull
+        request achter.</li>
+    <li>Klik <strong>"Confirm squash and merge"</strong>.</li>
+    <li>Klik daarna op <strong>"Delete branch"</strong>. De tijdelijke tak is
+        niet meer nodig; de wijziging staat nu in <code>main</code>.</li>
+  </ol>
+
+  <div class="gerust">
+    <strong>Gemerged is nog niet live.</strong> De wijziging staat in
+    <code>main</code>, maar de website wordt pas bijgewerkt als er een
+    <strong>release</strong> wordt gepubliceerd (2.7). Zo kun je een reeks
+    wijzigingen mergen en ze samen in één versie naar buiten brengen.
+  </div>
+
+  <div class="tip"><strong>Niet je eigen voorstel goedkeuren.</strong> GitHub
+  laat het technisch toe, maar het punt van een review is dat een tweede
+  paar ogen meekijkt. Wie schrijft, vraagt een ander om de review en de merge.</div>
 
   <h3>Oefeningen</h3>
   <p>Net als in deel 3: ik ruim de oefen-voorstellen na afloop op.</p>

@@ -163,10 +163,5 @@ Alle documenten die onder de reikwijdte van de Archiefwet vallen moeten worden v
 ## Gerelateerde onderwerpen
 
 - [Document](/onderwerpen/document/)
-- Informatieobject
-- Zaak
-- Taak en werkproces
 - [Ordening](/normen/03-ordenen/)
 - [Vernietiging](/normen/07-vernietigen/)
-- Vervanging
-- Conversie
