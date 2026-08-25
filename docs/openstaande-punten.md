@@ -30,7 +30,7 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 - [x] **Regel tekst per onderwerp op de indexpagina weg**: niet iedereen ziet
       dat je op het onderwerp moet klikken. `layouts/onderwerpen/list.html`
       (de `description` op de kaart).
-- [x] **"Zie ook" per onderwerp: de normbladen waar het onderwerp in voorkomt.**
+- [x] **"Zie ook" per onderwerp (criterium: normbladen waar het begrip inhoudelijk speelt; Passende maatregelen heeft die lijst al onder "De risicobenadering per norm"): de normbladen waar het onderwerp in voorkomt.**
       Content per onderwerpenpagina, of automatisch uit de backlinks.
 - [ ] **Onderwerpen niet in een carousel.** Onduidelijk wat bedoeld wordt: op `main` staat geen carousel (A-Z-lijst). Navragen.
 - [x] **Menu'tje (vorige/volgende) weg.** `prev_next` in
@@ -68,4 +68,5 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 ## Toegankelijkheid
 
 - [ ] **Contrasten in de figuren** (bollendiagram, afbeeldingen) nalopen.
-      Nog geen aandacht aan besteed.
+      Nog geen aandacht aan besteed. Sinds het diagram 440 px is, ook de
+      lettergrootte van de labels (`.bd-label-sm` ≈ 11 px) meenemen.

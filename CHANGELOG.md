@@ -42,8 +42,7 @@ changelog volgt [Semantic Versioning][semver].
   - "Gerelateerde onderwerpen": items zonder link weg; bij norm 7 daarmee het
     hele kopje.
   - Onderwerpenindex toont alleen de titel per begrip, geen regel tekst.
-    "Zie ook" op Document en Passende maatregelen noemt alle normbladen waar
-    het begrip in voorkomt.
+    "Zie ook" op Document noemt ook Overzicht, Ordenen en Metadateren.
   - Vorige/volgende-navigatie weg op de Over- en Onderwerpenpagina's.
   - Samenhang: bollendiagram kleiner (440 px) en inhoudsopgave standaard
     uitgeklapt (`toc_open`).

@@ -81,7 +81,7 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   // Kern als h2 (zoals Toelichting) + kerntekst als alinea.
   // De kop noemt de norm en het normnummer, net als op de website
   // (layouts/_partials/kern-kop.html): "1. Kern van …".
-  const kernIdx = dd.content.findIndex(b => typeof b.text === 'string' && /^(\d+\. )?Kern van /.test(b.text))
+  const kernIdx = dd.content.findIndex(b => typeof b.text === 'string' && /^\d+\. Kern van /.test(b.text))
   assert.ok(kernIdx !== -1, 'kern-kop aanwezig')
   assert.equal(dd.content[kernIdx].style, 'h2', 'kern-kop als sectiekop (h2)')
   const kernBlock = dd.content[kernIdx + 1]

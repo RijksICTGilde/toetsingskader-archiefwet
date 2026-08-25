@@ -134,7 +134,6 @@
       var qLower = query.trim().toLowerCase();
       function hasSubstring(item) {
         return item.title.toLowerCase().indexOf(qLower) !== -1
-            || (item.synoniemen || '').toLowerCase().indexOf(qLower) !== -1
             || item.content.toLowerCase().indexOf(qLower) !== -1;
       }
       var hasAnySubstring = results.some(function (r) { return hasSubstring(r.item); });
