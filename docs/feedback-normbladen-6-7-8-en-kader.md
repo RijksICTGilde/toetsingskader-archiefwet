@@ -210,7 +210,7 @@ staat in `afwijkingen-van-het-normblad.md`.
 | 21 | Kaarttekst "Doelgroep" | `content/over/doelgroep.md`, `description` |
 | 22 | Voetnoot Position Paper in de inleiding | `content/over/inleiding.md`, `[^position-paper-archiefwet]` → <https://kiacommunity.nl/documents/73772> |
 | 23 | Titel van het blauwe blok weg | `inleiding.md`, `titel` van de callout verwijderd |
-| 24 | Bron in het blauwe blok | `inleiding.md`, regel "Bron: …" in de callout, zie hieronder |
+| 24 | Bron in het blauwe blok | `inleiding.md`, voetnoot `[^na-module-1]` op "noodzakelijk" in een `callout-md`-blok (shortcode uit #82) |
 | 25 | Hover "archiefbescheiden" bij "document" | `content/over/wettelijk-kader.md`, `[^archiefbescheiden]`, zie hieronder |
 | 26 | Dubbele zin in "Opbouw en indeling" weg | `content/over/opbouw-en-indeling.md` |
 | 27 | Komma in de doelgroeplijst | `content/over/doelgroep.md` |
@@ -219,7 +219,7 @@ staat in `afwijkingen-van-het-normblad.md`.
 | 30 | Twee bronnen bij metadata integriteitscheck | `content/onderwerpen/metadata-integriteitscheck.md`, `[^ar-artikel-2-8-sub-b]`, `[^ab-artikel-2-1-sub-e]` |
 | 31 | Twee bronnen bij passende maatregelen | `passende-maatregelen.md`, `[^kamerstukken-35968-nr-3-duurzame-toegankelijkheid]`, `[^aw-artikel-4-1-lid-2]` |
 
-## Drie afwijkingen van de letterlijke vraag
+## Eén afwijking van de letterlijke vraag
 
 **Punt 6 (zoekranking "vinden") is niet verwerkt.** De zoekfunctie komt uit het
 thema (`hugo-theme-rijksoverheid`, `assets/js/search.js`) en weegt alleen
@@ -230,14 +230,5 @@ even zwaar als een willekeurig woord in de tekst. Oplossen betekent een
 `synoniemen`-key met hoger gewicht in `search.js`, in het thema of als lokale
 override. Dat is een scriptwijziging en valt buiten deze contentronde.
 
-**Punt 24: de bron in het blauwe blok staat als losse regel "Bron: …", niet
-als voetnoot op "noodzakelijk".** De callout rendert zijn inhoud apart
-(`.Inner | markdownify`), waardoor een voetnootmarkering erin niet aan de
-definitie op de pagina te koppelen is; hij bleef letterlijk als `[^…]` staan.
-De `{{% %}}`-variant van de shortcode liet het hele blok verdwijnen door de
-geneste `relref`-aanroepen. De bronregel gebruikt de gevraagde linktekst.
-
-**Punt 25: op "Wettelijk kader" is de toelichting een voetnoot onderaan de
-pagina, geen hover.** Hovers bestaan alleen op normpagina's
-(`layouts/normen/single.html`); op de overige pagina's blijft een voetnoot een
-gewone voetnoot. De tekst staat er wel, achter de link op "document".
+**Punt 25: "document" op Wettelijk kader** is een voetnoot; sinds #82 draait de
+tooltip-transformatie ook op de Over-pagina's, dus het wordt daar een hover.
