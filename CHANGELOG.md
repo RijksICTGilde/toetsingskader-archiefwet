@@ -63,6 +63,25 @@ changelog volgt [Semantic Versioning][semver].
   - Onderwerpen: bronnen bij metadata hardware/programmatuur (Ar 2.8 sub a;
     Ar Toelichting p. 38), metadata integriteitscheck (Ar 2.8 sub b; Ab 2.1
     sub e) en passende maatregelen (Aw MvT 4.1; Aw 4.1 lid 2).
+- Openstaande punten uit de feedbackrondes (`docs/openstaande-punten.md`):
+  - Kop boven de kern genummerd: "1. Kern van inbeheername en beheer", zodat
+    "Voorschrift 1.1" eronder aansluit. Ook in de inhoudsopgave en de PDF.
+  - "Gerelateerde onderwerpen": items zonder link weg; bij norm 7 daarmee het
+    hele kopje.
+  - Onderwerpenindex toont alleen de titel per begrip, geen regel tekst.
+    "Zie ook" op Document noemt ook Overzicht, Ordenen en Metadateren.
+  - Vorige/volgende-navigatie weg op de Over- en Onderwerpenpagina's.
+  - Samenhang: bollendiagram kleiner (440 px) en inhoudsopgave standaard
+    uitgeklapt (`toc_open`).
+  - PDF: blok "Belangrijke informatie" vervangen door één regel met het
+    versienummer en een link naar de actuele versie.
+  - De zin "De inhoud is nog in ontwikkeling en kan wijzigen." is weg uit de
+    versiezin (voet van elke pagina, homepage) en uit de PDF.
+  - Zoeken: synoniemen wegen zwaarder dan titel en tekst (projectoverride van
+    `search.js`), zodat een norm op zijn synoniem bovenaan komt.
+- Nieuwe hero-afbeelding op de homepage: brede banner (4000×1056,
+  `assets/images/hero.jpg`) in plaats van de 1000×600 png. Decoratief, alt
+  blijft leeg.
 - Kop boven de kern noemt de norm: "Kern van ordenen" in plaats van "Kern van
   de norm", op de normpagina, in de inhoudsopgave en in de PDF. Uit
   `norm_titel`, dus voor alle acht normen tegelijk.
