@@ -18,7 +18,6 @@ In een digitale context is een document een verzameling van aan elkaar gerelatee
 ## Zie ook
 
 - [Wettelijk kader]({{< relref "/over/wettelijk-kader" >}})
-- [Inbeheername en beheer]({{< relref "/normen/01-beheer" >}})
 - [Overzicht]({{< relref "/normen/02-overzicht" >}})
 - [Ordenen]({{< relref "/normen/03-ordenen" >}})
 - [Metadateren]({{< relref "/normen/04-metadateren" >}})

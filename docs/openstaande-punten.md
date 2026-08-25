@@ -42,7 +42,7 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 ## Samenhang
 
 - [x] **Bollendiagram kleiner.** `assets/css/bollendiagram.css`.
-- [x] **Menu'tje standaard uitgeklapt.** `toc_open: true` + shadow `article.html`.
+- [x] **Menu'tje standaard uitgeklapt.** `toc_open: true` + shadow `article.html` + `assets/js/toc-open.js` (respecteert een eerder dichtgeklapte voorkeur).
 
 ## Over
 

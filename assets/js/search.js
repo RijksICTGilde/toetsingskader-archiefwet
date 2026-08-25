@@ -82,6 +82,9 @@
             title: item.title,
             url: item.url,
             content: decodeHtmlEntities(item.content),
+            // Projectoverride: synoniemen apart doorgeven, anders matcht de
+            // `synoniemen`-key in fuseOptions op niets.
+            synoniemen: decodeHtmlEntities(item.synoniemen || ''),
             section: item.section
           };
         });
@@ -131,6 +134,7 @@
       var qLower = query.trim().toLowerCase();
       function hasSubstring(item) {
         return item.title.toLowerCase().indexOf(qLower) !== -1
+            || (item.synoniemen || '').toLowerCase().indexOf(qLower) !== -1
             || item.content.toLowerCase().indexOf(qLower) !== -1;
       }
       var hasAnySubstring = results.some(function (r) { return hasSubstring(r.item); });

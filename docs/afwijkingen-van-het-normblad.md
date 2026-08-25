@@ -25,6 +25,8 @@ Bij elke afwijking hoort:
 | Kop boven de kern volgt `norm_titel`: "Kern van ordenen" | Kop2 van het normblad: "Kern van Ordeningsstructuur" | `validate-norms.py` weigert het veld `kern_kop` |
 | Norm 3, toelichting 3e alinea: "overbrengen" | "overdragen" | — |
 | Norm 3, voorschrift 3.3: bron "Ar, artikel 2.5, tweede lid, sub k" eerst | omgekeerde volgorde | — |
+| Kern-kop genummerd: "1. Kern van inbeheername en beheer" (feedback 25 augustus 2026: nummering van de voorschriften sluit erop aan) | "Kern van Inbeheername en beheer" zonder nummer | `_partials/kern-kop.html` zet het nummer; `tests/js/pdf-doc.test.mjs` verwacht het |
+| "Gerelateerde onderwerpen": alleen items die naar een pagina of bron linken; bij norm 7 daardoor het hele kopje weg (feedback 25 augustus 2026) | de volledige lijst uit het normblad, ook losse woorden als "Dossier", "Zaak", "Migratie" | — (volgende stap volgens de feedback: kopje en lijst helemaal weg) |
 
 De kern-kop geldt voor alle acht normen. `_partials/kern-kop.html` leidt hem af
 uit `norm_titel`, zodat pagina, inhoudsopgave en PDF dezelfde tekst voeren. Pas
