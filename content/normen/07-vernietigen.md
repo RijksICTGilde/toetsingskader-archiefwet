@@ -106,7 +106,7 @@ Documenten worden na het verstrijken van de bewaartermijn gecontroleerd worden v
 
 - Documenten worden alleen vernietigd als hiervoor een grondslag bestaat in een selectiebesluit van het verantwoordelijke overheidsorgaan;[^aw-artikel-5-1-lid-1]
 - Er is een verklaring van vernietiging opgesteld.
-- Indien wenselijk of noodzakelijk, worden bepaalde [metagegevens](/normen/04-metadateren/) behouden om te bewijzen[^na-digitaal-vernietigen] dat de vernietigde documenten hebben bestaan of zijn vernietigd.[^kamerstukken-35968-nr-3-selectie]
+- Indien wenselijk of noodzakelijk, worden bepaalde [metagegevens](/normen/04-metadateren/) behouden [om te bewijzen](https://www.nationaalarchief.nl/archiveren/kennisbank/hoe-kun-je-digitaal-vernietigen#collapse-86789)[^na-digitaal-vernietigen] dat de vernietigde documenten hebben bestaan of zijn vernietigd.[^kamerstukken-35968-nr-3-selectie]
 
 [^na-digitaal-vernietigen]: Hoe kun je digitaal vernietigen? Nationaal Archief, kennisbank. [Bekijk bron](https://www.nationaalarchief.nl/archiveren/kennisbank/hoe-kun-je-digitaal-vernietigen#collapse-86789)
 

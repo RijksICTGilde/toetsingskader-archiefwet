@@ -202,7 +202,7 @@ staat in `afwijkingen-van-het-normblad.md`.
 | 13 | Referenties 4–7 | gedekt door 7, 9, 11, 12 |
 | 14 | Kaart "7. Vernietigen" en kop "Kern van vernietigen" | `content/normen/07-vernietigen.md`, `norm_titel`; label in `layouts/shortcodes/bollendiagram.html` meegenomen |
 | 15 | Bron onder de kern van norm 7 | `07-vernietigen.md`, `kern_bron` |
-| 16 | Hover bij "om te bewijzen" (criteria 7.4) | `07-vernietigen.md`, `[^na-digitaal-vernietigen]` op het woord "bewijzen" |
+| 16 | Hover bij "om te bewijzen" (criteria 7.4) | `07-vernietigen.md`: "om te bewijzen" is een link naar de kennisbank mét `[^na-digitaal-vernietigen]`, zodat de hover op alle drie de woorden staat (een kale voetnoot pakt alleen het laatste woord) |
 | 17 | Haakje sluiten in de reikwijdte | `07-vernietigen.md` |
 | 18 | Kaarttekst norm 8 ingekort | `content/normen/08-periodieke-evaluatie.md`, `kern_kaart` |
 | 19 | Titel norm 8 → "Normanalyse periodieke evaluatie" | `08-periodieke-evaluatie.md`, `title` |
