@@ -132,8 +132,4 @@ De eisen voor overzicht gelden voor alle documenten van alle organisatieonderdel
 - [Vindbaarheid](/normen/06-vindbaar/)
 - [Vernietigen](/normen/07-vernietigen/)
 - [Document](/onderwerpen/document/)
-- Dossier
-- Zaak
 - [Beheer](/normen/01-beheer/)
-- Architectuur
-- Categorie

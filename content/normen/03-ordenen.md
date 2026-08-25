@@ -97,15 +97,8 @@ Alle documenten moeten worden gekoppeld aan een ordening.[^ar-toelichting-h1-eis
 
 ## Gerelateerde onderwerpen
 
-- Taak
-- Werkproces
-- Functie
 - [Metadata](/normen/04-metadateren/)
 - [Metadataschema](/normen/04-metadateren/)
 - [Document](/onderwerpen/document/)
-- Dossier
-- Zaak
-- Capstone-methodiek
-- Categorie (in selectiebesluit)
 - [Overzicht](/normen/02-overzicht/)
 - [Vindbaarheid](/normen/06-vindbaar/)

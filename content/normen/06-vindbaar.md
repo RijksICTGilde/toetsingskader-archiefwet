@@ -105,4 +105,3 @@ Alle documenten moeten binnen een redelijke termijn vindbaar zijn. Dit geldt ook
 - [Metadata](/normen/04-metadateren/)
 - [Beheer](/normen/01-beheer/)
 - [Beveiliging](/normen/05-betrouwbaar/)
-- Migratie

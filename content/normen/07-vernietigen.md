@@ -148,7 +148,3 @@ Voor documenten die op elk moment kunnen worden vernietigd gelden niet alle eise
 - deze niet opgenomen hoeven te worden in een verklaring van vernietiging.[^ab-artikel-4-1-lid-3]
 
 [^ab-artikel-4-1-lid-3]: Ab, artikel 4.1, derde lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-
-## Gerelateerde onderwerpen
-
-- technisch vernietigen (buiten scope, volgt op een later moment)
