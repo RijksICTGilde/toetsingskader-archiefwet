@@ -36,6 +36,33 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Tweede feedbackronde verwerkt: normbladen vindbaar, vernietigen en periodieke
+  evaluatie, de sectie "Over het toetsingskader" en drie onderwerpenpagina's
+  (`docs/feedback-normbladen-6-7-8-en-kader.md`):
+  - Paginatitels "Normanalyse vindbaar" en "Normanalyse periodieke evaluatie"
+    (was "Normanalyse Vindbaarheid" en "Normanalyse Periodieke evaluatie");
+    norm 7 heet op de kaart en boven de kern "Vernietigen" in plaats van
+    "Gecontroleerd vernietigen".
+  - Kaartteksten van norm 6 en norm 8 ingekort; kaartteksten van "Wettelijk
+    kader", "Doelgroep" en "Passende maatregelen en risicobenadering"
+    aangepast.
+  - Norm 6: puntkomma's tussen de vindplaatsen in de bronnen bij 6.1 t/m 6.4;
+    tweede vindplaats bij de bron in de toelichting; nieuwe bron bij
+    "categorieën documenten"; hovers bij "invulling" en "centrale plaats" naar
+    de kennisbank van het Nationaal Archief; de twee links in het derde
+    criterium van 6.1 weg.
+  - Norm 7: bron onder de kern met puntkomma's en "Ar, artikel 4.1" erbij;
+    hover bij "bewijzen" (criteria 7.4) naar de kennisbank; haakje sluiten in
+    de reikwijdte.
+  - Inleiding: voetnoot naar de Position Paper nieuwe Archiefwet (KIA);
+    definitieblok zonder dubbele titel en met bron "De waarde van de duurzame
+    toegankelijkheid" (DUTO module 1).
+  - Wettelijk kader: voetnoot "In de Archiefwet 1995 waren dit
+    archiefbescheiden" bij "document". Opbouw en indeling: dubbele zin weg.
+    Doelgroep: komma voor "etc.".
+  - Onderwerpen: bronnen bij metadata hardware/programmatuur (Ar 2.8 sub a;
+    Ar Toelichting p. 38), metadata integriteitscheck (Ar 2.8 sub b; Ab 2.1
+    sub e) en passende maatregelen (Aw MvT 4.1; Aw 4.1 lid 2).
 - Kop boven de kern noemt de norm: "Kern van ordenen" in plaats van "Kern van
   de norm", op de normpagina, in de inhoudsopgave en in de PDF. Uit
   `norm_titel`, dus voor alle acht normen tegelijk.

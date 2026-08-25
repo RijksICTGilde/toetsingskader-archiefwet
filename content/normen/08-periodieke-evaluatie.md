@@ -1,5 +1,5 @@
 ---
-title: "Normanalyse Periodieke evaluatie"
+title: "Normanalyse periodieke evaluatie"
 versie: "0.8"
 weight: 8
 norm_id: "8"
@@ -7,7 +7,7 @@ norm_titel: "Periodieke evaluatie"
 kern: "Het archiefbeheer wordt door het verantwoordelijke overheidsorgaan periodiek geëvalueerd op basis van de kwaliteitseisen voor duurzame toegankelijkheid. Tijdens een periodieke evaluatie wordt gekeken naar de passende maatregelen en alle beheertaken die bijdragen aan de duurzame toegankelijkheid. De periodieke evaluatie vindt plaats door middel van een planning en control cyclus."
 kern_bron: "Aw, artikel 4.2, tweede lid, sub c; Aw, Memorie van toelichting, Kamerstukken II 2021/22, 35968, nr. 3, 4.3 Duurzame toegankelijkheid, beheerstrategie."
 kern_bron_url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
-kern_kaart: "Het archiefbeheer wordt periodiek geëvalueerd op basis van de kwaliteitseisen voor duurzame toegankelijkheid. Tijdens een periodieke evaluatie wordt gekeken naar de passende maatregelen en alle beheertaken die bijdragen aan de duurzame toegankelijkheid. De periodieke evaluatie vindt plaats door middel van een planning en control cyclus."
+kern_kaart: "Het archiefbeheer wordt door het verantwoordelijke overheidsorgaan periodiek geëvalueerd op basis van de kwaliteitseisen voor duurzame toegankelijkheid."
 synoniemen:
   - "Kwaliteitszorg"
   - "Kwaliteitssysteem"
