@@ -1,6 +1,8 @@
 {{/*
-  Shadow van de theme-scripts; enige verschil is js/toegankelijkheid.js achteraan
-  de bundel. Dat patcht themadefecten die niet uit CSS of onze templates op te
+  Shadow van de theme-scripts; verschil: js/toc-open.js na toc.js (toc_open
+  respecteert de dichtgeklapte voorkeur) en js/toegankelijkheid.js achteraan
+  de bundel. js/search.js is een projectoverride van het thema-script
+  (synoniemen-key); resources.Get pakt de projectversie. Dat patcht themadefecten die niet uit CSS of onze templates op te
   lossen zijn (zie docs/toegankelijkheidsonderzoek-2026-08.md).
 
   TIJDELIJK. Bij elke `just update-theme` vergelijken met de thema-versie, anders
@@ -8,9 +10,10 @@
 */}}
 {{- $baseJs := resources.Get "js/base.js" -}}
 {{- $tocJs := resources.Get "js/toc.js" -}}
+{{- $tocOpenJs := resources.Get "js/toc-open.js" -}}
 {{- $referentiesJs := resources.Get "js/referenties.js" -}}
 {{- $fuseJs := resources.Get "lib/fuse/fuse.min.js" -}}
 {{- $searchJs := resources.Get "js/search.js" -}}
 {{- $a11yJs := resources.Get "js/toegankelijkheid.js" -}}
-{{- $js := slice $baseJs $tocJs $referentiesJs $fuseJs $searchJs $a11yJs | resources.Concat "js/bundle.js" | fingerprint "md5" -}}
+{{- $js := slice $baseJs $tocJs $tocOpenJs $referentiesJs $fuseJs $searchJs $a11yJs | resources.Concat "js/bundle.js" | fingerprint "md5" -}}
 <script src="{{ $js.RelPermalink }}"></script>

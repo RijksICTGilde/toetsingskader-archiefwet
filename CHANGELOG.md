@@ -36,6 +36,22 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Openstaande punten uit de feedbackrondes (`docs/openstaande-punten.md`):
+  - Kop boven de kern genummerd: "1. Kern van inbeheername en beheer", zodat
+    "Voorschrift 1.1" eronder aansluit. Ook in de inhoudsopgave en de PDF.
+  - "Gerelateerde onderwerpen": items zonder link weg; bij norm 7 daarmee het
+    hele kopje.
+  - Onderwerpenindex toont alleen de titel per begrip, geen regel tekst.
+    "Zie ook" op Document noemt ook Overzicht, Ordenen en Metadateren.
+  - Vorige/volgende-navigatie weg op de Over- en Onderwerpenpagina's.
+  - Samenhang: bollendiagram kleiner (440 px) en inhoudsopgave standaard
+    uitgeklapt (`toc_open`).
+  - PDF: blok "Belangrijke informatie" vervangen door één regel met het
+    versienummer en een link naar de actuele versie.
+  - De zin "De inhoud is nog in ontwikkeling en kan wijzigen." is weg uit de
+    versiezin (voet van elke pagina, homepage) en uit de PDF.
+  - Zoeken: synoniemen wegen zwaarder dan titel en tekst (projectoverride van
+    `search.js`), zodat een norm op zijn synoniem bovenaan komt.
 - Nieuwe hero-afbeelding op de homepage: brede banner (4000×1056,
   `assets/images/hero.jpg`) in plaats van de 1000×600 png. Decoratief, alt
   blijft leeg.
