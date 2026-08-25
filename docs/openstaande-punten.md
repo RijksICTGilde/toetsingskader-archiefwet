@@ -12,9 +12,8 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
       kunnen weg. Volgende stap: kopje en hele lijst weg, want de gelinkte
       woorden staan al in de tekst. Content (alle acht normbladen) én
       `scripts/validate-norms.py` (sectie is daar optioneel toegestaan).
-- [ ] **Hovers "gewoon zwart"** (norm 1, criteria 1.6 / 1.8): nu link-met-hover
-      blauw doorgetrokken, alleen-hover zwart gestippeld. Letterlijk zwart maakt
-      een link onherkenbaar (WCAG 1.4.1). Keuze nodig. `assets/css/main.css`.
+- [x] **Hovers en links**: keuze 25 augustus 2026 "alles blauw" — hover en link
+      allebei in linkkleur; hover gestippeld, link doorgetrokken. `main.css`.
 - [x] "Normanalyse" uit de paginatitel; titel gelijk aan de naam in het kader
       (ordeningsstructuur → ordenen). Gedaan in #76, #78 en #79.
 
@@ -34,12 +33,13 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
       (de `description` op de kaart).
 - [x] **"Zie ook" per onderwerp (criterium: normbladen waar het begrip inhoudelijk speelt; Passende maatregelen heeft die lijst al onder "De risicobenadering per norm"): de normbladen waar het onderwerp in voorkomt.**
       Content per onderwerpenpagina, of automatisch uit de backlinks.
-- [ ] **Onderwerpen niet in een carousel.** Onduidelijk wat bedoeld wordt: op `main` staat geen carousel (A-Z-lijst). Navragen.
+- [x] **Onderwerpen niet in een carousel.** Bedoeld was de vorige/volgende-
+      navigatie; die is weg (zie hierboven).
 - [x] **Menu'tje (vorige/volgende) weg.** `prev_next` in
       `content/onderwerpen/_index.md` en de page-nav in de layout.
-- [ ] **Hover op "document" (Wettelijk kader)**: de tooltip-transformatie zit
-      alleen in `layouts/normen/single.html`; nu een voetnoot onderaan. Vraagt
-      die transformatie ook op de Over-pagina's.
+- [x] **Hover op "document" (Wettelijk kader)**: de tooltip-transformatie is
+      een partial (`_partials/voetnoot-tooltips.html`) en draait via de
+      `article.html`-shadow op alle gewone pagina's. De voetnoot zelf zit in #78.
 
 ## Samenhang
 
@@ -48,11 +48,12 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 
 ## Over
 
-- [ ] **Pagina "Totstandkoming" komt er nog bij.** Tekst volgt van de Inspectie.
+- [ ] **Pagina "Totstandkoming"**: stub staat er (`content/over/totstandkoming.md`,
+      tegel 7). Tekst volgt van de Inspectie.
 - [x] **Menu'tjes per pagina weg.** `prev_next` in `content/over/_index.md`.
-- [ ] **Bron in het blauwe definitieblok als voetnoot op "noodzakelijk"**: de
-      callout-shortcode rendert voetnoten niet; nu een "Bron: …"-regel in het
-      blok. Vraagt een eigen callout-shortcode.
+- [x] **Bron in het blauwe definitieblok als voetnoot op "noodzakelijk"**:
+      shortcode `callout-md` (inner rendert in de pagina-context; vereist
+      `goldmark.renderer.unsafe: true`). De inleiding schakelt om in #78.
 
 ## PDF
 

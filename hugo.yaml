@@ -35,7 +35,10 @@ outputs:
 markup:
   goldmark:
     renderer:
-      unsafe: false
+      # Aan sinds 25 augustus 2026: nodig voor `{{% callout %}}` met een
+      # voetnoot erin (de shortcode-HTML gaat dan door goldmark en werd met
+      # `false` weggegooid). Content blijft onder validate-norms.py.
+      unsafe: true
     extensions:
       table: true
       footnote: true

@@ -1,90 +1,10 @@
 {{ define "main" }}
 {{ $page := . }}
 
-{{/* ---------------------------------------------------------------------
-     Voetnoten → thema-referentie-UX.
-
-     Goldmark rendert `[^id]` als genummerd superscript plus een platte lijst.
-     Dit project wil de reference-UX van het thema: een onderstreept woord met
-     tooltip (.ref-term/.ref-tooltip) en een uitklapbare lijst (.references).
-     Vandaar deze server-side transformatie van `.Content` — geen JS, CSP-veilig.
-
-     Upstream-kandidaat: het thema uit voetnoten laten renderen.
-     --------------------------------------------------------------------- */}}
-{{ $content := .Content }}
-
-{{/* 1. Brontekst uit de <li id="fn:N"> halen en elke <sup> vervangen door een
-       tooltip op het voorafgaande woord. De anker-id (fnref…:N) blijft, anders
-       breken de ↩-backlinks. */}}
-{{ $defs := findRESubmatch `(?s)<li id="fn:(\d+)">\s*<p>(.*?)(?:&#160;)?<a href="#fnref[0-9]*:\d+" class="footnote-backref"` $content }}
-{{/* Labels onthouden, zodat stap 2 dezelfde op de referentielijst zet. */}}
-{{ $bronLabels := newScratch }}
-{{ range $defs }}
-  {{ $n := index . 1 }}
-  {{ $text := index . 2 | strings.TrimSpace }}
-  {{/* Link losknippen, zodat hij een direct kind van .ref-tooltip wordt. */}}
-  {{ $textOnly := $text }}
-  {{ $linkHTML := "" }}
-  {{ $lm := findRESubmatch `(?s)^(.*?)\s*(<a href="[^"]+"[^>]*>Bekijk bron</a>)\s*$` $text }}
-  {{ with $lm }}
-    {{ $textOnly = index (index . 0) 1 }}
-    {{ $linkHTML = index (index . 0) 2 }}
-  {{ end }}
-  {{/* 142 links heten site-breed "Bekijk bron" en zijn in een linkoverzicht niet
-       te onderscheiden (2.4.9, bevinding 27). Het label begint met de zichtbare
-       tekst, zodat 2.5.3 intact blijft, en komt uit de plátte brontekst — vóór
-       de abbr-pass, anders belandt markup in een attribuutwaarde. */}}
-  {{ with $linkHTML }}
-    {{ $bron := $textOnly | plainify | htmlUnescape | strings.TrimRight " .;:" | truncate 90 "…" | htmlEscape }}
-    {{ $label := printf "Bekijk bron: %s" $bron }}
-    {{ $bronLabels.Set $n $label }}
-    {{ $linkHTML = printf `<a aria-label="%s" %s` $label (strings.TrimPrefix "<a " $linkHTML) }}
-  {{ end }}
-  {{/* Afkortingen uitschrijven (3.1.4, bevinding 28). */}}
-  {{ $textOnly = partial "afkortingen.html" $textOnly }}
-  {{/* Twee passes, anders landt de term op een leesteken of blijft hij leeg:
-       A) link (+ leestekens/spatie) vóór de voetnoot → de link wordt de ref-term;
-       B) gewoon woord → het woord wordt de ref-term.
-       Wat geen van beide matcht blijft een zichtbaar superscript. */}}
-  {{/* Zonder `aria-describedby` hoort een schermlezergebruiker alleen de
-       linktekst: de tooltip staat op `visibility: hidden` en dus buiten de
-       toegankelijkheidsboom. De naamberekening leest verborgen doelen wél
-       (1.3.1 / 4.1.2). */}}
-  {{ $linkPat := printf `<a ([^>]*)>([^<]*)</a>([.,;:!?)]*)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
-  {{/* Doel is de bróntekst, niet de hele tooltip: die bevat ook de bronlink,
-       met een aria-label dat dezelfde tekst herhaalt. */}}
-  {{ $linkRepl := printf `<span class="ref-wrapper" id="${4}"><a ${1} class="ref-term" aria-describedby="${4}-bron">${2}</a><span class="ref-tooltip" role="note"><span id="${4}-bron">%s</span>%s</span></span>${3}` $textOnly $linkHTML }}
-  {{ $content = replaceRE $linkPat $linkRepl $content }}
-  {{ $wordPat := printf `([^\s<>]+)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
-  {{ $wordRepl := printf `<span class="ref-wrapper" id="$2"><a href="#fn:%s" class="ref-term" aria-describedby="$2-bron">$1</a><span class="ref-tooltip" role="note"><span id="$2-bron">%s</span>%s</span></span>` $n $textOnly $linkHTML }}
-  {{ $content = replaceRE $wordPat $wordRepl $content }}
-{{ end }}
-
-{{/* 2. Het footnotes-blok als thema-accordeon onderaan tonen. */}}
-{{ $refs := "" }}
-{{ $block := findRESubmatch `(?s)<div class="footnotes" role="doc-endnotes">\s*<hr\s*/?>\s*(<ol>.*?</ol>)\s*</div>` $content }}
-{{ with $block }}
-  {{ $ol := index (index . 0) 1 }}
-  {{/* Zelfde volgorde als bij de tooltips: eerst afkortingen, dan aria-labels.
-       Omgekeerd wrapt de abbr-pass afkortingen binnen de labelwaarden. */}}
-  {{ $ol = partial "afkortingen.html" $ol }}
-  {{ range $n, $label := $bronLabels.Values }}
-    {{/* De eerstvolgende bronlink na deze <li> hoort bij deze bron: alleen
-         voetnoten mét zo'n link staan in $bronLabels. */}}
-    {{ $pat := printf `(?s)(<li id="fn:%s">.*?<a href="[^"]*")([^>]*>Bekijk bron</a>)` $n }}
-    {{ $ol = replaceRE $pat (printf `${1} aria-label="%s"${2}` $label) $ol 1 }}
-  {{ end }}
-  {{/* Backlinks heten bij Goldmark alleen "↩︎": tientallen naamloze links in
-       een linkoverzicht (2.4.4). */}}
-  {{ $ol = replaceRE `class="footnote-backref"` `class="footnote-backref" aria-label="Terug naar de tekst"` $ol }}
-  {{/* De <summary> ziet eruit als h2 maar zat niet in de kopstructuur: wie op
-       koppen navigeert sloeg de bronnen over (1.3.1). */}}
-  {{/* `aria-label` blijft nodig náást de <h2>: een naamloze <section> is geen
-       landmark, en als knop maakt <summary> zijn kinderen presentational — de
-       <h2> haalt de koppenlijst dus meestal ook niet. */}}
-  {{ $refs = printf `<section id="referenties" class="references" aria-label="Referenties"><details><summary><h2>Referenties</h2></summary>%s</details></section>` $ol }}
-  {{ $content = replaceRE `(?s)<div class="footnotes" role="doc-endnotes">.*?</ol>\s*</div>` "" $content }}
-{{ end }}
+{{/* Voetnoten → tooltips + referentielijst; zie _partials/voetnoot-tooltips.html. */}}
+{{ $vt := partial "voetnoot-tooltips.html" (dict "content" .Content) }}
+{{ $content := $vt.content }}
+{{ $refs := $vt.refs }}
 
 {{/* 3. Voorschriften nummeren; gedeeld met de PDF-output. */}}
 {{ $content = partial "nummer-voorschriften.html" (dict "content" $content "norm_id" .Params.norm_id) }}

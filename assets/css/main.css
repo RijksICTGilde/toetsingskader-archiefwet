@@ -75,10 +75,13 @@ blockquote.callout .kern-bron {
   margin-inline-start: 1rem;
 }
 
-/* Ref-term in tekstkleur; de dotted underline komt uit het thema. */
-.norm a.ref-term,
-.norm a.ref-term:hover {
-  color: inherit;
+/* Ref-term (woord met hover) in linkkleur, net als een gewone link; de dotted
+   underline uit het thema maakt het verschil met een link (keuze 25 augustus
+   2026: "alles blauw"). Geldt sitebreed: de tooltip-transformatie draait ook
+   op de Over- en Onderwerpenpagina's (_partials/voetnoot-tooltips.html). */
+a.ref-term,
+a.ref-term:hover {
+  color: var(--color-primary);
 }
 
 /* PDF-knop bouwt op de thema-.button; alleen brand-kleur en icoon-uitlijning
@@ -113,13 +116,6 @@ blockquote.callout .kern-bron {
   outline: 3px solid var(--color-text);
   outline-offset: 2px;
   filter: none;
-}
-
-/* Ref-term die óók naar een andere pagina linkt, krijgt de linkkleur. Termen
-   met href="#fn:…" blijven in tekstkleur. */
-.norm a.ref-term[href^="/"],
-.norm a.ref-term[href^="/"]:hover {
-  color: var(--color-primary);
 }
 
 /* Toelichting hergebruikt de `.references`-accordeon van het thema; alleen de

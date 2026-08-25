@@ -13,6 +13,10 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Toegevoegd
 
+- Pagina "Totstandkoming" onder Over, voorlopig als stub; tekst volgt.
+- Shortcode `callout-md`: een callout waarvan de inhoud in de pagina-context
+  rendert, zodat een voetnoot erin een hover wordt. Daarvoor staat
+  `markup.goldmark.renderer.unsafe` aan.
 - Normen 2 tot en met 8 gevuld met de teksten uit de normbladen (4e iteratie):
   kern, synoniemen, toelichting, voorschriften met criteria en indicatoren,
   reikwijdte en "Zie ook". De PLACEHOLDER-stubs zijn daarmee weg; norm 1 was
@@ -36,6 +40,15 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Voetnoten worden op álle pagina's een hover met referentielijst, niet
+  alleen op de normpagina's: de transformatie is een partial
+  (`_partials/voetnoot-tooltips.html`) die ook in de `article.html`-shadow
+  draait.
+- Hover-termen in de linkkleur (was tekstkleur); de stippellijn blijft het
+  verschil met een gewone link.
+- Toegankelijkheidsscan controleert op de versiezin ("… van het
+  toetsingskader") in plaats van op de verwijderde zin "nog in ontwikkeling";
+  die check faalde sinds die zin weg is.
 - Openstaande punten uit de feedbackrondes (`docs/openstaande-punten.md`):
   - Kop boven de kern genummerd: "1. Kern van inbeheername en beheer", zodat
     "Voorschrift 1.1" eronder aansluit. Ook in de inhoudsopgave en de PDF.

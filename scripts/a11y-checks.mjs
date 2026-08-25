@@ -36,7 +36,9 @@ export const GEEN_VOORBEHOUD_NODIG = new Map([
   ['/tags/', 'lege taxonomiepagina (disableKinds, bevinding 14)'],
   ['/categories/', 'lege taxonomiepagina (disableKinds, bevinding 14)'],
 ])
-export const VOORBEHOUD = 'in ontwikkeling en kan wijzigen'
+// Sinds 25 augustus 2026 zonder "nog in ontwikkeling"; de versiezin zelf is het
+// voorbehoud (versienummer + datum laatst aangepast).
+export const VOORBEHOUD = 'van het toetsingskader'
 
 export function voorbehoudFout(document, url) {
   if (GEEN_VOORBEHOUD_NODIG.has(url)) return null
