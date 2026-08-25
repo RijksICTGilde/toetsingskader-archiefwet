@@ -36,6 +36,9 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Nieuwe hero-afbeelding op de homepage: brede banner (4000×1056,
+  `assets/images/hero.jpg`) in plaats van de 1000×600 png. Decoratief, alt
+  blijft leeg.
 - Kop boven de kern noemt de norm: "Kern van ordenen" in plaats van "Kern van
   de norm", op de normpagina, in de inhoudsopgave en in de PDF. Uit
   `norm_titel`, dus voor alle acht normen tegelijk.
