@@ -9,7 +9,9 @@ Aan het beheer van overheidsinformatie zijn wettelijke eisen gesteld. De Inspect
 
 ## Wat is een document?
 
-De Archiefwet definieert een [document]({{< relref "/onderwerpen/document" >}}) als een schriftelijk stuk of ander geheel van vastgelegde gegevens dat door een verantwoordelijk overheidsorgaan is opgemaakt of ontvangen en dat naar zijn aard verband houdt met de publieke taak van dat orgaan.
+De Archiefwet definieert een [document]({{< relref "/onderwerpen/document" >}})[^archiefbescheiden] als een schriftelijk stuk of ander geheel van vastgelegde gegevens dat door een verantwoordelijk overheidsorgaan is opgemaakt of ontvangen en dat naar zijn aard verband houdt met de publieke taak van dat orgaan.
+
+[^archiefbescheiden]: In de Archiefwet 1995 waren dit "archiefbescheiden".
 
 De Archiefwet is daarmee van toepassing op alle documenten die een organisatie ontvangt of creëert bij de uitvoering van haar taken. Hieronder vallen onder meer interne (digitale) documenten, e-mail, overheidsinformatie in databases, gegevensverzamelingen, overheidsinformatie op websites en overheidsinformatie op sociale mediakanalen.
 

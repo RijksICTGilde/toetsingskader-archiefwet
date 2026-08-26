@@ -320,8 +320,9 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
   <p>De eerste sessie ging over de <em>route</em>: een pagina bewerken, een
   voorstel indienen, de controle lezen. Deze sessie gaat over de <em>onderdelen</em>
   die daarbij horen: hovers, onderwerpenpagina's, links, de regels bovenin een
-  bestand, de toegankelijkheidscontrole, het verwerken van een review en zelf een
-  review doen en mergen.</p>
+  bestand, de toegankelijkheidscontrole, het verwerken van een review, zelf een
+  review doen en mergen, en wat je doet als je voorstel achterloopt op
+  <code>main</code> of botst met andermans wijziging.</p>
 
   <h3>4.1 <code>&lt;&lt;…&gt;&gt;</code> en "hoover" in het normblad</h3>
   <p>In de normbladen staan twee soorten aanwijzingen die géén tekst zijn:</p>
@@ -405,7 +406,7 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
   <p>In sessie 1 heette dit "titel, kern en synoniemen". Compleet:</p>
   <table>
     <tr><th>Veld</th><th>Wat erin staat</th></tr>
-    <tr><td><code>title</code></td><td>de titel van het normblad ("Normanalyse Metadata")</td></tr>
+    <tr><td><code>title</code></td><td>de titel van het normblad ("Normanalyse metadateren", met de normnaam in kleine letters)</td></tr>
     <tr><td><code>norm_titel</code></td><td>de normnaam uit de introductie ("Metadateren"). Stuurt het bollendiagram, de kaarten en de kop "Kern van metadateren". <strong>Niet aanpassen om een kop te veranderen.</strong></td></tr>
     <tr><td><code>kern</code></td><td>de kerntekst <em>uit het normblad zelf</em>, zonder voetnoten</td></tr>
     <tr><td><code>kern_bron</code> / <code>kern_bron_url</code></td><td>de bron onder de kern (optioneel, maar een url zonder brontekst mag niet)</td></tr>
@@ -520,6 +521,101 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
   laat het technisch toe, maar het punt van een review is dat een tweede
   paar ogen meekijkt. Wie schrijft, vraagt een ander om de review en de merge.</div>
 
+  <h3>4.9 Je voorstel bijwerken met <code>main</code> en conflicten oplossen</h3>
+  <p>Een pull request is een kopie van de site op het moment dat jij op het
+  potlood klikte. Terwijl jouw voorstel openstaat, gaan andere voorstellen
+  gewoon door: een collega merget, en <code>main</code> loopt op jou vooruit.
+  Dat is normaal en meestal onschuldig. GitHub meldt het onderaan je pull request
+  op twee manieren.</p>
+
+  <table>
+    <tr><th>Melding onderaan de pull request</th><th>Wat er aan de hand is</th><th>Wat je doet</th></tr>
+    <tr><td>"This branch is out-of-date with the base branch"</td>
+        <td>Er is iets in <code>main</code> veranderd, in <em>andere</em> regels
+            dan de jouwe. Niets botst.</td>
+        <td>Klik <strong>"Update branch"</strong>. Klaar.</td></tr>
+    <tr><td>"This branch has conflicts that must be resolved"</td>
+        <td>Iemand anders heeft <em>dezelfde regels</em> aangepast als jij, en
+            die wijziging is al doorgevoerd. GitHub kan niet raden welke versie
+            moet winnen.</td>
+        <td>Klik <strong>"Resolve conflicts"</strong> en kies zelf (hieronder).</td></tr>
+  </table>
+
+  <p><strong>Bijwerken ("Update branch")</strong></p>
+  <ol>
+    <li>Onderaan de pull request, bij de melding, staat de knop
+        <strong>"Update branch"</strong>. Heeft de knop een pijltje, kies dan
+        <strong>"Update with merge commit"</strong> (niet "rebase").</li>
+    <li>GitHub voegt de nieuwe stand van <code>main</code> toe aan je voorstel.
+        De controles draaien opnieuw. Jouw tekst verandert niet.</li>
+  </ol>
+  <div class="tip"><strong>Wanneer klik je erop?</strong> Vlak voordat je
+  voorstel gemerged wordt, of als de melding er staat terwijl je nog aan het
+  schrijven bent. Vaker hoeft niet: elke klik is een extra regel in de
+  geschiedenis, en die verdwijnt bij "Squash and merge" (4.8) toch weer.</div>
+
+  <p><strong>Conflict oplossen ("Resolve conflicts")</strong></p>
+  <ol>
+    <li>Klik onderaan de pull request op <strong>"Resolve conflicts"</strong>.
+        GitHub opent het bestand in een bewerkscherm. Links staat de lijst met
+        bestanden die botsen; meestal is dat er één.</li>
+    <li>Zoek in de tekst het blok met de strepen. Het ziet er zo uit:
+        <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; content/toelichting-norm-2
+Het overheidsorgaan heeft actuele regels vastgesteld over het archiefbeheer.
+=======
+Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefbeheer.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; main</code></pre>
+        Boven de <code>=======</code> staat <strong>jouw</strong> versie, eronder
+        de versie die al in <code>main</code> staat. De naam achter de punthaken
+        zegt welke tak het is.</li>
+    <li>Maak van het blok één tekst: kies de bovenste, de onderste, of schrijf
+        een zin die beide wijzigingen bevat (in <code>CHANGELOG.md</code>:
+        allebei laten staan, zie hieronder). Haal daarna de drie regels met
+        <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> en
+        <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> <strong>helemaal weg</strong>.
+        Wat overblijft moet weer gewoon leesbare pagina-tekst zijn.</li>
+    <li>Zijn er meer blokken in het bestand? Herhaal het voor elk blok. De knop
+        <strong>"Mark as resolved"</strong> rechtsboven wordt pas klikbaar als
+        er geen strepen meer over zijn.</li>
+    <li>Klik <strong>"Mark as resolved"</strong>, en daarna
+        <strong>"Commit merge"</strong>. De controles draaien opnieuw en de
+        melding onderaan de pull request verdwijnt.</li>
+  </ol>
+
+  <p><strong>Waar je op let bij het kiezen</strong></p>
+  <ul>
+    <li><strong><code>CHANGELOG.md</code> is de uitzondering: daar houd je
+        vrijwel altijd <em>beide</em> kanten.</strong> Twee voorstellen die
+        allebei een regel onder "Unreleased" toevoegen, botsen daar bijna
+        zeker, maar de regels sluiten elkaar niet uit: jouw wijziging is
+        gebeurd én die van de ander. Haal alleen de drie streepregels weg en
+        laat beide regels staan, elk op een eigen regel met een <code>-</code>
+        ervoor. Bij paginatekst geldt dat níet: daar staat maar één zin op de
+        site en moet je kiezen welke de juiste is.</li>
+    <li>De versie uit <code>main</code> is er niet voor niets: iemand heeft hem
+        geschreven, een collega heeft hem goedgekeurd. Gooi hem niet ongezien
+        weg. Twijfel je? Vraag het de schrijver (die staat in de geschiedenis van
+        het bestand, knop "History").</li>
+    <li>Kijk niet alleen naar de zin, maar ook naar de voetnoot eronder. Als
+        beide kanten dezelfde bron met een andere naam hebben toegevoegd, houd
+        je er één over en pas je de verwijzing in de tekst aan, anders wordt de
+        controle rood (2.6).</li>
+    <li>Wat uiteindelijk op de site komt is de tekst die jij hier overhoudt.
+        Lees hem daarom nog één keer als geheel.</li>
+  </ul>
+
+  <div class="gerust">
+    <strong>Kom je er niet uit?</strong> Laat het staan en zeg het in een
+    opmerking onder de pull request. Ook als GitHub meldt dat het conflict "too
+    complex to resolve in the web editor" is: dat kan ik van buiten de
+    website oplossen, jouw tekst gaat niet verloren.
+  </div>
+
+  <div class="tip"><strong>Voorkomen is makkelijker.</strong> Twee mensen aan
+  dezelfde norm in dezelfde week levert bijna altijd een conflict op. Houd
+  voorstellen klein en merge ze snel; zeg in het team even welke norm je onder
+  handen hebt.</div>
+
   <h3>Oefeningen</h3>
   <p>Net als in deel 3: ik ruim de oefen-voorstellen na afloop op.</p>
 
@@ -631,6 +727,45 @@ Eigen tekst. Gewoon Markdown, dus **vet** mag.
     oefening bruikbaarder is dan die uit H: dit blok controleert zijn eigen
     parameters en noemt de waarden die wél mogen. Waar zo'n controle ontbreekt, val
     je terug op een regelnummer.</p>
+  </details>
+
+  <details>
+    <summary>Oefening J: Bijwerken met main en een conflict oplossen</summary>
+    <p><strong>Doel:</strong> beide meldingen uit 4.9 zelf zien en de tweede
+    oplossen. Dit is een oefening in tweetallen; ik merge daarbij één keer een
+    oefen-wijziging echt in <code>main</code>, en draai die na afloop terug.</p>
+    <p><strong>Deel 1: bijwerken (geen conflict)</strong></p>
+    <ol>
+      <li>Allebei: open <code>content/normen/02-overzicht.md</code> met het
+          potlood. Persoon A past een zin aan in <code>## Toelichting</code>,
+          persoon B een zin in <code>## Reikwijdte</code>. Verschillende regels
+          dus.</li>
+      <li>Allebei: dien een voorstel in en wacht op groen.</li>
+      <li>Ik merge het voorstel van A.</li>
+      <li>B: ververs je pull request. Onderaan staat nu "This branch is
+          out-of-date with the base branch". Klik <strong>"Update branch"</strong>.
+          Bekijk daarna het tabblad "Files changed": zie je dat alleen jouw
+          wijziging als verschil wordt getoond, en die van A niet?</li>
+    </ol>
+    <p><strong>Deel 2: conflict</strong></p>
+    <ol>
+      <li>A: open hetzelfde bestand opnieuw met het potlood en verander
+          <em>dezelfde zin</em> in <code>## Reikwijdte</code> die B onder handen
+          heeft, maar anders. Dien in als nieuw voorstel.</li>
+      <li>Ik merge het nieuwe voorstel van A.</li>
+      <li>B: ververs je pull request. Nu staat er "This branch has conflicts that
+          must be resolved". Klik <strong>"Resolve conflicts"</strong>.</li>
+      <li>B: zoek het blok met de strepen. Welke regel is van jou, welke komt uit
+          <code>main</code>? Vergelijk met het voorbeeld in 4.9.</li>
+      <li>B: schrijf één zin die beide wijzigingen recht doet, haal de drie
+          streepregels weg, klik <strong>"Mark as resolved"</strong> en daarna
+          <strong>"Commit merge"</strong>.</li>
+      <li>Allebei: wacht tot de controles groen zijn en bekijk in "Files changed"
+          de zin die overbleef.</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> B's pull request is groen zonder melding
+    onderaan, de zin in Reikwijdte bevat wat A én B wilden, en jullie kunnen in
+    eigen woorden zeggen wat het verschil is tussen "out-of-date" en "conflict".</p>
   </details>
 </section>
 
