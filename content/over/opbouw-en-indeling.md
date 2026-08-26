@@ -11,8 +11,6 @@ Het toetsingskader omvat momenteel de onderwerpen die de Inspectie als fundament
 
 In het toetsingskader is per onderwerp uitgewerkt welke bijzondere bepalingen uit de Archiefwet- en regelgeving daarop van toepassing zijn. Hieruit volgen de voorschriften met eventueel bijbehorende criteria en indicatoren.
 
-In dit toetsingskader wordt onderscheid gemaakt tussen voorschriften, criteria en indicatoren.
-
 - **Voorschriften** zijn wettelijke normen die rechtstreeks voortvloeien uit de Archiefwet en onderliggende regelgeving.
 - **Criteria** zijn voorwaarden die niet expliciet in de wet zijn opgenomen, maar waaraan moet worden voldaan om aan het betreffende voorschrift te kunnen voldoen.
 - **Indicatoren** zijn voorbeelden van hoe een organisatie aan de voorschriften en criteria kan voldoen. De Inspectie kan hierop haar bevindingen en conclusies baseren.

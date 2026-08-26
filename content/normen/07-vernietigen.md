@@ -3,11 +3,11 @@ title: "Normanalyse vernietigen"
 versie: "0.8"
 weight: 7
 norm_id: "7"
-norm_titel: "Gecontroleerd vernietigen"
+norm_titel: "Vernietigen"
 aliases:
   - /normen/07-informatiebeveiliging/
 kern: "Het verantwoordelijke overheidsorgaan vernietigt documenten waarvan de bewaartermijn is verstreken. Om aan de eisen voor vernietiging te voldoen is een procesbeschrijving van vernietiging noodzakelijk. Ook moet er een verklaring van vernietiging worden opgesteld."
-kern_bron: "Aw, artikel 5.3, eerste lid, en Ab, artikel 4.1; Ar, artikel 4.1 en artikel 4.2."
+kern_bron: "Aw, artikel 5.3, eerste lid; Ab, artikel 4.1; Ar, artikel 4.1; Ar, artikel 4.2."
 kern_bron_url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
 kern_kaart: "Documenten moeten gecontroleerd vernietigd worden."
 synoniemen:
@@ -106,7 +106,9 @@ Documenten worden na het verstrijken van de bewaartermijn gecontroleerd worden v
 
 - Documenten worden alleen vernietigd als hiervoor een grondslag bestaat in een selectiebesluit van het verantwoordelijke overheidsorgaan;[^aw-artikel-5-1-lid-1]
 - Er is een verklaring van vernietiging opgesteld.
-- Indien wenselijk of noodzakelijk, worden bepaalde [metagegevens](/normen/04-metadateren/) behouden om te bewijzen dat de vernietigde documenten hebben bestaan of zijn vernietigd.[^kamerstukken-35968-nr-3-selectie]
+- Indien wenselijk of noodzakelijk, worden bepaalde [metagegevens](/normen/04-metadateren/) behouden [om te bewijzen](https://www.nationaalarchief.nl/archiveren/kennisbank/hoe-kun-je-digitaal-vernietigen#collapse-86789)[^na-digitaal-vernietigen] dat de vernietigde documenten hebben bestaan of zijn vernietigd.[^kamerstukken-35968-nr-3-selectie]
+
+[^na-digitaal-vernietigen]: Hoe kun je digitaal vernietigen? Nationaal Archief, kennisbank. [Bekijk bron](https://www.nationaalarchief.nl/archiveren/kennisbank/hoe-kun-je-digitaal-vernietigen#collapse-86789)
 
 #### Indicatoren
 
@@ -137,7 +139,7 @@ Bij vernietiging van documenten, uitgezonderd de documenten die op elk moment mo
 
 ## Reikwijdte
 
-De eisen voor vernietiging gelden voor alle tijdelijk te bewaren documenten van alle organisatieonderdelen van het verantwoordelijke overheidsorgaan, ongeacht de vorm (digitaal of papier.[^ar-hoofdstuk-2-hoofdlijnen-p30]
+De eisen voor vernietiging gelden voor alle tijdelijk te bewaren documenten van alle organisatieonderdelen van het verantwoordelijke overheidsorgaan, ongeacht de vorm (digitaal of papier).[^ar-hoofdstuk-2-hoofdlijnen-p30]
 
 [^ar-hoofdstuk-2-hoofdlijnen-p30]: Ar, Hoofdstuk 2. Hoofdlijnen van de regeling, p.30. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
