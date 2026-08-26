@@ -9,9 +9,13 @@ synoniemen:
   - "Integriteit"
 ---
 
-Een audittrail is een chronologische en gedetailleerde registratie van activiteiten of transacties bij een document. Deze registratie maakt reconstructie en onderzoek mogelijk.
+Een audittrail is een chronologische en gedetailleerde registratie van activiteiten of transacties bij een document. Deze registratie maakt reconstructie en onderzoek mogelijk.[^csrc-audit-trail]
 
-Documenten moeten volledig, betrouwbaar en authentiek zijn. In de metadata bij een document moet onder andere zijn vastgelegd wanneer en door wie het document is gemaakt of gewijzigd. Ook moet de gebruiker erop kunnen vertrouwen dat de documenten niet ongecontroleerd zijn gewijzigd of dat er informatie uit is verwijderd.
+[^csrc-audit-trail]: Audit trail, Glossary, NIST Computer Security Resource Center. [Bekijk bron](https://csrc.nist.gov/glossary/term/audit_trail)
+
+Documenten moeten volledig, betrouwbaar en authentiek zijn. In de metadata bij een document moet onder andere zijn vastgelegd wanneer en door wie het document is gemaakt of gewijzigd. Ook moet de gebruiker erop kunnen vertrouwen dat de documenten niet ongecontroleerd zijn gewijzigd of dat er informatie uit is verwijderd.[^ab-nvt-betrouwbaar-p11]
+
+[^ab-nvt-betrouwbaar-p11]: Ab, Nota van toelichting, Algemeen Deel, Hoofdstuk 2, betrouwbaar, p.11. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
 ## Zie ook
 

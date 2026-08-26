@@ -1,12 +1,12 @@
 ---
-title: "Normanalyse informatiebeveiliging en betrouwbaar"
+title: "Informatiebeveiliging en betrouwbaar"
 versie: "0.8"
 weight: 5
 norm_id: "5"
 norm_titel: "Informatiebeveiliging en betrouwbaar"
 aliases:
   - /normen/06-vernietigen/
-kern: "Het verantwoordelijke overheidsorgaan beheert de door hem opgemaakte of ontvangen documenten op zodanige wijze dat de inhoud van documenten betrouwbaar, volledig en beveiligd zijn en documenten geen 'aanmerkelijke' digitale achteruitgang of informatieverlies ondervinden gedurende hun bewaartermijn, óók wanneer incidenten zich voordoen. Daarnaast mogen documenten niet ongecontroleerd gewijzigd worden en moeten deze volledig zijn."
+kern: "Het verantwoordelijke overheidsorgaan beheert de door hem opgemaakte of ontvangen documenten op zodanige wijze dat de inhoud van documenten betrouwbaar, volledig en beveiligd zijn en documenten geen 'aanmerkelijke' digitale achteruitgang of informatieverlies ondervinden gedurende hun bewaartermijn, óók wanneer [incidenten](/onderwerpen/incidenten-voorkomen/) zich voordoen. Daarnaast mogen documenten niet ongecontroleerd gewijzigd worden en moeten deze volledig zijn."
 kern_bron: "Ab, artikel 2.1, eerste lid, sub e en f; Ab, artikel 2.1, tweede lid."
 kern_bron_url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
 kern_kaart: "Een document moet aantoonbaar betrouwbaar zijn, dat wil zeggen dat het document is wat het zegt te zijn."

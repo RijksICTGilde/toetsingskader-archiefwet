@@ -1,10 +1,10 @@
 ---
-title: "Normanalyse overzicht informatiehuishouding"
+title: "Overzicht"
 versie: "0.8"
 weight: 2
 norm_id: "2"
 norm_titel: "Overzicht"
-kern: "Het verantwoordelijke overheidsorgaan beschikt over een actueel overzicht van de informatiehuishouding. Dit overzicht geeft aan welke (categorieën) documenten zich bij het overheidsorgaan bevinden en waar ze te vinden zijn. Een overzicht kan zowel individuele documenten als documenten op een hoger aggregatieniveau bevatten."
+kern: "Het verantwoordelijke overheidsorgaan beschikt over een actueel overzicht van de informatiehuishouding. Dit overzicht geeft aan welke (categorieën) documenten zich bij het overheidsorgaan bevinden en waar ze te vinden zijn."
 kern_bron: "Ar, artikel 2.3, aanhef; Ar, Toelichting, Algemene eisen, overzicht informatiehuishouding, p. 33-35."
 kern_bron_url: "https://www.internetconsultatie.nl/archiefregeling/b1"
 kern_kaart: "De organisatie heeft een overzicht van welke documenten ze onder zich heeft en waar die zich bevinden."
@@ -38,7 +38,7 @@ Ook voor andere wetgeving, zoals de AVG en WOO, is een overzicht essentieel. Het
 
 #### Voorschrift
 
-Het verantwoordelijke overheidsorgaan heeft een actueel overzicht[^ar-artikel-2-3-aanhef]
+Het verantwoordelijke overheidsorgaan heeft een actueel overzicht.[^ar-artikel-2-3-aanhef]
 
 [^ar-artikel-2-3-aanhef]: Ar, artikel 2.3, aanhef. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
@@ -71,8 +71,8 @@ Het verantwoordelijke overheidsorgaan heeft een omschrijving van de taken van he
 - Het is mogelijk om meerdere soorten overzichten op te stellen, afhankelijk van de vraag en behoefte van de organisatie.
 - Het overzicht maakt de samenhang en dwarsverbanden tussen documenten, processen, applicaties[^applicatie] en systemen[^systeem] inzichtelijk.
 
-[^applicatie]: “Applicatie” wordt meestal gebruikt als het gaat om een of meer zelfstandige programmamodules die rechtstreeks met de gebruikers communiceren. De taken die we met applicaties uitvoeren zijn meestal zakelijk en administratief. Welcome IT professional.
-[^systeem]: Een (informatie)systeem “is een geïntegreerde oplossing voor een organisatorisch probleem. Daarom kan je de software, de applicatie of het tool geen systeem noemen. Een systeem is bijvoorbeeld een reeks onderling verbonden componenten (modules, subsystemen, enz.) die samenwerken om een samenhangend geheel te vormen.” Welcome IT professional.
+[^applicatie]: “Applicatie” wordt meestal gebruikt als het gaat om een of meer zelfstandige programmamodules die rechtstreeks met de gebruikers communiceren. De taken die we met applicaties uitvoeren zijn meestal zakelijk en administratief. Welcome IT professional. [Bekijk bron](https://www.itpedia.nl/2018/10/23/applicatie-systeem-tool-of-software-wat-is-wat/)
+[^systeem]: Een (informatie)systeem “is een geïntegreerde oplossing voor een organisatorisch probleem. Daarom kan je de software, de applicatie of het tool geen systeem noemen. Een systeem is bijvoorbeeld een reeks onderling verbonden componenten (modules, subsystemen, enz.) die samenwerken om een samenhangend geheel te vormen.” Welcome IT professional. [Bekijk bron](https://www.itpedia.nl/2018/10/23/applicatie-systeem-tool-of-software-wat-is-wat/)
 
 #### Voorschrift
 

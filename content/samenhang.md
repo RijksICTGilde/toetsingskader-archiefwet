@@ -25,10 +25,6 @@ Duurzame toegankelijkheid ontstaat niet vanzelf. Hiervoor zijn beheerregels, de 
 
 Het feitelijk beheer wordt uitgevoerd op basis van de passende maatregelen. Op basis van [risicoanalyses]({{< relref "/onderwerpen/passende-maatregelen" >}}) en [periodieke evaluaties]({{< relref "/normen/08-periodieke-evaluatie" >}}) worden deze maatregelen waar nodig aangevuld, herzien of verbeterd. Het beheer van overheidsinformatie is daarmee een continu proces.
 
-## Relatie met DUTO
+## Beschikbaar en leesbaar
 
-Het Nationaal Archief definieert in het [DUTO-raamwerk](https://www.nationaalarchief.nl/archiveren/duto) wanneer een document duurzaam toegankelijk is: als het [vindbaar]({{< relref "/normen/06-vindbaar" >}}), beschikbaar, leesbaar, [interpreteerbaar]({{< relref "/onderwerpen/samenhang-en-interpreteerbaarheid" >}}), [betrouwbaar]({{< relref "/normen/05-betrouwbaar" >}}) en toekomstbestendig is. Voor iedereen die daar recht op heeft en voor zo lang als noodzakelijk.
-
-Dit toetsingskader sluit aan bij die definitie. Een deel van de DUTO-kenmerken is direct als norm uitgewerkt: vindbaar en betrouwbaar. Het begrip toekomstbestendig wordt nader ingevuld aan de hand van de normen uit de Archiefwet 2026 en de daarop gebaseerde regelgeving, onder meer via [Overzicht]({{< relref "/normen/02-overzicht" >}}), [Ordenen]({{< relref "/normen/03-ordenen" >}}) en [Metadateren]({{< relref "/normen/04-metadateren" >}}).
-
-De kenmerken beschikbaar en leesbaar zijn nog niet als afzonderlijke norm uitgewerkt. Die onderwerpen staan vervaagd in het diagram hierboven en worden op een later moment aan het toetsingskader toegevoegd. Zie ook [Opbouw en indeling]({{< relref "/over/opbouw-en-indeling" >}}).
+De DUTO-kenmerken beschikbaar en leesbaar zijn nog niet als afzonderlijke norm uitgewerkt. Die onderwerpen staan vervaagd in het diagram hierboven en worden op een later moment aan het toetsingskader toegevoegd. Zie ook [Duurzame toegankelijkheid]({{< relref "/over/duurzame-toegankelijkheid" >}}) en [Opbouw en indeling]({{< relref "/over/opbouw-en-indeling" >}}).

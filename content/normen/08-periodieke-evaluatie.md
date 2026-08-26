@@ -1,5 +1,5 @@
 ---
-title: "Normanalyse periodieke evaluatie"
+title: "Periodieke evaluatie"
 versie: "0.8"
 weight: 8
 norm_id: "8"
