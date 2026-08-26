@@ -36,6 +36,7 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+content/feedback-normbladen-6-7-8-en-kaderpaginas
 - Tweede feedbackronde verwerkt: normbladen vindbaar, vernietigen en periodieke
   evaluatie, de sectie "Over het toetsingskader" en drie onderwerpenpagina's
   (`docs/feedback-normbladen-6-7-8-en-kader.md`):
@@ -63,6 +64,38 @@ changelog volgt [Semantic Versioning][semver].
   - Onderwerpen: bronnen bij metadata hardware/programmatuur (Ar 2.8 sub a;
     Ar Toelichting p. 38), metadata integriteitscheck (Ar 2.8 sub b; Ab 2.1
     sub e) en passende maatregelen (Aw MvT 4.1; Aw 4.1 lid 2).
+- Feedbackronde op de normbladen ordenen, metadateren en informatiebeveiliging
+  verwerkt:
+  - De paginatitels volgen het normblad: "Normanalyse ordenen", "Normanalyse
+    metadateren" en "Normanalyse informatiebeveiliging en betrouwbaar" (was
+    "Normanalyse Ordeningsstructuur", "Normanalyse Metadata" en "Normanalyse
+    informatiebeveiliging en betrouwbaarheid van documenten").
+  - Norm 4: de bron bij NEN-ISO 23081-1:2017 wees naar een DMS-bestand dat
+    buiten de organisatie niet te openen is; hij wijst nu naar
+    [NEN-ISO 23081-1:2017 nl](https://www.nen.nl/nen-iso-23081-1-2017-nl-269387)
+    op nen.nl.
+  - Norm 4: de drie zinnen die de categorieën documenten inleiden ("Alle
+    documenten, ongeacht de bewaartermijn …", "Digitale documenten met een
+    bewaartermijn langer dan tien jaar …", "Over te brengen documenten …") zijn
+    tussenkopjes (`###`) op hetzelfde niveau als "Feitelijk beheer" bij norm 1.
+    Ze liepen als losse alinea door in het voorschrift ervoor.
+  - Norm 4: hover bij "structuur" leest "aan een bericht dat bijlagen bevat";
+    de bron bij het permanent uniek identificatiekenmerk (voorschrift 4.3) is
+    "Ar, artikel 2.7; Ar, artikel 2.8; Archiefregeling, Toelichting, 2.2
+    Aanvullende eisen voor langdurig te bewaren documenten in digitale vorm,
+    p.37."
+  - Norm 5: de hover bij "informatiebeveiliging" in de toelichting noemt nu de
+    onderwerpen waar de Inspectie zich niet op richt (firewalls, encryptie,
+    antivirussoftware, MFA, patchen). Toegevoegd aan de bestaande bronvoetnoot
+    op dat woord in plaats van als tweede voetnoot: twee voetnootmarkeringen
+    achter elkaar geven één zwevend nummer, omdat de tooltip-transformatie in
+    `layouts/normen/single.html` het voorafgaande woord pakt.
+  - Norm 5: de twee back-upindicatoren bij voorschrift 5.1 stonden ingesprongen
+    en staan nu op hetzelfde niveau als de andere indicatoren; de bron bij 5.1
+    scheidt de twee vindplaatsen met een puntkomma; de bron bij het laatste
+    criterium van 5.4 legt uit wat "ongeoorloofd" betekent en is niet langer
+    een half afgemaakte notitie.
+main
 - Openstaande punten uit de feedbackrondes (`docs/openstaande-punten.md`):
   - Kop boven de kern genummerd: "1. Kern van inbeheername en beheer", zodat
     "Voorschrift 1.1" eronder aansluit. Ook in de inhoudsopgave en de PDF.
