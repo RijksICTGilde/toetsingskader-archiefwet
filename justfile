@@ -14,8 +14,8 @@ build:
 #
 # Nodig omdat een deel van de controles op de gebouwde HTML werkt en dus niet
 # in de pre-commit hook kan zitten: of een voetnootmarkering een ref-term heeft
-# gekregen, of een ref-term meer is dan interpunctie, of elke pagina het
-# draft-voorbehoud draagt. Zonder dit recept ziet een redacteur die fouten pas
+# gekregen, of een ref-term meer is dan interpunctie, of een afbeelding een
+# lege alt heeft. Zonder dit recept ziet een redacteur die fouten pas
 # in CI. Zie scripts/a11y-checks.mjs.
 #
 # Bewust géén `--quiet` op de build: Hugo's warnf gaat daarmee ook weg, en juist

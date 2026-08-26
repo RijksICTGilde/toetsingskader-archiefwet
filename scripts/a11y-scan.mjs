@@ -11,7 +11,6 @@ import path from 'node:path'
 import { createRequire } from 'node:module'
 import {
   zwevendeVoetnootFouten, korteRefTermFouten,
-  voorbehoudFout, voorbehoudBronFout, VOORBEHOUD,
   legeAltFouten,
 } from './a11y-checks.mjs'
 
@@ -35,16 +34,6 @@ function htmlFiles(dir, acc = []) {
 const files = htmlFiles(root)
 let total = 0
 
-// Klopt de zin in a11y-checks.mjs nog met de partial? Zo niet, dan wordt elke
-// pagina hieronder rood met een melding die de verkeerde oorzaak noemt. Pad
-// relatief aan dit script: de scan draait ook vanuit een andere map.
-const versieZinPad = new URL('../layouts/_partials/versie-zin.html', import.meta.url)
-const bronFout = voorbehoudBronFout(fs.readFileSync(versieZinPad, 'utf8'))
-if (bronFout) {
-  total++
-  console.log(`— draft-voorbehoud [moderate] 1x: ${bronFout}`)
-}
-
 for (const file of files) {
   const url = '/' + path.relative(root, file).replace(/index\.html$/, '')
   const dom = new JSDOM(fs.readFileSync(file, 'utf8'), { pretendToBeVisual: true, runScripts: 'outside-only' })
@@ -58,11 +47,6 @@ for (const file of files) {
     total += v.nodes.length
     console.log(`${url} — ${v.id} [${v.impact}] ${v.nodes.length}x: ${v.help}`)
     for (const n of v.nodes.slice(0, 3)) console.log(`    ${n.target.join(' ')}`)
-  }
-  if (voorbehoudFout(dom.window.document, url)) {
-    total++
-    console.log(`${url} — draft-voorbehoud [moderate] 1x: pagina zonder "${VOORBEHOUD}"`)
-    console.log(`    zet show_lastmod: true in de front matter, of neem de pagina op in GEEN_VOORBEHOUD_NODIG met een reden`)
   }
   for (const href of zwevendeVoetnootFouten(dom.window.document, url)) {
     total++

@@ -267,6 +267,9 @@ main
 
 ### Verwijderd
 
+- De controle `draft-voorbehoud` in de toegankelijkheidsscan, die op elke
+  pagina de zin "in ontwikkeling en kan wijzigen" eiste. Die zin is op verzoek
+  weg (25 augustus), de controle maakte sindsdien elke build rood.
 - De project-eigen "naar boven"-knop (`layouts/baseof.html`,
   `_partials/terug-naar-boven.html`, `js/back-to-top.js`,
   `css/terug-naar-boven.css`). De knop komt nu uit het thema, aangezet met
@@ -281,6 +284,9 @@ main
 
 ### Opgelost
 
+- Containerbuild: de runtime-stage staat buiten de GHA-layercache
+  (`no-cache-filters: runtime`), zodat `apk upgrade` echt draait en de
+  Trivy-scan niet rood wordt op een al gefixte Alpine-CVE (CVE-2026-14456).
 - Voorschriftnummering (`<norm>.<n>`) ontbrak in de PDF-export; de nummering
   is nu gedeeld tussen webpagina en PDF, zowel per norm als in de kader-PDF.
 - Interne normverwijzingen gecorrigeerd: "(gecontroleerd) vernietigen" wees
