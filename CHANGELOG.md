@@ -315,6 +315,9 @@ main
 
 ### Opgelost
 
+- Hover-termen kleuren met `--color-link` in plaats van `--color-primary`:
+  dezelfde kleur als gewone links, en op het blauwe callout-vlak voldoende
+  contrast (was 3,7:1, axe-fout op de bron-hover in het DUTO-blok).
 - PDF: een voetnoot in een kop (norm 4, "Digitale documenten met een
   bewaartermijn …") las als kaal nummer achter de kop; nu superscript met
   sprong naar de bronnenlijst, zoals in de lopende tekst.
