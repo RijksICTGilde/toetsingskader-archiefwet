@@ -24,8 +24,8 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
       en in de PDF.
 - [x] **Versiezin in de voet** ("Versie v0.2.2 … laatst aangepast op …") in de
       kleine opmaak van de homepage, overal. Sinds 31 augustus 2026 één partial
-      (`_partials/versie-zin.html`) en één class (`.versielabel`) voor voet en
-      homepage; de homepage toont nu ook de datum.
+      (`_partials/versie-zin.html`) voor voet en homepage, in de thema-opmaak
+      voor `footer p` (gedempt, cursief); de homepage toont nu ook de datum.
 
 ## Onderwerpen
 

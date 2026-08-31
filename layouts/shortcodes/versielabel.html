@@ -2,12 +2,15 @@
      Versielabel — `{{< versielabel >}}`
 
      Voor de homepage: die heeft geen `show_lastmod` en dus geen voet, waar de
-     versiezin elders staat (`_partials/lastmod.html`). Zelfde partial, zelfde
-     class, dus dezelfde tekst en opmaak als overal.
+     versiezin elders staat (`_partials/lastmod.html`). Dezelfde partial in
+     dezelfde thema-structuur als de voet van een inhoudspagina —
+     `:where(article, section) > footer p` in layout.css van het thema zet de
+     gedempte, cursieve opmaak. Geen eigen CSS: zonder deze structuur was de
+     zin op de homepage niet cursief en elders wel (feedback 31 augustus 2026).
 
      Shortcode en geen shadow van `hero.html`: shadows lopen bij een theme-update
      uit de pas, en dit hoort bij de inhoud, niet bij de layout.
      --------------------------------------------------------------------- */}}
 {{- with partial "versie-zin.html" .Page -}}
-<p class="versielabel">{{ . }}</p>
+<section class="versielabel"><footer><p>{{ . }}</p></footer></section>
 {{- end -}}

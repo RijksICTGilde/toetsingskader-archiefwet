@@ -51,7 +51,8 @@ params:
   # voor de PDF-export.
   versie: "v0.2.2"
   # Doel van het versienummer. Eén plek: het label staat op de homepage
-  # (`versielabel`) én in de paginavoet (`_partials/lastmod.html`).
+  # (shortcode `versielabel`) én in de paginavoet (`_partials/lastmod.html`),
+  # beide uit `_partials/versie-zin.html`.
   releases_url: "https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases"
   feedback:
     email: toetsingskader@inspectie-oe.nl

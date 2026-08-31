@@ -1,14 +1,14 @@
 {{/*
   Shadow van de theme-lastmod. Verschil: de hele versiezin (versienummer +
-  laatst aangepast) uit `_partials/versie-zin.html`, in dezelfde opmaak als op
-  de homepage (`.versielabel`, zie main.css). De homepage heeft geen voet en
-  zet dezelfde partial via de shortcode `versielabel`. Upstream-kandidaat:
-  versielabel als theme-optie.
+  laatst aangepast) uit `_partials/versie-zin.html`. De opmaak komt uit het
+  thema (`:where(article, section) > footer p`: gedempt en cursief); de
+  homepage heeft geen voet en zet dezelfde partial in dezelfde structuur via de
+  shortcode `versielabel`. Upstream-kandidaat: versiezin als theme-optie.
 */}}
 {{- if .Params.show_lastmod -}}
 {{- /* Het voorbehoud hoort op élke inhoudspagina: normpagina's worden los
        gedeeld en geciteerd. */ -}}
 {{- with partial "versie-zin.html" . }}
-<p class="versielabel">{{ . }}</p>
+<p>{{ . }}</p>
 {{- end -}}
 {{- end -}}

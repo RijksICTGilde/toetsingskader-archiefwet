@@ -46,12 +46,16 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Over- en onderwerpenpagina's op volle breedte (`wide: true` via `cascade`
+  in de sectie-index): ze hebben geen inhoudsopgave meer, dus de smalle
+  tekstkolom liet rechts een lege strook.
 - Menu'tjes verwijderd op (`/samenhang/`) en (`/over/`) pagina's.
 - Versiezin op elke pagina gelijk: "Versie … van het toetsingskader. Deze
   pagina is voor het laatst aangepast op …", in de gedempte opmaak van de
   homepage. De homepage toont nu ook de datum; de voet van de andere pagina's
-  gebruikt dezelfde partial en class (`_partials/versie-zin.html`,
-  `.versielabel`). Lokale default van het versienummer is `v0.2.2`.
+  gebruikt dezelfde partial (`_partials/versie-zin.html`); de opmaak is die
+  van het thema voor een paginavoet (gedempt, cursief), zonder eigen CSS.
+  Lokale default van het versienummer is `v0.2.2`.
 - De kern-callout op de normpagina's heeft geen kop meer: de kerntekst staat
   direct onder de paginatitel. De regel "Kern van …" is ook weg uit de
   inhoudsopgave en de PDF; `_partials/kern-kop.html` is verwijderd.

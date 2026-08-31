@@ -163,13 +163,3 @@ abbr[title] {
     max-inline-size: calc(100vw - 2rem);
   }
 }
-
-/* Versiezin ("Versie … van het toetsingskader. Deze pagina is voor het laatst
-   aangepast op …"): op de homepage via de shortcode `versielabel`, elders in de
-   paginavoet (`_partials/lastmod.html`). Eén class, dus overal dezelfde opmaak.
-   Gedempt, want context en geen mededeling. */
-.versielabel {
-  margin-block-start: 2rem;
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
-}
