@@ -112,6 +112,19 @@ test('alinea die alléén een voetnootnummer is behoudt superscript', () => {
   assert.equal(runs[0].linkToDestination, 'n1-fn-1')
 })
 
+test('voetnoot in een kop wordt superscript met sprong, geen kaal nummer', () => {
+  // Norm 4: de ###-kop "Digitale documenten met een bewaartermijn …" draagt
+  // [^ar-artikel-2-8]. Met textContent las de PDF "… metadataschema:17".
+  const out = convertWith('<h3 id="x">Kop met bron<sup id="fnref:17"><a href="#fn:17" class="footnote-ref">17</a></sup></h3>', { prefix: 'n4-' })
+  assert.equal(out[0].style, 'h3')
+  assert.ok(Array.isArray(out[0].text), 'runs, geen platte tekst')
+  const ref = out[0].text.find(r => r.sup)
+  assert.ok(ref, 'voetnootnummer als superscript')
+  assert.equal(ref.text, '17')
+  assert.equal(ref.linkToDestination, 'n4-fn-17')
+  assert.equal(out[0].text[0].text, 'Kop met bron')
+})
+
 test('interne norm-link wordt absolute site-link zonder normDests (losse norm-PDF)', () => {
   const out = convertWith('<p>zie <a href="/normen/06-vernietigen/">Norm 6</a></p>', { origin: 'https://x.nl', normDests: null })
   const link = out[0].text.find(r => r.link)

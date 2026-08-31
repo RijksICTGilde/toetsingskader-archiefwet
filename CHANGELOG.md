@@ -46,6 +46,11 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Vijf punten uit de feedback op de kaderpagina's (#78) die bij het mergen van
+  #79 waren teruggedraaid, staan weer: kaartteksten "Wettelijk kader" en
+  "Doelgroep", de Position-Paper-voetnoot in de inleiding, en het DUTO-blok
+  zonder titel en met bron op "noodzakelijk" (nu op de pagina Duurzame
+  toegankelijkheid).
 - Over- en onderwerpenpagina's op volle breedte (`wide: true` via `cascade`
   in de sectie-index): ze hebben geen inhoudsopgave meer, dus de smalle
   tekstkolom liet rechts een lege strook.
@@ -310,6 +315,9 @@ main
 
 ### Opgelost
 
+- PDF: een voetnoot in een kop (norm 4, "Digitale documenten met een
+  bewaartermijn …") las als kaal nummer achter de kop; nu superscript met
+  sprong naar de bronnenlijst, zoals in de lopende tekst.
 - Containerbuild: de runtime-stage staat buiten de GHA-layercache
   (`no-cache-filters: runtime`), zodat `apk upgrade` echt draait en de
   Trivy-scan niet rood wordt op een al gefixte Alpine-CVE (CVE-2026-14456).

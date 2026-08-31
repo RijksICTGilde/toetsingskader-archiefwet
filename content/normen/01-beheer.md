@@ -40,7 +40,7 @@ Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. 
 
 De beheerregeling moet samen met de omschrijving van de passende maatregelen worden gepubliceerd. Vervolgens moeten de passende maatregelen getroffen worden, en hiervoor moeten deze passende maatregelen in ieder geval beschreven zijn in een 'document'.
 
-In een beheerde omgeving[^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten[^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/05-betrouwbaar/), [gecontroleerd vernietigen](/normen/07-vernietigen/) en [metadateren](/normen/04-metadateren/) geeft direct richting aan de invulling van de benodigde functionaliteiten.[^kamerstukken-2021-22-35968]
+In een beheerde omgeving[^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten[^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/05-betrouwbaar/), [vernietigen](/normen/07-vernietigen/) en [metadateren](/normen/04-metadateren/) geeft direct richting aan de invulling van de benodigde functionaliteiten.[^kamerstukken-2021-22-35968]
 
 [^kamerstukken-2021-22-35968]: Aw, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Beheerstrategie
 

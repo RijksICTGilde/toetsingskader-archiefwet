@@ -1,7 +1,7 @@
 ---
 title: "Doelgroep"
 card_title: "Doelgroep"
-description: "Welke organisaties onder de Archiefwet 2026 en het toezicht van de Inspectie vallen."
+description: "Welke organisaties onder het toezicht van de Inspectie vallen."
 toc: false
 weight: 6
 ---

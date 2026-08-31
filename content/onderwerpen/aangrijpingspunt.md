@@ -17,4 +17,4 @@ Bij tijdelijk te bewaren documenten kan een ander aangrijpingspunt gekozen worde
 
 ## Zie ook
 
-- [Gecontroleerd vernietigen]({{< relref "/normen/07-vernietigen" >}})
+- [Vernietigen]({{< relref "/normen/07-vernietigen" >}})
