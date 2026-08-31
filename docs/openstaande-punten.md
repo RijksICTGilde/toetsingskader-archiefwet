@@ -7,7 +7,8 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 ## Normpagina's
 
 - [x] **Nummer op "Kern van …"**, zodat de nummering van de voorschriften erop
-      aansluit. `layouts/_partials/kern-kop.html`; werkt door in TOC en PDF.
+      aansluit. Achterhaald: sinds 31 augustus 2026 heeft de kern-callout geen
+      kop meer (pagina, TOC en PDF); `_partials/kern-kop.html` is weg.
 - [x] **Gerelateerde onderwerpen** (ongelinkte items weg; kopje blijft waar nog links staan): de niet-gelinkte items onder dat kopje
       kunnen weg. Volgende stap: kopje en hele lijst weg, want de gelinkte
       woorden staan al in de tekst. Content (alle acht normbladen) én

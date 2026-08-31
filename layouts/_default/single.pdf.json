@@ -7,7 +7,6 @@
   "titel" (printf "Norm %s: %s" (string .Params.norm_id) .Params.norm_titel)
   "norm_id" (string .Params.norm_id)
   "norm_titel" .Params.norm_titel
-  "kern_kop" (partial "kern-kop.html" .)
   "kern_html" $kern
   "kern_bron_html" $kernBron
   "body_html" (partial "nummer-voorschriften.html" (dict "content" .Content "norm_id" .Params.norm_id))

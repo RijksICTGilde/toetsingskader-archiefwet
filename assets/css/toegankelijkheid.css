@@ -17,14 +17,6 @@
   padding: 0;
 }
 
-/* Idem voor "Kern van de norm", nu een <h2> met dezelfde class. */
-blockquote.callout header h2.title {
-  margin: 0;
-  font-size: 1.7rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
 /* --- Sneltoetshint (gevolg van bevinding 10) -------------------------------
    Het thema toont de <kbd>/</kbd>-hint sinds v0.2.0 op vol contrast, maar
    toegankelijkheid.js neutraliseert de sitebrede sneltoets (2.1.4). Een hint

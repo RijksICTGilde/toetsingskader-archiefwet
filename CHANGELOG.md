@@ -40,6 +40,9 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- De kern-callout op de normpagina's heeft geen kop meer: de kerntekst staat
+  direct onder de paginatitel. De regel "Kern van …" is ook weg uit de
+  inhoudsopgave en de PDF; `_partials/kern-kop.html` is verwijderd.
 - Voetnoten worden op álle pagina's een hover met referentielijst, niet
   alleen op de normpagina's: de transformatie is een partial
   (`_partials/voetnoot-tooltips.html`) die ook in de `article.html`-shadow
