@@ -83,6 +83,11 @@ jobs:
             VERSIE=${{ steps.versie.outputs.value }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          # De build-stage (Go + Hugo) mag uit de cache; de runtime-stage niet,
+          # anders is `apk upgrade` in de Containerfile een gecachte laag met
+          # de openssl van weken terug en wordt Trivy rood op een CVE die
+          # Alpine al gefixt heeft.
+          no-cache-filters: runtime
 
       - name: Trivy security scan
         uses: aquasecurity/trivy-action@v0.36.0

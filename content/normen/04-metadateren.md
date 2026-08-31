@@ -1,5 +1,5 @@
 ---
-title: "Normanalyse Metadata"
+title: "Metadateren"
 versie: "0.8"
 weight: 4
 norm_id: "4"
@@ -37,7 +37,7 @@ De Archiefregeling onderscheidt drie categorieën documenten, die ieder andere e
 
 Het verantwoordelijke overheidsorgaan heeft één of meerdere metadataschema's zoals bedoeld in NEN-ISO 23081-1:2017[^nen-iso-23081-1-2017] vastgesteld.[^ar-artikel-2-5-lid-1]
 
-[^nen-iso-23081-1-2017]: NEN-ISO 23081-1 2017.PDF | Downloaden
+[^nen-iso-23081-1-2017]: NEN-ISO 23081-1:2017 nl. [Bekijk bron](https://www.nen.nl/nen-iso-23081-1-2017-nl-269387)
 [^ar-artikel-2-5-lid-1]: Ar, artikel 2.5, eerste lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 #### Criteria
@@ -51,7 +51,7 @@ Het verantwoordelijke overheidsorgaan heeft één of meerdere metadataschema's z
 - Het metadataschema heeft betrekking op alle documenten van het verantwoordelijke overheidsorgaan.
 - Het metadataschema bevat ten minste de metadata die wettelijk verplicht zijn voor de drie verschillende categorieën documenten.
 
-Alle documenten, ongeacht de bewaartermijn, zijn voorzien van de volgende metadata die zijn vastgelegd in een metadataschema:
+### Alle documenten, ongeacht de bewaartermijn, zijn voorzien van de volgende metadata die zijn vastgelegd in een metadataschema:
 
 #### Voorschrift
 
@@ -67,7 +67,7 @@ Van ieder document is minimaal het volgende in de metadata (bij het document, of
 - de bewaartermijn.
 
 [^ab-artikel-2-1-lid-1-sub-d]: Ab, artikel 2.1, eerste lid, sub d [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^structuur]: Bij het metadataveld “structuur” kan worden gedacht aan het beschrijven van de onderlinge samenhang van de onderdelen waaruit één informatie-object bestaat. Bijvoorbeeld als een applicatie op basis van meerdere informatie-objecten een overzicht toont, of een dashboard maakt. Maar ook kan gedacht worden aan bericht dat bijlagen bevat.
+[^structuur]: Bij het metadataveld “structuur” kan worden gedacht aan het beschrijven van de onderlinge samenhang van de onderdelen waaruit één informatie-object bestaat. Bijvoorbeeld als een applicatie op basis van meerdere informatie-objecten een overzicht toont, of een dashboard maakt. Maar ook kan gedacht worden aan een bericht dat bijlagen bevat.
 
 Indien relevant:
 
@@ -106,7 +106,7 @@ Indien gebruik is gemaakt van een elektronische handtekening:
 - Er zijn instructies voor het toekennen van de vereiste metadata aan documenten.
 - Metadata wordt zoveel mogelijk automatisch toegekend aan documenten.
 
-Digitale documenten met een bewaartermijn langer dan tien jaar zijn voorzien van de volgende metadata die zijn vastgelegd in een metadataschema:[^ar-artikel-2-8]
+### Digitale documenten met een bewaartermijn langer dan tien jaar zijn voorzien van de volgende metadata die zijn vastgelegd in een metadataschema:[^ar-artikel-2-8]
 
 [^ar-artikel-2-8]: Ar, artikel 2.8. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
@@ -120,7 +120,7 @@ Van ieder document is in de metadata (bij het document, of op het niveau van zaa
 
 [^ar-artikel-2-8-onder-a]: Ar, artikel 2.8, onder a. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ar-artikel-2-8-onder-b]: Ar, artikel 2.8, onder b. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
-[^ar-artikel-2-7-reikwijdte]: Ar, artikel 2.7 reikwijdte, p.3 en Archiefregeling, toelichting §2.2 Aanvullende eisen voor langdurig te bewaren documenten in digitale vorm, artikel 2.8 aanvullende metadata. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-2-7-reikwijdte]: Ar, artikel 2.7; Ar, artikel 2.8; Archiefregeling, Toelichting, 2.2 Aanvullende eisen voor langdurig te bewaren documenten in digitale vorm, p.37. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 #### Criterium
 
@@ -131,7 +131,7 @@ Van ieder document is in de metadata (bij het document, of op het niveau van zaa
 - Er zijn instructies voor het toekennen van de vereiste metadata aan documenten.
 - Metadata wordt zoveel als mogelijk automatisch toegekend aan documenten.
 
-Over te brengen documenten zijn, uiterlijk voorafgaand aan overbrenging, voorzien van de volgende metadata die zijn vastgelegd in een metadataschema:
+### Over te brengen documenten zijn, uiterlijk voorafgaand aan overbrenging, voorzien van de volgende metadata die zijn vastgelegd in een metadataschema:
 
 #### Voorschrift
 

@@ -2,8 +2,8 @@
 title: "Doel van het toetsingskader"
 card_title: "Doel van het toetsingskader"
 description: "Inzichtelijk en transparant maken hoe de Inspectie de naleving van de Archiefwet toetst."
-weight: 2
 toc: false
+weight: 3
 ---
 
 Het doel van dit toetsingskader is inzichtelijk en transparant maken hoe de Inspectie Overheidsinformatie en Erfgoed (hierna: Inspectie) de naleving van de Archiefwet toetst. Daarmee draagt de Inspectie bij aan het bewaken en verbeteren van de duurzame toegankelijkheid van overheidsinformatie.

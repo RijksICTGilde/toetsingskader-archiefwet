@@ -290,6 +290,9 @@ beloven.
 * **Het draft-voorbehoud hing aan `show_lastmod`.** Een nieuwe pagina zonder
   dat veld verliest het voorbehoud zonder dat iets dat opmerkt.
   `scripts/a11y-scan.mjs` controleert het nu per pagina.
+  *Vervallen op 26 augustus 2026:* het voorbehoud zelf is op verzoek van de
+  opdrachtgever weggehaald (`versie-zin.html`, #80); de controle die de zin
+  op elke pagina eiste is daarmee verwijderd.
 
 **De voetnootcontrole is verhuisd.** De controle die in de eerste ronde in
 `scripts/validate-norms.py` werd geschreven, probeerde te voorspellen wat

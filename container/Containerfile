@@ -1,4 +1,4 @@
-FROM golang:1.26.6-alpine@sha256:3889b425f035be855a72fb4755265311293b6d414521f0a519d819df32222d83 AS build
+FROM golang:1.27.0-alpine@sha256:4c9fe60190a2a3350ddc51de80d0224b8a6698d12bdfc999fee45ea9d6c46dbc AS build
 ARG HUGO_VERSION=0.162.1
 ARG HUGO_SHA256=4bfcdb092d0306586f1b72e5687787ead053faab2d71f09951d3c5fecde66873
 RUN apk add --no-cache git wget tar \
@@ -20,9 +20,12 @@ RUN if [ -n "$VERSIE" ]; then export HUGO_PARAMS_VERSIE="$VERSIE"; fi; \
       hugo --minify; \
     fi
 
-FROM nginxinc/nginx-unprivileged:stable-alpine-slim@sha256:e88d990b349df8cf4aa82f16642d7a23375016638c9ace4e5c6ca25028e62e65
+FROM nginxinc/nginx-unprivileged:stable-alpine-slim@sha256:e88d990b349df8cf4aa82f16642d7a23375016638c9ace4e5c6ca25028e62e65 AS runtime
 # Patch Alpine-packages onafhankelijk van de (soms achterlopende) base-image
 # rebuild; houdt de Trivy-scan groen bij CVE's die Alpine al gefixt heeft.
+# Werkt alleen als deze laag ook echt opnieuw draait: de workflow zet
+# `no-cache-filters: runtime`, anders komt de upgrade uit de GHA-cache en
+# blijft de oude openssl staan (CVE-2026-14456, 26 augustus 2026).
 # Let op: deze upgrade vervangt nginx door de Alpine-build, die prefix
 # /var/lib/nginx heeft. Die directory is 0750 en van uid 101, terwijl ZAD
 # de pod met een willekeurige UID draait — zonder chmod faalt nginx op het
