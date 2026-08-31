@@ -3,6 +3,7 @@ title: "Wettelijk kader"
 card_title: "Wettelijk kader"
 description: "De Archiefwet 2026, het Archiefbesluit 2026 en de Archiefregeling, en wat de wet onder een document verstaat."
 weight: 3
+toc: false
 ---
 
 Aan het beheer van overheidsinformatie zijn wettelijke eisen gesteld. De Inspectie houdt toezicht op de naleving van de Archiefwet 2026, het Archiefbesluit 2026 en de Archiefregeling.

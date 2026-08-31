@@ -6,6 +6,7 @@ description: "Wat passende maatregelen zijn, en hoe een risicobenadering ruimte 
 aliases:
   - /over/passende-maatregelen/
   - /over/passende-maatregelen-en-risicobenadering/
+toc: false
 ---
 
 ## Wat zijn passende maatregelen?

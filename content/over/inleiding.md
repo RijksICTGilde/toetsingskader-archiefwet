@@ -3,6 +3,7 @@ title: "Inleiding"
 card_title: "Inleiding"
 description: "Duurzame toegankelijkheid is het centrale uitgangspunt van de Archiefwet 2026. Het toetsingskader sluit aan bij de DUTO-definitie van het Nationaal Archief."
 weight: 1
+toc: false
 ---
 
 Dit toetsingskader sluit aan bij het centrale uitgangspunt van de Archiefwet 2026: duurzame toegankelijkheid van overheidsinformatie. Daarbij hanteert de Inspectie een praktische aanpak: documenten moeten [in beheer]({{< relref "/normen/01-beheer" >}}) zijn, zodat zij duurzaam toegankelijk kunnen worden gemaakt én gehouden worden.

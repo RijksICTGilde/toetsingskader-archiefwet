@@ -7,6 +7,7 @@ synoniemen:
   - "Informatieobject"
   - "Overheidsinformatie"
   - "Archiefstuk"
+toc: false
 ---
 
 Een document is een schriftelijk stuk of ander geheel van vastgelegde gegevens dat door een verantwoordelijk overheidsorgaan is opgemaakt of ontvangen en dat naar zijn aard verband houdt met de publieke taak van dat overheidsorgaan. In de Memorie van Toelichting op de Archiefwet 2026 wordt "informatie-object" gebruikt als mogelijk synoniem voor "document".

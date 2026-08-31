@@ -13,7 +13,7 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Toegevoegd
 
-- Pagina "Totstandkoming" onder Over, voorlopig als stub; tekst volgt.
+- Pagina "Totstandkoming" onder Over ingevuld, datum stub vervanging volgt.
 - Shortcode `callout-md`: een callout waarvan de inhoud in de pagina-context
   rendert, zodat een voetnoot erin een hover wordt. Daarvoor staat
   `markup.goldmark.renderer.unsafe` aan.
@@ -40,6 +40,7 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Menu'tjes verwijderd op (`/samenhang/`) en (`/over/`) pagina's.
 - Versiezin op elke pagina gelijk: "Versie … van het toetsingskader. Deze
   pagina is voor het laatst aangepast op …", in de gedempte opmaak van de
   homepage. De homepage toont nu ook de datum; de voet van de andere pagina's

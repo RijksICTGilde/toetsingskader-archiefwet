@@ -8,6 +8,7 @@ synoniemen:
   - "Herkomst"
   - "Status van een document"
   - "Migratie"
+toc: false
 ---
 
 Om documenten te kunnen interpreteren is het nodig om relevante metadata vast te leggen en beschikbaar te stellen waaruit af te leiden valt wanneer het document ontvangen of opgemaakt is, door wie het is opgemaakt, waar het betrekking op heeft en wat de status is van het document.

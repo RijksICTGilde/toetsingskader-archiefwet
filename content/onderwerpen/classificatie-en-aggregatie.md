@@ -9,6 +9,7 @@ synoniemen:
   - "Serie"
   - "Deelarchief"
   - "Classificatiecode"
+toc: false
 ---
 
 Een aggregatie is een verzameling van samengevoegde documenten (die bij elkaar horen). Documenten horen bij elkaar op basis van de taak waarbinnen zij zijn ontvangen of opgemaakt. Hierdoor vormen zij samen een zaak of dossier. De samenhang kan zijn vastgelegd in een dossier- of zaaknummer, cliëntnummer, locatie of objectidentificatie (dan wel classificatiecode). Maar ook een verzameling dossiers die bij elkaar hoort op basis van een taak (bijvoorbeeld alle dossiers met specifieke vergunningsaanvragen in "jaar Y") vormt een aggregatie.

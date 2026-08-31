@@ -6,6 +6,7 @@ synoniemen:
   - "Startmoment bewaartermijn"
   - "Overbrengingstermijn"
   - "Openbaarheidsbeperking"
+toc: false
 ---
 
 De overbrengingstermijn en de maximumtermijnen voor openbaarheidsbeperkingen gaan uit van de datum van ontvangst of creatie van een document. Dit geldt alleen voor blijvend te bewaren documenten.

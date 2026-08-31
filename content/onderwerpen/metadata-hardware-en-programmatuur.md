@@ -7,6 +7,7 @@ synoniemen:
   - "Toepassingsprogrammatuur"
   - "Software"
   - "Technische omgeving"
+toc: false
 ---
 
 Bij documenten die langer dan 10 jaar worden bewaard, moet in de metadata een omschrijving zijn opgenomen van tenminste de naam en versie van de gebruikte hardware, het besturingsprogrammatuur en de toepassingsprogrammatuur.
