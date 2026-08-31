@@ -2,12 +2,12 @@
      Versielabel — `{{< versielabel >}}`
 
      Voor de homepage: die heeft geen `show_lastmod` en dus geen voet, waar de
-     versie elders staat (`_partials/lastmod.html`). Bron is `site.Params.versie`,
-     dezelfde als de PDF-export.
+     versiezin elders staat (`_partials/lastmod.html`). Zelfde partial, zelfde
+     class, dus dezelfde tekst en opmaak als overal.
 
      Shortcode en geen shadow van `hero.html`: shadows lopen bij een theme-update
      uit de pas, en dit hoort bij de inhoud, niet bij de layout.
      --------------------------------------------------------------------- */}}
-{{- with partial "versie-zin.html" . -}}
+{{- with partial "versie-zin.html" .Page -}}
 <p class="versielabel">{{ . }}</p>
 {{- end -}}

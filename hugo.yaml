@@ -49,7 +49,7 @@ markup:
 params:
   # Lokale default; in CI de git-release-tag via HUGO_PARAMS_VERSIE. Ook de bron
   # voor de PDF-export.
-  versie: "0.8"
+  versie: "v0.2.2"
   # Doel van het versienummer. Eén plek: het label staat op de homepage
   # (`versielabel`) én in de paginavoet (`_partials/lastmod.html`).
   releases_url: "https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases"

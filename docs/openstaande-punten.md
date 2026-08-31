@@ -22,10 +22,10 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 
 - [x] **"De inhoud is nog in ontwikkeling en kan wijzigen." weg**, op de site
       en in de PDF.
-- [ ] **Versiezin in de voet** ("Versie v0.2.0 … laatst aangepast op …") in de
-      kleine opmaak van de homepage, overal. Nu al kleiner en gedempt in #79
-      (`.page-meta` in `main.css`); nog gelijktrekken met de homepage
-      (`versielabel`-shortcode) zodat het één opmaak is.
+- [x] **Versiezin in de voet** ("Versie v0.2.2 … laatst aangepast op …") in de
+      kleine opmaak van de homepage, overal. Sinds 31 augustus 2026 één partial
+      (`_partials/versie-zin.html`) en één class (`.versielabel`) voor voet en
+      homepage; de homepage toont nu ook de datum.
 
 ## Onderwerpen
 

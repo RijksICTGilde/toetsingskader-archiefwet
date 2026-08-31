@@ -1,13 +1,23 @@
 {{/*
-  Versienummer als één zin (het voorbehoud "nog in ontwikkeling" is op verzoek
-  weg, 25 augustus 2026), gedeeld door `_partials/lastmod.html`
-  (voet van elke inhoudspagina) en de shortcode `versielabel` (homepage, geen
-  voet). Eén bron, want los overgetikt stond het voorbehoud alleen nog op de
-  homepage en lazen de normpagina's als vastgesteld beleid.
+  De versiezin, op elke pagina dezelfde twee zinnen:
 
-  Nummer uit site.Params.versie (lokaal hugo.yaml, in CI de release-tag), gelinkt
-  via render-link. Rendert niets zonder dat param.
+    Versie v0.2.2 van het toetsingskader. Deze pagina is voor het laatst
+    aangepast op maandag 10 augustus 2026.
+
+  Gedeeld door `_partials/lastmod.html` (voet van elke inhoudspagina) en de
+  shortcode `versielabel` (homepage, die geen voet heeft). Eén bron, want los
+  overgetikt liepen de twee uiteen: de homepage had alleen het versienummer en
+  de voet een andere opmaak (feedback 31 augustus 2026: overal dezelfde tekst
+  in de opmaak van de homepage). Het voorbehoud "nog in ontwikkeling" is op
+  verzoek weg (25 augustus 2026).
+
+  Nummer uit site.Params.versie (lokaal hugo.yaml, in CI de release-tag),
+  gelinkt via render-link. Datum uit .Lastmod (enableGitInfo). Rendert niets
+  zonder versie-param; scripts/a11y-checks.mjs controleert op "van het
+  toetsingskader" op elke pagina.
+
+  Aanroep: {{ partial "versie-zin.html" $page }} (een Page, geen shortcode)
 */}}
 {{- with site.Params.versie -}}
-<strong>{{ partial "render-link" (dict "href" site.Params.releases_url "text" (printf "Versie %s" .)) }}</strong> van het toetsingskader.
+<strong>{{ partial "render-link" (dict "href" site.Params.releases_url "text" (printf "Versie %s" .)) }}</strong> van het toetsingskader. Deze pagina is voor het laatst aangepast op <time datetime="{{ $.Lastmod.Format "2006-01-02" }}">{{ $.Lastmod | time.Format ":date_full" }}</time>.
 {{- end -}}
