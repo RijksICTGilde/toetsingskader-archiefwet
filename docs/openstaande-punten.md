@@ -71,6 +71,13 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 
 ## Toegankelijkheid
 
+- [ ] **Lange woorden in koppen op 320 px** (`/onderwerpen/metadata-hardware-en-programmatuur/`,
+      "toepassingsprogrammatuur"): het thema zet geen `overflow-wrap`/`hyphens`
+      op koppen, dus de h1 loopt 77 px over (WCAG 1.4.10). Themadefect →
+      upstream-issue op hugo-theme-rijksoverheid; tot dan als URL-gebonden
+      `KNOWN`-uitzondering in `scripts/a11y-browser.mjs` (CI was hierdoor rood
+      sinds #79, ook op `main`).
+
 - [ ] **Contrasten in de figuren** (bollendiagram, afbeeldingen) nalopen.
       Nog geen aandacht aan besteed. Sinds het diagram 440 px is, ook de
       lettergrootte van de labels (`.bd-label-sm` ≈ 11 px) meenemen.

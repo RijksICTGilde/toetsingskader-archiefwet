@@ -30,12 +30,23 @@ const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']
 const FATAL = ['axe:', 'reflow-320']
 
 // Elders belegde bevindingen: wel in de log, niet fataal, met het issue erbij.
-// Weghalen zodra dat rond is.
+// Weghalen zodra dat rond is. `url` (optioneel) bindt de uitzondering aan één
+// pagina, zodat dezelfde melding op een andere pagina wél fataal blijft.
 const KNOWN = [
   {
     category: 'reflow-320',
     match: /^div\.hero\b/,
     reason: 'hugo-theme-rijksoverheid#12 — .hero heeft een vaste hoogte met overflow hidden',
+  },
+  {
+    // "toepassingsprogrammatuur" (24 tekens) past op 320px niet in de h1; het
+    // thema zet geen overflow-wrap/hyphens op koppen. De overloop is van de
+    // tekstrun, niet van een element, daarom "verdacht: onbekend". De titel
+    // komt letterlijk uit "9) Onderwerpen en Verwijzingen" en blijft staan.
+    category: 'reflow-320',
+    url: /^\/onderwerpen\/metadata-hardware-en-programmatuur\/$/,
+    match: /^\d+px horizontale overloop; verdacht: onbekend/,
+    reason: 'themadefect, upstream hugo-theme-rijksoverheid — koppen breken lange woorden niet af (geen overflow-wrap/hyphens)',
   },
 ]
 
@@ -287,7 +298,7 @@ for (const url of [...urls, ...extra]) {
 await browser.close()
 server.close()
 
-const known = f => KNOWN.find(k => k.category === f.category && k.match.test(f.message))
+const known = f => KNOWN.find(k => k.category === f.category && k.match.test(f.message) && (!k.url || k.url.test(f.url)))
 const isFatal = f => STRICT || (FATAL.some(prefix => f.category.startsWith(prefix)) && !known(f))
 const all = [...findings.values()]
 const fatal = all.filter(isFatal)
