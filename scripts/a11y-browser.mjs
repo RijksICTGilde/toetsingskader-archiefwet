@@ -234,13 +234,8 @@ for (const url of [...urls, ...extra]) {
 
   // 1. axe-core, incl. de layout-afhankelijke regels.
   //
-  // `target-size` (2.5.8) gaat over aanwijsdoelen: 24 CSS-px, of genoeg ruimte
-  // ertussen. De print-HTML wordt een PDF op A4 en heeft geen aanwijsdoelen —
-  // regelafstand oprekken tot de links 24 px uit elkaar staan zou de opmaak
-  // veranderen voor een probleem dat op papier niet bestaat. Alle andere regels
-  // blijven staan, contrast voorop.
-  const rules = url.endsWith('.print.html') ? { 'target-size': { enabled: false } } : {}
   await page.addScriptTag({ content: axeSrc })
+  const rules = {}
   const res = await page.evaluate(
     ([tags, rules]) => window.axe.run(document, { runOnly: { type: 'tag', values: tags }, rules }),
     [TAGS, rules])
@@ -253,16 +248,9 @@ for (const url of [...urls, ...extra]) {
     add(url, `axe:${v.id}`, `${v.nodes.length}x ${v.help} — ${detail}`)
   }
 
-  // De print-HTML (`…/index.print.html`) is de invoer voor de PDF-generatie.
-  // Axe hierboven telt onverkort mee: contrast en semantiek gaan mee de PDF in,
-  // en de kern-callout zakte daar precies op door (#007bc7 op #f3f6f8 = 4,15:1).
-  // Alles hieronder meet schermgedrag — toetsenbordfocus, tekstvergroting,
-  // tekstafstand, reflow op 320 px. Een document op A4 heeft geen viewport en
-  // geen focus; die metingen zouden alleen ruis opleveren.
-  if (url.endsWith('.print.html')) {
-    await page.close()
-    continue
-  }
+  // (De vroegere print-HTML-uitzonderingen zijn weg: de PDF wordt sinds de
+  // pdfkit-pijplijn niet meer uit HTML gerenderd. De toegankelijkheid van de
+  // PDF zelf bewaken scripts/pdf-build.mjs en scripts/pdf-ua-check.mjs.)
 
   // 2. Toetsenborddoorloop: focusindicator (2.4.7) en focus-niet-afgedekt (2.4.11).
   await tabWalk(page, url)

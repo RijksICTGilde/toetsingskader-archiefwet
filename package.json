@@ -14,6 +14,8 @@
     "jsdom": "^25.0.1",
     "linkedom": "^0.18.12",
     "pdf-lib": "^1.17.1",
-    "playwright": "^1.62.1"
+    "pdfkit": "^0.20.2",
+    "playwright": "^1.62.1",
+    "svg-to-pdfkit": "^0.1.8"
   }
 }

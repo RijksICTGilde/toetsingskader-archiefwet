@@ -12,7 +12,7 @@ import { createRequire } from 'node:module'
 import {
   zwevendeVoetnootFouten, korteRefTermFouten,
   voorbehoudFout, voorbehoudBronFout, VOORBEHOUD,
-  legeAltFouten, kopvolgordeFouten, dubbeleIdFouten, bronnenKopFouten,
+  legeAltFouten,
 } from './a11y-checks.mjs'
 
 const axeSrc = fs.readFileSync(createRequire(import.meta.url).resolve('axe-core'), 'utf8')
@@ -22,9 +22,6 @@ const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']
 // Alias-stubs bevatten geen inhoud; overslaan houdt de telling zuiver.
 // Zelfde filter als in a11y-browser.mjs.
 const isRedirect = p => /http-equiv=["']?refresh/i.test(fs.readFileSync(p, 'utf8'))
-
-// Print-HTML (`…/index.print.html`) is de invoer voor de PDF-generatie.
-const isPrint = p => p.endsWith('.print.html')
 
 function htmlFiles(dir, acc = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -37,16 +34,6 @@ function htmlFiles(dir, acc = []) {
 
 const files = htmlFiles(root)
 let total = 0
-
-// De print-HTML wordt door scripts/pdf-build.mjs opgeruimd zodra de PDF's er
-// staan. Draait deze scan dáárna, dan zijn er geen bestanden meer om de
-// kopvolgorde en de dubbele id's op te controleren en meldt hij "0
-// overtredingen" over een lege verzameling. Dat ziet eruit als goed nieuws.
-if (!files.some(isPrint)) {
-  console.log('LET OP: geen *.print.html gevonden; de controles op kopvolgorde en')
-  console.log('dubbele id\'s hebben niets gezien. Bouw de site opnieuw en draai deze')
-  console.log('scan vóór `npm run build:pdf`.\n')
-}
 
 // Klopt de zin in a11y-checks.mjs nog met de partial? Zo niet, dan wordt elke
 // pagina hieronder rood met een melding die de verkeerde oorzaak noemt. Pad
@@ -72,31 +59,9 @@ for (const file of files) {
     console.log(`${url} — ${v.id} [${v.impact}] ${v.nodes.length}x: ${v.help}`)
     for (const n of v.nodes.slice(0, 3)) console.log(`    ${n.target.join(' ')}`)
   }
-  // De print-HTML is de invoer voor de PDF, geen sitepagina. Axe hierboven geldt
-  // onverkort, maar de projecteigen controles hieronder toetsen de UX van de
-  // site: de ref-term-tooltips uit `normen/single.html` staan er bewust niet in,
-  // want op papier is een genummerde voetnoot met een bronnenlijst juist goed.
-  // In plaats daarvan de twee dingen waar de structuurboom van de PDF op staat.
-  if (isPrint(file)) {
-    for (const fout of kopvolgordeFouten(dom.window.document)) {
-      total++
-      console.log(`${url} — kopvolgorde [serious] 1x: ${fout}`)
-      console.log('    Chromium leidt de structuurboom van de PDF uit de koppen af; een sprong is daar een structuurfout')
-    }
-    for (const ervoor of bronnenKopFouten(dom.window.document)) {
-      total++
-      console.log(`${url} — bronnenkop [serious] 1x: voetnotenblok zonder kop "Bronnen" erboven`)
-      console.log(`    ervoor staat <${ervoor}>; controleer de replaceRE-volgorde in de print-template`)
-    }
-    for (const id of dubbeleIdFouten(dom.window.document)) {
-      total++
-      console.log(`${url} — dubbel-id [serious] 1x: id "${id}" komt meer dan één keer voor`)
-      console.log('    verwijzingen landen op de eerste; geef de ankers per norm een prefix')
-    }
-    dom.window.close()
-    continue
-  }
-
+  // De structuurcontroles voor de PDF (kopvolgorde, dubbele ankers) draaien
+  // niet meer hier maar in scripts/pdf-build.mjs, op de pdfdata-JSON: sinds de
+  // pdfkit-pijplijn is er geen print-HTML meer om te scannen.
   if (voorbehoudFout(dom.window.document, url)) {
     total++
     console.log(`${url} — draft-voorbehoud [moderate] 1x: pagina zonder "${VOORBEHOUD}"`)

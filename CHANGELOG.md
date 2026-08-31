@@ -33,6 +33,14 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- PDF-generatie omgebouwd van Chromium-print naar pdfkit met een handgebouwde
+  structuurboom (`markStructureContent`), dezelfde oplossing als de
+  AI-verordening-beslishulp (MinBZK/ai-verordening-beslishulp#1047). Nog
+  steeds bij de build, maar zonder browser: `just pdf` draait nu ook lokaal en
+  de containerbuild heeft geen Chromium meer nodig. `pdf-ua-check` eist naast
+  de vier markers voortaan ook een gevulde boom (/H1, /LBody); kopvolgorde en
+  dubbele ankers worden op de invoer gecontroleerd in `scripts/pdf-build.mjs`.
+  Zie docs/besluit-toegankelijke-pdf.md §11.
 - De PDF-export wordt bij de build gemaakt in plaats van in de browser van de
   bezoeker, en levert een getagde PDF: structuurboom, bladwijzers, taal en
   documenttitel. Daarmee is de download navigeerbaar met een schermlezer —

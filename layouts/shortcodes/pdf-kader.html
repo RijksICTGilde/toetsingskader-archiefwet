@@ -11,11 +11,11 @@
      `download` met een naam erin, want het bestand heet op schijf index.pdf.
      Zelfde naam als de oude export, zodat verwijzingen ernaar blijven kloppen.
      --------------------------------------------------------------------- */ -}}
-{{- /* Alleen tonen waar de PDF ook gemaakt wordt. Het `print`-outputformat
+{{- /* Alleen tonen waar de PDF ook gemaakt wordt. Het `pdfdata`-outputformat
      staat aan via de front matter van content/normen/_index.md; zonder die
      controle levert deze shortcode op een andere pagina een volledig opgemaakte
      knop naar een 404 op. */ -}}
-{{- with .Page.OutputFormats.Get "print" -}}
+{{- with .Page.OutputFormats.Get "pdfdata" -}}
 <p class="pdf-kader">
   <a class="button pdf-download" href="{{ $.Page.RelPermalink }}index.pdf"
      download="toetsingskader-archiefwet-2026.pdf">

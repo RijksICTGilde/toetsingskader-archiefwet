@@ -234,3 +234,38 @@ worden gecontroleerd.
 OCW waar dit kader in past? Zo ja, dan is route 3 beter dan wat hier wordt
 gebouwd, en kan de eigen pijplijn weer weg. Die vraag is technisch niet te
 beantwoorden en hoort bij het team en de opdrachtgever.
+
+
+---
+
+## 11. Addendum (31 augustus 2026): van Chromium naar pdfkit
+
+Op verzoek van de gebruiker is de engine gewisseld: de PDF's worden nog steeds
+**bij de build** gegenereerd (het besluit in §1 staat), maar niet meer met
+Chromium uit print-HTML. In plaats daarvan bouwt `scripts/pdf-tagged.mjs` de
+structuurboom zelf met **pdfkit** en `markStructureContent()` — dezelfde
+oplossing als de AI-verordening-beslishulp
+([MinBZK/ai-verordening-beslishulp#1047](https://github.com/MinBZK/ai-verordening-beslishulp/pull/1047)),
+zodat beide projecten hetzelfde patroon en dezelfde kennis delen.
+
+Wat dat verandert:
+
+* **Invoer** is niet langer print-HTML maar `index.pdfdata.json` per norm
+  (outputformat `pdfdata`); `scripts/pdf-html.mjs` vertaalt de norm-HTML naar
+  structuurelementen (`Document → H1…H5, P, L → LI → LBody`), met de
+  bewerkingen die eerst als `replaceRE` in de print-templates zaten.
+* **Geen browser meer in de keten**: `just pdf` draait volledig lokaal, en de
+  containerbuild heeft geen Chromium meer nodig. Het risico "niet lokaal te
+  verifiëren" uit §8 is daarmee vervallen.
+* **Het acceptatiecriterium is aangescherpt**: `pdf-ua-check` eist naast de
+  vier markers ook een gevulde boom (`/H1` en `/LBody`) — precies de val van
+  een gezette vlag boven een lege boom.
+* **Kopvolgorde en dubbele ankers** worden voortaan in `scripts/pdf-build.mjs`
+  op de invoer gecontroleerd (voorheen op de print-HTML in de a11y-scan).
+* De **inhoudsopgave met paginanummers** en de **bladwijzers** blijven; de
+  nummers komen uit een tweede opbouw in geheugen in plaats van een tweede
+  Chromium-doorloop.
+
+De kanttekening uit §7 blijft onverkort gelden: markers en een gevulde boom
+zijn een ondergrens; of de tags de inhoud kloppend beschrijven vraagt een
+handmatige doorloop met PAC of Acrobat.

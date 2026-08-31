@@ -14,14 +14,17 @@ disableKinds:
   - term
 
 outputFormats:
-  # Print-HTML: de invoer waar scripts/pdf-build.mjs met Chromium een getagde
-  # PDF van maakt. Alleen aangezet op de normen (front matter van
-  # content/normen/_index.md), want alleen die worden als document aangeboden.
-  # `notAlternative` houdt het uit de <link rel="alternate"> van de site: het is
-  # een tussenproduct, geen tweede versie van de pagina om naartoe te linken.
-  print:
-    mediaType: text/html
-    baseName: index.print
+  # JSON-data per norm: de invoer waar scripts/pdf-build.mjs met pdfkit een
+  # getagde PDF van maakt (zelfde aanpak als de AI-verordening-beslishulp,
+  # MinBZK/ai-verordening-beslishulp#1047). Alleen aangezet op de normen
+  # (front matter van content/normen/_index.md), want alleen die worden als
+  # document aangeboden. `notAlternative` houdt het uit de
+  # <link rel="alternate"> van de site: het is een tussenproduct, geen tweede
+  # versie van de pagina om naartoe te linken.
+  pdfdata:
+    mediaType: application/json
+    baseName: index.pdfdata
+    isPlainText: true
     notAlternative: true
 
 outputs:

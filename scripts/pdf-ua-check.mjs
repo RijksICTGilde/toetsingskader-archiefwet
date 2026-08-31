@@ -85,9 +85,20 @@ for (const pad of bestanden) {
   const inhoud = metUitgepakteStreams(buf)
   const gemist = MARKERS.filter(([marker]) => !inhoud.includes(marker))
   const aanwezig = MARKERS.length - gemist.length
+  // De vier markers zijn een belofte; deze telling controleert of hij wordt
+  // waargemaakt. Een /StructTreeRoot met een lege boom was precies de
+  // pdfMake-val (en wat de beslishulp in MinBZK/ai-verordening-beslishulp#1047
+  // mat): de vlag stond aan, de boom was leeg. Elke norm heeft minstens één
+  // documentkop en één lijst (criteria of bronnen), dus /H1 en /LBody horen in
+  // de boom te zitten.
+  const boom = ['/H1', '/LBody'].filter((tag) => !inhoud.includes(tag))
   console.log(`${pad} — ${aanwezig}/${MARKERS.length} markers, ${buf.length} bytes`)
   for (const [marker, uitleg] of gemist) {
     console.log(`    ontbreekt ${marker} — ${uitleg}`)
+    ontbreekt++
+  }
+  for (const tag of boom) {
+    console.log(`    ontbreekt ${tag} in de structuurboom — de boom is (bijna) leeg terwijl de markers er staan`)
     ontbreekt++
   }
 }

@@ -79,8 +79,8 @@ export function legeAltFouten(document) {
 }
 
 // --- Kopvolgorde ------------------------------------------------------------
-// Voor de print-HTML (`*.print.html`), waar Chromium de structuurboom van de PDF
-// uit de koppen afleidt. Een overgeslagen niveau is daar geen opmaakkwestie maar
+// Voor de PDF-invoer (index.pdfdata.json, gecontroleerd in scripts/pdf-build.mjs),
+// waar de structuurboom van de PDF uit de koppen volgt. Een overgeslagen niveau is daar geen opmaakkwestie maar
 // een structuurfout: Acrobat rapporteert hem als "Juiste insluiting via nesting",
 // en dat is precies waarop de auto-getagde PDF in docs/toegankelijkheid/
 // struikelt. Axe dekt dit niet: `heading-order` valt onder best-practice en de
@@ -110,7 +110,7 @@ export function kopvolgordeFouten(document) {
 const tekst = el => (el.textContent || '').trim().slice(0, 60)
 
 // --- Dubbele id's -----------------------------------------------------------
-// Ook voor de print-HTML. Het kaderdocument zet acht normen achter elkaar en
+// Ook voor de PDF-invoer. Het kaderdocument zet acht normen achter elkaar en
 // Goldmark nummert voetnoten per pagina, dus zonder prefix per norm bestaat
 // `fn:1` acht keer. Elke verwijzing landt dan op de eerste — in een document van
 // tachtig pagina's stuurt dat de lezer naar de verkeerde bron. Axe's
@@ -127,7 +127,7 @@ export function dubbeleIdFouten(document) {
 }
 
 // --- Kop boven de bronnenlijst ----------------------------------------------
-// Ook voor de print-HTML. De kop wordt met een `replaceRE` vóór het
+// Historisch (printpijplijn): de kop werd met een `replaceRE` vóór het
 // voetnotenblok gezet, en dat blok wordt in dezelfde template nog een paar keer
 // bewerkt. Verschuift één van die bewerkingen, dan matcht het patroon niet meer
 // en verdwijnt de kop zonder dat er iets faalt — precies wat er gebeurde toen de

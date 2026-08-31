@@ -1,0 +1,25 @@
+{{- /* PDF-data van het hele kader: titel + de acht normen op volgorde.
+     Kopverschuiving (h2→h3 enz.) en ankerprefixen per norm doet de walker. */ -}}
+{{- $normen := where .Pages "Params.norm_id" "!=" nil -}}
+{{- $normen = sort $normen "Weight" -}}
+{{- $items := slice -}}
+{{- range $normen -}}
+  {{- $kern := "" -}}{{- with .Params.kern }}{{ $kern = . | markdownify }}{{ end -}}
+  {{- $items = $items | append (dict
+      "titel" .Title
+      "norm_id" (string .Params.norm_id)
+      "slug" .File.ContentBaseName
+      "kern_html" $kern
+      "kern_bron_html" (partial "kern-bron-html.html" .)
+      "body_html" (partial "nummer-voorschriften.html" (dict "content" .Content "norm_id" .Params.norm_id))) -}}
+{{- end -}}
+{{- dict
+  "kind" "kader"
+  "titel" (printf "%s 2026" site.Title)
+  "url" .Permalink
+  "site_url" site.Home.Permalink
+  "versie" (site.Params.versie | default "")
+  "site_titel" site.Title
+  "taal" (or site.Language.LanguageCode "nl-NL")
+  "normen" $items
+  | jsonify -}}

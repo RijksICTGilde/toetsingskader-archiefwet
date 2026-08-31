@@ -149,9 +149,9 @@
        Hiervoor stond hier een <button hidden> die JavaScript zichtbaar moest
        maken, omdat de link naar een JSON-endpoint wees. Dat is niet meer nodig,
        en daarmee werkt de download ook zonder JavaScript. */}}
-  {{- /* Alleen waar het `print`-outputformat aanstaat; daar wordt de PDF
+  {{- /* Alleen waar het `pdfdata`-outputformat aanstaat; daar wordt de PDF
          gemaakt. Anders wijst de knop naar een bestand dat er niet is. */ -}}
-  {{- with .OutputFormats.Get "print" -}}
+  {{- with .OutputFormats.Get "pdfdata" -}}
   <a class="button pdf-download" href="{{ $.RelPermalink }}index.pdf"
      download="{{ $.Title | urlize }}.pdf">
     {{- partial "icon.html" "download" -}}<span>Download als PDF</span>

@@ -30,12 +30,11 @@ check:
     hugo --environment production --minify
     npm test
     npm run test:a11y
+    npm run build:pdf
+    npm run test:pdf-ua
 
-# PDF's genereren uit de gebouwde site en de markers controleren
-#
-# Vraagt een Chromium die kan starten: `npx playwright install --with-deps
-# chromium`. In een omgeving zonder root lukt dat niet — draai het dan op de PR,
-# waar CI hetzelfde doet en de PDF's als artifact bewaart.
+# PDF's genereren uit de gebouwde site en de markers controleren.
+# Draait volledig lokaal: pdfkit in Node, geen browser nodig.
 pdf:
     hugo --environment production --minify
     npm run build:pdf
