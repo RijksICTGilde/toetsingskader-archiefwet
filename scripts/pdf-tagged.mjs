@@ -216,6 +216,13 @@ export class TaggedPdf {
     const totaal = doc.bufferedPageRange().count
     for (let i = 0; i < totaal; i++) {
       doc.switchToPage(i)
+      // De voetregel staat ín de ondermarge, dus onder page.maxY(). pdfkit
+      // concludeert dan dat de tekst niet past en opent een nieuwe pagina —
+      // per pagina één lege extra, achteraan het document (dezelfde valkuil
+      // die de beslishulp in pdfTagged.ts beschrijft). Daarom de marge even op
+      // nul tijdens het tekenen.
+      const ondermarge = doc.page.margins.bottom
+      doc.page.margins.bottom = 0
       doc.markContent('Artifact', { type: 'Pagination' })
       const y = A4.hoog - MARGE.bottom + 14
       doc
@@ -234,6 +241,7 @@ export class TaggedPdf {
           lineBreak: false,
         })
       doc.endMarkedContent()
+      doc.page.margins.bottom = ondermarge
     }
     this.root.end()
     doc.end()
