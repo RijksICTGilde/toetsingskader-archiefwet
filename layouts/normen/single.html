@@ -20,9 +20,13 @@
      er een lege root-heading boven de h2's; die slaan we over. */}}
 {{ $headings := .Fragments.Headings }}
 {{ with $headings }}{{ $first := index . 0 }}{{ if not $first.ID }}{{ $headings = $first.Headings }}{{ end }}{{ end }}
-{{/* Ook bij een norm met alleen een kern (geen koppen) rendert de aside: daar
-     staat de PDF-downloadlink in, en de PDF wordt voor zo'n norm wél gemaakt. */}}
-{{ $hasToc := or .Params.kern (gt (len $headings) 0) }}
+{{/* $hasToc stuurt de inhoudsopgave en de toggle; de aside zelf rendert ook
+     voor een norm met alleen een kern, want daar staat de PDF-downloadlink in
+     (en die PDF wordt voor zo'n norm wél gemaakt). Zonder die splitsing kreeg
+     een kern-only norm een lege "Op deze pagina"-landmark met een knop die
+     niets uitklapt. */}}
+{{ $hasToc := gt (len $headings) 0 }}
+{{ $hasAside := or $hasToc (and .Params.norm_id (.OutputFormats.Get "pdfdata")) }}
 
 <article class="norm{{ if .Params.wide }} wide{{ end }}">
   <header>
@@ -82,7 +86,7 @@
   {{- end -}}
 </article>
 
-{{- if $hasToc -}}
+{{- if $hasAside -}}
 <aside id="toc" class="toc is-open" aria-label="Op deze pagina">
   {{/* Een gewone link naar een bestaand bestand: de PDF wordt bij de build
        gemaakt (scripts/pdf-build.mjs, pdfkit) en staat als index.pdf naast de
@@ -100,6 +104,7 @@
   </a>
   {{- end -}}
   {{- end -}}
+  {{- if $hasToc -}}
   <h2>Op deze pagina</h2>
   <nav>
     <ul>
@@ -125,6 +130,7 @@
       {{- with $refs }}<li><a href="#referenties">Referenties</a></li>{{ end -}}
     </ul>
   </nav>
+  {{- end -}}
 </aside>
 
 {{/* Scroll-spy: highlight de actieve sectie in de TOC (alleen koppen mét een

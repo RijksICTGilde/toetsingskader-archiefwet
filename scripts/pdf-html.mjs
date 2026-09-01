@@ -9,6 +9,9 @@ import { parseHTML } from 'linkedom'
 /** Interne links worden sitelinks, precies zoals de print-HTML dat deed. */
 function absoluteLink(href, siteUrl) {
   if (!href || /^[a-z]+:/i.test(href)) return href
+  // Protocol-relatief ("//host/pad") is al absoluut; er een sitepad van maken
+  // zou "<site>//host/pad" opleveren.
+  if (href.startsWith('//')) return 'https:' + href
   const basis = siteUrl.replace(/\/$/, '')
   return href.startsWith('/') ? basis + href : href
 }
@@ -160,11 +163,14 @@ export function schrijfNorm(pdf, data, opties) {
   const heeftBlokkinderen = (el) => [...el.children].some((k) => /^(p|ul|ol|h[1-6]|blockquote|div|section|article|figure)$/i.test(k.tagName))
   const verwerk = (el) => {
     const tag = el.tagName.toLowerCase()
-    const m = tag.match(/^h([2-6])$/)
+    const m = tag.match(/^h([1-6])$/)
     if (m) {
+      // Ook h1 (de validator verbiedt hem in normteksten, maar stil een
+      // alinea van een kop maken mag nooit) en geklemd op H2–H6: PDF 1.7 kent
+      // geen H7, en onder de documenttitel begint de body op H2.
       const niveau = Number(m[1])
       for (const k of [...tagVoor.keys()]) if (k > niveau) tagVoor.delete(k)
-      const tagNiveau = tagVoor.get(niveau) ?? Math.min(niveau + kopShift, vorigTag + 1)
+      const tagNiveau = tagVoor.get(niveau) ?? Math.min(Math.max(niveau + kopShift, 2), vorigTag + 1, 6)
       tagVoor.set(niveau, tagNiveau)
       vorigTag = tagNiveau
       const id = el.getAttribute('id')
@@ -172,7 +178,7 @@ export function schrijfNorm(pdf, data, opties) {
       // dragen (norm 4), en die moet superscript blijven én springen.
       // Stijl h5/h6 bestaat niet apart; die tonen als h4.
       pdf.kop(tagNiveau, runsVan(el, ctx), {
-        stijl: 'h' + Math.min(niveau, 4),
+        stijl: 'h' + Math.min(Math.max(niveau, 2), 4),
         id: id ? prefix + id : undefined,
         ouder: sectie,
       })
@@ -182,6 +188,19 @@ export function schrijfNorm(pdf, data, opties) {
       if (runs.length) pdf.alinea(runs, { ouder: sectie })
     } else if (isLijst(el)) {
       pdf.lijst(lijstItems(el, ctx), { geordend: tag === 'ol', ouder: sectie })
+    } else if (tag === 'blockquote') {
+      // Citaat: de alinea's als P bínnen een BlockQuote-element, cursief als
+      // visueel onderscheid; een lijst in het citaat gaat als gewone lijst
+      // verder (inhoud en volgorde boven citaat-semantiek).
+      const alineas = []
+      for (const kind of el.children) {
+        if (kind.tagName.toLowerCase() === 'p') alineas.push(runsVan(kind, ctx).map((r) => ({ italics: true, ...r })))
+        else verwerk(kind)
+      }
+      if (!alineas.length && el.textContent.trim() && ![...el.children].length) {
+        alineas.push(runsVan(el, ctx).map((r) => ({ italics: true, ...r })))
+      }
+      if (alineas.length) pdf.citaat(alineas, { ouder: sectie })
     } else if (/^(table|thead|tbody|figure|pre)$/.test(tag)) {
       // Nog niet ondersteund in de structuurboom. Stil platslaan tot één
       // alinea zou de site en de "toegankelijke" PDF uiteen laten lopen
@@ -205,13 +224,10 @@ export function schrijfNorm(pdf, data, opties) {
   // navigeert midden in een genummerde lijst (zelfde keuze als de oude exports).
   if (voetnoten) {
     pdf.kop(2 + kopShift, 'Bronnen', { stijl: 'bronnenH', ouder: sectie })
-    const items = [...voetnoten.children].map((li) => ({
-      // De hele <li>: runsVan loopt door álle alinea's heen, dus ook een
-      // voetnoot met een vervolgalinea komt volledig in de lijst (alleen de
-      // eerste <p> nemen liet de rest stilletjes weg).
-      runs: runsVan(li, { ...ctx, underlineLinks: true }),
-      id: prefix + (li.getAttribute('id') || ''),
-    }))
+    // Via lijstItems, net als de lijsten in de body: alle alinea's van een
+    // voetnoot komen mee, en een geneste lijst in een voetnoot blijft een
+    // lijst in plaats van stilletjes te verdwijnen.
+    const items = lijstItems(voetnoten, { ...ctx, underlineLinks: true })
     pdf.lijst(items, { stijl: 'bronnen', geordend: true, ouder: sectie })
   }
 }

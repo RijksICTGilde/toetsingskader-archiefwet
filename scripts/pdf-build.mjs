@@ -171,6 +171,12 @@ if (bestanden.length === 0) {
 function structuurFouten(data) {
   const fouten = []
   const normen = data.kind === 'kader' ? data.normen : [data]
+  // Dubbele norm_id: bestemmingen "norm-<id>" en prefixen "n<id>-" zouden
+  // botsen en elke verwijzing op de verkeerde norm laten landen.
+  const ids = normen.map((n) => n.norm_id)
+  for (const id of new Set(ids.filter((x, i) => ids.indexOf(x) !== i))) {
+    fouten.push(`norm_id "${id}" komt meer dan één keer voor`)
+  }
   for (const norm of normen) {
     // De pijplijn registreert zelf named destinations ("kern"); die doen in
     // de botsingscontrole mee, want pdfkit overschrijft een dubbele naam

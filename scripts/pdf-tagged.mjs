@@ -95,6 +95,8 @@ export class TaggedPdf {
   }
 
   #briefhoofdX = null
+  #dests = new Set()
+  #sprongen = new Set()
 
   font(run) {
     if (run.bold) return 'BodyBold'
@@ -212,6 +214,18 @@ export class TaggedPdf {
     l.end()
   }
 
+  /**
+   * Citaat: alinea's (arrays van runs) als P binnen één BlockQuote-element,
+   * zodat een aanhaling zich in de structuurboom onderscheidt van de eigen
+   * normtekst.
+   */
+  citaat(alineas, { stijl = 'para', ouder } = {}) {
+    const bq = this.doc.struct('BlockQuote')
+    ;(ouder || this.root).add(bq)
+    for (const runs of alineas) this.#blok('P', runs, STIJL[stijl], { ouder: bq })
+    bq.end()
+  }
+
   /** Horizontale lijn als artifact (decoratie, geen inhoud). */
   lijn() {
     const { doc } = this
@@ -249,6 +263,16 @@ export class TaggedPdf {
     const sluitMC = () => { if (open) { doc.endMarkedContent(); open = false } }
 
     runs.forEach((run, i) => {
+      // Bestemmingen bewaken: pdfkit overschrijft een dubbele named
+      // destination zwijgend (elke sprong landt dan op de laatste schrijver)
+      // en een sprong naar een niet-bestaande naam doet stil niets. Beide
+      // zijn hier een bouwfout; einde() controleert de sprongen.
+      const dest = (i === 0 && id) || null
+      if (dest) {
+        if (this.#dests.has(dest)) throw new Error(`dubbele bestemming "${dest}": elke verwijzing ernaar zou op de laatste landen`)
+        this.#dests.add(dest)
+      }
+      if (run.goTo) this.#sprongen.add(run.goTo)
       const opties = {
         width: breedte,
         lineGap: s.size * (REGEL - 1),
@@ -260,7 +284,7 @@ export class TaggedPdf {
         // Expliciet null, nooit undefined: zie punt 1 in de kop.
         link: run.link || null,
         goTo: run.goTo || null,
-        destination: (i === 0 && id) || null,
+        destination: dest,
       }
       doc
         .font(this.font(run))
@@ -312,6 +336,11 @@ export class TaggedPdf {
    */
   async einde() {
     const { doc } = this
+    const dood = [...this.#sprongen].filter((naam) => !this.#dests.has(naam))
+    if (dood.length) {
+      throw new Error(`sprong naar niet-bestaande bestemming(en): ${dood.join(', ')} — ` +
+        'controleer de ankers in de content (een typefout, of een anker dat wel op de site maar niet in de PDF bestaat)')
+    }
     const totaal = doc.bufferedPageRange().count
     for (let i = 0; i < totaal; i++) {
       doc.switchToPage(i)

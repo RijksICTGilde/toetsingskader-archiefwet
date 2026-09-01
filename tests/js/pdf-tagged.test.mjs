@@ -3,7 +3,6 @@
 // content-streams voor de BDC-tags). Draait zonder browser.
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import zlib from 'node:zlib'
 import { PDFDocument, PDFDict, PDFName } from 'pdf-lib'
 import { TaggedPdf, laadFonts, laadBriefhoofd } from '../../scripts/pdf-tagged.mjs'
 import { schrijfNorm, runsVan, lijstItems } from '../../scripts/pdf-html.mjs'
@@ -62,21 +61,8 @@ function structTelling(doc) {
   return telling
 }
 
-// Alle FlateDecode-streams uitpakken, zodat de content-streams doorzoekbaar zijn.
-function uitgepakt(bytes) {
-  const delen = [bytes.toString('latin1')]
-  let i = 0
-  while ((i = bytes.indexOf('stream', i)) !== -1) {
-    let start = i + 6
-    if (bytes[start] === 0x0d) start++
-    if (bytes[start] === 0x0a) start++
-    const eind = bytes.indexOf('endstream', start)
-    if (eind === -1) break
-    try { delen.push(zlib.inflateSync(bytes.subarray(start, eind)).toString('latin1')) } catch { /* geen flate */ }
-    i = eind + 9
-  }
-  return delen.join('\n')
-}
+// Dezelfde uitpakker als de CI-gate, zodat test en gate dezelfde bytes zien.
+import { metUitgepakteStreams as uitgepakt } from '../../scripts/pdf-ua-check.mjs'
 
 test('structuurboom: koppen, alinea’s, echte (geneste) lijsten, geen kern-kop', async () => {
   const { doc } = await bouw()
@@ -179,13 +165,46 @@ test('voetnootmarkering staat bóven de basislijn (superscript, geen "4.21")', a
   assert.ok(sup.y > buur.y + 1, `marker (y=${sup.y}) hoort boven de tekst (y=${buur.y})`)
 })
 
-test('lijst in een wrapper (blockquote) verdwijnt niet uit de PDF', () => {
+test('blockquote wordt een citaat; een lijst erin verdwijnt niet', () => {
   const uit = []
-  const nep = { alinea: (runs) => uit.push(['p', runs]), kop: () => {}, lijst: (items) => uit.push(['l', items]), bladwijzer: () => {} }
+  const nep = { alinea: (runs) => uit.push(['p', runs]), kop: () => {}, lijst: (items) => uit.push(['l', items]), citaat: (alineas) => uit.push(['q', alineas]), bladwijzer: () => {} }
   schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<blockquote><p>intro</p><ul><li>een</li><li>twee</li></ul></blockquote>' }, { siteUrl: DATA.site_url })
+  const citaat = uit.find(([t]) => t === 'q')
+  assert.ok(citaat, 'citaat aanwezig')
+  assert.equal(citaat[1][0].map((r) => r.text).join(''), 'intro')
+  assert.ok(citaat[1][0].every((r) => r.italics), 'citaat cursief')
   const lijst = uit.find(([t]) => t === 'l')
   assert.ok(lijst, 'lijst aanwezig')
   assert.equal(lijst[1].length, 2)
+})
+
+test('dubbele bestemming of sprong naar niets is een bouwfout', async () => {
+  const pdf1 = new TaggedPdf({ titel: 'T', taal: 'nl', versie: 'v0', fonts, briefhoofdSvg })
+  pdf1.nieuwePagina()
+  pdf1.alinea([{ text: 'a' }], { id: 'kern' })
+  assert.throws(() => pdf1.alinea([{ text: 'b' }], { id: 'kern' }), /dubbele bestemming/)
+  const pdf2 = new TaggedPdf({ titel: 'T', taal: 'nl', versie: 'v0', fonts, briefhoofdSvg })
+  pdf2.nieuwePagina()
+  pdf2.alinea([{ text: 'zie ', goTo: 'bestaat-niet' }])
+  await assert.rejects(() => pdf2.einde(), /niet-bestaande bestemming/)
+})
+
+test('h1 in de body blijft een kop en H-tags klemmen op 6', () => {
+  const koppen = []
+  const nep = { alinea: () => { throw new Error('kop werd alinea') }, lijst: () => {}, bladwijzer: () => {}, citaat: () => {}, kop: (n, runs, o) => koppen.push({ n, o }) }
+  schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<h1 id="x">Kop</h1><h2 id="a">A</h2><h3 id="b">B</h3><h4 id="c">C</h4><h5 id="d">D</h5><h6 id="e">E</h6>' }, { siteUrl: DATA.site_url, kopShift: 1 })
+  assert.deepEqual(koppen.map((k) => k.n), [2, 3, 4, 5, 6, 6].slice(0, koppen.length))
+  assert.ok(koppen.every((k) => k.n <= 6), JSON.stringify(koppen.map((k) => k.n)))
+})
+
+test('voetnoot met een geneste lijst houdt die lijst in de bronnen', () => {
+  const uit = []
+  const nep = { alinea: () => {}, kop: () => {}, bladwijzer: () => {}, citaat: () => {}, lijst: (items, o) => uit.push({ items, o }) }
+  schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<div class="footnotes" role="doc-endnotes"><ol><li id="fn:1"><p>Bronnen:</p><ul><li>Aw 4.1</li><li>Ar 2.2</li></ul></li></ol></div>' }, { siteUrl: DATA.site_url })
+  const bron = uit.find((u) => u.o?.stijl === 'bronnen')
+  assert.ok(bron, 'bronnenlijst aanwezig')
+  const seg = bron.items[0].segmenten
+  assert.ok(seg.some((x) => x.sub?.items?.length === 2), JSON.stringify(seg))
 })
 
 test('h5 blijft een kop (H5-tag), geen alinea', () => {
@@ -214,6 +233,12 @@ test('runsVan: interne links worden sitelinks, externe blijven', () => {
   assert.equal(runs.find((r) => r.text === 'extern').link, 'https://extern.example/')
 })
 
+test('runsVan: protocol-relatieve link wordt geen sitepad', () => {
+  const { document } = parseHTML('<body><p><a href="//nationaalarchief.nl/x">na</a></p></body>')
+  const runs = runsVan(document.querySelector('p'), { prefix: '', siteUrl: 'https://site.nl/' })
+  assert.equal(runs[0].link, 'https://nationaalarchief.nl/x')
+})
+
 test('lijstItems: geneste lijst wordt een segment op zijn plek, tekst erna blijft erna', () => {
   const { document } = parseHTML('<body><ul><li>Boven<ul><li>onder een</li><li>onder twee</li></ul> tenzij anders bepaald.</li></ul></body>')
   const items = lijstItems(document.querySelector('ul'), { prefix: '', siteUrl: 'https://x.nl/' })
@@ -231,7 +256,7 @@ test('voetnoot met vervolgalinea houdt beide alinea’s in de bronnenlijst', () 
   const nep = { alinea: () => {}, kop: () => {}, bladwijzer: () => {}, lijst: (items) => uit.push(items) }
   schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<div class="footnotes" role="doc-endnotes"><ol><li id="fn:1"><p>Eerste alinea.</p><p>Tweede alinea.</p></li></ol></div>' }, { siteUrl: DATA.site_url })
   const bron = uit[0][0]
-  const tekst = bron.runs.map((r) => r.text).join('')
+  const tekst = bron.segmenten.flatMap((seg) => seg.runs || []).map((r) => r.text).join('')
   assert.ok(tekst.includes('Eerste alinea.') && tekst.includes('Tweede alinea.'), tekst)
 })
 

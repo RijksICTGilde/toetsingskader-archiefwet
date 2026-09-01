@@ -8,7 +8,7 @@ Alleen opnieuw draaien als het woordmerk of de lettersnede wijzigt; de
 uitvoer staat in de repository.
 
 Waarom contouren en geen tekst: het briefhoofd wordt als vectorbeeld in een
-eigen document gerenderd (`headerTemplate` in scripts/pdf-build.mjs) en daar
+eigen Form XObject gezet (scripts/pdf-tagged.mjs) en daar
 laadt geen enkel lettertype — ook niet als `data:`-URI. Gemeten op de
 gegenereerde PDF viel de tekst terug op DejaVu Sans, een derde breder dan
 Rijksoverheid Sans. Als contour hoeft er niets geladen te worden.
@@ -60,7 +60,7 @@ def regel_naar_pad(font_pad, tekst, korps, basislijn_y):
         if naam is None:
             raise SystemExit(f"Teken {teken!r} ontbreekt in {font_pad}")
         # Eén decimaal is op 9,5pt ruim onder een beeldpunt. De PDF-renderer zet dit
-        # briefhoofd op élke pagina opnieuw in de PDF, dus elke byte telt 28x.
+        # briefhoofd op élke pagina opnieuw in de PDF, dus de SVG wordt één keer als Form XObject in de PDF ingebed.
         pen = SVGPathPen(glyfset, ntos=lambda n: f'{n:.0f}')
         glyfset[naam].draw(pen)
         d = pen.getCommands()

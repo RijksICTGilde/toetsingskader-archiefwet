@@ -28,6 +28,7 @@
 // alleen in een uitgepakte stream staat telt net zo goed.
 import fs from 'node:fs'
 import zlib from 'node:zlib'
+import { pathToFileURL } from 'node:url'
 
 const MARKERS = [
   ['/StructTreeRoot', 'structuurboom (koppen, lijsten, leesvolgorde)'],
@@ -40,7 +41,7 @@ const MARKERS = [
 // enkele zoekactie zowel losse objecten als object-streams dekt. Streams die
 // niet uit te pakken zijn (andere filter, kapot) worden overgeslagen: dit is
 // een controle, geen parser.
-function metUitgepakteStreams(buf) {
+export function metUitgepakteStreams(buf) {
   const delen = [buf.toString('latin1')]
   const bytes = buf
   let i = 0
@@ -60,48 +61,52 @@ function metUitgepakteStreams(buf) {
   return delen.join('\n')
 }
 
-const bestanden = process.argv.slice(2)
-if (bestanden.length === 0) {
-  console.error('Gebruik: node scripts/pdf-ua-check.mjs bestand.pdf [meer.pdf …]')
-  process.exit(2)
-}
+// Als CLI: de controle draaien. Als module (de tests importeren de
+// uitpak-helper hierboven, zodat gate en test dezelfde bytes zien): niets doen.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const bestanden = process.argv.slice(2)
+  if (bestanden.length === 0) {
+    console.error('Gebruik: node scripts/pdf-ua-check.mjs bestand.pdf [meer.pdf …]')
+    process.exit(2)
+  }
 
-let ontbreekt = 0
-for (const pad of bestanden) {
-  // Een pad dat niet bestaat is hier een fout, geen uitzondering: als de
-  // buildstap geen PDF heeft geschreven, is dat precies wat deze controle
-  // hoort te melden. Een niet-uitgevouwen glob komt hier ook terecht.
-  if (!fs.existsSync(pad)) {
-    console.log(`${pad} — bestaat niet; is scripts/pdf-build.mjs gedraaid?`)
-    ontbreekt++
-    continue
+  let ontbreekt = 0
+  for (const pad of bestanden) {
+    // Een pad dat niet bestaat is hier een fout, geen uitzondering: als de
+    // buildstap geen PDF heeft geschreven, is dat precies wat deze controle
+    // hoort te melden. Een niet-uitgevouwen glob komt hier ook terecht.
+    if (!fs.existsSync(pad)) {
+      console.log(`${pad} — bestaat niet; is scripts/pdf-build.mjs gedraaid?`)
+      ontbreekt++
+      continue
+    }
+    const buf = fs.readFileSync(pad)
+    if (buf.subarray(0, 5).toString() !== '%PDF-') {
+      console.log(`${pad} — geen PDF`)
+      ontbreekt++
+      continue
+    }
+    const inhoud = metUitgepakteStreams(buf)
+    const gemist = MARKERS.filter(([marker]) => !inhoud.includes(marker))
+    const aanwezig = MARKERS.length - gemist.length
+    // De vier markers zijn een belofte; deze telling controleert of hij wordt
+    // waargemaakt. Een /StructTreeRoot met een lege boom was precies de
+    // pdfMake-val (en wat de beslishulp in MinBZK/ai-verordening-beslishulp#1047
+    // mat): de vlag stond aan, de boom was leeg. Elke norm heeft minstens één
+    // documentkop en één lijst (criteria of bronnen), dus /H1 en /LBody horen in
+    // de boom te zitten.
+    const boom = ['/H1', '/LBody'].filter((tag) => !inhoud.includes(tag))
+    console.log(`${pad} — ${aanwezig}/${MARKERS.length} markers, ${buf.length} bytes`)
+    for (const [marker, uitleg] of gemist) {
+      console.log(`    ontbreekt ${marker} — ${uitleg}`)
+      ontbreekt++
+    }
+    for (const tag of boom) {
+      console.log(`    ontbreekt ${tag} in de structuurboom — de boom is (bijna) leeg terwijl de markers er staan`)
+      ontbreekt++
+    }
   }
-  const buf = fs.readFileSync(pad)
-  if (buf.subarray(0, 5).toString() !== '%PDF-') {
-    console.log(`${pad} — geen PDF`)
-    ontbreekt++
-    continue
-  }
-  const inhoud = metUitgepakteStreams(buf)
-  const gemist = MARKERS.filter(([marker]) => !inhoud.includes(marker))
-  const aanwezig = MARKERS.length - gemist.length
-  // De vier markers zijn een belofte; deze telling controleert of hij wordt
-  // waargemaakt. Een /StructTreeRoot met een lege boom was precies de
-  // pdfMake-val (en wat de beslishulp in MinBZK/ai-verordening-beslishulp#1047
-  // mat): de vlag stond aan, de boom was leeg. Elke norm heeft minstens één
-  // documentkop en één lijst (criteria of bronnen), dus /H1 en /LBody horen in
-  // de boom te zitten.
-  const boom = ['/H1', '/LBody'].filter((tag) => !inhoud.includes(tag))
-  console.log(`${pad} — ${aanwezig}/${MARKERS.length} markers, ${buf.length} bytes`)
-  for (const [marker, uitleg] of gemist) {
-    console.log(`    ontbreekt ${marker} — ${uitleg}`)
-    ontbreekt++
-  }
-  for (const tag of boom) {
-    console.log(`    ontbreekt ${tag} in de structuurboom — de boom is (bijna) leeg terwijl de markers er staan`)
-    ontbreekt++
-  }
-}
 
-console.log(`\n${bestanden.length} PDF('s) gecontroleerd, ${ontbreekt} ontbrekende marker(s).`)
-process.exit(ontbreekt > 0 ? 1 : 0)
+  console.log(`\n${bestanden.length} PDF('s) gecontroleerd, ${ontbreekt} ontbrekende marker(s).`)
+  process.exit(ontbreekt > 0 ? 1 : 0)
+}
