@@ -18,7 +18,7 @@ git clone git@github.com:RijksICTGilde/toetsingskader-archiefwet.git
 cd toetsingskader-archiefwet
 just            # toont alle recipes
 just serve      # dev-server op http://localhost:1313
-just build      # productie-build naar public/
+just build      # productie-build naar public/, inclusief de PDF's
 ```
 
 Eerste keer? Installeer ook pre-commit:

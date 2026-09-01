@@ -13,6 +13,21 @@ function absoluteLink(href, siteUrl) {
   return href.startsWith('/') ? basis + href : href
 }
 
+/**
+ * In het kaderdocument wordt een verwijzing naar een andere norm een sprong
+ * bínnen het document in plaats van een weblink: wie de PDF offline of als
+ * bijlage leest, blijft in het document (zelfde gedrag als de oude export met
+ * `normDests`). ctx.normDests: slug → { dest: 'norm-<id>', prefix: 'n<id>-' }.
+ */
+function normSprong(href, normDests) {
+  if (!normDests) return null
+  const m = href.match(/^\/normen\/([^/#]+)\/?(?:#(.+))?$/)
+  if (!m) return null
+  const doel = normDests[m[1]]
+  if (!doel) return null
+  return m[2] ? doel.prefix + m[2] : doel.dest
+}
+
 const isLijst = (el) => el.nodeType === 1 && /^(ul|ol)$/i.test(el.tagName)
 
 /**
@@ -45,8 +60,12 @@ export function runsVan(el, ctx, basis = {}) {
       } else if (href.startsWith('#')) {
         run.goTo = ctx.prefix + href.slice(1)
       } else {
-        run.link = absoluteLink(href, ctx.siteUrl)
-        if (ctx.underlineLinks) run.underline = true
+        const sprong = normSprong(href, ctx.normDests)
+        if (sprong) run.goTo = sprong
+        else {
+          run.link = absoluteLink(href, ctx.siteUrl)
+          if (ctx.underlineLinks) run.underline = true
+        }
       }
       if (run.text) runs.push(run)
     } else runs.push(...runsVan(kind, ctx, basis))
@@ -81,8 +100,8 @@ export function lijstItems(lijstEl, ctx) {
  *                bladwijzer outline-ouder voor de subkoppen
  */
 export function schrijfNorm(pdf, data, opties) {
-  const { prefix = '', kopShift = 0, siteUrl, sectie, bladwijzer } = opties
-  const ctx = { prefix, siteUrl }
+  const { prefix = '', kopShift = 0, siteUrl, sectie, bladwijzer, normDests } = opties
+  const ctx = { prefix, siteUrl, normDests }
 
   // --- Kern -------------------------------------------------------------------
   // Zonder kop, net als op de site (keuze 31 augustus 2026, zie
@@ -118,9 +137,10 @@ export function schrijfNorm(pdf, data, opties) {
   // opnieuw.
   const tagVoor = new Map()
   let vorigTag = 1 + kopShift // de documenttitel (of de normtitel in het kader)
-  for (const el of document.body.children) {
+  const heeftBlokkinderen = (el) => [...el.children].some((k) => /^(p|ul|ol|h[1-6]|blockquote|div|section|article|figure)$/i.test(k.tagName))
+  const verwerk = (el) => {
     const tag = el.tagName.toLowerCase()
-    const m = tag.match(/^h([2-4])$/)
+    const m = tag.match(/^h([2-6])$/)
     if (m) {
       const niveau = Number(m[1])
       for (const k of [...tagVoor.keys()]) if (k > niveau) tagVoor.delete(k)
@@ -130,8 +150,9 @@ export function schrijfNorm(pdf, data, opties) {
       const id = el.getAttribute('id')
       // Als runs, niet als platte tekst: een kop kan een voetnootmarkering
       // dragen (norm 4), en die moet superscript blijven én springen.
+      // Stijl h5/h6 bestaat niet apart; die tonen als h4.
       pdf.kop(tagNiveau, runsVan(el, ctx), {
-        stijl: 'h' + niveau,
+        stijl: 'h' + Math.min(niveau, 4),
         id: id ? prefix + id : undefined,
         ouder: sectie,
       })
@@ -141,10 +162,15 @@ export function schrijfNorm(pdf, data, opties) {
       if (runs.length) pdf.alinea(runs, { ouder: sectie })
     } else if (isLijst(el)) {
       pdf.lijst(lijstItems(el, ctx), { geordend: tag === 'ol', ouder: sectie })
+    } else if (heeftBlokkinderen(el)) {
+      // Wrapper (blockquote, div, …): de blokken erin verwerken in plaats van
+      // alles door runsVan te halen — die slaat lijsten juist over.
+      for (const kind of el.children) verwerk(kind)
     } else if (el.textContent.trim()) {
       pdf.alinea(runsVan(el, ctx), { ouder: sectie })
     }
   }
+  for (const el of document.body.children) verwerk(el)
 
   // --- Bronnen ----------------------------------------------------------------
   // Goldmark zet de voetnoten zonder kop; zonder "Bronnen" valt wie op koppen

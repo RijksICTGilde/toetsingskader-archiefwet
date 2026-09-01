@@ -123,6 +123,12 @@ async function bouwKaderEenmaal(data, paginas) {
     { stijl: 'toc', label: false }
   )
 
+  // Kruisverwijzingen tussen normen worden sprongen binnen het document.
+  const normDests = {}
+  for (const n of data.normen) {
+    if (n.slug) normDests[n.slug] = { dest: `norm-${n.norm_id}`, prefix: `n${n.norm_id}-` }
+  }
+
   const gevonden = {}
   for (const norm of data.normen) {
     pdf.nieuwePagina() // elke norm op een eigen pagina, zoals eerst
@@ -134,6 +140,7 @@ async function bouwKaderEenmaal(data, paginas) {
       kopShift: 1,
       siteUrl: data.site_url,
       bladwijzer: bw,
+      normDests,
     })
   }
   colofon(pdf, data)

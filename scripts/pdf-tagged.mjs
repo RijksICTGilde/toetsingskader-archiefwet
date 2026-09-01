@@ -94,23 +94,52 @@ export class TaggedPdf {
     })
   }
 
+  #briefhoofdX = null
+
   font(run) {
     if (run.bold) return 'BodyBold'
     if (run.italics) return 'BodyItalic'
     return 'Body'
   }
 
-  /** Briefhoofd als artifact (buiten de leesvolgorde). */
+  /**
+   * Briefhoofd als artifact (buiten de leesvolgorde). Als Form XObject: de
+   * SVG-operatoren (±73 kB per pagina) worden één keer vastgelegd en per
+   * pagina met één `Do` hergebruikt — zonder dat was het kaderdocument voor
+   * ruim de helft herhaald briefhoofd.
+   */
   #briefhoofd() {
     if (!this.briefhoofdSvg) return
     const { doc } = this
     const x = doc.x
     const y = doc.y
-    // Het lint stond in de oude export gecentreerd (26pt breed) tegen de
-    // bovenrand; het briefhoofd-SVG heeft het lint op x=0..26, dus het geheel
-    // begint op paginamidden − 13pt.
+    if (!this.#briefhoofdX) {
+      // De operatoren die SVGtoPDF in de paginastroom zou schrijven, opvangen
+      // en in een eigen stream-object zetten. Het briefhoofd is louter paden
+      // (contouren, geen tekst), dus het object heeft geen Resources nodig;
+      // SVGtoPDF omsluit alles met q…Q, dus er lekt geen graphics state.
+      const delen = []
+      const orig = doc.addContent
+      doc.addContent = (data) => { delen.push(data); return doc }
+      try {
+        // Het lint stond in de oude export gecentreerd (26pt breed) tegen de
+        // bovenrand; het SVG heeft het lint op x=0..26, dus het geheel begint
+        // op paginamidden − 13pt.
+        SVGtoPDF(doc, this.briefhoofdSvg, A4.breed / 2 - 13, 0)
+      } finally {
+        doc.addContent = orig
+      }
+      const xobj = doc.ref({
+        Type: 'XObject',
+        Subtype: 'Form',
+        BBox: [0, 0, A4.breed, A4.hoog],
+      })
+      xobj.end(Buffer.from(delen.join('\n'), 'binary'))
+      this.#briefhoofdX = xobj
+    }
+    doc.page.xobjects['BH1'] = this.#briefhoofdX
     doc.markContent('Artifact', { type: 'Pagination' })
-    SVGtoPDF(doc, this.briefhoofdSvg, A4.breed / 2 - 13, 0)
+    doc.addContent('/BH1 Do')
     doc.endMarkedContent()
     doc.x = x
     doc.y = y
@@ -230,6 +259,16 @@ export class TaggedPdf {
         .font(this.font(run))
         .fontSize(run.sup ? s.size * 0.65 : s.size)
         .fillColor(run.color || (run.link || run.goTo ? BRAND : s.color))
+      // Echte superscript: pdfkit legt de basislijn standaard op ascender ×
+      // de éígen fontgrootte vanaf de bovenkant van de regel, waardoor een
+      // kleinere marker op of onder de basislijn belandde ("4.21"). Een
+      // numerieke `baseline` b legt de basislijn b pt boven het invoegpunt:
+      // gewone runs expliciet op −ascender × s.size (gelijk aan de default),
+      // sup-runs een derde regelhoogte hoger. Altijd expliciet, ook hier:
+      // `baseline` erft net als link/goTo over naar de volgende
+      // `continued`-run zodra hij undefined is (punt 1 in de kop).
+      const basis = -(doc._font.ascender / 1000) * s.size
+      opties.baseline = run.sup ? basis + 0.33 * s.size : basis
       const schrijf = () => (i === 0 ? doc.text(run.text, x, doc.y, opties) : doc.text(run.text, opties))
 
       if (run.link || run.goTo) {

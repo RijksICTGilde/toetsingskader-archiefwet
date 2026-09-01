@@ -6,9 +6,13 @@ default:
 serve:
     hugo server --environment development
 
-# Production build
+# Production build, inclusief de PDF's: de downloadknop op de normpagina's is
+# een gewone link naar index.pdf, dus een build zonder deze stap levert een
+# dode link op en laat de index.pdfdata.json-tussenproducten publiek staan.
+# (`hugo server` heeft datzelfde: in dev wijst de knop naar een 404.)
 build:
     hugo --environment production --minify
+    npm run build:pdf
 
 # De controles die lokaal te draaien zijn
 #
@@ -21,10 +25,10 @@ build:
 # Bewust géén `--quiet` op de build: Hugo's warnf gaat daarmee ook weg, en juist
 # de waarschuwingen (zoals de labeldrift in het bollendiagram) zijn hier het punt.
 #
-# Drie CI-stappen ontbreken, omdat ze een installatie vragen die niet in de
-# repo zit: `htmltest` (linkcontrole, los binary), de browserscan
-# `npm run test:a11y:browser` en de PDF-generatie `just pdf` (beide Chromium via
-# Playwright). Draai die op de PR.
+# Twee CI-stappen ontbreken, omdat ze een installatie vragen die niet in de
+# repo zit: `htmltest` (linkcontrole, los binary) en de browserscan
+# `npm run test:a11y:browser` (Chromium via Playwright). De PDF-stappen staan
+# hieronder gewoon in de lijst: pdfkit draait in Node, zonder browser.
 check:
     pre-commit run --all-files
     hugo --environment production --minify

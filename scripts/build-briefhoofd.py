@@ -7,7 +7,7 @@ woordmerk ernaast, met de tekst als contouren.
 Alleen opnieuw draaien als het woordmerk of de lettersnede wijzigt; de
 uitvoer staat in de repository.
 
-Waarom contouren en geen tekst: het briefhoofd wordt door Chromium in een
+Waarom contouren en geen tekst: het briefhoofd wordt als vectorbeeld in een
 eigen document gerenderd (`headerTemplate` in scripts/pdf-build.mjs) en daar
 laadt geen enkel lettertype — ook niet als `data:`-URI. Gemeten op de
 gegenereerde PDF viel de tekst terug op DejaVu Sans, een derde breder dan
@@ -59,7 +59,7 @@ def regel_naar_pad(font_pad, tekst, korps, basislijn_y):
         naam = cmap.get(ord(teken))
         if naam is None:
             raise SystemExit(f"Teken {teken!r} ontbreekt in {font_pad}")
-        # Eén decimaal is op 9,5pt ruim onder een beeldpunt. Chromium zet dit
+        # Eén decimaal is op 9,5pt ruim onder een beeldpunt. De PDF-renderer zet dit
         # briefhoofd op élke pagina opnieuw in de PDF, dus elke byte telt 28x.
         pen = SVGPathPen(glyfset, ntos=lambda n: f'{n:.0f}')
         glyfset[naam].draw(pen)

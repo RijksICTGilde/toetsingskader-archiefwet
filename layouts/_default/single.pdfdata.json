@@ -4,6 +4,10 @@
      genummerde voorschriften; alle verdere bewerkingen (backrefs weg,
      voetnoot-items plat, kop "Bronnen") doet de walker in
      scripts/pdf-html.mjs, op een echte DOM in plaats van met replaceRE. */ -}}
+{{- /* Alleen echte normpagina's; een andere pagina onder /normen/ (de cascade
+     zet dit outputformat sectie-breed aan) levert een lege stub die
+     scripts/pdf-build.mjs opruimt in plaats van een nep-norm-PDF. */ -}}
+{{- if .Params.norm_id -}}
 {{- $kern := "" -}}{{- with .Params.kern }}{{ $kern = . | markdownify }}{{ end -}}
 {{- dict
   "kind" "norm"
@@ -18,3 +22,6 @@
   "site_titel" site.Title
   "taal" (or site.Language.LanguageCode "nl-NL")
   | jsonify -}}
+{{- else -}}
+{}
+{{- end -}}

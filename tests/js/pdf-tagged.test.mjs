@@ -154,6 +154,48 @@ test('briefhoofd staat op elke pagina, ook na een automatische paginaovergang', 
   assert.equal(artifacts, doc.getPageCount() * 2, `artifacts: ${artifacts}`)
 })
 
+test('kader: verwijzing naar een andere norm wordt een sprong binnen het document', () => {
+  const { document } = parseHTML('<body><p>zie <a href="/normen/01-beheer/">norm 1</a> en <a href="/normen/03-ordenen/#voorschriften">daar</a> en <a href="/onderwerpen/document/">een begrip</a></p></body>')
+  const normDests = { '01-beheer': { dest: 'norm-1', prefix: 'n1-' }, '03-ordenen': { dest: 'norm-3', prefix: 'n3-' } }
+  const runs = runsVan(document.querySelector('p'), { prefix: 'n2-', siteUrl: 'https://x.nl/', normDests })
+  assert.equal(runs.find((r) => r.text === 'norm 1').goTo, 'norm-1')
+  assert.equal(runs.find((r) => r.text === 'daar').goTo, 'n3-voorschriften')
+  assert.equal(runs.find((r) => r.text === 'een begrip').link, 'https://x.nl/onderwerpen/document/')
+})
+
+test('voetnootmarkering staat bóven de basislijn (superscript, geen "4.21")', async () => {
+  const { bytes } = await bouw()
+  const inhoud = uitgepakt(bytes)
+  // Tekstfragmenten: "1 0 0 1 x y Tm" gevolgd door Tf/Tj. De marker is de
+  // enige run op ±6.8pt; zijn y (PDF: hoger = groter) moet boven die van de
+  // omringende 10.5pt-tekst op dezelfde regel liggen.
+  const frags = [...inhoud.matchAll(/1 0 0 1 ([\d.]+) ([\d.]+) Tm\n\/F\d+ ([\d.]+) Tf/g)]
+    .map((m) => ({ x: +m[1], y: +m[2], size: +m[3] }))
+  const sup = frags.find((f) => f.size < 8 && f.size > 5)
+  assert.ok(sup, 'superscript-fragment gevonden')
+  const buur = frags.filter((f) => f.size > 10 && Math.abs(f.y - sup.y) < 12 && f !== sup)
+    .sort((a, b) => Math.abs(a.x - sup.x) - Math.abs(b.x - sup.x))[0]
+  assert.ok(buur, 'buurfragment gevonden')
+  assert.ok(sup.y > buur.y + 1, `marker (y=${sup.y}) hoort boven de tekst (y=${buur.y})`)
+})
+
+test('lijst in een wrapper (blockquote) verdwijnt niet uit de PDF', () => {
+  const uit = []
+  const nep = { alinea: (runs) => uit.push(['p', runs]), kop: () => {}, lijst: (items) => uit.push(['l', items]), bladwijzer: () => {} }
+  schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<blockquote><p>intro</p><ul><li>een</li><li>twee</li></ul></blockquote>' }, { siteUrl: DATA.site_url })
+  const lijst = uit.find(([t]) => t === 'l')
+  assert.ok(lijst, 'lijst aanwezig')
+  assert.equal(lijst[1].length, 2)
+})
+
+test('h5 blijft een kop (H5-tag), geen alinea', () => {
+  const koppen = []
+  const nep = { alinea: () => {}, lijst: () => {}, bladwijzer: () => {}, kop: (n, runs, o) => koppen.push({ n, o }) }
+  schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<h2 id="a">A</h2><h3 id="b">B</h3><h4 id="c">C</h4><h5 id="d">D</h5>' }, { siteUrl: DATA.site_url })
+  assert.deepEqual(koppen.map((k) => k.n), [2, 3, 4, 5])
+  assert.equal(koppen[3].o.stijl, 'h4')
+})
+
 test('runsVan: voetnootmarkering wordt superscript-sprong, backref verdwijnt', () => {
   const { document } = parseHTML(`<body><p>tekst<sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup>
     <a href="#fnref:1" class="footnote-backref">↩</a></p></body>`)

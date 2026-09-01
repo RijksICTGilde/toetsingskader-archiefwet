@@ -127,22 +127,3 @@ export function dubbeleIdFouten(document) {
   }
   return [...dubbel]
 }
-
-// --- Kop boven de bronnenlijst ----------------------------------------------
-// Historisch (printpijplijn): de kop werd met een `replaceRE` vóór het
-// voetnotenblok gezet, en dat blok wordt in dezelfde template nog een paar keer
-// bewerkt. Verschuift één van die bewerkingen, dan matcht het patroon niet meer
-// en verdwijnt de kop zonder dat er iets faalt — precies wat er gebeurde toen de
-// rol `doc-endnotes` eerder werd weggehaald dan de kop werd ingevoegd. Wie op
-// koppen navigeert valt dan midden in een genummerde lijst met tientallen
-// bronnen.
-export function bronnenKopFouten(document) {
-  const fouten = []
-  for (const blok of document.querySelectorAll('.footnotes')) {
-    const vorige = blok.previousElementSibling
-    const isKop = vorige && /^H[1-6]$/.test(vorige.tagName) &&
-      (vorige.textContent || '').trim() === 'Bronnen'
-    if (!isKop) fouten.push(vorige ? vorige.tagName.toLowerCase() : '(niets ervoor)')
-  }
-  return fouten
-}

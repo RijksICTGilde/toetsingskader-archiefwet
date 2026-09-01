@@ -246,10 +246,9 @@ for (const url of [...urls, ...extra]) {
   // 1. axe-core, incl. de layout-afhankelijke regels.
   //
   await page.addScriptTag({ content: axeSrc })
-  const rules = {}
   const res = await page.evaluate(
-    ([tags, rules]) => window.axe.run(document, { runOnly: { type: 'tag', values: tags }, rules }),
-    [TAGS, rules])
+    (tags) => window.axe.run(document, { runOnly: { type: 'tag', values: tags } }),
+    TAGS)
   for (const v of res.violations) {
     // Kleuren en ratio meenemen; anders is de bevinding niet na te trekken.
     const detail = v.nodes.slice(0, 3).map(n => {
