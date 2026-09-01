@@ -97,6 +97,12 @@ class FrontMatterTests(unittest.TestCase):
         errors = run(content)
         self.assertTrue(any("'kern' mag geen voetnoten" in e for e in errors), errors)
 
+    def test_kern_kop_is_rejected(self):
+        # De kern heeft geen kop; het veld mag er niet stilzwijgend een terugbrengen.
+        content = replace("synoniemen:\n", 'kern_kop: "Kern van Overzicht"\nsynoniemen:\n')
+        errors = run(content)
+        self.assertTrue(any("'kern_kop' bestaat niet meer: de kern heeft geen kop" in e for e in errors), errors)
+
     def test_kern_bron_is_optional(self):
         errors = run(VALID_NORM)
         self.assertFalse(any("kern_bron" in e for e in errors), errors)

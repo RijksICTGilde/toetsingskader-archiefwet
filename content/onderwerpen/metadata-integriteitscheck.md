@@ -7,6 +7,7 @@ synoniemen:
   - "Integriteitscontrole"
   - "Ongewijzigd"
   - "Onbeschadigd"
+toc: false
 ---
 
 Bij documenten die langer dan 10 jaar worden bewaard moet in de metadata een vermelding van de resultaten van uitgevoerde integriteitschecks zijn opgenomen.[^ar-artikel-2-8-sub-b] Deze metadata tonen aan dat documenten ongewijzigd en onbeschadigd zijn.[^ab-artikel-2-1-sub-e] Dit neemt niet weg dat alle documenten, ongeacht de bewaartermijn, betrouwbaar moeten zijn.

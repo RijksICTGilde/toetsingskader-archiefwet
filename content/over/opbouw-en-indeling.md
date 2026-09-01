@@ -2,6 +2,7 @@
 title: "Opbouw en indeling"
 card_title: "Opbouw en indeling"
 description: "Hoe het toetsingskader is opgebouwd en wat het verschil is tussen een voorschrift, een criterium en een indicator."
+toc: false
 weight: 5
 ---
 

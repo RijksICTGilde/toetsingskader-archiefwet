@@ -6,6 +6,7 @@ synoniemen:
   - "Hash"
   - "Checksum"
   - "Integriteit"
+toc: false
 ---
 
 Voor de controleerbaarheid van de (blijvende) integriteit van digitale bestanden kan gebruik gemaakt worden van een hashfunctie. Een hashfunctie kan binnen de beheeromgeving van het gebruikte systeem geautomatiseerd worden ingezet. Hiermee moet de integriteit van de digitale bestanden gedurende de bewaartermijn op ieder gewenst moment vastgesteld kunnen worden. Een document is integer wanneer het is zoals het werd opgeslagen.

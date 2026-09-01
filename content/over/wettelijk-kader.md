@@ -1,7 +1,8 @@
 ---
 title: "Wettelijk kader"
 card_title: "Wettelijk kader"
-description: "De Archiefwet 2026, het Archiefbesluit 2026 en de Archiefregeling, en wat de wet onder een document verstaat."
+description: "Archief wet- en regelgeving en wat de wet verstaat onder een document."
+toc: false
 weight: 4
 ---
 

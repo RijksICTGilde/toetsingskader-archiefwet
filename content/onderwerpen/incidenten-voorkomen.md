@@ -8,6 +8,7 @@ synoniemen:
   - "Ransomware"
   - "Datalek"
   - "Informatieverlies"
+toc: false
 ---
 
 Digitale documenten kunnen ontoegankelijk, beschadigd, gekopieerd, aangepast of vernietigd worden door bijvoorbeeld hacks, virussen of aanvallen met gijzelsoftware. Hierbij speelt naast de veiligheid van de digitale omgeving ook de veiligheid en inrichting van fysieke middelen, zoals hardware en serverruimtes, een rol. Een inbreuk op de beveiliging kan ertoe leiden dat documenten oncontroleerbaar worden veranderd en er fysieke of digitale achteruitgang of informatieverlies plaatsvindt.
@@ -17,5 +18,5 @@ Dit soort incidenten kunnen ook de overbrengings- en vernietigingsplicht die voo
 ## Zie ook
 
 - [Informatiebeveiliging en betrouwbaar]({{< relref "/normen/05-betrouwbaar" >}})
-- [Gecontroleerd vernietigen]({{< relref "/normen/07-vernietigen" >}})
+- [Vernietigen]({{< relref "/normen/07-vernietigen" >}})
 - [Passende maatregelen en risicobenadering]({{< relref "/onderwerpen/passende-maatregelen" >}})

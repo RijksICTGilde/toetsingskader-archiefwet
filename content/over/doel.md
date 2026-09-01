@@ -2,6 +2,7 @@
 title: "Doel van het toetsingskader"
 card_title: "Doel van het toetsingskader"
 description: "Inzichtelijk en transparant maken hoe de Inspectie de naleving van de Archiefwet toetst."
+toc: false
 weight: 3
 ---
 

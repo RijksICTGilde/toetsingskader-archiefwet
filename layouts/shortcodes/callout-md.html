@@ -1,0 +1,38 @@
+{{- /* Callout waarvan de inhoud in de pagina-context rendert.
+
+  Gebruik met procent-haken: {{% callout-md titel="…" variant="…" %}}…{{% /callout-md %}}
+
+  Verschil met `callout` uit het thema: die doet `.Inner | markdownify`, een
+  losse markdown-context. Een voetnoot `[^id]` in het blok vindt daar zijn
+  definitie niet en blijft letterlijk staan. Hier gaat `.Inner` rauw terug naar
+  goldmark (lege regels om de HTML heen, anders leest goldmark de inhoud als
+  deel van het HTML-blok). Vereist `markup.goldmark.renderer.unsafe: true`.
+  Voetnoten in het blok worden daarna door _partials/voetnoot-tooltips.html
+  een hover, net als in de rest van de pagina (feedback 25 augustus 2026:
+  bron op "noodzakelijk" in het definitieblok van de inleiding).
+
+  Zelfde markup en params als het thema: titel, variant (muted | warning |
+  success | danger), corner (bottom-right | bottom-left | upper-left).
+  Upstream-kandidaat.
+*/ -}}
+{{- $titel := .Get "titel" -}}
+{{- $variant := .Get "variant" -}}
+{{- $corner := .Get "corner" -}}
+{{- $validVariant := slice "muted" "warning" "success" "danger" -}}
+{{- $validCorner := slice "bottom-right" "bottom-left" "upper-left" -}}
+{{- if and $variant (not (in $validVariant $variant)) -}}
+  {{- errorf "callout-md: variant %q ongeldig (kies: %s)" $variant (delimit $validVariant ", ") -}}
+{{- end -}}
+{{- if and $corner (not (in $validCorner $corner)) -}}
+  {{- errorf "callout-md: corner %q ongeldig (kies: %s)" $corner (delimit $validCorner ", ") -}}
+{{- end -}}
+<blockquote class="callout{{ with $variant }} {{ . }}{{ end }}{{ with $corner }} corner-{{ . }}{{ end }}">
+{{- with $titel }}
+<header><span class="title">{{ . }}</span></header>
+{{- end }}
+<div class="content">
+
+{{ .Inner | strings.TrimSpace }}
+
+</div>
+</blockquote>

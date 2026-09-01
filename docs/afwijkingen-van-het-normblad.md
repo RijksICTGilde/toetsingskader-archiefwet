@@ -22,16 +22,15 @@ Bij elke afwijking hoort:
 
 | Wat | In plaats van | Geborgd door |
 |---|---|---|
-| Kop boven de kern volgt `norm_titel`: "Kern van ordenen" | Kop2 van het normblad: "Kern van Ordeningsstructuur" | `validate-norms.py` weigert het veld `kern_kop` |
+| Geen kop boven de kern (keuze 31 augustus 2026): de callout begint met de kerntekst | Kop2 van het normblad: "Kern van Ordeningsstructuur" | `validate-norms.py` weigert het veld `kern_kop`; `tests/js/pdf-doc.test.mjs` controleert dat de PDF geen "Kern van …" zet |
 | Norm 3, toelichting 3e alinea: "overbrengen" | "overdragen" | — |
 | Norm 3, voorschrift 3.3: bron "Ar, artikel 2.5, tweede lid, sub k" eerst | omgekeerde volgorde | — |
-| Kern-kop genummerd: "1. Kern van inbeheername en beheer" (feedback 25 augustus 2026: nummering van de voorschriften sluit erop aan) | "Kern van Inbeheername en beheer" zonder nummer | `_partials/kern-kop.html` zet het nummer; `tests/js/pdf-doc.test.mjs` verwacht het |
 | "Gerelateerde onderwerpen": alleen items die naar een pagina of bron linken; bij norm 7 daardoor het hele kopje weg (feedback 25 augustus 2026) | de volledige lijst uit het normblad, ook losse woorden als "Dossier", "Zaak", "Migratie" | — (volgende stap volgens de feedback: kopje en lijst helemaal weg) |
 
-De kern-kop geldt voor alle acht normen. `_partials/kern-kop.html` leidt hem af
-uit `norm_titel`, zodat pagina, inhoudsopgave en PDF dezelfde tekst voeren. Pas
-`norm_titel` niet aan om die kop te sturen: dat veld stuurt ook het
-bollendiagram, de kaarten op `/normen/` en de navigatie.
+De kern zonder kop geldt voor alle acht normen: op de normpagina, in de
+inhoudsopgave (geen regel voor de kern) en in de PDF. Eerder stond er "Kern van
+<norm_titel>" (sinds 25 augustus 2026 genummerd, "1. Kern van …"), afgeleid in
+`_partials/kern-kop.html`; die partial is verwijderd.
 
 ## Geen afwijking
 

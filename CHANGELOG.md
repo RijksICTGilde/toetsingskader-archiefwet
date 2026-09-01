@@ -13,6 +13,10 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Toegevoegd
 
+- Pagina "Totstandkoming" onder Over ingevuld, datum stub vervanging volgt.
+- Shortcode `callout-md`: een callout waarvan de inhoud in de pagina-context
+  rendert, zodat een voetnoot erin een hover wordt. Daarvoor staat
+  `markup.goldmark.renderer.unsafe` aan.
 - Pagina "Duurzame toegankelijkheid" onder Over, met de DUTO-definitie en de
   duiding welke kenmerken als norm zijn uitgewerkt. Die tekst stond dubbel in
   de inleiding en op de samenhangpagina.
@@ -59,6 +63,34 @@ changelog volgt [Semantic Versioning][semver].
   markers worden in CI gemeten met `scripts/pdf-ua-check.mjs`.
 - De downloadknop is een gewone link naar een bestand en werkt daarmee ook
   zonder JavaScript.
+- Vijf punten uit de feedback op de kaderpagina's (#78) die bij het mergen van
+  #79 waren teruggedraaid, staan weer: kaartteksten "Wettelijk kader" en
+  "Doelgroep", de Position-Paper-voetnoot in de inleiding, en het DUTO-blok
+  zonder titel en met bron op "noodzakelijk" (nu op de pagina Duurzame
+  toegankelijkheid).
+- Over- en onderwerpenpagina's op volle breedte (`wide: true` via `cascade`
+  in de sectie-index): ze hebben geen inhoudsopgave meer, dus de smalle
+  tekstkolom liet rechts een lege strook.
+- Menu'tjes verwijderd op (`/samenhang/`) en (`/over/`) pagina's.
+- Versiezin op elke pagina gelijk: "Versie … van het toetsingskader. Deze
+  pagina is voor het laatst aangepast op …", in de gedempte opmaak van de
+  homepage. De homepage toont nu ook de datum; de voet van de andere pagina's
+  gebruikt dezelfde partial (`_partials/versie-zin.html`); de opmaak is die
+  van het thema voor een paginavoet (gedempt, cursief), zonder eigen CSS.
+  Lokale default van het versienummer is `v0.2.2`.
+- De kern-callout op de normpagina's heeft geen kop meer: de kerntekst staat
+  direct onder de paginatitel. De regel "Kern van …" is ook weg uit de
+  inhoudsopgave en de PDF; `_partials/kern-kop.html` is verwijderd.
+- Voetnoten worden op álle pagina's een hover met referentielijst, niet
+  alleen op de normpagina's: de transformatie is een partial
+  (`_partials/voetnoot-tooltips.html`) die ook in de `article.html`-shadow
+  draait.
+- Hover-termen in de linkkleur (was tekstkleur); de stippellijn blijft het
+  verschil met een gewone link.
+- Toegankelijkheidsscan controleert op de versiezin ("… van het
+  toetsingskader") in plaats van op de verwijderde zin "nog in ontwikkeling";
+  die check faalde sinds die zin weg is.
+content/feedback-algemeen-normblad-1-2-onderwerpen
 - Derde feedbackronde verwerkt (`docs/feedback-algemeen-normblad-1-2-onderwerpen.md`):
   - Paginatitels van de normen zijn de normnaam, bijvoorbeeld "Inbeheername
     en beheer", in plaats van "Normanalyse …".
@@ -302,6 +334,12 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Opgelost
 
+- Hover-termen kleuren met `--color-link` in plaats van `--color-primary`:
+  dezelfde kleur als gewone links, en op het blauwe callout-vlak voldoende
+  contrast (was 3,7:1, axe-fout op de bron-hover in het DUTO-blok).
+- PDF: een voetnoot in een kop (norm 4, "Digitale documenten met een
+  bewaartermijn …") las als kaal nummer achter de kop; nu superscript met
+  sprong naar de bronnenlijst, zoals in de lopende tekst.
 - Containerbuild: de runtime-stage staat buiten de GHA-layercache
   (`no-cache-filters: runtime`), zodat `apk upgrade` echt draait en de
   Trivy-scan niet rood wordt op een al gefixte Alpine-CVE (CVE-2026-14456).

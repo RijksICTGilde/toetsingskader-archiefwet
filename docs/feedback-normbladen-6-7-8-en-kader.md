@@ -219,6 +219,17 @@ staat in `afwijkingen-van-het-normblad.md`.
 | 30 | Twee bronnen bij metadata integriteitscheck | `content/onderwerpen/metadata-integriteitscheck.md`, `[^ar-artikel-2-8-sub-b]`, `[^ab-artikel-2-1-sub-e]` |
 | 31 | Twee bronnen bij passende maatregelen | `passende-maatregelen.md`, `[^kamerstukken-35968-nr-3-duurzame-toegankelijkheid]`, `[^aw-artikel-4-1-lid-2]` |
 
+## Regressie en herstel (31 augustus 2026)
+
+PR #79 (`62df65d`) was afgesplitst vóór deze PR en zette bij het mergen vijf
+punten van hierboven terug: 20 en 21 (kaartteksten Wettelijk kader en
+Doelgroep), 22 (voetnoot Position Paper in de inleiding), 23 en 24 (titel en
+bron van het blauwe blok — dat blok verhuisde in #79 naar
+`content/over/duurzame-toegankelijkheid.md` als gewone `callout` mét titel en
+zonder bron). Alle vijf zijn op 31 augustus 2026 hersteld in de huidige
+bestanden; het blauwe blok staat nu op de DUTO-pagina als `callout-md` zonder
+titel, met `[^na-module-1]` op "noodzakelijk".
+
 ## Eén afwijking van de letterlijke vraag
 
 **Punt 6 (zoekranking "vinden") is niet verwerkt.** De zoekfunctie komt uit het

@@ -8,6 +8,7 @@ synoniemen:
   - "Informatiebeheerbeleid"
   - "BIO"
   - "AVG"
+toc: false
 ---
 
 Het verdient aanbeveling dat overheidsorganisaties archiefbeheer onderdeel maken van een breder informatiebeheerbeleid en bijbehorende planning- en controlcyclus. Op die manier kunnen onder meer maatregelen voor duurzame toegankelijkheid, bescherming van persoonsgegevens, informatiebeveiliging en openbaarmaking in samenhang worden bepaald.

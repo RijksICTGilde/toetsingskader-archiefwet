@@ -40,7 +40,10 @@ outputs:
 markup:
   goldmark:
     renderer:
-      unsafe: false
+      # Aan sinds 25 augustus 2026: nodig voor `{{% callout %}}` met een
+      # voetnoot erin (de shortcode-HTML gaat dan door goldmark en werd met
+      # `false` weggegooid). Content blijft onder validate-norms.py.
+      unsafe: true
     extensions:
       table: true
       footnote: true
@@ -51,9 +54,10 @@ markup:
 params:
   # Lokale default; in CI de git-release-tag via HUGO_PARAMS_VERSIE. Ook de bron
   # voor de PDF-export.
-  versie: "0.8"
+  versie: "v0.2.2"
   # Doel van het versienummer. Eén plek: het label staat op de homepage
-  # (`versielabel`) én in de paginavoet (`_partials/lastmod.html`).
+  # (shortcode `versielabel`) én in de paginavoet (`_partials/lastmod.html`),
+  # beide uit `_partials/versie-zin.html`.
   releases_url: "https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases"
   feedback:
     email: toetsingskader@inspectie-oe.nl

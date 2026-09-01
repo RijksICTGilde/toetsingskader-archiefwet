@@ -7,6 +7,7 @@ synoniemen:
   - "Auditlog"
   - "Authenticiteit"
   - "Integriteit"
+toc: false
 ---
 
 Een audittrail is een chronologische en gedetailleerde registratie van activiteiten of transacties bij een document. Deze registratie maakt reconstructie en onderzoek mogelijk.[^csrc-audit-trail]

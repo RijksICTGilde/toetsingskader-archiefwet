@@ -6,6 +6,7 @@ synoniemen:
   - "Startmoment bewaartermijn"
   - "Overbrengingstermijn"
   - "Openbaarheidsbeperking"
+toc: false
 ---
 
 De overbrengingstermijn en de maximumtermijnen voor openbaarheidsbeperkingen gaan uit van de datum van ontvangst of creatie van een document. Dit geldt alleen voor blijvend te bewaren documenten.[^aw-mvt-4-3-ab-nvt-3]
@@ -16,4 +17,4 @@ Bij tijdelijk te bewaren documenten kan een ander aangrijpingspunt gekozen worde
 
 ## Zie ook
 
-- [Gecontroleerd vernietigen]({{< relref "/normen/07-vernietigen" >}})
+- [Vernietigen]({{< relref "/normen/07-vernietigen" >}})
