@@ -1,9 +1,9 @@
 ---
-title: "Ordenen"
+title: "3. Ordenen"
 versie: "0.8"
 weight: 3
 norm_id: "3"
-norm_titel: "Ordenen"
+norm_titel: "3. Ordenen"
 aliases:
   - /normen/03-ordeningsstructuur/
 kern: "Het verantwoordelijke overheidsorgaan beschikt over één of meerdere ordeningsstructuren, waarvan er ten minste één aansluit bij de taken en werkprocessen van het verantwoordelijke overheidsorgaan."

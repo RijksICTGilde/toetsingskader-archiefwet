@@ -1,9 +1,9 @@
 ---
-title: "Vindbaar"
+title: "6. Vindbaar"
 versie: "0.8"
 weight: 6
 norm_id: "6"
-norm_titel: "Vindbaar"
+norm_titel: "6. Vindbaar"
 aliases:
   - /normen/05-vindbaarheid/
 kern: "Het verantwoordelijke overheidsorgaan zorgt ervoor dat documenten binnen een redelijke termijn gevonden kunnen worden."

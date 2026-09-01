@@ -1,9 +1,9 @@
 ---
-title: "Gecontroleerd vernietigen"
+title: "7. Gecontroleerd vernietigen"
 versie: "0.8"
 weight: 7
 norm_id: "7"
-norm_titel: "Vernietigen"
+norm_titel: "7. Vernietigen"
 aliases:
   - /normen/07-informatiebeveiliging/
 kern: "Het verantwoordelijke overheidsorgaan vernietigt documenten waarvan de bewaartermijn is verstreken. Om aan de eisen voor vernietiging te voldoen is een procesbeschrijving van vernietiging noodzakelijk. Ook moet er een verklaring van vernietiging worden opgesteld."
