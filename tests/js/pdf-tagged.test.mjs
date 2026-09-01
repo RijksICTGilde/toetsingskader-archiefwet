@@ -61,9 +61,11 @@ test('structuurboom: koppen, alinea’s en echte lijsten', async () => {
   const doc = await bouw()
   const t = structTelling(doc)
   assert.equal(t['/Document'], 1)
-  // Kern, Toelichting, Voorschriften, Bronnen als H2; Voorschrift/Criteria als H4.
+  // Kern, Toelichting, Voorschriften, Bronnen als H2. Voorschrift/Criteria zijn
+  // in de HTML h4 (het normblad slaat ### over) en worden in de boom H3.
   assert.equal(t['/H2'], 4, JSON.stringify(t))
-  assert.equal(t['/H4'], 2, JSON.stringify(t))
+  assert.equal(t['/H3'], 2, JSON.stringify(t))
+  assert.equal(t['/H4'], undefined, JSON.stringify(t))
   // Criteria (2) + bronnen (1) als LI met LBody eronder.
   assert.equal(t['/L'], 2, JSON.stringify(t))
   assert.equal(t['/LI'], 3, JSON.stringify(t))

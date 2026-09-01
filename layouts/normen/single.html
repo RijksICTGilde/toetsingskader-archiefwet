@@ -1,4 +1,6 @@
 {{ define "main" }}
+{{ $page := . }}
+
 {{/* ---------------------------------------------------------------------
      Voetnoten → thema-referentie-UX.
 
@@ -160,12 +162,10 @@
 {{- if $hasToc -}}
 <aside id="toc" class="toc is-open" aria-label="Op deze pagina">
   {{/* Een gewone link naar een bestaand bestand: de PDF wordt bij de build
-       gemaakt (scripts/pdf-build.mjs) en staat als index.pdf naast de pagina.
-       Hiervoor stond hier een <button hidden> die JavaScript zichtbaar moest
-       maken, omdat de link naar een JSON-endpoint wees. Dat is niet meer nodig,
-       en daarmee werkt de download ook zonder JavaScript. */}}
-  {{- /* Alleen waar het `pdfdata`-outputformat aanstaat; daar wordt de PDF
-         gemaakt. Anders wijst de knop naar een bestand dat er niet is. */ -}}
+       gemaakt (scripts/pdf-build.mjs, pdfkit) en staat als index.pdf naast de
+       pagina. Werkt dus ook zonder JavaScript. Alleen waar het
+       `pdfdata`-outputformat aanstaat (front matter van content/normen/_index.md);
+       anders wijst de knop naar een bestand dat er niet is. */}}
   {{- with .OutputFormats.Get "pdfdata" -}}
   <a class="button pdf-download" href="{{ $.RelPermalink }}index.pdf"
      download="{{ $.Title | urlize }}.pdf">

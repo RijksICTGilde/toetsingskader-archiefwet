@@ -59,7 +59,6 @@ changelog volgt [Semantic Versioning][semver].
   markers worden in CI gemeten met `scripts/pdf-ua-check.mjs`.
 - De downloadknop is een gewone link naar een bestand en werkt daarmee ook
   zonder JavaScript.
-content/feedback-algemeen-normblad-1-2-onderwerpen
 - Derde feedbackronde verwerkt (`docs/feedback-algemeen-normblad-1-2-onderwerpen.md`):
   - Paginatitels van de normen zijn de normnaam, bijvoorbeeld "Inbeheername
     en beheer", in plaats van "Normanalyse …".
@@ -77,7 +76,6 @@ content/feedback-algemeen-normblad-1-2-onderwerpen
   - Norm 5: "incidenten" in de kern linkt naar het onderwerp Incidenten, dat
     niet langer "(voorkomen van)" heet. Eerste zin van de onderwerpenindex weg.
 
-content/feedback-normbladen-6-7-8-en-kaderpaginas
 - Tweede feedbackronde verwerkt: normbladen vindbaar, vernietigen en periodieke
   evaluatie, de sectie "Over het toetsingskader" en drie onderwerpenpagina's
   (`docs/feedback-normbladen-6-7-8-en-kader.md`):
@@ -136,8 +134,6 @@ content/feedback-normbladen-6-7-8-en-kaderpaginas
     scheidt de twee vindplaatsen met een puntkomma; de bron bij het laatste
     criterium van 5.4 legt uit wat "ongeoorloofd" betekent en is niet langer
     een half afgemaakte notitie.
-main
-main
 - Openstaande punten uit de feedbackrondes (`docs/openstaande-punten.md`):
   - Kop boven de kern genummerd: "1. Kern van inbeheername en beheer", zodat
     "Voorschrift 1.1" eronder aansluit. Ook in de inhoudsopgave en de PDF.

@@ -96,14 +96,23 @@ export function schrijfNorm(pdf, data, opties) {
   // dieper dan de vorige (PDF/UA, "juiste insluiting via nesting"), dus de tag
   // wordt genormaliseerd: H2 → H3 in plaats van H4. De opmaak volgt wél het
   // oorspronkelijke niveau, zodat "Voorschrift" er blijft uitzien als op de site.
-  let vorigNiveau = 1 + kopShift // de documenttitel (of de normtitel in het kader)
+  //
+  // Gelijke HTML-niveaus krijgen gelijke tags: na `## Voorschriften` wordt de
+  // eerste `#### Voorschrift` H3, en de `#### Criteria` erna óók H3 — niet H4.
+  // Daarvoor onthoudt `tagVoor` per HTML-niveau de gekozen tag; een kop op een
+  // hoger niveau vergeet de diepere mappings, want daaronder begint de telling
+  // opnieuw.
+  const tagVoor = new Map()
+  let vorigTag = 1 + kopShift // de documenttitel (of de normtitel in het kader)
   for (const el of document.body.children) {
     const tag = el.tagName.toLowerCase()
     const m = tag.match(/^h([2-4])$/)
     if (m) {
       const niveau = Number(m[1])
-      const tagNiveau = Math.min(niveau + kopShift, vorigNiveau + 1)
-      vorigNiveau = tagNiveau
+      for (const k of [...tagVoor.keys()]) if (k > niveau) tagVoor.delete(k)
+      const tagNiveau = tagVoor.get(niveau) ?? Math.min(niveau + kopShift, vorigTag + 1)
+      tagVoor.set(niveau, tagNiveau)
+      vorigTag = tagNiveau
       const id = el.getAttribute('id')
       pdf.kop(tagNiveau, el.textContent.trim(), {
         stijl: 'h' + niveau,
