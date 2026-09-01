@@ -90,13 +90,22 @@ export function schrijfNorm(pdf, data, opties) {
   const voetnoten = document.querySelector('.footnotes ol')
   document.querySelector('.footnotes')?.remove()
 
+  // Kopniveaus voor de structuurboom. De normbladen slaan niveaus over
+  // (`## Voorschriften` → `#### Voorschrift`, zonder `###`-thema), en dat is
+  // woord-voor-woord zo afgesproken. In de PDF mag een kop hoogstens één niveau
+  // dieper dan de vorige (PDF/UA, "juiste insluiting via nesting"), dus de tag
+  // wordt genormaliseerd: H2 → H3 in plaats van H4. De opmaak volgt wél het
+  // oorspronkelijke niveau, zodat "Voorschrift" er blijft uitzien als op de site.
+  let vorigNiveau = 1 + kopShift // de documenttitel (of de normtitel in het kader)
   for (const el of document.body.children) {
     const tag = el.tagName.toLowerCase()
     const m = tag.match(/^h([2-4])$/)
     if (m) {
       const niveau = Number(m[1])
+      const tagNiveau = Math.min(niveau + kopShift, vorigNiveau + 1)
+      vorigNiveau = tagNiveau
       const id = el.getAttribute('id')
-      pdf.kop(niveau + kopShift, el.textContent.trim(), {
+      pdf.kop(tagNiveau, el.textContent.trim(), {
         stijl: 'h' + niveau,
         id: id ? prefix + id : undefined,
         ouder: sectie,

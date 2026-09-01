@@ -31,13 +31,13 @@ Een toelichting met een bron.[^aw-4-1-lid-1]
 
 [^aw-4-1-lid-1]: Aw, artikel 4.1, lid 1. [Bekijk bron](https://example.org)
 
-## Normuitleg
+## Voorschriften
 
 ### Besturing
 
 #### Voorschrift
 
-De Inspectie toetst of beheerregels zijn vastgesteld.
+Het verantwoordelijke overheidsorgaan heeft beheerregels vastgesteld.
 
 #### Criteria
 
@@ -47,7 +47,7 @@ De Inspectie toetst of beheerregels zijn vastgesteld.
 
 Alle documenten.
 
-## Zie ook
+## Gerelateerde onderwerpen
 
 - [Ordenen](/normen/03-ordenen/)
 """
@@ -97,6 +97,38 @@ class FrontMatterTests(unittest.TestCase):
         errors = run(content)
         self.assertTrue(any("'kern' mag geen voetnoten" in e for e in errors), errors)
 
+    def test_kern_bron_is_optional(self):
+        errors = run(VALID_NORM)
+        self.assertFalse(any("kern_bron" in e for e in errors), errors)
+
+    def test_kern_bron_with_markdown_link(self):
+        content = replace(
+            'kern: "De organisatie heeft een overzicht van haar documenten."',
+            'kern: "De organisatie heeft een overzicht van haar documenten."\n'
+            'kern_bron: "Aw, artikel 4.1. [Bekijk bron](https://example.org)"',
+        )
+        errors = run(content)
+        self.assertTrue(any("'kern_bron' mag geen voetnoten of markdown-links" in e for e in errors), errors)
+
+    def test_kern_bron_url_must_be_http(self):
+        content = replace(
+            'kern: "De organisatie heeft een overzicht van haar documenten."',
+            'kern: "De organisatie heeft een overzicht van haar documenten."\n'
+            'kern_bron: "Aw, artikel 4.1, eerste lid."\n'
+            'kern_bron_url: "example.org/bron"',
+        )
+        errors = run(content)
+        self.assertTrue(any("'kern_bron_url' moet een http(s)-URL zijn" in e for e in errors), errors)
+
+    def test_kern_bron_url_without_kern_bron(self):
+        content = replace(
+            'kern: "De organisatie heeft een overzicht van haar documenten."',
+            'kern: "De organisatie heeft een overzicht van haar documenten."\n'
+            'kern_bron_url: "https://example.org/bron"',
+        )
+        errors = run(content)
+        self.assertTrue(any("'kern_bron_url' zonder 'kern_bron'" in e for e in errors), errors)
+
     def test_invalid_yaml(self):
         content = replace('norm_titel: "Overzicht"', 'norm_titel: "Overzicht')  # ongesloten quote
         errors = run(content)
@@ -133,30 +165,51 @@ class HeadingTests(unittest.TestCase):
         errors = run(content)
         self.assertTrue(any("dieper dan h4" in e for e in errors), errors)
 
-    def test_criterium_singular(self):
+    def test_criterium_singular_is_allowed(self):
+        # De normbladen schrijven "Criterium:" als het er een is; de koppen
+        # volgen het normblad woord voor woord.
         content = replace("#### Criteria\n", "#### Criterium\n")
-        errors = run(content)
-        self.assertTrue(any("Gebruik '#### Criteria' (meervoud) in plaats van '#### Criterium'" in e for e in errors), errors)
+        self.assertEqual(run(content), [])
 
-    def test_indicator_singular(self):
+    def test_indicator_singular_is_allowed(self):
         content = replace("#### Criteria\n\n- De beheerregels zijn actueel.\n",
                           "#### Indicator\n\n- Iets.\n")
+        self.assertEqual(run(content), [])
+
+    def test_reikwijdte_may_have_suffix(self):
+        # Normblad 1 heet de sectie "Reikwijdte inbeheername en beheer".
+        content = replace("## Reikwijdte\n", "## Reikwijdte inbeheername en beheer\n")
+        self.assertEqual(run(content), [])
+
+    def test_voorschrift_without_theme_is_allowed(self):
+        # De meeste normbladen groeperen de voorschriften niet.
+        content = replace("### Besturing\n\n", "")
+        self.assertEqual(run(content), [])
+
+    def test_voorschriften_without_any_voorschrift(self):
+        content = replace("### Besturing\n\n#### Voorschrift\n\n"
+                          "Het verantwoordelijke overheidsorgaan heeft beheerregels vastgesteld.\n\n", "")
         errors = run(content)
-        self.assertTrue(any("Gebruik '#### Indicatoren' (meervoud)" in e for e in errors), errors)
+        self.assertTrue(any("geen enkel '#### Voorschrift'" in e for e in errors), errors)
+
+    def test_zie_ook_is_no_longer_a_section(self):
+        content = replace("## Gerelateerde onderwerpen\n", "## Zie ook\n")
+        errors = run(content)
+        self.assertTrue(any("Onbekende sectie '## Zie ook'" in e for e in errors), errors)
 
     def test_unknown_subheading(self):
         content = replace("#### Criteria\n", "#### Onbekend\n")
         errors = run(content)
         self.assertTrue(any("Onbekende subkop '#### Onbekend'" in e for e in errors), errors)
 
-    def test_theme_outside_normuitleg(self):
+    def test_theme_outside_voorschriften(self):
         content = replace("## Reikwijdte\n\nAlle documenten.\n",
                           "## Reikwijdte\n\n### Verdwaald thema\n\nAlle documenten.\n")
         errors = run(content)
-        self.assertTrue(any("mag alleen binnen '## Normuitleg'" in e for e in errors), errors)
+        self.assertTrue(any("mag alleen binnen '## Voorschriften'" in e for e in errors), errors)
 
     def test_theme_without_voorschrift(self):
-        content = replace("#### Voorschrift\n\nDe Inspectie toetst of beheerregels zijn vastgesteld.\n\n", "")
+        content = replace("#### Voorschrift\n\nHet verantwoordelijke overheidsorgaan heeft beheerregels vastgesteld.\n\n", "")
         errors = run(content)
         self.assertTrue(any("minstens één '#### Voorschrift'" in e for e in errors), errors)
 
@@ -218,9 +271,9 @@ class FootnoteTests(unittest.TestCase):
 
 class FormatTests(unittest.TestCase):
     def test_error_includes_line_number(self):
-        content = replace("#### Criteria\n", "#### Criterium\n")
+        content = replace("#### Criteria\n", "#### Onbekend\n")
         errors = run(content)
-        match = [e for e in errors if "Criteria" in e]
+        match = [e for e in errors if "Onbekende subkop" in e]
         self.assertTrue(match)
         # Vorm: bestandsnaam:regel: melding
         prefix = match[0].split(": ", 1)[0]

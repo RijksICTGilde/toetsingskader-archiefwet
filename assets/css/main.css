@@ -12,11 +12,20 @@
   }
 }
 
+/* Bronvermelding onder de kern-callout: kleiner dan de kerntekst, maar niet
+   grijs — op het callout-vlak zou dat het contrast onder 4.5:1 duwen. */
+blockquote.callout .kern-bron {
+  margin-block-start: 0.75rem;
+  margin-block-end: 0;
+  font-size: 0.875rem;
+}
+
 /* Norm page: project-specifieke decoratie op de markdown-body. De koppen zijn
    gewone h2/h3/h4, dus scopen via .norm + heading-ids. */
 
-/* Normuitleg-kop met accentlijn. */
-.norm h2#normuitleg {
+/* Voorschriften-kop met accentlijn. Het id volgt de koptekst, dus deze
+   selector hoort bij '## Voorschriften' in content/normen/*.md. */
+.norm h2#voorschriften {
   border-block-end: 2px solid var(--color-primary);
   padding-block-end: 0.5rem;
 }
@@ -41,22 +50,28 @@
   border-block-start: 1px solid var(--color-border);
 }
 
-.norm h3 + h4[id^="voorschrift"] {
+/* Het eerste voorschrift na een thema (h3) of direct na '## Voorschriften'
+   krijgt geen scheidingslijn: die staat er al. De meeste normbladen groeperen
+   niet, dus zonder de h2-variant kreeg het eerste voorschrift een dubbele lijn. */
+.norm h3 + h4[id^="voorschrift"],
+.norm h2#voorschriften + h4[id^="voorschrift"] {
   border-block-start: none;
   padding-block-start: 0;
 }
 
 /* Criteria en Indicatoren zijn sub-items: kleiner en ingesprongen. Margin i.p.v.
-   padding, anders verspringen de lijst-bullets. */
-.norm h4[id^="criteria"],
-.norm h4[id^="indicatoren"] {
+   padding, anders verspringen de lijst-bullets. De prefixen dekken zowel
+   enkelvoud als meervoud ("criterium"/"criteria", "indicator"/"indicatoren"),
+   want de koppen volgen het normblad. */
+.norm h4[id^="criteri"],
+.norm h4[id^="indicator"] {
   font-size: 1.15rem;
 }
 
-.norm h4[id^="criteria"],
-.norm h4[id^="indicatoren"],
-.norm h4[id^="criteria"] + *,
-.norm h4[id^="indicatoren"] + * {
+.norm h4[id^="criteri"],
+.norm h4[id^="indicator"],
+.norm h4[id^="criteri"] + *,
+.norm h4[id^="indicator"] + * {
   margin-inline-start: 1rem;
 }
 
@@ -100,11 +115,23 @@
   filter: none;
 }
 
-/* Ref-term die óók naar een andere pagina linkt, krijgt de linkkleur. Termen
-   met href="#fn:…" blijven in tekstkleur. */
+/* Ref-term die óók naar een andere pagina linkt, leest als link: linkkleur en
+   een doorgetrokken lijn. Termen met href="#fn:…" (alleen een hover) houden
+   de tekstkleur en de dotted lijn uit het thema, zodat hover en link uit
+   elkaar te houden zijn (feedback normblad 1, criteria 1.6 en 1.8). */
 .norm a.ref-term[href^="/"],
 .norm a.ref-term[href^="/"]:hover {
   color: var(--color-primary);
+  text-decoration: underline solid;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+}
+
+/* Versiezin en laatst-gewijzigd-datum in de voet: naslag, geen kop. Kleiner
+   en gedempt, zodat de zin niet met de inhoud concurreert. */
+.page-meta {
+  font-size: 0.875rem;
+  color: var(--color-text-muted, #555);
 }
 
 /* Toelichting hergebruikt de `.references`-accordeon van het thema; alleen de

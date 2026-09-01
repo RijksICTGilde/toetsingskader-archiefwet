@@ -70,6 +70,19 @@ test('structuurboom: koppen, alinea’s en echte lijsten', async () => {
   assert.equal(t['/LBody'], 3, JSON.stringify(t))
 })
 
+test('overgeslagen kopniveau wordt in de PDF genormaliseerd (## → #### geeft H2 → H3)', async () => {
+  // Zoals de normbladen op main: `## Voorschriften` direct gevolgd door
+  // `#### Voorschrift`, zonder ###-thema.
+  const data = { ...DATA, kern_html: '', kern_bron_html: '', body_html: '<h2 id="v">Voorschriften</h2><h4 id="v1">Voorschrift 3.1</h4><p>Tekst.</p>' }
+  const pdf = new TaggedPdf({ titel: 'Test', taal: 'nl', versie: 'v0', fonts, briefhoofdSvg })
+  pdf.nieuwePagina()
+  schrijfNorm(pdf, data, { siteUrl: DATA.site_url })
+  const t = structTelling(await PDFDocument.load(await pdf.einde()))
+  assert.equal(t['/H2'], 1, JSON.stringify(t))
+  assert.equal(t['/H3'], 1, JSON.stringify(t))
+  assert.equal(t['/H4'], undefined, JSON.stringify(t))
+})
+
 test('catalogus: taal, MarkInfo en documenttitel', async () => {
   const doc = await bouw()
   const cat = doc.catalog

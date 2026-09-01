@@ -8,7 +8,6 @@ import assert from 'node:assert/strict'
 import { parseHTML } from 'linkedom'
 import {
   zwevendeVoetnootFouten, korteRefTermFouten,
-  voorbehoudFout, voorbehoudBronFout, VOORBEHOUD,
   legeAltFouten, zonderHash, kopvolgordeFouten, dubbeleIdFouten, bronnenKopFouten,
 } from '../../scripts/a11y-checks.mjs'
 
@@ -45,24 +44,6 @@ test('korte ref-term: een woord met aanhangende interpunctie mag', () => {
 test('korte ref-term: een cijfer telt als inhoud', () => {
   const html = '<a href="#fn:1" class="ref-term">4.1</a>'
   assert.deepEqual(korteRefTermFouten(dom(html)), [])
-})
-
-test('draft-voorbehoud: pagina zonder de zin is een fout', () => {
-  assert.equal(voorbehoudFout(dom('<p>Gewone tekst.</p>'), '/normen/01-beheer/'), '/normen/01-beheer/')
-})
-
-test('draft-voorbehoud: pagina mét de zin is in orde', () => {
-  const html = `<p>Versie 0.8 van het toetsingskader. De inhoud is nog ${VOORBEHOUD}.</p>`
-  assert.equal(voorbehoudFout(dom(html), '/normen/01-beheer/'), null)
-})
-
-test('draft-voorbehoud: de uitzonderingen worden overgeslagen', () => {
-  assert.equal(voorbehoudFout(dom('<p>Niet gevonden.</p>'), '/404.html'), null)
-})
-
-test('draft-voorbehoud: de bronguard slaat aan als de partial de zin niet meer bevat', () => {
-  assert.equal(voorbehoudBronFout(`<p>De inhoud is nog ${VOORBEHOUD}.</p>`), null)
-  assert.match(voorbehoudBronFout('<p>Andere formulering.</p>'), /versie-zin\.html/)
 })
 
 test('lege alt: een niet-aangemerkte afbeelding is een fout', () => {

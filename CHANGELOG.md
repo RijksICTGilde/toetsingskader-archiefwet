@@ -13,10 +13,19 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Toegevoegd
 
+- Pagina "Duurzame toegankelijkheid" onder Over, met de DUTO-definitie en de
+  duiding welke kenmerken als norm zijn uitgewerkt. Die tekst stond dubbel in
+  de inleiding en op de samenhangpagina.
+- Bronvoetnoten op de onderwerpenpagina's aangrijpingspunt, audittrail,
+  classificatie/aggregatie, document en samenhang/interpreteerbaar, uit het
+  brondocument "Onderwerpen en verwijzingen".
 - Normen 2 tot en met 8 gevuld met de teksten uit de normbladen (4e iteratie):
   kern, synoniemen, toelichting, voorschriften met criteria en indicatoren,
   reikwijdte en "Zie ook". De PLACEHOLDER-stubs zijn daarmee weg; norm 1 was
   al eerder gemigreerd.
+- Begrippenpagina "Werkproces", met de definitie die als losse zin onder norm 3
+  stond. Het woord "werkproces" in de toelichting linkt ernaar — dezelfde
+  hover-oplossing als bij de begrippen hieronder.
 - Begrippenpagina's voor de termen waar de normbladen om een hover vroegen:
   "Applicatie en systeem", "Structuur", "Verschijningsvorm" en "Strategisch
   informatieoverleg (SIO)". De hover-opmerkingen zijn verwerkt als link naar
@@ -50,6 +59,169 @@ changelog volgt [Semantic Versioning][semver].
   markers worden in CI gemeten met `scripts/pdf-ua-check.mjs`.
 - De downloadknop is een gewone link naar een bestand en werkt daarmee ook
   zonder JavaScript.
+content/feedback-algemeen-normblad-1-2-onderwerpen
+- Derde feedbackronde verwerkt (`docs/feedback-algemeen-normblad-1-2-onderwerpen.md`):
+  - Paginatitels van de normen zijn de normnaam, bijvoorbeeld "Inbeheername
+    en beheer", in plaats van "Normanalyse …".
+  - Een link die ook een hover draagt is blauw met doorgetrokken lijn; een
+    pure hover blijft zwart met stippellijn. Versiezin en datum in de voet
+    kleiner en gedempt.
+  - Inleiding zonder "centrale"; DUTO-sectie verhuisd naar de nieuwe pagina.
+    Samenhangpagina zonder "Relatie met DUTO". Kopje "Invloed per onderwerp"
+    heet "De risicobenadering per norm".
+  - Norm 1: "omschrijving" (1.2) en "Alleen wanneer dergelijke categorieën
+    bestaan" (1.5) vet; het laatste criterium van 1.3 linkt naar "Feitelijk
+    beheer".
+  - Norm 2: zin over aggregatieniveau uit de kern; punt achter 2.1; hovers
+    bij applicatie en systeem met bronlink naar itpedia.nl.
+  - Norm 5: "incidenten" in de kern linkt naar het onderwerp Incidenten, dat
+    niet langer "(voorkomen van)" heet. Eerste zin van de onderwerpenindex weg.
+
+content/feedback-normbladen-6-7-8-en-kaderpaginas
+- Tweede feedbackronde verwerkt: normbladen vindbaar, vernietigen en periodieke
+  evaluatie, de sectie "Over het toetsingskader" en drie onderwerpenpagina's
+  (`docs/feedback-normbladen-6-7-8-en-kader.md`):
+  - Paginatitels "Normanalyse vindbaar" en "Normanalyse periodieke evaluatie"
+    (was "Normanalyse Vindbaarheid" en "Normanalyse Periodieke evaluatie");
+    norm 7 heet op de kaart en boven de kern "Vernietigen" in plaats van
+    "Gecontroleerd vernietigen".
+  - Kaartteksten van norm 6 en norm 8 ingekort; kaartteksten van "Wettelijk
+    kader", "Doelgroep" en "Passende maatregelen en risicobenadering"
+    aangepast.
+  - Norm 6: puntkomma's tussen de vindplaatsen in de bronnen bij 6.1 t/m 6.4;
+    tweede vindplaats bij de bron in de toelichting; nieuwe bron bij
+    "categorieën documenten"; hovers bij "invulling" en "centrale plaats" naar
+    de kennisbank van het Nationaal Archief; de twee links in het derde
+    criterium van 6.1 weg.
+  - Norm 7: bron onder de kern met puntkomma's en "Ar, artikel 4.1" erbij;
+    hover bij "bewijzen" (criteria 7.4) naar de kennisbank; haakje sluiten in
+    de reikwijdte.
+  - Inleiding: voetnoot naar de Position Paper nieuwe Archiefwet (KIA);
+    definitieblok zonder dubbele titel en met bron "De waarde van de duurzame
+    toegankelijkheid" (DUTO module 1).
+  - Wettelijk kader: voetnoot "In de Archiefwet 1995 waren dit
+    archiefbescheiden" bij "document". Opbouw en indeling: dubbele zin weg.
+    Doelgroep: komma voor "etc.".
+  - Onderwerpen: bronnen bij metadata hardware/programmatuur (Ar 2.8 sub a;
+    Ar Toelichting p. 38), metadata integriteitscheck (Ar 2.8 sub b; Ab 2.1
+    sub e) en passende maatregelen (Aw MvT 4.1; Aw 4.1 lid 2).
+- Feedbackronde op de normbladen ordenen, metadateren en informatiebeveiliging
+  verwerkt:
+  - De paginatitels volgen het normblad: "Normanalyse ordenen", "Normanalyse
+    metadateren" en "Normanalyse informatiebeveiliging en betrouwbaar" (was
+    "Normanalyse Ordeningsstructuur", "Normanalyse Metadata" en "Normanalyse
+    informatiebeveiliging en betrouwbaarheid van documenten").
+  - Norm 4: de bron bij NEN-ISO 23081-1:2017 wees naar een DMS-bestand dat
+    buiten de organisatie niet te openen is; hij wijst nu naar
+    [NEN-ISO 23081-1:2017 nl](https://www.nen.nl/nen-iso-23081-1-2017-nl-269387)
+    op nen.nl.
+  - Norm 4: de drie zinnen die de categorieën documenten inleiden ("Alle
+    documenten, ongeacht de bewaartermijn …", "Digitale documenten met een
+    bewaartermijn langer dan tien jaar …", "Over te brengen documenten …") zijn
+    tussenkopjes (`###`) op hetzelfde niveau als "Feitelijk beheer" bij norm 1.
+    Ze liepen als losse alinea door in het voorschrift ervoor.
+  - Norm 4: hover bij "structuur" leest "aan een bericht dat bijlagen bevat";
+    de bron bij het permanent uniek identificatiekenmerk (voorschrift 4.3) is
+    "Ar, artikel 2.7; Ar, artikel 2.8; Archiefregeling, Toelichting, 2.2
+    Aanvullende eisen voor langdurig te bewaren documenten in digitale vorm,
+    p.37."
+  - Norm 5: de hover bij "informatiebeveiliging" in de toelichting noemt nu de
+    onderwerpen waar de Inspectie zich niet op richt (firewalls, encryptie,
+    antivirussoftware, MFA, patchen). Toegevoegd aan de bestaande bronvoetnoot
+    op dat woord in plaats van als tweede voetnoot: twee voetnootmarkeringen
+    achter elkaar geven één zwevend nummer, omdat de tooltip-transformatie in
+    `layouts/normen/single.html` het voorafgaande woord pakt.
+  - Norm 5: de twee back-upindicatoren bij voorschrift 5.1 stonden ingesprongen
+    en staan nu op hetzelfde niveau als de andere indicatoren; de bron bij 5.1
+    scheidt de twee vindplaatsen met een puntkomma; de bron bij het laatste
+    criterium van 5.4 legt uit wat "ongeoorloofd" betekent en is niet langer
+    een half afgemaakte notitie.
+main
+main
+- Openstaande punten uit de feedbackrondes (`docs/openstaande-punten.md`):
+  - Kop boven de kern genummerd: "1. Kern van inbeheername en beheer", zodat
+    "Voorschrift 1.1" eronder aansluit. Ook in de inhoudsopgave en de PDF.
+  - "Gerelateerde onderwerpen": items zonder link weg; bij norm 7 daarmee het
+    hele kopje.
+  - Onderwerpenindex toont alleen de titel per begrip, geen regel tekst.
+    "Zie ook" op Document noemt ook Overzicht, Ordenen en Metadateren.
+  - Vorige/volgende-navigatie weg op de Over- en Onderwerpenpagina's.
+  - Samenhang: bollendiagram kleiner (440 px) en inhoudsopgave standaard
+    uitgeklapt (`toc_open`).
+  - PDF: blok "Belangrijke informatie" vervangen door één regel met het
+    versienummer en een link naar de actuele versie.
+  - De zin "De inhoud is nog in ontwikkeling en kan wijzigen." is weg uit de
+    versiezin (voet van elke pagina, homepage) en uit de PDF.
+  - Zoeken: synoniemen wegen zwaarder dan titel en tekst (projectoverride van
+    `search.js`), zodat een norm op zijn synoniem bovenaan komt.
+- Nieuwe hero-afbeelding op de homepage: brede banner (4000×1056,
+  `assets/images/hero.jpg`) in plaats van de 1000×600 png. Decoratief, alt
+  blijft leeg.
+- Kop boven de kern noemt de norm: "Kern van ordenen" in plaats van "Kern van
+  de norm", op de normpagina, in de inhoudsopgave en in de PDF. Uit
+  `norm_titel`, dus voor alle acht normen tegelijk.
+- Sectiekop `## Normuitleg` heet `## Voorschriften`, in alle acht normbladen
+  en in de validator, de training voor contentbeheer en de accentlijn-CSS.
+- Norm 3 (Ordenen) verwerkt naar het herziene normblad: de kern is de
+  kerntekst uit het normblad zelf, met bronvermelding (Ar, artikel 2.2,
+  eerste lid); de drie voorschriften staan als norm geformuleerd in plaats
+  van als toetsvraag ("De Inspectie toetst of …"); "overdragen" is
+  "overbrengen" in de toelichting; de twee bronnen bij voorschrift 3.3 staan
+  in de volgorde van het normblad (artikel vóór toelichting).
+- De kaart op `/normen/` houdt de kortere omschrijving uit het
+  introductiedocument (front matter `kern_kaart`), zodat de normpagina de
+  normbladtekst kan tonen zonder dat de index verandert.
+- De review op normblad Ordenen gold expliciet voor alle normbladen; die twee
+  punten zijn nu ook op de normen 1, 2 en 4 tot en met 8 doorgevoerd:
+  - De `kern` is de kerntekst uit het normblad zelf, met bronvermelding
+    (`kern_bron`/`kern_bron_url`). De kortere zin uit "0) Introductie" die er
+    stond staat nu in `kern_kaart` en blijft dus op de kaart in `/normen/`.
+    Waar die normbladtekst ook als eerste alinea onder `## Toelichting` stond
+    (normen 2, 4, 5, 6 en 7) is die dubbeling weg.
+  - De voorschriften zijn letterlijk de normbladtekst en staan als eis
+    geformuleerd ("Het verantwoordelijke overheidsorgaan heeft …") in plaats
+    van als toetsvraag ("De Inspectie toetst of …"). De bronvoetnoten bleven
+    gelijk. `CONTRIBUTING.md` en de training voor contentbeheer beschrijven
+    die vorm nu ook; `CONTRIBUTING.md` noemde daar bovendien nog de oude kop
+    `## Normuitleg`.
+- De tekst van de normbladen staat nu woord voor woord op de site. De
+  redactionele bewerkingen die er tot nu toe op zaten zijn teruggedraaid: de
+  spellings- en congruentiecorrecties op het normblad ("emailapplicaties",
+  "maateregelen", "plaats vond", "Metadata wordt", "de inhoud … zijn", het
+  ontbrekende haakje in "(digitaal of papier."), de uitgeschreven afkortingen
+  in de lopende tekst ("WOO", "etc.", "SIO", "functies/rollen"), en de
+  normnamen uit normblad 8 in plaats van de sitenaamgeving. Ook de vier zinnen
+  die de site had toegevoegd om naar de kennisbank van het Nationaal Archief
+  te linken (architectuur/overwegingen bij implementatie, niveau van
+  maatregelen, digitaal vernietigen, aangrijpingspunt) staan niet in de
+  normbladen en zijn eruit; die vier externe links vervallen daarmee.
+  Vervolgens is ook de rest gelijkgetrokken, zodat de normpagina's nu op elk
+  punt het normblad volgen:
+  - **Koppen.** De paginatitel is de normbladtitel ("Normanalyse Metadata"),
+    de kop boven de kern komt uit het nieuwe front-matter-veld `kern_kop`
+    ("Kern van Ordeningsstructuur" — die titels wijken af van de normnamen die
+    de site verder voert, dus `norm_titel` blijft ongemoeid en daarmee ook het
+    bollendiagram, de kaarten op `/normen/` en de navigatie). `## Zie ook`
+    heet `## Gerelateerde onderwerpen`, norm 1 heeft weer
+    `## Reikwijdte inbeheername en beheer`, en `#### Criteria`/`#### Indicatoren`
+    staan in het enkelvoud waar het normblad dat schrijft. De dertien
+    `### <thema>`-koppen die de site zelf had bedacht zijn weg; alleen
+    "Besturing" en "Feitelijk beheer" blijven, want die staan in normblad 1.
+  - **Voetnoten.** 57 bronvermeldingen zijn letterlijk de normbladtekst
+    geworden ("Aw, Memorie van Toelichting", "AW1995", "p.34", "t.b.v.").
+    Twee blijven afwijken: `hyperlink-duto` (het normblad geeft daar de
+    instructie "Hyperlink naar DUTO", geen bron) en de bron bij voorschrift
+    3.3, waarvan de reviewer expliciet de volgorde vroeg.
+  - **Synoniemen en gerelateerde onderwerpen** volgen de lijsten uit het
+    normblad. Norm 5 verliest daarmee zijn sectie, want normblad 7 heeft er
+    geen; termen zonder eigen pagina staan als platte tekst.
+  - De validator, de unittests, de PDF-export, de training en `CONTRIBUTING.md`
+    zijn op het nieuwe formaat gezet. `### <thema>` is optioneel geworden en
+    enkelvoudige subkoppen zijn niet langer een fout.
+
+  Buiten de regel blijft alleen "overbrengen" in norm 3 — die correctie vroeg
+  de reviewer zelf — en de `<<…>>`-markeringen, die een linkinstructie zijn en
+  geen tekst.
 - Thema bijgewerkt naar `hugo-theme-rijksoverheid` v0.2.0. Daarin zitten vijf
   toegankelijkheidsfixes die hier als tijdelijke overrides stonden
   (focusindicatoren in de zoekresultaten, het zoekveld en de footerlinks; het
@@ -117,6 +289,9 @@ changelog volgt [Semantic Versioning][semver].
   de `index.pdf.json`-endpoints en de bijbehorende tests. Dat scheelt een
   blokkerend script van ruim anderhalve megabyte op elke normpagina, ook voor
   wie nooit iets downloadt.
+- De controle `draft-voorbehoud` in de toegankelijkheidsscan, die op elke
+  pagina de zin "in ontwikkeling en kan wijzigen" eiste. Die zin is op verzoek
+  weg (25 augustus), de controle maakte sindsdien elke build rood.
 - De project-eigen "naar boven"-knop (`layouts/baseof.html`,
   `_partials/terug-naar-boven.html`, `js/back-to-top.js`,
   `css/terug-naar-boven.css`). De knop komt nu uit het thema, aangezet met
@@ -131,6 +306,9 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Opgelost
 
+- Containerbuild: de runtime-stage staat buiten de GHA-layercache
+  (`no-cache-filters: runtime`), zodat `apk upgrade` echt draait en de
+  Trivy-scan niet rood wordt op een al gefixte Alpine-CVE (CVE-2026-14456).
 - Voorschriftnummering (`<norm>.<n>`) ontbrak in de PDF-export; de nummering
   is nu gedeeld tussen webpagina en PDF, zowel per norm als in de kader-PDF.
 - Interne normverwijzingen gecorrigeerd: "(gecontroleerd) vernietigen" wees

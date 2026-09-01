@@ -32,12 +32,16 @@
 
 <header>
   <h1>Training contentbeheer</h1>
-  <p><strong>Toetsingskader Archiefwet</strong>, voor redacteuren.
-     Geen technische voorkennis nodig.</p>
+  <p><strong>Toetsingskader Archiefwet</strong>. Ik heb de site en de
+     controles gebouwd; vanaf nu beheren jullie de teksten zelf. Deze
+     training gaat daarom over het gereedschap, niet over de inhoud:
+     de normbladen zijn van jullie, en die kennen jullie beter dan ik.
+     Technische voorkennis heb je niet nodig.</p>
   <nav>
     <a href="#deel1">1.&nbsp;Wat is GitHub?</a>
     <a href="#deel2">2.&nbsp;Handleiding</a>
     <a href="#deel3">3.&nbsp;Oefeningen</a>
+    <a href="#deel4">4.&nbsp;Vervolgsessie</a>
   </nav>
 </header>
 
@@ -76,7 +80,9 @@
         (in orde) of rood kruis (er klopt iets niet, met uitleg in het
         Nederlands, inclusief regelnummer).</li>
     <li>Een <strong>collega keurt goed</strong>.</li>
-    <li>Daarna pas komt de wijziging op de website.</li>
+    <li>Een collega <strong>voert de wijziging door</strong> (mergen, zie 4.8).</li>
+    <li>Bij de eerstvolgende <strong>release</strong> komt de wijziging op de
+        website.</li>
   </ol>
 
   <p>Losse wijzigingen worden van tijd tot tijd gebundeld tot een
@@ -86,9 +92,10 @@
   2.7.</p>
 
   <div class="gerust">
-    <strong>Je kunt niets kapotmaken.</strong> De website verandert nooit
-    direct door wat jij typt. Elke stap is omkeerbaar, en de controle plus een
-    collega kijken altijd mee voordat iets live gaat.
+    <strong>Je kunt niets kapotmaken.</strong> Dat heb ik met opzet zo
+    ingericht: de website verandert nooit direct door wat jij typt. Elke stap
+    is omkeerbaar, en de controle plus een collega kijken altijd mee voordat
+    iets live gaat.
   </div>
 </section>
 
@@ -108,27 +115,33 @@
   <div class="tip"><strong>Tip:</strong> met de tab "Preview" bovenin zie je
   direct hoe je tekst eruit komt te zien.</div>
 
-  <h3>2.2 De opbouw van een pagina</h3>
+  <h3>2.2 Waar jullie tekst in het bestand staat</h3>
+  <p>De normbladen zijn woord voor woord overgenomen. Wat hier verandert is
+  alleen de <em>verpakking</em>: elk onderdeel van het normblad staat onder een
+  kop die met <code>#</code>-tekens begint. Hoe meer tekens, hoe dieper het
+  onderdeel. Deze tabel is de vertaalsleutel tussen het normblad zoals jullie
+  het kennen en het bestand zoals GitHub het toont.</p>
   <table>
-    <tr><th>Kop</th><th>Betekenis</th></tr>
-    <tr><td><code>## Toelichting</code></td><td>uitleg van de norm (verplicht)</td></tr>
-    <tr><td><code>## Normuitleg</code></td><td>uitwerking (verplicht), met daarbinnen:</td></tr>
-    <tr><td><code>### &lt;thema&gt;</code></td><td>subkop, bijvoorbeeld "Besturing"</td></tr>
-    <tr><td><code>#### Voorschrift</code></td><td>wat de Inspectie toetst</td></tr>
-    <tr><td><code>#### Criteria</code></td><td>waaraan getoetst wordt (lijst met <code>-</code>)</td></tr>
-    <tr><td><code>#### Indicatoren</code></td><td>hoe vastgesteld wordt of aan het criterium is voldaan (lijst met <code>-</code>)</td></tr>
-    <tr><td><code>## Reikwijdte</code></td><td>op welke documenten de norm van toepassing is (optioneel)</td></tr>
-    <tr><td><code>## Zie ook</code></td><td>verwijzingen naar andere normen of onderwerpen (optioneel)</td></tr>
+    <tr><th>Kop in het bestand</th><th>Welk deel van het normblad</th><th>Verplicht?</th></tr>
+    <tr><td><code>## Toelichting</code></td><td>de toelichting bij de norm</td><td>verplicht</td></tr>
+    <tr><td><code>## Voorschriften</code></td><td>het kopje boven de uitwerking; de uitwerking zelf staat eronder</td><td>verplicht</td></tr>
+    <tr><td><code>### &lt;thema&gt;</code></td><td>de themakop, alleen als het normblad er een heeft (bijvoorbeeld "Besturing")</td><td>alleen als het normblad hem heeft</td></tr>
+    <tr><td><code>#### Voorschrift</code></td><td>de tekst van het voorschrift</td><td>verplicht binnen Voorschriften</td></tr>
+    <tr><td><code>#### Criteria</code> / <code>#### Criterium</code></td><td>de criteria, elk op een eigen regel met een <code>-</code> ervoor</td><td>enkelvoud of meervoud — neem over wat het normblad schrijft</td></tr>
+    <tr><td><code>#### Indicatoren</code> / <code>#### Indicator</code></td><td>de indicatoren, elk op een eigen regel met een <code>-</code> ervoor</td><td>enkelvoud of meervoud — neem over wat het normblad schrijft</td></tr>
+    <tr><td><code>## Reikwijdte</code></td><td>de reikwijdte</td><td>optioneel</td></tr>
+    <tr><td><code>## Gerelateerde onderwerpen</code></td><td>de verwijzingen naar andere normen of onderwerpen</td><td>optioneel</td></tr>
   </table>
+  <div class="tip"><strong>Tip:</strong> de tekst achter de kop laat ik met rust
+  — die is van jullie. De controle kijkt alleen of de koppen kloppen en of de
+  bronnen sluiten, nooit of de formulering goed is.</div>
 
   <p>Voorbeeldfragment:</p>
-  <pre><code>## Normuitleg
-
-### Besturing
+  <pre><code>## Voorschriften
 
 #### Voorschrift
 
-De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
+Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefbeheer van documenten.
 
 #### Criteria
 
@@ -168,7 +181,7 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
         van een collega.</li>
     <li><strong>Rood kruis</strong>: klik op <strong>"Details"</strong>. Je
         ziet dan een melding zoals:
-        <pre><code>04-metadateren.md:23: Gebruik '#### Criteria' (meervoud) in plaats van '#### Criterium'</code></pre>
+        <pre><code>04-metadateren.md:23: Voetnoot [^ar-artikel-2-5-lid-2] wordt gebruikt maar is nergens gedefinieerd</code></pre>
         Dat betekent: bestand <code>04-metadateren.md</code>, regel 23.
         Open het bestand opnieuw via het potlood-icoon <em>in dezelfde pull
         request</em> (tabblad "Files changed" → potlood), herstel het, en
@@ -178,9 +191,9 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
   <h3>2.6 Veelgemaakte fouten</h3>
   <table>
     <tr><th>Fout</th><th>Wat de controle zegt</th><th>Oplossing</th></tr>
-    <tr><td><code>#### Criterium</code> (enkelvoud)</td>
-        <td>"Gebruik '#### Criteria' (meervoud)…"</td>
-        <td>Kop hernoemen naar <code>#### Criteria</code></td></tr>
+    <tr><td>Zelfbedachte kop, bijvoorbeeld <code>## Uitleg</code></td>
+        <td>"Onbekende sectie '## Uitleg'. Toegestaan: …"</td>
+        <td>Een kop uit de lijst in 2.2 gebruiken</td></tr>
     <tr><td>Voetnoot gebruikt, definitieregel vergeten</td>
         <td>"…wordt gebruikt maar is nergens gedefinieerd"</td>
         <td>Regel <code>[^naam]: Bron.</code> toevoegen onder de alinea</td></tr>
@@ -232,9 +245,9 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
 
 <section id="deel3">
   <h2>Deel 3: Oefeningen</h2>
-  <p>Vier opdrachten. De trainer begeleidt en ruimt na afloop
-  de oefen-voorstellen op (sluiten zonder doorvoeren). De website blijft dus
-  ongewijzigd.</p>
+  <p>Vier opdrachten. Ik begeleid, en na afloop ruim ik de oefen-voorstellen
+  zelf op (sluiten zonder doorvoeren). De website blijft dus ongewijzigd, en
+  jullie tekst ook.</p>
 
   <details open>
     <summary>Oefening A: Tekst wijzigen</summary>
@@ -242,11 +255,14 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
     preview zien.</p>
     <ol>
       <li>Open <code>content/normen/02-overzicht.md</code> en klik het potlood-icoon.</li>
-      <li>Vervang in de sectie <code>## Toelichting</code> de tekst
-          <code>[PLACEHOLDER: vul toelichting in]</code> door één eigen zin.</li>
+      <li>Zoek in de sectie <code>## Toelichting</code> jullie eigen tekst op en
+          leg er de tabel uit 2.2 naast: welk deel van het normblad heb je voor je?</li>
+      <li>Pas één zin aan — een komma, een woord, wat je wilt. Dit is een
+          oefening; de wijziging gaat nergens heen.</li>
       <li>Bekijk het resultaat via de tab <strong>"Preview"</strong>.</li>
     </ol>
-    <p><strong>Klaar wanneer:</strong> je ziet jouw zin netjes opgemaakt in de preview.</p>
+    <p><strong>Klaar wanneer:</strong> je jouw aangepaste zin netjes opgemaakt in
+    de preview ziet staan, op dezelfde plek als in het normblad.</p>
   </details>
 
   <details>
@@ -276,7 +292,7 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
       <li>Herstel de fout in dezelfde pull request (tabblad "Files changed" →
           potlood) en commit opnieuw.</li>
       <li>Wacht tot de check <strong>groen</strong> wordt en wijs rechts een
-          reviewer aan (Reviewers → kies je collega of de trainer).</li>
+          reviewer aan (Reviewers → kies een collega of mij).</li>
     </ol>
     <p><strong>Klaar wanneer:</strong> groene check én een toegewezen reviewer.</p>
   </details>
@@ -298,14 +314,470 @@ De Inspectie toetst of regels voor het archiefbeheer zijn vastgesteld.
   </details>
 </section>
 
+<section id="deel4">
+  <h2>Deel 4: Vervolgsessie</h2>
+
+  <p>De eerste sessie ging over de <em>route</em>: een pagina bewerken, een
+  voorstel indienen, de controle lezen. Deze sessie gaat over de <em>onderdelen</em>
+  die daarbij horen: hovers, onderwerpenpagina's, links, de regels bovenin een
+  bestand, de toegankelijkheidscontrole, het verwerken van een review, zelf een
+  review doen en mergen, en wat je doet als je voorstel achterloopt op
+  <code>main</code> of botst met andermans wijziging.</p>
+
+  <h3>4.1 <code>&lt;&lt;…&gt;&gt;</code> en "hoover" in het normblad</h3>
+  <p>In de normbladen staan twee soorten aanwijzingen die géén tekst zijn:</p>
+  <table>
+    <tr><th>In het normblad</th><th>Wat het betekent</th><th>Wat je doet</th></tr>
+    <tr><td><code>&lt;&lt;aggregatieniveau&gt;&gt;</code></td>
+        <td>"hier moet een link komen"</td>
+        <td>Maak er een link van naar de onderwerpenpagina, of laat het woord
+            gewoon staan als die pagina niet bestaat. De punthaken zelf komen
+            nooit op de site.</td></tr>
+    <tr><td>Een commentaarballon met "Hoover: …"</td>
+        <td>"toon deze uitleg als de lezer over het woord gaat"</td>
+        <td>Maak er een <strong>hover</strong> van (4.2). <strong>Geen</strong>
+            aparte onderwerpenpagina.</td></tr>
+  </table>
+  <p>Die tweede regel is er niet altijd geweest. Er zijn vijf begrippenpagina's
+  gemaakt van ballonnen die om een hover vroegen; die zijn in augustus 2026 weer
+  opgeruimd. De verantwoording staat in
+  <code>docs/onderwerpen-en-hovers.md</code>.</p>
+
+  <h3>4.2 Een hover maken</h3>
+  <p>Een hover is hetzelfde gereedschap als de voetnoot uit 2.3, alleen zet je er
+  een uitleg in plaats van een bron in. Op een normpagina wordt het woord
+  onderstreept en klapt de tekst open bij aanwijzen, met het toetsenbord en in
+  een schermlezer.</p>
+  <pre><code>… documenten die behoren tot hetzelfde werkproces[^werkproces].
+
+[^werkproces]: Een werkproces is een samenhangend geheel van stappen en procedures in het kader van de uitvoering van een taak. Ar, artikel 1.1, begripsbepalingen. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)</code></pre>
+  <p>Twee dingen die makkelijk misgaan:</p>
+  <ul>
+    <li><strong>Zet de markering direct achter het woord</strong>, vóór de komma
+        of punt. Achter een leesteken wordt dat leesteken het klikbare doel; de
+        toegankelijkheidscontrole geeft dan een fout.</li>
+    <li><strong>Nooit twee markeringen naast elkaar</strong>
+        (<code>woord[^a].[^b]</code>). Hoort er ook een bron bij, zet die dan in
+        dezelfde voetnoot achter de uitleg — zoals hierboven bij
+        <code>[^werkproces]</code>.</li>
+  </ul>
+  <div class="gerust">Werkt alleen op normpagina's. Op andere pagina's blijft een
+  voetnoot gewoon een voetnoot onderaan de pagina.</div>
+
+  <h3>4.3 Wanneer maak je wél een onderwerpenpagina?</h3>
+  <p><code>/onderwerpen/</code> is de begrippenindex. Daar hoort een pagina
+  alleen als het begrip in <strong>"9) Onderwerpen en Verwijzingen"</strong>
+  staat, of als een normblad er met <code>&lt;&lt;…&gt;&gt;</code> naartoe wil
+  linken. Zelf een begrip bedenken dat je nuttig lijkt: niet doen.</p>
+  <p>Een nieuwe pagina is een bestand in <code>content/onderwerpen/</code>:</p>
+  <pre><code>---
+title: "Aangrijpingspunt"
+card_title: "Aangrijpingspunt"
+description: "Eén zin, wordt getoond op de indexkaart."
+synoniemen:
+  - "Startmoment"
+---
+
+De tekst, letterlijk uit het bronbestand.</code></pre>
+  <ul>
+    <li><strong>De titel is de term uit het bronbestand</strong>, met een
+        hoofdletter aan het begin. Dus "Classificatie, aggregatie" en niet
+        "Classificatie en aggregatie".</li>
+    <li><strong>Geef een onderwerp nooit een <code>weight</code>.</strong> De
+        index sorteert op titel; één gewogen pagina verspringt naar voren en de
+        vorige/volgende-knoppen lopen dan niet meer gelijk met de index.</li>
+  </ul>
+
+  <h3>4.4 Links, hernoemen en verwijderen</h3>
+  <p>Interne links wijzen naar het adres, niet naar het bestand:
+  <code>[ordening](/normen/03-ordenen/)</code>,
+  <code>[document](/onderwerpen/document/)</code>. De linktekst volgt de zin uit
+  het normblad — je verandert de zin niet om een mooiere linktekst te
+  krijgen.</p>
+  <p>Verwijder je een pagina, zoek dan eerst wie ernaar linkt. Blijft er een link
+  staan, dan wordt de linkcontrole rood. Meestal is de oplossing: het woord laten
+  staan en de link eromheen weghalen.</p>
+  <div class="tip"><strong>Hernoemen?</strong> Zet het oude adres als
+  <code>aliases</code> in de front matter, zodat links van buiten blijven werken:
+  <pre><code>aliases:
+  - /normen/03-ordeningsstructuur/</code></pre></div>
+
+  <h3>4.5 De regels bovenin (front matter)</h3>
+  <p>In sessie 1 heette dit "titel, kern en synoniemen". Compleet:</p>
+  <table>
+    <tr><th>Veld</th><th>Wat erin staat</th></tr>
+    <tr><td><code>title</code></td><td>de titel van het normblad ("Normanalyse metadateren", met de normnaam in kleine letters)</td></tr>
+    <tr><td><code>norm_titel</code></td><td>de normnaam uit de introductie ("Metadateren"). Stuurt het bollendiagram, de kaarten en de kop "Kern van metadateren". <strong>Niet aanpassen om een kop te veranderen.</strong></td></tr>
+    <tr><td><code>kern</code></td><td>de kerntekst <em>uit het normblad zelf</em>, zonder voetnoten</td></tr>
+    <tr><td><code>kern_bron</code> / <code>kern_bron_url</code></td><td>de bron onder de kern (optioneel, maar een url zonder brontekst mag niet)</td></tr>
+    <tr><td><code>kern_kaart</code></td><td>de kortere zin uit de introductie, voor de kaart op <code>/normen/</code> (optioneel)</td></tr>
+    <tr><td><code>synoniemen</code></td><td>zoekwoorden; staan niet op de pagina, voeden alleen de zoekfunctie</td></tr>
+    <tr><td><code>weight</code>, <code>norm_id</code>, <code>versie</code></td><td>nummer en volgorde van de norm; laat staan</td></tr>
+  </table>
+
+  <h3>4.6 De tweede controle: toegankelijkheid</h3>
+  <p>Naast de contentcontrole uit 2.5 draait een toegankelijkheidsscan. Drie
+  meldingen kun je zelf veroorzaken:</p>
+  <table>
+    <tr><th>Melding</th><th>Wat er aan de hand is</th></tr>
+    <tr><td>"voetnootmarkering zonder ref-term en zonder tooltip"</td>
+        <td>De markering staat aan het begin van een regel of achter opmaak. Hang
+            hem aan gewoon tekst.</td></tr>
+    <tr><td>"ref-term bestaat alleen uit interpunctie"</td>
+        <td>De markering staat achter een leesteken. Zet hem achter het
+            woord.</td></tr>
+    <tr><td>"lege alt op een afbeelding die niet als decoratief is aangemerkt"</td>
+        <td>Vul de alt-tekst, of meld de afbeelding aan als decoratief.</td></tr>
+  </table>
+
+  <h3>4.7 Een review verwerken</h3>
+  <ol>
+    <li>Opmerkingen van je collega staan onder het tabblad
+        <strong>"Files changed"</strong>, bij de betreffende regel.</li>
+    <li>Pas de tekst aan via het potlood <em>in dezelfde pull request</em> en
+        commit opnieuw. De controles draaien vanzelf opnieuw.</li>
+    <li>Klik bij een verwerkte opmerking op <strong>"Resolve
+        conversation"</strong>, zodat zichtbaar blijft wat nog open staat.</li>
+    <li>Ben je het oneens? Schrijf het eronder in plaats van het stil te laten.
+        Een afwijking van het normblad die je bewust maakt, hoort in
+        <code>docs/afwijkingen-van-het-normblad.md</code>, met de reden erbij.
+        Anders draait de volgende vergelijking met het normblad hem terug.</li>
+  </ol>
+
+  <h3>4.8 Zelf een review doen en mergen</h3>
+  <p>4.7 ging over de kant van de schrijver. Dit is de andere kant: een collega
+  vraagt jou als reviewer. Jij kijkt na, en als het goed is voer jij de wijziging
+  door (<strong>mergen</strong>).</p>
+
+  <p><strong>Stap 1: de review</strong></p>
+  <ol>
+    <li>Open de pull request (tabblad <strong>"Pull requests"</strong> bovenin de
+        repository, of via de melding die je van GitHub kreeg).</li>
+    <li>Kijk eerst onderaan: zijn alle controles <strong>groen</strong>? Bij een
+        rood kruis is de schrijver aan zet, niet jij. Laat dat dan weten en wacht.</li>
+    <li>Ga naar het tabblad <strong>"Files changed"</strong>. Rood is weggehaald,
+        groen is toegevoegd. Lees alleen wat gewijzigd is.</li>
+    <li>Heb je een opmerking bij een regel? Beweeg over de regel, klik op het
+        blauwe <strong>+</strong> en typ je opmerking. Kies
+        <strong>"Start a review"</strong> (niet "Add single comment"), zodat de
+        schrijver al je opmerkingen in één keer krijgt.</li>
+    <li>Klaar met lezen? Klik rechtsboven op <strong>"Review changes"</strong>
+        en kies:
+        <table>
+          <tr><th>Keuze</th><th>Wanneer</th></tr>
+          <tr><td><strong>Approve</strong></td>
+              <td>In orde, mag door. Ook als je alleen kleine opmerkingen hebt
+                  die de schrijver zelf kan afhandelen.</td></tr>
+          <tr><td><strong>Request changes</strong></td>
+              <td>Er moet eerst iets aangepast worden voordat het door mag.</td></tr>
+          <tr><td><strong>Comment</strong></td>
+              <td>Je hebt vragen, maar geen oordeel. Gebruik dit spaarzaam: de
+                  schrijver weet dan niet of hij door mag.</td></tr>
+        </table></li>
+    <li>Klik <strong>"Submit review"</strong>.</li>
+  </ol>
+
+  <p><strong>Waar je op let</strong> (de controle doet de opbouw, jij doet de
+  inhoud):</p>
+  <ul>
+    <li>Klopt de tekst met het normblad? Een bewuste afwijking hoort in
+        <code>docs/afwijkingen-van-het-normblad.md</code> (zie 4.7).</li>
+    <li>Staat een bron of hover achter het <em>woord</em>, niet achter een
+        leesteken (4.2)?</li>
+    <li>Is er iets aangepast dat niet in de omschrijving van de pull request
+        staat? Vraag dan waarom.</li>
+    <li>Bekijk de <strong>preview</strong>: bij elke pull request zet de
+        deploy-controle een tijdelijke versie van de site neer. De link staat
+        in een automatische reactie onderaan de pull request (tabblad
+        "Conversation"). Zo zie je hovers en opmaak zoals de lezer ze ziet.</li>
+  </ul>
+
+  <p><strong>Stap 2: mergen</strong></p>
+  <ol>
+    <li>Voorwaarden: alle controles groen, minstens één <strong>Approve</strong>,
+        en geen open opmerkingen meer (alle "Resolve conversation" gedaan).</li>
+    <li>Onderaan de pull request staat een groene knop. Klik op het pijltje
+        ernaast en kies <strong>"Squash and merge"</strong>. Dat voegt alle
+        losse commits van het voorstel samen tot één regel in de geschiedenis.
+        De andere twee keuzes ("Create a merge commit", "Rebase and merge")
+        gebruiken we niet.</li>
+    <li>Controleer de omschrijving die GitHub voorstelt: één korte regel die
+        zegt wat er veranderd is (bijv. <code>content(normen): toelichting
+        norm 2 aangevuld</code>). GitHub plakt er zelf het nummer van de pull
+        request achter.</li>
+    <li>Klik <strong>"Confirm squash and merge"</strong>.</li>
+    <li>Klik daarna op <strong>"Delete branch"</strong>. De tijdelijke tak is
+        niet meer nodig; de wijziging staat nu in <code>main</code>.</li>
+  </ol>
+
+  <div class="gerust">
+    <strong>Gemerged is nog niet live.</strong> De wijziging staat in
+    <code>main</code>, maar de website wordt pas bijgewerkt als er een
+    <strong>release</strong> wordt gepubliceerd (2.7). Zo kun je een reeks
+    wijzigingen mergen en ze samen in één versie naar buiten brengen.
+  </div>
+
+  <div class="tip"><strong>Niet je eigen voorstel goedkeuren.</strong> GitHub
+  laat het technisch toe, maar het punt van een review is dat een tweede
+  paar ogen meekijkt. Wie schrijft, vraagt een ander om de review en de merge.</div>
+
+  <h3>4.9 Je voorstel bijwerken met <code>main</code> en conflicten oplossen</h3>
+  <p>Een pull request is een kopie van de site op het moment dat jij op het
+  potlood klikte. Terwijl jouw voorstel openstaat, gaan andere voorstellen
+  gewoon door: een collega merget, en <code>main</code> loopt op jou vooruit.
+  Dat is normaal en meestal onschuldig. GitHub meldt het onderaan je pull request
+  op twee manieren.</p>
+
+  <table>
+    <tr><th>Melding onderaan de pull request</th><th>Wat er aan de hand is</th><th>Wat je doet</th></tr>
+    <tr><td>"This branch is out-of-date with the base branch"</td>
+        <td>Er is iets in <code>main</code> veranderd, in <em>andere</em> regels
+            dan de jouwe. Niets botst.</td>
+        <td>Klik <strong>"Update branch"</strong>. Klaar.</td></tr>
+    <tr><td>"This branch has conflicts that must be resolved"</td>
+        <td>Iemand anders heeft <em>dezelfde regels</em> aangepast als jij, en
+            die wijziging is al doorgevoerd. GitHub kan niet raden welke versie
+            moet winnen.</td>
+        <td>Klik <strong>"Resolve conflicts"</strong> en kies zelf (hieronder).</td></tr>
+  </table>
+
+  <p><strong>Bijwerken ("Update branch")</strong></p>
+  <ol>
+    <li>Onderaan de pull request, bij de melding, staat de knop
+        <strong>"Update branch"</strong>. Heeft de knop een pijltje, kies dan
+        <strong>"Update with merge commit"</strong> (niet "rebase").</li>
+    <li>GitHub voegt de nieuwe stand van <code>main</code> toe aan je voorstel.
+        De controles draaien opnieuw. Jouw tekst verandert niet.</li>
+  </ol>
+  <div class="tip"><strong>Wanneer klik je erop?</strong> Vlak voordat je
+  voorstel gemerged wordt, of als de melding er staat terwijl je nog aan het
+  schrijven bent. Vaker hoeft niet: elke klik is een extra regel in de
+  geschiedenis, en die verdwijnt bij "Squash and merge" (4.8) toch weer.</div>
+
+  <p><strong>Conflict oplossen ("Resolve conflicts")</strong></p>
+  <ol>
+    <li>Klik onderaan de pull request op <strong>"Resolve conflicts"</strong>.
+        GitHub opent het bestand in een bewerkscherm. Links staat de lijst met
+        bestanden die botsen; meestal is dat er één.</li>
+    <li>Zoek in de tekst het blok met de strepen. Het ziet er zo uit:
+        <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; content/toelichting-norm-2
+Het overheidsorgaan heeft actuele regels vastgesteld over het archiefbeheer.
+=======
+Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefbeheer.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; main</code></pre>
+        Boven de <code>=======</code> staat <strong>jouw</strong> versie, eronder
+        de versie die al in <code>main</code> staat. De naam achter de punthaken
+        zegt welke tak het is.</li>
+    <li>Maak van het blok één tekst: kies de bovenste, de onderste, of schrijf
+        een zin die beide wijzigingen bevat (in <code>CHANGELOG.md</code>:
+        allebei laten staan, zie hieronder). Haal daarna de drie regels met
+        <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> en
+        <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> <strong>helemaal weg</strong>.
+        Wat overblijft moet weer gewoon leesbare pagina-tekst zijn.</li>
+    <li>Zijn er meer blokken in het bestand? Herhaal het voor elk blok. De knop
+        <strong>"Mark as resolved"</strong> rechtsboven wordt pas klikbaar als
+        er geen strepen meer over zijn.</li>
+    <li>Klik <strong>"Mark as resolved"</strong>, en daarna
+        <strong>"Commit merge"</strong>. De controles draaien opnieuw en de
+        melding onderaan de pull request verdwijnt.</li>
+  </ol>
+
+  <p><strong>Waar je op let bij het kiezen</strong></p>
+  <ul>
+    <li><strong><code>CHANGELOG.md</code> is de uitzondering: daar houd je
+        vrijwel altijd <em>beide</em> kanten.</strong> Twee voorstellen die
+        allebei een regel onder "Unreleased" toevoegen, botsen daar bijna
+        zeker, maar de regels sluiten elkaar niet uit: jouw wijziging is
+        gebeurd én die van de ander. Haal alleen de drie streepregels weg en
+        laat beide regels staan, elk op een eigen regel met een <code>-</code>
+        ervoor. Bij paginatekst geldt dat níet: daar staat maar één zin op de
+        site en moet je kiezen welke de juiste is.</li>
+    <li>De versie uit <code>main</code> is er niet voor niets: iemand heeft hem
+        geschreven, een collega heeft hem goedgekeurd. Gooi hem niet ongezien
+        weg. Twijfel je? Vraag het de schrijver (die staat in de geschiedenis van
+        het bestand, knop "History").</li>
+    <li>Kijk niet alleen naar de zin, maar ook naar de voetnoot eronder. Als
+        beide kanten dezelfde bron met een andere naam hebben toegevoegd, houd
+        je er één over en pas je de verwijzing in de tekst aan, anders wordt de
+        controle rood (2.6).</li>
+    <li>Wat uiteindelijk op de site komt is de tekst die jij hier overhoudt.
+        Lees hem daarom nog één keer als geheel.</li>
+  </ul>
+
+  <div class="gerust">
+    <strong>Kom je er niet uit?</strong> Laat het staan en zeg het in een
+    opmerking onder de pull request. Ook als GitHub meldt dat het conflict "too
+    complex to resolve in the web editor" is: dat kan ik van buiten de
+    website oplossen, jouw tekst gaat niet verloren.
+  </div>
+
+  <div class="tip"><strong>Voorkomen is makkelijker.</strong> Twee mensen aan
+  dezelfde norm in dezelfde week levert bijna altijd een conflict op. Houd
+  voorstellen klein en merge ze snel; zeg in het team even welke norm je onder
+  handen hebt.</div>
+
+  <h3>Oefeningen</h3>
+  <p>Net als in deel 3: ik ruim de oefen-voorstellen na afloop op.</p>
+
+  <details open>
+    <summary>Oefening E: Van ballon naar hover</summary>
+    <p><strong>Doel:</strong> een hover maken op het juiste woord.</p>
+    <ol>
+      <li>Open <code>content/normen/06-vindbaar.md</code> met het potlood.</li>
+      <li>Kies in de toelichting een woord en zet er direct achter
+          <code>[^oefening]</code> — vóór de punt of komma.</li>
+      <li>Zet onder de alinea:
+          <pre><code>[^oefening]: Korte uitleg als oefening.</code></pre></li>
+      <li>Bekijk de preview. Die toont een voetnootnummer; de hover zie je pas op
+          de gebouwde site, dus dat controleer ik.</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> de markering staat achter een woord en niet
+    achter een leesteken.</p>
+  </details>
+
+  <details>
+    <summary>Oefening F: Hover of pagina?</summary>
+    <p><strong>Doel:</strong> de regel uit 4.1 en 4.3 toepassen. Denkoefening, je
+    verandert niets.</p>
+    <p>Drie gevallen. Wat maak je ervan?</p>
+    <ol>
+      <li>Het normblad Vindbaarheid heeft een ballon "Hoover: categorieën met een
+          relatie met het selectiebesluit".</li>
+      <li>"9) Onderwerpen en Verwijzingen" beschrijft het begrip
+          <em>hashfunctie</em>, en normblad 7 verwijst ernaar met
+          <code>&lt;&lt;hashfunctie&gt;&gt;</code>.</li>
+      <li>Je vindt de term "capstone-methodiek" onduidelijk en wilt hem uitleggen.
+          Er staat geen ballon bij en het begrip staat niet in bestand 9.</li>
+    </ol>
+    <details>
+      <summary>Antwoord</summary>
+      <p>1: hover. 2: onderwerpenpagina, want het begrip staat in bestand 9 én er
+      wordt met punthaken naar gelinkt. 3: niets op de site. Een begrip dat
+      nergens is vastgelegd uitleggen is een inhoudelijke keuze; die hoort eerst
+      in het normblad thuis en komt daarna vanzelf hierheen.</p>
+    </details>
+  </details>
+
+  <details>
+    <summary>Oefening G: Een link opruimen</summary>
+    <p><strong>Doel:</strong> zien wat er gebeurt als een link naar een
+    niet-bestaande pagina wijst.</p>
+    <ol>
+      <li>Open <code>content/normen/02-overzicht.md</code> en maak van een woord
+          een link naar <code>/onderwerpen/bestaat-niet/</code>.</li>
+      <li>Dien het voorstel in en wacht op de controles.</li>
+      <li>Lees welke controle rood wordt en wat de melding zegt.</li>
+      <li>Herstel het: haal de link weg, laat het woord staan.</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> je kunt uitleggen waarom "het woord laten
+    staan, de link weghalen" hier de juiste oplossing is en niet "de zin
+    herschrijven".</p>
+  </details>
+
+  <details>
+    <summary>Oefening H: Een tegel op de homepage</summary>
+    <p><strong>Doel:</strong> de regels bovenin een bestand bewerken (4.5) en zien
+    wat er gebeurt als de inspringing niet klopt.</p>
+    <ol>
+      <li>Open <code>content/_index.md</code> met het potlood. Boven in het bestand,
+          onder <code>tiles:</code>, staan vier blokken van twee regels.</li>
+      <li>Zet er een vijfde onder, met <strong>precies dezelfde inspringing</strong>
+          — twee spaties voor het streepje, vier voor <code>body</code>:
+          <pre><code>  - title: "Oefening"
+    body: "Vijfde tegel als proef."</code></pre></li>
+      <li>Dien het voorstel in en wacht tot de controles groen zijn.</li>
+      <li>Haal nu <strong>expres</strong> het afsluitende aanhalingsteken achter
+          <code>"Oefening</code> weg en commit opnieuw.</li>
+      <li>Lees de melding onder "Details".</li>
+    </ol>
+    <div class="tip"><strong>Let op:</strong> deze melding is de enige in de hele
+    training die niet in het Nederlands is en niet uitlegt wat je moet doen. Hij
+    komt niet van onze eigen controle maar van de sitebouwer, en ziet er zo uit:
+    <pre><code>content/_index.md:15:13: [14:13] value is not allowed in this context. map key-value is pre-defined</code></pre>
+    Het bruikbare deel is het regelnummer. Bijna altijd is de oorzaak een
+    ontbrekend aanhalingsteken of een verkeerd aantal spaties.</div>
+    <p><strong>Klaar wanneer:</strong> de controle eerst groen was, daarna rood, en
+    je in de melding het regelnummer terugvindt van de regel die je kapotmaakte.</p>
+  </details>
+
+  <details>
+    <summary>Oefening I: Een blokje op de normen-pagina</summary>
+    <p><strong>Doel:</strong> een blok toevoegen aan de tekst van een pagina, en
+    het verschil zien met oefening H.</p>
+    <ol>
+      <li>Open <code>content/normen/_index.md</code>. Onder de regels bovenin staat
+          de inleidende tekst, daaronder <code>{{&lt; pdf-kader &gt;}}</code> en
+          <code>{{&lt; normen-grid &gt;}}</code>. Dat zijn <strong>blokken</strong>:
+          korte opdrachten die de site ter plekke iets laten neerzetten.</li>
+      <li>Zet er zelf een boven <code>{{&lt; normen-grid &gt;}}</code>:
+          <pre><code>{{&lt; callout titel="Leeswijzer" &gt;}}
+Eigen tekst. Gewoon Markdown, dus **vet** mag.
+{{&lt; /callout &gt;}}</code></pre>
+          De regel met de <code>/</code> sluit het blok. Vergeet je die, dan komt
+          er: <code>shortcode "callout" must be closed or self-closed</code>.</li>
+      <li>Dien in en wacht op groen.</li>
+      <li>Maak van de eerste regel
+          <code>{{&lt; callout titel="Leeswijzer" variant="warning" &gt;}}</code>
+          en commit. Het blok krijgt een andere kleur.</li>
+      <li>Zet er nu <code>variant="info"</code> van en commit. Lees de melding:
+          <pre><code>callout: variant "info" ongeldig (kies: muted, warning, success, danger)</code></pre></li>
+      <li>Zet <code>variant</code> terug op <code>warning</code>, of haal hem weg.</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> je kunt uitleggen waarom de melding uit deze
+    oefening bruikbaarder is dan die uit H: dit blok controleert zijn eigen
+    parameters en noemt de waarden die wél mogen. Waar zo'n controle ontbreekt, val
+    je terug op een regelnummer.</p>
+  </details>
+
+  <details>
+    <summary>Oefening J: Bijwerken met main en een conflict oplossen</summary>
+    <p><strong>Doel:</strong> beide meldingen uit 4.9 zelf zien en de tweede
+    oplossen. Dit is een oefening in tweetallen; ik merge daarbij één keer een
+    oefen-wijziging echt in <code>main</code>, en draai die na afloop terug.</p>
+    <p><strong>Deel 1: bijwerken (geen conflict)</strong></p>
+    <ol>
+      <li>Allebei: open <code>content/normen/02-overzicht.md</code> met het
+          potlood. Persoon A past een zin aan in <code>## Toelichting</code>,
+          persoon B een zin in <code>## Reikwijdte</code>. Verschillende regels
+          dus.</li>
+      <li>Allebei: dien een voorstel in en wacht op groen.</li>
+      <li>Ik merge het voorstel van A.</li>
+      <li>B: ververs je pull request. Onderaan staat nu "This branch is
+          out-of-date with the base branch". Klik <strong>"Update branch"</strong>.
+          Bekijk daarna het tabblad "Files changed": zie je dat alleen jouw
+          wijziging als verschil wordt getoond, en die van A niet?</li>
+    </ol>
+    <p><strong>Deel 2: conflict</strong></p>
+    <ol>
+      <li>A: open hetzelfde bestand opnieuw met het potlood en verander
+          <em>dezelfde zin</em> in <code>## Reikwijdte</code> die B onder handen
+          heeft, maar anders. Dien in als nieuw voorstel.</li>
+      <li>Ik merge het nieuwe voorstel van A.</li>
+      <li>B: ververs je pull request. Nu staat er "This branch has conflicts that
+          must be resolved". Klik <strong>"Resolve conflicts"</strong>.</li>
+      <li>B: zoek het blok met de strepen. Welke regel is van jou, welke komt uit
+          <code>main</code>? Vergelijk met het voorbeeld in 4.9.</li>
+      <li>B: schrijf één zin die beide wijzigingen recht doet, haal de drie
+          streepregels weg, klik <strong>"Mark as resolved"</strong> en daarna
+          <strong>"Commit merge"</strong>.</li>
+      <li>Allebei: wacht tot de controles groen zijn en bekijk in "Files changed"
+          de zin die overbleef.</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> B's pull request is groen zonder melding
+    onderaan, de zin in Reikwijdte bevat wat A én B wilden, en jullie kunnen in
+    eigen woorden zeggen wat het verschil is tussen "out-of-date" en "conflict".</p>
+  </details>
+</section>
+
 <footer>
   <p>Vragen na de training? Open een issue op GitHub
   (<code>github.com/RijksICTGilde/toetsingskader-archiefwet/issues</code>) of
-  mail de beheerder. Naslag: zie ook <code>CONTRIBUTING.md</code> in de
-  repository.</p>
+  mail mij rechtstreeks — ook als er iets niet werkt zoals ik het hier
+  beschrijf. Naslag: zie ook <code>CONTRIBUTING.md</code> in de repository.</p>
   <p>Deze training hoort bij release <strong>v0.1.0</strong> van het
   Toetsingskader Archiefwet (juni 2026). Wijzigingen per versie staan in
   <code>CHANGELOG.md</code>.</p>
+  <p>Ravi Meijer</p>
 </footer>
 
 </body>

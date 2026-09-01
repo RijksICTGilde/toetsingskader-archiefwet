@@ -261,7 +261,12 @@ Wat dat verandert:
   vier markers ook een gevulde boom (`/H1` en `/LBody`) — precies de val van
   een gezette vlag boven een lege boom.
 * **Kopvolgorde en dubbele ankers** worden voortaan in `scripts/pdf-build.mjs`
-  op de invoer gecontroleerd (voorheen op de print-HTML in de a11y-scan).
+  op de invoer gecontroleerd (voorheen op de print-HTML in de a11y-scan). Een
+  dubbel anker is fataal. Een overgeslagen kopniveau niet: de normbladen
+  schrijven `## Voorschriften` → `#### Voorschrift` zonder tussenkop, en dat
+  staat woord voor woord op de site. De walker normaliseert het niveau alleen
+  in de PDF-tag (H2 → H3 in plaats van H4; de opmaak blijft die van het
+  oorspronkelijke niveau) en de build meldt waar dat gebeurt.
 * De **inhoudsopgave met paginanummers** en de **bladwijzers** blijven; de
   nummers komen uit een tweede opbouw in geheugen in plaats van een tweede
   Chromium-doorloop.

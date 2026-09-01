@@ -144,18 +144,17 @@ if (bestanden.length === 0) {
   process.exit(1)
 }
 
-// De structuurboom volgt de koppen en ankers uit de content; een overgeslagen
-// kopniveau of een dubbel anker is in de PDF een structuurfout ("juiste
-// insluiting via nesting" bij PAC/Acrobat, verwijzingen die op de verkeerde
-// bron landen). Zelfde controles als de vroegere printpijplijn, nu op de
-// invoer in plaats van op tussen-HTML. De kern- en bronnenkoppen zet de
-// walker zelf, op de juiste niveaus; dit gaat over de body.
+// De structuurboom volgt de koppen en ankers uit de content. Een dubbel anker
+// is fataal: verwijzingen landen dan op de verkeerde bron. Een overgeslagen
+// kopniveau (`## Voorschriften` → `#### Voorschrift`, zoals de normbladen het
+// schrijven) normaliseert scripts/pdf-html.mjs in de PDF-tags; dat wordt hier
+// gemeld, zodat zichtbaar blijft waar de boom van de content afwijkt.
 function structuurFouten(data) {
   const fouten = []
   const normen = data.kind === 'kader' ? data.normen : [data]
   for (const norm of normen) {
     const { document } = parseHTML(`<!DOCTYPE html><html><body><h1>x</h1>${norm.kern_html ? '<h2>Kern</h2>' : ''}${norm.body_html || ''}</body></html>`)
-    for (const f of kopvolgordeFouten(document)) fouten.push(`norm ${norm.norm_id}: kopvolgorde — ${f}`)
+    for (const f of kopvolgordeFouten(document)) console.warn(`  norm ${norm.norm_id}: ${f} — in de PDF genormaliseerd naar één niveau dieper`)
     for (const id of dubbeleIdFouten(document)) fouten.push(`norm ${norm.norm_id}: dubbel anker "${id}"`)
   }
   return fouten

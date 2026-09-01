@@ -3,8 +3,8 @@ name: Deploy to ZAD
 on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
-  push:
-    branches: [main]
+  release:
+    types: [published]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -38,12 +38,17 @@ jobs:
             echo "value=" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Determine version from git tag
+      - name: Determine version from release tag
         id: versie
-        # Alleen een echte tag; leeg als er (nog) geen tag is, zodat de
-        # Containerfile terugvalt op de leesbare default uit hugo.yaml
-        # (geen kale commit-hash als "versie").
-        run: echo "value=$(git describe --tags --abbrev=0 2>/dev/null || true)" >> "$GITHUB_OUTPUT"
+        # Bij een release: de tag van de release. Anders de laatste tag; leeg
+        # als er (nog) geen tag is, zodat de Containerfile terugvalt op de
+        # leesbare default uit hugo.yaml (geen kale commit-hash als "versie").
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          V="$RELEASE_TAG"
+          if [ -z "$V" ]; then V="$(git describe --tags --abbrev=0 2>/dev/null || true)"; fi
+          echo "value=$V" >> "$GITHUB_OUTPUT"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
@@ -62,7 +67,7 @@ jobs:
           images: ${{ env.IMAGE }}
           tags: |
             type=sha,format=short,prefix=pr-${{ github.event.pull_request.number }}-,enable=${{ github.event_name == 'pull_request' }}
-            type=raw,value=main-${{ github.sha }},enable=${{ github.event_name == 'push' }}
+            type=raw,value=${{ github.event.release.tag_name }},enable=${{ github.event_name == 'release' }}
 
       - name: Build and push
         id: docker_build
@@ -78,6 +83,11 @@ jobs:
             VERSIE=${{ steps.versie.outputs.value }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          # De build-stage (Go + Hugo) mag uit de cache; de runtime-stage niet,
+          # anders is `apk upgrade` in de Containerfile een gecachte laag met
+          # de openssl van weken terug en wordt Trivy rood op een CVE die
+          # Alpine al gefixt heeft.
+          no-cache-filters: runtime
 
       - name: Trivy security scan
         uses: aquasecurity/trivy-action@v0.36.0
@@ -158,7 +168,7 @@ jobs:
           echo "Deleted $DELETED container version(s) for PR ${{ github.event.pull_request.number }}"
 
   deploy-production:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'release'
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -172,5 +182,5 @@ jobs:
           project-id: toets-hn7
           deployment-name: production
           component: frontend
-          image: ${{ env.IMAGE }}:main-${{ github.sha }}
+          image: ${{ env.IMAGE }}:${{ github.event.release.tag_name }}
           wait-for-ready: true
