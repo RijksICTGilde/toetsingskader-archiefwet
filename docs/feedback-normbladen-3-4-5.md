@@ -101,6 +101,10 @@ de zin ongewijzigd.
 
 ## Openstaand
 
+*Opgelost 31 augustus 2026: `html-to-pdfmake.js` rendert koppen nu via
+`inline()`, dus het voetnootnummer staat ook in de PDF als superscript met
+sprong naar de bronnenlijst. De kop en de voetnoot zijn ongewijzigd.*
+
 De kop "Digitale documenten met een bewaartermijn langer dan tien jaar …" draagt
 voetnoot `[^ar-artikel-2-8]`. Op de site is dat een gewone hover, maar de
 PDF-export zet koppen om met `textContent` (`assets/js/html-to-pdfmake.js`),

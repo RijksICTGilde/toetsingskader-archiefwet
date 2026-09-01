@@ -117,7 +117,10 @@
       }
       if (el.nodeType !== 1) continue
       var tag = el.tagName.toLowerCase()
-      if (/^h[1-6]$/.test(tag)) out.push({ text: el.textContent.trim(), style: tag })
+      // Koppen via inline(), net als alinea's: een voetnoot in een kop (norm 4,
+      // "Digitale documenten met een bewaartermijn …[^ar-artikel-2-8]") werd
+      // met textContent een kaal nummer zonder superscript of sprong.
+      if (/^h[1-6]$/.test(tag)) out.push({ text: inline(el), style: tag })
       else if (tag === 'p') out.push({ text: inline(el), style: 'para' })
       else if (tag === 'ul') out.push({ ul: listItems(el), style: 'list' })
       else if (tag === 'ol') out.push({ ol: listItems(el), style: 'list' })

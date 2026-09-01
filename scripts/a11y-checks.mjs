@@ -26,6 +26,33 @@ export function korteRefTermFouten(document) {
     .filter(tekst => tekst.length > 0 && !LETTER_OF_CIJFER.test(tekst))
 }
 
+// --- Draft-voorbehoud -------------------------------------------------------
+// Het voorbehoud komt via `_partials/versie-zin.html` en hangt aan
+// `.Params.show_lastmod`. Vergeet je dat op een nieuwe pagina, dan staat er
+// normatief ogende tekst zonder voorbehoud. Uitzonderingen dragen geen
+// kadertekst.
+export const GEEN_VOORBEHOUD_NODIG = new Map([
+  ['/404.html', 'foutpagina; toont geen normtekst maar vier ingangen'],
+  ['/tags/', 'lege taxonomiepagina (disableKinds, bevinding 14)'],
+  ['/categories/', 'lege taxonomiepagina (disableKinds, bevinding 14)'],
+])
+// Sinds 25 augustus 2026 zonder "nog in ontwikkeling"; de versiezin zelf is het
+// voorbehoud (versienummer + datum laatst aangepast).
+export const VOORBEHOUD = 'van het toetsingskader'
+
+export function voorbehoudFout(document, url) {
+  if (GEEN_VOORBEHOUD_NODIG.has(url)) return null
+  return document.body.textContent.includes(VOORBEHOUD) ? null : url
+}
+
+// De zin staat hierboven overgetikt. Zonder deze controle kleurt een aangepaste
+// formulering élke pagina rood met een melding die de verkeerde oorzaak noemt.
+export function voorbehoudBronFout(partialBron) {
+  return partialBron.includes(VOORBEHOUD)
+    ? null
+    : 'layouts/_partials/versie-zin.html bevat de zin niet meer; werk VOORBEHOUD bij in scripts/a11y-checks.mjs'
+}
+
 // --- Lege alt ---------------------------------------------------------------
 // Een lege alt op een informatieve afbeelding is een 1.1.1-fout die niemand
 // vangt: axe leest hem als "bewust decoratief" en .htmltest.yml zet

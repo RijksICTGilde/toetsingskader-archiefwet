@@ -35,34 +35,26 @@ function clickWith(json) {
   return new Promise((r) => setTimeout(r, 50)).then(() => captured)
 }
 
-test('kern-kop komt uit kern_kop, niet uit norm_titel', async () => {
-  // De koppen volgen het normblad woord voor woord: normblad 3 heet
-  // "Kern van Ordeningsstructuur" terwijl de norm op de site "Ordenen" heet.
-  // De PDF moet dezelfde kop tonen als de pagina en de inhoudsopgave.
+test('kern zonder kop: de kerntekst volgt direct op de titelpagina', async () => {
+  // De kern-callout op de website heeft geen kop (keuze 31 augustus 2026), dus
+  // de PDF zet er ook geen "Kern van …" boven. Een oude JSON met `kern_kop`
+  // mag dat niet terugbrengen.
   const dd = await clickWith({
     kind: 'norm',
     titel: 'Norm 3: Ordenen',
     norm_id: '3',
     norm_titel: 'Ordenen',
-    kern_kop: 'Kern van Ordeningsstructuur',
+    kern_kop: '3. Kern van ordenen',
     kern_html: '<p>Een kerntekst van voldoende lengte.</p>',
     body_html: '<h2>Toelichting</h2><p>Tekst.</p>',
   })
-  const kop = dd.content.find(b => typeof b.text === 'string' && b.text.startsWith('Kern van '))
-  assert.equal(kop.text, 'Kern van Ordeningsstructuur')
-})
-
-test('kern-kop valt terug op norm_titel als kern_kop ontbreekt', async () => {
-  const dd = await clickWith({
-    kind: 'norm',
-    titel: 'Norm 3: Ordenen',
-    norm_id: '3',
-    norm_titel: 'Ordenen',
-    kern_html: '<p>Een kerntekst van voldoende lengte.</p>',
-    body_html: '<h2>Toelichting</h2><p>Tekst.</p>',
-  })
-  const kop = dd.content.find(b => typeof b.text === 'string' && b.text.startsWith('Kern van '))
-  assert.equal(kop.text, 'Kern van ordenen')
+  const koppen = dd.content.filter(b => typeof b.text === 'string' && /Kern van /.test(b.text))
+  assert.deepEqual(koppen, [], 'geen kern-kop in de PDF')
+  // content[0] is de titelpagina; de kern komt er direct achter.
+  assert.equal(dd.content[1].style, 'para')
+  assert.match(dd.content[1].text, /^Een kerntekst/)
+  assert.equal(dd.content[2].style, 'h2')
+  assert.equal(dd.content[2].text, 'Toelichting')
 })
 
 test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
@@ -78,13 +70,10 @@ test('norm-doc: header, kern, body, disclaimer, fonts', async () => {
   assert.match(coverText, /Gedownload op/)
   assert.match(coverText, /Bron/)
   assert.equal(cover.pageBreak, 'after')
-  // Kern als h2 (zoals Toelichting) + kerntekst als alinea.
-  // De kop noemt de norm en het normnummer, net als op de website
-  // (layouts/_partials/kern-kop.html): "1. Kern van …".
-  const kernIdx = dd.content.findIndex(b => typeof b.text === 'string' && /^\d+\. Kern van /.test(b.text))
-  assert.ok(kernIdx !== -1, 'kern-kop aanwezig')
-  assert.equal(dd.content[kernIdx].style, 'h2', 'kern-kop als sectiekop (h2)')
-  const kernBlock = dd.content[kernIdx + 1]
+  // Kern zonder kop, net als de callout op de website: de kerntekst is de
+  // eerste alinea na de titelpagina.
+  assert.ok(!dd.content.some(b => typeof b.text === 'string' && /Kern van /.test(b.text)), 'geen kern-kop')
+  const kernBlock = dd.content[1]
   assert.equal(kernBlock.style, 'para')
   assert.ok(typeof kernBlock.text === 'string' && kernBlock.text.length > 10, 'kerntekst gerenderd')
   // versieregel i.p.v. disclaimerblok: "Dit is versie … Bekijk voor de actuele versie <url>."

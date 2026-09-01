@@ -84,12 +84,9 @@
       blocks.push(head)
     }
     if (n.kern_html) {
-      // Kern als h2 + normale alinea, net als Toelichting (klantfeedback).
-      // De kop komt uit de JSON en is daar door _partials/kern-kop.html gezet,
-      // zodat de PDF exact dezelfde kop toont als de website en de
-      // inhoudsopgave daar. De fallbacks zijn alleen voor oude JSON.
-      var kernKop = n.kern_kop || (n.norm_titel ? 'Kern van ' + n.norm_titel.toLowerCase() : 'Kern van de norm')
-      blocks.push({ text: kernKop, style: 'h2' })
+      // Kern zonder kop, net als de callout op de website (keuze 31 augustus
+      // 2026): de kerntekst is de eerste alinea na de titel. Een `kern_kop` in
+      // oude JSON wordt bewust genegeerd.
       blocks = blocks.concat(parse(n.kern_html, opts))
       // De bron bij de kern staat los van de kerntekst (front matter
       // `kern_bron`), dus die komt hier als eigen alinea achteraan.

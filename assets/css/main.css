@@ -75,10 +75,17 @@ blockquote.callout .kern-bron {
   margin-inline-start: 1rem;
 }
 
-/* Ref-term in tekstkleur; de dotted underline komt uit het thema. */
-.norm a.ref-term,
-.norm a.ref-term:hover {
-  color: inherit;
+/* Ref-term (woord met hover) in linkkleur, net als een gewone link; de dotted
+   underline uit het thema maakt het verschil met een link (keuze 25 augustus
+   2026: "alles blauw"). Geldt sitebreed: de tooltip-transformatie draait ook
+   op de Over- en Onderwerpenpagina's (_partials/voetnoot-tooltips.html).
+   `--color-link` en niet `--color-primary`: gewone links hebben die kleur al
+   (thema-base.css), en op het callout-vlak (--color-bg-info, #d9ebf7) haalt
+   #007bc7 maar 3,7:1 waar #01689b 5,0:1 haalt (WCAG 1.4.3; axe-fout op de
+   hover in het DUTO-blok). */
+a.ref-term,
+a.ref-term:hover {
+  color: var(--color-link);
 }
 
 /* PDF-knop bouwt op de thema-.button; alleen brand-kleur en icoon-uitlijning
@@ -113,25 +120,6 @@ blockquote.callout .kern-bron {
   outline: 3px solid var(--color-text);
   outline-offset: 2px;
   filter: none;
-}
-
-/* Ref-term die óók naar een andere pagina linkt, leest als link: linkkleur en
-   een doorgetrokken lijn. Termen met href="#fn:…" (alleen een hover) houden
-   de tekstkleur en de dotted lijn uit het thema, zodat hover en link uit
-   elkaar te houden zijn (feedback normblad 1, criteria 1.6 en 1.8). */
-.norm a.ref-term[href^="/"],
-.norm a.ref-term[href^="/"]:hover {
-  color: var(--color-primary);
-  text-decoration: underline solid;
-  text-decoration-color: currentColor;
-  text-decoration-thickness: 1px;
-}
-
-/* Versiezin en laatst-gewijzigd-datum in de voet: naslag, geen kop. Kleiner
-   en gedempt, zodat de zin niet met de inhoud concurreert. */
-.page-meta {
-  font-size: 0.875rem;
-  color: var(--color-text-muted, #555);
 }
 
 /* Toelichting hergebruikt de `.references`-accordeon van het thema; alleen de
@@ -178,12 +166,4 @@ abbr[title] {
     min-inline-size: 0;
     max-inline-size: calc(100vw - 2rem);
   }
-}
-
-/* Versielabel op de homepage: die heeft geen voet, waar de versie elders staat
-   (`_partials/lastmod.html`). Gedempt, want context en geen mededeling. */
-.versielabel {
-  margin-block-start: 2rem;
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
 }
