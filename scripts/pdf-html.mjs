@@ -78,13 +78,33 @@ export function runsVan(el, ctx, basis = {}) {
   return runs.filter((r) => r.text)
 }
 
-/** <ul>/<ol> → items voor TaggedPdf.lijst(), met geneste lijsten als `sub`. */
+/**
+ * <ul>/<ol> → items voor TaggedPdf.lijst(). Elk item is een reeks segmenten in
+ * documentvolgorde: tekst en geneste lijsten wisselen elkaar af, zodat
+ * "tekst, sublijst, tekst" in de PDF dezelfde volgorde houdt als op de site
+ * (runsVan alleen zou de tekst ná de sublijst ervóór plakken).
+ */
 export function lijstItems(lijstEl, ctx) {
   return [...lijstEl.children].map((li) => {
-    const item = { runs: runsVan(li, ctx), id: li.getAttribute('id') ? ctx.prefix + li.getAttribute('id') : undefined }
-    const genest = [...li.children].find(isLijst)
-    if (genest) item.sub = { items: lijstItems(genest, ctx), geordend: genest.tagName.toLowerCase() === 'ol' }
-    return item
+    const segmenten = []
+    let buffer = null
+    const spoel = () => {
+      if (!buffer) return
+      const runs = runsVan(buffer, ctx)
+      if (runs.length) segmenten.push({ runs })
+      buffer = null
+    }
+    for (const node of [...li.childNodes]) {
+      if (node.nodeType === 1 && isLijst(node)) {
+        spoel()
+        segmenten.push({ sub: { items: lijstItems(node, ctx), geordend: node.tagName.toLowerCase() === 'ol' } })
+      } else {
+        buffer = buffer || li.ownerDocument.createElement('span')
+        buffer.appendChild(node)
+      }
+    }
+    spoel()
+    return { segmenten, id: li.getAttribute('id') ? ctx.prefix + li.getAttribute('id') : undefined }
   })
 }
 
@@ -162,6 +182,14 @@ export function schrijfNorm(pdf, data, opties) {
       if (runs.length) pdf.alinea(runs, { ouder: sectie })
     } else if (isLijst(el)) {
       pdf.lijst(lijstItems(el, ctx), { geordend: tag === 'ol', ouder: sectie })
+    } else if (/^(table|thead|tbody|figure|pre)$/.test(tag)) {
+      // Nog niet ondersteund in de structuurboom. Stil platslaan tot één
+      // alinea zou de site en de "toegankelijke" PDF uiteen laten lopen
+      // zonder dat een controle het ziet — dan liever een bouwfout.
+      throw new Error(`<${tag}> wordt nog niet ondersteund in de PDF-pijplijn (scripts/pdf-html.mjs); ` +
+        'bouw er structuurondersteuning voor of haal het element uit de content')
+    } else if (tag === 'hr') {
+      pdf.lijn()
     } else if (heeftBlokkinderen(el)) {
       // Wrapper (blockquote, div, …): de blokken erin verwerken in plaats van
       // alles door runsVan te halen — die slaat lijsten juist over.
@@ -177,14 +205,13 @@ export function schrijfNorm(pdf, data, opties) {
   // navigeert midden in een genummerde lijst (zelfde keuze als de oude exports).
   if (voetnoten) {
     pdf.kop(2 + kopShift, 'Bronnen', { stijl: 'bronnenH', ouder: sectie })
-    const items = [...voetnoten.children].map((li) => {
-      // Goldmark wikkelt de brontekst in een <p>; plat is hij een echte LBody.
-      const bron = li.querySelector('p') || li
-      return {
-        runs: runsVan(bron, { ...ctx, underlineLinks: true }),
-        id: prefix + (li.getAttribute('id') || ''),
-      }
-    })
+    const items = [...voetnoten.children].map((li) => ({
+      // De hele <li>: runsVan loopt door álle alinea's heen, dus ook een
+      // voetnoot met een vervolgalinea komt volledig in de lijst (alleen de
+      // eerste <p> nemen liet de rest stilletjes weg).
+      runs: runsVan(li, { ...ctx, underlineLinks: true }),
+      id: prefix + (li.getAttribute('id') || ''),
+    }))
     pdf.lijst(items, { stijl: 'bronnen', geordend: true, ouder: sectie })
   }
 }

@@ -214,13 +214,33 @@ test('runsVan: interne links worden sitelinks, externe blijven', () => {
   assert.equal(runs.find((r) => r.text === 'extern').link, 'https://extern.example/')
 })
 
-test('lijstItems: geneste lijst wordt sub, niet platgeslagen in de tekst', () => {
-  const { document } = parseHTML('<body><ul><li>Boven<ul><li>onder een</li><li>onder twee</li></ul></li></ul></body>')
+test('lijstItems: geneste lijst wordt een segment op zijn plek, tekst erna blijft erna', () => {
+  const { document } = parseHTML('<body><ul><li>Boven<ul><li>onder een</li><li>onder twee</li></ul> tenzij anders bepaald.</li></ul></body>')
   const items = lijstItems(document.querySelector('ul'), { prefix: '', siteUrl: 'https://x.nl/' })
   assert.equal(items.length, 1)
-  assert.equal(items[0].runs.map((r) => r.text).join(''), 'Boven')
-  assert.equal(items[0].sub.items.length, 2)
-  assert.equal(items[0].sub.geordend, false)
+  const seg = items[0].segmenten
+  assert.equal(seg.length, 3, JSON.stringify(seg))
+  assert.equal(seg[0].runs.map((r) => r.text).join(''), 'Boven')
+  assert.equal(seg[1].sub.items.length, 2)
+  assert.equal(seg[1].sub.geordend, false)
+  assert.equal(seg[2].runs.map((r) => r.text).join('').trim(), 'tenzij anders bepaald.')
+})
+
+test('voetnoot met vervolgalinea houdt beide alinea’s in de bronnenlijst', () => {
+  const uit = []
+  const nep = { alinea: () => {}, kop: () => {}, bladwijzer: () => {}, lijst: (items) => uit.push(items) }
+  schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<div class="footnotes" role="doc-endnotes"><ol><li id="fn:1"><p>Eerste alinea.</p><p>Tweede alinea.</p></li></ol></div>' }, { siteUrl: DATA.site_url })
+  const bron = uit[0][0]
+  const tekst = bron.runs.map((r) => r.text).join('')
+  assert.ok(tekst.includes('Eerste alinea.') && tekst.includes('Tweede alinea.'), tekst)
+})
+
+test('tabel in de body is een bouwfout, geen stille woordenbrij', () => {
+  const nep = { alinea: () => {}, kop: () => {}, bladwijzer: () => {}, lijst: () => {} }
+  assert.throws(
+    () => schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<table><tbody><tr><td>a</td></tr></tbody></table>' }, { siteUrl: DATA.site_url }),
+    /wordt nog niet ondersteund/
+  )
 })
 
 test('vetgedrukte tekst behoudt zijn opmaak als aparte run', () => {

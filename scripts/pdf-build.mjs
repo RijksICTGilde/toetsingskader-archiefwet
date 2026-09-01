@@ -172,7 +172,11 @@ function structuurFouten(data) {
   const fouten = []
   const normen = data.kind === 'kader' ? data.normen : [data]
   for (const norm of normen) {
-    const { document } = parseHTML(`<!DOCTYPE html><html><body><h1>x</h1>${norm.body_html || ''}</body></html>`)
+    // De pijplijn registreert zelf named destinations ("kern"); die doen in
+    // de botsingscontrole mee, want pdfkit overschrijft een dubbele naam
+    // zwijgend en elke sprong landt dan op de laatste schrijver.
+    const synth = norm.kern_html ? '<p id="kern"></p>' : ''
+    const { document } = parseHTML(`<!DOCTYPE html><html><body><h1>x</h1>${synth}${norm.body_html || ''}</body></html>`)
     for (const f of kopvolgordeFouten(document)) console.warn(`  norm ${norm.norm_id}: ${f} — in de PDF genormaliseerd naar één niveau dieper`)
     for (const id of dubbeleIdFouten(document)) fouten.push(`norm ${norm.norm_id}: dubbel anker "${id}"`)
   }

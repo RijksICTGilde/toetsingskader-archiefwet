@@ -172,11 +172,12 @@ export class TaggedPdf {
   }
 
   /**
-   * Lijst als L → LI → LBody. Items zijn arrays van runs of
-   * {runs, id, sub: {items, geordend}} voor een geneste lijst (die komt als L
-   * ín de LI, na de LBody). Genummerde lijsten krijgen het nummer in de tekst;
-   * pdfkit nummert niet zelf. `label: false` voor items die al een nummer
-   * dragen (de inhoudsopgave: "1. Inbeheername en beheer").
+   * Lijst als L → LI → LBody. Items zijn arrays van runs, {runs, id} of
+   * {segmenten: [{runs} | {sub: {items, geordend}}], id}: segmenten schrijven
+   * in documentvolgorde binnen de LBody, met een geneste lijst als L ín die
+   * LBody — zo blijft "tekst, sublijst, tekst" op volgorde. Genummerde
+   * lijsten krijgen het nummer in de tekst; pdfkit nummert niet zelf.
+   * `label: false` voor items die al een nummer dragen (de inhoudsopgave).
    */
   lijst(items, { stijl = 'para', geordend = false, start = 1, label = true, ouder } = {}) {
     this.#lijstIn(ouder || this.root, items, { s: STIJL[stijl], geordend, start, label, inspring: 0 })
@@ -187,19 +188,25 @@ export class TaggedPdf {
     const l = this.doc.struct('L')
     ouderEl.add(l)
     items.forEach((item, i) => {
-      const runs = Array.isArray(item) ? item : item.runs
+      const segmenten = Array.isArray(item)
+        ? [{ runs: item }]
+        : item.segmenten || (item.runs ? [{ runs: item.runs }] : [])
       const id = Array.isArray(item) ? undefined : item.id
-      const sub = Array.isArray(item) ? undefined : item.sub
       const li = this.doc.struct('LI')
       l.add(li)
       const lbody = this.doc.struct('LBody')
       li.add(lbody)
-      const prefix = !label ? [] : [{ text: geordend ? `${start + i}. ` : '•  ' }]
-      this.#tekstBlok(lbody, [...prefix, ...runs], s, { id, inspring: inspring + INSPRING })
-      lbody.end()
-      if (sub?.items?.length) {
-        this.#lijstIn(li, sub.items, { s, geordend: !!sub.geordend, start: 1, label: true, inspring: inspring + INSPRING })
+      let eersteTekst = true
+      for (const seg of segmenten) {
+        if (seg.runs) {
+          const prefix = eersteTekst && label ? [{ text: geordend ? `${start + i}. ` : '•  ' }] : []
+          this.#tekstBlok(lbody, [...prefix, ...seg.runs], s, { id: eersteTekst ? id : undefined, inspring: inspring + INSPRING })
+          eersteTekst = false
+        } else if (seg.sub?.items?.length) {
+          this.#lijstIn(lbody, seg.sub.items, { s, geordend: !!seg.sub.geordend, start: 1, label: true, inspring: inspring + INSPRING })
+        }
       }
+      lbody.end()
       li.end()
     })
     l.end()

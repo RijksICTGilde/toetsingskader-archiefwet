@@ -43,6 +43,11 @@
   {{ end }}
   {{/* Afkortingen uitschrijven (3.1.4, bevinding 28). */}}
   {{ $textOnly = partial "afkortingen.html" $textOnly }}
+  {{/* De brontekst gaat zo een replaceRE-replacement in, waar Go `$1`/`${x}`
+       als capture-groep uitbreidt: een letterlijke "$" in een voetnoot zou de
+       tooltip vullen met matchfragmenten. `$$` is de escape voor een kale $. */}}
+  {{ $textOnly = replace $textOnly "$" "$$$$" }}
+  {{ $linkHTML = replace $linkHTML "$" "$$$$" }}
   {{/* Twee passes, anders landt de term op een leesteken of blijft hij leeg:
        A) link (+ leestekens/spatie) vóór de voetnoot → de link wordt de ref-term;
        B) gewoon woord → het woord wordt de ref-term.
@@ -73,7 +78,8 @@
     {{/* De eerstvolgende bronlink na deze <li> hoort bij deze bron: alleen
          voetnoten mét zo'n link staan in $bronLabels. */}}
     {{ $pat := printf `(?s)(<li id="fn:%s">.*?<a href="[^"]*")([^>]*>Bekijk bron</a>)` $n }}
-    {{ $ol = replaceRE $pat (printf `${1} aria-label="%s"${2}` $label) $ol 1 }}
+    {{/* Zelfde $-escape als hierboven: het label komt uit de brontekst. */}}
+    {{ $ol = replaceRE $pat (printf `${1} aria-label="%s"${2}` (replace $label "$" "$$$$")) $ol 1 }}
   {{ end }}
   {{/* Backlinks heten bij Goldmark alleen "↩︎": tientallen naamloze links in
        een linkoverzicht (2.4.4). */}}

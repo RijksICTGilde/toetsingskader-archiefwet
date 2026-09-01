@@ -20,7 +20,9 @@
      er een lege root-heading boven de h2's; die slaan we over. */}}
 {{ $headings := .Fragments.Headings }}
 {{ with $headings }}{{ $first := index . 0 }}{{ if not $first.ID }}{{ $headings = $first.Headings }}{{ end }}{{ end }}
-{{ $hasToc := gt (len $headings) 0 }}
+{{/* Ook bij een norm met alleen een kern (geen koppen) rendert de aside: daar
+     staat de PDF-downloadlink in, en de PDF wordt voor zo'n norm wél gemaakt. */}}
+{{ $hasToc := or .Params.kern (gt (len $headings) 0) }}
 
 <article class="norm{{ if .Params.wide }} wide{{ end }}">
   <header>
@@ -87,11 +89,16 @@
        pagina. Werkt dus ook zonder JavaScript. Alleen waar het
        `pdfdata`-outputformat aanstaat (front matter van content/normen/_index.md);
        anders wijst de knop naar een bestand dat er niet is. */}}
+  {{- /* Én norm_id: de cascade zet `pdfdata` sectie-breed aan, maar de
+         PDF wordt alleen voor echte normpagina's geschreven — voor een andere
+         pagina onder /normen/ zou dit een knop naar een 404 zijn. */ -}}
+  {{- if .Params.norm_id -}}
   {{- with .OutputFormats.Get "pdfdata" -}}
   <a class="button pdf-download" href="{{ $.RelPermalink }}index.pdf"
      download="{{ $.File.ContentBaseName }}.pdf">
     {{- partial "icon.html" "download" -}}<span>Download als PDF</span>
   </a>
+  {{- end -}}
   {{- end -}}
   <h2>Op deze pagina</h2>
   <nav>
