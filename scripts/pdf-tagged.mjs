@@ -1,17 +1,30 @@
 // Getagde PDF-opbouw met pdfkit: elk tekstblok wordt via markStructureContent()
 // aan een structuurelement gekoppeld, zodat de PDF een leesvolgorde met echte
-// koppen en lijsten krijgt (WCAG 1.3.1, EN 301 549 §10).
+// koppen, lijsten en links krijgt (WCAG 1.3.1, EN 301 549 §10, PDF/UA-1).
 //
 // Zelfde aanpak als de AI-verordening-beslishulp
 // (MinBZK/ai-verordening-beslishulp#1047, frontend/src/services/pdfTagged.ts),
 // maar in Node bij de build: de inhoud is statisch, dus de bezoeker hoeft niets
 // te genereren en de downloadlink blijft een gewoon bestand.
 //
-// De maten en kleuren komen uit de eerdere exports (pdfMake, daarna print.css):
-// A4, marges [48, 92, 48, 56]pt, RO Sans, brand #007bc7.
+// Drie pdfkit-eigenaardigheden waar deze code omheen werkt — allemaal gemeten
+// op de gegenereerde bytes, zie tests/js/pdf-tagged.test.mjs:
 //
-// Wie hier iets aan verandert: `npm run build:pdf && npm run test:pdf-ua`
-// draait lokaal — geen browser nodig.
+// 1. Opties van een `continued`-run erven over naar de volgende run zodra die
+//    ze op `undefined` laat (text.js, _initOptions). Een link zou dan tot het
+//    einde van de alinea doorlopen. Vandaar: link/goTo/destination altijd
+//    expliciet, `null` als er niets is.
+// 2. Een link-annotatie krijgt alleen /StructParent en een OBJR in de boom als
+//    de tekst binnen een `struct('Link', [closure])` wordt geschreven (dan is
+//    _currentStructureElement een Link). goTo() krijgt dat zelfs dan niet
+//    vanzelf; daarvoor krijgt goTo tijdens die closure het structParent mee.
+// 3. Tekst die onder page.maxY() begint "past niet" en opent een nieuwe pagina;
+//    en een alinea die zelf over de paginagrens loopt roept addPage() aan
+//    buiten onze eigen nieuwePagina() om. Vandaar het briefhoofd op het
+//    `pageAdded`-event en de voetregel met de ondermarge tijdelijk op nul.
+//
+// Maten en kleuren komen uit de eerdere exports: A4, marges [48, 92, 48, 56]pt,
+// RO Sans, brand #007bc7.
 import PDFDocument from 'pdfkit'
 import SVGtoPDF from 'svg-to-pdfkit'
 import fs from 'node:fs'
@@ -24,8 +37,9 @@ const LIJN = '#dddddd' // decoratief, geen betekenisdrager
 
 const A4 = { breed: 595.28, hoog: 841.89 }
 const MARGE = { top: 92, bottom: 56, left: 48, right: 48 }
+const INSPRING = 14 // per lijstniveau
 
-// Stijlen als [fontgrootte, vet, kleur, marge-boven, marge-onder].
+// Stijlen: fontgrootte, vet, kleur, marge boven/onder (pt).
 const STIJL = {
   cover: { size: 26, bold: true, color: BRAND, boven: 0, onder: 24 },
   sectie: { size: 20, bold: true, color: BRAND, boven: 0, onder: 16 },
@@ -35,9 +49,8 @@ const STIJL = {
   para: { size: 10.5, bold: false, color: TEKST, boven: 0, onder: 6 },
   meta: { size: 12, bold: false, color: META, boven: 4, onder: 0 },
   bronnenH: { size: 10, bold: true, color: BRAND, boven: 14, onder: 4 },
-  colofonH: { size: 13, bold: true, color: BRAND, boven: 18, onder: 6 },
   bronnen: { size: 8.5, bold: false, color: NOOT, boven: 0, onder: 2 },
-  colofon: { size: 9.5, bold: false, color: NOOT, boven: 0, onder: 2 },
+  colofon: { size: 9.5, bold: false, color: NOOT, boven: 16, onder: 2 },
   toc: { size: 11, bold: false, color: TEKST, boven: 0, onder: 6 },
 }
 
@@ -69,6 +82,9 @@ export class TaggedPdf {
     this.doc.registerFont('BodyBold', opties.fonts.bold)
     this.doc.registerFont('BodyItalic', opties.fonts.italic)
     this.briefhoofdSvg = opties.briefhoofdSvg
+    // Op élke pagina, ook de pagina's die pdfkit zelf opent als een alinea
+    // over de grens loopt (zie kop van dit bestand, punt 3).
+    this.doc.on('pageAdded', () => this.#briefhoofd())
     this.root = this.doc.struct('Document')
     this.doc.addStructure(this.root)
     this.klaar = new Promise((resolve) => {
@@ -84,17 +100,24 @@ export class TaggedPdf {
     return 'Body'
   }
 
-  /** Nieuwe pagina met het briefhoofd als artifact (buiten de leesvolgorde). */
+  /** Briefhoofd als artifact (buiten de leesvolgorde). */
+  #briefhoofd() {
+    if (!this.briefhoofdSvg) return
+    const { doc } = this
+    const x = doc.x
+    const y = doc.y
+    // Het lint stond in de oude export gecentreerd (26pt breed) tegen de
+    // bovenrand; het briefhoofd-SVG heeft het lint op x=0..26, dus het geheel
+    // begint op paginamidden − 13pt.
+    doc.markContent('Artifact', { type: 'Pagination' })
+    SVGtoPDF(doc, this.briefhoofdSvg, A4.breed / 2 - 13, 0)
+    doc.endMarkedContent()
+    doc.x = x
+    doc.y = y
+  }
+
   nieuwePagina() {
     this.doc.addPage()
-    if (this.briefhoofdSvg) {
-      // Het lint stond in de oude export gecentreerd (lint 26pt breed) en
-      // tegen de bovenrand; het briefhoofd-SVG is 202,282×52pt met het lint op
-      // x=0..26, dus het geheel begint op paginamidden − 13pt.
-      this.doc.markContent('Artifact', { type: 'Pagination' })
-      SVGtoPDF(this.doc, this.briefhoofdSvg, A4.breed / 2 - 13, 0)
-      this.doc.endMarkedContent()
-    }
     this.doc.x = MARGE.left
     this.doc.y = MARGE.top
   }
@@ -103,11 +126,15 @@ export class TaggedPdf {
     return this.doc.bufferedPageRange().count
   }
 
-  /** Kop als H<niveau>-structuurelement; zet ook een named destination. */
-  kop(niveau, tekst, { stijl, id, ouder, uitlijning } = {}) {
+  /**
+   * Kop als H<niveau>. `inhoud` is een string of een array runs (een kop kan
+   * een voetnootmarkering dragen — norm 4 doet dat). Zet ook een named
+   * destination als er een id is.
+   */
+  kop(niveau, inhoud, { stijl, id, ouder, uitlijning } = {}) {
     const s = STIJL[stijl || 'h' + niveau]
-    const tag = 'H' + niveau
-    this.#blok(tag, [{ text: tekst, bold: s.bold }], s, { id, ouder, uitlijning })
+    const runs = (typeof inhoud === 'string' ? [{ text: inhoud }] : inhoud).map((r) => ({ bold: s.bold, ...r }))
+    this.#blok('H' + niveau, runs, s, { id, ouder, uitlijning })
   }
 
   /** Alinea; runs = [{text, bold, italics, sup, underline, color, link, goTo}]. */
@@ -116,45 +143,44 @@ export class TaggedPdf {
   }
 
   /**
-   * Lijst: items zijn arrays van runs (of {runs, id}). Structuur L → LI →
-   * LBody, zoals de beslishulp en zoals PAC hem verwacht. Genummerde lijsten
-   * krijgen het nummer in de tekst; pdfkit nummert niet zelf.
+   * Lijst als L → LI → LBody. Items zijn arrays van runs of
+   * {runs, id, sub: {items, geordend}} voor een geneste lijst (die komt als L
+   * ín de LI, na de LBody). Genummerde lijsten krijgen het nummer in de tekst;
+   * pdfkit nummert niet zelf. `label: false` voor items die al een nummer
+   * dragen (de inhoudsopgave: "1. Inbeheername en beheer").
    */
   lijst(items, { stijl = 'para', geordend = false, start = 1, label = true, ouder } = {}) {
-    const s = STIJL[stijl]
+    this.#lijstIn(ouder || this.root, items, { s: STIJL[stijl], geordend, start, label, inspring: 0 })
+    this.doc.y += STIJL[stijl].onder
+  }
+
+  #lijstIn(ouderEl, items, { s, geordend, start, label, inspring }) {
     const l = this.doc.struct('L')
-    ;(ouder || this.root).add(l)
+    ouderEl.add(l)
     items.forEach((item, i) => {
       const runs = Array.isArray(item) ? item : item.runs
       const id = Array.isArray(item) ? undefined : item.id
+      const sub = Array.isArray(item) ? undefined : item.sub
       const li = this.doc.struct('LI')
       l.add(li)
       const lbody = this.doc.struct('LBody')
       li.add(lbody)
-      // `label: false` voor lijsten waarvan de items zelf al een nummer dragen
-      // (de inhoudsopgave: de normtitels heten "1. Inbeheername en beheer").
       const prefix = !label ? [] : [{ text: geordend ? `${start + i}. ` : '•  ' }]
-      this.#tekstBlok(lbody, [...prefix, ...runs], s, {
-        id,
-        inspring: 14,
-      })
+      this.#tekstBlok(lbody, [...prefix, ...runs], s, { id, inspring: inspring + INSPRING })
       lbody.end()
+      if (sub?.items?.length) {
+        this.#lijstIn(li, sub.items, { s, geordend: !!sub.geordend, start: 1, label: true, inspring: inspring + INSPRING })
+      }
       li.end()
     })
     l.end()
-    this.doc.y += s.onder
   }
 
   /** Horizontale lijn als artifact (decoratie, geen inhoud). */
   lijn() {
     const { doc } = this
     doc.markContent('Artifact', { type: 'Layout' })
-    doc
-      .moveTo(MARGE.left, doc.y)
-      .lineTo(A4.breed - MARGE.right, doc.y)
-      .lineWidth(0.5)
-      .strokeColor(LIJN)
-      .stroke()
+    doc.moveTo(MARGE.left, doc.y).lineTo(A4.breed - MARGE.right, doc.y).lineWidth(0.5).strokeColor(LIJN).stroke()
     doc.endMarkedContent()
     doc.y += 8
   }
@@ -166,39 +192,66 @@ export class TaggedPdf {
     el.end()
   }
 
-  /** Runs binnen één marked-content-blok schrijven, met stijl en paginaval. */
+  /**
+   * Runs binnen één structuurelement schrijven. Runs met link of goTo gaan in
+   * een eigen Link-kind (punt 2 in de kop); de rest in marked content van het
+   * element zelf. Het element krijgt daardoor meerdere MCID's — dat mag.
+   */
   #tekstBlok(el, runs, s, { id, inspring = 0, uitlijning } = {}) {
     const { doc } = this
+    const tagNaam = el.dictionary.data.S // pdfkit bewaart /S als string
     doc.y += s.boven
-    // Past de eerste regel niet meer boven de ondermarge, dan eerst een nieuwe
-    // pagina — anders schrijft pdfkit hem er zelf, maar buiten ons briefhoofd om.
+    // Past de eerste regel niet meer boven de ondermarge, dan eerst zelf een
+    // nieuwe pagina; loopt het blok daarna door over de grens, dan doet
+    // pdfkit dat en tekent `pageAdded` het briefhoofd.
     if (doc.y + s.size * REGEL > A4.hoog - MARGE.bottom) this.nieuwePagina()
-    el.add(doc.markStructureContent(el.dictionary.data.S.name))
     const x = MARGE.left + inspring
     const breedte = A4.breed - MARGE.left - MARGE.right - inspring
+
+    let open = false
+    const openMC = () => { if (!open) { el.add(doc.markStructureContent(tagNaam)); open = true } }
+    const sluitMC = () => { if (open) { doc.endMarkedContent(); open = false } }
+
     runs.forEach((run, i) => {
-      const laatste = i === runs.length - 1
       const opties = {
         width: breedte,
         lineGap: s.size * (REGEL - 1),
-        continued: !laatste,
+        continued: i < runs.length - 1,
         align: uitlijning || 'left',
-        // `underline` alleen waar de oude opmaak hem had (de bronnenlijst);
-        // in de lopende tekst is het kleurverschil 3,86:1 het onderscheid
-        // (1.4.1), net als op print.css en in de oude export.
-        underline: run.underline || false,
-        link: run.link || undefined,
-        goTo: run.goTo || undefined,
-        destination: (i === 0 && id) || undefined,
+        // `underline` alleen waar de oude opmaak hem had (de bronnenlijst); in
+        // de lopende tekst is het kleurverschil 3,86:1 het onderscheid (1.4.1).
+        underline: !!run.underline,
+        // Expliciet null, nooit undefined: zie punt 1 in de kop.
+        link: run.link || null,
+        goTo: run.goTo || null,
+        destination: (i === 0 && id) || null,
       }
       doc
         .font(this.font(run))
         .fontSize(run.sup ? s.size * 0.65 : s.size)
         .fillColor(run.color || (run.link || run.goTo ? BRAND : s.color))
-      if (i === 0) doc.text(run.text, x, doc.y, opties)
-      else doc.text(run.text, opties)
+      const schrijf = () => (i === 0 ? doc.text(run.text, x, doc.y, opties) : doc.text(run.text, opties))
+
+      if (run.link || run.goTo) {
+        sluitMC()
+        // De closure loopt binnen struct(): _currentStructureElement is dan
+        // dit Link-element, zodat link() er structParent van maakt. goTo()
+        // doet dat niet uit zichzelf; tijdelijk bijgeleerd.
+        const origGoTo = doc.goTo
+        doc.goTo = (gx, gy, gw, gh, naam, o) => origGoTo.call(doc, gx, gy, gw, gh, naam, { ...o, structParent: doc._currentStructureElement })
+        try {
+          const link = doc.struct('Link', [schrijf])
+          el.add(link)
+          link.end()
+        } finally {
+          doc.goTo = origGoTo
+        }
+      } else {
+        openMC()
+        schrijf()
+      }
     })
-    doc.endMarkedContent()
+    sluitMC()
     doc.y += s.onder
   }
 
@@ -216,21 +269,13 @@ export class TaggedPdf {
     const totaal = doc.bufferedPageRange().count
     for (let i = 0; i < totaal; i++) {
       doc.switchToPage(i)
-      // De voetregel staat ín de ondermarge, dus onder page.maxY(). pdfkit
-      // concludeert dan dat de tekst niet past en opent een nieuwe pagina —
-      // per pagina één lege extra, achteraan het document (dezelfde valkuil
-      // die de beslishulp in pdfTagged.ts beschrijft). Daarom de marge even op
-      // nul tijdens het tekenen.
+      // De voetregel staat in de ondermarge, onder page.maxY(); zonder deze
+      // truc opent pdfkit per pagina een lege extra (punt 3 in de kop).
       const ondermarge = doc.page.margins.bottom
       doc.page.margins.bottom = 0
       doc.markContent('Artifact', { type: 'Pagination' })
       const y = A4.hoog - MARGE.bottom + 14
-      doc
-        .moveTo(MARGE.left, y - 5)
-        .lineTo(A4.breed - MARGE.right, y - 5)
-        .lineWidth(0.5)
-        .strokeColor(LIJN)
-        .stroke()
+      doc.moveTo(MARGE.left, y - 5).lineTo(A4.breed - MARGE.right, y - 5).lineWidth(0.5).strokeColor(LIJN).stroke()
       doc
         .font('Body')
         .fontSize(8)

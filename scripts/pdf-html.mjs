@@ -13,9 +13,12 @@ function absoluteLink(href, siteUrl) {
   return href.startsWith('/') ? basis + href : href
 }
 
+const isLijst = (el) => el.nodeType === 1 && /^(ul|ol)$/i.test(el.tagName)
+
 /**
- * Inline-inhoud van een element naar runs voor TaggedPdf.alinea()/lijst().
- * ctx: { prefix, siteUrl, underlineLinks }
+ * Inline-inhoud van een element naar runs voor TaggedPdf.
+ * ctx: { prefix, siteUrl, underlineLinks }. Geneste lijsten binnen een <li>
+ * worden overgeslagen; die verwerkt lijstItems() apart als L in de LI.
  */
 export function runsVan(el, ctx, basis = {}) {
   const runs = []
@@ -25,7 +28,7 @@ export function runsVan(el, ctx, basis = {}) {
       if (t) runs.push({ ...basis, text: t })
       continue
     }
-    if (kind.nodeType !== 1) continue
+    if (kind.nodeType !== 1 || isLijst(kind)) continue
     const tag = kind.tagName.toLowerCase()
     if (tag === 'strong' || tag === 'b') runs.push(...runsVan(kind, ctx, { ...basis, bold: true }))
     else if (tag === 'em' || tag === 'i') runs.push(...runsVan(kind, ctx, { ...basis, italics: true }))
@@ -56,6 +59,16 @@ export function runsVan(el, ctx, basis = {}) {
   return runs.filter((r) => r.text)
 }
 
+/** <ul>/<ol> → items voor TaggedPdf.lijst(), met geneste lijsten als `sub`. */
+export function lijstItems(lijstEl, ctx) {
+  return [...lijstEl.children].map((li) => {
+    const item = { runs: runsVan(li, ctx), id: li.getAttribute('id') ? ctx.prefix + li.getAttribute('id') : undefined }
+    const genest = [...li.children].find(isLijst)
+    if (genest) item.sub = { items: lijstItems(genest, ctx), geordend: genest.tagName.toLowerCase() === 'ol' }
+    return item
+  })
+}
+
 /**
  * Eén norm in het document schrijven: kern, body, bronnenlijst.
  *
@@ -71,15 +84,16 @@ export function schrijfNorm(pdf, data, opties) {
   const { prefix = '', kopShift = 0, siteUrl, sectie, bladwijzer } = opties
   const ctx = { prefix, siteUrl }
 
-  // --- Kern: een sectie met een kop, geen citaat (zie print.css-historie). ---
+  // --- Kern -------------------------------------------------------------------
+  // Zonder kop, net als op de site (keuze 31 augustus 2026, zie
+  // docs/afwijkingen-van-het-normblad.md): de kerntekst is de eerste alinea
+  // onder de titel. Wel een named destination, voor wie ernaar verwijst.
   if (data.kern_html) {
-    pdf.kop(2 + kopShift, 'Kern van de norm', { stijl: 'h2', id: prefix + 'kern', ouder: sectie })
-    if (bladwijzer) pdf.bladwijzer('Kern van de norm', { ouder: bladwijzer })
-    for (const blok of blokken(data.kern_html)) {
-      pdf.alinea(runsVan(blok, ctx), { ouder: sectie })
-    }
+    blokken(data.kern_html).forEach((blok, i) => {
+      pdf.alinea(runsVan(blok, ctx), { ouder: sectie, id: i === 0 ? prefix + 'kern' : undefined })
+    })
     for (const blok of blokken(data.kern_bron_html || '')) {
-      pdf.alinea(runsVan(blok, ctx), { stijl: 'colofon', ouder: sectie })
+      pdf.alinea(runsVan(blok, ctx), { stijl: 'bronnen', ouder: sectie })
     }
   }
 
@@ -114,7 +128,9 @@ export function schrijfNorm(pdf, data, opties) {
       tagVoor.set(niveau, tagNiveau)
       vorigTag = tagNiveau
       const id = el.getAttribute('id')
-      pdf.kop(tagNiveau, el.textContent.trim(), {
+      // Als runs, niet als platte tekst: een kop kan een voetnootmarkering
+      // dragen (norm 4), en die moet superscript blijven én springen.
+      pdf.kop(tagNiveau, runsVan(el, ctx), {
         stijl: 'h' + niveau,
         id: id ? prefix + id : undefined,
         ouder: sectie,
@@ -123,11 +139,8 @@ export function schrijfNorm(pdf, data, opties) {
     } else if (tag === 'p') {
       const runs = runsVan(el, ctx)
       if (runs.length) pdf.alinea(runs, { ouder: sectie })
-    } else if (tag === 'ul' || tag === 'ol') {
-      pdf.lijst(
-        [...el.children].map((li) => runsVan(li, ctx)),
-        { geordend: tag === 'ol', ouder: sectie }
-      )
+    } else if (isLijst(el)) {
+      pdf.lijst(lijstItems(el, ctx), { geordend: tag === 'ol', ouder: sectie })
     } else if (el.textContent.trim()) {
       pdf.alinea(runsVan(el, ctx), { ouder: sectie })
     }
@@ -135,14 +148,12 @@ export function schrijfNorm(pdf, data, opties) {
 
   // --- Bronnen ----------------------------------------------------------------
   // Goldmark zet de voetnoten zonder kop; zonder "Bronnen" valt wie op koppen
-  // navigeert midden in een genummerde lijst (zelfde keuze als de oude
-  // exports; tests/js/a11y-checks.test.mjs waakt hierover).
+  // navigeert midden in een genummerde lijst (zelfde keuze als de oude exports).
   if (voetnoten) {
     pdf.kop(2 + kopShift, 'Bronnen', { stijl: 'bronnenH', ouder: sectie })
     const items = [...voetnoten.children].map((li) => {
       // Goldmark wikkelt de brontekst in een <p>; plat is hij een echte LBody.
-      const p = li.querySelector('p')
-      const bron = p || li
+      const bron = li.querySelector('p') || li
       return {
         runs: runsVan(bron, { ...ctx, underlineLinks: true }),
         id: prefix + (li.getAttribute('id') || ''),
@@ -152,13 +163,19 @@ export function schrijfNorm(pdf, data, opties) {
   }
 }
 
-/** Losse HTML (kern, bron) als blokelementen; kale tekst wordt één alinea. */
+/**
+ * Losse HTML (kern, bron) als blokelementen. Een `kern` uit de front matter
+ * markdownified zonder <p>; staat er dan een inline element in (een link),
+ * dan zijn `children` alleen dat element en zou de rest van de tekst
+ * verdwijnen (norm 5). Daarom: zijn er tekstknopen op het hoogste niveau, dan
+ * is het geheel één alinea.
+ */
 function blokken(html) {
   if (!html || !html.trim()) return []
   const { document } = parseHTML(`<!DOCTYPE html><html><body>${html}</body></html>`)
-  const kinderen = [...document.body.children]
-  if (kinderen.length) return kinderen
+  const losseTekst = [...document.body.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())
+  if (!losseTekst && document.body.children.length) return [...document.body.children]
   const p = document.createElement('p')
-  p.textContent = document.body.textContent.trim()
+  p.innerHTML = document.body.innerHTML
   return [p]
 }

@@ -49,32 +49,43 @@ function nieuw(data) {
   })
 }
 
+// "1 september 2026" in Nederlandse tijd, zonder te vertrouwen op nl-locale-
+// data: Alpine's Node (containerbuild) heeft alleen de Engelse ICU-set en zou
+// "September 1, 2026" geven; de tijdzone voorkomt dat een nachtelijke build
+// de vorige dag stempelt.
+const MAANDEN = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december']
+function datumNL(d) {
+  const delen = Object.fromEntries(
+    new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Amsterdam', day: 'numeric', month: 'numeric', year: 'numeric' })
+      .formatToParts(d).filter((p) => p.type !== 'literal').map((p) => [p.type, Number(p.value)])
+  )
+  return `${delen.day} ${MAANDEN[delen.month - 1]} ${delen.year}`
+}
+
 // Titelpagina: dezelfde regels als de eerdere exports. De datum is de
 // bouwdatum — er wordt niets meer bij de bezoeker gegenereerd.
 function titelpagina(pdf, titel, data) {
   pdf.nieuwePagina()
   pdf.doc.y = 92 + 168 // zelfde witruimte boven de titel als de oude export
   pdf.kop(1, titel, { stijl: 'cover', uitlijning: 'center' })
-  const datum = new Intl.DateTimeFormat('nl-NL', { dateStyle: 'long' }).format(new Date())
+  const datum = datumNL(new Date())
   pdf.alinea([{ text: `Gegenereerd op ${datum}` }], { stijl: 'meta', uitlijning: 'center' })
   // Eén run: pdfkit centreert een doorlopende reeks runs over elkaar heen.
   pdf.alinea([{ text: `Bron: ${data.url}`, link: data.url }], { stijl: 'meta', uitlijning: 'center' })
   pdf.alinea([{ text: `Versie: ${data.versie || 'onbekend'}` }], { stijl: 'meta', uitlijning: 'center' })
 }
 
-// "Belangrijke informatie" achterin, met het voorbehoud — de drie regels die
-// al in de pdfMake-export stonden.
-function colofon(pdf, url) {
-  pdf.kop(2, 'Belangrijke informatie', { stijl: 'colofonH' })
-  pdf.lijst(
+// Versieregel achterin — de vorm die de feedback van 25 augustus 2026 vroeg in
+// plaats van het blok "Belangrijke informatie": één zin met het versienummer
+// en een link naar de site (site-root, niet de pagina: bij de kader-PDF is dat
+// /normen/). Geen "in ontwikkeling en kan wijzigen" meer; die zin is weg.
+function colofon(pdf, data) {
+  const site = data.site_url || data.url
+  pdf.alinea(
     [
-      [{ text: 'Dit is een automatisch gegenereerd document op basis van de online versie van het toetsingskader.' }],
-      [
-        { text: 'De inhoud is in ontwikkeling en kan wijzigen; raadpleeg voor de actuele tekst altijd ' },
-        { text: url, link: url },
-        { text: '.' },
-      ],
-      [{ text: 'Aan dit document kunnen geen rechten worden ontleend.' }],
+      { text: `Dit is versie ${data.versie || 'onbekend'} van het toetsingskader. Bekijk voor de actuele versie ` },
+      { text: site, link: site },
+      { text: '. Aan dit document kunnen geen rechten worden ontleend.' },
     ],
     { stijl: 'colofon' }
   )
@@ -85,7 +96,7 @@ async function bouwNorm(data) {
   titelpagina(pdf, data.titel, data)
   pdf.nieuwePagina()
   schrijfNorm(pdf, data, { siteUrl: data.site_url, bladwijzer: pdf.doc.outline })
-  colofon(pdf, data.url)
+  colofon(pdf, data)
   return pdf.einde()
 }
 
@@ -125,7 +136,7 @@ async function bouwKaderEenmaal(data, paginas) {
       bladwijzer: bw,
     })
   }
-  colofon(pdf, data.url)
+  colofon(pdf, data)
   return { bytes: await pdf.einde(), paginas: gevonden }
 }
 
@@ -154,7 +165,7 @@ function structuurFouten(data) {
   const fouten = []
   const normen = data.kind === 'kader' ? data.normen : [data]
   for (const norm of normen) {
-    const { document } = parseHTML(`<!DOCTYPE html><html><body><h1>x</h1>${norm.kern_html ? '<h2>Kern</h2>' : ''}${norm.body_html || ''}</body></html>`)
+    const { document } = parseHTML(`<!DOCTYPE html><html><body><h1>x</h1>${norm.body_html || ''}</body></html>`)
     for (const f of kopvolgordeFouten(document)) console.warn(`  norm ${norm.norm_id}: ${f} — in de PDF genormaliseerd naar één niveau dieper`)
     for (const id of dubbeleIdFouten(document)) fouten.push(`norm ${norm.norm_id}: dubbel anker "${id}"`)
   }

@@ -53,7 +53,10 @@ changelog volgt [Semantic Versioning][semver].
   de containerbuild heeft geen Chromium meer nodig. `pdf-ua-check` eist naast
   de vier markers voortaan ook een gevulde boom (/H1, /LBody); kopvolgorde en
   dubbele ankers worden op de invoer gecontroleerd in `scripts/pdf-build.mjs`.
-  Zie docs/besluit-toegankelijke-pdf.md §11.
+  Zie docs/besluit-toegankelijke-pdf.md §11. Na review: links als
+  Link-structuurelementen met OBJR, geneste lijsten behouden, kern zonder kop
+  en het colofon als versieregel (zoals eerder afgesproken), briefhoofd op
+  elke pagina, Nederlandse datum ook in de containerbuild.
 - De PDF-export wordt bij de build gemaakt in plaats van in de browser van de
   bezoeker, en levert een getagde PDF: structuurboom, bladwijzers, taal en
   documenttitel. Daarmee is de download navigeerbaar met een schermlezer —

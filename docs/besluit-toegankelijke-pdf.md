@@ -271,6 +271,17 @@ Wat dat verandert:
   nummers komen uit een tweede opbouw in geheugen in plaats van een tweede
   Chromium-doorloop.
 
+Na een codereview (1 september 2026) zijn daar drie dingen aan toegevoegd die
+de vier markers níét zien en die daarom in `tests/js/pdf-tagged.test.mjs` op de
+bytes worden gemeten: de BDC-tags in de content-streams komen overeen met de
+boom (pdfkit bewaart `/S` als string; `.name` gaf `/undefined`), links zijn
+`Link`-structuurelementen met OBJR (PDF/UA-1 §7.18.5) en lopen niet door in de
+volgende tekstrun (pdfkit erft `continued`-opties over zodra ze `undefined`
+zijn), en geneste lijsten blijven L → LI → L. Twee inhoudelijke afwijkingen
+van eerdere besluiten zijn teruggedraaid: de kern heeft in de PDF geen kop
+(keuze 31 augustus) en het colofon is de versieregel van 25 augustus, niet het
+blok "Belangrijke informatie".
+
 De kanttekening uit §7 blijft onverkort gelden: markers en een gevulde boom
 zijn een ondergrens; of de tags de inhoud kloppend beschrijven vraagt een
 handmatige doorloop met PAC of Acrobat.

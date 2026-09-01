@@ -89,7 +89,7 @@
        anders wijst de knop naar een bestand dat er niet is. */}}
   {{- with .OutputFormats.Get "pdfdata" -}}
   <a class="button pdf-download" href="{{ $.RelPermalink }}index.pdf"
-     download="{{ $.Title | urlize }}.pdf">
+     download="{{ $.File.ContentBaseName }}.pdf">
     {{- partial "icon.html" "download" -}}<span>Download als PDF</span>
   </a>
   {{- end -}}

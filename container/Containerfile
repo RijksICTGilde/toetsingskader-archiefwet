@@ -24,7 +24,7 @@ RUN if [ -n "$VERSIE" ]; then export HUGO_PARAMS_VERSIE="$VERSIE"; fi; \
 # de bezoeker. Zie docs/besluit-toegankelijke-pdf.md (§11): pdfkit in Node,
 # zonder browser — dezelfde oplossing als de AI-verordening-beslishulp. De
 # Playwright-download blijft uit; die is alleen voor de browsertests in CI.
-ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 TZ=Europe/Amsterdam
 RUN npm ci --no-audit --no-fund \
     && node scripts/pdf-build.mjs public \
     && node scripts/pdf-ua-check.mjs public/normen/index.pdf public/normen/*/index.pdf
