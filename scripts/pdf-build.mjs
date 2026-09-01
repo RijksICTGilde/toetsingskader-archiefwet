@@ -108,7 +108,8 @@ async function bouwKaderEenmaal(data, paginas) {
       if (p) runs.push({ text: `  —  ${p}`, color: '#666666' })
       return runs
     }),
-    { stijl: 'toc', geordend: true }
+    // Geen eigen nummering: de normtitels dragen hun nummer al ("1. …").
+    { stijl: 'toc', label: false }
   )
 
   const gevonden = {}

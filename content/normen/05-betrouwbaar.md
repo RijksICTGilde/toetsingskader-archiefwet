@@ -3,7 +3,7 @@ title: "5. Informatiebeveiliging en betrouwbaar"
 versie: "0.8"
 weight: 5
 norm_id: "5"
-norm_titel: "5. Informatiebeveiliging en betrouwbaar"
+norm_titel: "Informatiebeveiliging en betrouwbaar"
 aliases:
   - /normen/06-vernietigen/
 kern: "Het verantwoordelijke overheidsorgaan beheert de door hem opgemaakte of ontvangen documenten op zodanige wijze dat de inhoud van documenten betrouwbaar, volledig en beveiligd zijn en documenten geen 'aanmerkelijke' digitale achteruitgang of informatieverlies ondervinden gedurende hun bewaartermijn, óók wanneer [incidenten](/onderwerpen/incidenten-voorkomen/) zich voordoen. Daarnaast mogen documenten niet ongecontroleerd gewijzigd worden en moeten deze volledig zijn."

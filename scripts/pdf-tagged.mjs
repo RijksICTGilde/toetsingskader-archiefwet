@@ -120,7 +120,7 @@ export class TaggedPdf {
    * LBody, zoals de beslishulp en zoals PAC hem verwacht. Genummerde lijsten
    * krijgen het nummer in de tekst; pdfkit nummert niet zelf.
    */
-  lijst(items, { stijl = 'para', geordend = false, start = 1, ouder } = {}) {
+  lijst(items, { stijl = 'para', geordend = false, start = 1, label = true, ouder } = {}) {
     const s = STIJL[stijl]
     const l = this.doc.struct('L')
     ;(ouder || this.root).add(l)
@@ -131,8 +131,10 @@ export class TaggedPdf {
       l.add(li)
       const lbody = this.doc.struct('LBody')
       li.add(lbody)
-      const label = geordend ? `${start + i}. ` : '•  '
-      this.#tekstBlok(lbody, [{ text: label }, ...runs], s, {
+      // `label: false` voor lijsten waarvan de items zelf al een nummer dragen
+      // (de inhoudsopgave: de normtitels heten "1. Inbeheername en beheer").
+      const prefix = !label ? [] : [{ text: geordend ? `${start + i}. ` : '•  ' }]
+      this.#tekstBlok(lbody, [...prefix, ...runs], s, {
         id,
         inspring: 14,
       })
