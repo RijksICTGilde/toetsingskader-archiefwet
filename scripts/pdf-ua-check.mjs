@@ -96,8 +96,13 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     // alinea's; /LBody wordt alleen geëist als de boom zelf lijsten (/S /L)
     // claimt — een norm zonder lijsten (kern-only) is geldig en mag niet rood
     // kleuren.
-    const boom = ['/H1', '/P'].filter((tag) => !new RegExp(`${tag}(?![A-Za-z])`).test(inhoud))
-    if (/\/S\s*\/L(?![A-Za-z])/.test(inhoud) && !inhoud.includes('/LBody')) boom.push('/LBody')
+    // Op /S matchen, niet op de kale naam: elke structuurknoop draagt óók een
+    // parent-key "/P n 0 R", waardoor een kale /P-zoektocht nooit kan falen.
+    const heeftS = (naam) => new RegExp(`/S\\s*/${naam}(?![A-Za-z])`).test(inhoud)
+    const boom = []
+    if (!heeftS('H1')) boom.push('/S /H1')
+    if (!heeftS('P')) boom.push('/S /P')
+    if (heeftS('L') && !heeftS('LBody')) boom.push('/S /LBody')
     console.log(`${pad} — ${aanwezig}/${MARKERS.length} markers, ${buf.length} bytes`)
     for (const [marker, uitleg] of gemist) {
       console.log(`    ontbreekt ${marker} — ${uitleg}`)

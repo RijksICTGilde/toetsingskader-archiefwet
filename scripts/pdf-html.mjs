@@ -6,14 +6,18 @@
 // een echte DOM en met de structuurboom als uitvoer in plaats van HTML.
 import { parseHTML } from 'linkedom'
 
-/** Interne links worden sitelinks, precies zoals de print-HTML dat deed. */
-function absoluteLink(href, siteUrl) {
-  if (!href || /^[a-z]+:/i.test(href)) return href
-  // Protocol-relatief ("//host/pad") is al absoluut; er een sitepad van maken
-  // zou "<site>//host/pad" opleveren.
-  if (href.startsWith('//')) return 'https:' + href
-  const basis = siteUrl.replace(/\/$/, '')
-  return href.startsWith('/') ? basis + href : href
+/**
+ * Interne links worden sitelinks. Via de URL-resolver tegen de pagina-URL,
+ * zodat óók "../doel/", "bijlage.pdf" en "//host/pad" kloppen — een relatieve
+ * URI in een gedownloade PDF lost nergens tegen op.
+ */
+function absoluteLink(href, basisUrl) {
+  if (!href) return href
+  try {
+    return new URL(href, basisUrl).href
+  } catch {
+    return href
+  }
 }
 
 /**
@@ -33,12 +37,18 @@ function normSprong(href, normDests) {
 
 const isLijst = (el) => el.nodeType === 1 && /^(ul|ol)$/i.test(el.tagName)
 
+/** `start` van een <ol>, met 0 als geldige waarde (Number(...) || 1 at hem op). */
+function olStart(el) {
+  const s = Number(el.getAttribute('start'))
+  return el.hasAttribute('start') && Number.isFinite(s) ? s : 1
+}
+
 /**
  * Inline-inhoud van een element naar runs voor TaggedPdf.
  * ctx: { prefix, siteUrl, underlineLinks }. Geneste lijsten binnen een <li>
  * worden overgeslagen; die verwerkt lijstItems() apart als L in de LI.
  */
-export function runsVan(el, ctx, basis = {}) {
+export function runsVan(el, ctx, basis = {}, top = true) {
   const runs = []
   for (const kind of el.childNodes) {
     if (kind.nodeType === 3) {
@@ -58,9 +68,9 @@ export function runsVan(el, ctx, basis = {}) {
       throw new Error('<img> wordt nog niet ondersteund in de PDF-pijplijn (scripts/pdf-html.mjs); ' +
         'een afbeelding zou stilletjes uit de PDF verdwijnen terwijl de site hem toont')
     }
-    if (tag === 'strong' || tag === 'b') runs.push(...runsVan(kind, ctx, { ...basis, bold: true }))
-    else if (tag === 'em' || tag === 'i') runs.push(...runsVan(kind, ctx, { ...basis, italics: true }))
-    else if (tag === 'sup') runs.push(...runsVan(kind, ctx, { ...basis, sup: true }))
+    if (tag === 'strong' || tag === 'b') runs.push(...runsVan(kind, ctx, { ...basis, bold: true }, false))
+    else if (tag === 'em' || tag === 'i') runs.push(...runsVan(kind, ctx, { ...basis, italics: true }, false))
+    else if (tag === 'sup') runs.push(...runsVan(kind, ctx, { ...basis, sup: true }, false))
     else if (tag === 'a') {
       const cls = kind.getAttribute('class') || ''
       const href = kind.getAttribute('href') || ''
@@ -76,16 +86,17 @@ export function runsVan(el, ctx, basis = {}) {
         const sprong = normSprong(href, ctx.normDests)
         if (sprong) run.goTo = sprong
         else {
-          run.link = absoluteLink(href, ctx.siteUrl)
+          run.link = absoluteLink(href, ctx.basisUrl || ctx.siteUrl)
           if (ctx.underlineLinks) run.underline = true
         }
       }
       if (run.text) runs.push(run)
-    } else runs.push(...runsVan(kind, ctx, basis))
+    } else runs.push(...runsVan(kind, ctx, basis, false))
   }
-  // Blokgedrag van HTML: randwitruimte weg (een bewust regeleinde van <br>
-  // aan het einde doet toch niets meer en mag mee-wegvallen).
-  if (runs.length) {
+  // Blokgedrag van HTML: randwitruimte weg — maar alléén op blokniveau. Deze
+  // functie recursiveert voor strong/em/sup, en daar zou de trim de spatie
+  // bínnen het element opeten ("voor<strong> vet</strong>" werd "voorvet").
+  if (top && runs.length) {
     runs[0].text = runs[0].text.replace(/^\s+/, '')
     runs[runs.length - 1].text = runs[runs.length - 1].text.replace(/\s+$/, '')
   }
@@ -111,7 +122,11 @@ export function lijstItems(lijstEl, ctx) {
     for (const node of [...li.childNodes]) {
       if (node.nodeType === 1 && isLijst(node)) {
         spoel()
-        segmenten.push({ sub: { items: lijstItems(node, ctx), geordend: node.tagName.toLowerCase() === 'ol' } })
+        segmenten.push({ sub: {
+          items: lijstItems(node, ctx),
+          geordend: node.tagName.toLowerCase() === 'ol',
+          start: olStart(node),
+        } })
       } else {
         buffer = buffer || li.ownerDocument.createElement('span')
         buffer.appendChild(node)
@@ -134,8 +149,8 @@ export function lijstItems(lijstEl, ctx) {
  *                bladwijzer outline-ouder voor de subkoppen
  */
 export function schrijfNorm(pdf, data, opties) {
-  const { prefix = '', kopShift = 0, siteUrl, sectie, bladwijzer, normDests } = opties
-  const ctx = { prefix, siteUrl, normDests }
+  const { prefix = '', kopShift = 0, siteUrl, paginaUrl, sectie, bladwijzer, normDests } = opties
+  const ctx = { prefix, siteUrl, basisUrl: paginaUrl || siteUrl, normDests }
 
   // --- Kern -------------------------------------------------------------------
   // Zonder kop, net als op de site (keuze 31 augustus 2026, zie
@@ -202,7 +217,7 @@ export function schrijfNorm(pdf, data, opties) {
         geordend: tag === 'ol',
         // `start` van de <ol> meenemen: een hervatte nummering ("3. 4.") mag
         // in de PDF niet stilletjes weer bij 1 beginnen.
-        start: Number(el.getAttribute('start')) || 1,
+        start: olStart(el),
         ouder: sectie,
       })
     } else if (tag === 'blockquote') {

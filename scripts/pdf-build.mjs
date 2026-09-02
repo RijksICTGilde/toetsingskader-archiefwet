@@ -1,7 +1,11 @@
 // Genereert de PDF's uit de pdfdata-JSON in de gebouwde site, met pdfkit.
 //
-// Gebruik:  hugo --baseURL / --destination public
-//           node scripts/pdf-build.mjs public        (of: npm run build:pdf)
+// Gebruik:  hugo --environment production --minify   (absolute baseURL!)
+//           node scripts/pdf-build.mjs public          (of: npm run build:pdf)
+//
+// Niet met `--baseURL /` bouwen: url/site_url in de pdfdata-JSON worden dan
+// site-relatief en belanden zo in de linkannotaties — een gedownloade PDF kan
+// die nergens tegen oplossen. De contractcontrole hieronder vangt dat.
 //
 // Voor elke `…/index.pdfdata.json` komt er een `…/index.pdf` naast te staan;
 // de JSON zelf wordt daarna opgeruimd (tussenproduct, geen sitepagina).
@@ -95,7 +99,7 @@ async function bouwNorm(data) {
   const pdf = nieuw(data)
   titelpagina(pdf, data.titel, data)
   pdf.nieuwePagina()
-  schrijfNorm(pdf, data, { siteUrl: data.site_url, bladwijzer: pdf.doc.outline })
+  schrijfNorm(pdf, data, { siteUrl: data.site_url, paginaUrl: data.url, bladwijzer: pdf.doc.outline })
   colofon(pdf, data)
   return pdf.einde()
 }
@@ -139,6 +143,7 @@ async function bouwKaderEenmaal(data, paginas) {
       prefix: `n${norm.norm_id}-`,
       kopShift: 1,
       siteUrl: data.site_url,
+      paginaUrl: norm.slug ? `${data.site_url.replace(/\/$/, '')}/normen/${norm.slug}/` : data.url,
       bladwijzer: bw,
       normDests,
     })
@@ -189,14 +194,45 @@ function structuurFouten(data) {
   return fouten
 }
 
-for (const bestand of bestanden) {
-  const data = JSON.parse(fs.readFileSync(bestand, 'utf8'))
+// Contract tussen de Hugo-templates en dit script: een hernoemd JSON-veld zou
+// anders stil een PDF zonder kern of body opleveren, en een relatieve URL zou
+// als dode linkannotatie in de PDF belanden.
+function contractFouten(data) {
+  const fouten = []
+  const normen = data.kind === 'kader' ? data.normen : [data]
+  for (const n of normen) {
+    if (!n.kern_html) fouten.push(`norm ${n.norm_id}: kern_html ontbreekt (validator eist een kern — veldnaam in de template gewijzigd?)`)
+    if (!n.body_html) fouten.push(`norm ${n.norm_id}: body_html ontbreekt`)
+  }
+  for (const veld of ['url', 'site_url']) {
+    if (!/^https?:\/\//.test(data[veld] || '')) {
+      fouten.push(`${veld} is niet absoluut ("${data[veld]}") — bouw met een absolute baseURL, niet met --baseURL /`)
+    }
+  }
+  return fouten
+}
+
+const alleData = bestanden.map((bestand) => ({ bestand, data: JSON.parse(fs.readFileSync(bestand, 'utf8')) }))
+
+// Het kaderdocument moet elke norm dekken die ook een eigen PDF krijgt; een
+// versmalde paginaquery zou anders stil een norm uit het verzamel-PDF laten
+// vallen terwijl alle controles groen blijven.
+{
+  const losseNormen = alleData.filter(({ data }) => data.kind === 'norm').length
+  const kader = alleData.find(({ data }) => data.kind === 'kader')
+  if (kader && kader.data.normen.length !== losseNormen) {
+    console.error(`kader-PDF dekt ${kader.data.normen.length} normen, maar er zijn ${losseNormen} losse norm-PDF's — query in layouts/normen/list.pdfdata.json versmald?`)
+    process.exit(1)
+  }
+}
+
+for (const { bestand, data } of alleData) {
   if (!data.kind) {
     fs.rmSync(bestand) // lege stub van een pagina zonder norm_id
     continue
   }
   const doel = bestand.replace(/index\.pdfdata\.json$/, 'index.pdf')
-  const fouten = structuurFouten(data)
+  const fouten = [...contractFouten(data), ...structuurFouten(data)]
   if (fouten.length) {
     for (const f of fouten) console.error(`${path.relative(root, bestand)} — ${f}`)
     process.exit(1)

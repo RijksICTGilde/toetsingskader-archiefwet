@@ -205,14 +205,19 @@ export class TaggedPdf {
       l.add(li)
       const lbody = this.doc.struct('LBody')
       li.add(lbody)
+      // De bestemming meteen registreren, los van de tekst: een item dat
+      // alléén een sublijst bevat (een voetnoot die een lijst is) heeft geen
+      // eerste tekstsegment, en een sprong ernaartoe zou de build afbreken op
+      // geldige content.
+      if (id) this.#registreerDest(id, this.doc.x, this.doc.y)
       let eersteTekst = true
       for (const seg of segmenten) {
         if (seg.runs) {
           const prefix = eersteTekst && label ? [{ text: geordend ? `${start + i}. ` : '•  ' }] : []
-          this.#tekstBlok(lbody, [...prefix, ...seg.runs], s, { id: eersteTekst ? id : undefined, inspring: inspring + INSPRING })
+          this.#tekstBlok(lbody, [...prefix, ...seg.runs], s, { inspring: inspring + INSPRING })
           eersteTekst = false
         } else if (seg.sub?.items?.length) {
-          this.#lijstIn(lbody, seg.sub.items, { s, geordend: !!seg.sub.geordend, start: 1, label: true, inspring: inspring + INSPRING })
+          this.#lijstIn(lbody, seg.sub.items, { s, geordend: !!seg.sub.geordend, start: seg.sub.start || 1, label: true, inspring: inspring + INSPRING })
         }
       }
       lbody.end()
@@ -270,15 +275,8 @@ export class TaggedPdf {
     const sluitMC = () => { if (open) { doc.endMarkedContent(); open = false } }
 
     runs.forEach((run, i) => {
-      // Bestemmingen bewaken: pdfkit overschrijft een dubbele named
-      // destination zwijgend (elke sprong landt dan op de laatste schrijver)
-      // en een sprong naar een niet-bestaande naam doet stil niets. Beide
-      // zijn hier een bouwfout; einde() controleert de sprongen.
       const dest = (i === 0 && id) || null
-      if (dest) {
-        if (this.#dests.has(dest)) throw new Error(`dubbele bestemming "${dest}": elke verwijzing ernaar zou op de laatste landen`)
-        this.#dests.add(dest)
-      }
+      if (dest) this.#dests.add(this.#bewaakDest(dest))
       if (run.goTo) this.#sprongen.add(run.goTo)
       const opties = {
         width: breedte,
@@ -330,6 +328,23 @@ export class TaggedPdf {
     })
     sluitMC()
     doc.y += s.onder
+  }
+
+  /**
+   * Bestemmingen bewaken: pdfkit overschrijft een dubbele named destination
+   * zwijgend (elke sprong landt dan op de laatste schrijver) en een sprong
+   * naar een niet-bestaande naam doet stil niets. Beide zijn hier een
+   * bouwfout; einde() controleert de sprongen.
+   */
+  #bewaakDest(naam) {
+    if (this.#dests.has(naam)) throw new Error(`dubbele bestemming "${naam}": elke verwijzing ernaar zou op de laatste landen`)
+    return naam
+  }
+
+  /** Bestemming zonder tekstrun (een lijst-item dat alleen een sublijst is). */
+  #registreerDest(naam, x, y) {
+    this.#dests.add(this.#bewaakDest(naam))
+    this.doc.addNamedDestination(naam, 'XYZ', x, y, null)
   }
 
   /** Bladwijzer (outline). Geeft het item terug voor geneste bladwijzers. */

@@ -59,7 +59,7 @@ def regel_naar_pad(font_pad, tekst, korps, basislijn_y):
         naam = cmap.get(ord(teken))
         if naam is None:
             raise SystemExit(f"Teken {teken!r} ontbreekt in {font_pad}")
-        # Eén decimaal is op 9,5pt ruim onder een beeldpunt. De PDF-renderer zet dit
+        # Gehele punten zijn op 9,5pt ruim onder een beeldpunt. De PDF-renderer zet dit
         # briefhoofd op élke pagina opnieuw in de PDF, dus de SVG wordt één keer als Form XObject in de PDF ingebed.
         pen = SVGPathPen(glyfset, ntos=lambda n: f'{n:.0f}')
         glyfset[naam].draw(pen)
@@ -98,6 +98,7 @@ def main():
         breedste = max(breedste, breedte)
 
     breed = TEKST_X + breedste
+    alle_stukken = "\n".join(stukken)
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{breed:.3f}" height="{LINT_HOOG:.3f}"
      viewBox="0 0 {breed:.3f} {LINT_HOOG:.3f}" role="img">
   <title>Inspectie Overheidsinformatie en Erfgoed, Ministerie van Onderwijs, Cultuur en Wetenschap</title>
@@ -105,8 +106,7 @@ def main():
     {lint_inhoud()}
   </svg>
   <g fill="{BLAUW}">
-  {stukken[0]}
-  {stukken[1]}
+  {alle_stukken}
   </g>
 </svg>
 """

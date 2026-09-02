@@ -258,6 +258,33 @@ test('blockquote met kale tekst en inline nadruk verliest niets', () => {
   assert.equal(tekst, 'tekst nadruk')
 })
 
+test('spatie binnen <strong>/<em> blijft staan (geen "voorvet")', () => {
+  const { document } = parseHTML('<body><p>voor<strong> vet</strong> na</p></body>')
+  const runs = runsVan(document.querySelector('p'), { prefix: '', siteUrl: 'https://x.nl/' })
+  assert.equal(runs.map((r) => r.text).join(''), 'voor vet na')
+})
+
+test('lijst-item met alléén een sublijst houdt zijn bestemming (build breekt niet)', async () => {
+  const pdf = new TaggedPdf({ titel: 'T', taal: 'nl', versie: 'v0', fonts, briefhoofdSvg })
+  pdf.nieuwePagina()
+  pdf.alinea([{ text: 'zie ', goTo: 'fn:1' }])
+  pdf.lijst([{ segmenten: [{ sub: { items: [[{ text: 'sub' }]], geordend: false } }], id: 'fn:1' }])
+  await pdf.einde() // gooit zonder de registratie: "sprong naar niet-bestaande bestemming"
+})
+
+test('relatieve link lost op tegen de pagina-URL', () => {
+  const { document } = parseHTML('<body><p><a href="../doel/">doel</a> en <a href="bijlage.pdf">bijlage</a></p></body>')
+  const runs = runsVan(document.querySelector('p'), { prefix: '', siteUrl: 'https://site.nl/', basisUrl: 'https://site.nl/normen/03-ordenen/' })
+  assert.equal(runs.find((r) => r.text === 'doel').link, 'https://site.nl/normen/doel/')
+  assert.equal(runs.find((r) => r.text === 'bijlage').link, 'https://site.nl/normen/03-ordenen/bijlage.pdf')
+})
+
+test('geneste <ol start="5"> houdt zijn beginwaarde', () => {
+  const { document } = parseHTML('<body><ol start="3"><li>x<ol start="5"><li>y</li></ol></li></ol></body>')
+  const items = lijstItems(document.querySelector('ol'), { prefix: '', siteUrl: 'https://x.nl/' })
+  assert.equal(items[0].segmenten.find((s) => s.sub).sub.start, 5)
+})
+
 test('runsVan: voetnootmarkering wordt superscript-sprong, backref verdwijnt', () => {
   const { document } = parseHTML(`<body><p>tekst<sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup>
     <a href="#fnref:1" class="footnote-backref">↩</a></p></body>`)
