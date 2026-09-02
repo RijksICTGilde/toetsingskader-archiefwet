@@ -93,8 +93,11 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     // precies de vlag-zonder-inhoud-klasse) zou een substring-zoektocht
     // false-groen laten passeren.
     let cat = null
+    let ctx = null
     try {
-      cat = (await PDFDocument.load(buf, { updateMetadata: false })).catalog
+      const doc = await PDFDocument.load(buf, { updateMetadata: false })
+      cat = doc.catalog
+      ctx = doc.context
     } catch {
       // niet-parsebaar: de substringcontrole hieronder meldt wat er mist
     }
@@ -102,10 +105,15 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
       '/StructTreeRoot': (c) => !!c.get(PDFName.of('StructTreeRoot')),
       '/MarkInfo': (c) => !!c.get(PDFName.of('MarkInfo')),
       '/Lang': (c) => !!c.get(PDFName.of('Lang')),
-      '/DisplayDocTitle': (c) => !!c.get(PDFName.of('ViewerPreferences')),
+      '/DisplayDocTitle': (c, ctx) => {
+        // De voorkeur zelf moet er staan én waar zijn; een ViewerPreferences
+        // met alleen /Direction toont nog steeds de bestandsnaam.
+        const vp = ctx.lookup(c.get(PDFName.of('ViewerPreferences')))
+        return String(vp?.get?.(PDFName.of('DisplayDocTitle')) || '') === 'true'
+      },
     }
     const gemist = MARKERS.filter(([marker]) =>
-      cat ? !inCatalogus[marker](cat) : !inhoud.includes(marker))
+      cat ? !inCatalogus[marker](cat, ctx) : !inhoud.includes(marker))
     const aanwezig = MARKERS.length - gemist.length
     // De vier markers zijn een belofte; deze telling controleert of hij wordt
     // waargemaakt. Een /StructTreeRoot met een lege boom was precies de

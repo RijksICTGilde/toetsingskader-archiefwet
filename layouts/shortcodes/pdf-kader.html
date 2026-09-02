@@ -15,6 +15,7 @@
      staat aan via de front matter van content/normen/_index.md; zonder die
      controle levert deze shortcode op een andere pagina een volledig opgemaakte
      knop naar een 404 op. */ -}}
+{{- if ne hugo.Environment "development" -}}
 {{- with .Page.OutputFormats.Get "pdfdata" -}}
 <p class="pdf-kader">
   <a class="button pdf-download" href="{{ $.Page.RelPermalink }}index.pdf"
@@ -22,4 +23,5 @@
     {{- partial "icon.html" "download" -}}<span>Download het volledige kader als PDF</span>
   </a>
 </p>
+{{- end -}}
 {{- end -}}

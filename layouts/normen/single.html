@@ -96,7 +96,9 @@
   {{- /* Én norm_id: de cascade zet `pdfdata` sectie-breed aan, maar de
          PDF wordt alleen voor echte normpagina's geschreven — voor een andere
          pagina onder /normen/ zou dit een knop naar een 404 zijn. */ -}}
-  {{- if .Params.norm_id -}}
+  {{- /* Niet in development: de PDF ontstaat pas bij `just build`, en een
+         knop naar een 404 in de preview wekte verwarring. */ -}}
+  {{- if and .Params.norm_id (ne hugo.Environment "development") -}}
   {{- with .OutputFormats.Get "pdfdata" -}}
   <a class="button pdf-download" href="{{ $.RelPermalink }}index.pdf"
      download="{{ $.File.ContentBaseName }}.pdf">

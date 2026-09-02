@@ -202,7 +202,10 @@ function contractFouten(data) {
   const normen = data.kind === 'kader' ? data.normen : [data]
   for (const n of normen) {
     if (!n.kern_html) fouten.push(`norm ${n.norm_id}: kern_html ontbreekt (validator eist een kern — veldnaam in de template gewijzigd?)`)
-    if (!n.body_html) fouten.push(`norm ${n.norm_id}: body_html ontbreekt`)
+    // Geen fout: een kern-only norm is geldig (layouts/normen/single.html
+    // belooft er expliciet een PDF voor). Wel melden, want een hernoemd
+    // JSON-veld zou hetzelfde beeld geven.
+    if (!n.body_html) console.warn(`  norm ${n.norm_id}: body_html is leeg — kern-only norm, of een gewijzigde veldnaam in de template?`)
   }
   for (const veld of ['url', 'site_url']) {
     if (!/^https?:\/\//.test(data[veld] || '')) {

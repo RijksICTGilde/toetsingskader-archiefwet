@@ -8,6 +8,12 @@ RUN apk add --no-cache git wget tar nodejs npm \
   && rm /tmp/hugo.tar.gz \
   && hugo version
 WORKDIR /src
+# Eerst de lockfiles + npm ci: die laag verandert alleen als de dependencies
+# veranderen; met COPY . . ervóór installeerde elke contentwijziging de hele
+# devDependency-boom opnieuw.
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 TZ=Europe/Amsterdam
+COPY package.json package-lock.json ./
+RUN npm ci --no-audit --no-fund
 COPY . .
 ARG BASE_URL=
 # Release-tag (git describe) doorgegeven vanuit de workflow; voedt de PDF-export
@@ -22,11 +28,8 @@ RUN if [ -n "$VERSIE" ]; then export HUGO_PARAMS_VERSIE="$VERSIE"; fi; \
 
 # De PDF's horen bij de site en worden hier gemaakt, niet meer in de browser van
 # de bezoeker. Zie docs/besluit-toegankelijke-pdf.md (§11): pdfkit in Node,
-# zonder browser — dezelfde oplossing als de AI-verordening-beslishulp. De
-# Playwright-download blijft uit; die is alleen voor de browsertests in CI.
-ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 TZ=Europe/Amsterdam
-RUN npm ci --no-audit --no-fund \
-    && node scripts/pdf-build.mjs public \
+# zonder browser — dezelfde oplossing als de AI-verordening-beslishulp.
+RUN node scripts/pdf-build.mjs public \
     && node scripts/pdf-ua-check.mjs public/normen/index.pdf public/normen/*/index.pdf
 
 FROM nginxinc/nginx-unprivileged:stable-alpine-slim@sha256:e88d990b349df8cf4aa82f16642d7a23375016638c9ace4e5c6ca25028e62e65 AS runtime

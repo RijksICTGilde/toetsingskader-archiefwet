@@ -312,6 +312,34 @@ test('geneste <ol start="5"> houdt zijn beginwaarde', () => {
   assert.equal(items[0].segmenten.find((s) => s.sub).sub.start, 5)
 })
 
+test('tabel in een <div>-wrapper of in een lijst-item is óók een bouwfout', () => {
+  const nep = { alinea: () => {}, kop: () => {}, bladwijzer: () => {}, citaat: () => {}, lijst: () => {} }
+  assert.throws(
+    () => schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<div><table><tbody><tr><td>a</td></tr></tbody></table></div>' }, { siteUrl: DATA.site_url }),
+    /wordt nog niet ondersteund/
+  )
+  assert.throws(
+    () => schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<ul><li>Zie: <table><tbody><tr><td>a</td></tr></tbody></table></li></ul>' }, { siteUrl: DATA.site_url }),
+    /in een lijst-item/
+  )
+})
+
+test('lijst in de kern blijft een lijst', () => {
+  const uit = []
+  const nep = { alinea: () => {}, kop: () => {}, bladwijzer: () => {}, citaat: () => {}, lijst: (items, o) => uit.push({ items, o }) }
+  schrijfNorm(nep, { ...DATA, body_html: '', kern_html: '<p>intro</p><ul><li>punt een</li><li>punt twee</li></ul>' }, { siteUrl: DATA.site_url })
+  assert.equal(uit.length, 1)
+  assert.equal(uit[0].items.length, 2)
+})
+
+test('cross-norm link naar een layout-anker wordt een sitelink, geen dode sprong', () => {
+  const { document } = parseHTML('<body><p><a href="/normen/07-vernietigen/#referenties">bronnen daar</a></p></body>')
+  const ctx = { prefix: 'n2-', siteUrl: 'https://x.nl/', basisUrl: 'https://x.nl/normen/02-overzicht/', normDests: { '07-vernietigen': { dest: 'norm-7', prefix: 'n7-' } } }
+  const runs = runsVan(document.querySelector('p'), ctx)
+  assert.equal(runs[0].goTo, undefined)
+  assert.equal(runs[0].link, 'https://x.nl/normen/07-vernietigen/#referenties')
+})
+
 test('runsVan: voetnootmarkering wordt superscript-sprong, backref verdwijnt', () => {
   const { document } = parseHTML(`<body><p>tekst<sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup>
     <a href="#fnref:1" class="footnote-backref">↩</a></p></body>`)

@@ -44,6 +44,9 @@ function normSprong(href, ctx) {
   const doel = ctx.normDests[pad[1]]
   if (!doel) return null
   const anker = abs.hash ? abs.hash.slice(1) : ''
+  // Een layout-anker (bestaat op de site, niet in de PDF) op een andere norm:
+  // geen sprong — de aanroeper maakt er dan een gewone sitelink van.
+  if (anker && SITE_ANKERS.has(anker)) return null
   return anker ? doel.prefix + anker : doel.dest
 }
 
@@ -51,6 +54,10 @@ const isLijst = (el) => el.nodeType === 1 && /^(ul|ol)$/i.test(el.tagName)
 
 // Ankers die layouts (niet body_html) op de sitepagina zetten; zie runsVan.
 const SITE_ANKERS = new Set(['referenties'])
+
+// Eén blok-regex voor detectie, dispatch én blokken(): drie uiteenlopende
+// lijstjes lieten een <div><table>…</div> langs de fail-loud-guards glippen.
+const BLOK_RE = /^(p|ul|ol|h[1-6]|blockquote|div|section|article|figure|table|thead|tbody|pre|img|hr|details|summary|header|footer|aside|main|nav)$/i
 
 /** `start` van een <ol>, met 0 als geldige waarde (Number(...) || 1 at hem op). */
 function olStart(el) {
@@ -143,6 +150,10 @@ export function lijstItems(lijstEl, ctx) {
       buffer = null
     }
     for (const node of [...li.childNodes]) {
+      if (node.nodeType === 1 && /^(table|thead|tbody|figure|pre|img)$/i.test(node.tagName)) {
+        throw new Error(`<${node.tagName.toLowerCase()}> in een lijst-item wordt nog niet ondersteund in de PDF-pijplijn; ` +
+          'de inhoud zou als aan elkaar geplakte tekst in het item belanden')
+      }
       if (node.nodeType === 1 && isLijst(node)) {
         spoel()
         segmenten.push({ sub: {
@@ -184,6 +195,10 @@ export function schrijfNorm(pdf, data, opties) {
     // hem stil overslaan, waarna elke #kern-sprong de build breekt.
     let kernId = prefix + 'kern'
     for (const blok of blokken(data.kern_html)) {
+      if (isLijst(blok)) {
+        pdf.lijst(lijstItems(blok, ctx), { geordend: blok.tagName.toLowerCase() === 'ol', start: olStart(blok), ouder: sectie })
+        continue
+      }
       const runs = runsVan(blok, ctx)
       if (!runs.length) continue
       pdf.alinea(runs, { ouder: sectie, id: kernId })
@@ -215,7 +230,7 @@ export function schrijfNorm(pdf, data, opties) {
   // opnieuw.
   const tagVoor = new Map()
   let vorigTag = 1 + kopShift // de documenttitel (of de normtitel in het kader)
-  const heeftBlokkinderen = (el) => [...el.children].some((k) => /^(p|ul|ol|h[1-6]|blockquote|div|section|article|figure)$/i.test(k.tagName))
+  const heeftBlokkinderen = (el) => [...el.children].some((k) => BLOK_RE.test(k.tagName))
   // Kinderen van body of van een wrapper verwerken met een buffer voor kale
   // tekst en inline elementen: "<div>Let op: <p>…</p></div>" toont "Let op:"
   // op de site, dus dat mag hier niet stilletjes wegvallen.
@@ -228,7 +243,7 @@ export function schrijfNorm(pdf, data, opties) {
       buffer = null
     }
     for (const node of [...nodes]) {
-      if (node.nodeType === 1 && /^(p|ul|ol|h[1-6]|blockquote|div|section|article|figure|table|thead|tbody|pre|img|hr)$/i.test(node.tagName)) {
+      if (node.nodeType === 1 && BLOK_RE.test(node.tagName)) {
         spoel()
         verwerk(node)
       } else {
@@ -290,7 +305,7 @@ export function schrijfNorm(pdf, data, opties) {
         if (kindTag === 'p') {
           spoel()
           alineas.push(runsVan(kind, ctx).map((r) => ({ italics: true, ...r })))
-        } else if (kindTag && /^(ul|ol|h[1-6]|blockquote|div|section|table|figure|pre|img)$/.test(kindTag)) {
+        } else if (kindTag && BLOK_RE.test(kindTag)) {
           spoel()
           verwerk(kind)
         } else {
@@ -346,9 +361,8 @@ function blokken(html) {
   // Alleen als de kinderen echte blokken zijn: een kern die louter uit inline
   // elementen bestaat (precies één <a>, of "<em>x</em> <a>y</a>") zou anders
   // per element door de blokverwerking gaan en zijn link/nadruk verliezen.
-  const BLOK = /^(p|ul|ol|h[1-6]|blockquote|div|section|table|figure|pre|hr)$/i
   const kinderen = [...document.body.children]
-  if (!losseTekst && kinderen.length && kinderen.every((k) => BLOK.test(k.tagName))) return kinderen
+  if (!losseTekst && kinderen.length && kinderen.every((k) => BLOK_RE.test(k.tagName))) return kinderen
   const p = document.createElement('p')
   p.innerHTML = document.body.innerHTML
   return [p]

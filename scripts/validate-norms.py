@@ -183,6 +183,18 @@ def validate_front_matter(name, fm_text, errors):
     # in het veld `kern_kop`, daarna kwam de kop uit `norm_titel`, en nu is hij
     # weg. Zonder deze afwijzing zou het veld de kop stilzwijgend kunnen
     # terugbrengen bij een volgende woord-voor-woord-ronde.
+    # De paginatitel draagt zijn eigen nummer ("1. Inbeheername en beheer"); de
+    # PDF-inhoudsopgave en de kaarten nummeren bewust niet zelf (zie
+    # docs/afwijkingen-van-het-normblad.md). Loopt het nummer uit de pas met
+    # norm_id, dan kloppen inhoudsopgave, bladwijzers en kaarten stilzwijgend
+    # niet meer.
+    titel = fm.get("title")
+    nid = fm.get("norm_id")
+    if isinstance(titel, str) and isinstance(nid, str) and not titel.startswith(f"{nid}. "):
+        errors.append(Error(name, f"'title' hoort te beginnen met \"{nid}. \" (het nummer van norm_id); "
+                                  f"gevonden: \"{titel}\"",
+                            line=find_field_line(fm_text, "title")))
+
     if "kern_kop" in fm:
         errors.append(Error(name, "'kern_kop' bestaat niet meer: de kern heeft geen kop. Zie "
                                   "docs/afwijkingen-van-het-normblad.md",
