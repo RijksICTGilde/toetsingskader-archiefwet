@@ -31,17 +31,22 @@ function normSprong(href, ctx) {
   // Op de opgeloste URL matchen, zodat óók "../07-vernietigen/", een volledige
   // https-link en een root-relatief pad een sprong worden — een vormvaste
   // regex liet die stil degraderen tot weblinks.
-  let abs, site
+  let abs, normenBasis
   try {
     abs = new URL(href, ctx.basisUrl || ctx.siteUrl)
-    site = new URL(ctx.siteUrl)
+    // Tegen de volledige site-URL, niet alleen het pad: onder een subpad
+    // (…/archiefwet/) begint het pad niet met /normen/ en zou elke sprong
+    // stil een weblink worden.
+    normenBasis = new URL('normen/', ctx.siteUrl.endsWith('/') ? ctx.siteUrl : ctx.siteUrl + '/')
   } catch {
     return null
   }
-  if (abs.origin !== site.origin) return null
-  const pad = abs.pathname.match(/^\/normen\/([^/]+)\/?$/)
-  if (!pad) return null
-  const doel = ctx.normDests[pad[1]]
+  const kaal = abs.origin + abs.pathname
+  if (!kaal.startsWith(normenBasis.href)) return null
+  const rest = kaal.slice(normenBasis.href.length)
+  const slug = rest.split('/')[0]
+  if (!slug || rest.replace(/\/$/, '') !== slug) return null
+  const doel = ctx.normDests[slug]
   if (!doel) return null
   const anker = abs.hash ? abs.hash.slice(1) : ''
   // Alleen naar een anker springen dat in de PDF van die norm echt bestaat;
@@ -56,10 +61,10 @@ const isLijst = (el) => el.nodeType === 1 && /^(ul|ol)$/i.test(el.tagName)
 
 // Eén blok-regex voor detectie, dispatch én blokken(): drie uiteenlopende
 // lijstjes lieten een <div><table>…</div> langs de fail-loud-guards glippen.
-const BLOK_RE = /^(p|ul|ol|h[1-6]|blockquote|div|section|article|figure|table|thead|tbody|pre|img|hr|details|summary|header|footer|aside|main|nav)$/i
+const BLOK_RE = /^(p|ul|ol|h[1-6]|blockquote|div|section|article|figure|table|thead|tbody|pre|img|hr|details|summary|header|footer|aside|main|nav|dl|dt|dd|address)$/i
 
 // Idem voor wat de pijplijn (nog) niet kan: één lijst, op beide plekken.
-const ONGESTEUND_RE = /^(table|thead|tbody|figure|pre|img)$/i
+const ONGESTEUND_RE = /^(table|thead|tbody|figure|pre|img|dl|dt|dd|address)$/i
 
 /**
  * Alle ankers die deze norm in de PDF echt krijgt: de id's uit kern en body
@@ -70,7 +75,14 @@ const ONGESTEUND_RE = /^(table|thead|tbody|figure|pre|img)$/i
 export function ankersVan(data) {
   const ankers = new Set(['kern'])
   for (const html of [data.kern_html, data.body_html]) {
-    for (const m of (html || '').matchAll(/\sid="([^"]+)"/g)) ankers.add(m[1])
+    if (!html) continue
+    const { document } = parseHTML(`<!DOCTYPE html><html><body>${html}</body></html>`)
+    // Alleen id's die de pijplijn ook echt als bestemming registreert
+    // (koppen, lijst-items, alinea's): élk id claimen liet een sprong toe
+    // naar een element zonder bestemming, en dan brak einde() de build.
+    for (const el of document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id],li[id],p[id]')) {
+      ankers.add(el.getAttribute('id'))
+    }
   }
   return ankers
 }
@@ -294,7 +306,8 @@ export function schrijfNorm(pdf, data, opties) {
       if (niveau === 2 && bladwijzer) pdf.bladwijzer(el.textContent.trim(), { ouder: bladwijzer })
     } else if (tag === 'p') {
       const runs = runsVan(el, ctx)
-      if (runs.length) pdf.alinea(runs, { ouder: sectie })
+      const id = el.getAttribute('id')
+      if (runs.length) pdf.alinea(runs, { ouder: sectie, id: id ? prefix + id : undefined })
     } else if (isLijst(el)) {
       pdf.lijst(lijstItems(el, ctx), {
         geordend: tag === 'ol',
@@ -381,13 +394,21 @@ export function schrijfNorm(pdf, data, opties) {
 function blokken(html) {
   if (!html || !html.trim()) return []
   const { document } = parseHTML(`<!DOCTYPE html><html><body>${html}</body></html>`)
-  const losseTekst = [...document.body.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())
-  // Alleen als de kinderen echte blokken zijn: een kern die louter uit inline
-  // elementen bestaat (precies één <a>, of "<em>x</em> <a>y</a>") zou anders
-  // per element door de blokverwerking gaan en zijn link/nadruk verliezen.
-  const kinderen = [...document.body.children]
-  if (!losseTekst && kinderen.length && kinderen.every((k) => BLOK_RE.test(k.tagName))) return kinderen
-  const p = document.createElement('p')
-  p.innerHTML = document.body.innerHTML
-  return [p]
+  // Losse tekst en inline elementen bufferen tot een alinea, blok-elementen
+  // apart doorgeven: alles in één synthetische <p> stoppen slokte een lijst
+  // tussen de tekst op (runsVan slaat lijsten over) en per kind verwerken
+  // verloor de link/nadruk van een kern die louter inline is.
+  const uit = []
+  let p = null
+  for (const node of [...document.body.childNodes]) {
+    if (node.nodeType === 1 && BLOK_RE.test(node.tagName)) {
+      if (p) { uit.push(p); p = null }
+      uit.push(node)
+    } else if (node.nodeType === 3 || node.nodeType === 1) {
+      p = p || document.createElement('p')
+      p.appendChild(node)
+    }
+  }
+  if (p) uit.push(p)
+  return uit.filter((b) => b.textContent.trim() || BLOK_RE.test(b.tagName))
 }

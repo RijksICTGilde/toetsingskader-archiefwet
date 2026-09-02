@@ -98,8 +98,13 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
       const doc = await PDFDocument.load(buf, { updateMetadata: false })
       cat = doc.catalog
       ctx = doc.context
-    } catch {
-      // niet-parsebaar: de substringcontrole hieronder meldt wat er mist
+    } catch (e) {
+      // Fail closed: een PDF die pdf-lib niet kan parsen keurt de controle
+      // af — een substring-terugval kon een kapot bestand met toevallig de
+      // juiste bytes groen laten passeren.
+      console.log(`${pad} — niet te parsen door pdf-lib (${e.message}); afgekeurd`)
+      ontbreekt++
+      continue
     }
     const inCatalogus = {
       '/StructTreeRoot': (c) => !!c.get(PDFName.of('StructTreeRoot')),
@@ -112,8 +117,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
         return String(vp?.get?.(PDFName.of('DisplayDocTitle')) || '') === 'true'
       },
     }
-    const gemist = MARKERS.filter(([marker]) =>
-      cat ? !inCatalogus[marker](cat, ctx) : !inhoud.includes(marker))
+    const gemist = MARKERS.filter(([marker]) => !inCatalogus[marker](cat, ctx))
     const aanwezig = MARKERS.length - gemist.length
     // De vier markers zijn een belofte; deze telling controleert of hij wordt
     // waargemaakt. Een /StructTreeRoot met een lege boom was precies de

@@ -24,13 +24,12 @@ test('zwevende voetnoot: een omgezette ref-term is geen fout', () => {
   assert.deepEqual(zwevendeVoetnootFouten(dom(GOEDE_REF), '/normen/01-beheer/'), [])
 })
 
-test('zwevende voetnoot: telt sitebreed, behalve op de sectie-indexen', () => {
-  // De tooltip-transformatie draait via de article-shadow op alle
-  // inhoudspagina's; een kale markering is dus ook op een Over-pagina fout.
-  const kaal = dom('<p>tekst<sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup></p>')
-  assert.deepEqual(zwevendeVoetnootFouten(kaal, '/over/doel/'), ['#fn:1'])
-  assert.deepEqual(zwevendeVoetnootFouten(kaal, '/normen/'), [])
-  assert.deepEqual(zwevendeVoetnootFouten(kaal, '/onderwerpen/'), [])
+test('zwevende voetnoot: telt overal waar de transformatie draait, niet op onbewerkte pagina\u2019s', () => {
+  const kaal = '<p>tekst<sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup></p>'
+  // Transformatie gedraaid (blok weg) maar marker gemist → fout, ook buiten /normen/.
+  assert.deepEqual(zwevendeVoetnootFouten(dom(kaal), '/over/doel/'), ['#fn:1'])
+  // Onbewerkte pagina (homepage/404): het Goldmark-blok staat er nog → correcte voetnoot.
+  assert.deepEqual(zwevendeVoetnootFouten(dom(kaal + '<div class="footnotes"><ol><li id="fn:1">bron</li></ol></div>'), '/'), [])
 })
 
 test('korte ref-term: alleen interpunctie is een fout', () => {

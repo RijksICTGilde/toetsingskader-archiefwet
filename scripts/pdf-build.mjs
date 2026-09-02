@@ -239,6 +239,7 @@ const alleData = bestanden.map((bestand) => ({ bestand, data: JSON.parse(fs.read
   }
 }
 
+let geschreven = 0
 for (const { bestand, data } of alleData) {
   if (!data.kind) {
     fs.rmSync(bestand) // lege stub van een pagina zonder norm_id
@@ -255,7 +256,8 @@ for (const { bestand, data } of alleData) {
   // De JSON is invoer, geen pagina: laten staan betekent een kale kopie van
   // elke normtekst op de gedeployde site.
   fs.rmSync(bestand)
+  geschreven++
   console.log(`${path.relative(root, doel)} — ${Math.round(bytes.length / 1024)} kB`)
 }
 
-console.log(`\n${bestanden.length} PDF('s) geschreven. Controleer met: npm run test:pdf-ua`)
+console.log(`\n${geschreven} PDF('s) geschreven. Controleer met: npm run test:pdf-ua`)

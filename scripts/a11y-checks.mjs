@@ -11,8 +11,11 @@
 // Over-pagina's, feedback 25 augustus 2026), dus een gemiste marker is overal
 // een half-getransformeerde pagina. Alleen de sectie-indexen niet: dat zijn
 // list-templates zonder transformatie.
-export function zwevendeVoetnootFouten(document, url) {
-  if (/^\/(normen|over|onderwerpen)\/$/.test(url)) return []
+export function zwevendeVoetnootFouten(document, url) { // eslint-disable-line no-unused-vars
+  // Heeft de pagina het onbewerkte Goldmark-voetnotenblok nog, dan draait de
+  // tooltip-transformatie er niet (homepage/hero, 404): een kale markering is
+  // daar een correcte voetnoot, geen fout.
+  if (document.querySelector('div.footnotes')) return []
   return [...document.querySelectorAll('a.footnote-ref')].map(a => a.getAttribute('href') || '(zonder href)')
 }
 

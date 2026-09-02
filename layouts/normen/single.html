@@ -26,7 +26,7 @@
      een kern-only norm een lege "Op deze pagina"-landmark met een knop die
      niets uitklapt. */}}
 {{ $hasToc := gt (len $headings) 0 }}
-{{ $hasAside := or $hasToc (and .Params.norm_id (.OutputFormats.Get "pdfdata")) }}
+{{ $hasAside := or $hasToc (and .Params.norm_id (.OutputFormats.Get "pdfdata") (ne hugo.Environment "development")) }}
 
 <article class="norm{{ if .Params.wide }} wide{{ end }}">
   <header>

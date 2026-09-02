@@ -1,18 +1,12 @@
 {{- /* PDF-data van het hele kader: titel + de acht normen op volgorde.
-     Kopverschuiving (h2→h3 enz.) en ankerprefixen per norm doet de walker. */ -}}
+     Het per-norm-deel komt uit _partials/pdfdata-norm.html, gedeeld met de
+     losse norm-template. Kopverschuiving en ankerprefixen per norm doet
+     scripts/pdf-html.mjs. */ -}}
 {{- $normen := where .Pages "Params.norm_id" "!=" nil -}}
 {{- $normen = sort $normen "Weight" -}}
 {{- $items := slice -}}
 {{- range $normen -}}
-  {{- $kern := "" -}}{{- with .Params.kern }}{{ $kern = . | markdownify }}{{ end -}}
-  {{- $items = $items | append (dict
-      "titel" .Title
-      "norm_id" (string .Params.norm_id)
-      "norm_titel" .Params.norm_titel
-      "slug" .File.ContentBaseName
-      "kern_html" $kern
-      "kern_bron_html" (partial "kern-bron-html.html" .)
-      "body_html" (partial "nummer-voorschriften.html" (dict "content" .Content "norm_id" .Params.norm_id))) -}}
+  {{- $items = $items | append (merge (partial "pdfdata-norm.html" .) (dict "slug" .File.ContentBaseName)) -}}
 {{- end -}}
 {{- dict
   "kind" "kader"
