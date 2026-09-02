@@ -9,16 +9,18 @@
   overgetikt liepen de twee uiteen: de homepage had alleen het versienummer en
   de voet een andere opmaak (feedback 31 augustus 2026: overal dezelfde tekst
   en opmaak). De opmaak zelf komt uit het thema (`footer p` in een article of
-  section: gedempt, cursief); dit project zet er geen CSS op. Het voorbehoud "nog in ontwikkeling" is op
+  section: gedempt, cursief); dit project zet er geen CSS op. Het eerdere voorbehoud "nog in ontwikkeling" is op
   verzoek weg (25 augustus 2026).
 
   Nummer uit site.Params.versie (lokaal hugo.yaml, in CI de release-tag),
   gelinkt via render-link. Datum uit .Lastmod (enableGitInfo). Rendert niets
-  zonder versie-param; scripts/a11y-checks.mjs controleert op "van het
+  zonder versienummer valt alleen het versiedeel weg — de
+  laatst-aangepast-datum blijft (die verdween eerder mee, en daarmee elke
+  datering op elke pagina). Er is géén automatische controle meer op "van het
   toetsingskader" op elke pagina.
 
   Aanroep: {{ partial "versie-zin.html" $page }} (een Page, geen shortcode)
 */}}
 {{- with site.Params.versie -}}
-<strong>{{ partial "render-link" (dict "href" site.Params.releases_url "text" (printf "Versie %s" .)) }}</strong> van het toetsingskader. Deze pagina is voor het laatst aangepast op <time datetime="{{ $.Lastmod.Format "2006-01-02" }}">{{ $.Lastmod | time.Format ":date_full" }}</time>.
-{{- end -}}
+<strong>{{ partial "render-link" (dict "href" site.Params.releases_url "text" (printf "Versie %s" .)) }}</strong> van het toetsingskader. {{ end -}}
+Deze pagina is voor het laatst aangepast op <time datetime="{{ $.Lastmod.Format "2006-01-02" }}">{{ $.Lastmod | time.Format ":date_full" }}</time>.

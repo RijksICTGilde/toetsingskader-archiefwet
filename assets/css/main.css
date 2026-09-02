@@ -88,6 +88,13 @@ a.ref-term:hover {
   color: var(--color-link);
 }
 
+/* Keuze 25 augustus 2026: alles in linkkleur, maar een term die ook echt
+   navigeert (href naar een pagina) doorgetrokken en een pure tooltip-term
+   gestippeld — anders is niet te zien wat wegklikt en wat alleen uitklapt. */
+a.ref-term:not([href^="#"]) {
+  text-decoration-style: solid;
+}
+
 /* PDF-knop bouwt op de thema-.button; alleen brand-kleur en icoon-uitlijning
    zijn project-specifiek. Border == achtergrond, dus geen randje op hover. */
 .toc .pdf-download.button {

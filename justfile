@@ -6,9 +6,14 @@ default:
 serve:
     hugo server --environment development
 
-# Production build
+# Production build, inclusief de PDF's: de downloadknop op de normpagina's is
+# een gewone link naar index.pdf, dus een build zonder deze stap levert een
+# dode link op en laat de index.pdfdata.json-tussenproducten publiek staan.
+# (`hugo server` heeft datzelfde: in dev wijst de knop naar een 404.)
 build:
-    hugo --environment production --minify
+    hugo --environment production --minify --cleanDestinationDir
+    [ -d node_modules/pdfkit ] || npm ci --no-audit --no-fund
+    npm run build:pdf
 
 # De controles die lokaal te draaien zijn
 #
@@ -23,13 +28,24 @@ build:
 #
 # Twee CI-stappen ontbreken, omdat ze een installatie vragen die niet in de
 # repo zit: `htmltest` (linkcontrole, los binary) en de browserscan
-# `npm run test:a11y:browser` (Chromium via Playwright). Draai die op de PR.
+# `npm run test:a11y:browser` (Chromium via Playwright). De PDF-stappen staan
+# hieronder gewoon in de lijst: pdfkit draait in Node, zonder browser.
 check:
     pre-commit run --all-files
-    hugo --environment production --minify
+    hugo --environment production --minify --cleanDestinationDir
+    [ -d node_modules/pdfkit ] || npm ci --no-audit --no-fund
     npm test
-    npm run smoke:pdf
     npm run test:a11y
+    npm run build:pdf
+    npm run test:pdf-ua
+
+# PDF's genereren uit de gebouwde site en de markers controleren.
+# Draait volledig lokaal: pdfkit in Node, geen browser nodig.
+pdf:
+    hugo --environment production --minify --cleanDestinationDir
+    [ -d node_modules/pdfkit ] || npm ci --no-audit --no-fund
+    npm run build:pdf
+    npm run test:pdf-ua
 
 # Bijwerken theme naar laatste versie
 update-theme:

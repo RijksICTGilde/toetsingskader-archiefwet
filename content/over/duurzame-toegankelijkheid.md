@@ -8,7 +8,7 @@ weight: 2
 Het Nationaal Archief definieert duurzame toegankelijkheid in het [DUTO-raamwerk](https://www.nationaalarchief.nl/archiveren/duto) (Duurzaam Toegankelijke Overheidsinformatie) als volgt:
 
 {{% callout-md %}}
-"Een document is duurzaam toegankelijk als het [vindbaar](/normen/06-vindbaar/), beschikbaar, leesbaar, [interpreteerbaar](/onderwerpen/samenhang-en-interpreteerbaarheid/), [betrouwbaar](/normen/05-betrouwbaar/) en toekomstbestendig is. Voor iedereen die daar recht op heeft en voor zo lang als noodzakelijk."[^na-module-1]
+"Een document is duurzaam toegankelijk als het [vindbaar](/normen/06-vindbaar/), beschikbaar, leesbaar, [interpreteerbaar](/onderwerpen/samenhang-en-interpreteerbaarheid/), [betrouwbaar](/normen/05-betrouwbaar/) en toekomstbestendig is. Voor iedereen die daar recht op heeft en voor zo lang als noodzakelijk[^na-module-1]."
 {{% /callout-md %}}
 
 [^na-module-1]: De waarde van de duurzame toegankelijkheid, Module 1 van het DUTO-raamwerk, Nationaal Archief. [Bekijk bron](https://www.nationaalarchief.nl/archiveren/kennisbank/module-1-de-waarde-van-de-duurzame-toegankelijkheid)

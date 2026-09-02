@@ -1,0 +1,18 @@
+{{- /* PDF-data van één norm: invoer voor scripts/pdf-build.mjs (pdfkit).
+     Alleen normpagina's voeren dit outputformat (front matter van
+     content/normen/_index.md). Het per-norm-deel komt uit
+     _partials/pdfdata-norm.html, gedeeld met het kaderdocument. */ -}}
+{{- /* Alleen echte normpagina's; een andere pagina onder /normen/ (de cascade
+     zet dit outputformat sectie-breed aan) levert een lege stub die
+     scripts/pdf-build.mjs opruimt in plaats van een nep-norm-PDF. */ -}}
+{{- if .Params.norm_id -}}
+{{- merge (partial "pdfdata-norm.html" .) (dict
+  "kind" "norm"
+  "url" .Permalink
+  "site_url" site.Home.Permalink
+  "versie" (site.Params.versie | default "")
+  "site_titel" site.Title
+  "taal" (or site.Language.LanguageCode "nl-NL")) | jsonify -}}
+{{- else -}}
+{}
+{{- end -}}

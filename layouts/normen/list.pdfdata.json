@@ -1,0 +1,20 @@
+{{- /* PDF-data van het hele kader: titel + de acht normen op volgorde.
+     Het per-norm-deel komt uit _partials/pdfdata-norm.html, gedeeld met de
+     losse norm-template. Kopverschuiving en ankerprefixen per norm doet
+     scripts/pdf-html.mjs. */ -}}
+{{- $normen := where .Pages "Params.norm_id" "!=" nil -}}
+{{- $normen = sort $normen "Weight" -}}
+{{- $items := slice -}}
+{{- range $normen -}}
+  {{- $items = $items | append (merge (partial "pdfdata-norm.html" .) (dict "slug" .File.ContentBaseName)) -}}
+{{- end -}}
+{{- dict
+  "kind" "kader"
+  "titel" (printf "%s 2026" site.Title)
+  "url" .Permalink
+  "site_url" site.Home.Permalink
+  "versie" (site.Params.versie | default "")
+  "site_titel" site.Title
+  "taal" (or site.Language.LanguageCode "nl-NL")
+  "normen" $items
+  | jsonify -}}

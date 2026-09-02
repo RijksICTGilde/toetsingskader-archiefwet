@@ -22,9 +22,10 @@ Bij elke afwijking hoort:
 
 | Wat | In plaats van | Geborgd door |
 |---|---|---|
-| Geen kop boven de kern (keuze 31 augustus 2026): de callout begint met de kerntekst | Kop2 van het normblad: "Kern van Ordeningsstructuur" | `validate-norms.py` weigert het veld `kern_kop`; `tests/js/pdf-doc.test.mjs` controleert dat de PDF geen "Kern van …" zet |
+| Geen kop boven de kern (keuze 31 augustus 2026): de callout begint met de kerntekst | Kop2 van het normblad: "Kern van Ordeningsstructuur" | `validate-norms.py` weigert het veld `kern_kop`; `tests/js/pdf-tagged.test.mjs` controleert dat de PDF geen "Kern van …" zet |
 | Norm 3, toelichting 3e alinea: "overbrengen" | "overdragen" | — |
 | Norm 3, voorschrift 3.3: bron "Ar, artikel 2.5, tweede lid, sub k" eerst | omgekeerde volgorde | — |
+| Paginatitels genummerd: "1. Inbeheername en beheer" … "8. Periodieke evaluatie" (verzoek 1 september 2026; de PDF-inhoudsopgave en de kaarten op /normen/ steunen erop dat de titel zijn eigen nummer draagt) | de normbladtitel zonder nummer | `scripts/pdf-build.mjs` nummert de PDF-inhoudsopgave bewust niet zelf (`label: false`); haalt een woord-voor-woord-ronde de nummers weg, dan staan kaarten en inhoudsopgave zonder nummer |
 | "Gerelateerde onderwerpen": alleen items die naar een pagina of bron linken; bij norm 7 daardoor het hele kopje weg (feedback 25 augustus 2026) | de volledige lijst uit het normblad, ook losse woorden als "Dossier", "Zaak", "Migratie" | — (volgende stap volgens de feedback: kopje en lijst helemaal weg) |
 
 De kern zonder kop geldt voor alle acht normen: op de normpagina, in de

@@ -206,8 +206,11 @@ const findings = new Map()
 function add(url, category, message) {
   const key = `${category}|${message}`
   const seen = findings.get(key)
-  if (seen) { seen.count++; return }
-  findings.set(key, { url, category, message, count: 1 })
+  // Alle URL's bijhouden: een KNOWN-uitzondering met een `url`-veld geldt per
+  // pagina, dus dezelfde melding op een ándere pagina mag niet meeliften op de
+  // uitzondering van de eerste (en andersom niet ten onrechte rood kleuren).
+  if (seen) { seen.count++; seen.urls.add(url); return }
+  findings.set(key, { url, category, message, count: 1, urls: new Set([url]) })
 }
 
 async function tabWalk(page, url) {
@@ -244,9 +247,11 @@ for (const url of [...urls, ...extra]) {
   await page.goto(base + url, { waitUntil: 'load' })
 
   // 1. axe-core, incl. de layout-afhankelijke regels.
+  //
   await page.addScriptTag({ content: axeSrc })
   const res = await page.evaluate(
-    tags => window.axe.run(document, { runOnly: { type: 'tag', values: tags } }), TAGS)
+    (tags) => window.axe.run(document, { runOnly: { type: 'tag', values: tags } }),
+    TAGS)
   for (const v of res.violations) {
     // Kleuren en ratio meenemen; anders is de bevinding niet na te trekken.
     const detail = v.nodes.slice(0, 3).map(n => {
@@ -255,6 +260,10 @@ for (const url of [...urls, ...extra]) {
     }).join(', ')
     add(url, `axe:${v.id}`, `${v.nodes.length}x ${v.help} — ${detail}`)
   }
+
+  // (De vroegere print-HTML-uitzonderingen zijn weg: de PDF wordt sinds de
+  // pdfkit-pijplijn niet meer uit HTML gerenderd. De toegankelijkheid van de
+  // PDF zelf bewaken scripts/pdf-build.mjs en scripts/pdf-ua-check.mjs.)
 
   // 2. Toetsenborddoorloop: focusindicator (2.4.7) en focus-niet-afgedekt (2.4.11).
   await tabWalk(page, url)
@@ -298,7 +307,12 @@ for (const url of [...urls, ...extra]) {
 await browser.close()
 server.close()
 
-const known = f => KNOWN.find(k => k.category === f.category && k.match.test(f.message) && (!k.url || k.url.test(f.url)))
+// Bekend = élke pagina waarop de melding voorkomt valt onder een uitzondering;
+// één niet-gedekte pagina en de bevinding blijft fataal.
+const known = f => {
+  const dekt = u => KNOWN.find(k => k.category === f.category && k.match.test(f.message) && (!k.url || k.url.test(u)))
+  return [...f.urls].every(dekt) ? dekt(f.url) : undefined
+}
 const isFatal = f => STRICT || (FATAL.some(prefix => f.category.startsWith(prefix)) && !known(f))
 const all = [...findings.values()]
 const fatal = all.filter(isFatal)

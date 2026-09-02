@@ -9,6 +9,8 @@ overheidsorganisaties. Statische site, gebouwd met [Hugo].
 - [Hugo Extended] ≥ 0.162
 - [Go] ≥ 1.26 (voor Hugo Modules)
 - [just] voor de dev-recipes
+- [Node.js] ≥ 22 met npm (PDF-generatie en de testscripts; `just build` draait
+  zelf `npm ci` als `node_modules` ontbreekt)
 - [pre-commit] voor lokale hooks (optioneel, draait ook in CI)
 
 ## Lokaal draaien
@@ -18,7 +20,7 @@ git clone git@github.com:RijksICTGilde/toetsingskader-archiefwet.git
 cd toetsingskader-archiefwet
 just            # toont alle recipes
 just serve      # dev-server op http://localhost:1313
-just build      # productie-build naar public/
+just build      # productie-build naar public/, inclusief de PDF's (vraagt Node.js)
 ```
 
 Eerste keer? Installeer ook pre-commit:
@@ -91,6 +93,7 @@ Dit project is gelicentieerd onder de [EUPL v1.2](LICENSE).
 [Hugo Extended]: https://github.com/gohugoio/hugo/releases
 [Go]: https://go.dev
 [just]: https://github.com/casey/just
+[Node.js]: https://nodejs.org/
 [pre-commit]: https://pre-commit.com
 [htmltest]: https://github.com/wjdp/htmltest
 [ZAD]: https://github.com/RijksICTGilde/zad-actions

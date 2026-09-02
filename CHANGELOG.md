@@ -46,6 +46,26 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- PDF-generatie omgebouwd van Chromium-print naar pdfkit met een handgebouwde
+  structuurboom (`markStructureContent`), dezelfde oplossing als de
+  AI-verordening-beslishulp (MinBZK/ai-verordening-beslishulp#1047). Nog
+  steeds bij de build, maar zonder browser: `just pdf` draait nu ook lokaal en
+  de containerbuild heeft geen Chromium meer nodig. `pdf-ua-check` eist naast
+  de vier markers voortaan ook een gevulde boom (/H1, /LBody); kopvolgorde en
+  dubbele ankers worden op de invoer gecontroleerd in `scripts/pdf-build.mjs`.
+  Zie docs/besluit-toegankelijke-pdf.md §11. Na review: links als
+  Link-structuurelementen met OBJR, geneste lijsten behouden, kern zonder kop
+  en het colofon als versieregel (zoals eerder afgesproken), briefhoofd op
+  elke pagina, Nederlandse datum ook in de containerbuild.
+- De PDF-export wordt bij de build gemaakt in plaats van in de browser van de
+  bezoeker, en levert een getagde PDF: structuurboom, bladwijzers, taal en
+  documenttitel. Daarmee is de download navigeerbaar met een schermlezer —
+  koppen, lijsten en leesvolgorde — waar het eerder één doorlopende lap tekst
+  was (EN 301 549 §10, onderliggend WCAG 1.3.1 en 4.1.2, niveau A). De
+  motivering en de afweging staan in `docs/besluit-toegankelijke-pdf.md`; de
+  markers worden in CI gemeten met `scripts/pdf-ua-check.mjs`.
+- De downloadknop is een gewone link naar een bestand en werkt daarmee ook
+  zonder JavaScript.
 - Vijf punten uit de feedback op de kaderpagina's (#78) die bij het mergen van
   #79 waren teruggedraaid, staan weer: kaartteksten "Wettelijk kader" en
   "Doelgroep", de Position-Paper-voetnoot in de inleiding, en het DUTO-blok
@@ -70,10 +90,10 @@ changelog volgt [Semantic Versioning][semver].
   draait.
 - Hover-termen in de linkkleur (was tekstkleur); de stippellijn blijft het
   verschil met een gewone link.
-- Toegankelijkheidsscan controleert op de versiezin ("… van het
-  toetsingskader") in plaats van op de verwijderde zin "nog in ontwikkeling";
-  die check faalde sinds die zin weg is.
-content/feedback-algemeen-normblad-1-2-onderwerpen
+- De controle op de versiezin in de toegankelijkheidsscan is vervallen: de
+  zin komt sitebreed uit één partial (`_partials/versie-zin.html`), en de
+  controle kleurde elke build rood sinds het voorbehoud op verzoek is
+  aangepast.
 - Derde feedbackronde verwerkt (`docs/feedback-algemeen-normblad-1-2-onderwerpen.md`):
   - Paginatitels van de normen zijn de normnaam, bijvoorbeeld "Inbeheername
     en beheer", in plaats van "Normanalyse …".
@@ -91,7 +111,6 @@ content/feedback-algemeen-normblad-1-2-onderwerpen
   - Norm 5: "incidenten" in de kern linkt naar het onderwerp Incidenten, dat
     niet langer "(voorkomen van)" heet. Eerste zin van de onderwerpenindex weg.
 
-content/feedback-normbladen-6-7-8-en-kaderpaginas
 - Tweede feedbackronde verwerkt: normbladen vindbaar, vernietigen en periodieke
   evaluatie, de sectie "Over het toetsingskader" en drie onderwerpenpagina's
   (`docs/feedback-normbladen-6-7-8-en-kader.md`):
@@ -150,8 +169,6 @@ content/feedback-normbladen-6-7-8-en-kaderpaginas
     scheidt de twee vindplaatsen met een puntkomma; de bron bij het laatste
     criterium van 5.4 legt uit wat "ongeoorloofd" betekent en is niet langer
     een half afgemaakte notitie.
-main
-main
 - Openstaande punten uit de feedbackrondes (`docs/openstaande-punten.md`):
   - Kop boven de kern genummerd: "1. Kern van inbeheername en beheer", zodat
     "Voorschrift 1.1" eronder aansluit. Ook in de inhoudsopgave en de PDF.
@@ -298,6 +315,11 @@ main
 
 ### Verwijderd
 
+- De client-side PDF-generatie met pdfMake: de gevendorde bibliotheek (1,3 MB),
+  de base64-lettertypen (228 kB), de HTML→pdfMake-converter, de doc-definitie,
+  de `index.pdf.json`-endpoints en de bijbehorende tests. Dat scheelt een
+  blokkerend script van ruim anderhalve megabyte op elke normpagina, ook voor
+  wie nooit iets downloadt.
 - De controle `draft-voorbehoud` in de toegankelijkheidsscan, die op elke
   pagina de zin "in ontwikkeling en kan wijzigen" eiste. Die zin is op verzoek
   weg (25 augustus), de controle maakte sindsdien elke build rood.
