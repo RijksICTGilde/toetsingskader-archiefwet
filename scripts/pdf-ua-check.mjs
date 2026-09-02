@@ -92,10 +92,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     // De vier markers zijn een belofte; deze telling controleert of hij wordt
     // waargemaakt. Een /StructTreeRoot met een lege boom was precies de
     // pdfMake-val (en wat de beslishulp in MinBZK/ai-verordening-beslishulp#1047
-    // mat): de vlag stond aan, de boom was leeg. Elke norm heeft minstens één
-    // documentkop en één lijst (criteria of bronnen), dus /H1 en /LBody horen in
-    // de boom te zitten.
-    const boom = ['/H1', '/LBody'].filter((tag) => !inhoud.includes(tag))
+    // mat): de vlag stond aan, de boom was leeg. Elk document heeft een kop en
+    // alinea's; /LBody wordt alleen geëist als de boom zelf lijsten (/S /L)
+    // claimt — een norm zonder lijsten (kern-only) is geldig en mag niet rood
+    // kleuren.
+    const boom = ['/H1', '/P'].filter((tag) => !new RegExp(`${tag}(?![A-Za-z])`).test(inhoud))
+    if (/\/S\s*\/L(?![A-Za-z])/.test(inhoud) && !inhoud.includes('/LBody')) boom.push('/LBody')
     console.log(`${pad} — ${aanwezig}/${MARKERS.length} markers, ${buf.length} bytes`)
     for (const [marker, uitleg] of gemist) {
       console.log(`    ontbreekt ${marker} — ${uitleg}`)

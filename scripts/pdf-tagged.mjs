@@ -115,6 +115,12 @@ export class TaggedPdf {
     const { doc } = this
     const x = doc.x
     const y = doc.y
+    // Dit draait ook op `pageAdded` middenin een doorlopende tekstrun, en
+    // pdfkit's endMarkedContent() wist dan link/goTo/underline uit de líve
+    // _textOptions — een link die over de paginagrens loopt verloor zo zijn
+    // annotatie op de vervolgpagina. Opties even opzij zetten.
+    const tekstOpties = doc._textOptions
+    doc._textOptions = null
     if (!this.#briefhoofdX) {
       // De operatoren die SVGtoPDF in de paginastroom zou schrijven, opvangen
       // en in een eigen stream-object zetten. Het briefhoofd is louter paden
@@ -143,6 +149,7 @@ export class TaggedPdf {
     doc.markContent('Artifact', { type: 'Pagination' })
     doc.addContent('/BH1 Do')
     doc.endMarkedContent()
+    doc._textOptions = tekstOpties
     doc.x = x
     doc.y = y
   }

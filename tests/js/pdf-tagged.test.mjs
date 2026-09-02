@@ -215,6 +215,49 @@ test('h5 blijft een kop (H5-tag), geen alinea', () => {
   assert.equal(koppen[3].o.stijl, 'h4')
 })
 
+test('link die over de paginagrens loopt houdt zijn annotatie op de vervolgpagina', async () => {
+  // pdfkit's endMarkedContent() (het briefhoofd op pageAdded) wist link/goTo
+  // uit de live opties van een doorlopende run; de link verloor dan zijn
+  // annotaties op de nieuwe pagina.
+  const lang = {
+    ...DATA, kern_html: '',
+    body_html: '<h2 id="t">Toelichting</h2><p>' + 'Aanloop tot onderaan de pagina. '.repeat(140) +
+      '<a href="https://example.org/lang/">' + 'een heel lange linktekst die over de paginagrens heen wikkelt '.repeat(20) + '</a>slot.</p>',
+  }
+  const { doc } = await bouw(lang)
+  assert.ok(doc.getPageCount() >= 2, `pagina's: ${doc.getPageCount()}`)
+  const perPagina = doc.getPages().map((p) => (p.node.Annots() ? p.node.Annots().size() : 0))
+  // De link begint op pagina 1 en wikkelt de grens over: beide pagina's
+  // moeten annotaties dragen (zonder de _textOptions-fix had pagina 2 er nul).
+  assert.ok(perPagina[0] > 0 && perPagina[1] > 0, `annotaties per pagina: ${perPagina}`)
+})
+
+test('runsVan: <br> wordt een regeleinde, geen aan elkaar geplakte woorden', () => {
+  const { document } = parseHTML('<body><p>regel een<br>regel twee</p></body>')
+  const runs = runsVan(document.querySelector('p'), { prefix: '', siteUrl: 'https://x.nl/' })
+  assert.ok(runs.some((r) => r.text.includes('\n')), JSON.stringify(runs))
+})
+
+test('runsVan: <img> is een bouwfout, geen stil weggelaten afbeelding', () => {
+  const { document } = parseHTML('<body><p>voor <img src="a.png" alt="beeld"> na</p></body>')
+  assert.throws(() => runsVan(document.querySelector('p'), { prefix: '', siteUrl: 'https://x.nl/' }), /wordt nog niet ondersteund/)
+})
+
+test('<ol start="3"> nummert in de PDF ook vanaf 3', () => {
+  const uit = []
+  const nep = { alinea: () => {}, kop: () => {}, bladwijzer: () => {}, citaat: () => {}, lijst: (items, o) => uit.push(o) }
+  schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<ol start="3"><li>eerste</li></ol>' }, { siteUrl: DATA.site_url })
+  assert.equal(uit[0].start, 3)
+})
+
+test('blockquote met kale tekst en inline nadruk verliest niets', () => {
+  const uit = []
+  const nep = { alinea: () => { throw new Error('buiten het citaat beland') }, kop: () => {}, bladwijzer: () => {}, citaat: (a) => uit.push(a), lijst: () => {} }
+  schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<blockquote>tekst <em>nadruk</em></blockquote>' }, { siteUrl: DATA.site_url })
+  const tekst = uit[0][0].map((r) => r.text).join('')
+  assert.equal(tekst, 'tekst nadruk')
+})
+
 test('runsVan: voetnootmarkering wordt superscript-sprong, backref verdwijnt', () => {
   const { document } = parseHTML(`<body><p>tekst<sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup>
     <a href="#fnref:1" class="footnote-backref">↩</a></p></body>`)

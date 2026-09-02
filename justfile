@@ -12,6 +12,7 @@ serve:
 # (`hugo server` heeft datzelfde: in dev wijst de knop naar een 404.)
 build:
     hugo --environment production --minify
+    [ -d node_modules ] || npm ci --no-audit --no-fund
     npm run build:pdf
 
 # De controles die lokaal te draaien zijn

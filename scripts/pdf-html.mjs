@@ -48,6 +48,16 @@ export function runsVan(el, ctx, basis = {}) {
     }
     if (kind.nodeType !== 1 || isLijst(kind)) continue
     const tag = kind.tagName.toLowerCase()
+    if (tag === 'br') {
+      // Hard regeleinde: als \n schrijft pdfkit een nieuwe regel. Zonder deze
+      // run plakten de woorden eromheen aan elkaar.
+      runs.push({ ...basis, text: '\n' })
+      continue
+    }
+    if (tag === 'img') {
+      throw new Error('<img> wordt nog niet ondersteund in de PDF-pijplijn (scripts/pdf-html.mjs); ' +
+        'een afbeelding zou stilletjes uit de PDF verdwijnen terwijl de site hem toont')
+    }
     if (tag === 'strong' || tag === 'b') runs.push(...runsVan(kind, ctx, { ...basis, bold: true }))
     else if (tag === 'em' || tag === 'i') runs.push(...runsVan(kind, ctx, { ...basis, italics: true }))
     else if (tag === 'sup') runs.push(...runsVan(kind, ctx, { ...basis, sup: true }))
@@ -73,7 +83,8 @@ export function runsVan(el, ctx, basis = {}) {
       if (run.text) runs.push(run)
     } else runs.push(...runsVan(kind, ctx, basis))
   }
-  // Blokgedrag van HTML: randwitruimte weg.
+  // Blokgedrag van HTML: randwitruimte weg (een bewust regeleinde van <br>
+  // aan het einde doet toch niets meer en mag mee-wegvallen).
   if (runs.length) {
     runs[0].text = runs[0].text.replace(/^\s+/, '')
     runs[runs.length - 1].text = runs[runs.length - 1].text.replace(/\s+$/, '')
@@ -187,21 +198,43 @@ export function schrijfNorm(pdf, data, opties) {
       const runs = runsVan(el, ctx)
       if (runs.length) pdf.alinea(runs, { ouder: sectie })
     } else if (isLijst(el)) {
-      pdf.lijst(lijstItems(el, ctx), { geordend: tag === 'ol', ouder: sectie })
+      pdf.lijst(lijstItems(el, ctx), {
+        geordend: tag === 'ol',
+        // `start` van de <ol> meenemen: een hervatte nummering ("3. 4.") mag
+        // in de PDF niet stilletjes weer bij 1 beginnen.
+        start: Number(el.getAttribute('start')) || 1,
+        ouder: sectie,
+      })
     } else if (tag === 'blockquote') {
       // Citaat: de alinea's als P bínnen een BlockQuote-element, cursief als
       // visueel onderscheid; een lijst in het citaat gaat als gewone lijst
-      // verder (inhoud en volgorde boven citaat-semantiek).
+      // verder (inhoud en volgorde boven citaat-semantiek). Kale tekst en
+      // inline elementen (unsafe-HTML zonder <p>) bufferen als alinea, zodat
+      // er niets stilletjes wegvalt.
       const alineas = []
-      for (const kind of el.children) {
-        if (kind.tagName.toLowerCase() === 'p') alineas.push(runsVan(kind, ctx).map((r) => ({ italics: true, ...r })))
-        else verwerk(kind)
+      let buffer = null
+      const spoel = () => {
+        if (!buffer) return
+        const runs = runsVan(buffer, ctx).map((r) => ({ italics: true, ...r }))
+        if (runs.length) alineas.push(runs)
+        buffer = null
       }
-      if (!alineas.length && el.textContent.trim() && ![...el.children].length) {
-        alineas.push(runsVan(el, ctx).map((r) => ({ italics: true, ...r })))
+      for (const kind of [...el.childNodes]) {
+        const kindTag = kind.nodeType === 1 ? kind.tagName.toLowerCase() : null
+        if (kindTag === 'p') {
+          spoel()
+          alineas.push(runsVan(kind, ctx).map((r) => ({ italics: true, ...r })))
+        } else if (kindTag && /^(ul|ol|h[1-6]|blockquote|div|section|table|figure|pre|img)$/.test(kindTag)) {
+          spoel()
+          verwerk(kind)
+        } else {
+          buffer = buffer || el.ownerDocument.createElement('span')
+          buffer.appendChild(kind)
+        }
       }
+      spoel()
       if (alineas.length) pdf.citaat(alineas, { ouder: sectie })
-    } else if (/^(table|thead|tbody|figure|pre)$/.test(tag)) {
+    } else if (/^(table|thead|tbody|figure|pre|img)$/.test(tag)) {
       // Nog niet ondersteund in de structuurboom. Stil platslaan tot één
       // alinea zou de site en de "toegankelijke" PDF uiteen laten lopen
       // zonder dat een controle het ziet — dan liever een bouwfout.
