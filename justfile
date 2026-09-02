@@ -11,7 +11,7 @@ serve:
 # dode link op en laat de index.pdfdata.json-tussenproducten publiek staan.
 # (`hugo server` heeft datzelfde: in dev wijst de knop naar een 404.)
 build:
-    hugo --environment production --minify
+    hugo --environment production --minify --cleanDestinationDir
     [ -d node_modules/pdfkit ] || npm ci --no-audit --no-fund
     npm run build:pdf
 
@@ -32,7 +32,7 @@ build:
 # hieronder gewoon in de lijst: pdfkit draait in Node, zonder browser.
 check:
     pre-commit run --all-files
-    hugo --environment production --minify
+    hugo --environment production --minify --cleanDestinationDir
     [ -d node_modules/pdfkit ] || npm ci --no-audit --no-fund
     npm test
     npm run test:a11y
@@ -42,7 +42,7 @@ check:
 # PDF's genereren uit de gebouwde site en de markers controleren.
 # Draait volledig lokaal: pdfkit in Node, geen browser nodig.
 pdf:
-    hugo --environment production --minify
+    hugo --environment production --minify --cleanDestinationDir
     [ -d node_modules/pdfkit ] || npm ci --no-audit --no-fund
     npm run build:pdf
     npm run test:pdf-ua

@@ -142,7 +142,11 @@ test('briefhoofd staat op elke pagina, ook na een automatische paginaovergang', 
 
 test('kader: verwijzing naar een andere norm wordt een sprong binnen het document', () => {
   const { document } = parseHTML('<body><p>zie <a href="/normen/01-beheer/">norm 1</a> en <a href="/normen/03-ordenen/#voorschriften">daar</a> en <a href="../07-vernietigen/">relatief</a> en <a href="https://x.nl/normen/01-beheer/">voluit</a> en <a href="/onderwerpen/document/">een begrip</a></p></body>')
-  const normDests = { '01-beheer': { dest: 'norm-1', prefix: 'n1-' }, '03-ordenen': { dest: 'norm-3', prefix: 'n3-' }, '07-vernietigen': { dest: 'norm-7', prefix: 'n7-' } }
+  const normDests = {
+    '01-beheer': { dest: 'norm-1', prefix: 'n1-', ankers: new Set() },
+    '03-ordenen': { dest: 'norm-3', prefix: 'n3-', ankers: new Set(['voorschriften']) },
+    '07-vernietigen': { dest: 'norm-7', prefix: 'n7-', ankers: new Set() },
+  }
   const ctx = { prefix: 'n2-', siteUrl: 'https://x.nl/', basisUrl: 'https://x.nl/normen/02-overzicht/', normDests }
   const runs = runsVan(document.querySelector('p'), ctx)
   assert.equal(runs.find((r) => r.text === 'norm 1').goTo, 'norm-1')
@@ -171,7 +175,8 @@ test('kern die precies één link is houdt zijn link', () => {
 
 test('link naar een layout-anker (#referenties) wordt een sitelink, geen dode sprong', () => {
   const { document } = parseHTML('<body><p><a href="#referenties">bronnen</a></p></body>')
-  const runs = runsVan(document.querySelector('p'), { prefix: 'n1-', siteUrl: 'https://x.nl/', basisUrl: 'https://x.nl/normen/01-beheer/' })
+  // eigenAnkers = wat er echt in deze PDF staat; #referenties zit daar niet in.
+  const runs = runsVan(document.querySelector('p'), { prefix: 'n1-', siteUrl: 'https://x.nl/', basisUrl: 'https://x.nl/normen/01-beheer/', eigenAnkers: new Set(['kern']) })
   assert.equal(runs[0].link, 'https://x.nl/normen/01-beheer/#referenties')
   assert.equal(runs[0].goTo, undefined)
 })
@@ -332,12 +337,43 @@ test('lijst in de kern blijft een lijst', () => {
   assert.equal(uit[0].items.length, 2)
 })
 
-test('cross-norm link naar een layout-anker wordt een sitelink, geen dode sprong', () => {
-  const { document } = parseHTML('<body><p><a href="/normen/07-vernietigen/#referenties">bronnen daar</a></p></body>')
-  const ctx = { prefix: 'n2-', siteUrl: 'https://x.nl/', basisUrl: 'https://x.nl/normen/02-overzicht/', normDests: { '07-vernietigen': { dest: 'norm-7', prefix: 'n7-' } } }
+test('cross-norm link naar een layout-anker springt naar het begin van die norm', () => {
+  const { document } = parseHTML('<body><p><a href="/normen/07-vernietigen/#referenties">bronnen daar</a> en <a href="/normen/07-vernietigen/#echt">bestaand</a></p></body>')
+  const ctx = { prefix: 'n2-', siteUrl: 'https://x.nl/', basisUrl: 'https://x.nl/normen/02-overzicht/', normDests: { '07-vernietigen': { dest: 'norm-7', prefix: 'n7-', ankers: new Set(['echt']) } } }
   const runs = runsVan(document.querySelector('p'), ctx)
-  assert.equal(runs[0].goTo, undefined)
-  assert.equal(runs[0].link, 'https://x.nl/normen/07-vernietigen/#referenties')
+  assert.equal(runs.find((r) => r.text === 'bronnen daar').goTo, 'norm-7')
+  assert.equal(runs.find((r) => r.text === 'bestaand').goTo, 'n7-echt')
+})
+
+test('citaat met een lijst ertussen houdt de leesvolgorde', () => {
+  const volgorde = []
+  const nep = { alinea: () => {}, kop: () => {}, bladwijzer: () => {}, citaat: (a) => volgorde.push(['q', a[0][0].text]), lijst: (i) => volgorde.push(['l', i[0].segmenten[0].runs[0].text]) }
+  schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<blockquote><p>ALFA</p><ul><li>BETA</li></ul><p>GAMMA</p></blockquote>' }, { siteUrl: DATA.site_url })
+  assert.deepEqual(volgorde, [['q', 'ALFA'], ['l', 'BETA'], ['q', 'GAMMA']])
+})
+
+test('kern die alleen een lijst is houdt zijn #kern-bestemming', async () => {
+  const pdf = new TaggedPdf({ titel: 'T', taal: 'nl', versie: 'v0', fonts, briefhoofdSvg })
+  pdf.nieuwePagina()
+  schrijfNorm(pdf, { ...DATA, kern_html: '<ul><li>punt een</li></ul>', body_html: '<h2 id="t">T</h2><p><a href="#kern">terug</a></p>' }, { siteUrl: DATA.site_url })
+  await pdf.einde() // gooit zonder registratie: sprong naar niet-bestaande bestemming
+})
+
+test('link naar een anker dat wél in de body bestaat blijft een sprong', () => {
+  const uit = []
+  const nep = { alinea: (runs) => uit.push(runs), kop: () => {}, bladwijzer: () => {}, citaat: () => {}, lijst: () => {} }
+  schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<h2 id="doel">Doel</h2><p><a href="#doel">spring</a> en <a href="#toc">layout</a></p>' }, { siteUrl: DATA.site_url, paginaUrl: 'https://example.org/normen/03-ordenen/' })
+  const runs = uit.flat()
+  assert.equal(runs.find((r) => r.text === 'spring').goTo, 'doel')
+  assert.equal(runs.find((r) => r.text === 'layout').link, 'https://example.org/normen/03-ordenen/#toc')
+})
+
+test('briefhoofd-XObject draagt zijn eigen ExtGState-resources', async () => {
+  const { bytes } = await bouw()
+  const inhoud = uitgepakt(bytes)
+  const m = inhoud.match(/\/Subtype \/Form[\s\S]{0,400}?>>/)
+  assert.ok(m, 'Form XObject aanwezig')
+  if (inhoud.includes('/Gs1 gs')) assert.ok(m[0].includes('/ExtGState'), m[0])
 })
 
 test('runsVan: voetnootmarkering wordt superscript-sprong, backref verdwijnt', () => {

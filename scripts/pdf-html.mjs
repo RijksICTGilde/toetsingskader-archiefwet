@@ -44,20 +44,36 @@ function normSprong(href, ctx) {
   const doel = ctx.normDests[pad[1]]
   if (!doel) return null
   const anker = abs.hash ? abs.hash.slice(1) : ''
-  // Een layout-anker (bestaat op de site, niet in de PDF) op een andere norm:
-  // geen sprong — de aanroeper maakt er dan een gewone sitelink van.
-  if (anker && SITE_ANKERS.has(anker)) return null
-  return anker ? doel.prefix + anker : doel.dest
+  // Alleen naar een anker springen dat in de PDF van die norm echt bestaat;
+  // een layout-anker (#referenties) degradeert naar het begin van de norm —
+  // zoals de oude export deed — in plaats van een dode sprong die de build
+  // breekt.
+  if (anker && doel.ankers && doel.ankers.has(anker)) return doel.prefix + anker
+  return doel.dest
 }
 
 const isLijst = (el) => el.nodeType === 1 && /^(ul|ol)$/i.test(el.tagName)
 
-// Ankers die layouts (niet body_html) op de sitepagina zetten; zie runsVan.
-const SITE_ANKERS = new Set(['referenties'])
-
 // Eén blok-regex voor detectie, dispatch én blokken(): drie uiteenlopende
 // lijstjes lieten een <div><table>…</div> langs de fail-loud-guards glippen.
 const BLOK_RE = /^(p|ul|ol|h[1-6]|blockquote|div|section|article|figure|table|thead|tbody|pre|img|hr|details|summary|header|footer|aside|main|nav)$/i
+
+// Idem voor wat de pijplijn (nog) niet kan: één lijst, op beide plekken.
+const ONGESTEUND_RE = /^(table|thead|tbody|figure|pre|img)$/i
+
+/**
+ * Alle ankers die deze norm in de PDF echt krijgt: de id's uit kern en body
+ * plus de gesynthetiseerde "kern". Een layoutanker van de site (#toc,
+ * #referenties, …) staat hier dus níét in — een link daarheen wordt een
+ * sitelink of, cross-norm, een sprong naar het begin van die norm.
+ */
+export function ankersVan(data) {
+  const ankers = new Set(['kern'])
+  for (const html of [data.kern_html, data.body_html]) {
+    for (const m of (html || '').matchAll(/\sid="([^"]+)"/g)) ankers.add(m[1])
+  }
+  return ankers
+}
 
 /** `start` van een <ol>, met 0 als geldige waarde (Number(...) || 1 at hem op). */
 function olStart(el) {
@@ -103,14 +119,14 @@ export function runsVan(el, ctx, basis = {}, top = true) {
         run.sup = true
         run.goTo = ctx.prefix + href.replace(/^#/, '')
       } else if (href.startsWith('#')) {
-        // Ankers die de site-layout maakt (niet de body) bestaan niet in de
-        // PDF; een sprong ernaartoe zou de build op geldige content breken.
-        // Die worden een link naar de pagina zelf.
-        if (SITE_ANKERS.has(href.slice(1))) {
+        // Alleen een sprong als het anker in déze PDF bestaat; een anker dat
+        // de site-layout maakt (#toc, #referenties) wordt een link naar de
+        // pagina — een dode sprong zou de build op geldige content breken.
+        if (!ctx.eigenAnkers || ctx.eigenAnkers.has(href.slice(1))) {
+          run.goTo = ctx.prefix + href.slice(1)
+        } else {
           run.link = (ctx.basisUrl || ctx.siteUrl) + href
           if (ctx.underlineLinks) run.underline = true
-        } else {
-          run.goTo = ctx.prefix + href.slice(1)
         }
       } else {
         const sprong = normSprong(href, ctx)
@@ -150,7 +166,7 @@ export function lijstItems(lijstEl, ctx) {
       buffer = null
     }
     for (const node of [...li.childNodes]) {
-      if (node.nodeType === 1 && /^(table|thead|tbody|figure|pre|img)$/i.test(node.tagName)) {
+      if (node.nodeType === 1 && ONGESTEUND_RE.test(node.tagName)) {
         throw new Error(`<${node.tagName.toLowerCase()}> in een lijst-item wordt nog niet ondersteund in de PDF-pijplijn; ` +
           'de inhoud zou als aan elkaar geplakte tekst in het item belanden')
       }
@@ -184,7 +200,7 @@ export function lijstItems(lijstEl, ctx) {
  */
 export function schrijfNorm(pdf, data, opties) {
   const { prefix = '', kopShift = 0, siteUrl, paginaUrl, sectie, bladwijzer, normDests } = opties
-  const ctx = { prefix, siteUrl, basisUrl: paginaUrl || siteUrl, normDests }
+  const ctx = { prefix, siteUrl, basisUrl: paginaUrl || siteUrl, normDests, eigenAnkers: ankersVan(data) }
 
   // --- Kern -------------------------------------------------------------------
   // Zonder kop, net als op de site (keuze 31 augustus 2026, zie
@@ -196,7 +212,8 @@ export function schrijfNorm(pdf, data, opties) {
     let kernId = prefix + 'kern'
     for (const blok of blokken(data.kern_html)) {
       if (isLijst(blok)) {
-        pdf.lijst(lijstItems(blok, ctx), { geordend: blok.tagName.toLowerCase() === 'ol', start: olStart(blok), ouder: sectie })
+        pdf.lijst(lijstItems(blok, ctx), { geordend: blok.tagName.toLowerCase() === 'ol', start: olStart(blok), ouder: sectie, id: kernId })
+        kernId = undefined
         continue
       }
       const runs = runsVan(blok, ctx)
@@ -292,30 +309,37 @@ export function schrijfNorm(pdf, data, opties) {
       // verder (inhoud en volgorde boven citaat-semantiek). Kale tekst en
       // inline elementen (unsafe-HTML zonder <p>) bufferen als alinea, zodat
       // er niets stilletjes wegvalt.
-      const alineas = []
+      let alineas = []
       let buffer = null
-      const spoel = () => {
+      const spoelBuffer = () => {
         if (!buffer) return
         const runs = runsVan(buffer, ctx).map((r) => ({ italics: true, ...r }))
         if (runs.length) alineas.push(runs)
         buffer = null
       }
+      // Vóór een blok-kind (lijst, hr) eerst de opgebouwde alinea's als citaat
+      // wegschrijven: anders belandde de lijst vóór de alinea's die er in de
+      // bron vóór staan en klopte de leesvolgorde niet meer.
+      const spoelCitaat = () => {
+        spoelBuffer()
+        if (alineas.length) pdf.citaat(alineas, { ouder: sectie })
+        alineas = []
+      }
       for (const kind of [...el.childNodes]) {
         const kindTag = kind.nodeType === 1 ? kind.tagName.toLowerCase() : null
         if (kindTag === 'p') {
-          spoel()
+          spoelBuffer()
           alineas.push(runsVan(kind, ctx).map((r) => ({ italics: true, ...r })))
         } else if (kindTag && BLOK_RE.test(kindTag)) {
-          spoel()
+          spoelCitaat()
           verwerk(kind)
         } else {
           buffer = buffer || el.ownerDocument.createElement('span')
           buffer.appendChild(kind)
         }
       }
-      spoel()
-      if (alineas.length) pdf.citaat(alineas, { ouder: sectie })
-    } else if (/^(table|thead|tbody|figure|pre|img)$/.test(tag)) {
+      spoelCitaat()
+    } else if (ONGESTEUND_RE.test(tag)) {
       // Nog niet ondersteund in de structuurboom. Stil platslaan tot één
       // alinea zou de site en de "toegankelijke" PDF uiteen laten lopen
       // zonder dat een controle het ziet — dan liever een bouwfout.

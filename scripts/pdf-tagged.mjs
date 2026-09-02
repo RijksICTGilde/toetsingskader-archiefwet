@@ -137,10 +137,17 @@ export class TaggedPdf {
       } finally {
         doc.addContent = orig
       }
+      // De SVG-operatoren gebruiken /Gs1 (ExtGState uit svg-to-pdfkit); die
+      // werd tijdens de capture alleen op de toenmalige pagina geregistreerd.
+      // Zonder eigen /Resources is elke latere `/BH1 Do` een ISO 32000-
+      // schending waar veraPDF/PAC over vallen — viewers vergeven het, een
+      // toegankelijkheidsvalidatie niet.
+      const gstates = { ...doc.page.ext_gstates }
       const xobj = doc.ref({
         Type: 'XObject',
         Subtype: 'Form',
         BBox: [0, 0, A4.breed, A4.hoog],
+        ...(Object.keys(gstates).length ? { Resources: { ExtGState: gstates } } : {}),
       })
       xobj.end(Buffer.from(delen.join('\n'), 'binary'))
       this.#briefhoofdX = xobj
@@ -188,9 +195,14 @@ export class TaggedPdf {
    * lijsten krijgen het nummer in de tekst; pdfkit nummert niet zelf.
    * `label: false` voor items die al een nummer dragen (de inhoudsopgave).
    */
-  lijst(items, { stijl = 'para', geordend = false, start = 1, label = true, ouder } = {}) {
-    this.#lijstIn(ouder || this.root, items, { s: STIJL[stijl], geordend, start, label, inspring: 0 })
-    this.doc.y += STIJL[stijl].onder
+  lijst(items, { stijl = 'para', geordend = false, start = 1, label = true, ouder, id } = {}) {
+    const s = STIJL[stijl]
+    if (id) {
+      if (this.doc.y + s.boven + s.size * REGEL > A4.hoog - MARGE.bottom) this.nieuwePagina()
+      this.#registreerDest(id, this.doc.x, this.doc.y)
+    }
+    this.#lijstIn(ouder || this.root, items, { s, geordend, start, label, inspring: 0 })
+    this.doc.y += s.onder
   }
 
   #lijstIn(ouderEl, items, { s, geordend, start, label, inspring }) {

@@ -22,7 +22,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { parseHTML } from 'linkedom'
 import { TaggedPdf, laadFonts, laadBriefhoofd } from './pdf-tagged.mjs'
-import { schrijfNorm } from './pdf-html.mjs'
+import { schrijfNorm, ankersVan } from './pdf-html.mjs'
 import { kopvolgordeFouten, dubbeleIdFouten } from './a11y-checks.mjs'
 
 const root = process.argv[2] || 'public'
@@ -127,10 +127,12 @@ async function bouwKaderEenmaal(data, paginas) {
     { stijl: 'toc', label: false }
   )
 
-  // Kruisverwijzingen tussen normen worden sprongen binnen het document.
+  // Kruisverwijzingen tussen normen worden sprongen binnen het document; per
+  // norm reizen de echte ankers mee, zodat een link naar een anker dat alleen
+  // op de site bestaat naar het begin van die norm springt.
   const normDests = {}
   for (const n of data.normen) {
-    if (n.slug) normDests[n.slug] = { dest: `norm-${n.norm_id}`, prefix: `n${n.norm_id}-` }
+    if (n.slug) normDests[n.slug] = { dest: `norm-${n.norm_id}`, prefix: `n${n.norm_id}-`, ankers: ankersVan(n) }
   }
 
   const gevonden = {}
@@ -155,9 +157,17 @@ async function bouwKaderEenmaal(data, paginas) {
 async function bouwKader(data) {
   const eerste = await bouwKaderEenmaal(data, null)
   const tweede = await bouwKaderEenmaal(data, eerste.paginas)
-  const gelijk = JSON.stringify(eerste.paginas) === JSON.stringify(tweede.paginas)
-  if (!gelijk) console.warn('  inhoudsopgave zonder paginanummers: de telling verschoof tussen de doorlopen')
-  return gelijk ? tweede.bytes : eerste.bytes
+  if (JSON.stringify(eerste.paginas) !== JSON.stringify(tweede.paginas)) {
+    // Twee doorlopen over dezelfde invoer horen deterministisch te zijn; als
+    // het bijschrijven van " — <nr>" de paginaval verschuift is dat een
+    // layoutprobleem dat opgelost moet worden, geen degradatie om stil door
+    // te laten (de vorige stille terugval was in geen enkele controle
+    // zichtbaar).
+    console.error('  paginatelling verschoof tussen de twee doorlopen; inhoudsopgave zou verkeerde nummers dragen')
+    console.error(`  eerste: ${JSON.stringify(eerste.paginas)}  tweede: ${JSON.stringify(tweede.paginas)}`)
+    process.exit(1)
+  }
+  return tweede.bytes
 }
 
 const bestanden = vindPdfdata(root)

@@ -6,10 +6,13 @@
 // Een `footnote-ref` die de ref-term-transformatie van `normen/single.html` heeft
 // gemist, is een zwevend nummer zonder brontekst. Controle op de gerenderde HTML,
 // niet op de markdown: Goldmark voorspellen met regex werkte twee kanten op
-// verkeerd (zie scripts/validate-norms.py). Alleen normpagina's — elders is een
-// gewone Goldmark-voetnoot correct, en `/normen/` is een list-template.
+// verkeerd (zie scripts/validate-norms.py). Sitebreed: de transformatie draait
+// via de article.html-shadow op álle inhoudspagina's (sinds de hover op de
+// Over-pagina's, feedback 25 augustus 2026), dus een gemiste marker is overal
+// een half-getransformeerde pagina. Alleen de sectie-indexen niet: dat zijn
+// list-templates zonder transformatie.
 export function zwevendeVoetnootFouten(document, url) {
-  if (!url.startsWith('/normen/') || url === '/normen/') return []
+  if (/^\/(normen|over|onderwerpen)\/$/.test(url)) return []
   return [...document.querySelectorAll('a.footnote-ref')].map(a => a.getAttribute('href') || '(zonder href)')
 }
 

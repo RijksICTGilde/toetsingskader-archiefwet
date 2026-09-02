@@ -90,10 +90,10 @@ changelog volgt [Semantic Versioning][semver].
   draait.
 - Hover-termen in de linkkleur (was tekstkleur); de stippellijn blijft het
   verschil met een gewone link.
-- Toegankelijkheidsscan controleert op de versiezin ("… van het
-  toetsingskader") in plaats van op de verwijderde zin "nog in ontwikkeling";
-  die check faalde sinds die zin weg is.
-content/feedback-algemeen-normblad-1-2-onderwerpen
+- De controle op de versiezin in de toegankelijkheidsscan is vervallen: de
+  zin komt sitebreed uit één partial (`_partials/versie-zin.html`), en de
+  controle kleurde elke build rood sinds het voorbehoud op verzoek is
+  aangepast.
 - Derde feedbackronde verwerkt (`docs/feedback-algemeen-normblad-1-2-onderwerpen.md`):
   - Paginatitels van de normen zijn de normnaam, bijvoorbeeld "Inbeheername
     en beheer", in plaats van "Normanalyse …".
