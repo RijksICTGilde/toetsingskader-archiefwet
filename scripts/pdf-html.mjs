@@ -26,16 +26,31 @@ function absoluteLink(href, basisUrl) {
  * bijlage leest, blijft in het document (zelfde gedrag als de oude export met
  * `normDests`). ctx.normDests: slug → { dest: 'norm-<id>', prefix: 'n<id>-' }.
  */
-function normSprong(href, normDests) {
-  if (!normDests) return null
-  const m = href.match(/^\/normen\/([^/#]+)\/?(?:#(.+))?$/)
-  if (!m) return null
-  const doel = normDests[m[1]]
+function normSprong(href, ctx) {
+  if (!ctx.normDests) return null
+  // Op de opgeloste URL matchen, zodat óók "../07-vernietigen/", een volledige
+  // https-link en een root-relatief pad een sprong worden — een vormvaste
+  // regex liet die stil degraderen tot weblinks.
+  let abs, site
+  try {
+    abs = new URL(href, ctx.basisUrl || ctx.siteUrl)
+    site = new URL(ctx.siteUrl)
+  } catch {
+    return null
+  }
+  if (abs.origin !== site.origin) return null
+  const pad = abs.pathname.match(/^\/normen\/([^/]+)\/?$/)
+  if (!pad) return null
+  const doel = ctx.normDests[pad[1]]
   if (!doel) return null
-  return m[2] ? doel.prefix + m[2] : doel.dest
+  const anker = abs.hash ? abs.hash.slice(1) : ''
+  return anker ? doel.prefix + anker : doel.dest
 }
 
 const isLijst = (el) => el.nodeType === 1 && /^(ul|ol)$/i.test(el.tagName)
+
+// Ankers die layouts (niet body_html) op de sitepagina zetten; zie runsVan.
+const SITE_ANKERS = new Set(['referenties'])
 
 /** `start` van een <ol>, met 0 als geldige waarde (Number(...) || 1 at hem op). */
 function olStart(el) {
@@ -81,9 +96,17 @@ export function runsVan(el, ctx, basis = {}, top = true) {
         run.sup = true
         run.goTo = ctx.prefix + href.replace(/^#/, '')
       } else if (href.startsWith('#')) {
-        run.goTo = ctx.prefix + href.slice(1)
+        // Ankers die de site-layout maakt (niet de body) bestaan niet in de
+        // PDF; een sprong ernaartoe zou de build op geldige content breken.
+        // Die worden een link naar de pagina zelf.
+        if (SITE_ANKERS.has(href.slice(1))) {
+          run.link = (ctx.basisUrl || ctx.siteUrl) + href
+          if (ctx.underlineLinks) run.underline = true
+        } else {
+          run.goTo = ctx.prefix + href.slice(1)
+        }
       } else {
-        const sprong = normSprong(href, ctx.normDests)
+        const sprong = normSprong(href, ctx)
         if (sprong) run.goTo = sprong
         else {
           run.link = absoluteLink(href, ctx.basisUrl || ctx.siteUrl)
@@ -157,9 +180,15 @@ export function schrijfNorm(pdf, data, opties) {
   // docs/afwijkingen-van-het-normblad.md): de kerntekst is de eerste alinea
   // onder de titel. Wel een named destination, voor wie ernaar verwijst.
   if (data.kern_html) {
-    blokken(data.kern_html).forEach((blok, i) => {
-      pdf.alinea(runsVan(blok, ctx), { ouder: sectie, id: i === 0 ? prefix + 'kern' : undefined })
-    })
+    // De bestemming aan het eerste blok mét tekst: een leeg eerste blok zou
+    // hem stil overslaan, waarna elke #kern-sprong de build breekt.
+    let kernId = prefix + 'kern'
+    for (const blok of blokken(data.kern_html)) {
+      const runs = runsVan(blok, ctx)
+      if (!runs.length) continue
+      pdf.alinea(runs, { ouder: sectie, id: kernId })
+      kernId = undefined
+    }
     for (const blok of blokken(data.kern_bron_html || '')) {
       pdf.alinea(runsVan(blok, ctx), { stijl: 'bronnen', ouder: sectie })
     }
@@ -187,6 +216,28 @@ export function schrijfNorm(pdf, data, opties) {
   const tagVoor = new Map()
   let vorigTag = 1 + kopShift // de documenttitel (of de normtitel in het kader)
   const heeftBlokkinderen = (el) => [...el.children].some((k) => /^(p|ul|ol|h[1-6]|blockquote|div|section|article|figure)$/i.test(k.tagName))
+  // Kinderen van body of van een wrapper verwerken met een buffer voor kale
+  // tekst en inline elementen: "<div>Let op: <p>…</p></div>" toont "Let op:"
+  // op de site, dus dat mag hier niet stilletjes wegvallen.
+  const verwerkKinderen = (nodes, doc) => {
+    let buffer = null
+    const spoel = () => {
+      if (!buffer) return
+      const runs = runsVan(buffer, ctx)
+      if (runs.length) pdf.alinea(runs, { ouder: sectie })
+      buffer = null
+    }
+    for (const node of [...nodes]) {
+      if (node.nodeType === 1 && /^(p|ul|ol|h[1-6]|blockquote|div|section|article|figure|table|thead|tbody|pre|img|hr)$/i.test(node.tagName)) {
+        spoel()
+        verwerk(node)
+      } else {
+        buffer = buffer || doc.createElement('span')
+        buffer.appendChild(node)
+      }
+    }
+    spoel()
+  }
   const verwerk = (el) => {
     const tag = el.tagName.toLowerCase()
     const m = tag.match(/^h([1-6])$/)
@@ -258,14 +309,15 @@ export function schrijfNorm(pdf, data, opties) {
     } else if (tag === 'hr') {
       pdf.lijn()
     } else if (heeftBlokkinderen(el)) {
-      // Wrapper (blockquote, div, …): de blokken erin verwerken in plaats van
-      // alles door runsVan te halen — die slaat lijsten juist over.
-      for (const kind of el.children) verwerk(kind)
+      // Wrapper (div, section, …): de blokken erin verwerken in plaats van
+      // alles door runsVan te halen — die slaat lijsten juist over; kale
+      // tekst tussen de blokken buffert mee.
+      verwerkKinderen(el.childNodes, el.ownerDocument)
     } else if (el.textContent.trim()) {
       pdf.alinea(runsVan(el, ctx), { ouder: sectie })
     }
   }
-  for (const el of document.body.children) verwerk(el)
+  verwerkKinderen(document.body.childNodes, document)
 
   // --- Bronnen ----------------------------------------------------------------
   // Goldmark zet de voetnoten zonder kop; zonder "Bronnen" valt wie op koppen
@@ -291,7 +343,12 @@ function blokken(html) {
   if (!html || !html.trim()) return []
   const { document } = parseHTML(`<!DOCTYPE html><html><body>${html}</body></html>`)
   const losseTekst = [...document.body.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())
-  if (!losseTekst && document.body.children.length) return [...document.body.children]
+  // Alleen als de kinderen echte blokken zijn: een kern die louter uit inline
+  // elementen bestaat (precies één <a>, of "<em>x</em> <a>y</a>") zou anders
+  // per element door de blokverwerking gaan en zijn link/nadruk verliezen.
+  const BLOK = /^(p|ul|ol|h[1-6]|blockquote|div|section|table|figure|pre|hr)$/i
+  const kinderen = [...document.body.children]
+  if (!losseTekst && kinderen.length && kinderen.every((k) => BLOK.test(k.tagName))) return kinderen
   const p = document.createElement('p')
   p.innerHTML = document.body.innerHTML
   return [p]

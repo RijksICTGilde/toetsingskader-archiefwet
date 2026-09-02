@@ -29,6 +29,7 @@
 import fs from 'node:fs'
 import zlib from 'node:zlib'
 import { pathToFileURL } from 'node:url'
+import { PDFDocument, PDFName } from 'pdf-lib'
 
 const MARKERS = [
   ['/StructTreeRoot', 'structuurboom (koppen, lijsten, leesvolgorde)'],
@@ -87,7 +88,24 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
       continue
     }
     const inhoud = metUitgepakteStreams(buf)
-    const gemist = MARKERS.filter(([marker]) => !inhoud.includes(marker))
+    // Verankering in de catalogus meten, niet alleen de substring: een
+    // losgeraakt object ("boom bestaat, catalogus wijst er niet meer naar" —
+    // precies de vlag-zonder-inhoud-klasse) zou een substring-zoektocht
+    // false-groen laten passeren.
+    let cat = null
+    try {
+      cat = (await PDFDocument.load(buf, { updateMetadata: false })).catalog
+    } catch {
+      // niet-parsebaar: de substringcontrole hieronder meldt wat er mist
+    }
+    const inCatalogus = {
+      '/StructTreeRoot': (c) => !!c.get(PDFName.of('StructTreeRoot')),
+      '/MarkInfo': (c) => !!c.get(PDFName.of('MarkInfo')),
+      '/Lang': (c) => !!c.get(PDFName.of('Lang')),
+      '/DisplayDocTitle': (c) => !!c.get(PDFName.of('ViewerPreferences')),
+    }
+    const gemist = MARKERS.filter(([marker]) =>
+      cat ? !inCatalogus[marker](cat) : !inhoud.includes(marker))
     const aanwezig = MARKERS.length - gemist.length
     // De vier markers zijn een belofte; deze telling controleert of hij wordt
     // waargemaakt. Een /StructTreeRoot met een lege boom was precies de

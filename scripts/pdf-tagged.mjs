@@ -205,11 +205,15 @@ export class TaggedPdf {
       l.add(li)
       const lbody = this.doc.struct('LBody')
       li.add(lbody)
-      // De bestemming meteen registreren, los van de tekst: een item dat
-      // alléén een sublijst bevat (een voetnoot die een lijst is) heeft geen
-      // eerste tekstsegment, en een sprong ernaartoe zou de build afbreken op
-      // geldige content.
-      if (id) this.#registreerDest(id, this.doc.x, this.doc.y)
+      // De bestemming registreren op de pagina waar het item ook echt komt:
+      // eerst dezelfde paginaval-check als #tekstBlok, anders wijst een
+      // voetnoot-sprong vlak bij de paginagrens naar de lege onderkant van de
+      // vórige pagina. Registratie los van de tekst, want een item dat alléén
+      // een sublijst bevat heeft geen eerste tekstsegment.
+      if (id) {
+        if (this.doc.y + s.boven + s.size * REGEL > A4.hoog - MARGE.bottom) this.nieuwePagina()
+        this.#registreerDest(id, this.doc.x, this.doc.y)
+      }
       let eersteTekst = true
       for (const seg of segmenten) {
         if (seg.runs) {
@@ -217,7 +221,7 @@ export class TaggedPdf {
           this.#tekstBlok(lbody, [...prefix, ...seg.runs], s, { inspring: inspring + INSPRING })
           eersteTekst = false
         } else if (seg.sub?.items?.length) {
-          this.#lijstIn(lbody, seg.sub.items, { s, geordend: !!seg.sub.geordend, start: seg.sub.start || 1, label: true, inspring: inspring + INSPRING })
+          this.#lijstIn(lbody, seg.sub.items, { s, geordend: !!seg.sub.geordend, start: seg.sub.start ?? 1, label: true, inspring: inspring + INSPRING })
         }
       }
       lbody.end()

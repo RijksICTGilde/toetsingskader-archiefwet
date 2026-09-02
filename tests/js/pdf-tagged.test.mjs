@@ -141,12 +141,39 @@ test('briefhoofd staat op elke pagina, ook na een automatische paginaovergang', 
 })
 
 test('kader: verwijzing naar een andere norm wordt een sprong binnen het document', () => {
-  const { document } = parseHTML('<body><p>zie <a href="/normen/01-beheer/">norm 1</a> en <a href="/normen/03-ordenen/#voorschriften">daar</a> en <a href="/onderwerpen/document/">een begrip</a></p></body>')
-  const normDests = { '01-beheer': { dest: 'norm-1', prefix: 'n1-' }, '03-ordenen': { dest: 'norm-3', prefix: 'n3-' } }
-  const runs = runsVan(document.querySelector('p'), { prefix: 'n2-', siteUrl: 'https://x.nl/', normDests })
+  const { document } = parseHTML('<body><p>zie <a href="/normen/01-beheer/">norm 1</a> en <a href="/normen/03-ordenen/#voorschriften">daar</a> en <a href="../07-vernietigen/">relatief</a> en <a href="https://x.nl/normen/01-beheer/">voluit</a> en <a href="/onderwerpen/document/">een begrip</a></p></body>')
+  const normDests = { '01-beheer': { dest: 'norm-1', prefix: 'n1-' }, '03-ordenen': { dest: 'norm-3', prefix: 'n3-' }, '07-vernietigen': { dest: 'norm-7', prefix: 'n7-' } }
+  const ctx = { prefix: 'n2-', siteUrl: 'https://x.nl/', basisUrl: 'https://x.nl/normen/02-overzicht/', normDests }
+  const runs = runsVan(document.querySelector('p'), ctx)
   assert.equal(runs.find((r) => r.text === 'norm 1').goTo, 'norm-1')
   assert.equal(runs.find((r) => r.text === 'daar').goTo, 'n3-voorschriften')
+  assert.equal(runs.find((r) => r.text === 'relatief').goTo, 'norm-7')
+  assert.equal(runs.find((r) => r.text === 'voluit').goTo, 'norm-1')
   assert.equal(runs.find((r) => r.text === 'een begrip').link, 'https://x.nl/onderwerpen/document/')
+})
+
+test('kale tekst in een <div>-wrapper valt niet weg', () => {
+  const uit = []
+  const nep = { alinea: (runs) => uit.push(runs), kop: () => {}, bladwijzer: () => {}, citaat: () => {}, lijst: () => {} }
+  schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<div>Let op: <p>alinea.</p></div>' }, { siteUrl: DATA.site_url })
+  const alle = uit.flat().map((r) => r.text).join('|')
+  assert.ok(alle.includes('Let op:'), alle)
+  assert.ok(alle.includes('alinea.'), alle)
+})
+
+test('kern die precies één link is houdt zijn link', () => {
+  const uit = []
+  const nep = { alinea: (runs, o) => uit.push({ runs, o }), kop: () => {}, bladwijzer: () => {}, citaat: () => {}, lijst: () => {} }
+  schrijfNorm(nep, { ...DATA, body_html: '', kern_html: '<a href="/onderwerpen/document/">documenten</a>' }, { siteUrl: DATA.site_url })
+  assert.equal(uit[0].runs[0].link, 'https://example.org/onderwerpen/document/')
+  assert.equal(uit[0].o.id, 'kern')
+})
+
+test('link naar een layout-anker (#referenties) wordt een sitelink, geen dode sprong', () => {
+  const { document } = parseHTML('<body><p><a href="#referenties">bronnen</a></p></body>')
+  const runs = runsVan(document.querySelector('p'), { prefix: 'n1-', siteUrl: 'https://x.nl/', basisUrl: 'https://x.nl/normen/01-beheer/' })
+  assert.equal(runs[0].link, 'https://x.nl/normen/01-beheer/#referenties')
+  assert.equal(runs[0].goTo, undefined)
 })
 
 test('voetnootmarkering staat bóven de basislijn (superscript, geen "4.21")', async () => {

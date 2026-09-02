@@ -33,6 +33,7 @@ build:
 check:
     pre-commit run --all-files
     hugo --environment production --minify
+    [ -d node_modules/pdfkit ] || npm ci --no-audit --no-fund
     npm test
     npm run test:a11y
     npm run build:pdf
@@ -42,6 +43,7 @@ check:
 # Draait volledig lokaal: pdfkit in Node, geen browser nodig.
 pdf:
     hugo --environment production --minify
+    [ -d node_modules/pdfkit ] || npm ci --no-audit --no-fund
     npm run build:pdf
     npm run test:pdf-ua
 
