@@ -1,0 +1,10 @@
+{{- /* Absolute URL van een pagina voor in de PDF (omslag "Bron: …" en de
+       linkannotatie). Met params.pdf.site_url gezet: dat adres plus het pad
+       van de pagina, zodat omslag en colofon hetzelfde domein noemen. Anders
+       de gewone Permalink (baseURL van de build). */ -}}
+{{- with site.Params.pdf.site_url -}}
+  {{- $pad := strings.TrimPrefix (strings.TrimSuffix "/" site.Home.RelPermalink) $.RelPermalink -}}
+  {{- printf "%s%s" (strings.TrimSuffix "/" .) $pad -}}
+{{- else -}}
+  {{- $.Permalink -}}
+{{- end -}}

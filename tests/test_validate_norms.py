@@ -15,7 +15,7 @@ _spec.loader.exec_module(validator)
 
 VALID_NORM = """\
 ---
-title: "Norm 2: Overzicht"
+title: "2. Overzicht"
 versie: "0.8"
 weight: 2
 norm_id: "2"
@@ -96,6 +96,11 @@ class FrontMatterTests(unittest.TestCase):
         )
         errors = run(content)
         self.assertTrue(any("'kern' mag geen voetnoten" in e for e in errors), errors)
+
+    def test_title_zonder_normnummer(self):
+        content = replace('title: "2. Overzicht"', 'title: "Overzicht"')
+        errors = run(content)
+        self.assertTrue(any("hoort te beginnen met" in e for e in errors), errors)
 
     def test_kern_kop_is_rejected(self):
         # De kern heeft geen kop; het veld mag er niet stilzwijgend een terugbrengen.

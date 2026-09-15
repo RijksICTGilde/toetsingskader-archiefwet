@@ -48,6 +48,9 @@ for (const file of files) {
     console.log(`${url} — ${v.id} [${v.impact}] ${v.nodes.length}x: ${v.help}`)
     for (const n of v.nodes.slice(0, 3)) console.log(`    ${n.target.join(' ')}`)
   }
+  // De structuurcontroles voor de PDF (kopvolgorde, dubbele ankers) draaien
+  // niet meer hier maar in scripts/pdf-build.mjs, op de pdfdata-JSON: sinds de
+  // pdfkit-pijplijn is er geen print-HTML meer om te scannen.
   for (const href of zwevendeVoetnootFouten(dom.window.document, url)) {
     total++
     console.log(`${url} — zwevende-voetnoot [serious] 1x: voetnootmarkering zonder ref-term en zonder tooltip`)
