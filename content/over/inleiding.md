@@ -12,4 +12,4 @@ Dit toetsingskader sluit aan bij het uitgangspunt van de Archiefwet 2026: duurza
 
 Wanneer overheidsinformatie wordt beheerd volgens de normen van de Archiefwet, is deze duurzaam toegankelijk. Het in beheer nemen en beheren van overheidsinformatie zijn daarbij geen eenmalige handelingen, maar doorlopende processen.
 
-Hoe de normen uit dit toetsingskader zich tot elkaar verhouden, staat op de pagina over [de samenhang van de normen]({{< relref "/samenhang" >}}). Daar staat ook wat [duurzame toegankelijkheid]({{< relref "/samenhang#duurzame-toegankelijkheid" >}}) inhoudt.
+Wat duurzame toegankelijkheid inhoudt, staat onder [Duurzame toegankelijkheid]({{< relref "/samenhang#duurzame-toegankelijkheid" >}}). Hoe de normen uit dit toetsingskader zich tot elkaar en tot deze definitie verhouden, staat op de pagina over [de samenhang van de normen]({{< relref "/samenhang" >}}).
