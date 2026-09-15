@@ -11,11 +11,6 @@ changelog volgt [Semantic Versioning][semver].
 
 ## [Unreleased]
 
-### Gerepareerd
-
-- PDF-knop in donkere modus: witte tekst op hemelblauw haalde 1,6:1 (WCAG
-  1.4.3). Tekstkleur nu uit `--color-text-on-primary`.
-
 ### Toegevoegd
 
 - Pagina "Totstandkoming" onder Over ingevuld, datum stub vervanging volgt.
@@ -319,6 +314,9 @@ main
   staan al uitgelegd op [Opbouw en indeling](/over/opbouw-en-indeling/).
 
 ### Opgelost
+
+- PDF-knop in donkere modus: witte tekst op hemelblauw haalde 1,6:1 (WCAG
+  1.4.3). Tekstkleur nu uit `--color-text-on-primary`.
 
 - Hover-termen kleuren met `--color-link` in plaats van `--color-primary`:
   dezelfde kleur als gewone links, en op het blauwe callout-vlak voldoende
