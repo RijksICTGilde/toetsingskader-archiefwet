@@ -77,8 +77,11 @@ blockquote.callout .kern-bron {
 
 /* Ref-term (woord met hover) in linkkleur, net als een gewone link; de dotted
    underline uit het thema maakt het verschil met een link (keuze 25 augustus
-   2026: "alles blauw"). Geldt sitebreed: de tooltip-transformatie draait ook
-   op de Over- en Onderwerpenpagina's (_partials/voetnoot-tooltips.html).
+   2026: "alles blauw"). Sinds 15 september 2026 is élke ref-term gestippeld,
+   ook een term die vroeger zelf een link was: die link staat nu ín de tooltip
+   (`.ref-ga`, "Ga naar …"). Eén betekenis per lijn: gestippeld = uitklappen,
+   doorgetrokken = navigeren. Geldt sitebreed: de tooltip-transformatie draait
+   ook op de Over- en Onderwerpenpagina's (_partials/voetnoot-tooltips.html).
    `--color-link` en niet `--color-primary`: gewone links hebben die kleur al
    (thema-base.css), en op het callout-vlak (--color-bg-info, #d9ebf7) haalt
    #007bc7 maar 3,7:1 waar #01689b 5,0:1 haalt (WCAG 1.4.3; axe-fout op de
@@ -88,11 +91,11 @@ a.ref-term:hover {
   color: var(--color-link);
 }
 
-/* Keuze 25 augustus 2026: alles in linkkleur, maar een term die ook echt
-   navigeert (href naar een pagina) doorgetrokken en een pure tooltip-term
-   gestippeld — anders is niet te zien wat wegklikt en wat alleen uitklapt. */
-a.ref-term:not([href^="#"]) {
-  text-decoration-style: solid;
+/* "Ga naar …" op een eigen regel onder "Bekijk bron"; het thema zet
+   `.ref-tooltip > a` als inline-block, dus zonder dit staan ze naast elkaar. */
+.ref-tooltip > .ref-ga {
+  display: block;
+  margin-block-start: 0.5rem;
 }
 
 /* PDF-knop bouwt op de thema-.button; alleen brand-kleur en icoon-uitlijning

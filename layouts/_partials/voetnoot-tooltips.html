@@ -20,6 +20,8 @@
 {{ $defs := findRESubmatch `(?s)<li id="fn:(\d+)">\s*<p>(.*?)(?:&#160;)?<a href="#fnref[0-9]*:\d+" class="footnote-backref"` $content }}
 {{/* Labels onthouden, zodat stap 2 dezelfde op de referentielijst zet. */}}
 {{ $bronLabels := newScratch }}
+{{/* "Ga naar …"-links per voetnoot, voor de bronnenlijst (zie pass A). */}}
+{{ $gaLinks := newScratch }}
 {{ range $defs }}
   {{ $n := index . 1 }}
   {{ $text := index . 2 | strings.TrimSpace }}
@@ -43,28 +45,61 @@
   {{ end }}
   {{/* Afkortingen uitschrijven (3.1.4, bevinding 28). */}}
   {{ $textOnly = partial "afkortingen.html" $textOnly }}
-  {{/* De brontekst gaat zo een replaceRE-replacement in, waar Go `$1`/`${x}`
-       als capture-groep uitbreidt: een letterlijke "$" in een voetnoot zou de
-       tooltip vullen met matchfragmenten. In de replacement is `$$` de escape
-       voor één kale $ (dus twee tekens, niet vier: de expansie draait één
-       keer). */}}
-  {{ $textOnly = replace $textOnly "$" "$$" }}
-  {{ $linkHTML = replace $linkHTML "$" "$$" }}
   {{/* Twee passes, anders landt de term op een leesteken of blijft hij leeg:
-       A) link (+ leestekens/spatie) vóór de voetnoot → de link wordt de ref-term;
-       B) gewoon woord → het woord wordt de ref-term.
+       A) link (+ leestekens/spatie) vóór de voetnoot → het linkwoord wordt de
+          ref-term, de link zelf verhuist naar de tooltip ("Ga naar …");
+       B) gewoon woord → het woord wordt de ref-term, leesteken erbuiten.
        Wat geen van beide matcht blijft een zichtbaar superscript. */}}
   {{/* Zonder `aria-describedby` hoort een schermlezergebruiker alleen de
        linktekst: de tooltip staat op `visibility: hidden` en dus buiten de
        toegankelijkheidsboom. De naamberekening leest verborgen doelen wél
        (1.3.1 / 4.1.2). */}}
+  {{/* Pass A (keuze 15 september 2026, "één betekenis per lijn"): een term
+       die ook een link was, is nu net als elke andere ref-term gestippeld en
+       opent alleen de tooltip; de paginalink staat ín de tooltip als
+       "Ga naar <paginatitel>". Zo doet hover/tik nooit twee dingen tegelijk en
+       is de bron ook op een touchscreen bereikbaar (daar navigeerde de tik
+       meteen weg). Per match, omdat de titel uit site.GetPage komt. */}}
   {{ $linkPat := printf `<a ([^>]*)>([^<]*)</a>([.,;:!?)]*)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
-  {{/* Doel is de bróntekst, niet de hele tooltip: die bevat ook de bronlink,
-       met een aria-label dat dezelfde tekst herhaalt. */}}
-  {{ $linkRepl := printf `<span class="ref-wrapper" id="${4}"><a ${1} class="ref-term" aria-describedby="${4}-bron">${2}</a><span class="ref-tooltip" role="note"><span id="${4}-bron">%s</span>%s</span></span>${3}` $textOnly $linkHTML }}
-  {{ $content = replaceRE $linkPat $linkRepl $content }}
-  {{ $wordPat := printf `([^\s<>]+)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
-  {{ $wordRepl := printf `<span class="ref-wrapper" id="$2"><a href="#fn:%s" class="ref-term" aria-describedby="$2-bron">$1</a><span class="ref-tooltip" role="note"><span id="$2-bron">%s</span>%s</span></span>` $n $textOnly $linkHTML }}
+  {{ range findRESubmatch $linkPat $content }}
+    {{ $heel := index . 0 }}{{ $attrs := index . 1 }}{{ $woord := index . 2 }}{{ $lt := index . 3 }}{{ $id := index . 4 }}
+    {{ $href := "" }}
+    {{ with findRESubmatch `href="([^"]+)"` $attrs }}{{ $href = index (index . 0) 1 }}{{ end }}
+    {{/* Zelfde adres als "Bekijk bron"? Dan geen tweede link. Externe link:
+         hostnaam als label en dezelfde attributen als de bronlink (nieuw
+         venster, rel external), zodat het thema hem als extern markeert. */}}
+    {{ $bronHref := "" }}
+    {{ with findRESubmatch `href="([^"]+)"` $linkHTML }}{{ $bronHref = index (index . 0) 1 }}{{ end }}
+    {{ $ga := "" }}
+    {{ if and $href (ne $href $bronHref) }}
+      {{ $p := site.GetPage $href }}
+      {{ if $p }}
+        {{ $ga = printf `<a href="%s" class="ref-ga">Ga naar %s</a>` $href $p.Title }}
+      {{ else if hasPrefix $href "http" }}
+        {{ $host := strings.TrimPrefix "www." (urls.Parse $href).Host }}
+        {{ $ga = printf `<a href="%s" class="ref-ga" target="_blank" rel="external noopener noreferrer">Ga naar %s</a>` $href $host }}
+      {{ else }}
+        {{ $ga = printf `<a href="%s" class="ref-ga">Ga naar de pagina</a>` $href }}
+      {{ end }}
+    {{ end }}
+    {{/* Ook in de bronnenlijst onderaan: op een touchscreen springt een tik
+         op de term daarheen (geen hover), en daar mag de paginalink niet
+         ontbreken. */}}
+    {{ with $ga }}{{ $gaLinks.Add $n (slice .) }}{{ end }}
+    {{ $repl := printf `<span class="ref-wrapper" id="%s"><a href="#fn:%s" class="ref-term" aria-describedby="%s-bron">%s</a><span class="ref-tooltip" role="note"><span id="%s-bron">%s</span>%s%s</span></span>%s` $id $n $id $woord $id $textOnly $linkHTML $ga $lt }}
+    {{ $content = replace $content $heel $repl }}
+  {{ end }}
+  {{/* Pass B gaat door replaceRE, waar Go `$1`/`${x}` als capture-groep
+       uitbreidt: een letterlijke "$" in een voetnoot zou de tooltip vullen met
+       matchfragmenten. `$$` is de escape voor één kale $. */}}
+  {{ $textOnlyRE := replace $textOnly "$" "$$" }}
+  {{ $linkHTMLRE := replace $linkHTML "$" "$$" }}
+  {{/* Leesteken (. , ; : ! ?) direct achter het woord blijft buiten de term:
+       in het normblad staat de marker vaak achter het leesteken, en anders
+       loopt de stippellijn onder de punt door en zit die ook in de
+       toegankelijke naam. `)` bewust niet: "(SIO)" moet heel blijven. */}}
+  {{ $wordPat := printf `([^\s<>]+?)([.,;:!?]*)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
+  {{ $wordRepl := printf `<span class="ref-wrapper" id="$3"><a href="#fn:%s" class="ref-term" aria-describedby="$3-bron">$1</a><span class="ref-tooltip" role="note"><span id="$3-bron">%s</span>%s</span></span>$2` $n $textOnlyRE $linkHTMLRE }}
   {{ $content = replaceRE $wordPat $wordRepl $content }}
 {{ end }}
 
@@ -82,6 +117,13 @@
     {{ $pat := printf `(?s)(<li id="fn:%s">.*?<a href="[^"]*")([^>]*>Bekijk bron</a>)` $n }}
     {{/* Zelfde $-escape als hierboven: het label komt uit de brontekst. */}}
     {{ $ol = replaceRE $pat (printf `${1} aria-label="%s"${2}` (replace $label "$" "$$")) $ol 1 }}
+  {{ end }}
+  {{/* De "Ga naar …"-link(s) van pass A vóór de terugspringpijl van de
+       bijbehorende voetnoot. */}}
+  {{ range $n, $links := $gaLinks.Values }}
+    {{ $pat := printf `(?s)(<li id="fn:%s">.*?)(\s*(?:&#160;)?<a href="#fnref[0-9]*:%s" class="footnote-backref")` $n $n }}
+    {{ $ins := delimit (uniq $links) " " }}
+    {{ $ol = replaceRE $pat (printf `${1} %s${2}` (replace $ins "$" "$$")) $ol 1 }}
   {{ end }}
   {{/* Backlinks heten bij Goldmark alleen "↩︎": tientallen naamloze links in
        een linkoverzicht (2.4.4). */}}
