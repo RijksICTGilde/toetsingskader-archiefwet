@@ -17,7 +17,7 @@
   "kind" "kader"
   "titel" "Toetsingskader Archiefwet 2026"
   "url" .Permalink
-  "site_url" site.Home.Permalink
+  "site_url" (site.Params.pdf.site_url | default site.Home.Permalink)
   "versie" (site.Params.versie | default "")
   "normen" $items
   | jsonify -}}
