@@ -2,7 +2,7 @@
 title: "Totstandkoming"
 card_title: "Totstandkoming"
 toc: false
-description: "Hoe dit toetsingskader is ontwikkeld, welke stappen zijn doorlopen, welke externen zijn betrokken of geraadpleegd in dit proces en wanneer het toetsingskader is vastgesteld."
+description: "Hoe dit toetsingskader is ontwikkeld, welke stappen zijn doorlopen, wie erbij betrokken is en wanneer het is vastgesteld."
 weight: 7
 ---
 

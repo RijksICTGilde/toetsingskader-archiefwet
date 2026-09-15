@@ -13,7 +13,7 @@ tiles:
   - title: "Wat is het?"
     body: "Het toetsingskader is een hulpmiddel om de open normen uit de Archiefwet 2026 concreet en toepasbaar te maken. De Inspectie Overheidsinformatie en Erfgoed gebruikt het bij haar toezicht en organisaties gebruiken het om hun informatiehuishouding op orde te brengen. Zie het [wettelijk kader](over/wettelijk-kader/)."
   - title: "Voor wie?"
-    body: "Het toetsingskader is er voor [overheidsorganisaties](over/doelgroep/) die onder de Archiefwet 2026 vallen, voor inspecteurs, en voor stelselpartijen of andere geïnteresseerden die willen zien hoe de Inspectie open normen uitlegt"
+    body: "Voor [overheidsorganisaties](over/doelgroep/) die onder de Archiefwet vallen, voor inspecteurs, en voor stelselpartijen of andere geïnteresseerden die willen zien hoe de Inspectie toezicht houdt op de eisen aan [duurzame toegankelijkheid](samenhang/#duurzame-toegankelijkheid) in de Archiefwet- en regelgeving."
   - title: "Wanneer?"
     body: "Het toetsingskader wordt gebruikt bij de inrichting en verbetering van de informatiehuishouding en wanneer een overheidsorganisatie documenten ontvangt of opstelt die onder de Archiefwet 2026 vallen."
   - title: "Waar beginnen?"
