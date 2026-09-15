@@ -303,6 +303,17 @@ main
   "Inspectie Overheidsinformatie en Erfgoed" en "Ministerie van Onderwijs,
   Cultuur en Wetenschap". Het lint staat horizontaal gecentreerd en loopt af
   aan de bovenrand van de pagina, zoals de huisstijl voorschrijft.
+- Bollendiagram op de samenhangpagina naar de plaat van de Inspectie van
+  15 september 2026 (`docs/bollendiagram-inspectie-2026-09-15.png`): hub
+  "Inbeheername en beheer" met zeven normen eromheen, elk met een icoon en
+  het label buiten de bol, en een ring tussen de buurbollen; de vervaagde
+  toekomstbollen zijn weg. De plaat is data-gedreven: een norm toevoegen is
+  één regel in `layouts/shortcodes/bollendiagram.html`, de posities worden
+  berekend. De iconen komen uit het NLDD Design System; de kleuren zijn
+  Rijkshuisstijl-groen (donkergroen, groen, mintgroen). Blijft klikbaar en
+  toetsenbordbedienbaar; op een smal scherm scrollt hij horizontaal binnen de
+  figure. De lijst normlinks onder het diagram is weg.
+
 
 ### Verwijderd
 
