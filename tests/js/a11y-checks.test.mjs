@@ -9,6 +9,7 @@ import { parseHTML } from 'linkedom'
 import {
   zwevendeVoetnootFouten, korteRefTermFouten,
   legeAltFouten, zonderHash, kopvolgordeFouten, dubbeleIdFouten,
+  ontbrekendeGaNaarFouten,
 } from '../../scripts/a11y-checks.mjs'
 
 const dom = (body) => parseHTML(`<!DOCTYPE html><html><body>${body}</body></html>`).document
@@ -97,4 +98,20 @@ test('dubbele id: geprefixte ankers per norm botsen niet', () => {
 
 test('dubbele id: hetzelfde anker twee keer is een fout', () => {
   assert.deepEqual(dubbeleIdFouten(dom('<p id="fn:1">a</p><p id="fn:1">b</p>')), ['fn:1'])
+})
+
+const TOOLTIP_MET_GA = '<span class="ref-wrapper" id="fnref:1"><a href="#fn:1" class="ref-term">vindbaar</a><span class="ref-tooltip" role="note"><span id="fnref:1-bron">Ab.</span><span class="ref-ga"><a href="/normen/06-vindbaar/">Ga naar 6. Vindbaar</a></span></span></span>'
+const LIJST_MET_GA = '<ol><li id="fn:1"><p>Ab. <span class="ref-ga"><a href="/normen/06-vindbaar/">Ga naar 6. Vindbaar</a></span></p></li></ol>'
+const LIJST_ZONDER_GA = '<ol><li id="fn:1"><p>Ab.</p></li></ol>'
+
+test('ga naar: link in tooltip én bronnenlijst is in orde', () => {
+  assert.deepEqual(ontbrekendeGaNaarFouten(dom(TOOLTIP_MET_GA + LIJST_MET_GA)), [])
+})
+
+test('ga naar: link alleen in de tooltip is een fout', () => {
+  assert.deepEqual(ontbrekendeGaNaarFouten(dom(TOOLTIP_MET_GA + LIJST_ZONDER_GA)), ['/normen/06-vindbaar/ (fn:1)'])
+})
+
+test('ga naar: tooltip zonder paginalink telt niet mee', () => {
+  assert.deepEqual(ontbrekendeGaNaarFouten(dom(GOEDE_REF + LIJST_ZONDER_GA)), [])
 })

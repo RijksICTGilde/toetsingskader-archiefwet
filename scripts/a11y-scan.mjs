@@ -11,7 +11,7 @@ import path from 'node:path'
 import { createRequire } from 'node:module'
 import {
   zwevendeVoetnootFouten, korteRefTermFouten,
-  legeAltFouten,
+  legeAltFouten, ontbrekendeGaNaarFouten,
 } from './a11y-checks.mjs'
 
 const axeSrc = fs.readFileSync(createRequire(import.meta.url).resolve('axe-core'), 'utf8')
@@ -60,6 +60,11 @@ for (const file of files) {
     total++
     console.log(`${url} — korte-ref-term [serious] 1x: ref-term bestaat alleen uit interpunctie`)
     console.log(`    "${tekst}" — te klein als klikdoel (WCAG 2.5.8); zet de voetnootmarkering achter een woord`)
+  }
+  for (const href of ontbrekendeGaNaarFouten(dom.window.document)) {
+    total++
+    console.log(`${url} — ga-naar-ontbreekt [serious] 1x: paginalink staat in de tooltip maar niet in de bronnenlijst`)
+    console.log(`    ${href} — op een touchscreen is de pagina dan onbereikbaar; zie _partials/voetnoot-tooltips.html`)
   }
   for (const src of legeAltFouten(dom.window.document)) {
     total++

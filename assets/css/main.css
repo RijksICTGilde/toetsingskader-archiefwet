@@ -91,12 +91,6 @@ a.ref-term:hover {
   color: var(--color-link);
 }
 
-/* "Ga naar …" op een eigen regel onder "Bekijk bron"; het thema zet
-   `.ref-tooltip > a` als inline-block, dus zonder dit staan ze naast elkaar. */
-.ref-tooltip > .ref-ga {
-  display: block;
-  margin-block-start: 0.5rem;
-}
 
 /* PDF-knop bouwt op de thema-.button; alleen brand-kleur en icoon-uitlijning
    zijn project-specifiek. Border == achtergrond, dus geen randje op hover.
