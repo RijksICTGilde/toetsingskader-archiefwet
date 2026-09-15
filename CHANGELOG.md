@@ -13,6 +13,9 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Toegevoegd
 
+- `params.pdf.site_url` in `hugo.yaml`: het adres achter "Bekijk voor de
+  actuele versie …" in de PDF's. Leeg betekent de baseURL van de build.
+
 - Pagina "Totstandkoming" onder Over ingevuld, datum stub vervanging volgt.
 - Shortcode `callout-md`: een callout waarvan de inhoud in de pagina-context
   rendert, zodat een voetnoot erin een hover wordt. Daarvoor staat
