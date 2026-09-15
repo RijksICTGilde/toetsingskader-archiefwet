@@ -19,7 +19,8 @@ changelog volgt [Semantic Versioning][semver].
   het label buiten de bol; de vervaagde toekomstbollen zijn weg. De plaat is
   data-gedreven: een norm toevoegen is één regel in
   `layouts/shortcodes/bollendiagram.html`, de posities worden berekend. De
-  iconen komen uit het NLDD Design System. Blijft klikbaar en
+  iconen komen uit het NLDD Design System; de kleuren zijn Rijkshuisstijl-
+  groen (donkergroen, groen, mintgroen). Blijft klikbaar en
   toetsenbordbedienbaar; op een smal scherm scrollt hij horizontaal binnen de
   figure. De lijst normlinks onder het diagram is weg.
 

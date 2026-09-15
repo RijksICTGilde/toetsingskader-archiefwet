@@ -14,23 +14,25 @@
   overflow: visible;
 }
 
-/* Kleuren. Lijnen (spaken + ring) en bolrand dragen betekenis en moeten 3:1
-   halen (1.4.11): #3d8fcc haalt 3,4:1 op wit, #7fc0ea 9,0:1 op de donkere
-   achtergrond. Zelfde blauw als in de plaat van de Inspectie. Hub in
-   lintblauw (#154273) met witte tekst: 11,5:1. */
+/* Kleuren uit de Rijkshuisstijl: donkergroen (#275937) voor de hub, groen
+   (#39870c) voor lijnen en bolrand, mintgroen (#76d2b6) in donkere modus.
+   Keuze 15 september 2026: "een hele andere kleur, wel Rijksoverheid".
+   Lijnen en bolrand dragen betekenis en moeten 3:1 halen (1.4.11): #39870c
+   haalt 4,5:1 op wit, #76d2b6 11:1 op de donkere achtergrond. Hub met witte
+   tekst: 8,2:1. Labels #275937 op wit: 8,2:1. */
 .bollendiagram {
-  --bd-line: light-dark(#3d8fcc, #7fc0ea);
-  --bd-bol-fill: light-dark(#e9f2fa, #1f3550);
-  --bd-bol-fill-hover: light-dark(#cfe3f5, #2b4a6e);
-  --bd-bol-stroke: light-dark(#3d8fcc, #7fc0ea);
-  --bd-hub-fill: #154273;
-  --bd-hub-fill-hover: #1f5a99;
-  --bd-hub-stroke: light-dark(#0d2d50, #7fc0ea);
-  --bd-icoon: light-dark(#154273, #cfe3f5);
-  --bd-label: light-dark(#154273, #e2e8f0);
+  --bd-line: light-dark(#39870c, #76d2b6);
+  --bd-bol-fill: light-dark(#e9f6ef, #1b3a2d);
+  --bd-bol-fill-hover: light-dark(#cdeadb, #27503e);
+  --bd-bol-stroke: light-dark(#39870c, #76d2b6);
+  --bd-hub-fill: #275937;
+  --bd-hub-fill-hover: #39870c;
+  --bd-hub-stroke: light-dark(#1b3f27, #76d2b6);
+  --bd-icoon: light-dark(#275937, #d3f0e4);
+  --bd-label: light-dark(#275937, #e2e8f0);
 }
 
-/* === Verbindingslijnen (spokes) ===
+/* === Verbindingslijnen (spokes + ring) ===
    Onder de bollen; de opake fills verbergen de uiteinden. */
 .bd-spoke {
   stroke: var(--bd-line);
