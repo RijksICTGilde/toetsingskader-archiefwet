@@ -11,7 +11,7 @@
 {{- dict
   "kind" "kader"
   "titel" (printf "%s 2026" site.Title)
-  "url" .Permalink
+  "url" (partial "pdf-url.html" .)
   "site_url" (site.Params.pdf.site_url | default site.Home.Permalink)
   "versie" (site.Params.versie | default "")
   "site_titel" site.Title
