@@ -337,6 +337,9 @@ main
 
 ### Opgelost
 
+- PDF-knop in donkere modus: witte tekst op hemelblauw haalde 1,6:1 (WCAG
+  1.4.3). Tekstkleur nu uit `--color-text-on-primary`.
+
 - Hover-termen kleuren met `--color-link` in plaats van `--color-primary`:
   dezelfde kleur als gewone links, en op het blauwe callout-vlak voldoende
   contrast (was 3,7:1, axe-fout op de bron-hover in het DUTO-blok).
