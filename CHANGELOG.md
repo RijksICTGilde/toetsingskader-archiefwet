@@ -11,6 +11,14 @@ changelog volgt [Semantic Versioning][semver].
 
 ## [Unreleased]
 
+### Gewijzigd
+
+- Feedback 15 september 2026: de tegel "Duurzame toegankelijkheid" onder Over
+  is vervallen; die tekst staat nu als kop "Duurzame toegankelijkheid" op de
+  samenhangpagina, in plaats van "Beschikbaar en leesbaar". Een alias houdt de
+  oude URL werkend. De tegel "Voor wie?" op de homepage verwijst naar die kop.
+  De kaarttekst van norm 1 op /normen/ is een zin korter.
+
 ### Toegevoegd
 
 - `params.pdf.site_url` in `hugo.yaml`: het adres achter "Bekijk voor de
@@ -315,6 +323,17 @@ changelog volgt [Semantic Versioning][semver].
   "Inspectie Overheidsinformatie en Erfgoed" en "Ministerie van Onderwijs,
   Cultuur en Wetenschap". Het lint staat horizontaal gecentreerd en loopt af
   aan de bovenrand van de pagina, zoals de huisstijl voorschrijft.
+- Bollendiagram op de samenhangpagina naar de plaat van de Inspectie van
+  15 september 2026 (`docs/bollendiagram-inspectie-2026-09-15.png`): hub
+  "Inbeheername en beheer" met zeven normen eromheen, elk met een icoon en
+  het label buiten de bol, en een ring tussen de buurbollen; de vervaagde
+  toekomstbollen zijn weg. De plaat is data-gedreven: een norm toevoegen is
+  één regel in `layouts/shortcodes/bollendiagram.html`, de posities worden
+  berekend. De iconen komen uit het NLDD Design System; de kleuren zijn
+  Rijkshuisstijl-groen (donkergroen, groen, mintgroen). Blijft klikbaar en
+  toetsenbordbedienbaar; op een smal scherm scrollt hij horizontaal binnen de
+  figure. De lijst normlinks onder het diagram is weg.
+
 
 ### Verwijderd
 
@@ -339,6 +358,9 @@ changelog volgt [Semantic Versioning][semver].
   staan al uitgelegd op [Opbouw en indeling](/over/opbouw-en-indeling/).
 
 ### Opgelost
+
+- PDF-knop in donkere modus: witte tekst op hemelblauw haalde 1,6:1 (WCAG
+  1.4.3). Tekstkleur nu uit `--color-text-on-primary`.
 
 - Hover-termen kleuren met `--color-link` in plaats van `--color-primary`:
   dezelfde kleur als gewone links, en op het blauwe callout-vlak voldoende

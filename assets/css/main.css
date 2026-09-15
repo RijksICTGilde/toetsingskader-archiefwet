@@ -96,7 +96,10 @@ a.ref-term:not([href^="#"]) {
 }
 
 /* PDF-knop bouwt op de thema-.button; alleen brand-kleur en icoon-uitlijning
-   zijn project-specifiek. Border == achtergrond, dus geen randje op hover. */
+   zijn project-specifiek. Border == achtergrond, dus geen randje op hover.
+   Tekstkleur uit het token en niet #fff: in donkere modus is --color-primary
+   #80d5fc en haalt wit daarop 1,6:1 (scan 15 september 2026);
+   --color-text-on-primary is daar #1e293b, 8,4:1. */
 .toc .pdf-download.button {
   width: 100%;
   margin-bottom: 1.25rem;
@@ -109,14 +112,14 @@ a.ref-term:not([href^="#"]) {
   gap: 0.5em;
   background-color: var(--color-primary);
   border-color: var(--color-primary);
-  color: #fff;
+  color: var(--color-text-on-primary);
 }
 
 .pdf-download.button:hover,
 .pdf-download.button:focus-visible {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
-  color: #fff;
+  color: var(--color-text-on-primary);
   filter: brightness(0.9);
 }
 
