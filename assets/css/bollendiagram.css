@@ -14,11 +14,12 @@
   overflow: visible;
 }
 
-/* Kleuren. De spokes dragen betekenis en moeten 3:1 halen (1.4.11): de
-   lijnkleur haalt 4,8:1 licht en 7,0:1 donker; de bolrand 3,4:1 op wit.
-   Hub in lintblauw (#154273) met witte tekst: 11,5:1. */
+/* Kleuren. Lijnen (spaken + ring) en bolrand dragen betekenis en moeten 3:1
+   halen (1.4.11): #3d8fcc haalt 3,4:1 op wit, #7fc0ea 9,0:1 op de donkere
+   achtergrond. Zelfde blauw als in de plaat van de Inspectie. Hub in
+   lintblauw (#154273) met witte tekst: 11,5:1. */
 .bollendiagram {
-  --bd-line: light-dark(#6b7280, #94a3b8);
+  --bd-line: light-dark(#3d8fcc, #7fc0ea);
   --bd-bol-fill: light-dark(#e9f2fa, #1f3550);
   --bd-bol-fill-hover: light-dark(#cfe3f5, #2b4a6e);
   --bd-bol-stroke: light-dark(#3d8fcc, #7fc0ea);
@@ -33,7 +34,7 @@
    Onder de bollen; de opake fills verbergen de uiteinden. */
 .bd-spoke {
   stroke: var(--bd-line);
-  stroke-width: 2;
+  stroke-width: 3;
   fill: none;
 }
 

@@ -117,9 +117,16 @@
       </symbol>
     </defs>
 
+    {{/* Spaken van de hub naar elke bol, plus een ring tussen buurbollen (zoals
+         in de plaat). Beide van middelpunt naar middelpunt; de opake bollen
+         verbergen de uiteinden. */}}
     <g class="bd-spokes" aria-hidden="true">
       {{- range $bollen }}
       <line class="bd-spoke" x1="{{ $cx }}" y1="{{ $cy }}" x2="{{ printf "%.1f" .x }}" y2="{{ printf "%.1f" .y }}"/>
+      {{- end }}
+      {{- range $i, $b := $bollen }}
+      {{- $volgende := index $bollen (mod (add $i 1) $n) }}
+      <line class="bd-spoke bd-ring" x1="{{ printf "%.1f" $b.x }}" y1="{{ printf "%.1f" $b.y }}" x2="{{ printf "%.1f" $volgende.x }}" y2="{{ printf "%.1f" $volgende.y }}"/>
       {{- end }}
     </g>
 
