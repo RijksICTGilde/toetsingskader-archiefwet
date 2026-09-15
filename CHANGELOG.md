@@ -11,6 +11,14 @@ changelog volgt [Semantic Versioning][semver].
 
 ## [Unreleased]
 
+### Gewijzigd
+
+- Feedback 15 september 2026: de tegel "Duurzame toegankelijkheid" onder Over
+  is vervallen; die tekst staat nu als kop "Duurzame toegankelijkheid" op de
+  samenhangpagina, in plaats van "Beschikbaar en leesbaar". Een alias houdt de
+  oude URL werkend. De tegel "Voor wie?" op de homepage verwijst naar die kop.
+  De kaarttekst van norm 1 op /normen/ is een zin korter.
+
 ### Toegevoegd
 
 - Pagina "Totstandkoming" onder Over ingevuld, datum stub vervanging volgt.

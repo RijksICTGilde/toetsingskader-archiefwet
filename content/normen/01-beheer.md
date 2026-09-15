@@ -7,7 +7,7 @@ norm_titel: "Inbeheername en beheer"
 kern: "Een document is in beheer van het verantwoordelijke overheidsorgaan zodat het duurzaam toegankelijk gemaakt en gehouden kan worden."
 kern_bron: "Ab, artikel 2.1, eerste lid; Aw, artikel 4.1, eerste lid."
 kern_bron_url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
-kern_kaart: "Er zijn beheerregels en passende maatregelen die de duurzame toegankelijkheid van documenten borgen. Een document bevindt zich in een beheerde omgeving, zodat de beheertaken kunnen worden uitgevoerd waarmee documenten duurzaam toegankelijk gemaakt worden en blijven."
+kern_kaart: "Een document bevindt zich in een beheerde omgeving, zodat de beheertaken kunnen worden uitgevoerd waarmee documenten duurzaam toegankelijk gemaakt worden en blijven."
 synoniemen:
   - "Opname (DUTO)"
   - "Duurzaam toegankelijk (DUTO)"

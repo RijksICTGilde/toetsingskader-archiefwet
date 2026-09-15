@@ -1,7 +1,7 @@
 ---
 title: "Over het toetsingskader"
 card_title: "Over het toetsingskader"
-description: "Achtergrond bij het toetsingskader: inleiding, duurzame toegankelijkheid, doel, wettelijk kader, opbouw en doelgroep."
+description: "Achtergrond bij het toetsingskader: inleiding, doel, wettelijk kader, opbouw, doelgroep en totstandkoming."
 weight: 4
 show_lastmod: true
 manual_layout: true
