@@ -1,6 +1,9 @@
+/* Bollendiagram (layouts/shortcodes/bollendiagram.html): hub-and-spoke met
+   iconen, naar de plaat van de Inspectie van 15 september 2026. Labels staan
+   buiten de bol, dus de plaat is breed (viewBox 760×480). */
 .bollendiagram-wrapper {
   width: 100%;
-  max-width: 440px;
+  max-width: 760px;
   margin: 2rem auto;
 }
 
@@ -11,25 +14,27 @@
   overflow: visible;
 }
 
-/* Spokes en scheidingslijn dragen betekenis, dus grafische objecten die 3:1
-   moeten halen (1.4.11). --color-border haalde 1,23:1; dit 4,8:1 en 7,0:1. */
+/* Kleuren. De spokes dragen betekenis en moeten 3:1 halen (1.4.11): de
+   lijnkleur haalt 4,8:1 licht en 7,0:1 donker; de bolrand 3,4:1 op wit.
+   Hub in lintblauw (#154273) met witte tekst: 11,5:1. */
 .bollendiagram {
   --bd-line: light-dark(#6b7280, #94a3b8);
+  --bd-bol-fill: light-dark(#e9f2fa, #1f3550);
+  --bd-bol-fill-hover: light-dark(#cfe3f5, #2b4a6e);
+  --bd-bol-stroke: light-dark(#3d8fcc, #7fc0ea);
+  --bd-hub-fill: #154273;
+  --bd-hub-fill-hover: #1f5a99;
+  --bd-hub-stroke: light-dark(#0d2d50, #7fc0ea);
+  --bd-icoon: light-dark(#154273, #cfe3f5);
+  --bd-label: light-dark(#154273, #e2e8f0);
 }
 
 /* === Verbindingslijnen (spokes) ===
    Onder de bollen; de opake fills verbergen de uiteinden. */
 .bd-spoke {
   stroke: var(--bd-line);
-  stroke-width: 1.5;
+  stroke-width: 2;
   fill: none;
-}
-
-.bd-divider {
-  stroke: var(--bd-line);
-  stroke-width: 1.5;
-  stroke-dasharray: 2 6;
-  stroke-linecap: round;
 }
 
 /* === Bollen (cirkels) === */
@@ -37,60 +42,53 @@
    <circle> in dezelfde <a>, en `.bd-bubble circle` (0,1,1) wint anders van
    `.bd-focus-ring` (0,1,0) — de ring wordt dan een opake schijf óver de bol. */
 .bd-bubble circle:not(.bd-focus-ring) {
-  fill: #8cc3e6;
-  stroke: #66afdd;
-  stroke-width: 1;
-  transition: fill 0.18s ease, stroke 0.18s ease, stroke-width 0.18s ease;
+  fill: var(--bd-bol-fill);
+  stroke: var(--bd-bol-stroke);
+  stroke-width: 3;
+  transition: fill 0.18s ease, stroke 0.18s ease;
 }
 
 .bd-main circle:not(.bd-focus-ring) {
-  fill: #007bc7;
-  stroke: light-dark(#01689b, #4ba3d8);
-  stroke-width: 1.5;
+  fill: var(--bd-hub-fill);
+  stroke: var(--bd-hub-stroke);
+  stroke-width: 3;
 }
 
-/* Toekomst-cluster. Dark mode transparant, anders verdwijnt de stippelstroke. */
-.bd-bubble-outlined {
-  fill: light-dark(#eef5fb, transparent);
-  stroke: var(--bd-line);
-  stroke-width: 1.5;
-  stroke-dasharray: 4 4;
-}
-
-/* === Labels (tekst, op aparte laag bovenop) === */
+/* === Iconen en labels (aparte lagen bovenop) === */
+.bd-iconen,
 .bd-labels {
   pointer-events: none;
 }
 
+.bd-iconen {
+  color: var(--bd-icoon);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Geen `text-anchor` hier: die staat als attribuut op elke <text>, want een
+   label links van de plaat eindigt bij zijn anker en een label rechts begint
+   er. Een CSS-regel zou dat attribuut overschrijven (en inline style mag niet
+   van de CSP). */
 .bd-labels text {
   font-family: "RO Sans", "Source Sans 3", system-ui, sans-serif;
-  text-anchor: middle;
   dominant-baseline: middle;
 }
 
 .bd-label {
-  fill: var(--rijkshuisstijl-color-cool-gray-800, #1e293b);
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* Lange normtitels passen alleen kleiner én over meerdere regels in r=55. */
-.bd-label-sm {
-  font-size: 12px;
+  fill: var(--bd-label);
+  font-size: 17px;
+  font-weight: 600;
 }
 
 .bd-label-main {
   fill: #ffffff;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: 0.01em;
-}
-
-/* Toekomst-labels: eigen, gedempte kleur. */
-.bd-label-outlined {
-  fill: light-dark(#5a7184, #aebfcf);
-  font-size: 13px;
-  font-style: italic;
 }
 
 /* === Tekstuele normenlijst onder het diagram ===
@@ -124,22 +122,21 @@
 }
 
 .bd-bubble:hover circle:not(.bd-focus-ring) {
-  fill: #409cd5;
+  fill: var(--bd-bol-fill-hover);
 }
 
 .bd-main:hover circle:not(.bd-focus-ring) {
-  fill: #01689b;
+  fill: var(--bd-hub-fill-hover);
 }
 
 /* Losse ring op r+4, dus buiten de bol (SVG-equivalent van outline-offset).
-   Grenst alleen aan de paginaachtergrond: 17,9:1 licht, 14,5:1 donker. De
-   bol-stroke verdikken werkte niet — in donkere modus zakte het contrast van de
-   centrale bol van 6,4:1 naar 2,9:1 (2.4.7). */
+   Grenst alleen aan de paginaachtergrond. De bol-stroke verdikken werkte
+   niet: in donkere modus zakte het contrast van de centrale bol (2.4.7). */
 .bd-focus-ring {
   fill: none;
   stroke: none;
-  /* non-scaling-stroke houdt de dikte in CSS-pixels; anders schaalt de ring mee
-     met de viewBox en wordt hij ~2px op 320px. */
+  /* non-scaling-stroke houdt de dikte in CSS-pixels; anders schaalt de ring
+     mee met de viewBox. */
   vector-effect: non-scaling-stroke;
   stroke-width: 3px;
 }
@@ -148,21 +145,17 @@
   stroke: var(--color-text);
 }
 
+/* Smal scherm: de plaat is tweedimensionaal en heeft een minimale breedte
+   nodig om leesbaar te blijven; hij scrollt dan horizontaal binnen de figure
+   (uitzondering in WCAG 1.4.10 voor diagrammen). De normenlijst eronder blijft
+   de tekstuele route. */
 @media (max-width: 640px) {
   .bollendiagram-wrapper {
     margin: 1rem 0;
+    overflow-x: auto;
   }
-  .bd-label {
-    font-size: 15px;
-  }
-  .bd-label-sm {
-    font-size: 13px;
-  }
-  .bd-label-main {
-    font-size: 22px;
-  }
-  .bd-label-outlined {
-    font-size: 14px;
+  .bollendiagram {
+    min-width: 600px;
   }
 }
 
@@ -174,8 +167,7 @@
 
 /* Forced-colors (Windows High Contrast) — vervang fills door systeem-kleuren. */
 @media (forced-colors: active) {
-  .bd-bubble circle:not(.bd-focus-ring),
-  .bd-bubble-outlined {
+  .bd-bubble circle:not(.bd-focus-ring) {
     fill: Canvas;
     stroke: CanvasText;
   }
@@ -184,9 +176,11 @@
   .bd-bubble:focus-visible .bd-focus-ring {
     stroke: Highlight;
   }
-  .bd-spoke,
-  .bd-divider {
+  .bd-spoke {
     stroke: CanvasText;
+  }
+  .bd-iconen {
+    color: CanvasText;
   }
   .bd-labels text {
     fill: CanvasText;

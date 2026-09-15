@@ -11,6 +11,17 @@ changelog volgt [Semantic Versioning][semver].
 
 ## [Unreleased]
 
+### Gewijzigd
+
+- Bollendiagram op de samenhangpagina naar de plaat van de Inspectie van
+  15 september 2026 (`docs/bollendiagram-inspectie-2026-09-15.png`): hub
+  "Inbeheername en beheer" met zeven normen eromheen, elk met een icoon en
+  het label buiten de bol; de vervaagde toekomstbollen zijn weg. De plaat is
+  data-gedreven: een norm toevoegen is één regel in
+  `layouts/shortcodes/bollendiagram.html`, de posities worden berekend. Blijft
+  klikbaar en toetsenbordbedienbaar; op een smal scherm scrollt hij
+  horizontaal binnen de figure.
+
 ### Toegevoegd
 
 - Pagina "Totstandkoming" onder Over ingevuld, datum stub vervanging volgt.
