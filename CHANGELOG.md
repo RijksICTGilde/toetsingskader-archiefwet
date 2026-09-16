@@ -13,6 +13,13 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Hover en link gescheiden (keuze 15 september 2026): elke term met een
+  tooltip is gestippeld en opent alleen de tooltip; was de term ook een link
+  naar een pagina, dan staat die link nu in de tooltip als "Ga naar …". Eén
+  betekenis per lijn, en de bron is ook op een touchscreen bereikbaar. Een
+  leesteken direct achter zo'n term valt buiten de stippellijn en buiten de
+  toegankelijke naam.
+
 - Feedback 15 september 2026: de tegel "Duurzame toegankelijkheid" onder Over
   is vervallen; die tekst staat nu als kop "Duurzame toegankelijkheid" op de
   samenhangpagina, in plaats van "Beschikbaar en leesbaar". Een alias houdt de

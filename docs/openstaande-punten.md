@@ -15,6 +15,9 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
       `scripts/validate-norms.py` (sectie is daar optioneel toegestaan).
 - [x] **Hovers en links**: keuze 25 augustus 2026 "alles blauw" — hover en link
       allebei in linkkleur; hover gestippeld, link doorgetrokken. `main.css`.
+      Achterhaald sinds 15 september 2026: een term met hover én link is nu
+      gestippeld en heeft de paginalink in de tooltip en in de bronnenlijst
+      ("Ga naar …"); zie `_partials/voetnoot-tooltips.html`.
 - [x] "Normanalyse" uit de paginatitel; titel gelijk aan de naam in het kader
       (ordeningsstructuur → ordenen). Gedaan in #76, #78 en #79.
 

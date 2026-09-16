@@ -32,6 +32,27 @@ export function korteRefTermFouten(document) {
     .filter(tekst => tekst.length > 0 && !LETTER_OF_CIJFER.test(tekst))
 }
 
+// --- "Ga naar"-link in tooltip zonder tegenhanger in de bronnenlijst -----------
+// Een term die ook een paginalink was, heeft die link in de tooltip (.ref-ga)
+// én in de bronnenlijst (<li id="fn:N">): op een touchscreen springt een tik
+// naar die lijst. Ontbreekt hij daar, dan is de pagina op mobiel onbereikbaar
+// terwijl de tooltip gewoon werkt — precies de stille uitval die de partial
+// met errorf probeert te vangen, hier nog eens op de gebouwde HTML.
+export function ontbrekendeGaNaarFouten(document) {
+  const fouten = []
+  for (const tip of document.querySelectorAll('.ref-wrapper .ref-tooltip')) {
+    const term = tip.parentElement.querySelector('a.ref-term')
+    const fn = (term?.getAttribute('href') || '').replace(/^#/, '')
+    const lijst = fn && document.getElementById(fn)
+    for (const a of tip.querySelectorAll('.ref-ga a')) {
+      const href = a.getAttribute('href')
+      const inLijst = lijst && [...lijst.querySelectorAll('.ref-ga a')].some(b => b.getAttribute('href') === href)
+      if (!inLijst) fouten.push(`${href} (${fn || 'geen voetnoot'})`)
+    }
+  }
+  return fouten
+}
+
 // --- Lege alt ---------------------------------------------------------------
 // Een lege alt op een informatieve afbeelding is een 1.1.1-fout die niemand
 // vangt: axe leest hem als "bewust decoratief" en .htmltest.yml zet
