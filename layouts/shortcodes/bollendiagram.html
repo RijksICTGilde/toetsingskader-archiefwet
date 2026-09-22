@@ -52,7 +52,9 @@
 {{- end -}}
 
 {{/* Geometrie (viewBox-eenheden). Labels staan buiten de bol, dus de plaat is
-     breder dan hoog; de tekst rechts en links mag tot ±160 eenheden uitlopen. */}}
+     breder dan hoog; de tekst rechts en links mag tot ±160 eenheden uitlopen.
+     `$rLabel` is de afstand van de hub tot het anker van een label van één
+     regel; labels van meer regels schuiven verderop nog naar buiten. */}}
 {{- $cx := 380.0 -}}{{- $cy := 240.0 -}}
 {{- $rHub := 80.0 -}}{{- $rBol := 48.0 -}}
 {{- $rKring := 150.0 -}}{{- $rLabel := 214.0 -}}
@@ -66,9 +68,16 @@
   {{- $cos := math.Cos $hoek -}}{{- $sin := math.Sin $hoek -}}
   {{- $anker := "middle" -}}
   {{- if gt $cos 0.3 }}{{ $anker = "start" }}{{ else if lt $cos -0.3 }}{{ $anker = "end" }}{{ end -}}
+  {{/* Een label van meer dan één regel groeit om zijn ankerpunt heen, dus de
+       bovenste regel kruipt naar de bol toe — hoe verticaler de richting, hoe
+       dichterbij. Schuif het anker die halve blokhoogte naar buiten (met
+       |sin| als maat voor het verticale deel van de richting), dan houdt elk
+       label dezelfde afstand tot zijn bol als een label van één regel. */}}
+  {{- $nregels := len ($norm.regels | default (slice $norm.naam)) -}}
+  {{- $rl := add $rLabel (mul (mul (div (sub (float $nregels) 1.0) 2.0) $regelhoogte) (math.Abs $sin)) -}}
   {{- $bollen = $bollen | append (merge $norm (dict
         "x"  (add $cx (mul $rKring $cos)) "y"  (add $cy (mul $rKring $sin))
-        "lx" (add $cx (mul $rLabel $cos)) "ly" (add $cy (mul $rLabel $sin))
+        "lx" (add $cx (mul $rl $cos)) "ly" (add $cy (mul $rl $sin))
         "anker" $anker)) -}}
 {{- end -}}
 
