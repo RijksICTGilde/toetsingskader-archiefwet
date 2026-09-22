@@ -13,6 +13,17 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Het Rijksoverheid-lint in de kop staat er niet meer alleen: het woordmerk
+  "Ministerie van Onderwijs, Cultuur en Wetenschap" staat ernaast, zoals op het
+  briefhoofd van de PDF's. Onder 820px (waar de sitetitel in dezelfde balk
+  staat) blijft alleen het lint over.
+
+- Het logo linkt naar de hoofdsite van de Inspectie
+  (https://www.inspectie-oe.nl/) in plaats van naar de homepage van deze site.
+  Beide via `params.logo` in `hugo.yaml`, in een projectshadow van
+  `_partials/header.html` — upstream-kandidaat op het thema, dat alleen het
+  kale lint met een link naar de eigen homepage kent.
+
 - Afkortingen Aw, Ab en Ar worden voluit geschreven: "Archiefwet",
   "Archiefbesluit" en "Archiefregeling" (169 plekken in de content, inclusief
   de kern_bron in de front matter). Ze staan niet meer in
@@ -25,13 +36,11 @@ changelog volgt [Semantic Versioning][semver].
   ruimte tot zijn bol houdt als een label van één regel ("Informatiebeveiliging
   en betrouwbaar" stond tegen de bol aan).
 
-- De "Ga naar …"-link is weg (keuze 22 september 2026): een term die in de
-  content een link is, is weer gewoon die link — met de tooltip erbij — in
-  plaats van een gestippelde term met de paginalink in de tooltip en nog een
-  keer in de bronnenlijst. Die kopie in de bronnenlijst was de aanleiding; ze
-  hoorde daar niet, en zonder de link op de term zelf zou de pagina op een
-  touchscreen onbereikbaar zijn. Daarmee vervallen de controle
-  `ga-naar-ontbreekt` en het partial `voetnoot-url-sleutel.html`.
+- De "Ga naar …"-link staat alleen nog in de tooltip (keuze 22 september
+  2026), niet meer ook in de bronnenlijst onderaan: die lijst gaat over
+  bronnen, niet over navigatie. De controle `ga-naar-ontbreekt` in
+  `scripts/a11y-checks.mjs`, die de kopie in de lijst afdwong, vervalt
+  daarmee.
 
 - De aangesprongen bron in de referentielijst verspringt niet meer: de
   thema-regel `.references li:target` schoof de regel (en dus het

@@ -1,0 +1,5 @@
+{{- /* Vergelijkingssleutel voor twee adressen: host zonder www. + pad zonder
+       slash aan het eind, zonder schema, fragment en query. Voor de vraag of
+       een paginalink hetzelfde is als de "Bekijk bron"-link. */ -}}
+{{- $u := urls.Parse . -}}
+{{- printf "%s%s" (strings.TrimPrefix "www." $u.Host) (strings.TrimSuffix "/" $u.Path) -}}
