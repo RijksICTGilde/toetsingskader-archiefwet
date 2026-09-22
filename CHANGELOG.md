@@ -13,6 +13,31 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Afkortingen Aw, Ab en Ar worden voluit geschreven: "Archiefwet",
+  "Archiefbesluit" en "Archiefregeling" (169 plekken in de content, inclusief
+  de kern_bron in de front matter). Ze staan niet meer in
+  `data/afkortingen.yaml`, dus er komt ook geen `<abbr>` meer omheen; DUTO en
+  SIO blijven afkortingen.
+
+- Bollendiagram in blauw in plaats van groen: rijksblauw #154273 voor de hub,
+  hemelblauw #007bc7 voor lijnen en bolranden, #80d5fc in donkere modus. Een
+  label van meer dan één regel schuift verder naar buiten, zodat het evenveel
+  ruimte tot zijn bol houdt als een label van één regel ("Informatiebeveiliging
+  en betrouwbaar" stond tegen de bol aan).
+
+- De "Ga naar …"-link is weg (keuze 22 september 2026): een term die in de
+  content een link is, is weer gewoon die link — met de tooltip erbij — in
+  plaats van een gestippelde term met de paginalink in de tooltip en nog een
+  keer in de bronnenlijst. Die kopie in de bronnenlijst was de aanleiding; ze
+  hoorde daar niet, en zonder de link op de term zelf zou de pagina op een
+  touchscreen onbereikbaar zijn. Daarmee vervallen de controle
+  `ga-naar-ontbreekt` en het partial `voetnoot-url-sleutel.html`.
+
+- De aangesprongen bron in de referentielijst verspringt niet meer: de
+  thema-regel `.references li:target` schoof de regel (en dus het
+  referentienummer) 0,5em naar links. De highlight is nu alleen een
+  achtergrondkleur. Upstream-kandidaat op het thema.
+
 - Hover en link gescheiden (keuze 15 september 2026): elke term met een
   tooltip is gestippeld en opent alleen de tooltip; was de term ook een link
   naar een pagina, dan staat die link nu in de tooltip als "Ga naar …". Eén
