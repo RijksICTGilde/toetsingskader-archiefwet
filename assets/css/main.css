@@ -77,10 +77,10 @@ blockquote.callout .kern-bron {
 
 /* Ref-term (woord met hover) in linkkleur, net als een gewone link; de dotted
    underline uit het thema maakt het verschil met een link (keuze 25 augustus
-   2026: "alles blauw"). Sinds 15 september 2026 is élke ref-term gestippeld,
-   ook een term die vroeger zelf een link was: die link staat nu ín de tooltip
-   (`.ref-ga`, "Ga naar …"). Eén betekenis per lijn: gestippeld = uitklappen,
-   doorgetrokken = navigeren. Geldt sitebreed: de tooltip-transformatie draait
+   2026: "alles blauw"). Een term die in de content al een link was, is sinds
+   22 september 2026 weer gewoon die link, mét tooltip: de omweg via
+   "Ga naar …" in de tooltip en de bronnenlijst (15 september 2026) is weg.
+   Geldt sitebreed: de tooltip-transformatie draait
    ook op de Over- en Onderwerpenpagina's (_partials/voetnoot-tooltips.html).
    `--color-link` en niet `--color-primary`: gewone links hebben die kleur al
    (thema-base.css), en op het callout-vlak (--color-bg-info, #d9ebf7) haalt
@@ -89,6 +89,18 @@ blockquote.callout .kern-bron {
 a.ref-term,
 a.ref-term:hover {
   color: var(--color-link);
+}
+
+/* Highlight van de aangesprongen bron mag de lijst niet laten verspringen
+   (verzoek 22 september 2026). De thema-regel `.references li:target` zet
+   `padding: .25em .5em` met `margin-inline-start: -.5em`: de tekst blijft
+   daardoor staan, maar de li-box — en dus de ::marker met het
+   referentienummer — schuift 0,5em naar links. Hier alleen de
+   achtergrondkleur, zonder padding of margin, zodat er niets beweegt.
+   Upstream-kandidaat op het thema. */
+.references li:target {
+  padding: 0;
+  margin-inline-start: 0;
 }
 
 

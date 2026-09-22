@@ -20,8 +20,6 @@
 {{ $defs := findRESubmatch `(?s)<li id="fn:(\d+)">\s*<p>(.*?)(?:&#160;)?<a href="#fnref[0-9]*:\d+" class="footnote-backref"` $content }}
 {{/* Labels onthouden, zodat stap 2 dezelfde op de referentielijst zet. */}}
 {{ $bronLabels := newScratch }}
-{{/* "Ga naar …"-links per voetnoot, voor de bronnenlijst (zie pass A). */}}
-{{ $gaLinks := newScratch }}
 {{ range $defs }}
   {{ $n := index . 1 }}
   {{ $text := index . 2 | strings.TrimSpace }}
@@ -33,10 +31,6 @@
     {{ $textOnly = index (index . 0) 1 }}
     {{ $linkHTML = index (index . 0) 2 }}
   {{ end }}
-  {{/* Sleutel van het bronadres, voor de vergelijking met een paginalink in
-       pass A (host + pad, genormaliseerd). */}}
-  {{ $bronSleutel := "" }}
-  {{ with findRESubmatch `href="([^"]+)"` $linkHTML }}{{ $bronSleutel = partial "voetnoot-url-sleutel.html" (index (index . 0) 1 | htmlUnescape) }}{{ end }}
   {{/* 142 links heten site-breed "Bekijk bron" en zijn in een linkoverzicht niet
        te onderscheiden (2.4.9, bevinding 27). Het label begint met de zichtbare
        tekst, zodat 2.5.3 intact blijft, en komt uit de plátte brontekst — vóór
@@ -50,62 +44,33 @@
   {{/* Afkortingen uitschrijven (3.1.4, bevinding 28). */}}
   {{ $textOnly = partial "afkortingen.html" $textOnly }}
   {{/* Twee passes, anders landt de term op een leesteken of blijft hij leeg:
-       A) link (+ leestekens/spatie) vóór de voetnoot → het linkwoord wordt de
-          ref-term, de link zelf verhuist naar de tooltip ("Ga naar …");
+       A) link (+ leestekens/spatie) vóór de voetnoot → de link zélf wordt de
+          ref-term en houdt zijn href;
        B) gewoon woord → het woord wordt de ref-term, leesteken erbuiten.
        Wat geen van beide matcht blijft een zichtbaar superscript. */}}
   {{/* Zonder `aria-describedby` hoort een schermlezergebruiker alleen de
        linktekst: de tooltip staat op `visibility: hidden` en dus buiten de
        toegankelijkheidsboom. De naamberekening leest verborgen doelen wél
        (1.3.1 / 4.1.2). */}}
-  {{/* Pass A (keuze 15 september 2026, "één betekenis per lijn"): een term
-       die ook een link was, is nu net als elke andere ref-term gestippeld en
-       opent alleen de tooltip; de paginalink staat ín de tooltip als
-       "Ga naar <paginatitel>". Zo doet hover/tik nooit twee dingen tegelijk en
-       is de bron ook op een touchscreen bereikbaar (daar navigeerde de tik
-       meteen weg). Per match, omdat de titel uit site.GetPage komt.
+  {{/* Pass A: een term die ook een link is, blijft een link naar zijn pagina
+       en krijgt de tooltip erbij (keuze 22 september 2026, terug naar de
+       situatie van vóór 15 september). Tussen 15 en 22 september was die term
+       alleen gestippeld en stond de paginalink als "Ga naar <paginatitel>" in
+       de tooltip én in de bronnenlijst; die kopie in de lijst was ongewenst,
+       en zonder kopie zou de pagina op een touchscreen onbereikbaar worden.
+       Vandaar de link terug op de term zelf: die werkt met muis, toetsenbord
+       én tik.
        De linktekst mag inline markup bevatten (<em>, <abbr>, de
        visually-hidden span van het thema bij besloten links): alles tot de
        eerstvolgende </a>, zonder over een </a> heen te lopen. */}}
   {{ $linkPat := printf `<a ([^>]*)>((?:[^<]|<(?:[^/]|/(?:[^a]|a[^>]))[^>]*>)*)</a>([.,;:!?)]*)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
   {{ range findRESubmatch $linkPat $content }}
     {{ $heel := index . 0 }}{{ $attrs := index . 1 }}{{ $woord := index . 2 }}{{ $lt := index . 3 }}{{ $id := index . 4 }}
-    {{ $href := "" }}
-    {{ with findRESubmatch `href="([^"]+)"` $attrs }}{{ $href = index (index . 0) 1 | htmlUnescape }}{{ end }}
-    {{/* Zelfde adres als "Bekijk bron"? Dan geen tweede link. Vergelijking op
-         host + pad, zonder www., fragment, query en slash aan het eind. */}}
-    {{ $ga := "" }}
-    {{ if and $href (ne (partial "voetnoot-url-sleutel.html" $href) $bronSleutel) }}
-      {{ $doel := "" }}
-      {{ if hasPrefix $href "mailto:" }}
-        {{ $doel = printf "e-mailadres %s" (strings.TrimPrefix "mailto:" $href) }}
-      {{ else if or (hasPrefix $href "http://") (hasPrefix $href "https://") }}
-        {{ $doel = strings.TrimPrefix "www." (urls.Parse $href).Host }}
-      {{ else }}
-        {{/* Interne link: pad zonder fragment/query opzoeken, ook via alias. */}}
-        {{ $pad := (urls.Parse $href).Path }}
-        {{ $p := site.GetPage $pad }}
-        {{ if not $p }}
-          {{ range site.Pages }}{{ if in .Aliases $pad }}{{ $p = . }}{{ end }}{{ end }}
-        {{ end }}
-        {{ if $p }}
-          {{ $doel = $p.Title }}
-        {{ else }}
-          {{ warnf "voetnoot-tooltips: linkdoel %q van ref-term %q niet gevonden; tooltip krijgt 'Ga naar de pagina'" $href (plainify $woord) }}
-          {{ $doel = "de pagina" }}
-        {{ end }}
-      {{ end }}
-      {{/* Via het thema-partial, zodat extern/besloten dezelfde attributen en
-           markering krijgen als elke andere link. In een <span>: het thema zet
-           `.ref-tooltip > span` als blok, dus geen eigen CSS nodig. */}}
-      {{ $ga = printf `<span class="ref-ga">%s</span>` (partial "render-link" (dict "href" $href "text" (printf "Ga naar %s" $doel))) }}
-    {{ end }}
-    {{/* Ook in de bronnenlijst onderaan: op een touchscreen springt een tik
-         op de term daarheen (geen hover), en daar mag de paginalink niet
-         ontbreken. Per voetnoot, dus een bron die op meer plekken met
-         verschillende links staat, krijgt ze daar allemaal. */}}
-    {{ with $ga }}{{ $gaLinks.Add $n (slice .) }}{{ end }}
-    {{ $repl := printf `<span class="ref-wrapper" id="%s"><a href="#fn:%s" class="ref-term" aria-describedby="%s-bron">%s</a><span class="ref-tooltip" role="note"><span id="%s-bron">%s</span>%s%s</span></span>%s` $id $n $id $woord $id $textOnly $linkHTML $ga $lt }}
+    {{/* `ref-term` bij een class die er al staat (het thema markeert externe en
+         besloten links zo), anders zou een tweede class-attribuut de eerste
+         laten winnen en de stippellijn wegvallen. */}}
+    {{ $attrs = cond (in $attrs `class="`) (replaceRE `class="` `class="ref-term ` $attrs 1) (printf `%s class="ref-term"` $attrs) }}
+    {{ $repl := printf `<span class="ref-wrapper" id="%s"><a %s aria-describedby="%s-bron">%s</a><span class="ref-tooltip" role="note"><span id="%s-bron">%s</span>%s</span></span>%s` $id $attrs $id $woord $id $textOnly $linkHTML $lt }}
     {{ $content = replace $content $heel $repl }}
   {{ end }}
   {{/* Pass B gaat door replaceRE, waar Go `$1`/`${x}` als capture-groep
@@ -140,18 +105,6 @@
     {{ $pat := printf `(?s)(<li id="fn:%s">.*?<a href="[^"]*")([^>]*>Bekijk bron</a>)` $n }}
     {{/* Zelfde $-escape als hierboven: het label komt uit de brontekst. */}}
     {{ $ol = replaceRE $pat (printf `${1} aria-label="%s"${2}` (replace $label "$" "$$")) $ol 1 }}
-  {{ end }}
-  {{/* De "Ga naar …"-link(s) van pass A vóór de terugspringpijl van de
-       bijbehorende voetnoot. */}}
-  {{ range $n, $links := $gaLinks.Values }}
-    {{ $pat := printf `(?s)(<li id="fn:%s">.*?)(\s*(?:&#160;)?<a href="#fnref[0-9]*:%s" class="footnote-backref")` $n $n }}
-    {{ $ins := delimit (uniq $links) " " }}
-    {{ $voor := $ol }}
-    {{ $ol = replaceRE $pat (printf `${1} %s${2}` (replace $ins "$" "$$")) $ol 1 }}
-    {{/* Hard: als Goldmark de backref anders gaat renderen, verdwijnt de
-         paginalink stil uit de bronnenlijst terwijl de tooltip hem houdt —
-         en die lijst is de route op een touchscreen. */}}
-    {{ if eq $voor $ol }}{{ errorf "voetnoot-tooltips: kon 'Ga naar' niet in de bronnenlijst zetten bij voetnoot %s (backref-patroon gewijzigd?)" $n }}{{ end }}
   {{ end }}
   {{/* Backlinks heten bij Goldmark alleen "↩︎": tientallen naamloze links in
        een linkoverzicht (2.4.4). */}}

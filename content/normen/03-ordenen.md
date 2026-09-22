@@ -7,7 +7,7 @@ norm_titel: "Ordenen"
 aliases:
   - /normen/03-ordeningsstructuur/
 kern: "Het verantwoordelijke overheidsorgaan beschikt over één of meerdere ordeningsstructuren, waarvan er ten minste één aansluit bij de taken en werkprocessen van het verantwoordelijke overheidsorgaan."
-kern_bron: "Ar, artikel 2.2, eerste lid."
+kern_bron: "Archiefregeling, artikel 2.2, eerste lid."
 kern_bron_url: "https://www.internetconsultatie.nl/archiefregeling/b1"
 kern_kaart: "Documenten zijn gekoppeld aan een ordening."
 synoniemen:
@@ -22,23 +22,23 @@ synoniemen:
 
 Een ordeningsstructuur is een logisch verband tussen de elementen van een document of een archief.[^ar-artikel-1-1] Dit verband gaat uit van één of meerdere ordeningsprincipes, bijvoorbeeld documenten over hetzelfde onderwerp of documenten die behoren tot hetzelfde werkproces[^werkproces]. Een ordeningsstructuur brengt samenhang aan tussen documenten en legt verbanden tussen documenten, ook over systemen heen.[^ar-toelichting-h2-ordening-p33]
 
-[^ar-artikel-1-1]: Ar, artikel 1.1, begripsbepalingen. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
-[^werkproces]: Een werkproces is een samenhangend geheel van stappen en procedures in het kader van de uitvoering van een taak. Ar, artikel 1.1, begripsbepalingen. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
-[^ar-toelichting-h2-ordening-p33]: Ar, Toelichting, Hoofdstuk 2, Ordening, p.33. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-1-1]: Archiefregeling, artikel 1.1, begripsbepalingen. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^werkproces]: Een werkproces is een samenhangend geheel van stappen en procedures in het kader van de uitvoering van een taak. Archiefregeling, artikel 1.1, begripsbepalingen. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-toelichting-h2-ordening-p33]: Archiefregeling, Toelichting, Hoofdstuk 2, Ordening, p.33. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 Een ordeningsstructuur bevat waarden die de logische plaats van documenten in de ordeningsstructuur bepalen.[^ar-artikel-2-2-lid-2] Met behulp van metadata of externe registratie wordt de plaats van een document in de ordeningsstructuur vastgelegd.[^ar-artikel-2-2-lid-3]
 
-[^ar-artikel-2-2-lid-2]: Ar, artikel 2.2, tweede lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
-[^ar-artikel-2-2-lid-3]: Ar, artikel 2.2, derde lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-2-2-lid-2]: Archiefregeling, artikel 2.2, tweede lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-2-2-lid-3]: Archiefregeling, artikel 2.2, derde lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 Om documenten duurzaam toegankelijk te maken en houden is het van belang dat deze zijn gekoppeld aan een ordening. Een geordend archief is onder andere belangrijk voor het uitvoeren van beheertaken als het selecteren, [vernietigen](/normen/07-vernietigen/) en overbrengen van documenten. Het verantwoordelijke overheidsorgaan beschikt over tenminste één door de organisatie (bijvoorbeeld in een SIO[^sio]) vastgestelde ordeningsstructuur, die aansluit bij de taken en werkprocessen van het verantwoordelijke overheidsorgaan.[^ar-artikel-2-2-ordening-p2] Daarnaast mogen aanvullende ordeningen bestaan, die niet hoeven aan te sluiten bij de taken en werkprocessen.[^ar-artikel-2-2-ordening-p2] Dit mogen bijvoorbeeld cliëntgerichte, locatiegerichte of objectgerichte ordeningsstructuren zijn. Voor specifieke verschijningsvormen van documenten, denk aan e-mail of websites, zijn aanvullende ordeningen mogelijk.
 
-[^ar-artikel-2-2-ordening-p2]: Ar, artikel 2.2 Ordening, p.2. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-2-2-ordening-p2]: Archiefregeling, artikel 2.2 Ordening, p.2. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^sio]: Strategisch Informatie Overleg.
 
 Om documenten te kunnen koppelen aan een ordening moeten deze worden voorzien van metadata. Deze kunnen op het niveau van individuele documenten worden vastgelegd, maar ook op een hoger [aggregatieniveau](/onderwerpen/classificatie-en-aggregatie/).[^ar-toelichting-h2-ordening-p34] Het kan voorkomen dat het technisch niet mogelijk is om metagegevens aan documenten toe te voegen. In dat geval kan met behulp van een externe registratie een document alsnog aan de ordening gekoppeld worden.[^ar-artikel-2-2-lid-3]
 
-[^ar-toelichting-h2-ordening-p34]: Ar, Toelichting, Hoofdstuk 2, Ordening, p 34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-toelichting-h2-ordening-p34]: Archiefregeling, Toelichting, Hoofdstuk 2, Ordening, p 34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 ## Voorschriften
 
@@ -46,7 +46,7 @@ Om documenten te kunnen koppelen aan een ordening moeten deze worden voorzien va
 
 Het verantwoordelijke overheidsorgaan beschikt over één of meerdere ordeningsstructuren, waarvan er ten minste één aansluit bij de taken en werkprocessen van het verantwoordelijke overheidsorgaan.[^ar-artikel-2-2-lid-1]
 
-[^ar-artikel-2-2-lid-1]: Ar, artikel 2.2, eerste lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-2-2-lid-1]: Archiefregeling, artikel 2.2, eerste lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 #### Criteria
 
@@ -65,7 +65,7 @@ Het verantwoordelijke overheidsorgaan beschikt over één of meerdere ordeningss
 
 Alle documenten, op individueel of hoger [aggregatieniveau](/onderwerpen/classificatie-en-aggregatie/) zijn gekoppeld aan een ordening, ook de documenten die op elk moment mogen worden vernietigd na ontvangen of opmaken.[^ar-toelichting-h2-ordening-p33-34]
 
-[^ar-toelichting-h2-ordening-p33-34]: Ar, Toelichting, Hoofdstuk 2, Ordening, p 33-34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-toelichting-h2-ordening-p33-34]: Archiefregeling, Toelichting, Hoofdstuk 2, Ordening, p 33-34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 #### Criteria
 
@@ -79,7 +79,7 @@ Alle documenten, op individueel of hoger [aggregatieniveau](/onderwerpen/classif
 
 Documenten die zijn gekoppeld aan een aanvullende ordening, zijn gewaardeerd met een bewaartermijn van een categorie in het selectiebesluit.[^ar-toelichting-h2-algemene-eisen-ordening-p34]
 
-[^ar-toelichting-h2-algemene-eisen-ordening-p34]: Ar, artikel 2.5, tweede lid, sub k; Ar, Toelichting, Hoofdstuk 2, Algemene Eisen ordening, p.34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-toelichting-h2-algemene-eisen-ordening-p34]: Archiefregeling, artikel 2.5, tweede lid, sub k; Archiefregeling, Toelichting, Hoofdstuk 2, Algemene Eisen ordening, p.34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 #### Criterium
 
@@ -93,7 +93,7 @@ Documenten die zijn gekoppeld aan een aanvullende ordening, zijn gewaardeerd met
 
 Alle documenten moeten worden gekoppeld aan een ordening.[^ar-toelichting-h1-eisen-p29] Ook documenten die op elk moment mogen worden vernietigd.
 
-[^ar-toelichting-h1-eisen-p29]: Ar, Toelichting. Hoofdstuk 1, Eisen die van toepassing zijn op alle documenten, p.29. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-toelichting-h1-eisen-p29]: Archiefregeling, Toelichting. Hoofdstuk 1, Eisen die van toepassing zijn op alle documenten, p.29. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 ## Gerelateerde onderwerpen
 
