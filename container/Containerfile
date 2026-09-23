@@ -32,7 +32,7 @@ RUN if [ -n "$VERSIE" ]; then export HUGO_PARAMS_VERSIE="$VERSIE"; fi; \
 RUN node scripts/pdf-build.mjs public \
     && node scripts/pdf-ua-check.mjs public/normen/index.pdf public/normen/*/index.pdf
 
-FROM nginxinc/nginx-unprivileged:stable-alpine-slim@sha256:11f3f6249b4ae3d7a4ec2a51797060107b88ead52b33b6ed3c6c33f55ca96200 AS runtime
+FROM nginxinc/nginx-unprivileged:stable-alpine-slim@sha256:c2c3905bda3dc8de80023e19bed0a45745279d26e5586cdee64370c8f9b12348 AS runtime
 # Patch Alpine-packages onafhankelijk van de (soms achterlopende) base-image
 # rebuild; houdt de Trivy-scan groen bij CVE's die Alpine al gefixt heeft.
 # Werkt alleen als deze laag ook echt opnieuw draait: de workflow zet
