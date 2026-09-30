@@ -31,7 +31,7 @@ Een ordeningsstructuur bevat waarden die de logische plaats van documenten in de
 [^ar-artikel-2-2-lid-2]: Ar, artikel 2.2, tweede lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^ar-artikel-2-2-lid-3]: Ar, artikel 2.2, derde lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
-Om documenten duurzaam toegankelijk te maken en houden is het van belang dat deze zijn gekoppeld aan een ordening. Een geordend archief is onder andere belangrijk voor het uitvoeren van beheertaken als het selecteren, [vernietigen](/normen/07-vernietigen/) en overbrengen van documenten. Het verantwoordelijke overheidsorgaan beschikt over tenminste één door de organisatie (bijvoorbeeld in een SIO[^sio]) vastgestelde ordeningsstructuur, die aansluit bij de taken en werkprocessen van het verantwoordelijke overheidsorgaan.[^ar-artikel-2-2-ordening-p2] Daarnaast mogen aanvullende ordeningen bestaan, die niet hoeven aan te sluiten bij de taken en werkprocessen.[^ar-artikel-2-2-ordening-p2] Dit mogen bijvoorbeeld cliëntgerichte, locatiegerichte of objectgerichte ordeningsstructuren zijn. Voor specifieke verschijningsvormen van documenten, denk aan e-mail of websites, zijn aanvullende ordeningen mogelijk.
+Om documenten duurzaam toegankelijk te maken en te houden is het van belang dat deze zijn gekoppeld aan een ordening. Een geordend archief is onder andere belangrijk voor het uitvoeren van beheertaken als het selecteren, [vernietigen](/normen/07-vernietigen/) en overbrengen van documenten. Het verantwoordelijke overheidsorgaan beschikt over ten minste één door de organisatie (bijvoorbeeld in een SIO[^sio]) vastgestelde ordeningsstructuur, die aansluit bij de taken en werkprocessen van het verantwoordelijke overheidsorgaan.[^ar-artikel-2-2-ordening-p2] Daarnaast mogen aanvullende ordeningen bestaan, die niet hoeven aan te sluiten bij de taken en werkprocessen.[^ar-artikel-2-2-ordening-p2] Dit mogen bijvoorbeeld cliëntgerichte, locatiegerichte of objectgerichte ordeningsstructuren zijn. Voor specifieke verschijningsvormen van documenten, denk aan e-mail of websites, zijn aanvullende ordeningen mogelijk.
 
 [^ar-artikel-2-2-ordening-p2]: Ar, artikel 2.2 Ordening, p.2. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 [^sio]: Strategisch Informatie Overleg.
@@ -59,11 +59,11 @@ Het verantwoordelijke overheidsorgaan beschikt over één of meerdere ordeningss
 
 - Er is een verantwoordelijke aangewezen voor het actualiseren van de ordeningsstructuur.
 - Er is een door de organisatie vastgestelde procedure voor het actualiseren van de ordeningsstructuur.
-- Tenminste één ordeningsstructuur komt overeen met de structuur in het selectiebesluit.
+- Ten minste één ordeningsstructuur komt overeen met de structuur in het selectiebesluit.
 
 #### Voorschrift
 
-Alle documenten, op individueel of hoger [aggregatieniveau](/onderwerpen/classificatie-en-aggregatie/) zijn gekoppeld aan een ordening, ook de documenten die op elk moment mogen worden vernietigd na ontvangen of opmaken.[^ar-toelichting-h2-ordening-p33-34]
+Alle documenten, op individueel of hoger [aggregatieniveau](/onderwerpen/classificatie-en-aggregatie/) zijn gekoppeld aan een ordening, ook de documenten die op elk moment mogen worden vernietigd na creatie of ontvangst.[^ar-toelichting-h2-ordening-p33-34]
 
 [^ar-toelichting-h2-ordening-p33-34]: Ar, Toelichting, Hoofdstuk 2, Ordening, p 33-34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
@@ -77,7 +77,7 @@ Alle documenten, op individueel of hoger [aggregatieniveau](/onderwerpen/classif
 
 #### Voorschrift
 
-Documenten die zijn gekoppeld aan een aanvullende ordening, zijn gewaardeerd met een bewaartermijn van een categorie in het selectiebesluit.[^ar-toelichting-h2-algemene-eisen-ordening-p34]
+Documenten die zijn gekoppeld aan een aanvullende ordening zijn gewaardeerd met een bewaartermijn van een categorie in het selectiebesluit.[^ar-toelichting-h2-algemene-eisen-ordening-p34]
 
 [^ar-toelichting-h2-algemene-eisen-ordening-p34]: Ar, artikel 2.5, tweede lid, sub k; Ar, Toelichting, Hoofdstuk 2, Algemene Eisen ordening, p.34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
