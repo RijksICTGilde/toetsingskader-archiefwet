@@ -4,7 +4,7 @@ versie: "0.8"
 weight: 1
 norm_id: "1"
 norm_titel: "Inbeheername en beheer"
-kern: "Een document is in beheer van het verantwoordelijke overheidsorgaan zodat het duurzaam toegankelijk gemaakt en gehouden kan worden."
+kern: "Een document is in beheer van het verantwoordelijke overheidsorgaan, zodat het duurzaam toegankelijk gemaakt en gehouden kan worden."
 kern_bron: "Ab, artikel 2.1, eerste lid; Aw, artikel 4.1, eerste lid."
 kern_bron_url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
 kern_kaart: "Een document bevindt zich in een beheerde omgeving, zodat de beheertaken kunnen worden uitgevoerd waarmee documenten duurzaam toegankelijk gemaakt worden en blijven."
@@ -38,9 +38,9 @@ Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. 
 
 [^aw-memorie-toelichting-4-3-beheerstrategie]: Aw, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 4.3 Duurzame toegankelijkheid, beheerstrategie.
 
-De beheerregeling moet samen met de omschrijving van de passende maatregelen worden gepubliceerd. Vervolgens moeten de passende maatregelen getroffen worden, en hiervoor moeten deze passende maatregelen in ieder geval beschreven zijn in een 'document'.
+De beheerregeling moet samen met de omschrijving van de passende maatregelen worden gepubliceerd. Vervolgens moeten de passende maatregelen getroffen worden en hiervoor moeten deze passende maatregelen in ieder geval beschreven zijn in een 'document'.
 
-In een beheerde omgeving[^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten[^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bijvoorbeeld bij de normen over [betrouwbaarheid](/normen/05-betrouwbaar/), [vernietigen](/normen/07-vernietigen/) en [metadateren](/normen/04-metadateren/) geeft direct richting aan de invulling van de benodigde functionaliteiten.[^kamerstukken-2021-22-35968]
+In een beheerde omgeving[^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten[^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bij de normen over [betrouwbaarheid](/normen/05-betrouwbaar/), [vernietigen](/normen/07-vernietigen/) en [metadateren](/normen/04-metadateren/), geeft direct richting aan de invulling van de benodigde functionaliteiten.[^kamerstukken-2021-22-35968]
 
 [^kamerstukken-2021-22-35968]: Aw, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Beheerstrategie
 
@@ -67,9 +67,9 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
 
 #### Voorschrift
 
-Het verantwoordelijk overheidsorgaan heeft in de beheerregels, in ieder geval per categorie[^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten, een **omschrijving** opgenomen van de passende maatregelen die het verantwoordelijke overheidsorgaan neemt om de documenten:[^aw-artikel-4-2-lid-2]
+Het verantwoordelijke overheidsorgaan heeft in de beheerregels, in ieder geval per categorie[^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten, een **omschrijving** opgenomen van de passende maatregelen die het verantwoordelijke overheidsorgaan neemt om de documenten:[^aw-artikel-4-2-lid-2]
 
-a) duurzaam toegankelijk te maken en te houden,[^aw-artikel-4-2-lid-2]
+a) duurzaam toegankelijk te maken en te houden;[^aw-artikel-4-2-lid-2]
 
 b) te [vernietigen](/normen/07-vernietigen/). [^aw-artikel-4-2-lid-2]
 
@@ -88,19 +88,19 @@ b) te [vernietigen](/normen/07-vernietigen/). [^aw-artikel-4-2-lid-2]
 
 #### Voorschrift
 
-Het verantwoordelijk overheidsorgaan heeft per categorie[^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten passende maatregelen getroffen om documenten:[^aw-artikel-4-1-lid-1]
+Het verantwoordelijke overheidsorgaan heeft per categorie[^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten passende maatregelen getroffen om documenten:[^aw-artikel-4-1-lid-1]
 
-a) duurzaam toegankelijk te maken en te houden
+a) duurzaam toegankelijk te maken en te houden;
 
-b) te [vernietigen](/normen/07-vernietigen/)
+b) te [vernietigen](/normen/07-vernietigen/).
 
 #### Criteria
 
 - In de passende maatregelen is beschreven dat documenten zich in een beheerde omgeving moeten bevinden.
-- De passende maatregelen zijn van toepassing op alle omgevingen waarin overheidsinformatie wordt opgeslagen. Denk hierbij aan bijvoorbeeld documentmanagementsystemen, maar ook back-ups[^kamerstukken-2021-22-35968-4-4-selectie], cloudomgevingen, samenwerkingsruimtes en emailapplicaties.
+- De passende maatregelen zijn van toepassing op alle omgevingen waarin overheidsinformatie wordt opgeslagen. Denk hierbij aan bijvoorbeeld documentmanagementsystemen, maar ook back-ups[^kamerstukken-2021-22-35968-4-4-selectie], cloudomgevingen, samenwerkingsruimtes en e-mailapplicaties.
 - In de passende maatregelen zijn in ieder geval de onderwerpen [overzicht](/normen/02-overzicht/), [vinden](/normen/06-vindbaar/) en beschikbaarstellen, [ordenen](/normen/03-ordenen/), [metadateren](/normen/04-metadateren/), [vernietigen](/normen/07-vernietigen/) en [betrouwbaarheid](/normen/05-betrouwbaar/) beschreven.
 - De passende maatregelen zijn opgesteld op basis van een [risicobenadering](/onderwerpen/passende-maatregelen/).
-- Een categorie, waarvoor passende maatregelen zijn genomen, heeft een relatie met een selectiebesluit.
+- Een categorie waarvoor passende maatregelen zijn genomen, heeft een relatie met een selectiebesluit.
 - De passende maatregelen zijn actueel.
 - De passende maatregelen worden [toegepast](#feitelijk-beheer).
 
@@ -167,7 +167,7 @@ Het verantwoordelijke overheidsorgaan heeft in de beheerregels[^aw-artikel-4-2-l
 
 #### Voorschrift
 
-Het verantwoordelijk overheidsorgaan heeft in de beheerregels nadere omschrijving opgenomen over de wijze waarop het archiefbeheer van documenten [periodiek](/normen/08-periodieke-evaluatie/) wordt geëvalueerd[^heet-aw1995-kwaliteitssyteem], onderzocht en indien nodig bijgesteld.[^aw-artikel-4-2-lid-2-2]
+Het verantwoordelijke overheidsorgaan heeft in de beheerregels een nadere omschrijving opgenomen over de wijze waarop het archiefbeheer van documenten [periodiek](/normen/08-periodieke-evaluatie/) wordt geëvalueerd[^heet-aw1995-kwaliteitssyteem], onderzocht en indien nodig bijgesteld.[^aw-artikel-4-2-lid-2-2]
 
 [^heet-aw1995-kwaliteitssyteem]: Dit heet in de AW1995 "kwaliteitssysteem".
 [^aw-artikel-4-2-lid-2-2]: Aw, artikel 4.2, tweede lid, sub c. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
