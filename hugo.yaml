@@ -77,13 +77,6 @@ params:
       - home
   back_to_top: true
   tagline: "Normen voor duurzame toegankelijkheid"
-  # Het Rijksoverheid-lint in de kop (_partials/header.html, projectshadow):
-  # `woordmerk` staat ernaast zoals op het briefhoofd van de PDF's, `url` is
-  # waar het logo heen linkt — de hoofdsite van de Inspectie, niet de homepage
-  # van deze site. Leeg `woordmerk` laat alleen het lint staan.
-  logo:
-    url: "https://www.inspectie-oe.nl/"
-    woordmerk: "Ministerie van Onderwijs, Cultuur en Wetenschap"
   footer:
     tagline: "De Inspectie ziet toe op de toegankelijkheid van overheidsinformatie en op de zorgvuldige omgang met erfgoed. Zij kijkt hoe de regels in de praktijk werken."
     links: "Zie ook"
