@@ -356,6 +356,12 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Verwijderd
 
+- De project-eigen scroll-spy voor "Op deze pagina" op de normpagina's
+  (`assets/js/toc-scrollspy.js`); thema naar v0.2.2. Het thema volgt nu zelf
+  alleen koppen met een TOC-link en markeert ook de laatste secties onderaan
+  een pagina (hugo-theme-rijksoverheid#8 en #22). Daardoor wordt elke sectie
+  in de inhoudsopgave gemarkeerd, ook "Referenties"; voorheen bleef op elke
+  normpagina minstens één sectie onderaan ongemarkeerd. Sluit #45.
 - De client-side PDF-generatie met pdfMake: de gevendorde bibliotheek (1,3 MB),
   de base64-lettertypen (228 kB), de HTML→pdfMake-converter, de doc-definitie,
   de `index.pdf.json`-endpoints en de bijbehorende tests. Dat scheelt een
