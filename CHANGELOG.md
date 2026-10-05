@@ -20,9 +20,8 @@ changelog volgt [Semantic Versioning][semver].
 
 - Het logo linkt naar de hoofdsite van de Inspectie
   (https://www.inspectie-oe.nl/) in plaats van naar de homepage van deze site.
-  Beide via `params.logo` in `hugo.yaml`, in een projectshadow van
-  `_partials/header.html` — upstream-kandidaat op het thema, dat alleen het
-  kale lint met een link naar de eigen homepage kent.
+  Beide via `params.logo` in `hugo.yaml`, een optie van het thema sinds v0.2.1
+  (hugo-theme-rijksoverheid#20); geen projectshadow of eigen CSS.
 
 - Hover en link gescheiden (keuze 15 september 2026): elke term met een
   tooltip is gestippeld en opent alleen de tooltip; was de term ook een link

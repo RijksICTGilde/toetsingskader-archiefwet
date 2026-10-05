@@ -3,45 +3,6 @@
   --color-banner: #007bc7;
 }
 
-/* Logo-lockup in de kop: het Rijksoverheid-lint met het woordmerk ernaast,
-   zoals op het briefhoofd van de PDF's (scripts/build-briefhoofd.py). Hoort bij
-   de projectshadow _partials/header.html; het thema kent alleen het kale lint.
-   Het woordmerk staat rechts van het lint en breekt zelf af, zodat de lockup
-   ook op een smal scherm binnen de kolom blijft. */
-.site-logo-link {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  text-decoration: none;
-}
-
-.site-logo-woordmerk {
-  max-width: 11rem;
-  font-size: 0.8125rem;
-  line-height: 1.25;
-  color: var(--color-text-heading);
-}
-
-.site-logo-link:hover .site-logo-woordmerk {
-  text-decoration: underline;
-}
-
-/* Het lint is het logo en de link is het hele blok; een focusring om beide
-   heen (het thema zet er geen op deze link). */
-.site-logo-link:focus-visible {
-  outline: 3px solid var(--color-text);
-  outline-offset: 3px;
-}
-
-/* Tussen 600px en 1100px staat de sitetitel absoluut links in dezelfde balk
-   (thema-header.css) terwijl de lockup gecentreerd is; het woordmerk zou er
-   dan tegenaan lopen. Onder 600px is de titel verborgen en is er ruimte. */
-@media (min-width: 600px) and (max-width: 819px) {
-  .site-logo-woordmerk {
-    display: none;
-  }
-}
-
 /* Breder dan de thema-nav (10rem) voor het langste label, "Kwetsbaarheid
    melden": forceren i.p.v. laten groeien. */
 @media (min-width: 700px) {
