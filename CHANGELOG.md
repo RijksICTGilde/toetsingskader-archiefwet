@@ -13,6 +13,17 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Het Rijksoverheid-lint in de kop staat er niet meer alleen: het woordmerk
+  "Ministerie van Onderwijs, Cultuur en Wetenschap" staat ernaast, zoals op het
+  briefhoofd van de PDF's. Onder 820px (waar de sitetitel in dezelfde balk
+  staat) blijft alleen het lint over.
+
+- Het logo linkt naar de hoofdsite van de Inspectie
+  (https://www.inspectie-oe.nl/) in plaats van naar de homepage van deze site.
+  Beide via `params.logo` in `hugo.yaml`, in een projectshadow van
+  `_partials/header.html` — upstream-kandidaat op het thema, dat alleen het
+  kale lint met een link naar de eigen homepage kent.
+
 - Hover en link gescheiden (keuze 15 september 2026): elke term met een
   tooltip is gestippeld en opent alleen de tooltip; was de term ook een link
   naar een pagina, dan staat die link nu in de tooltip als "Ga naar …". Eén

@@ -59,6 +59,7 @@ export function ontbrekendeGaNaarFouten(document) {
 // `IgnoreAltEmpty: true`. Vandaar deze expliciete lijst, met reden per item.
 export const DECORATIEF = new Map([
   ['/images/hero', 'Hero op de homepage; de <h1> eronder zegt hetzelfde (bevinding 20).'],
+  ['/images/logo-rijksoverheid', 'Rijksoverheid-lint in de kop; het woordmerk ernaast staat in dezelfde link en is de naam (_partials/header.html).'],
 ])
 
 // "/images/hero_hu_b08cab36f00ecf30.webp" → "/images/hero", zodat de sleutel niet
