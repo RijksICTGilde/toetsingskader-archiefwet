@@ -16,7 +16,7 @@ Een aggregatie is een verzameling van samengevoegde documenten (die bij elkaar h
 
 De samenhang tussen documenten en de aard daarvan moet herleidbaar blijven op basis van de metadata. Ook bij het vastleggen van metadata kunnen er verschillende niveaus van aggregatie zijn, bijvoorbeeld op zaak, dossier, serie of deelarchief.[^ar-artikel-2-5-metadata-algemeen-p61]
 
-[^ar-artikel-2-5-metadata-algemeen-p61]: Ar, Artikelsgewijs, artikel 2.5, metadata algemeen, p. 61. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-2-5-metadata-algemeen-p61]: Archiefregeling, Artikelsgewijs, artikel 2.5, metadata algemeen, p. 61. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 ## Zie ook
 

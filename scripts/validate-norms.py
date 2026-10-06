@@ -332,14 +332,14 @@ def validate_footnotes(name, body_lines, body_start, errors):
                 errors.append(Error(
                     name,
                     f"Voetnoot [^{fid}] heeft geen brontekst. Zet de bron achter de marker "
-                    "(bijvoorbeeld 'Aw, artikel 4.1, eerste lid.'), anders krijgt de "
+                    "(bijvoorbeeld 'Archiefwet, artikel 4.1, eerste lid.'), anders krijgt de "
                     "verwijzing in de tekst een lege tooltip",
                     lineno))
             elif FN_DEF_ALLEEN_BRONLINK_RE.match(lichaam):
                 errors.append(Error(
                     name,
                     f"Voetnoot [^{fid}] bestaat alleen uit een 'Bekijk bron'-link. Zet de "
-                    "brontekst ervóór (bijvoorbeeld 'Aw, artikel 4.1, eerste lid.'), anders "
+                    "brontekst ervóór (bijvoorbeeld 'Archiefwet, artikel 4.1, eerste lid.'), anders "
                     "krijgt de verwijzing in de tekst een lege tooltip en een naamloze bronlink",
                     lineno))
 
