@@ -17,7 +17,7 @@ Dit is een continu proces. Documenten kunnen bijvoorbeeld door de tijd heen in v
 
 Het is bovendien belangrijk om de samenhang met andere documenten inzichtelijk te maken. Dan kunnen gebruikers verschillende documenten die betrekking hebben op een besluit in samenhang raadplegen en interpreteren.[^ab-nvt-interpreteerbaar-p11]
 
-[^ab-nvt-interpreteerbaar-p11]: Ab, nota van toelichting, 2. Duurzame toegankelijkheid, interpreteerbaar, p. 11. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-nvt-interpreteerbaar-p11]: Archiefbesluit, nota van toelichting, 2. Duurzame toegankelijkheid, interpreteerbaar, p. 11. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
 ## Zie ook
 

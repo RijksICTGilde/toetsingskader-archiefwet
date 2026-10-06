@@ -16,7 +16,7 @@ Een audittrail is een chronologische en gedetailleerde registratie van activitei
 
 Documenten moeten volledig, betrouwbaar en authentiek zijn. In de metadata bij een document moet onder andere zijn vastgelegd wanneer en door wie het document is gemaakt of gewijzigd. Ook moet de gebruiker erop kunnen vertrouwen dat de documenten niet ongecontroleerd zijn gewijzigd of dat er informatie uit is verwijderd.[^ab-nvt-betrouwbaar-p11]
 
-[^ab-nvt-betrouwbaar-p11]: Ab, Nota van toelichting, Algemeen Deel, Hoofdstuk 2, betrouwbaar, p.11. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-nvt-betrouwbaar-p11]: Archiefbesluit, Nota van toelichting, Algemeen Deel, Hoofdstuk 2, betrouwbaar, p.11. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
 ## Zie ook
 
