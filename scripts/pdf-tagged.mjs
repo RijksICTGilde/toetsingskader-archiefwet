@@ -337,6 +337,13 @@ export class TaggedPdf {
         } finally {
           doc.goTo = origGoTo
         }
+      } else if (run.lang) {
+        // Anderstalige term (WCAG 3.1.2): eigen Span met /Lang, zodat
+        // hulpsoftware hem in die taal uitspreekt. Zelfde patroon als Link.
+        sluitMC()
+        const span = doc.struct('Span', { lang: run.lang }, [schrijf])
+        el.add(span)
+        span.end()
       } else {
         openMC()
         schrijf()

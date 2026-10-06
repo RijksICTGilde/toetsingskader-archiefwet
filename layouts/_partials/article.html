@@ -16,7 +16,7 @@
     {{- end -}}
   </header>
   {{/* Voetnoten als tooltip + referentielijst, net als op de normpagina's. */}}
-  {{- $vt := partial "voetnoot-tooltips.html" (dict "content" .Content) -}}
+  {{- $vt := partial "voetnoot-tooltips.html" (dict "content" (partial "vreemde-termen.html" .Content)) -}}
   {{ $vt.content | safeHTML }}
   {{ with $vt.refs }}{{ . | safeHTML }}{{ end }}
   {{- $pageNav := partial "page-nav.html" . -}}

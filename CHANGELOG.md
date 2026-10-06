@@ -61,6 +61,13 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Toegevoegd
 
+- Anderstalige termen krijgen een taalmarkering (WCAG 3.1.2, issue #62 punt 2):
+  "by design" staat op de site in `<span lang="en">` en in de PDF als `Span`
+  met `/Lang (en)`, zodat een schermlezer het in het Engels uitspreekt. De
+  termen staan in `data/vreemde-termen.yaml` en worden bij het bouwen
+  gemarkeerd; de normtekst zelf verandert niet. Een voetnoot direct achter zo'n
+  term maakt de hele term tot tooltip-term.
+
 - `params.pdf.site_url` in `hugo.yaml`: het adres achter "Bekijk voor de
   actuele versie …" in de PDF's én de "Bron: …"-regel op de omslag. Leeg
   betekent de baseURL van de build.

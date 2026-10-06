@@ -1,0 +1,15 @@
+# Termen in een andere taal dan Nederlands; `_partials/vreemde-termen.html`
+# zet er bij het bouwen <span lang="…"> omheen (WCAG 3.1.2 Taal van
+# onderdelen, AA; issue #62 punt 2). Een schermlezer spreekt de term dan uit in
+# die taal. De PDF neemt het over als /Lang op een Span in de structuurboom.
+#
+# Template-side, net als data/afkortingen.yaml: de normtekst blijft woord voor
+# woord zoals de redacteuren hem schrijven, en een nieuwe vindplaats wordt
+# vanzelf gemarkeerd.
+#
+# De match is niet hoofdlettergevoelig ("by design", "by Design") en op hele
+# woorden. De schrijfwijze in de tekst blijft staan. Alleen het anderstalige
+# deel opnemen: in "archiveren by design" is "archiveren" Nederlands.
+#
+# Sleutel: de term. Waarde: de taalcode (BCP 47).
+"by design": en

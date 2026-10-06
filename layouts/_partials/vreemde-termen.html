@@ -1,0 +1,51 @@
+{{/* ---------------------------------------------------------------------
+     Taal van onderdelen — WCAG 3.1.2 (issue #62 punt 2).
+
+     Wrapt elke term uit `data/vreemde-termen.yaml` in `<span lang="…">`.
+     HTML-string in, HTML-string uit: {{ $html = partial "vreemde-termen.html" $html }}
+
+     Draait op .Content, vóór de voetnoot-pass, zodat de bronteksten in de
+     tooltips en de referentielijst de markering meekrijgen. Ook de PDF krijgt
+     hem zo (pdfdata-norm.html → pdf-html.mjs → Span met /Lang).
+
+     Zelfde opzet als afkortingen.html: de pass loopt tag voor tag en raakt
+     alleen tekst, nooit een attribuutwaarde, en schrijft eerst sentinels en
+     pas daarna de tags. Zie de toelichting daar.
+     --------------------------------------------------------------------- */}}
+{{- $html := . -}}
+{{- $out := slice -}}
+{{- $data := index site.Data "vreemde-termen" | default dict -}}
+{{- $termen := slice -}}
+{{- range $term, $taal := $data -}}
+  {{- if not (findRE `^[\p{L}\p{N}]+( [\p{L}\p{N}]+)*$` $term) -}}
+    {{- errorf "data/vreemde-termen.yaml: term %q mag alleen letters, cijfers en enkele spaties bevatten; anders matcht \\b…\\b niet betrouwbaar" $term -}}
+  {{- end -}}
+  {{- if not (findRE `^[a-z]{2,3}(-[A-Za-z0-9]+)*$` $taal) -}}
+    {{- errorf "data/vreemde-termen.yaml: taalcode %q bij %q is geen BCP 47-code (bijvoorbeeld en, de, fr)" $taal $term -}}
+  {{- end -}}
+  {{- $termen = $termen | append $term -}}
+{{- end -}}
+{{- range $i, $chunk := split $html "<" -}}
+  {{- $tag := "" -}}
+  {{- $tekst := $chunk -}}
+  {{- if and (gt $i 0) (in $chunk ">") -}}
+    {{- $bits := split $chunk ">" -}}
+    {{- $tag = printf "<%s>" (index $bits 0) -}}
+    {{- $tekst = delimit (after 1 $bits) ">" -}}
+  {{- else if gt $i 0 -}}
+    {{- $tekst = printf "<%s" $chunk -}}
+  {{- end -}}
+  {{/* Fase 1: elke vindplaats wordt \x00<nr>\x02<oorspronkelijke tekst>\x01,
+       zodat de schrijfwijze uit de content behouden blijft. */}}
+  {{- range $n, $term := $termen -}}
+    {{- $patroon := replace $term " " `\s+` -}}
+    {{- $tekst = replaceRE (printf `(?i)\b(%s)\b` $patroon) (printf "\x00%d\x02${1}\x01" $n) $tekst -}}
+  {{- end -}}
+  {{/* Fase 2: sentinels → tags. */}}
+  {{- range $n, $term := $termen -}}
+    {{- $taal := index $data $term -}}
+    {{- $tekst = replaceRE (printf "\x00%d\x02([^\x01]*)\x01" $n) (printf `<span lang="%s">${1}</span>` $taal) $tekst -}}
+  {{- end -}}
+  {{- $out = $out | append (printf "%s%s" $tag $tekst) -}}
+{{- end -}}
+{{- return delimit $out "" -}}
