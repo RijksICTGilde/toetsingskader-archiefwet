@@ -4,7 +4,7 @@ versie: "0.8"
 weight: 1
 norm_id: "1"
 norm_titel: "Inbeheername en beheer"
-kern: "Een document is in beheer van het verantwoordelijke overheidsorgaan zodat het duurzaam toegankelijk gemaakt en gehouden kan worden."
+kern: "Een document is in beheer van het verantwoordelijke overheidsorgaan, zodat het duurzaam toegankelijk gemaakt en gehouden kan worden."
 kern_bron: "Archiefbesluit, artikel 2.1, eerste lid; Archiefwet, artikel 4.1, eerste lid."
 kern_bron_url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
 kern_kaart: "Een document bevindt zich in een beheerde omgeving, zodat de beheertaken kunnen worden uitgevoerd waarmee documenten duurzaam toegankelijk gemaakt worden en blijven."
