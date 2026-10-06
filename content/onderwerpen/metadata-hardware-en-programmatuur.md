@@ -10,7 +10,7 @@ synoniemen:
 toc: false
 ---
 
-Bij documenten die langer dan 10 jaar worden bewaard, moet in de metadata een omschrijving zijn opgenomen van tenminste de naam en versie van de gebruikte hardware, het besturingsprogrammatuur en de toepassingsprogrammatuur.[^ar-artikel-2-8-sub-a]
+Bij documenten die langer dan 10 jaar worden bewaard, moet in de metadata een omschrijving zijn opgenomen van ten minste de naam en versie van de gebruikte hardware, het besturingsprogrammatuur en de toepassingsprogrammatuur.[^ar-artikel-2-8-sub-a]
 
 [^ar-artikel-2-8-sub-a]: Ar, artikel 2.8, sub a. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
