@@ -20,7 +20,7 @@ synoniemen:
 
 Vernietigen van documenten is het wissen, verwijderen of ontoegankelijk maken. De gegevens waaruit het document bestaat zijn niet meer te reconstrueren, waardoor het document als geheel niet meer toegankelijk (te maken) is.[^kamerstukken-35968-nr-3-selectie]
 
-[^kamerstukken-35968-nr-3-selectie]: Aw, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen deel, 4.4 Selectie, Toepassen van het selectiebesluit en vernietiging. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^kamerstukken-35968-nr-3-selectie]: Aw, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen deel, 4.4 Selectie, Toepassen van het selectiebesluit en vernietiging. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
 Om de duurzame toegankelijkheid van een archief te borgen, is gecontroleerd vernietigen een voorwaarde. Zonder regelmatige vernietiging duren zoekopdrachten steeds langer, worden overzichten en ordeningen steeds groter en dreigt uiteindelijk informatiechaos. Ook neemt het risico op problemen met systeemperformance toe en daarmee op vertraging van de dienstverlening.
 
@@ -70,7 +70,7 @@ Het verantwoordelijke overheidsorgaan heeft [passende maatregelen](/onderwerpen/
 
 - De passende maatregelen zijn van toepassing op alle omgevingen waarin te vernietigen documenten worden opgeslagen. Denk hierbij aan bijvoorbeeld documentmanagementsystemen, maar ook back-ups,[^kamerstukken-35968-nr-3-selectie-backups] cloudomgevingen, samenwerkingsruimtes en emailapplicaties.
 
-[^kamerstukken-35968-nr-3-selectie-backups]: Aw, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen Deel, 4.4 selectie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^kamerstukken-35968-nr-3-selectie-backups]: Aw, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen Deel, 4.4 selectie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
 #### Voorschrift
 
