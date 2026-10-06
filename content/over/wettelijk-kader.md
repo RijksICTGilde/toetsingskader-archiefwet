@@ -1,7 +1,7 @@
 ---
 title: "Wettelijk kader"
 card_title: "Wettelijk kader"
-description: "Archief wet- en regelgeving en wat de wet verstaat onder een document."
+description: "Archiefwet- en regelgeving en wat de wet verstaat onder een document."
 toc: false
 weight: 4
 ---

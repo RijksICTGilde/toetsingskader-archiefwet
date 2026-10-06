@@ -18,13 +18,13 @@ synoniemen:
 
 ## Toelichting
 
-Vernietigen van documenten is het wissen, verwijderen of ontoegankelijk maken. De gegevens waaruit het document bestaat zijn niet meer te reconstrueren, waardoor het document als geheel niet meer toegankelijk (te maken) is.[^kamerstukken-35968-nr-3-selectie]
+Vernietigen van documenten is het wissen, verwijderen of ontoegankelijk maken. De gegevens waaruit het document bestaat, zijn niet meer te reconstrueren, waardoor het document als geheel niet meer toegankelijk (te maken) is.[^kamerstukken-35968-nr-3-selectie]
 
 [^kamerstukken-35968-nr-3-selectie]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen deel, 4.4 Selectie, Toepassen van het selectiebesluit en vernietiging. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
 Om de duurzame toegankelijkheid van een archief te borgen, is gecontroleerd vernietigen een voorwaarde. Zonder regelmatige vernietiging duren zoekopdrachten steeds langer, worden overzichten en ordeningen steeds groter en dreigt uiteindelijk informatiechaos. Ook neemt het risico op problemen met systeemperformance toe en daarmee op vertraging van de dienstverlening.
 
-Daarbij geldt dat documenten die vernietigd hadden moeten worden en die niet vernietigd zijn, nog opvraagbaar zijn. In het selectiebesluit stelt een verantwoordelijk overheidsorgaan vast hoe lang documenten worden bewaard.[^aw-artikel-5-1] Na afloop van de bewaartermijn moeten de documenten gecontroleerd worden vernietigd.[^aw-artikel-5-3]
+Daarbij geldt dat documenten die vernietigd hadden moeten worden en die niet vernietigd zijn, nog opvraagbaar zijn. In het selectiebesluit stelt het verantwoordelijke overheidsorgaan vast hoe lang documenten worden bewaard.[^aw-artikel-5-1] Na afloop van de bewaartermijn moeten de documenten gecontroleerd worden vernietigd.[^aw-artikel-5-3]
 
 [^aw-artikel-5-1]: Archiefwet, artikel 5.1. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 [^aw-artikel-5-3]: Archiefwet, artikel 5.3. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
@@ -68,7 +68,7 @@ Het verantwoordelijke overheidsorgaan heeft [passende maatregelen](/onderwerpen/
 
 #### Indicator
 
-- De passende maatregelen zijn van toepassing op alle omgevingen waarin te vernietigen documenten worden opgeslagen. Denk hierbij aan bijvoorbeeld documentmanagementsystemen, maar ook back-ups,[^kamerstukken-35968-nr-3-selectie-backups] cloudomgevingen, samenwerkingsruimtes en emailapplicaties.
+- De passende maatregelen zijn van toepassing op alle omgevingen waarin te vernietigen documenten worden opgeslagen. Denk hierbij bijvoorbeeld aan documentmanagementsystemen, maar ook back-ups,[^kamerstukken-35968-nr-3-selectie-backups] cloudomgevingen, samenwerkingsruimtes en e-mailapplicaties.
 
 [^kamerstukken-35968-nr-3-selectie-backups]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen Deel, 4.4 selectie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
@@ -98,7 +98,7 @@ Het verantwoordelijke overheidsorgaan beschrijft in de procesbeschrijving van ve
 
 #### Voorschrift
 
-Documenten worden na het verstrijken van de bewaartermijn gecontroleerd worden vernietigd.[^ab-artikel-4-1-lid-1]
+Documenten worden na het verstrijken van de bewaartermijn gecontroleerd vernietigd.[^ab-artikel-4-1-lid-1]
 
 [^ab-artikel-4-1-lid-1]: Archiefbesluit, artikel 4.1, eerste lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
@@ -145,8 +145,8 @@ De eisen voor vernietiging gelden voor alle tijdelijk te bewaren documenten van 
 
 Voor documenten die op elk moment kunnen worden vernietigd gelden niet alle eisen voor vernietiging. Voor deze documenten geldt dat:
 
-- deze alleen vernietigd mogen worden als hiervoor een grondslag bestaat in een selectiebesluit van het verantwoordelijk overheidsorgaan;[^aw-artikel-5-1-lid-4]
-- deze niet meegenomen te hoeven worden in de procesbeschrijving voor vernietiging;[^ab-artikel-4-1-lid-3]
+- deze alleen vernietigd mogen worden als hiervoor een grondslag bestaat in een selectiebesluit van het verantwoordelijke overheidsorgaan;[^aw-artikel-5-1-lid-4]
+- deze niet meegenomen hoeven te worden in de procesbeschrijving voor vernietiging;[^ab-artikel-4-1-lid-3]
 - deze niet opgenomen hoeven te worden in een verklaring van vernietiging.[^ab-artikel-4-1-lid-3]
 
 [^ab-artikel-4-1-lid-3]: Archiefbesluit, artikel 4.1, derde lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
