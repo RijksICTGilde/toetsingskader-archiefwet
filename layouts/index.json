@@ -10,6 +10,9 @@
 {{- $allPages := site.RegularPages | append site.Sections | append site.Home -}}
 {{- range $allPages -}}
   {{- $text := .Plain -}}
+  {{- /* Verborgen nieuw-venster-melding van render-link hoort niet in de index. */ -}}
+  {{- $text = replace $text " (opent in een nieuw venster)" "" -}}
+  {{- $text = replace $text ", opent in een nieuw venster)" ")" -}}
   {{- with .Params.kern }}{{ $text = printf "%s %s" $text (. | markdownify | plainify) }}{{ end -}}
   {{- $synoniemen := "" -}}
   {{- with .Params.synoniemen -}}

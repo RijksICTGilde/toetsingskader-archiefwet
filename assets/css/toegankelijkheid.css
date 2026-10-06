@@ -17,16 +17,6 @@
   padding: 0;
 }
 
-/* --- Sneltoetshint (gevolg van bevinding 10) -------------------------------
-   Het thema toont de <kbd>/</kbd>-hint sinds v0.2.0 op vol contrast, maar
-   toegankelijkheid.js neutraliseert de sitebrede sneltoets (2.1.4). Een hint
-   voor een toets die alleen werkt op de zoekknop zelf — waar Enter hetzelfde
-   doet — belooft iets wat de site niet doet. Weg zodra `/` upstream instelbaar
-   is. */
-.search-trigger .search-shortcut {
-  display: none;
-}
-
 /* Bevinding 19 (PDF-knop vraagt JavaScript) is vervallen: de download is een
    gewone link naar een bestand dat bij de build wordt gemaakt, dus er is geen
    `[hidden]`-knop meer die JavaScript zichtbaar moet maken. Zie
