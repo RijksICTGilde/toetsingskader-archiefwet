@@ -118,8 +118,12 @@
        teken van het woord, anders zou de ; ervan als leesteken afgaan. `)`
        bewust niet: "(SIO)" moet heel blijven. Bekende grens: de punt van een
        afkorting ("nr." "e.d.") valt ook buiten de term; zet de marker dan
-       vóór de punt. */}}
-  {{ $wordPat := printf `((?:&[#0-9A-Za-z]+;|[^\s<>&;])+?)([.,;:!?]*)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
+       vóór de punt.
+       Staat er een taalmarkering van vreemde-termen.html vlak voor de marker
+       ("<span lang="en">by design</span>[^x]"), dan is die hele span de term:
+       anders zou de </span> het woord blokkeren en bleef de marker een kale
+       <sup>. */}}
+  {{ $wordPat := printf `(<span lang="[^"]+">[^<]*</span>|(?:&[#0-9A-Za-z]+;|[^\s<>&;])+?)([.,;:!?]*)\s*<sup id="(fnref[0-9]*:%s)"><a href="#fn:%s" class="footnote-ref" role="doc-noteref">%s</a></sup>` $n $n $n }}
   {{ $wordRepl := printf `<span class="ref-wrapper" id="$3"><a href="#fn:%s" class="ref-term" aria-describedby="$3-bron">$1</a><span class="ref-tooltip" role="note"><span id="$3-bron">%s</span>%s</span></span>$2` $n $textOnlyRE $linkHTMLRE }}
   {{ $content = replaceRE $wordPat $wordRepl $content }}
 {{ end }}

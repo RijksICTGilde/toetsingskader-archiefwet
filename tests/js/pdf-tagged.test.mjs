@@ -434,3 +434,17 @@ test('vetgedrukte tekst behoudt zijn opmaak als aparte run', () => {
   const runs = runsVan(document.querySelector('p'), { prefix: '', siteUrl: 'https://x.nl/' })
   assert.deepEqual(runs.map((r) => !!r.bold), [false, true, false])
 })
+
+test('anderstalige term wordt een Span met /Lang (WCAG 3.1.2)', async () => {
+  const data = { ...DATA, body_html: '<h2 id="toelichting">Toelichting</h2><p>Principes van archiveren <span lang="en">by design</span> toepassen.</p>' }
+  const { doc } = await bouw(data)
+  const spans = []
+  for (const [, obj] of doc.context.enumerateIndirectObjects()) {
+    if (obj instanceof PDFDict && String(obj.get(PDFName.of('S'))) === '/Span') spans.push(obj)
+  }
+  assert.equal(spans.length, 1, `Span-elementen: ${spans.length}`)
+  assert.equal(String(spans[0].get(PDFName.of('Lang'))), '(en)')
+  // De tekst eromheen blijft in de alinea en loopt niet mee in de Span.
+  const runs = runsVan(parseHTML('<p>Principes van archiveren <span lang="en">by design</span> toepassen.</p>').document.querySelector('p'), {})
+  assert.deepEqual(runs.map((r) => [r.text, r.lang]), [['Principes van archiveren ', undefined], ['by design', 'en'], [' toepassen.', undefined]])
+})

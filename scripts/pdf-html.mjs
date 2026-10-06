@@ -121,6 +121,11 @@ export function runsVan(el, ctx, basis = {}, top = true) {
     if (tag === 'strong' || tag === 'b') runs.push(...runsVan(kind, ctx, { ...basis, bold: true }, false))
     else if (tag === 'em' || tag === 'i') runs.push(...runsVan(kind, ctx, { ...basis, italics: true }, false))
     else if (tag === 'sup') runs.push(...runsVan(kind, ctx, { ...basis, sup: true }, false))
+    // Taalmarkering (vreemde-termen.html, WCAG 3.1.2): de taal reist mee op de
+    // run en wordt in de PDF een Span met /Lang.
+    else if (tag === 'span' && kind.getAttribute('lang')) {
+      runs.push(...runsVan(kind, ctx, { ...basis, lang: kind.getAttribute('lang') }, false))
+    }
     else if (tag === 'a') {
       const cls = kind.getAttribute('class') || ''
       const href = kind.getAttribute('href') || ''

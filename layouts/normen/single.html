@@ -2,7 +2,7 @@
 {{ $page := . }}
 
 {{/* Voetnoten → tooltips + referentielijst; zie _partials/voetnoot-tooltips.html. */}}
-{{ $vt := partial "voetnoot-tooltips.html" (dict "content" .Content) }}
+{{ $vt := partial "voetnoot-tooltips.html" (dict "content" (partial "vreemde-termen.html" .Content)) }}
 {{ $content := $vt.content }}
 {{ $refs := $vt.refs }}
 
