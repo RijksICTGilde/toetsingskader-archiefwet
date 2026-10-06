@@ -45,7 +45,7 @@ Het verantwoordelijke overheidsorgaan heeft in de passende maatregelen opgenomen
 
 - Er zijn passende maatregelen met een concrete termijn voor de vindbaarheid van categorieën documenten.
 - Er is een risicoanalyse op basis waarvan de concrete termijn voor de vindbaarheid van categorieën documenten kan worden vastgesteld.
-- Er is een risicoanalyse op basis waarvan kan worden bepaald welke categorieën documenten een passende maatregel met hierin een concrete invulling van de redelijke termijn moeten krijgen.
+- Er is een risicoanalyse op basis waarvan kan worden bepaald welke categorieën documenten een passende maatregel met een concrete invulling van de redelijke termijn moeten krijgen.
 
 #### Indicatoren
 
