@@ -142,8 +142,12 @@ jobs:
 
       - name: Delete container images for this PR
         shell: bash
+        # Opruimen van oude preview-images mag een merge niet rood maken.
+        continue-on-error: true
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_ADMIN_TOKEN }}
+          # GITHUB_ADMIN_TOKEN bestaat (nog) niet als secret; github.token mag
+          # images verwijderen die deze repo zelf heeft gepubliceerd.
+          GH_TOKEN: ${{ secrets.GITHUB_ADMIN_TOKEN || github.token }}
           CONTAINER_ORG: ${{ github.repository_owner }}
           CONTAINER_NAME: ${{ github.event.repository.name }}
           TAG_PREFIX: pr-${{ github.event.pull_request.number }}-
