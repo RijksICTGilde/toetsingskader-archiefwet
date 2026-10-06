@@ -17,7 +17,7 @@ synoniemen:
 
 ## Toelichting
 
-Het verantwoordelijke overheidsorgaan richt zijn informatiehuishouding zodanig in dat documenten doelgericht, snel en eenvoudig kunnen worden teruggevonden gedurende hun gehele bewaartermijn. Vindbaarheid wordt geborgd door een duidelijke [ordening](/normen/03-ordenen/), consistente toepassing van [metadata](/normen/04-metadateren/) en een actueel [overzicht](/normen/02-overzicht/) van de informatiehuishouding.
+Het verantwoordelijke overheidsorgaan richt haar informatiehuishouding zodanig in dat documenten doelgericht, snel en eenvoudig kunnen worden teruggevonden gedurende hun gehele bewaartermijn. Vindbaarheid wordt geborgd door een duidelijke [ordening](/normen/03-ordenen/), consistente toepassing van [metadata](/normen/04-metadateren/) en een actueel [overzicht](/normen/02-overzicht/) van de informatiehuishouding.
 
 [Vindbaarheid](https://www.nationaalarchief.nl/archiveren/kennisbank/vindbaar) is een kenmerk van duurzame toegankelijkheid.[^ab-artikel-2-1-lid-1-onder-a] Documenten moeten binnen een redelijke termijn vindbaar zijn voor gebruikers die daar recht toe hebben en bevoegd zijn, bij voorkeur ongeacht tijd en systeem, en zodanig dat inzage, openbaarmaking en verantwoording binnen redelijke termijn mogelijk zijn.[^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar-p10]
 
