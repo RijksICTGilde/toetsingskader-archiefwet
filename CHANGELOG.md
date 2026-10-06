@@ -14,9 +14,9 @@ changelog volgt [Semantic Versioning][semver].
 ### Gewijzigd
 
 - Het Rijksoverheid-lint in de kop staat er niet meer alleen: het woordmerk
-  "Ministerie van Onderwijs, Cultuur en Wetenschap" staat ernaast, zoals op het
-  briefhoofd van de PDF's. Onder 820px (waar de sitetitel in dezelfde balk
-  staat) blijft alleen het lint over.
+  "Ministerie van Onderwijs, Cultuur en Wetenschap" staat rechts ernaast, zoals
+  op het briefhoofd van de PDF's. Het lint staat in het midden van de kop
+  (thema v0.2.3); het woordmerk blijft ook op een smal scherm staan.
 
 - Het logo linkt naar de hoofdsite van de Inspectie
   (https://www.inspectie-oe.nl/) in plaats van naar de homepage van deze site.
