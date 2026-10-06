@@ -11,8 +11,18 @@
     h1 { font-size: 1.8rem; }
     h2 { border-bottom: 2px solid #007bc7; padding-bottom: .3rem; margin-top: 2.5rem; }
     h3 { margin-top: 1.8rem; }
-    nav { margin: 1rem 0 2rem; padding: .75rem 1rem; background: #f0f7fc; border-radius: .5rem; }
-    nav a { margin-right: .75rem; }
+    html { scroll-padding-top: 3.5rem; }
+    .balk { position: sticky; top: 0; z-index: 1; margin: 0 -1.5rem; padding: .5rem 1.5rem;
+            background: #f0f7fc; border-bottom: 1px solid #c6e0f2; font-size: .95em;
+            white-space: nowrap; overflow-x: auto; }
+    td code { overflow-wrap: anywhere; }
+    .balk a { margin-right: .75rem; white-space: nowrap; }
+    .inhoud { margin: 1rem 0 2rem; padding: .75rem 1rem; background: #f0f7fc; border-radius: .5rem; }
+    .inhoud h2 { border: none; margin: 0 0 .5rem; font-size: 1.2rem; }
+    .inhoud ol { margin: 0; padding-left: 1.25rem; }
+    .inhoud > ol > li { margin-top: .4rem; font-weight: 600; }
+    .inhoud ol ol { list-style: none; padding-left: .75rem; font-weight: normal; }
+    .terug { margin-top: 2rem; font-size: .9em; }
     code, pre { background: #f4f4f4; border-radius: .3rem; font-size: .92em; }
     code { padding: .1rem .3rem; }
     pre { padding: .75rem 1rem; overflow-x: auto; }
@@ -25,10 +35,15 @@
     .tip { background: #f0f7fc; border-left: 4px solid #007bc7; padding: .5rem 1rem; margin: 1rem 0; }
     .gerust { background: #eef7ee; border-left: 4px solid #39870c; padding: .5rem 1rem; margin: 1rem 0; }
     footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #ccc; font-size: .9em; color: #555; }
+    @media print { .balk, .terug { display: none; } }
     @media print { details { border: none; padding: 0; } details[open] summary { font-size: 1.1em; } }
   </style>
 </head>
 <body>
+
+<nav class="balk" aria-label="Delen">
+  <a href="#inhoud">Inhoud</a> <a href="#deel1">1.&nbsp;Wat is GitHub?</a> <a href="#deel2">2.&nbsp;Handleiding</a> <a href="#deel3">3.&nbsp;Oefeningen</a> <a href="#deel4">4.&nbsp;Vervolgsessie</a> <a href="#deel5">5.&nbsp;Samenwerken</a>
+</nav>
 
 <header>
   <h1>Training contentbeheer</h1>
@@ -37,13 +52,56 @@
      training gaat daarom over het gereedschap, niet over de inhoud:
      de normbladen zijn van jullie, en die kennen jullie beter dan ik.
      Technische voorkennis heb je niet nodig.</p>
-  <nav>
-    <a href="#deel1">1.&nbsp;Wat is GitHub?</a>
-    <a href="#deel2">2.&nbsp;Handleiding</a>
-    <a href="#deel3">3.&nbsp;Oefeningen</a>
-    <a href="#deel4">4.&nbsp;Vervolgsessie</a>
-  </nav>
 </header>
+
+  <nav class="inhoud" id="inhoud" aria-label="Inhoudsopgave">
+    <h2>Inhoud</h2>
+    <ol>
+      <li><a href="#deel1">Wat is GitHub en hoe werkt versiebeheer?</a>
+      </li>
+      <li><a href="#deel2">Handleiding (naslag)</a>
+        <ol>
+          <li><a href="#p2-1">2.1 Een pagina vinden en bewerken</a></li>
+          <li><a href="#p2-2">2.2 Waar jullie tekst in het bestand staat</a></li>
+          <li><a href="#p2-3">2.3 Bronnen toevoegen (voetnoten)</a></li>
+          <li><a href="#p2-4">2.4 Wijziging indienen</a></li>
+          <li><a href="#p2-5">2.5 De automatische controle lezen</a></li>
+          <li><a href="#p2-6">2.6 Veelgemaakte fouten</a></li>
+          <li><a href="#p2-7">2.7 Releases en versies</a></li>
+        </ol>
+      </li>
+      <li><a href="#deel3">Oefeningen</a>
+        <ol>
+          <li>Oefeningen <a href="#oef-a">A</a>, <a href="#oef-b">B</a>, <a href="#oef-c">C</a>, <a href="#oef-d">D</a></li>
+        </ol>
+      </li>
+      <li><a href="#deel4">Vervolgsessie</a>
+        <ol>
+          <li><a href="#p4-1">4.1 <code>&lt;&lt;…&gt;&gt;</code> en "hoover" in het normblad</a></li>
+          <li><a href="#p4-2">4.2 Een hover maken</a></li>
+          <li><a href="#p4-3">4.3 Wanneer maak je wél een onderwerpenpagina?</a></li>
+          <li><a href="#p4-4">4.4 Links, hernoemen en verwijderen</a></li>
+          <li><a href="#p4-5">4.5 De regels bovenin (front matter)</a></li>
+          <li><a href="#p4-6">4.6 De tweede controle: toegankelijkheid</a></li>
+          <li><a href="#p4-7">4.7 Een review verwerken</a></li>
+          <li><a href="#p4-8">4.8 Zelf een review doen en mergen</a></li>
+          <li><a href="#p4-9">4.9 Je voorstel bijwerken met <code>main</code> en conflicten oplossen</a></li>
+          <li>Oefeningen <a href="#oef-e">E</a>, <a href="#oef-f">F</a>, <a href="#oef-g">G</a>, <a href="#oef-h">H</a>, <a href="#oef-i">I</a>, <a href="#oef-j">J</a></li>
+        </ol>
+      </li>
+      <li><a href="#deel5">Samenwerken aan één voorstel</a>
+        <ol>
+          <li><a href="#p5-1">5.1 Wie kan wat, en wanneer?</a></li>
+          <li><a href="#p5-2">5.2 Hoe noem je je tak?</a></li>
+          <li><a href="#p5-3">5.3 Wisselen tussen takken</a></li>
+          <li><a href="#p5-4">5.4 Meerdere wijzigingen in één voorstel</a></li>
+          <li><a href="#p5-5">5.5 Een pull request beschrijven</a></li>
+          <li><a href="#p5-6">5.6 Squash and merge: de omschrijving goed krijgen</a></li>
+          <li>Oefeningen <a href="#oef-k">K</a></li>
+        </ol>
+      </li>
+    </ol>
+  </nav>
 
 <section id="deel1">
   <h2>Deel 1: Wat is GitHub en hoe werkt versiebeheer?</h2>
@@ -80,7 +138,7 @@
         (in orde) of rood kruis (er klopt iets niet, met uitleg in het
         Nederlands, inclusief regelnummer).</li>
     <li>Een <strong>collega keurt goed</strong>.</li>
-    <li>Een collega <strong>voert de wijziging door</strong> (mergen, zie 4.8).</li>
+    <li>Een collega <strong>voert de wijziging door</strong> (mergen, zie <a href="#p4-8">4.8</a>).</li>
     <li>Bij de eerstvolgende <strong>release</strong> komt de wijziging op de
         website.</li>
   </ol>
@@ -97,12 +155,13 @@
     is omkeerbaar, en de controle plus een collega kijken altijd mee voordat
     iets live gaat.
   </div>
+  <p class="terug"><a href="#inhoud">↑ Terug naar de inhoud</a></p>
 </section>
 
 <section id="deel2">
   <h2>Deel 2: Handleiding (naslag)</h2>
 
-  <h3>2.1 Een pagina vinden en bewerken</h3>
+  <h3 id="p2-1">2.1 Een pagina vinden en bewerken</h3>
   <ol>
     <li>Ga naar <code>github.com/RijksICTGilde/toetsingskader-archiefwet</code>.</li>
     <li>Klik op de map <code>content</code>, dan <code>normen</code>.</li>
@@ -115,7 +174,7 @@
   <div class="tip"><strong>Tip:</strong> met de tab "Preview" bovenin zie je
   direct hoe je tekst eruit komt te zien.</div>
 
-  <h3>2.2 Waar jullie tekst in het bestand staat</h3>
+  <h3 id="p2-2">2.2 Waar jullie tekst in het bestand staat</h3>
   <p>De normbladen zijn woord voor woord overgenomen. Wat hier verandert is
   alleen de <em>verpakking</em>: elk onderdeel van het normblad staat onder een
   kop die met <code>#</code>-tekens begint. Hoe meer tekens, hoe dieper het
@@ -148,7 +207,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
 - De vastgestelde beheerregels zijn actueel.
 - De vastgestelde beheerregels zijn volledig.</code></pre>
 
-  <h3>2.3 Bronnen toevoegen (voetnoten)</h3>
+  <h3 id="p2-3">2.3 Bronnen toevoegen (voetnoten)</h3>
   <p>Zet <code>[^naam]</code> direct achter het woord dat je onderbouwt en zet
   de bron eronder. De nummering en de bronnenlijst onderaan de pagina gaan
   vanzelf. Die hoef je nooit zelf bij te houden.</p>
@@ -164,7 +223,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
         bijvoorbeeld <code>[^kamerstuk-35968]</code>.</li>
   </ul>
 
-  <h3>2.4 Wijziging indienen</h3>
+  <h3 id="p2-4">2.4 Wijziging indienen</h3>
   <ol>
     <li>Klik op de groene knop <strong>"Commit changes…"</strong>.</li>
     <li>Vul een korte omschrijving in (bijv. "Toelichting norm 2 aangevuld").</li>
@@ -174,7 +233,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
         <strong>"Create pull request"</strong>.</li>
   </ol>
 
-  <h3>2.5 De automatische controle lezen</h3>
+  <h3 id="p2-5">2.5 De automatische controle lezen</h3>
   <p>Onderaan je pull request verschijnt na korte tijd het resultaat:</p>
   <ul>
     <li><strong>Groen vinkje</strong>: alles in orde. Wachten op goedkeuring
@@ -188,12 +247,12 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
         commit opnieuw. De controle draait dan vanzelf opnieuw.</li>
   </ul>
 
-  <h3>2.6 Veelgemaakte fouten</h3>
+  <h3 id="p2-6">2.6 Veelgemaakte fouten</h3>
   <table>
     <tr><th>Fout</th><th>Wat de controle zegt</th><th>Oplossing</th></tr>
     <tr><td>Zelfbedachte kop, bijvoorbeeld <code>## Uitleg</code></td>
         <td>"Onbekende sectie '## Uitleg'. Toegestaan: …"</td>
-        <td>Een kop uit de lijst in 2.2 gebruiken</td></tr>
+        <td>Een kop uit de lijst in <a href="#p2-2">2.2</a> gebruiken</td></tr>
     <tr><td>Voetnoot gebruikt, definitieregel vergeten</td>
         <td>"…wordt gebruikt maar is nergens gedefinieerd"</td>
         <td>Regel <code>[^naam]: Bron.</code> toevoegen onder de alinea</td></tr>
@@ -208,7 +267,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
         <td>Aanhalingstekens om de waarde terugzetten</td></tr>
   </table>
 
-  <h3 id="rel">2.7 Releases en versies</h3>
+  <h3 id="p2-7">2.7 Releases en versies</h3>
   <p>Een <strong>release</strong> is een genummerde momentopname van de site.
   Waar een pull request één wijziging doorvoert, bundelt een release een set
   doorgevoerde wijzigingen onder één versienummer, zodat naderhand precies te
@@ -241,6 +300,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
   <code>CHANGELOG.md</code> (en zo nodig <code>publiccode.yml</code>) bij in een
   gewone pull request <em>voordat</em> je de release publiceert, zodat de release
   en de documentatie hetzelfde versienummer noemen.</div>
+  <p class="terug"><a href="#inhoud">↑ Terug naar de inhoud</a></p>
 </section>
 
 <section id="deel3">
@@ -249,14 +309,14 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
   zelf op (sluiten zonder doorvoeren). De website blijft dus ongewijzigd, en
   jullie tekst ook.</p>
 
-  <details open>
+  <details id="oef-a" open>
     <summary>Oefening A: Tekst wijzigen</summary>
     <p><strong>Doel:</strong> een pagina openen, bewerken en je wijziging in de
     preview zien.</p>
     <ol>
       <li>Open <code>content/normen/02-overzicht.md</code> en klik het potlood-icoon.</li>
       <li>Zoek in de sectie <code>## Toelichting</code> jullie eigen tekst op en
-          leg er de tabel uit 2.2 naast: welk deel van het normblad heb je voor je?</li>
+          leg er de tabel uit <a href="#p2-2">2.2</a> naast: welk deel van het normblad heb je voor je?</li>
       <li>Pas één zin aan — een komma, een woord, wat je wilt. Dit is een
           oefening; de wijziging gaat nergens heen.</li>
       <li>Bekijk het resultaat via de tab <strong>"Preview"</strong>.</li>
@@ -265,7 +325,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
     de preview ziet staan, op dezelfde plek als in het normblad.</p>
   </details>
 
-  <details>
+  <details id="oef-b">
     <summary>Oefening B: Bron toevoegen</summary>
     <p><strong>Doel:</strong> een voetnoot maken.</p>
     <ol>
@@ -278,7 +338,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
     je zin en je aantekening onderaan.</p>
   </details>
 
-  <details>
+  <details id="oef-c">
     <summary>Oefening C: Voorstel indienen + controle lezen</summary>
     <p><strong>Doel:</strong> de hele route doorlopen, inclusief een bewuste fout
     herstellen.</p>
@@ -297,7 +357,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
     <p><strong>Klaar wanneer:</strong> groene check én een toegewezen reviewer.</p>
   </details>
 
-  <details>
+  <details id="oef-d">
     <summary>Oefening D: Een release lezen</summary>
     <p><strong>Doel:</strong> de huidige versie vinden en de bijbehorende
     release-notes lezen. Je maakt hierbij niets aan; je leest alleen.</p>
@@ -312,6 +372,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
     <p><strong>Klaar wanneer:</strong> je het huidige versienummer kunt noemen en
     in eigen woorden kunt zeggen wat er in die release zat.</p>
   </details>
+  <p class="terug"><a href="#inhoud">↑ Terug naar de inhoud</a></p>
 </section>
 
 <section id="deel4">
@@ -324,7 +385,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
   review doen en mergen, en wat je doet als je voorstel achterloopt op
   <code>main</code> of botst met andermans wijziging.</p>
 
-  <h3>4.1 <code>&lt;&lt;…&gt;&gt;</code> en "hoover" in het normblad</h3>
+  <h3 id="p4-1">4.1 <code>&lt;&lt;…&gt;&gt;</code> en "hoover" in het normblad</h3>
   <p>In de normbladen staan twee soorten aanwijzingen die géén tekst zijn:</p>
   <table>
     <tr><th>In het normblad</th><th>Wat het betekent</th><th>Wat je doet</th></tr>
@@ -335,7 +396,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
             nooit op de site.</td></tr>
     <tr><td>Een commentaarballon met "Hoover: …"</td>
         <td>"toon deze uitleg als de lezer over het woord gaat"</td>
-        <td>Maak er een <strong>hover</strong> van (4.2). <strong>Geen</strong>
+        <td>Maak er een <strong>hover</strong> van (<a href="#p4-2">4.2</a>). <strong>Geen</strong>
             aparte onderwerpenpagina.</td></tr>
   </table>
   <p>Die tweede regel is er niet altijd geweest. Er zijn vijf begrippenpagina's
@@ -343,8 +404,8 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
   opgeruimd. De verantwoording staat in
   <code>docs/onderwerpen-en-hovers.md</code>.</p>
 
-  <h3>4.2 Een hover maken</h3>
-  <p>Een hover is hetzelfde gereedschap als de voetnoot uit 2.3, alleen zet je er
+  <h3 id="p4-2">4.2 Een hover maken</h3>
+  <p>Een hover is hetzelfde gereedschap als de voetnoot uit <a href="#p2-3">2.3</a>, alleen zet je er
   een uitleg in plaats van een bron in. Op een normpagina wordt het woord
   onderstreept en klapt de tekst open bij aanwijzen, met het toetsenbord en in
   een schermlezer.</p>
@@ -364,7 +425,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
   <div class="gerust">Werkt alleen op normpagina's. Op andere pagina's blijft een
   voetnoot gewoon een voetnoot onderaan de pagina.</div>
 
-  <h3>4.3 Wanneer maak je wél een onderwerpenpagina?</h3>
+  <h3 id="p4-3">4.3 Wanneer maak je wél een onderwerpenpagina?</h3>
   <p><code>/onderwerpen/</code> is de begrippenindex. Daar hoort een pagina
   alleen als het begrip in <strong>"9) Onderwerpen en Verwijzingen"</strong>
   staat, of als een normblad er met <code>&lt;&lt;…&gt;&gt;</code> naartoe wil
@@ -388,7 +449,7 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
         vorige/volgende-knoppen lopen dan niet meer gelijk met de index.</li>
   </ul>
 
-  <h3>4.4 Links, hernoemen en verwijderen</h3>
+  <h3 id="p4-4">4.4 Links, hernoemen en verwijderen</h3>
   <p>Interne links wijzen naar het adres, niet naar het bestand:
   <code>[ordening](/normen/03-ordenen/)</code>,
   <code>[document](/onderwerpen/document/)</code>. De linktekst volgt de zin uit
@@ -402,7 +463,7 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
   <pre><code>aliases:
   - /normen/03-ordeningsstructuur/</code></pre></div>
 
-  <h3>4.5 De regels bovenin (front matter)</h3>
+  <h3 id="p4-5">4.5 De regels bovenin (front matter)</h3>
   <p>In sessie 1 heette dit "titel, kern en synoniemen". Compleet:</p>
   <table>
     <tr><th>Veld</th><th>Wat erin staat</th></tr>
@@ -415,8 +476,8 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
     <tr><td><code>weight</code>, <code>norm_id</code>, <code>versie</code></td><td>nummer en volgorde van de norm; laat staan</td></tr>
   </table>
 
-  <h3>4.6 De tweede controle: toegankelijkheid</h3>
-  <p>Naast de contentcontrole uit 2.5 draait een toegankelijkheidsscan. Drie
+  <h3 id="p4-6">4.6 De tweede controle: toegankelijkheid</h3>
+  <p>Naast de contentcontrole uit <a href="#p2-5">2.5</a> draait een toegankelijkheidsscan. Drie
   meldingen kun je zelf veroorzaken:</p>
   <table>
     <tr><th>Melding</th><th>Wat er aan de hand is</th></tr>
@@ -430,7 +491,7 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
         <td>Vul de alt-tekst, of meld de afbeelding aan als decoratief.</td></tr>
   </table>
 
-  <h3>4.7 Een review verwerken</h3>
+  <h3 id="p4-7">4.7 Een review verwerken</h3>
   <ol>
     <li>Opmerkingen van je collega staan onder het tabblad
         <strong>"Files changed"</strong>, bij de betreffende regel.</li>
@@ -444,8 +505,8 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
         Anders draait de volgende vergelijking met het normblad hem terug.</li>
   </ol>
 
-  <h3>4.8 Zelf een review doen en mergen</h3>
-  <p>4.7 ging over de kant van de schrijver. Dit is de andere kant: een collega
+  <h3 id="p4-8">4.8 Zelf een review doen en mergen</h3>
+  <p><a href="#p4-7">4.7</a> ging over de kant van de schrijver. Dit is de andere kant: een collega
   vraagt jou als reviewer. Jij kijkt na, en als het goed is voer jij de wijziging
   door (<strong>mergen</strong>).</p>
 
@@ -472,7 +533,7 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
               <td>Er moet eerst iets aangepast worden voordat het door mag.</td></tr>
           <tr><td><strong>Comment</strong></td>
               <td>Je hebt vragen, maar geen oordeel. Gebruik dit spaarzaam: de
-                  schrijver weet dan niet of hij door mag.</td></tr>
+                  schrijver weet dan niet of het voorstel door mag.</td></tr>
         </table></li>
     <li>Klik <strong>"Submit review"</strong>.</li>
   </ol>
@@ -481,9 +542,9 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
   inhoud):</p>
   <ul>
     <li>Klopt de tekst met het normblad? Een bewuste afwijking hoort in
-        <code>docs/afwijkingen-van-het-normblad.md</code> (zie 4.7).</li>
+        <code>docs/afwijkingen-van-het-normblad.md</code> (zie <a href="#p4-7">4.7</a>).</li>
     <li>Staat een bron of hover achter het <em>woord</em>, niet achter een
-        leesteken (4.2)?</li>
+        leesteken (<a href="#p4-2">4.2</a>)?</li>
     <li>Is er iets aangepast dat niet in de omschrijving van de pull request
         staat? Vraag dan waarom.</li>
     <li>Bekijk de <strong>preview</strong>: bij elke pull request zet de
@@ -513,15 +574,16 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
   <div class="gerust">
     <strong>Gemerged is nog niet live.</strong> De wijziging staat in
     <code>main</code>, maar de website wordt pas bijgewerkt als er een
-    <strong>release</strong> wordt gepubliceerd (2.7). Zo kun je een reeks
+    <strong>release</strong> wordt gepubliceerd (<a href="#p2-7">2.7</a>). Zo kun je een reeks
     wijzigingen mergen en ze samen in één versie naar buiten brengen.
   </div>
 
-  <div class="tip"><strong>Niet je eigen voorstel goedkeuren.</strong> GitHub
-  laat het technisch toe, maar het punt van een review is dat een tweede
-  paar ogen meekijkt. Wie schrijft, vraagt een ander om de review en de merge.</div>
+  <div class="tip"><strong>Je eigen voorstel kun je niet goedkeuren.</strong>
+  GitHub schakelt "Approve" uit voor wie de pull request heeft geopend. Wie
+  schrijft, vraagt daarom een ander om de review. Wie wat mag, staat in <a href="#p5-1">5.1</a>; hoe
+  je de omschrijving van de merge goed krijgt in 5.6.</div>
 
-  <h3>4.9 Je voorstel bijwerken met <code>main</code> en conflicten oplossen</h3>
+  <h3 id="p4-9">4.9 Je voorstel bijwerken met <code>main</code> en conflicten oplossen</h3>
   <p>Een pull request is een kopie van de site op het moment dat jij op het
   potlood klikte. Terwijl jouw voorstel openstaat, gaan andere voorstellen
   gewoon door: een collega merget, en <code>main</code> loopt op jou vooruit.
@@ -552,7 +614,7 @@ De tekst, letterlijk uit het bronbestand.</code></pre>
   <div class="tip"><strong>Wanneer klik je erop?</strong> Vlak voordat je
   voorstel gemerged wordt, of als de melding er staat terwijl je nog aan het
   schrijven bent. Vaker hoeft niet: elke klik is een extra regel in de
-  geschiedenis, en die verdwijnt bij "Squash and merge" (4.8) toch weer.</div>
+  geschiedenis, en die verdwijnt bij "Squash and merge" (<a href="#p4-8">4.8</a>) toch weer.</div>
 
   <p><strong>Conflict oplossen ("Resolve conflicts")</strong></p>
   <ol>
@@ -599,7 +661,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
     <li>Kijk niet alleen naar de zin, maar ook naar de voetnoot eronder. Als
         beide kanten dezelfde bron met een andere naam hebben toegevoegd, houd
         je er één over en pas je de verwijzing in de tekst aan, anders wordt de
-        controle rood (2.6).</li>
+        controle rood (<a href="#p2-6">2.6</a>).</li>
     <li>Wat uiteindelijk op de site komt is de tekst die jij hier overhoudt.
         Lees hem daarom nog één keer als geheel.</li>
   </ul>
@@ -619,7 +681,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
   <h3>Oefeningen</h3>
   <p>Net als in deel 3: ik ruim de oefen-voorstellen na afloop op.</p>
 
-  <details open>
+  <details id="oef-e" open>
     <summary>Oefening E: Van ballon naar hover</summary>
     <p><strong>Doel:</strong> een hover maken op het juiste woord.</p>
     <ol>
@@ -635,9 +697,9 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
     achter een leesteken.</p>
   </details>
 
-  <details>
+  <details id="oef-f">
     <summary>Oefening F: Hover of pagina?</summary>
-    <p><strong>Doel:</strong> de regel uit 4.1 en 4.3 toepassen. Denkoefening, je
+    <p><strong>Doel:</strong> de regel uit <a href="#p4-1">4.1</a> en <a href="#p4-3">4.3</a> toepassen. Denkoefening, je
     verandert niets.</p>
     <p>Drie gevallen. Wat maak je ervan?</p>
     <ol>
@@ -658,7 +720,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
     </details>
   </details>
 
-  <details>
+  <details id="oef-g">
     <summary>Oefening G: Een link opruimen</summary>
     <p><strong>Doel:</strong> zien wat er gebeurt als een link naar een
     niet-bestaande pagina wijst.</p>
@@ -674,9 +736,9 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
     herschrijven".</p>
   </details>
 
-  <details>
+  <details id="oef-h">
     <summary>Oefening H: Een tegel op de homepage</summary>
-    <p><strong>Doel:</strong> de regels bovenin een bestand bewerken (4.5) en zien
+    <p><strong>Doel:</strong> de regels bovenin een bestand bewerken (<a href="#p4-5">4.5</a>) en zien
     wat er gebeurt als de inspringing niet klopt.</p>
     <ol>
       <li>Open <code>content/_index.md</code> met het potlood. Boven in het bestand,
@@ -700,7 +762,7 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
     je in de melding het regelnummer terugvindt van de regel die je kapotmaakte.</p>
   </details>
 
-  <details>
+  <details id="oef-i">
     <summary>Oefening I: Een blokje op de normen-pagina</summary>
     <p><strong>Doel:</strong> een blok toevoegen aan de tekst van een pagina, en
     het verschil zien met oefening H.</p>
@@ -729,9 +791,9 @@ Eigen tekst. Gewoon Markdown, dus **vet** mag.
     je terug op een regelnummer.</p>
   </details>
 
-  <details>
+  <details id="oef-j">
     <summary>Oefening J: Bijwerken met main en een conflict oplossen</summary>
-    <p><strong>Doel:</strong> beide meldingen uit 4.9 zelf zien en de tweede
+    <p><strong>Doel:</strong> beide meldingen uit <a href="#p4-9">4.9</a> zelf zien en de tweede
     oplossen. Dit is een oefening in tweetallen; ik merge daarbij één keer een
     oefen-wijziging echt in <code>main</code>, en draai die na afloop terug.</p>
     <p><strong>Deel 1: bijwerken (geen conflict)</strong></p>
@@ -767,6 +829,286 @@ Eigen tekst. Gewoon Markdown, dus **vet** mag.
     onderaan, de zin in Reikwijdte bevat wat A én B wilden, en jullie kunnen in
     eigen woorden zeggen wat het verschil is tussen "out-of-date" en "conflict".</p>
   </details>
+  <p class="terug"><a href="#inhoud">↑ Terug naar de inhoud</a></p>
+</section>
+
+<section id="deel5">
+  <h2>Deel 5: Samenwerken aan één voorstel</h2>
+
+  <p>Deel 4 ging over één schrijver en één reviewer. In de praktijk werken jullie
+  vaker met z'n tweeën of drieën aan hetzelfde voorstel, verspreid over een paar
+  dagen. Dit deel gaat over wat daarbij hoort: wie wat mag, hoe je een tak een
+  goede naam geeft, hoe je tussen takken wisselt, hoe je meerdere wijzigingen in
+  één voorstel krijgt, en hoe je het voorstel en de merge zo beschrijft dat de
+  geschiedenis later nog te lezen is. Conflicten oplossen staat al in <a href="#p4-9">4.9</a> en
+  oefening J.</p>
+
+  <h3 id="p5-1">5.1 Wie kan wat, en wanneer?</h3>
+  <p>Iedereen met <strong>schrijfrechten</strong> op de repository (dat zijn
+  jullie) kan een tak maken, commits toevoegen aan elke tak, reviewen en mergen.
+  Een paar dingen houdt GitHub tegen; de rest is een afspraak tussen ons.</p>
+  <table>
+    <tr><th>Situatie</th><th>Mag het?</th><th>Wie houdt het tegen?</th></tr>
+    <tr><td>Rechtstreeks iets wijzigen in <code>main</code>, zonder pull request</td>
+        <td>Nee</td>
+        <td>GitHub. Het potlood op <code>main</code> maakt altijd een nieuwe tak.</td></tr>
+    <tr><td>Mergen zonder Approve van iemand anders</td>
+        <td>Nee</td>
+        <td>GitHub. Er is minstens één Approve nodig.</td></tr>
+    <tr><td>Je eigen pull request goedkeuren</td>
+        <td>Nee</td>
+        <td>GitHub. "Approve" is uitgeschakeld voor wie de pull request opende.</td></tr>
+    <tr><td>Je eigen pull request mergen, nadat een ander hem heeft goedgekeurd</td>
+        <td>Ja</td>
+        <td>-</td></tr>
+    <tr><td>Een commit toevoegen aan de pull request van een collega</td>
+        <td>Ja</td>
+        <td>- (zie <a href="#p5-4">5.4</a> hoe)</td></tr>
+    <tr><td>Daarna die pull request zelf goedkeuren en direct mergen</td>
+        <td><strong>Ja</strong></td>
+        <td>Niemand: GitHub kijkt alleen wie de pull request <em>opende</em>,
+            niet wie de laatste commit deed. Zie de tip hieronder.</td></tr>
+    <tr><td>Na een Approve nog iets wijzigen en dan mergen</td>
+        <td>Ja</td>
+        <td>Niemand: een Approve blijft staan als er daarna nog commits bijkomen.</td></tr>
+    <tr><td>Mergen terwijl een controle rood is</td>
+        <td>Technisch ja</td>
+        <td>Niemand. <strong>Afspraak: niet doen.</strong> Een rode controle is
+            bijna altijd iets wat op de site kapot gaat.</td></tr>
+    <tr><td>Mergen met open opmerkingen</td>
+        <td>Technisch ja</td>
+        <td>Niemand. <strong>Afspraak: eerst alles "Resolve conversation"</strong>
+            (<a href="#p4-7">4.7</a>).</td></tr>
+    <tr><td>Een release publiceren (de site echt bijwerken)</td>
+        <td>Ja</td>
+        <td>- (<a href="#p2-7">2.7</a>)</td></tr>
+  </table>
+  <div class="tip"><strong>Twee rijen om op te letten.</strong> GitHub laat je
+  een pull request goedkeuren waar je zelf iets aan hebt toegevoegd, en het laat
+  een Approve staan als er daarna nog iets verandert. Dat is handig voor een
+  komma of een vergeten voetnoot. Is jouw toevoeging of de wijziging na de
+  Approve <em>inhoudelijk</em>, vraag dan een ander (de opener, of een derde)
+  om er nog naar te kijken. Anders heeft niemand anders je tekst gelezen.</div>
+
+  <h3 id="p5-2">5.2 Hoe noem je je tak?</h3>
+  <p>Klik je in het potlood-scherm op "Commit changes…" en kies je "Create a new
+  branch", dan stelt GitHub een naam voor als <code>inspectie-oe-patch-17</code>.
+  Die zegt niets: in de lijst met takken staan er nu zeventien van, en niemand
+  weet zonder te klikken welke over welke norm gaat. Typ daarom vóór je op
+  "Propose changes" klikt een eigen naam in dat veld.</p>
+  <table>
+    <tr><th>Soort wijziging</th><th>Begin met</th><th>Voorbeeld</th></tr>
+    <tr><td>Tekst op een normpagina of andere pagina</td>
+        <td><code>content/</code></td>
+        <td><code>content/norm-2-toelichting</code></td></tr>
+    <tr><td>Verwerken van een review of feedbackronde</td>
+        <td><code>content/</code></td>
+        <td><code>content/feedback-norm-7-oktober</code></td></tr>
+    <tr><td>Iets wat stuk is (verkeerde link, kapotte voetnoot)</td>
+        <td><code>fix/</code></td>
+        <td><code>fix/link-onderwerp-document</code></td></tr>
+    <tr><td>Deze training of andere uitleg</td>
+        <td><code>docs/</code></td>
+        <td><code>docs/training-deel-5</code></td></tr>
+  </table>
+  <ul>
+    <li>Kleine letters, woorden gescheiden door koppeltekens, geen spaties.</li>
+    <li>Kort, maar zo dat een collega zonder klikken weet waar het over gaat.</li>
+    <li><strong>Kies de naam meteen goed.</strong> Een tak hernoemen nadat er een
+        pull request op staat, sluit die pull request. Je moet dan een nieuwe
+        openen, en de reviews en opmerkingen blijven in de oude staan.</li>
+  </ul>
+
+  <h3 id="p5-3">5.3 Wisselen tussen takken</h3>
+  <p>De repository toont altijd één tak tegelijk. Welke, zie je linksboven op het
+  tabblad <strong>"Code"</strong>, op de knop met het takje-icoon (meestal staat
+  daar <code>main</code>).</p>
+  <ol>
+    <li>Klik op die knop. Er klapt een lijst open met een zoekveld.</li>
+    <li>Typ een deel van de naam, bijvoorbeeld <code>norm-2</code>, en klik de
+        tak aan. Alles wat je nu ziet en opent, is de versie uit die tak.</li>
+    <li>Alle takken op een rij, met wie er het laatst aan werkte en of er een
+        pull request bij hoort: klik onderaan de lijst op <strong>"View all
+        branches"</strong>.</li>
+  </ol>
+  <p>Vanuit een pull request kan het sneller: onder de titel staat
+  <em>"… wants to merge 2 commits into <code>main</code> from
+  <code>content/norm-2-toelichting</code>"</em>. Klik op de naam van de tak en je
+  staat erin.</p>
+  <div class="tip"><strong>Kijk naar die knop vóór je op het potlood klikt.</strong>
+  Staat er <code>main</code>, dan maakt GitHub bij het opslaan een nieuwe tak en
+  een nieuw voorstel. Staat er de naam van jouw tak, dan komt je wijziging bij het
+  voorstel dat er al is.</div>
+
+  <h3 id="p5-4">5.4 Meerdere wijzigingen in één voorstel</h3>
+  <p>Eén voorstel over één onderwerp, ook als dat meerdere bestanden of meerdere
+  sessies kost. Bijvoorbeeld: de toelichting van norm 2 aanpassen <em>en</em> de
+  onderwerpenpagina waar die naar linkt. Dat zijn twee commits op dezelfde tak,
+  in één pull request.</p>
+  <ol>
+    <li>Maak de eerste wijziging zoals in <a href="#p2-4">2.4</a>, met een goede taknaam (<a href="#p5-2">5.2</a>), en
+        open de pull request.</li>
+    <li>Ga naar je tak: klik in de pull request op de taknaam (<a href="#p5-3">5.3</a>), of kies hem
+        in de knop linksboven op het tabblad "Code".</li>
+    <li>Open het volgende bestand en klik op het potlood. Controleer dat de knop
+        linksboven je taknaam toont, niet <code>main</code>.</li>
+    <li>Klik "Commit changes…". Er staat nu <strong>"Commit directly to the
+        <code>content/norm-2-toelichting</code> branch"</strong>. Laat die keuze
+        staan en klik "Commit changes".</li>
+    <li>De commit verschijnt in dezelfde pull request (tabblad "Commits"), en de
+        controles draaien opnieuw.</li>
+  </ol>
+  <p>Zit het bestand al in het voorstel, dan kan het ook vanuit de pull request:
+  tabblad <strong>"Files changed"</strong>, de drie puntjes rechts boven het
+  bestand, <strong>"Edit file"</strong>. Een nieuw bestand toevoegen aan de tak
+  gaat met <strong>"Add file"</strong> op het tabblad "Code", terwijl je tak
+  geselecteerd is.</p>
+  <p>Zo voeg je ook iets toe aan het voorstel van een collega: zelfde stappen,
+  met diens tak. Zeg het wel even in een opmerking onder de pull request, anders
+  werkt je collega verder zonder te weten dat er iets bij is gekomen.</p>
+  <div class="gerust">Twee commits op dezelfde tak die <em>hetzelfde bestand</em>
+  wijzigen, geven geen conflict: ze staan na elkaar, niet naast elkaar. Wel
+  even verversen voor je verder typt, zodat je op de nieuwste versie werkt.
+  Conflicten (<a href="#p4-9">4.9</a>) ontstaan tussen een tak en <code>main</code>.</div>
+
+  <p><strong>Uit de praktijk: twee voorstellen op dezelfde pagina</strong></p>
+  <blockquote><em>"Ik heb als test iets aangepast op de pagina van de norm
+  Vernietigen. Daar had ik al tekstuele wijzigingen doorgevoerd, dus er zijn nu
+  twee pull requests met wijzigingen op Vernietigen. Is dat problematisch? De
+  wijzigingen zitten op verschillende plekken in de tekst."</em></blockquote>
+  <p>Nee. Twee takken die dezelfde pagina wijzigen, is op zich geen probleem.
+  Zo loopt het:</p>
+  <ol>
+    <li>De eerste pull request wordt gemerged. Die wijziging staat nu in
+        <code>main</code>.</li>
+    <li>Bij de tweede pull request verschijnt "This branch is out-of-date with
+        the base branch". Klik <strong>"Update branch"</strong> (<a href="#p4-9">4.9</a>). Omdat de
+        wijzigingen op verschillende plekken staan, voegt GitHub ze zonder
+        vragen samen.</li>
+    <li>Controles groen, review, mergen. Beide wijzigingen staan op de pagina.</li>
+  </ol>
+  <p>Een conflict krijg je alleen als beide voorstellen <em>dezelfde regel</em>
+  of twee regels direct onder elkaar wijzigen. Dat los je op zoals in 4.9.
+  Let op <code>CHANGELOG.md</code>: zetten beide voorstellen daar een regel
+  onder "Unreleased", dan botst dat bijna altijd. Ook dat staat in 4.9.</p>
+  <div class="tip"><strong>Eén voorstel of twee?</strong> Horen de wijzigingen bij
+  hetzelfde onderwerp (dezelfde review, dezelfde feedbackronde), zet de tweede
+  dan als extra commit op de tak van de eerste (zie hierboven). Gaan ze over iets
+  anders, houd ze dan apart: dan kan de een door terwijl over de ander nog
+  gepraat wordt.</div>
+
+  <h3 id="p5-5">5.5 Een pull request beschrijven</h3>
+  <p>De pull request is wat je reviewer als eerste leest, en wat over een jaar
+  verklaart waarom een zin is zoals hij is. Bij het openen vult GitHub een
+  sjabloon in met kopjes. Veel daarvan is voor technische wijzigingen; voor een
+  tekstwijziging is dit genoeg:</p>
+  <table>
+    <tr><th>Onderdeel</th><th>Wat erin hoort</th><th>Voorbeeld</th></tr>
+    <tr><td><strong>Titel</strong></td>
+        <td>Wat er verandert, in één regel. Begin met <code>content:</code> (of
+            <code>fix:</code>, <code>docs:</code>, net als de taknaam). Niet
+            alleen de bestandsnaam: die ziet de reviewer al.</td>
+        <td><code>content: norm 2 toelichting volgens review van 3 oktober</code></td></tr>
+    <tr><td><strong>Beschrijving</strong></td>
+        <td>Waarom. Waar komt de wijziging vandaan (normblad, review, mail)?</td>
+        <td>"Review van de opdrachtgever: 'bewaartermijn' moet
+            'vernietigingstermijn' zijn."</td></tr>
+    <tr><td><strong>Type wijziging</strong></td>
+        <td>Vink "Inhoudelijke correctie (norm-content)" aan, of "Documentatie".</td>
+        <td></td></tr>
+    <tr><td><strong>Inhoudelijke afstemming</strong></td>
+        <td>Wie heeft de inhoud bekeken of gevraagd?</td>
+        <td>"Afgestemd met het normteam, 3 oktober."</td></tr>
+    <tr><td><strong>Waar de reviewer op moet letten</strong></td>
+        <td>Wat de reviewer niet uit de wijziging zelf kan halen. Zet het onder
+            de beschrijving.</td>
+        <td>"Bewust afgeweken van het normblad, staat in
+            afwijkingen-van-het-normblad.md."</td></tr>
+    <tr><td><strong>Issue</strong></td>
+        <td>Hoort het bij een issue? Schrijf <code>Closes #62</code>; het issue
+            gaat dan dicht bij de merge.</td>
+        <td><code>Closes #62</code></td></tr>
+  </table>
+  <p>Wat niet van toepassing is (<code>just build</code>, pre-commit, "breaking
+  changes") mag je weghalen. Vink niets aan wat je niet gedaan hebt. De regel
+  over <code>CHANGELOG.md</code> geldt wél voor jullie: zet onder "Unreleased"
+  één regel over wat er veranderd is.</p>
+  <p>Titel of beschrijving achteraf aanpassen? Bovenaan de pull request,
+  <strong>"Edit"</strong> naast de titel; voor de beschrijving de drie puntjes
+  rechtsboven de eerste reactie, <strong>"Edit"</strong>.</p>
+
+  <h3 id="p5-6">5.6 Squash and merge: de omschrijving goed krijgen</h3>
+  <p>In <a href="#p4-8">4.8</a> stond het kort: we mergen altijd met <strong>"Squash and
+  merge"</strong>. Alle commits van het voorstel worden dan één commit in
+  <code>main</code>. Dat houdt de geschiedenis leesbaar (één regel per voorstel)
+  en maakt een voorstel in één keer terug te draaien. De andere twee keuzes
+  zetten elke losse commit in <code>main</code>, inclusief tussenstappen en
+  "Update branch"-commits.</p>
+  <p>Na de klik op "Squash and merge" toont GitHub twee velden voordat je
+  bevestigt. Wat erin staat, hangt af van het aantal commits:</p>
+  <table>
+    <tr><th></th><th>Eén commit in het voorstel</th><th>Meerdere commits</th></tr>
+    <tr><td><strong>Bovenste veld</strong> (de regel in de geschiedenis)</td>
+        <td>De omschrijving van die ene commit, vaak
+            <code>Update 07-vernietigen.md</code></td>
+        <td>De titel van de pull request</td></tr>
+    <tr><td><strong>Onderste veld</strong> (de toelichting)</td>
+        <td colspan="2">Een lijstje met de omschrijvingen van alle commits</td></tr>
+  </table>
+  <p>Die eerste kolom verklaart waarom de geschiedenis van <code>main</code> nu
+  zo uitziet:</p>
+  <pre><code>Update 07-vernietigen.md (#107)
+Update 06-vindbaar.md (#105)
+Update 2 07-vernietigen.md (#116)</code></pre>
+  <p>Dat er iets in norm 7 veranderde, zie je. Wat, en waarom, niet. Daarom, vlak
+  voor "Confirm squash and merge":</p>
+  <ol>
+    <li><strong>Bovenste veld:</strong> vervang een "Update …"-regel door de
+        titel van de pull request (<a href="#p5-5">5.5</a>), bijvoorbeeld <code>content: norm 7
+        vernietigingstermijn volgens review</code>. Het nummer achter de regel,
+        zoals <code>(#107)</code>, laat je staan.</li>
+    <li><strong>Onderste veld:</strong> haal regels als <code>* Update
+        07-vernietigen.md</code> en <code>* Merge branch 'main' into …</code>
+        weg. Laat staan wat iets zegt, of zet er één zin bij. Leeg laten mag
+        ook.</li>
+    <li>Klik "Confirm squash and merge" en daarna "Delete branch" (<a href="#p4-8">4.8</a>).</li>
+  </ol>
+  <div class="gerust">Vergeten? Niet erg. De regel in de geschiedenis pas je
+  daarna niet meer aan, maar via het nummer (<code>#107</code>) kom je altijd
+  bij de pull request met de volledige beschrijving. Daarom is <a href="#p5-5">5.5</a> belangrijker
+  dan deze stap.</div>
+
+  <h3>Oefening</h3>
+  <details id="oef-k" open>
+    <summary>Oefening K: Samen één voorstel</summary>
+    <p><strong>Doel:</strong> <a href="#p5-1">5.1</a> tot en met <a href="#p5-6">5.6</a> in één keer doorlopen. In
+    tweetallen, A en B. Er wordt niets gemerged; ik ruim de oefening na afloop
+    op.</p>
+    <ol>
+      <li>A: open <code>content/normen/02-overzicht.md</code> en pas een zin aan
+          in <code>## Toelichting</code>. Kies bij "Commit changes…" een nieuwe
+          tak en noem hem <code>content/oefening-k-&lt;jouw voornaam&gt;</code>.</li>
+      <li>A: open de pull request, met een titel en beschrijving volgens 5.5.</li>
+      <li>A: ga naar je tak (<a href="#p5-3">5.3</a>) en pas een tweede bestand aan,
+          <code>content/normen/03-ordenen.md</code>. Commit direct op je tak.
+          Controleer op het tabblad "Commits" dat er nu twee staan.</li>
+      <li>B: zoek de tak van A via de knop linksboven op "Code", zonder de pull
+          request te openen. Pas in <code>02-overzicht.md</code> een andere zin
+          aan en commit op de tak van A. Zet een opmerking onder de pull request
+          dat je dat deed.</li>
+      <li>A: probeer je eigen pull request goed te keuren. B: probeer het ook.
+          Wie kan het?</li>
+      <li>B: klik op het pijltje naast de groene knop, kies "Squash and merge"
+          en lees de twee velden. Er zijn drie commits, dus bovenaan staat de
+          titel van de pull request. Maak het onderste veld op zoals in 5.6.
+          <strong>Klik niet op "Confirm"</strong>: hier stopt de oefening.</li>
+    </ol>
+    <p><strong>Klaar wanneer:</strong> de pull request drie commits van twee
+    mensen heeft en een titel die zegt wat er verandert, en jullie kunnen
+    uitleggen waarom B mag goedkeuren en A niet, en wat de afspraak is als
+    B's toevoeging meer was dan een komma.</p>
+  </details>
+  <p class="terug"><a href="#inhoud">↑ Terug naar de inhoud</a></p>
 </section>
 
 <footer>
