@@ -145,9 +145,10 @@ jobs:
         # Opruimen van oude preview-images mag een merge niet rood maken.
         continue-on-error: true
         env:
-          # GITHUB_ADMIN_TOKEN bestaat (nog) niet als secret; github.token mag
-          # images verwijderen die deze repo zelf heeft gepubliceerd.
-          GH_TOKEN: ${{ secrets.GITHUB_ADMIN_TOKEN || github.token }}
+          # De token van de workflow zelf: hangt niet aan een persoon en verloopt
+          # niet. Mag images verwijderen die deze repo zelf heeft gepubliceerd
+          # (packages: write hierboven).
+          GH_TOKEN: ${{ github.token }}
           CONTAINER_ORG: ${{ github.repository_owner }}
           CONTAINER_NAME: ${{ github.event.repository.name }}
           TAG_PREFIX: pr-${{ github.event.pull_request.number }}-
