@@ -6,7 +6,7 @@ norm_id: "5"
 norm_titel: "Informatiebeveiliging en betrouwbaar"
 aliases:
   - /normen/06-vernietigen/
-kern: "Het verantwoordelijke overheidsorgaan beheert de door hem opgemaakte of ontvangen documenten op zodanige wijze dat de inhoud van documenten betrouwbaar, volledig en beveiligd zijn en documenten geen 'aanmerkelijke' digitale achteruitgang of informatieverlies ondervinden gedurende hun bewaartermijn, óók wanneer [incidenten](/onderwerpen/incidenten-voorkomen/) zich voordoen. Daarnaast mogen documenten niet ongecontroleerd gewijzigd worden en moeten deze volledig zijn."
+kern: "Het verantwoordelijke overheidsorgaan beheert de door hen opgemaakte of ontvangen documenten op zodanige wijze dat de inhoud van documenten betrouwbaar, volledig en beveiligd zijn en documenten geen 'aanmerkelijke' digitale achteruitgang of informatieverlies ondervinden gedurende hun bewaartermijn, óók wanneer [incidenten](/onderwerpen/incidenten-voorkomen/) zich voordoen. Daarnaast mogen documenten niet ongecontroleerd gewijzigd worden en moeten deze volledig zijn."
 kern_bron: "Archiefbesluit, artikel 2.1, eerste lid, sub e en f; Archiefbesluit, artikel 2.1, tweede lid."
 kern_bron_url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
 kern_kaart: "Een document moet aantoonbaar betrouwbaar zijn, dat wil zeggen dat het document is wat het zegt te zijn."
@@ -17,7 +17,7 @@ synoniemen:
 
 ## Toelichting
 
-Om documenten duurzaam toegankelijk te maken en te houden moeten deze [betrouwbaar](https://www.nationaalarchief.nl/archiveren/kennisbank/betrouwbaar) zijn. De Inspectie beoordeelt informatiebeveiliging in het kader van duurzame toegankelijkheid primair vanuit de verantwoordelijkheid en inspanningsverplichting van het overheidsorgaan.[^ab-nota-van-toelichting-p12] Daarbij kijkt de Inspectie of verantwoordelijke overheidsorganen passende maateregelen nemen op het gebied van informatiebeveiliging die zijn afgestemd op de risico's, het gebruik en de levensduur van de documenten en of zij erop zijn gericht om de authenticiteit, volledigheid en beschikbaarheid van documenten te borgen. De Inspectie richt zich niet op de technische kant van informatiebeveiliging.[^ab-nota-van-toelichting-p11-12]
+Om documenten duurzaam toegankelijk te maken en te houden moeten deze [betrouwbaar](https://www.nationaalarchief.nl/archiveren/kennisbank/betrouwbaar) zijn. De Inspectie beoordeelt informatiebeveiliging in het kader van duurzame toegankelijkheid primair vanuit de verantwoordelijkheid en inspanningsverplichting van het overheidsorgaan.[^ab-nota-van-toelichting-p12] Daarbij kijkt de Inspectie of verantwoordelijke overheidsorganen passende maatregelen nemen op het gebied van informatiebeveiliging die zijn afgestemd op de risico's, het gebruik en de levensduur van de documenten en of zij erop zijn gericht om de authenticiteit, volledigheid en beschikbaarheid van documenten te borgen. De Inspectie richt zich niet op de technische kant van informatiebeveiliging.[^ab-nota-van-toelichting-p11-12]
 
 [^ab-nota-van-toelichting-p12]: Archiefbesluit, nota van toelichting, p. 12. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 [^ab-nota-van-toelichting-p11-12]: Voorbeelden van onderwerpen waar de Inspectie zich niet op richt zijn: firewalls, versleuteling (encryptie), antivirussoftware, multifactorauthenticatie (MFA), of het patchen van kwetsbaarheden. Archiefbesluit, nota van toelichting p. 11-12. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
@@ -34,7 +34,7 @@ Het risico van onvoldoende beveiliging is dat documenten kunnen worden gestolen,
 
 #### Voorschrift
 
-De oorspronkelijke inhoud van documenten zijn betrouwbaar, volledig en beveiligd.[^ab-artikel-2-1-sub-e-en-lid-2]
+De oorspronkelijke inhoud van documenten is betrouwbaar, volledig en beveiligd.[^ab-artikel-2-1-sub-e-en-lid-2]
 
 [^ab-artikel-2-1-sub-e-en-lid-2]: Archiefbesluit, artikel 2.1, sub e; Archiefbesluit, artikel 2.1, tweede lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
@@ -71,7 +71,7 @@ Documenten zijn beschermd tegen ongeautoriseerde wijzigingen en verlies.[^kamers
 
 #### Voorschrift
 
-Beveiligingsmaatregelen passend[^ab-artikel-2-1-lid-2] en afgestemd op de risico's.[^ab-nota-van-toelichting-veilig-bio-h8]
+Beveiligingsmaatregelen zijn passend[^ab-artikel-2-1-lid-2] en afgestemd op de risico's.[^ab-nota-van-toelichting-veilig-bio-h8]
 
 [^ab-artikel-2-1-lid-2]: Archiefbesluit, artikel 2.1, tweede lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 [^ab-nota-van-toelichting-veilig-bio-h8]: Archiefbesluit, Nota van toelichting, Algemeen deel, 1 Inleiding, onder "veilig"; BIO, Hoofdstuk 8, p. 11. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
@@ -103,7 +103,7 @@ Het verantwoordelijke overheidsorgaan kan de betrouwbaarheid en authenticiteit v
 #### Indicatoren
 
 - In de [metadata](/normen/04-metadateren/) is de [integriteitscheck](/onderwerpen/metadata-integriteitscheck/) vastgelegd bij digitale documenten die langer dan tien jaar worden bewaard.[^ar-artikel-2-8-onderdeel-b]
-- Er wordt gebruik gemaakt van een [hashfunctie](/onderwerpen/hashfunctie/)[^duto-modeleis-r15] voor de controleerbaarheid van de integriteit van digitale documenten.
+- Er wordt gebruikgemaakt van een [hashfunctie](/onderwerpen/hashfunctie/)[^duto-modeleis-r15] voor de controleerbaarheid van de integriteit van digitale documenten.
 - Er is een [audittrail](/onderwerpen/audittrail/) waarin veranderingen in documenten en metadata worden vastgelegd.
 
 [^ar-artikel-2-8-onderdeel-b]: Archiefregeling, artikel 2.8, onderdeel b. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
