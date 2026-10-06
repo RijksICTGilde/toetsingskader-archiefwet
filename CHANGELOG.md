@@ -13,6 +13,29 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Afkortingen Aw, Ab en Ar worden voluit geschreven: "Archiefwet",
+  "Archiefbesluit" en "Archiefregeling" (169 plekken in de content, inclusief
+  de kern_bron in de front matter). Ze staan niet meer in
+  `data/afkortingen.yaml`, dus er komt ook geen `<abbr>` meer omheen; DUTO en
+  SIO blijven afkortingen.
+
+- Bollendiagram in blauw in plaats van groen: rijksblauw #154273 voor de hub,
+  hemelblauw #007bc7 voor lijnen en bolranden, #80d5fc in donkere modus. Een
+  label van meer dan één regel schuift verder naar buiten, zodat het evenveel
+  ruimte tot zijn bol houdt als een label van één regel ("Informatiebeveiliging
+  en betrouwbaar" stond tegen de bol aan).
+
+- De "Ga naar …"-link staat alleen nog in de tooltip (keuze 22 september
+  2026), niet meer ook in de bronnenlijst onderaan: die lijst gaat over
+  bronnen, niet over navigatie. De controle `ga-naar-ontbreekt` in
+  `scripts/a11y-checks.mjs`, die de kopie in de lijst afdwong, vervalt
+  daarmee.
+
+- De aangesprongen bron in de referentielijst verspringt niet meer: de
+  thema-regel `.references li:target` schoof de regel (en dus het
+  referentienummer) 0,5em naar links. De highlight is nu alleen een
+  achtergrondkleur. Upstream-kandidaat op het thema.
+
 - Hover en link gescheiden (keuze 15 september 2026): elke term met een
   tooltip is gestippeld en opent alleen de tooltip; was de term ook een link
   naar een pagina, dan staat die link nu in de tooltip als "Ga naar …". Eén
@@ -345,6 +368,12 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Verwijderd
 
+- De project-eigen scroll-spy voor "Op deze pagina" op de normpagina's
+  (`assets/js/toc-scrollspy.js`); thema naar v0.2.2. Het thema volgt nu zelf
+  alleen koppen met een TOC-link en markeert ook de laatste secties onderaan
+  een pagina (hugo-theme-rijksoverheid#8 en #22). Daardoor wordt elke sectie
+  in de inhoudsopgave gemarkeerd, ook "Referenties"; voorheen bleef op elke
+  normpagina minstens één sectie onderaan ongemarkeerd. Sluit #45.
 - De client-side PDF-generatie met pdfMake: de gevendorde bibliotheek (1,3 MB),
   de base64-lettertypen (228 kB), de HTML→pdfMake-converter, de doc-definitie,
   de `index.pdf.json`-endpoints en de bijbehorende tests. Dat scheelt een
