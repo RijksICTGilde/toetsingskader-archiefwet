@@ -13,6 +13,16 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Het Rijksoverheid-lint in de kop staat er niet meer alleen: het woordmerk
+  "Ministerie van Onderwijs, Cultuur en Wetenschap" staat rechts ernaast, zoals
+  op het briefhoofd van de PDF's. Het lint staat in het midden van de kop
+  (thema v0.2.3); het woordmerk blijft ook op een smal scherm staan.
+
+- Het logo linkt naar de hoofdsite van de Inspectie
+  (https://www.inspectie-oe.nl/) in plaats van naar de homepage van deze site.
+  Beide via `params.logo` in `hugo.yaml`, een optie van het thema sinds v0.2.1
+  (hugo-theme-rijksoverheid#20); geen projectshadow of eigen CSS.
+
 - Afkortingen Aw, Ab en Ar worden voluit geschreven: "Archiefwet",
   "Archiefbesluit" en "Archiefregeling" (169 plekken in de content, inclusief
   de kern_bron in de front matter). Ze staan niet meer in
