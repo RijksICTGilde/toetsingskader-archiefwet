@@ -16,7 +16,7 @@ wide: true
 toc_open: true
 ---
 
-Dat documenten in beheer moeten zijn, is het fundament van het toetsingskader. De norm [Inbeheername en beheer]({{< relref "/normen/01-beheer" >}}) staat daarom in het midden; de andere normen werken uit wat er in een beheerde omgeving geregeld moet zijn.
+Dat documenten in beheer moeten zijn, is het fundament van het toetsingskader. De norm [Inbeheername en beheer]({{< relref "/normen/01-beheer" >}}) staat daarom in het midden; de andere normen werken uit wat er ook in een beheerde omgeving geregeld moet zijn.
 
 {{< bollendiagram >}}
 

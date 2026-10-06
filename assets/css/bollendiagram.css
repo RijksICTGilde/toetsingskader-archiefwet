@@ -14,22 +14,25 @@
   overflow: visible;
 }
 
-/* Kleuren uit de Rijkshuisstijl: donkergroen (#275937) voor de hub, groen
-   (#39870c) voor lijnen en bolrand, mintgroen (#76d2b6) in donkere modus.
-   Keuze 15 september 2026: "een hele andere kleur, wel Rijksoverheid".
-   Lijnen en bolrand dragen betekenis en moeten 3:1 halen (1.4.11): #39870c
-   haalt 4,5:1 op wit, #76d2b6 11:1 op de donkere achtergrond. Hub met witte
-   tekst: 8,2:1. Labels #275937 op wit: 8,2:1. */
+/* Kleuren uit de Rijkshuisstijl, in de blauwen van de site (keuze 22 september
+   2026; het diagram stond sinds 15 september in groen). Rijksblauw (#154273,
+   het thema-token --color-rijksblauw) voor de hub, hemelblauw (#007bc7) voor
+   lijnen en bolrand, lichtblauw (#80d5fc, de dark-mode-accentkleur van het
+   thema) in donkere modus.
+   Lijnen en bolrand dragen betekenis en moeten 3:1 halen (1.4.11): #007bc7
+   haalt 4,5:1 op wit, #80d5fc 10,9:1 op de donkere achtergrond (#0f172a).
+   Hub met witte tekst: 9,9:1, hover #01689b: 6,1:1. Labels #154273 op wit:
+   9,9:1. Iconen op de bolvulling: 9,1:1 (licht) en 9,3:1 (donker). */
 .bollendiagram {
-  --bd-line: light-dark(#39870c, #76d2b6);
-  --bd-bol-fill: light-dark(#e9f6ef, #1b3a2d);
-  --bd-bol-fill-hover: light-dark(#cdeadb, #27503e);
-  --bd-bol-stroke: light-dark(#39870c, #76d2b6);
-  --bd-hub-fill: #275937;
-  --bd-hub-fill-hover: #39870c;
-  --bd-hub-stroke: light-dark(#1b3f27, #76d2b6);
-  --bd-icoon: light-dark(#275937, #d3f0e4);
-  --bd-label: light-dark(#275937, #e2e8f0);
+  --bd-line: light-dark(#007bc7, #80d5fc);
+  --bd-bol-fill: light-dark(#eff7fc, #1e3a5f);
+  --bd-bol-fill-hover: light-dark(#d9ebf7, #2a4f7c);
+  --bd-bol-stroke: light-dark(#007bc7, #80d5fc);
+  --bd-hub-fill: #154273;
+  --bd-hub-fill-hover: #01689b;
+  --bd-hub-stroke: light-dark(#0d2c4d, #80d5fc);
+  --bd-icoon: light-dark(#154273, #d6ecfa);
+  --bd-label: light-dark(#154273, #e2e8f0);
 }
 
 /* === Verbindingslijnen (spokes + ring) ===
