@@ -39,15 +39,15 @@ opgelost](#wat-er-is-opgelost-op-deze-branch) voor de gemaakte wijzigingen.
 | **7** | Bron-tooltip: niet te sluiten én niet gekoppeld aan de term | 1.4.13, 1.3.1 | AA, A | ja | deels: koppeling opgelost, Escape open ([thema-issue #10](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/10)) |
 | **8** | Toelichting, Referenties en Kern zijn geen koppen | 1.3.1 | A | ja | opgelost |
 | **9** | Zoekterm-markering wordt niet aangekondigd | 1.3.1, 4.1.3 | A, AA | ja | deels: melding wordt aangekondigd, `<mark>` open ([thema-issue #11](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/11)) |
-| **10** | Sneltoets `/` niet uit te zetten of te wijzigen | 2.1.4 | A | ja | opgelost (werkt nu alleen met focus op de zoekknop) |
+| **10** | Sneltoets `/` niet uit te zetten of te wijzigen | 2.1.4 | A | ja | opgelost in thema v0.2.3: sneltoets is nu Ctrl+K / Cmd+K |
 | **11** | Verbindingslijnen in het diagram: 1,23:1 | 1.4.11 | AA | ja | opgelost |
-| **12** | Sneltoetshint `/` in de balk: 2,98:1 | 1.4.3 | AA | ja | opgelost (hint verwijderd; de sneltoets werkt sinds bevinding 10 alleen met focus op de zoekknop) |
+| **12** | Sneltoetshint `/` in de balk: 2,98:1 | 1.4.3 | AA | ja | opgelost (hint toont sinds thema v0.2.3 weer, als Ctrl K) |
 | **13** | Statusmelding tijdens PDF-generatie niet bepaalbaar | 4.1.3 | AA | ja | opgelost |
 | **14** | `lang`-fout en lege taxonomiepagina's | 3.1.2, 2.4.6 | AA | ja | opgelost (taxonomieën uitgezet) |
 | 15 | Ontbrekende `}` in `main.css` zet twee regels uit | — | — | nee | opgelost |
-| 16 | Skip-link verplaatst de focus niet betrouwbaar | 2.4.1 | A | te bevestigen | opgelost (override op het thema) |
+| 16 | Skip-link verplaatst de focus niet betrouwbaar | 2.4.1 | A | te bevestigen | opgelost in thema v0.2.3 |
 | 17 | Zwevende melding kan de focus afdekken | 2.4.11 | AA | te bevestigen | opgelost via `scroll-margin`; nog in browser te bevestigen |
-| 18 | Hero-tekst kan bij 200% tekstvergroting afknippen | 1.4.4 | AA | te bevestigen | open — [thema-issue #12](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/12); browsertest staat nu in CI |
+| 18 | Hero-tekst kan bij 200% tekstvergroting afknippen | 1.4.4 | AA | te bevestigen | opgelost in thema v0.2.3 ([thema-issue #12](https://github.com/RijksICTGilde/hugo-theme-rijksoverheid/issues/12)); browsertest staat in CI |
 | 19 | PDF-downloadlink werkt niet zonder JavaScript | — | — | nee | opgelost |
 | 20 | Hero-`alt` dupliceert de `h1` eronder | 1.1.1 | A | nee | opgelost |
 | 21 | `aria-label="Zoeken"` dekt zichtbare tekst niet | 2.5.3 | A | ja | opgelost (override op het thema) |
@@ -109,11 +109,16 @@ bevinding 12 blijft in dit project wél verborgen, omdat `toegankelijkheid.js`
 de sitebrede `/`-sneltoets nog neutraliseert (bevinding 10); die binding zit nog
 steeds in de theme-`search.js` en is daarmee de volgende upstream-kandidaat.
 
+Op 6 oktober 2026 volgde de JS-helft: thema v0.2.3 lost 10, 16, 21, 23 en 24
+op. De sneltoets is daar Ctrl+K / Cmd+K geworden, dus de hint is weer
+zichtbaar. Ook onze `search.js`-override gebruikt die sneltoets nu. Alleen
+bevinding 9 blijft in `toegankelijkheid.js`.
+
 | Bestand | Bevinding |
 |---|---|
 | ~~`assets/css/toegankelijkheid.css`~~ | ~~1a, 1b, 1c (focusindicatoren), 12 (contrast sneltoetshint), 17 (`scroll-margin` onder de meldbalk)~~ — opgelost in thema v0.2.0 |
-| `assets/css/toegankelijkheid.css` | Rest: de `<h2>`-in-`<summary>`-correctie (bevinding 8), de PDF-knop (bevinding 19) en het verbergen van de sneltoetshint zolang bevinding 10 lokaal wordt opgelost |
-| `assets/js/toegankelijkheid.js` | 16 (skip-link), 21 (label in name), 24 (genest landmark + Escape), 10 (`/`-sneltoets), 23 (externe-linkmelding), 9 (aankondiging van de markering) |
+| `assets/css/toegankelijkheid.css` | Rest: de `<h2>`-in-`<summary>`-correctie (bevinding 8) |
+| `assets/js/toegankelijkheid.js` | 9 (aankondiging van de markering); 10, 16, 21, 23 en 24 opgelost in thema v0.2.3 |
 | `layouts/_partials/scripts.html` | shadow van het thema, alleen om het script hierboven te laden |
 
 Nog niet vanuit dit project op te lossen en dus een thema-issue: de

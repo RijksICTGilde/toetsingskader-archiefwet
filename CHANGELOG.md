@@ -355,6 +355,14 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Verwijderd
 
+- Thema naar v0.2.3. Vijf toegankelijkheidspatches uit
+  `assets/js/toegankelijkheid.js` zijn weg, omdat het thema ze nu zelf
+  oplost: skip-link (bevinding 16), naam van de zoekknop (21), genest
+  landmark en Escape in het mobiele menu (24), de `/`-sneltoets (10) en de
+  melding "opent in een nieuw venster" (23). De zoeksneltoets is nu
+  Ctrl+K / Cmd+K, ook in onze `search.js`-override, en de hint in de balk
+  is weer zichtbaar. De zoekindex neemt de verborgen nieuw-venster-melding
+  niet op.
 - De project-eigen scroll-spy voor "Op deze pagina" op de normpagina's
   (`assets/js/toc-scrollspy.js`); thema naar v0.2.2. Het thema volgt nu zelf
   alleen koppen met een TOC-link en markeert ook de laatste secties onderaan
