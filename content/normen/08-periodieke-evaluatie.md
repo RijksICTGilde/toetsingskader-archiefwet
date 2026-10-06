@@ -4,7 +4,7 @@ versie: "0.8"
 weight: 8
 norm_id: "8"
 norm_titel: "Periodieke evaluatie"
-kern: "Het archiefbeheer wordt door het verantwoordelijke overheidsorgaan periodiek geëvalueerd op basis van de kwaliteitseisen voor duurzame toegankelijkheid. Tijdens een periodieke evaluatie wordt gekeken naar de passende maatregelen en alle beheertaken die bijdragen aan de duurzame toegankelijkheid. De periodieke evaluatie vindt plaats door middel van een planning en control cyclus."
+kern: "Het archiefbeheer wordt door het verantwoordelijke overheidsorgaan periodiek geëvalueerd op basis van de kwaliteitseisen voor duurzame toegankelijkheid. Tijdens een periodieke evaluatie wordt gekeken naar de passende maatregelen en alle beheertaken die bijdragen aan de duurzame toegankelijkheid. De periodieke evaluatie vindt plaats door middel van een planning- en controlcyclus."
 kern_bron: "Aw, artikel 4.2, tweede lid, sub c; Aw, Memorie van toelichting, Kamerstukken II 2021/22, 35968, nr. 3, 4.3 Duurzame toegankelijkheid, beheerstrategie."
 kern_bron_url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
 kern_kaart: "Het archiefbeheer wordt door het verantwoordelijke overheidsorgaan periodiek geëvalueerd op basis van de kwaliteitseisen voor duurzame toegankelijkheid."
@@ -18,7 +18,7 @@ synoniemen:
 
 ## Toelichting
 
-Om documenten duurzaam toegankelijk te maken en houden wordt er met een periodieke evaluatie getoetst in hoeverre het archiefbeheer voldoet aan de kwaliteitseisen voor duurzame toegankelijkheid.[^aw-artikel-4-2-lid-2-sub-c] De [beheerregels](/normen/01-beheer/) moeten ten minste omschrijven welke overheidsorganen of dienstonderdelen zijn belast met het feitelijk beheer van documenten en op welke wijze de periodieke evaluatie van het archiefbeheer plaatsvindt.[^kamerstukken-35968-nr-3-artikel-4-2-beheerregels]
+Om documenten duurzaam toegankelijk te maken en te houden, wordt er met een periodieke evaluatie getoetst in hoeverre het archiefbeheer voldoet aan de kwaliteitseisen voor duurzame toegankelijkheid.[^aw-artikel-4-2-lid-2-sub-c] De [beheerregels](/normen/01-beheer/) moeten ten minste omschrijven welke overheidsorganen of dienstonderdelen zijn belast met het feitelijk beheer van documenten en op welke wijze de periodieke evaluatie van het archiefbeheer plaatsvindt.[^kamerstukken-35968-nr-3-artikel-4-2-beheerregels]
 
 [^aw-artikel-4-2-lid-2-sub-c]: Aw, artikel 4.2, tweede lid, sub c. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 [^kamerstukken-35968-nr-3-artikel-4-2-beheerregels]: Aw, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, II Artikelsgewijs deel, artikel 4.2 Beheerregels. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
@@ -33,7 +33,7 @@ Op deze manier kunnen maatregelen voor duurzame toegankelijkheid, bescherming va
 
 #### Voorschrift
 
-Het verantwoordelijke overheidsorgaan heeft in de beheerregels beschreven op welke wijze het archiefbeheer periodiek wordt onderzocht, geëvalueerd en indien nodig bijgesteld.[^aw-artikel-4-2-lid-2-sub-c]
+Het verantwoordelijke overheidsorgaan heeft in de beheerregels beschreven op welke wijze het archiefbeheer periodiek wordt onderzocht, geëvalueerd en, indien nodig, bijgesteld.[^aw-artikel-4-2-lid-2-sub-c]
 
 #### Criterium
 
@@ -45,7 +45,7 @@ Het verantwoordelijke overheidsorgaan heeft in de beheerregels beschreven op wel
 
 #### Voorschrift
 
-Het verantwoordelijk overheidsorgaan evalueert het archiefbeheer periodiek (minimaal tweejaarlijks) met een [planning en control cyclus](/onderwerpen/planning-en-controlcyclus/).[^kamerstukken-35968-nr-3-beheerstrategie]
+Het verantwoordelijke overheidsorgaan evalueert het archiefbeheer periodiek (minimaal tweejaarlijks) met een [planning- en controlcyclus](/onderwerpen/planning-en-controlcyclus/).[^kamerstukken-35968-nr-3-beheerstrategie]
 
 #### Criteria
 
@@ -68,21 +68,21 @@ De periodieke evaluatie omvat de [passende maatregelen](/onderwerpen/passende-ma
 #### Criterium
 
 - De evaluatie betreft in ieder geval de passende maatregelen voor voorschriften over:
-  - [Beheer](/normen/01-beheer/)
+  - [Inbeheername en beheer](/normen/01-beheer/)
   - [Overzicht](/normen/02-overzicht/)
-  - [Ordening](/normen/03-ordenen/)
-  - [Metadata](/normen/04-metadateren/)
-  - [Vindbaarheid](/normen/06-vindbaar/)
-  - [Vernietiging](/normen/07-vernietigen/)
-  - [Informatiebeveiliging](/normen/05-betrouwbaar/)
+  - [Ordenen](/normen/03-ordenen/)
+  - [Metadateren](/normen/04-metadateren/)
+  - [Informatiebeveiliging en betrouwbaar](/normen/05-betrouwbaar/)
+  - [Vindbaar](/normen/06-vindbaar/)
+  - [Vernietigen](/normen/07-vernietigen/)
 
 #### Indicator
 
-- Het verantwoordelijke overheidsorgaan heeft toetsbare doelstellingen vastgelegd bij voorschriften over [Beheer](/normen/01-beheer/), [Overzicht](/normen/02-overzicht/), [Ordening](/normen/03-ordenen/), [Metadata](/normen/04-metadateren/), [Vindbaarheid](/normen/06-vindbaar/), [Vernietiging](/normen/07-vernietigen/), [Informatiebeveiliging](/normen/05-betrouwbaar/).
+- Het verantwoordelijke overheidsorgaan heeft toetsbare doelstellingen vastgelegd bij voorschriften over [Inbeheername en beheer](/normen/01-beheer/), [Overzicht](/normen/02-overzicht/), [Ordenen](/normen/03-ordenen/), [Metadateren](/normen/04-metadateren/), [Informatiebeveiliging en betrouwbaar](/normen/05-betrouwbaar/), [Vindbaar](/normen/06-vindbaar/) en [Vernietigen](/normen/07-vernietigen/).
 
 ## Reikwijdte
 
-Het periodiek evalueren van het archiefbeheer ten behoeve van duurzame toegankelijkheid is van toepassing op alle documenten van een verantwoordelijk overheidsorgaan.[^ab-nota-van-toelichting-h2-p10] Ook voor documenten die op elk moment kunnen worden vernietigd.
+Het periodiek evalueren van het archiefbeheer ten behoeve van duurzame toegankelijkheid is van toepassing op alle documenten van het verantwoordelijke overheidsorgaan.[^ab-nota-van-toelichting-h2-p10] Ook op documenten die op elk moment kunnen worden vernietigd.
 
 [^ab-nota-van-toelichting-h2-p10]: Ab, Nota van toelichting, I. Algemeen deel, H2, 2 Duurzame toegankelijkheid, p.10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
 
