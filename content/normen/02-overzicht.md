@@ -14,7 +14,7 @@ synoniemen:
 
 ## Toelichting
 
-Een actueel en volledig overzicht van de [informatiehuishouding](https://www.nationaalarchief.nl/archiveren/kennisbank/overheidsinformatie-binnen-informatiehuishouding) zorgt ervoor dat een verantwoordelijk overheidsorgaan weet waar documenten zich bevinden. Dit inzicht is van belang voor het uitvoeren van [beheertaken](/normen/01-beheer/) die de duurzame toegankelijkheid van documenten borgen.[^ar-toelichting-overzicht-p34]
+Een actueel en volledig overzicht van de [informatiehuishouding](https://www.nationaalarchief.nl/archiveren/kennisbank/overheidsinformatie-binnen-informatiehuishouding) zorgt ervoor dat het verantwoordelijke overheidsorgaan weet waar documenten zich bevinden. Dit inzicht is van belang voor het uitvoeren van [beheertaken](/normen/01-beheer/) die de duurzame toegankelijkheid van documenten borgen.[^ar-toelichting-overzicht-p34]
 
 [^ar-toelichting-overzicht-p34]: Archiefregeling, Toelichting, Algemene eisen, overzicht informatiehuishouding, p.34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
@@ -32,7 +32,7 @@ Het overzicht kan op verschillende niveaus worden ingericht. Dit kan op het nive
 
 [^ar-toelichting-overzicht-p35]: Archiefregeling, Toelichting, Algemene eisen, overzicht informatiehuishouding, p.35. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
-Ook voor andere wetgeving, zoals de AVG en WOO, is een overzicht essentieel. Het overzicht draagt bij aan de vindbaarheid van documenten, waardoor de termijnen van de WOO (beter) kunnen worden gehaald. Een overzicht van de informatiehuishouding volgens de Archiefregeling is niet hetzelfde als een verwerkingsregister, zoals is vereist op grond van de AVG. Dit instrument dient een ander doel,[^ar-toelichting-overzicht-p35] al draagt het AVG-verwerkingsregister wel bij aan het overzicht.
+Ook voor andere wetgeving, zoals de AVG en Woo, is een overzicht essentieel. Het overzicht draagt bij aan de vindbaarheid van documenten, waardoor de termijnen van de Woo (beter) kunnen worden gehaald. Een overzicht van de informatiehuishouding volgens de Archiefregeling is niet hetzelfde als een verwerkingsregister, zoals is vereist op grond van de AVG. Dit instrument dient een ander doel,[^ar-toelichting-overzicht-p35] al draagt het AVG-verwerkingsregister wel bij aan het overzicht.
 
 ## Voorschriften
 
@@ -53,14 +53,14 @@ Het verantwoordelijke overheidsorgaan heeft een actueel overzicht.[^ar-artikel-2
 
 #### Voorschrift
 
-Het verantwoordelijke overheidsorgaan heeft een omschrijving van de taken van het verantwoordelijke overheidsorgaan en van de daarbij behorende documenten bevat.[^ar-artikel-2-3-onder-a]
+Het overzicht bevat[^ar-artikel-2-3-onder-a] een omschrijving van de taken van het verantwoordelijke overheidsorgaan en van de daarbij behorende documenten.
 
 [^ar-artikel-2-3-onder-a]: Archiefregeling, artikel 2.3, onder a. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
 #### Criteria
 
 - Het overzicht is volledig.
-- De juiste definitie van overheidsinformatie (conform artikel 1.1. van de Archiefwet) wordt gebruikt voor het overzicht.
+- De juiste definitie van overheidsinformatie (conform artikel 1.1 van de Archiefwet) wordt gebruikt voor het overzicht.
 - Het overzicht kan worden gemaakt op het moment dat er een vraag naar is.
 
 #### Indicatoren
@@ -107,7 +107,7 @@ Het overzicht geeft de samenhang tussen (categorieën) documenten weer.[^ar-arti
 
 #### Voorschrift
 
-Het overzicht bevat, in het geval een verantwoordelijke overheidsorgaan beschikt over meerdere [ordeningsstructuren](/normen/03-ordenen/), een beschrijving van deze ordeningsstructuren, de wijze waarop zij worden toegepast en een beschrijving van de onderlinge relaties tussen de toegepaste ordeningsstructuren.[^ar-artikel-2-3-onder-d]
+Het overzicht bevat, in het geval het verantwoordelijke overheidsorgaan beschikt over meerdere [ordeningsstructuren](/normen/03-ordenen/), een beschrijving van deze ordeningsstructuren, de wijze waarop zij worden toegepast en een beschrijving van de onderlinge relaties tussen de toegepaste ordeningsstructuren.[^ar-artikel-2-3-onder-d]
 
 [^ar-artikel-2-3-onder-d]: Archiefregeling, artikel 2.3, onder d. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
