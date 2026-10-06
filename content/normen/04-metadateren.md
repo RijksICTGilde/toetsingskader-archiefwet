@@ -106,7 +106,7 @@ Indien gebruik is gemaakt van een elektronische handtekening:
 - Er zijn instructies voor het toekennen van de vereiste metadata aan documenten.
 - Metadata wordt zoveel mogelijk automatisch toegekend aan documenten.
 
-### Digitale documenten met een bewaartermijn langer van dan tien jaar zijn voorzien van de volgende metadata die zijn vastgelegd in een metadataschema:[^ar-artikel-2-8]
+### Digitale documenten met een bewaartermijn langer dan tien jaar zijn voorzien van de volgende metadata die zijn vastgelegd in een metadataschema:[^ar-artikel-2-8]
 
 [^ar-artikel-2-8]: Ar, artikel 2.8. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
 
