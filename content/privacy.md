@@ -6,6 +6,8 @@ description: "Hoe de Inspectie Overheidsinformatie en Erfgoed op deze website om
 # https://www.inspectie-oe.nl/service/privacy (versie 15 januari 2026); de rest
 # beschrijft wat deze site feitelijk doet: geen formulier, geen cookies, alleen
 # e-mail naar toetsingskader@inspectie-oe.nl en hosting op ZAD.
+# De inlogmuur (Keycloak) gaat eraf bij go-live; accounts staan daarom bewust
+# niet in deze tekst.
 # TODO: bewaartermijn van de serverlogs bij ZAD navragen en hieronder invullen;
 # tekst laten toetsen door de FG/privacy-officer van OCW vóór publicatie.
 show_lastmod: true
@@ -25,7 +27,7 @@ Persoonsgegevens zeggen iets over uw persoon of zijn naar u te herleiden. Bijvoo
 
 Deze website heeft geen contactformulier en vraagt u nergens om gegevens. Als deze website uw persoonsgegevens verwerkt, is dat omdat u zelf contact opneemt en daarbij persoonlijke informatie opgeeft. Bijvoorbeeld wanneer u een e-mail stuurt naar [toetsingskader@inspectie-oe.nl](mailto:toetsingskader@inspectie-oe.nl). Uw gegevens worden dan alleen gebruikt om uw vraag of opmerking te beantwoorden.
 
-Deze website plaatst geen cookies en houdt geen webstatistieken bij. Lees meer op de pagina [Cookies]({{< relref "/cookies" >}}).
+Deze website plaatst alleen een technisch noodzakelijk cookie van het hostingplatform en houdt geen webstatistieken bij. Lees meer op de pagina [Cookies]({{< relref "/cookies" >}}).
 
 ## Hosting
 
