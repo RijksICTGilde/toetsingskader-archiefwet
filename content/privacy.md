@@ -35,7 +35,7 @@ Deze website bewaart persoonsgegevens niet langer dan nodig. Uw gegevens worden 
 
 Bij het ministerie van OCW zijn functionarissen voor gegevensbescherming werkzaam en bij de Autoriteit persoonsgegevens gemeld. Als onafhankelijke, interne toezichthouders zien zij erop toe dat de verwerkingen van persoonsgegevens binnen het ministerie van OCW en ook binnen de Inspectie Overheidsinformatie en Erfgoed, in overeenstemming is met de wet.
 
-De Functionaris Gegevensbescherming voor de Inspectie is: E.J.H.L Nijenhuis, [fg@minocw.nl](mailto:fg@minocw.nl). Ga voor meer informatie naar [Privacyverklaring ministerie van Onderwijs, Cultuur en Wetenschap](https://www.rijksoverheid.nl/ministeries/ministerie-van-onderwijs-cultuur-en-wetenschap/privacy)
+De Functionaris Gegevensbescherming voor de Inspectie is: E.J.H.L Nijenhuis, [fg@minocw.nl](mailto:fg@minocw.nl). Ga voor meer informatie naar [Privacyverklaring ministerie van Onderwijs, Cultuur en Wetenschap](https://www.rijksoverheid.nl/ministeries/ministerie-van-onderwijs-cultuur-en-wetenschap/organisatie/privacy)
 
 ## Uw rechten
 
