@@ -1,6 +1,6 @@
 ---
 title: "Cookies"
-description: "Deze website plaatst één technisch noodzakelijk cookie van het hostingplatform en houdt geen webstatistieken bij. Lees wat cookies zijn en wat deze website verder in uw browser bewaart."
+description: "Deze website plaatst één technisch noodzakelijk cookie van het hostingplatform en houdt geen webstatistieken bij."
 # Opbouw en zinnen volgen https://www.inspectie-oe.nl/service/cookies zo
 # letterlijk mogelijk. Alleen wat hier onwaar is, is weggelaten of omgezet: de
 # hoofdsite staat op het Platform Rijksoverheid Online met Piwik PRO; deze site
