@@ -53,13 +53,13 @@ De oorspronkelijke inhoud van documenten is betrouwbaar, volledig en beveiligd.[
 - Er is vastgelegd hoe back-ups worden bewaard, geraadpleegd en vernietigd in relatie tot geldende bewaartermijnen en archiefwetgeving.
 
 [^inspectie-geen-diepgaande-technische-toets]: De Inspectie voert daarbij geen diepgaande technische toets van informatiebeveiliging uit, maar stemt, waar relevant, haar beoordeling af met de RDI.
-[^kamerstukken-35968-nr-3-beheerstrategie]: Archiefwet 2026, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen deel, onder 4.3 "Beheerstrategie". [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^kamerstukken-35968-nr-3-beheerstrategie]: Archiefwet 2026, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen deel, onder 4.3 "Beheerstrategie". [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
 #### Voorschrift
 
 Documenten zijn beschermd tegen ongeautoriseerde wijzigingen en verlies.[^kamerstukken-35968-nr-3-archiveren-by-design]
 
-[^kamerstukken-35968-nr-3-archiveren-by-design]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen deel, onder 3.5 "Archiveren by Design". [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^kamerstukken-35968-nr-3-archiveren-by-design]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen deel, onder 3.5 "Archiveren by Design". [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
 #### Criterium
 
