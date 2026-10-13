@@ -21,11 +21,11 @@ synoniemen:
 Om documenten duurzaam toegankelijk te maken en te houden, wordt er met een periodieke evaluatie getoetst in hoeverre het archiefbeheer voldoet aan de kwaliteitseisen voor duurzame toegankelijkheid.[^aw-artikel-4-2-lid-2-sub-c] De [beheerregels](/normen/01-beheer/) moeten ten minste omschrijven welke overheidsorganen of dienstonderdelen zijn belast met het feitelijk beheer van documenten en op welke wijze de periodieke evaluatie van het archiefbeheer plaatsvindt.[^kamerstukken-35968-nr-3-artikel-4-2-beheerregels]
 
 [^aw-artikel-4-2-lid-2-sub-c]: Archiefwet, artikel 4.2, tweede lid, sub c. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
-[^kamerstukken-35968-nr-3-artikel-4-2-beheerregels]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, II Artikelsgewijs deel, artikel 4.2 Beheerregels. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^kamerstukken-35968-nr-3-artikel-4-2-beheerregels]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, II Artikelsgewijs deel, artikel 4.2 Beheerregels. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
 Een periodieke evaluatie moet worden ingericht met een [planning- en controlcyclus](/onderwerpen/planning-en-controlcyclus/). Het archiefbeheer is bij voorkeur onderdeel van een breder informatiebeheerbeleid. Hieruit volgt bijvoorbeeld een meerjarig informatiebeheerplan dat toetsbare doelstellingen verbindt aan een voortdurende verbetercyclus.[^kamerstukken-35968-nr-3-beheerstrategie]
 
-[^kamerstukken-35968-nr-3-beheerstrategie]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, 4.3 Duurzame toegankelijkheid, beheerstrategie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^kamerstukken-35968-nr-3-beheerstrategie]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, 4.3 Duurzame toegankelijkheid, beheerstrategie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
 Op deze manier kunnen maatregelen voor duurzame toegankelijkheid, bescherming van persoonsgegevens, informatiebeveiliging en openbaarmaking in samenhang worden geëvalueerd en verbeterd.[^kamerstukken-35968-nr-3-beheerstrategie]
 
