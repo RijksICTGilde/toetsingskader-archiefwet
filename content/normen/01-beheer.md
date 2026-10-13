@@ -36,13 +36,13 @@ In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurz
 
 Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](/onderwerpen/passende-maatregelen/), de [periodieke evaluatie](/normen/08-periodieke-evaluatie/) en eventueel ook op basis van een informatiebeheerplan invulling krijgen.[^aw-memorie-toelichting-4-3-beheerstrategie]
 
-[^aw-memorie-toelichting-4-3-beheerstrategie]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 4.3 Duurzame toegankelijkheid, beheerstrategie.
+[^aw-memorie-toelichting-4-3-beheerstrategie]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 4.3 Duurzame toegankelijkheid, beheerstrategie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
 De beheerregeling moet samen met de omschrijving van de passende maatregelen worden gepubliceerd. Vervolgens moeten de passende maatregelen getroffen worden en hiervoor moeten deze passende maatregelen in ieder geval beschreven zijn in een 'document'.
 
 In een beheerde omgeving[^functies-nationaal-archief] zijn functionaliteiten beschikbaar waarmee (systematisch) beheer uitgevoerd kan worden op documenten[^deze-toelichting-ontleend-kennisbank-nationaal-a]. Een aantal criteria bij normen in dit toetsingskader, zoals bij de normen over [betrouwbaarheid](/normen/05-betrouwbaar/), [vernietigen](/normen/07-vernietigen/) en [metadateren](/normen/04-metadateren/), geeft direct richting aan de invulling van de benodigde functionaliteiten.[^kamerstukken-2021-22-35968]
 
-[^kamerstukken-2021-22-35968]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Beheerstrategie
+[^kamerstukken-2021-22-35968]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Beheerstrategie [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
 ## Voorschriften
 
@@ -104,7 +104,7 @@ b) te [vernietigen](/normen/07-vernietigen/).
 - De passende maatregelen zijn actueel.
 - De passende maatregelen worden [toegepast](#feitelijk-beheer).
 
-[^kamerstukken-2021-22-35968-4-4-selectie]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen Deel, 4.4 selectie.
+[^kamerstukken-2021-22-35968-4-4-selectie]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen Deel, 4.4 selectie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
 #### Indicatoren
 
@@ -145,7 +145,7 @@ Het verantwoordelijke overheidsorgaan heeft inzichtelijk welke categorieën docu
 Het verantwoordelijke overheidsorgaan heeft in de beheerregels[^aw-artikel-4-2-lid-2-sub-a] de beheertaken op zowel leidinggevend als uitvoerend niveau beschreven.[^kamerstukken-2021-22-35968-2]
 
 [^aw-artikel-4-2-lid-2-sub-a]: Archiefwet, artikel 4.2, tweede lid, sub a [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
-[^kamerstukken-2021-22-35968-2]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 4.3, Duurzame toegankelijkheid, beheerstrategie, 2e alinea.
+[^kamerstukken-2021-22-35968-2]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 4.3, Duurzame toegankelijkheid, beheerstrategie, 2e alinea. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
 #### Criteria
 
@@ -158,7 +158,7 @@ Het verantwoordelijke overheidsorgaan heeft in de beheerregels[^aw-artikel-4-2-l
 - De beheerregels voor de beheertaken zijn actueel.
 - De beheerregels voor de beheertaken zijn volledig.
 
-[^kamerstukken-2021-22-35968-3]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 2.2, Zorgdrager of verantwoordelijke overheidsorgaan.
+[^kamerstukken-2021-22-35968-3]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 2.2, Zorgdrager of verantwoordelijke overheidsorgaan. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 [^ar-toelichting-algemeen-deel-h1-eisen-2]: Archiefregeling, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten.
 
 #### Indicatoren
