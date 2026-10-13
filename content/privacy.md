@@ -1,14 +1,17 @@
 ---
 title: "Privacy"
-description: "Hoe deze website omgaat met uw persoonsgegevens, wat uw rechten zijn en bij wie u terechtkunt."
-# Letterlijk overgenomen van https://www.inspectie-oe.nl/service/privacy
-# (versie van 15 januari 2026), zodat de voetlink op deze site blijft in plaats
-# van naar de hoofdsite te springen. Tekst niet redigeren; bij een wijziging op
-# de hoofdsite opnieuw overnemen.
+description: "Hoe de Inspectie Overheidsinformatie en Erfgoed op deze website omgaat met uw persoonsgegevens, wat uw rechten zijn en bij wie u terechtkunt."
+# Eigen verklaring voor deze site. De zinnen over persoonsgegevens, bewaren,
+# de Functionaris voor Gegevensbescherming en uw rechten zijn letterlijk uit
+# https://www.inspectie-oe.nl/service/privacy (versie 15 januari 2026); de rest
+# beschrijft wat deze site feitelijk doet: geen formulier, geen cookies, alleen
+# e-mail naar toetsingskader@inspectie-oe.nl en hosting op ZAD.
+# TODO: bewaartermijn van de serverlogs bij ZAD navragen en hieronder invullen;
+# tekst laten toetsen door de FG/privacy-officer van OCW vóór publicatie.
 show_lastmod: true
 ---
 
-Deze website gaat nauwkeurig om met uw persoonsgegevens. De Algemene Verordening Gegevensbescherming (AVG), de Europese privacywet, stelt eisen aan de manier waarop deze website persoonsgegevens verwerkt.
+Deze website is van de Inspectie Overheidsinformatie en Erfgoed, onderdeel van het ministerie van Onderwijs, Cultuur en Wetenschap (OCW). Deze website gaat nauwkeurig om met uw persoonsgegevens. De Algemene Verordening Gegevensbescherming (AVG), de Europese privacywet, stelt eisen aan de manier waarop deze website persoonsgegevens verwerkt.
 
 ## Wat zijn persoonsgegevens?
 
@@ -20,12 +23,13 @@ Persoonsgegevens zeggen iets over uw persoon of zijn naar u te herleiden. Bijvoo
 
 ## Wanneer worden uw persoonsgegevens verwerkt?
 
-Als deze website uw persoonsgegevens verwerkt, is dat meestal omdat u zelf contact opneemt en daarbij persoonlijke informatie opgeeft. Bijvoorbeeld wanneer u een contactformulier invult of een e-mail stuurt naar een adres dat op deze website staat.
+Deze website heeft geen contactformulier en vraagt u nergens om gegevens. Als deze website uw persoonsgegevens verwerkt, is dat omdat u zelf contact opneemt en daarbij persoonlijke informatie opgeeft. Bijvoorbeeld wanneer u een e-mail stuurt naar [toetsingskader@inspectie-oe.nl](mailto:toetsingskader@inspectie-oe.nl). Uw gegevens worden dan alleen gebruikt om uw vraag of opmerking te beantwoorden.
 
-- Staat op deze website geen contactformulier? Dan worden er geen gegevens opgeslagen.
-- Heeft deze website wel een contactformulier en maakt u hier gebruik van? Dan leest u in dat formulier meer informatie over hoe uw gegevens worden verwerkt.
+Deze website plaatst geen cookies en houdt geen webstatistieken bij. Lees meer op de pagina [Cookies]({{< relref "/cookies" >}}).
 
-In uitzonderlijke gevallen kunnen persoonsgegevens worden verwerkt voor opsporing. Bijvoorbeeld als iemand een strafbaar feit pleegt of strafbare uitlatingen doet. Dit kan alleen als het belangrijk is voor de veiligheid van de samenleving.
+## Hosting
+
+Deze website draait op ZAD, een hostingplatform van de Rijksoverheid. Om de website te kunnen leveren en te beveiligen, legt het platform technische gegevens van uw bezoek vast in logbestanden, zoals het IP-adres van uw apparaat, het tijdstip en de opgevraagde pagina. Deze gegevens worden niet gebruikt om bezoekers te volgen en worden niet langer bewaard dan nodig is voor het beheer en de beveiliging van de website.
 
 ## Bewaren persoonsgegevens
 
@@ -45,6 +49,4 @@ Wilt u een verzoek indienen? Of heeft u vragen over de informatie op deze pagina
 
 Als u vindt dat uw persoonsgegevens niet in overeenstemming met de AVG worden verwerkt, kunt u een klacht indienen bij de [Autoriteit Persoonsgegevens](https://www.autoriteitpersoonsgegevens.nl/een-tip-of-klacht-indienen-bij-de-ap).
 
-Deze pagina is aangepast op 15 januari 2026.
-
-Bron: [Privacy, Inspectie Overheidsinformatie en Erfgoed](https://www.inspectie-oe.nl/service/privacy).
+Deze verklaring is gebaseerd op de [privacypagina van de Inspectie Overheidsinformatie en Erfgoed](https://www.inspectie-oe.nl/service/privacy).

@@ -14,11 +14,12 @@ changelog volgt [Semantic Versioning][semver].
 ### Gewijzigd
 
 - De voetlinks Privacy en Cookies blijven op deze site (`/privacy/` en
-  `/cookies/`) in plaats van naar inspectie-oe.nl te springen. De privacytekst
-  is overgenomen van de hoofdsite (versie 15 januari 2026). De cookietekst is
-  op deze site toegesneden: hier worden geen cookies geplaatst en geen
-  webstatistieken bijgehouden; alleen de weergavevoorkeur en de stand van de
-  inhoudsopgave staan in de lokale opslag van de browser.
+  `/cookies/`) in plaats van naar inspectie-oe.nl te springen. Beide teksten
+  volgen de hoofdsite (versie 15 januari 2026) waar dat klopt en beschrijven
+  verder wat deze site zelf doet: eigen privacyverklaring met de Inspectie als
+  verantwoordelijke, alleen e-mailcontact, hosting op ZAD; geen cookies en geen
+  webstatistieken, alleen de weergavevoorkeur en de stand van de inhoudsopgave
+  in de lokale opslag van de browser.
 
 - Het Rijksoverheid-lint in de kop staat er niet meer alleen: het woordmerk
   staat rechts ernaast, zoals op het briefhoofd van de PDF's en op
