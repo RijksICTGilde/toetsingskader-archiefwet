@@ -1,9 +1,10 @@
 ---
 title: "Privacy"
-description: "Hoe deze website omgaat met persoonsgegevens, wat uw rechten zijn en bij wie u terechtkunt."
-# Overgenomen van https://www.inspectie-oe.nl/service/privacy (versie van
-# 15 januari 2026), zodat de voetlink op deze site blijft in plaats van naar de
-# hoofdsite te springen.
+description: "Hoe deze website omgaat met uw persoonsgegevens, wat uw rechten zijn en bij wie u terechtkunt."
+# Letterlijk overgenomen van https://www.inspectie-oe.nl/service/privacy
+# (versie van 15 januari 2026), zodat de voetlink op deze site blijft in plaats
+# van naar de hoofdsite te springen. Tekst niet redigeren; bij een wijziging op
+# de hoofdsite opnieuw overnemen.
 show_lastmod: true
 ---
 
@@ -15,7 +16,7 @@ Persoonsgegevens zeggen iets over uw persoon of zijn naar u te herleiden. Bijvoo
 
 - uw e-mailadres;
 - uw telefoonnummer;
-- andere contactgegevens.
+- andere contactgegevens
 
 ## Wanneer worden uw persoonsgegevens verwerkt?
 
@@ -32,16 +33,18 @@ Deze website bewaart persoonsgegevens niet langer dan nodig. Uw gegevens worden 
 
 ## Functionaris voor Gegevensbescherming
 
-Bij het ministerie van OCW zijn functionarissen voor gegevensbescherming werkzaam en bij de Autoriteit Persoonsgegevens gemeld. Als onafhankelijke, interne toezichthouders zien zij erop toe dat de verwerkingen van persoonsgegevens binnen het ministerie van OCW en ook binnen de Inspectie Overheidsinformatie en Erfgoed in overeenstemming zijn met de wet.
+Bij het ministerie van OCW zijn functionarissen voor gegevensbescherming werkzaam en bij de Autoriteit persoonsgegevens gemeld. Als onafhankelijke, interne toezichthouders zien zij erop toe dat de verwerkingen van persoonsgegevens binnen het ministerie van OCW en ook binnen de Inspectie Overheidsinformatie en Erfgoed, in overeenstemming is met de wet.
 
-De Functionaris Gegevensbescherming voor de Inspectie is: E.J.H.L. Nijenhuis, [fg@minocw.nl](mailto:fg@minocw.nl). Ga voor meer informatie naar de [privacyverklaring van het ministerie van Onderwijs, Cultuur en Wetenschap](https://www.rijksoverheid.nl/ministeries/ministerie-van-onderwijs-cultuur-en-wetenschap/privacy).
+De Functionaris Gegevensbescherming voor de Inspectie is: E.J.H.L Nijenhuis, [fg@minocw.nl](mailto:fg@minocw.nl). Ga voor meer informatie naar [Privacyverklaring ministerie van Onderwijs, Cultuur en Wetenschap](https://www.rijksoverheid.nl/ministeries/ministerie-van-onderwijs-cultuur-en-wetenschap/privacy)
 
 ## Uw rechten
 
 In de [Algemene Verordening Gegevensbescherming](https://www.autoriteitpersoonsgegevens.nl/themas/basis-avg/avg-algemeen) staat wanneer uw gegevens mogen worden verwerkt. Hier leest u ook wat uw rechten zijn. U mag hiervoor een verzoek indienen bij de organisatie die uw gegevens verwerkt.
 
-Wilt u een verzoek indienen? Of heeft u vragen over de informatie op deze pagina? Stuur dan een e-mail naar [AVG@minocw.nl](mailto:AVG@minocw.nl).
+Wilt u een verzoek indienen? Of heeft u vragen over de informatie op deze pagina? Stuur dan een mail naar [AVG@minocw.nl](mailto:AVG@minocw.nl)
 
 Als u vindt dat uw persoonsgegevens niet in overeenstemming met de AVG worden verwerkt, kunt u een klacht indienen bij de [Autoriteit Persoonsgegevens](https://www.autoriteitpersoonsgegevens.nl/een-tip-of-klacht-indienen-bij-de-ap).
 
-Deze tekst is overgenomen van de [privacypagina van de Inspectie Overheidsinformatie en Erfgoed](https://www.inspectie-oe.nl/service/privacy), versie van 15 januari 2026.
+Deze pagina is aangepast op 15 januari 2026.
+
+Bron: [Privacy, Inspectie Overheidsinformatie en Erfgoed](https://www.inspectie-oe.nl/service/privacy).
