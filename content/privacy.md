@@ -22,11 +22,16 @@ description: "Hoe de Inspectie Overheidsinformatie en Erfgoed op deze website om
 #   er geen andere ontvangers buiten de EU zijn (1.3);
 # - grondslag en taakomschrijving laten bevestigen door de FG; termijn uit de
 #   selectielijst voor e-mail opnemen als die er is;
+# - concrete bewaartermijn moet onder Hosting komen te staan; de zin onder
+#   "Bewaren persoonsgegevens" verwijst ernaar;
+# - cookiezin onder "Wanneer worden…" volgt de uitkomst van vraag 4.1 (zie
+#   cookies.md);
+# - ontvangers van e-mail (e-mailvoorziening) laten vaststellen door OCW;
 # - tekst laten toetsen door de FG/privacy-officer van OCW.
 show_lastmod: true
 ---
 
-Deze website is van de Inspectie Overheidsinformatie en Erfgoed, onderdeel van het ministerie van Onderwijs, Cultuur en Wetenschap (OCW). Verantwoordelijk voor de verwerking van persoonsgegevens is de minister van OCW. De Inspectie is uw aanspreekpunt; u bereikt het ministerie over privacyvragen via [AVG@minocw.nl](mailto:AVG@minocw.nl). Deze website gaat nauwkeurig om met uw persoonsgegevens. De Algemene Verordening Gegevensbescherming (AVG), de Europese privacywet, stelt eisen aan de manier waarop deze website persoonsgegevens verwerkt.
+Deze website is van de Inspectie Overheidsinformatie en Erfgoed, onderdeel van het ministerie van Onderwijs, Cultuur en Wetenschap (OCW). Verantwoordelijk voor de verwerking van persoonsgegevens is de minister van OCW. Met vragen over deze website kunt u terecht bij de Inspectie. Privacyverzoeken stuurt u naar [AVG@minocw.nl](mailto:AVG@minocw.nl). Deze website gaat nauwkeurig om met uw persoonsgegevens. De Algemene Verordening Gegevensbescherming (AVG), de Europese privacywet, stelt eisen aan de manier waarop deze website persoonsgegevens verwerkt.
 
 ## Wat zijn persoonsgegevens?
 
@@ -50,21 +55,15 @@ Deze website heeft geen contactformulier en vraagt u nergens om gegevens. Het st
 
 Deze website draait op ZAD, een hostingplatform van de Rijksoverheid. Om de website te kunnen leveren en te beveiligen, legt het platform technische gegevens van uw bezoek vast in logbestanden, zoals het IP-adres van uw apparaat, het tijdstip en de opgevraagde pagina. Deze gegevens worden niet gebruikt om bezoekers te volgen en worden niet langer bewaard dan nodig is voor het beheer en de beveiliging van de website.
 
-De beheerder van het platform en het Overheidsdatacenter Noord (ODC-Noord) in Groningen, waar het platform draait, verwerken deze gegevens in opdracht van het ministerie van OCW. De gegevens blijven in Nederland. Het ministerie verwerkt deze gegevens voor de uitvoering van een taak van algemeen belang: het toezicht door de Inspectie op de naleving van de Archiefwet, waarvan het publiceren van deze informatie deel uitmaakt (artikel 6, eerste lid, onder e, AVG).
+De beheerder van het platform en het Overheidsdatacenter Noord (ODC-Noord) in Groningen, waar het platform draait, verwerken deze gegevens in opdracht van het ministerie van OCW. ODC-Noord verwerkt deze gegevens in Nederland. Zonder het IP-adres van uw apparaat kan de website niet aan u worden getoond. Het ministerie verwerkt deze gegevens voor de uitvoering van een taak van algemeen belang: het toezicht door de Inspectie op de naleving van de Archiefwet, waarvan het publiceren van deze informatie deel uitmaakt (artikel 6, eerste lid, onder e, AVG).
 
 ## Als u een e-mail stuurt
 
-Uw e-mail wordt gebruikt om uw vraag of opmerking te beantwoorden. Dat is onderdeel van dezelfde taak van algemeen belang (artikel 6, eerste lid, onder e, AVG). Uw e-mail en het antwoord daarop zijn daarnaast archiefstukken van de Inspectie. Het ministerie is wettelijk verplicht die te bewaren en te vernietigen volgens de Archiefwet en de selectielijst die voor de Inspectie geldt (artikel 6, eerste lid, onder c, AVG).
+Uw e-mail wordt gebruikt om uw vraag of opmerking te beantwoorden. Dat is onderdeel van dezelfde taak van algemeen belang (artikel 6, eerste lid, onder e, AVG). Uw e-mail en het antwoord daarop zijn daarnaast archiefbescheiden van de Inspectie. Het ministerie is wettelijk verplicht die te bewaren en te vernietigen volgens de Archiefwet en de selectielijst die voor de Inspectie geldt (artikel 6, eerste lid, onder c, AVG).
 
 ## Bewaren persoonsgegevens
 
-Deze website bewaart persoonsgegevens niet langer dan nodig. Voor de logbestanden staat de termijn onder [Hosting](#hosting), voor e-mail onder [Als u een e-mail stuurt](#als-u-een-e-mail-stuurt). Deze website deelt geen persoonsgegevens met anderen voor commerciële doeleinden.
-
-## Functionaris voor Gegevensbescherming
-
-Bij het ministerie van OCW zijn functionarissen voor gegevensbescherming werkzaam en bij de Autoriteit persoonsgegevens gemeld. Als onafhankelijke, interne toezichthouders zien zij erop toe dat de verwerkingen van persoonsgegevens binnen het ministerie van OCW en ook binnen de Inspectie Overheidsinformatie en Erfgoed, in overeenstemming is met de wet.
-
-De Functionaris Gegevensbescherming voor de Inspectie is: E.J.H.L. Nijenhuis, [fg@minocw.nl](mailto:fg@minocw.nl). Ga voor meer informatie naar [Privacyverklaring ministerie van Onderwijs, Cultuur en Wetenschap](https://www.rijksoverheid.nl/ministeries/ministerie-van-onderwijs-cultuur-en-wetenschap/organisatie/privacy).
+Deze website bewaart persoonsgegevens niet langer dan nodig. Hoe lang de gegevens bewaard blijven, leest u onder [Hosting](#hosting) en [Als u een e-mail stuurt](#als-u-een-e-mail-stuurt). Deze website deelt geen persoonsgegevens met anderen voor commerciële doeleinden.
 
 ## Uw rechten
 
@@ -81,10 +80,16 @@ Wilt u een verzoek indienen? Of heeft u vragen over de informatie op deze pagina
 
 ## Bezwaar maken
 
-U kunt bezwaar maken tegen de verwerking van uw persoonsgegevens, op grond van uw specifieke situatie. Stuur uw bezwaar naar [AVG@minocw.nl](mailto:AVG@minocw.nl).
+U kunt bezwaar maken tegen het vastleggen van uw gegevens in logbestanden en tegen het verwerken van uw e-mail om die te beantwoorden, op grond van uw specifieke situatie. Tegen het bewaren van archiefbescheiden op grond van de Archiefwet is geen bezwaar mogelijk. Stuur uw bezwaar naar [AVG@minocw.nl](mailto:AVG@minocw.nl).
 
 ## Klacht indienen
 
 Als u vindt dat uw persoonsgegevens niet in overeenstemming met de AVG worden verwerkt, kunt u een klacht indienen bij de [Autoriteit Persoonsgegevens](https://www.autoriteitpersoonsgegevens.nl/een-tip-of-klacht-indienen-bij-de-ap).
+
+## Functionaris voor Gegevensbescherming
+
+Bij het ministerie van OCW zijn functionarissen voor gegevensbescherming werkzaam en bij de Autoriteit Persoonsgegevens gemeld. Als onafhankelijke, interne toezichthouders zien zij erop toe dat de verwerkingen van persoonsgegevens binnen het ministerie van OCW en ook binnen de Inspectie Overheidsinformatie en Erfgoed, in overeenstemming zijn met de wet.
+
+De Functionaris voor Gegevensbescherming voor de Inspectie is: E.J.H.L. Nijenhuis, [fg@minocw.nl](mailto:fg@minocw.nl). Ga voor meer informatie naar [Privacyverklaring ministerie van Onderwijs, Cultuur en Wetenschap](https://www.rijksoverheid.nl/ministeries/ministerie-van-onderwijs-cultuur-en-wetenschap/organisatie/privacy).
 
 Deze verklaring is gebaseerd op de [privacypagina van de Inspectie Overheidsinformatie en Erfgoed](https://www.inspectie-oe.nl/service/privacy).
