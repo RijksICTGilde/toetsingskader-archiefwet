@@ -10,6 +10,9 @@ description: "Deze website plaatst één technisch noodzakelijk cookie van het h
 # voor sessie-affiniteit, naam is een hash, HttpOnly, Secure, SameSite=None,
 # geen vervaldatum. Verder alleen localStorage `theme` en `toc-open`
 # (assets/js/toc-open.js en de thema-scripts base.js, toc.js).
+# Elk ZAD-component draait met één replica, dus de cookie heeft geen functie;
+# ZAD is gevraagd `disable_cookies` aan te zetten. Gaat hij uit, dan vervalt de
+# cookie-alinea en de tabelregel hieronder.
 # De inlogmuur (oauth2-proxy + Keycloak) gaat eraf bij go-live; de cookies
 # daarvan staan daarom bewust niet in deze tekst. Komt er ooit analytics bij
 # (ZAD overweegt Umami), dan moet deze pagina mee.
@@ -25,7 +28,7 @@ Een cookie is een klein tekstbestand met informatie. Bezoekt u een website? Dan 
 
 ## Waarom plaatst deze website een cookie?
 
-Deze website draait op ZAD, een hostingplatform van de Rijksoverheid. Het platform plaatst één cookie om uw bezoek steeds door dezelfde server te laten afhandelen. Dat cookie bevat geen gegevens over u en wordt niet gebruikt voor webstatistieken. Wij zien dus niet welke pagina's mensen bekijken en hoe lang zij op de site blijven.
+Deze website draait op ZAD, een hostingplatform van de Rijksoverheid. Het platform plaatst één cookie om uw bezoek steeds door dezelfde server te laten afhandelen. Dat cookie bevat geen gegevens over u en wordt niet gebruikt voor webstatistieken. Deze website houdt geen webstatistieken bij.
 
 ### Geen trackingcookies
 
@@ -33,11 +36,11 @@ Deze website gebruikt geen trackingcookies. Trackingcookies zijn cookies die bez
 
 ### Geen toestemming nodig
 
-Voor dit cookie is geen toestemming van de bezoeker nodig, omdat het geen inbreuk maakt op de privacy.
+Voor dit cookie is geen toestemming van de bezoeker nodig, omdat het alleen dient om de website technisch te leveren.
 
 ## Om welke gegevens gaat het?
 
-Deze website legt geen gegevens van een websitebezoek vast.
+Het cookie zelf bevat geen gegevens over u. Het hostingplatform legt wel technische gegevens van uw bezoek vast in logbestanden, zoals het IP-adres van uw apparaat. Wat daarmee gebeurt, leest u op de pagina [Privacy]({{< relref "/privacy" >}}).
 
 ## Om welk cookie gaat het?
 
