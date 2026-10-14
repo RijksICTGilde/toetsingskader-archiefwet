@@ -10,16 +10,18 @@ description: "Hoe de Inspectie Overheidsinformatie en Erfgoed op deze website om
 # Inspectie is archiefbescheid (Archiefwet, selectielijst).
 # De inlogmuur (Keycloak) gaat eraf bij go-live; accounts staan daarom bewust
 # niet in deze tekst.
-# TODO vóór publicatie (vragenlijst aan ZAD, versie 5, en de FG van OCW):
+# TODO vóór publicatie (vragenlijst aan ZAD in ~/projects, en de FG van OCW):
 # - velden in de logbestanden bevestigen (vraag 2.1, 2.2) en een concrete
 #   bewaartermijn invullen (2.3); art. 13 lid 2 onder a AVG staat een criterium
 #   alleen toe als een termijn niet te geven is;
 # - beheerder van ZAD bij naam noemen als ontvanger (1.1); datacenter is
-#   ODC-Noord (bevestigd 14 okt 2026); andere ontvangers uitsluiten (1.3, 1.4); "in opdracht van" pas na de verwerkersafspraak
+#   ODC-Noord (bevestigd 14 okt 2026); andere ontvangers uitsluiten (1.3);
+# - valt ODC-Noord onder OCW (DUO, vraag 1.4), dan de zin "in opdracht van
+#   het ministerie van OCW" voor ODC-Noord herzien; "in opdracht van" pas na de verwerkersafspraak
 #   (1.2);
 # - "niet gebruikt om bezoekers te volgen" bevestigen (1.6);
-# - "de gegevens blijven in Nederland" geldt voor ODC-Noord; bevestigen dat
-#   er geen andere ontvangers buiten de EU zijn (1.3);
+# - "ODC-Noord verwerkt deze gegevens in Nederland": bevestigen dat er geen
+#   andere ontvangers buiten Nederland of de EU zijn (1.3);
 # - grondslag en taakomschrijving laten bevestigen door de FG; termijn uit de
 #   selectielijst voor e-mail opnemen als die er is;
 # - concrete bewaartermijn moet onder Hosting komen te staan; de zin onder
@@ -31,7 +33,7 @@ description: "Hoe de Inspectie Overheidsinformatie en Erfgoed op deze website om
 show_lastmod: true
 ---
 
-Deze website is van de Inspectie Overheidsinformatie en Erfgoed, onderdeel van het ministerie van Onderwijs, Cultuur en Wetenschap (OCW). Verantwoordelijk voor de verwerking van persoonsgegevens is de minister van OCW. Met vragen over deze website kunt u terecht bij de Inspectie. Privacyverzoeken stuurt u naar [AVG@minocw.nl](mailto:AVG@minocw.nl). Deze website gaat nauwkeurig om met uw persoonsgegevens. De Algemene Verordening Gegevensbescherming (AVG), de Europese privacywet, stelt eisen aan de manier waarop deze website persoonsgegevens verwerkt.
+Deze website is van de Inspectie Overheidsinformatie en Erfgoed, onderdeel van het ministerie van Onderwijs, Cultuur en Wetenschap (OCW). Verantwoordelijk voor de verwerking van persoonsgegevens is de minister van OCW. Met vragen over deze website kunt u terecht bij de Inspectie, via [toetsingskader@inspectie-oe.nl](mailto:toetsingskader@inspectie-oe.nl). Privacyverzoeken stuurt u naar [AVG@minocw.nl](mailto:AVG@minocw.nl). Deze website gaat nauwkeurig om met uw persoonsgegevens. De Algemene Verordening Gegevensbescherming (AVG), de Europese privacywet, stelt eisen aan de manier waarop deze website persoonsgegevens verwerkt.
 
 ## Wat zijn persoonsgegevens?
 
@@ -39,8 +41,8 @@ Persoonsgegevens zeggen iets over uw persoon of zijn naar u te herleiden. Bijvoo
 
 - uw e-mailadres;
 - uw telefoonnummer;
-- het IP-adres van uw apparaat;
-- andere contactgegevens.
+- andere contactgegevens;
+- het IP-adres van uw apparaat.
 
 ## Wanneer worden uw persoonsgegevens verwerkt?
 
@@ -80,7 +82,7 @@ Wilt u een verzoek indienen? Of heeft u vragen over de informatie op deze pagina
 
 ## Bezwaar maken
 
-U kunt bezwaar maken tegen het vastleggen van uw gegevens in logbestanden en tegen het verwerken van uw e-mail om die te beantwoorden, op grond van uw specifieke situatie. Tegen het bewaren van archiefbescheiden op grond van de Archiefwet is geen bezwaar mogelijk. Stuur uw bezwaar naar [AVG@minocw.nl](mailto:AVG@minocw.nl).
+U kunt bezwaar maken als u redenen heeft die te maken hebben met uw persoonlijke situatie. Dat kan tegen het vastleggen van uw gegevens in logbestanden en tegen het verwerken van uw e-mail om die te beantwoorden. Tegen het bewaren van archiefbescheiden op grond van de Archiefwet is geen bezwaar mogelijk. Stuur uw bezwaar naar [AVG@minocw.nl](mailto:AVG@minocw.nl).
 
 ## Klacht indienen
 
