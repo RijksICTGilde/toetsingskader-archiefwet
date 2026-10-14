@@ -33,7 +33,7 @@ description: "Hoe de Inspectie Overheidsinformatie en Erfgoed op deze website om
 show_lastmod: true
 ---
 
-Deze website is van de Inspectie Overheidsinformatie en Erfgoed, onderdeel van het ministerie van Onderwijs, Cultuur en Wetenschap (OCW). Verantwoordelijk voor de verwerking van persoonsgegevens is de minister van OCW. Met vragen over deze website kunt u terecht bij de Inspectie, via [toetsingskader@inspectie-oe.nl](mailto:toetsingskader@inspectie-oe.nl). Privacyverzoeken stuurt u naar [AVG@minocw.nl](mailto:AVG@minocw.nl). Deze website gaat nauwkeurig om met uw persoonsgegevens. De Algemene Verordening Gegevensbescherming (AVG), de Europese privacywet, stelt eisen aan de manier waarop deze website persoonsgegevens verwerkt.
+Deze website is van de Inspectie Overheidsinformatie en Erfgoed, onderdeel van het ministerie van Onderwijs, Cultuur en Wetenschap (OCW). Verantwoordelijk voor de verwerking van persoonsgegevens is de minister van OCW. Met vragen over deze website kunt u terecht bij de Inspectie, via [toetsingskader@inspectie-oe.nl](mailto:toetsingskader@inspectie-oe.nl). Privacyverzoeken stuurt u naar [AVG@minocw.nl](mailto:AVG@minocw.nl). Deze website gaat nauwkeurig om met uw persoonsgegevens. De Algemene verordening gegevensbescherming (AVG), de Europese privacywet, stelt eisen aan de manier waarop deze website persoonsgegevens verwerkt.
 
 ## Wat zijn persoonsgegevens?
 
@@ -76,7 +76,7 @@ U heeft het recht om:
 - uw gegevens te laten verwijderen, voor zover het ministerie ze niet wettelijk moet bewaren;
 - de verwerking te laten beperken.
 
-In de [Algemene Verordening Gegevensbescherming](https://www.autoriteitpersoonsgegevens.nl/themas/basis-avg/avg-algemeen) leest u wanneer deze rechten gelden.
+Op de [website van de Autoriteit Persoonsgegevens](https://www.autoriteitpersoonsgegevens.nl/themas/basis-avg/avg-algemeen) leest u wanneer deze rechten gelden.
 
 Wilt u een verzoek indienen? Of heeft u vragen over de informatie op deze pagina? Stuur dan een mail naar [AVG@minocw.nl](mailto:AVG@minocw.nl).
 
@@ -90,7 +90,7 @@ Als u vindt dat uw persoonsgegevens niet in overeenstemming met de AVG worden ve
 
 ## Functionaris voor Gegevensbescherming
 
-Bij het ministerie van OCW zijn functionarissen voor gegevensbescherming werkzaam en bij de Autoriteit Persoonsgegevens gemeld. Als onafhankelijke, interne toezichthouders zien zij erop toe dat de verwerkingen van persoonsgegevens binnen het ministerie van OCW en ook binnen de Inspectie Overheidsinformatie en Erfgoed, in overeenstemming zijn met de wet.
+Bij het ministerie van OCW zijn functionarissen voor gegevensbescherming werkzaam en bij de Autoriteit Persoonsgegevens gemeld. Als onafhankelijke, interne toezichthouders zien zij erop toe dat de verwerkingen van persoonsgegevens binnen het ministerie van OCW en ook binnen de Inspectie Overheidsinformatie en Erfgoed in overeenstemming zijn met de wet.
 
 De Functionaris voor Gegevensbescherming voor de Inspectie is: E.J.H.L. Nijenhuis, [fg@minocw.nl](mailto:fg@minocw.nl). Ga voor meer informatie naar [Privacyverklaring ministerie van Onderwijs, Cultuur en Wetenschap](https://www.rijksoverheid.nl/ministeries/ministerie-van-onderwijs-cultuur-en-wetenschap/organisatie/privacy).
 

@@ -18,7 +18,8 @@ description: "Deze website plaatst één technisch noodzakelijk cookie van het h
 # hier en de cookiezin op de privacypagina. Blijft hij aan, dan beslist de FG.
 # De inlogmuur (oauth2-proxy + Keycloak) gaat eraf bij go-live; de cookies
 # daarvan staan daarom bewust niet in deze tekst. Komt er ooit analytics bij
-# (ZAD overweegt Umami), dan moet deze pagina mee.
+# (Umami staat als idee in RIG-Cluster, zie vraag 4.1 aan ZAD), dan moet deze
+# pagina mee.
 show_lastmod: true
 toc: false
 ---
