@@ -10,6 +10,8 @@ description: "Hoe de Inspectie Overheidsinformatie en Erfgoed op deze website om
 # Inspectie is archiefbescheid (Archiefwet, selectielijst).
 # De inlogmuur (Keycloak) gaat eraf bij go-live; accounts staan daarom bewust
 # niet in deze tekst.
+# TODO: bevestigen dat de Keycloak-realm en invite met de muur verdwijnen
+# (vraag 5.1); anders testers en hun gegevens opnemen.
 # TODO vóór publicatie (vragenlijst aan ZAD in ~/projects, en de FG van OCW):
 # - velden in de logbestanden bevestigen (vraag 2.1, 2.2) en een concrete
 #   bewaartermijn invullen (2.3); art. 13 lid 2 onder a AVG staat een criterium

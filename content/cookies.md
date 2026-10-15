@@ -1,6 +1,6 @@
 ---
 title: "Cookies"
-description: "Deze website plaatst één technisch noodzakelijk cookie van het hostingplatform en houdt geen webstatistieken bij."
+description: "Deze website plaatst één technisch cookie van het hostingplatform en houdt geen webstatistieken bij."
 # Opbouw en zinnen volgen https://www.inspectie-oe.nl/service/cookies zo
 # letterlijk mogelijk. Alleen wat hier onwaar is, is weggelaten of omgezet: de
 # hoofdsite staat op het Platform Rijksoverheid Online met Piwik PRO; deze site
@@ -15,7 +15,8 @@ description: "Deze website plaatst één technisch noodzakelijk cookie van het h
 # aan staat. De vrijstelling van art. 11.7a lid 3 onder a Tw vraagt dat de
 # cookie nodig is voor de communicatie; bij één replica is dat niet te
 # onderbouwen. Gaat de cookie uit, dan vervallen de alinea's over de cookie
-# hier en de cookiezin op de privacypagina. Blijft hij aan, dan beslist de FG.
+# hier, de description en de inleidende zin, en de cookiezin op de
+# privacypagina. Blijft hij aan, dan beslist de FG.
 # De inlogmuur (oauth2-proxy + Keycloak) gaat eraf bij go-live; de cookies
 # daarvan staan daarom bewust niet in deze tekst. Komt er ooit analytics bij
 # (Umami staat als idee in RIG-Cluster, zie vraag 4.1 aan ZAD), dan moet deze
