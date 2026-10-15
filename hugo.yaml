@@ -120,11 +120,14 @@ menus:
       weight: 2
 
   footer-rechts:
+    # Privacy en cookies staan op deze site zelf (content/privacy.md en
+    # content/cookies.md); de bezoeker blijft zo op dezelfde site. De andere
+    # voetlinks wijzen nog naar de hoofdsite.
     - name: Privacy
-      url: https://www.inspectie-oe.nl/service/privacy
+      pageRef: /privacy
       weight: 2
     - name: Cookies
-      url: https://www.inspectie-oe.nl/service/cookies
+      pageRef: /cookies
       weight: 3
     - name: Toegankelijkheid
       url: https://www.inspectie-oe.nl/service/toegankelijkheid
