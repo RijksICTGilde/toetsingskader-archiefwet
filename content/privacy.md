@@ -43,7 +43,7 @@ Een persoonsgegeven is informatie over een persoon die ofwel direct over iemand 
 
 ## Persoonsgegevens die verwerkt worden
 
-Als de Inspectie Overheidsinformatie en Erfgoed persoonsgegevens verwerkt, gaat het in het algemeen om 'gewone' persoonsgegevens, zoals een naam of een e-mailadres van ketenpartners of burgers. Op deze website gebeurt dit wanneer u per e-mail een vraag stelt, en bij elk bezoek in de logbestanden van het hostingplatform. Zie [Deze website](#deze-website).
+Als de Inspectie Overheidsinformatie en Erfgoed persoonsgegevens verwerkt, gaat het in het algemeen om 'gewone' persoonsgegevens, zoals een naam of een e-mailadres van ketenpartners of burgers. Op deze website verwerkt de Inspectie uw naam en e-mailadres alleen als u zelf per e-mail contact opneemt. Bij elk bezoek legt het hostingplatform wel technische gegevens vast in logbestanden, zoals uw IP-adres. Zie [Deze website](#deze-website).
 
 ## Deze website
 
