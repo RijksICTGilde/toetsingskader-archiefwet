@@ -11,23 +11,22 @@ description: "Hoe de Inspectie Overheidsinformatie en Erfgoed zorgvuldig omgaat 
 # Afwijkingen van de aangeleverde tekst, ter instemming voorgelegd:
 # Opbouw
 # - paragraaf "Deze website" toegevoegd, direct na "Privacyverklaring"
-#   (logbestanden, ZAD/ODC-Noord, bewaartermijn, e-mail als archiefbescheid,
-#   cookie): de aangeleverde tekst is algemeen;
+#   (logbestanden, ZAD/ODC-Noord, bewaartermijn, contactformulier en
+#   archiefbescheid, cookie): de aangeleverde tekst is algemeen;
 # - "Persoonsgegevens die verwerkt worden" is een subkop onder "Hoe gaan wij om
 #   met persoonsgegevens?" (was een eigen kop ervoor);
 # - "Bezwaar maken" als eigen kop toegevoegd na de rechten (art. 21 lid 4
-#   AVG): bezwaar kan tegen logbestanden en het beantwoorden van e-mail, niet
+#   AVG): bezwaar kan tegen logbestanden en het beantwoorden van berichten, niet
 #   tegen het bewaren als archiefbescheid;
 # Inhoud
 # - Persoonsgegevens: "een telefoonnummer" weggelaten; "Dit gebeurt
 #   bijvoorbeeld wanneer u telefonisch, per e-mail of via het contactformulier
 #   een vraag stelt" vervangen door: naam en e-mailadres alleen bij contact
-#   per e-mail, plus de logbestanden bij elk bezoek. Deze site heeft geen
-#   telefoonnummer of contactformulier;
+#   via het contactformulier, plus de logbestanden bij elk bezoek; verwijzing
+#   "Zie hiervoor" naar "Deze website";
 # - "uitvoering van overeenkomsten" uit de opsomming van doelen weggelaten:
 #   niet van toepassing op deze site;
-# - Beveiliging: "via het contactformulier" aangevuld met "op inspectie-oe.nl"
-#   (met link), omdat deze site geen formulier heeft;
+# - Beveiliging: "contactformulier" linkt naar inspectie-oe.nl/service/contact;
 # - Zie ook: "Privacy verklaring OC&W" wordt "Privacyverklaring ministerie van
 #   Onderwijs, Cultuur en Wetenschap", met een werkende link
 #   (rijksoverheid.nl/.../organisatie/privacy);
@@ -35,15 +34,16 @@ description: "Hoe de Inspectie Overheidsinformatie en Erfgoed zorgvuldig omgaat 
 # - "Algemene Verordening Gegevensbescherming" wordt "Algemene verordening
 #   gegevensbescherming" (officiële schrijfwijze);
 # - "een email sturen via de dienstpostbusavg@minocw.nl" wordt "een e-mail
-#   sturen naar dienstpostbusavg@minocw.nl";
+#   sturen naar de dienstpostbus avg@minocw.nl" (adres bevestigd door de
+#   privacycontactpersoon);
+# - "Archiefwet 1995" wordt "Archiefwet 2026" (op aanwijzing van de
+#   privacycontactpersoon);
 # - FG: "wordt verwerkt kunt u" wordt "worden verwerkt, kunt u";
 #   "E.J.H.L" wordt "E.J.H.L.";
 # - komma's: "verwerkt, gaat het", "Hoe u dat moet doen, kunt u";
 #   rechte aanhalingstekens bij 'gewone';
 # - links toegevoegd bij e-mailadressen en bij "een tip of een klacht
 #   indienen" (AP); kopjes en opsommingen als Markdown.
-# Navragen: "Archiefwet 1995" staat in de aangeleverde tekst; de site gaat over
-# de nieuwe Archiefwet.
 #
 # Verwerkt uit het antwoord van ZAD (19 oktober 2026): ZAD valt onder ODI
 # (BZK); ODC-Noord is onderdeel van DUO; geen andere ontvangers; geen eigen
@@ -56,7 +56,7 @@ description: "Hoe de Inspectie Overheidsinformatie en Erfgoed zorgvuldig omgaat 
 # - verwerkersovereenkomst: ZAD stelt een algemene op (vraag 2). "In opdracht
 #   van" beschrijft de feitelijke rolverdeling, de afspraak moet er wel komen
 #   (art. 28 lid 3 AVG);
-# - bewaartermijn van e-mail volgens de selectielijst;
+# - bewaartermijn van berichten via het contactformulier volgens de selectielijst;
 # - instemming van de privacycontactpersoon met de afwijkingen hierboven.
 show_lastmod: true
 ---
@@ -65,13 +65,13 @@ De Inspectie Overheidsinformatie en Erfgoed gaat zorgvuldig om met uw persoonsge
 
 ## Privacyverklaring
 
-Een persoonsgegeven is informatie over een persoon die ofwel direct over iemand gaat, ofwel naar deze persoon te herleiden is. De Inspectie Overheidsinformatie en Erfgoed is verantwoordelijk voor de verwerking van persoonsgegevens en gaat zorgvuldig om met deze gegevens. De Inspectie maakt alleen gebruik van persoonsgegevens als dat noodzakelijk is voor haar toezicht- en opsporingstaken. De wettelijke grondslagen hiervoor zijn onder andere de Erfgoedwet, de Archiefwet 1995 en de vervulling van taken in het algemeen belang. De bescherming van (uw) persoonsgegevens is geregeld in de Algemene verordening gegevensbescherming (AVG). De AVG heeft tot doel de privacy van burgers te beschermen. Deze privacyverklaring maakt duidelijk hoe de Inspectie Overheidsinformatie en Erfgoed daar invulling aan geeft.
+Een persoonsgegeven is informatie over een persoon die ofwel direct over iemand gaat, ofwel naar deze persoon te herleiden is. De Inspectie Overheidsinformatie en Erfgoed is verantwoordelijk voor de verwerking van persoonsgegevens en gaat zorgvuldig om met deze gegevens. De Inspectie maakt alleen gebruik van persoonsgegevens als dat noodzakelijk is voor haar toezicht- en opsporingstaken. De wettelijke grondslagen hiervoor zijn onder andere de Erfgoedwet, de Archiefwet 2026 en de vervulling van taken in het algemeen belang. De bescherming van (uw) persoonsgegevens is geregeld in de Algemene verordening gegevensbescherming (AVG). De AVG heeft tot doel de privacy van burgers te beschermen. Deze privacyverklaring maakt duidelijk hoe de Inspectie Overheidsinformatie en Erfgoed daar invulling aan geeft.
 
 ## Deze website
 
 Deze website draait op [ZAD](https://zad.rijksapp.nl/introductie), een hostingplatform van de Rijksorganisatie voor Ontwikkeling, Digitalisering en Innovatie (ODI) van het ministerie van Binnenlandse Zaken en Koninkrijksrelaties. Het platform staat in het Overheidsdatacenter Noord (ODC-Noord) van DUO in Groningen. Om de website te kunnen leveren en te beveiligen, legt het platform technische gegevens van uw bezoek vast in logbestanden, zoals het IP-adres van uw apparaat, het tijdstip en de opgevraagde pagina. Zonder het IP-adres kan de website niet aan u worden getoond. Deze gegevens worden niet gebruikt om bezoekers te volgen of voor statistiek, en worden 6 maanden bewaard. Alleen beheerders van ZAD en ODC-Noord en de beheerders van deze website kunnen de logbestanden inzien. ODI en ODC-Noord verwerken deze gegevens in opdracht van de Inspectie, in Nederland.
 
-Deze website heeft geen contactformulier. Als u een e-mail stuurt naar [toetsingskader@inspectie-oe.nl](mailto:toetsingskader@inspectie-oe.nl), gebruikt de Inspectie uw gegevens om uw vraag of opmerking te beantwoorden. Het sturen van een e-mail is vrijwillig. Uw e-mail en het antwoord daarop zijn archiefbescheiden van de Inspectie en worden bewaard en vernietigd volgens de Archiefwet en de selectielijst die voor de Inspectie geldt.
+Als u contact opneemt via het [contactformulier](https://www.inspectie-oe.nl/service/contact) van de Inspectie, gebruikt de Inspectie uw gegevens om uw vraag of opmerking te beantwoorden. Contact opnemen is vrijwillig. Uw bericht en het antwoord daarop zijn archiefbescheiden van de Inspectie en worden bewaard en vernietigd volgens de Archiefwet en de selectielijst die voor de Inspectie geldt.
 
 Deze website plaatst alleen een technisch cookie van het hostingplatform en houdt geen webstatistieken bij. Lees meer op de pagina [Cookies]({{< relref "/cookies" >}}).
 
@@ -86,7 +86,7 @@ De Inspectie Overheidsinformatie en Erfgoed hecht groot belang dat persoonsgegev
 
 ### Persoonsgegevens die verwerkt worden
 
-Als de Inspectie Overheidsinformatie en Erfgoed persoonsgegevens verwerkt, gaat het in het algemeen om 'gewone' persoonsgegevens, zoals een naam of een e-mailadres van ketenpartners of burgers. Op deze website verwerkt de Inspectie uw naam en e-mailadres alleen als u zelf per e-mail contact opneemt. Bij elk bezoek legt het hostingplatform wel technische gegevens vast in logbestanden, zoals uw IP-adres. Zie [Deze website](#deze-website).
+Als de Inspectie Overheidsinformatie en Erfgoed persoonsgegevens verwerkt, gaat het in het algemeen om 'gewone' persoonsgegevens, zoals een naam of een e-mailadres van ketenpartners of burgers. Op deze website verwerkt de Inspectie uw naam en e-mailadres alleen als u zelf contact opneemt via het contactformulier. Bij elk bezoek legt het hostingplatform wel technische gegevens vast in logbestanden, zoals uw IP-adres. Zie [hiervoor](#deze-website).
 
 ### Rechtmatigheid, behoorlijkheid en transparantie
 
@@ -129,15 +129,15 @@ De AVG stelt de rechten van u als betrokken burger centraal. U heeft de volgende
 - U heeft het recht om het verwerken van uw persoonsgegevens door de Inspectie te beperken;
 - U heeft het recht om bezwaar te maken.
 
-Wilt u op grond van de AVG een verzoek doen in verband met voornoemde rechten of wilt u bezwaar maken? Dan kunt u een e-mail sturen naar [dienstpostbusavg@minocw.nl](mailto:dienstpostbusavg@minocw.nl). Ter bevestiging van uw identiteit kunt u worden verzocht een kopie van een geldig identiteitsbewijs te sturen. U kunt dit op een veilige manier doen door een kopie te maken met de KopieID-app. Ook kunt u worden verzocht uw verzoek te preciseren.
+Wilt u op grond van de AVG een verzoek doen in verband met voornoemde rechten of wilt u bezwaar maken? Dan kunt u een e-mail sturen naar de dienstpostbus [avg@minocw.nl](mailto:avg@minocw.nl). Ter bevestiging van uw identiteit kunt u worden verzocht een kopie van een geldig identiteitsbewijs te sturen. U kunt dit op een veilige manier doen door een kopie te maken met de KopieID-app. Ook kunt u worden verzocht uw verzoek te preciseren.
 
 ## Bezwaar maken
 
-U kunt bezwaar maken als u redenen heeft die te maken hebben met uw persoonlijke situatie. Dat kan tegen het vastleggen van uw gegevens in logbestanden en tegen het verwerken van uw e-mail om die te beantwoorden. Tegen het bewaren van archiefbescheiden op grond van de Archiefwet is geen bezwaar mogelijk. Uw bezwaar stuurt u naar [dienstpostbusavg@minocw.nl](mailto:dienstpostbusavg@minocw.nl).
+U kunt bezwaar maken als u redenen heeft die te maken hebben met uw persoonlijke situatie. Dat kan tegen het vastleggen van uw gegevens in logbestanden en tegen het verwerken van uw bericht om dat te beantwoorden. Tegen het bewaren van archiefbescheiden op grond van de Archiefwet is geen bezwaar mogelijk. Uw bezwaar stuurt u naar de dienstpostbus [avg@minocw.nl](mailto:avg@minocw.nl).
 
 ## De beveiliging van uw persoonsgegevens
 
-De Inspectie Overheidsinformatie en Erfgoed neemt de bescherming van uw gegevens serieus en neemt passende maatregelen om misbruik, verlies, onbevoegde toegang, ongewenste openbaarmaking en ongeoorloofde wijziging tegen te gaan. Als u de indruk heeft dat uw gegevens niet goed beveiligd zijn of er aanwijzingen zijn van misbruik, dan kunt u dit bij de Inspectie melden via het contactformulier op [inspectie-oe.nl](https://www.inspectie-oe.nl).
+De Inspectie Overheidsinformatie en Erfgoed neemt de bescherming van uw gegevens serieus en neemt passende maatregelen om misbruik, verlies, onbevoegde toegang, ongewenste openbaarmaking en ongeoorloofde wijziging tegen te gaan. Als u de indruk heeft dat uw gegevens niet goed beveiligd zijn of er aanwijzingen zijn van misbruik, dan kunt u dit bij de Inspectie melden via het [contactformulier](https://www.inspectie-oe.nl/service/contact).
 
 ## Functionaris voor Gegevensbescherming
 
