@@ -15,7 +15,6 @@ description: "Hoe de Inspectie Overheidsinformatie en Erfgoed zorgvuldig omgaat 
 #   e-mail: deze site heeft alleen e-mail;
 # - "uitvoering van overeenkomsten" weggelaten: niet van toepassing op deze site;
 # - bezwaar daarnaast onder een eigen kop (art. 21 lid 4 AVG);
-# - "dienstpostbusavg@minocw.nl" gelezen als de dienstpostbus AVG@minocw.nl;
 # - kleine correcties: "E.J.H.L." met punt, "worden verwerkt".
 # Navragen: "Archiefwet 1995" staat in de aangeleverde tekst; de site gaat over
 # de nieuwe Archiefwet.
@@ -104,11 +103,11 @@ De AVG stelt de rechten van u als betrokken burger centraal. U heeft de volgende
 - U heeft het recht om het verwerken van uw persoonsgegevens door de Inspectie te beperken;
 - U heeft het recht om bezwaar te maken.
 
-Wilt u op grond van de AVG een verzoek doen in verband met voornoemde rechten of wilt u bezwaar maken? Dan kunt u een e-mail sturen naar de dienstpostbus [AVG@minocw.nl](mailto:AVG@minocw.nl). Ter bevestiging van uw identiteit kunt u worden verzocht een kopie van een geldig identiteitsbewijs te sturen. U kunt dit op een veilige manier doen door een kopie te maken met de KopieID-app. Ook kunt u worden verzocht uw verzoek te preciseren.
+Wilt u op grond van de AVG een verzoek doen in verband met voornoemde rechten of wilt u bezwaar maken? Dan kunt u een e-mail sturen naar [dienstpostbusavg@minocw.nl](mailto:dienstpostbusavg@minocw.nl). Ter bevestiging van uw identiteit kunt u worden verzocht een kopie van een geldig identiteitsbewijs te sturen. U kunt dit op een veilige manier doen door een kopie te maken met de KopieID-app. Ook kunt u worden verzocht uw verzoek te preciseren.
 
 ## Bezwaar maken
 
-U kunt bezwaar maken als u redenen heeft die te maken hebben met uw persoonlijke situatie. Dat kan tegen het vastleggen van uw gegevens in logbestanden en tegen het verwerken van uw e-mail om die te beantwoorden. Tegen het bewaren van archiefbescheiden op grond van de Archiefwet is geen bezwaar mogelijk. Uw bezwaar stuurt u naar [AVG@minocw.nl](mailto:AVG@minocw.nl).
+U kunt bezwaar maken als u redenen heeft die te maken hebben met uw persoonlijke situatie. Dat kan tegen het vastleggen van uw gegevens in logbestanden en tegen het verwerken van uw e-mail om die te beantwoorden. Tegen het bewaren van archiefbescheiden op grond van de Archiefwet is geen bezwaar mogelijk. Uw bezwaar stuurt u naar [dienstpostbusavg@minocw.nl](mailto:dienstpostbusavg@minocw.nl).
 
 ## De beveiliging van uw persoonsgegevens
 
