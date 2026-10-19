@@ -433,6 +433,11 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Opgelost
 
+- "Laatst aangepast" op de homepage en de sectie-overzichten (normen,
+  onderwerpen, over) volgt nu de jongste wijziging eronder. Eerder toonde de
+  homepage de datum van het eigen `_index.md`, waardoor die na een release
+  met aangepaste normen op een oude datum bleef staan.
+
 - PDF-knop in donkere modus: witte tekst op hemelblauw haalde 1,6:1 (WCAG
   1.4.3). Tekstkleur nu uit `--color-text-on-primary`.
 

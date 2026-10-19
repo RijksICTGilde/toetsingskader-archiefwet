@@ -19,8 +19,24 @@
   datering op elke pagina). Er is géén automatische controle meer op "van het
   toetsingskader" op elke pagina.
 
+  De datum op een overzichtspagina is de laatste wijziging eronder, niet die
+  van het eigen _index.md: de homepage neemt de jongste datum van de hele
+  site, een sectie (normen, onderwerpen, over) de jongste van haar pagina's.
+  Anders bleef de homepage na een release op een oude datum staan terwijl
+  normen eronder waren aangepast (19 oktober 2026).
+
   Aanroep: {{ partial "versie-zin.html" $page }} (een Page, geen shortcode)
 */}}
+{{- $lastmod := $.Lastmod -}}
+{{- $onder := slice -}}
+{{- if $.IsHome -}}
+  {{- $onder = site.Pages -}}
+{{- else if $.IsSection -}}
+  {{- $onder = $.RegularPagesRecursive -}}
+{{- end -}}
+{{- range $onder -}}
+  {{- if .Lastmod.After $lastmod }}{{ $lastmod = .Lastmod }}{{ end -}}
+{{- end -}}
 {{- with site.Params.versie -}}
 <strong>{{ partial "render-link" (dict "href" site.Params.releases_url "text" (printf "Versie %s" .)) }}</strong> van het toetsingskader. {{ end -}}
-Deze pagina is voor het laatst aangepast op <time datetime="{{ $.Lastmod.Format "2006-01-02" }}">{{ $.Lastmod | time.Format ":date_full" }}</time>.
+Deze pagina is voor het laatst aangepast op <time datetime="{{ $lastmod.Format "2006-01-02" }}">{{ $lastmod | time.Format ":date_full" }}</time>.
