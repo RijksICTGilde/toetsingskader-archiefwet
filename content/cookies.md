@@ -1,6 +1,6 @@
 ---
 title: "Cookies"
-description: "Deze website plaatst één technisch cookie van het hostingplatform en houdt geen webstatistieken bij."
+description: "Deze website plaatst één technische cookie van het hostingplatform en houdt geen webstatistieken bij."
 # Opbouw en zinnen volgen https://www.inspectie-oe.nl/service/cookies zo
 # letterlijk mogelijk. Alleen wat hier onwaar is, is weggelaten of omgezet: de
 # hoofdsite staat op het Platform Rijksoverheid Online met Piwik PRO; deze site
@@ -27,7 +27,7 @@ show_lastmod: true
 toc: false
 ---
 
-Deze website plaatst geen cookies voor onderzoek naar het gedrag van bezoekers. Het hostingplatform plaatst één technisch cookie. Hieronder leest u welk cookie dat is, hoe lang het geldig blijft en wat deze website verder in uw browser bewaart.
+Deze website plaatst geen cookies voor onderzoek naar het gedrag van bezoekers. Het hostingplatform plaatst één technische cookie. Hieronder leest u welke cookie dat is, hoe lang die geldig blijft en wat deze website verder in uw browser bewaart.
 
 ## Wat zijn cookies?
 
@@ -35,7 +35,7 @@ Een cookie is een klein tekstbestand met informatie. Bezoekt u een website? Dan 
 
 ## Waarom plaatst deze website een cookie?
 
-Deze website draait op [ZAD](https://zad.rijksapp.nl/introductie), een hostingplatform van de Rijksoverheid. Het platform plaatst één cookie dat uw bezoek naar de juiste server leidt. Dat cookie bevat geen gegevens over u en wordt niet gebruikt voor webstatistieken. Deze website houdt geen webstatistieken bij.
+Deze website draait op [ZAD](https://zad.rijksapp.nl/introductie), een hostingplatform van de Rijksoverheid. Het platform plaatst één cookie die uw bezoek naar de juiste server leidt. Die cookie bevat geen gegevens over u en wordt niet gebruikt voor webstatistieken. Deze website houdt geen webstatistieken bij.
 
 ### Geen trackingcookies
 
@@ -43,21 +43,21 @@ Deze website gebruikt geen trackingcookies. Trackingcookies zijn cookies die bez
 
 ### Geen toestemming nodig
 
-Voor dit cookie is geen toestemming nodig, omdat het alleen dient om uw bezoek aan de website door te geven (artikel 11.7a, derde lid, onder a, van de Telecommunicatiewet).
+Voor deze cookie is geen toestemming nodig, omdat die alleen dient om uw bezoek aan de website door te geven (artikel 11.7a, derde lid, onder a, van de Telecommunicatiewet).
 
-## Om welk cookie gaat het?
+## Om welke cookie gaat het?
 
-Hieronder staat het cookie dat deze website gebruikt. Het cookie wordt alleen geplaatst als uw browser dat toestaat.
+Hieronder staat de cookie die deze website gebruikt. De cookie wordt alleen geplaatst als uw browser dat toestaat.
 
 ### Cookie van het hostingplatform
 
-Dit cookie heeft een technische naam (een reeks cijfers en letters) en zorgt ervoor dat uw bezoek door dezelfde server wordt afgehandeld.
+Deze cookie heeft een technische naam (een reeks cijfers en letters) en zorgt ervoor dat uw bezoek door dezelfde server wordt afgehandeld.
 
-Het cookie wordt gewist zodra u de browser sluit.
+De cookie wordt gewist zodra u de browser sluit.
 
 ## Om welke gegevens gaat het?
 
-Het cookie zelf bevat geen gegevens over u. Het hostingplatform legt wel technische gegevens van uw bezoek vast in logbestanden, zoals het IP-adres van uw apparaat. Wat daarmee gebeurt, leest u op de pagina [Privacy]({{< relref "/privacy" >}}).
+De cookie zelf bevat geen gegevens over u. Het hostingplatform legt wel technische gegevens van uw bezoek vast in logbestanden, zoals het IP-adres van uw apparaat. Wat daarmee gebeurt, leest u op de pagina [Privacy]({{< relref "/privacy" >}}).
 
 ## Wat bewaart deze website verder in uw browser?
 

@@ -73,7 +73,7 @@ Deze website draait op [ZAD](https://zad.rijksapp.nl/introductie), een hostingpl
 
 Als u contact opneemt via het [contactformulier](https://www.inspectie-oe.nl/service/contact) van de Inspectie, gebruikt de Inspectie uw gegevens om uw vraag of opmerking te beantwoorden. Contact opnemen is vrijwillig. Uw bericht en het antwoord daarop zijn archiefbescheiden van de Inspectie en worden bewaard en vernietigd volgens de Archiefwet en de selectielijst die voor de Inspectie geldt.
 
-Deze website plaatst alleen een technisch cookie van het hostingplatform en houdt geen webstatistieken bij. Lees meer op de pagina [Cookies]({{< relref "/cookies" >}}).
+Deze website plaatst alleen een technische cookie van het hostingplatform en houdt geen webstatistieken bij. Lees meer op de pagina [Cookies]({{< relref "/cookies" >}}).
 
 ## Hoe gaan wij om met persoonsgegevens?
 
