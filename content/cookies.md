@@ -35,7 +35,7 @@ Een cookie is een klein tekstbestand met informatie. Bezoekt u een website? Dan 
 
 ## Waarom plaatst deze website een cookie?
 
-Deze website draait op ZAD, een hostingplatform van de Rijksoverheid. Het platform plaatst één cookie dat uw bezoek naar de juiste server leidt. Dat cookie bevat geen gegevens over u en wordt niet gebruikt voor webstatistieken. Deze website houdt geen webstatistieken bij.
+Deze website draait op [ZAD](https://zad.rijksapp.nl/introductie), een hostingplatform van de Rijksoverheid. Het platform plaatst één cookie dat uw bezoek naar de juiste server leidt. Dat cookie bevat geen gegevens over u en wordt niet gebruikt voor webstatistieken. Deze website houdt geen webstatistieken bij.
 
 ### Geen trackingcookies
 
