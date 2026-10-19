@@ -22,8 +22,7 @@ description: "Hoe de Inspectie Overheidsinformatie en Erfgoed zorgvuldig omgaat 
 # - Persoonsgegevens: "een telefoonnummer" weggelaten; "Dit gebeurt
 #   bijvoorbeeld wanneer u telefonisch, per e-mail of via het contactformulier
 #   een vraag stelt" vervangen door: naam en e-mailadres alleen bij contact
-#   via het contactformulier, plus de logbestanden bij elk bezoek; verwijzing
-#   "Zie het kopje Deze website";
+#   via het contactformulier, plus de logbestanden bij elk bezoek;
 # - "uitvoering van overeenkomsten" uit de opsomming van doelen weggelaten:
 #   niet van toepassing op deze site;
 # - Beveiliging: "contactformulier" linkt naar inspectie-oe.nl/service/contact;
@@ -86,7 +85,7 @@ De Inspectie Overheidsinformatie en Erfgoed hecht groot belang dat persoonsgegev
 
 ### Persoonsgegevens die verwerkt worden
 
-Als de Inspectie Overheidsinformatie en Erfgoed persoonsgegevens verwerkt, gaat het in het algemeen om 'gewone' persoonsgegevens, zoals een naam of een e-mailadres van ketenpartners of burgers. Op deze website verwerkt de Inspectie uw naam en e-mailadres alleen als u zelf contact opneemt via het contactformulier. Bij elk bezoek legt het hostingplatform wel technische gegevens vast in logbestanden, zoals uw IP-adres. Zie het kopje [Deze website](#deze-website).
+Als de Inspectie Overheidsinformatie en Erfgoed persoonsgegevens verwerkt, gaat het in het algemeen om 'gewone' persoonsgegevens, zoals een naam of een e-mailadres van ketenpartners of burgers. Op deze website verwerkt de Inspectie uw naam en e-mailadres alleen als u zelf contact opneemt via het contactformulier. Bij elk bezoek legt het hostingplatform wel technische gegevens vast in logbestanden, zoals uw IP-adres.
 
 ### Rechtmatigheid, behoorlijkheid en transparantie
 
