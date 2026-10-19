@@ -20,20 +20,17 @@ description: "Hoe de Inspectie Overheidsinformatie en Erfgoed zorgvuldig omgaat 
 # Navragen: "Archiefwet 1995" staat in de aangeleverde tekst; de site gaat over
 # de nieuwe Archiefwet.
 #
-# TODO vóór publicatie (vragen in ~/projects/zad-privacy-compliance-vragen-v11.md
-# en bij de privacycontactpersoon):
-# - velden in de logbestanden en een concrete bewaartermijn invullen (ODC-Noord,
-#   vraag 9 en 10); art. 13 lid 2 onder a AVG staat een criterium alleen toe als
-#   een termijn niet te geven is;
-# - beheerder van ZAD bij naam noemen (ZAD, vraag 2); andere ontvangers
-#   uitsluiten (ZAD, vraag 3);
-# - "in opdracht van" pas na de verwerkersafspraak; valt ODC-Noord onder OCW
-#   (DUO, ZAD vraag 4), dan de zin over ODC-Noord herzien;
-# - "niet gebruikt om bezoekers te volgen" bevestigen (ZAD vraag 5, ODC-Noord
-#   vraag 13);
-# - Keycloak-realm en invite verdwijnen met de inlogmuur (ZAD vraag 6); anders
-#   testers opnemen;
-# - cookiezin volgt de uitkomst van ZAD vraag 1 (zie cookies.md);
+# Verwerkt uit het antwoord van ZAD (19 oktober 2026): ZAD valt onder ODI
+# (BZK); ODC-Noord is onderdeel van DUO; geen andere ontvangers; geen eigen
+# doelen of statistiek; logs 6 maanden; toegang alleen beheerders van ZAD en
+# ODC-Noord en projectleden (eigen applicatie).
+#
+# TODO vóór publicatie (nummers uit ~/projects/zad-privacy-compliance-vragen-v13.md):
+# - cookiezin volgt het besluit over de router-cookie (zie cookies.md);
+# - velden in de logbestanden bevestigen (vraag 9); "zoals" dekt het nu;
+# - verwerkersovereenkomst: ZAD stelt een algemene op (vraag 2). "In opdracht
+#   van" beschrijft de feitelijke rolverdeling, de afspraak moet er wel komen
+#   (art. 28 lid 3 AVG);
 # - bewaartermijn van e-mail volgens de selectielijst;
 # - instemming van de privacycontactpersoon met de afwijkingen hierboven.
 show_lastmod: true
@@ -51,7 +48,7 @@ Als de Inspectie Overheidsinformatie en Erfgoed persoonsgegevens verwerkt, gaat 
 
 ## Deze website
 
-Deze website draait op ZAD, een hostingplatform van de Rijksoverheid, in het Overheidsdatacenter Noord (ODC-Noord) in Groningen. Om de website te kunnen leveren en te beveiligen, legt het platform technische gegevens van uw bezoek vast in logbestanden, zoals het IP-adres van uw apparaat, het tijdstip en de opgevraagde pagina. Zonder het IP-adres kan de website niet aan u worden getoond. Deze gegevens worden niet gebruikt om bezoekers te volgen en worden niet langer bewaard dan nodig is voor het beheer en de beveiliging van de website. De beheerder van het platform en ODC-Noord verwerken deze gegevens in opdracht van de Inspectie, in Nederland.
+Deze website draait op ZAD, een hostingplatform van de Rijksorganisatie voor Ontwikkeling, Digitalisering en Innovatie (ODI) van het ministerie van Binnenlandse Zaken en Koninkrijksrelaties. Het platform staat in het Overheidsdatacenter Noord (ODC-Noord) van DUO in Groningen. Om de website te kunnen leveren en te beveiligen, legt het platform technische gegevens van uw bezoek vast in logbestanden, zoals het IP-adres van uw apparaat, het tijdstip en de opgevraagde pagina. Zonder het IP-adres kan de website niet aan u worden getoond. Deze gegevens worden niet gebruikt om bezoekers te volgen of voor statistiek, en worden 6 maanden bewaard. Alleen beheerders van ZAD en ODC-Noord en de beheerders van deze website kunnen de logbestanden inzien. ODI en ODC-Noord verwerken deze gegevens in opdracht van de Inspectie, in Nederland.
 
 Deze website heeft geen contactformulier. Als u een e-mail stuurt naar [toetsingskader@inspectie-oe.nl](mailto:toetsingskader@inspectie-oe.nl), gebruikt de Inspectie uw gegevens om uw vraag of opmerking te beantwoorden. Het sturen van een e-mail is vrijwillig. Uw e-mail en het antwoord daarop zijn archiefbescheiden van de Inspectie en worden bewaard en vernietigd volgens de Archiefwet en de selectielijst die voor de Inspectie geldt.
 

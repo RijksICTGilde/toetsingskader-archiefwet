@@ -11,16 +11,18 @@ description: "Deze website plaatst één technisch cookie van het hostingplatfor
 # geen vervaldatum. Verder alleen localStorage `theme` en `toc-open`
 # (assets/js/toc-open.js en de thema-scripts base.js, toc.js).
 # Elke ZAD-component draait met één replica, dus de cookie heeft geen functie.
-# TODO vóór publicatie (ZAD vraag 1, zie zad-privacy-compliance-vragen-v11.md): niet publiceren zolang de cookie
-# aan staat. De vrijstelling van art. 11.7a lid 3 onder a Tw vraagt dat de
-# cookie nodig is voor de communicatie; bij één replica is dat niet te
-# onderbouwen. Gaat de cookie uit, dan vervallen de alinea's over de cookie
-# hier, de description en de inleidende zin, en de cookiezin op de
-# privacypagina. Blijft hij aan, dan beslist de FG.
+# TODO vóór publicatie (vraag 1, zie ~/projects/zad-privacy-compliance-vragen-v13.md):
+# niet publiceren zolang de cookie aan staat zonder besluit van de Inspectie.
+# De vrijstelling van art. 11.7a lid 3 onder a Tw vraagt dat de cookie nodig
+# is voor de communicatie; bij één replica is dat niet te onderbouwen.
+# ZAD (19 oktober 2026): de cookie kan nu niet via ZAD uit; een feature
+# request is mogelijk. Gaat de cookie uit, dan vervallen de alinea's over de
+# cookie hier, de description en de inleidende zin, en de cookiezin op de
+# privacypagina. Blijft hij aan, dan beslist de privacycontactpersoon.
 # De inlogmuur (oauth2-proxy + Keycloak) gaat eraf bij go-live; de cookies
-# daarvan staan daarom bewust niet in deze tekst. Komt er ooit analytics bij
-# (Umami staat als idee in RIG-Cluster, zie ZAD vraag 1), dan moet deze
-# pagina mee.
+# daarvan staan daarom bewust niet in deze tekst. ZAD draait geen analytics
+# (bevestigd 19 oktober 2026); komt dat er ooit bij (Umami staat als idee in
+# RIG-Cluster), dan moet deze pagina mee.
 show_lastmod: true
 toc: false
 ---
