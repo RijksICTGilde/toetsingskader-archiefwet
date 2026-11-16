@@ -84,7 +84,7 @@ De periodieke evaluatie omvat de [passende maatregelen](/onderwerpen/passende-ma
 
 Het periodiek evalueren van het archiefbeheer ten behoeve van duurzame toegankelijkheid is van toepassing op alle documenten van het verantwoordelijke overheidsorgaan.[^ab-nota-van-toelichting-h2-p10] Ook op documenten die op elk moment kunnen worden vernietigd.
 
-[^ab-nota-van-toelichting-h2-p10]: Archiefbesluit, Nota van toelichting, I. Algemeen deel, H2, 2 Duurzame toegankelijkheid, p.10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-nota-van-toelichting-h2-p10]: Archiefbesluit, Nota van toelichting, I. Algemeen deel, H2, 2 Duurzame toegankelijkheid, p.10. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 ## Gerelateerde onderwerpen
 

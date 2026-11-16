@@ -5,8 +5,7 @@ weight: 2
 norm_id: "2"
 norm_titel: "Overzicht"
 kern: "Het verantwoordelijke overheidsorgaan beschikt over een actueel overzicht van de informatiehuishouding. Dit overzicht geeft aan welke (categorieën) documenten zich bij het overheidsorgaan bevinden en waar ze te vinden zijn."
-kern_bron: "Archiefregeling, artikel 2.3, aanhef; Archiefregeling, Toelichting, Algemene eisen, overzicht informatiehuishouding, p. 33-35."
-kern_bron_url: "https://www.internetconsultatie.nl/archiefregeling/b1"
+kern_bron: "Archiefregeling, artikel 2.3, aanhef; Archiefregeling, Toelichting, Algemene eisen, overzicht informatiehuishouding, p. 33-35. De bronlink naar de Archiefregeling volgt na publicatie."
 kern_kaart: "De organisatie heeft een overzicht van welke documenten ze onder zich heeft en waar die zich bevinden."
 synoniemen:
   - "Bestandsoverzicht"
@@ -16,7 +15,7 @@ synoniemen:
 
 Een actueel en volledig overzicht van de [informatiehuishouding](https://www.nationaalarchief.nl/archiveren/kennisbank/overheidsinformatie-binnen-informatiehuishouding) zorgt ervoor dat het verantwoordelijke overheidsorgaan weet waar documenten zich bevinden. Dit inzicht is van belang voor het uitvoeren van [beheertaken](/normen/01-beheer/) die de duurzame toegankelijkheid van documenten borgen.[^ar-toelichting-overzicht-p34]
 
-[^ar-toelichting-overzicht-p34]: Archiefregeling, Toelichting, Algemene eisen, overzicht informatiehuishouding, p.34. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-toelichting-overzicht-p34]: Archiefregeling, Toelichting, Algemene eisen, overzicht informatiehuishouding, p.34. De bronlink naar de Archiefregeling volgt na publicatie.
 
 Een overzicht van de informatiehuishouding draagt bij aan:
 
@@ -30,7 +29,7 @@ Een overzicht van de informatiehuishouding draagt bij aan:
 
 Het overzicht kan op verschillende niveaus worden ingericht. Dit kan op het niveau van individuele documenten, maar het is niet noodzakelijk om voor alle onderdelen van de informatiehuishouding op het niveau van een individueel document te beschrijven.[^ar-toelichting-overzicht-p35]
 
-[^ar-toelichting-overzicht-p35]: Archiefregeling, Toelichting, Algemene eisen, overzicht informatiehuishouding, p.35. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-toelichting-overzicht-p35]: Archiefregeling, Toelichting, Algemene eisen, overzicht informatiehuishouding, p.35. De bronlink naar de Archiefregeling volgt na publicatie.
 
 Ook voor andere wetgeving, zoals de AVG en Woo, is een overzicht essentieel. Het overzicht draagt bij aan de vindbaarheid van documenten, waardoor de termijnen van de Woo (beter) kunnen worden gehaald. Een overzicht van de informatiehuishouding volgens de Archiefregeling is niet hetzelfde als een verwerkingsregister, zoals is vereist op grond van de AVG. Dit instrument dient een ander doel,[^ar-toelichting-overzicht-p35] al draagt het AVG-verwerkingsregister wel bij aan het overzicht.
 
@@ -40,7 +39,7 @@ Ook voor andere wetgeving, zoals de AVG en Woo, is een overzicht essentieel. Het
 
 Het verantwoordelijke overheidsorgaan heeft een actueel overzicht.[^ar-artikel-2-3-aanhef]
 
-[^ar-artikel-2-3-aanhef]: Archiefregeling, artikel 2.3, aanhef. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-2-3-aanhef]: Archiefregeling, artikel 2.3, aanhef. De bronlink naar de Archiefregeling volgt na publicatie.
 
 #### Criteria
 
@@ -55,7 +54,7 @@ Het verantwoordelijke overheidsorgaan heeft een actueel overzicht.[^ar-artikel-2
 
 Het overzicht bevat[^ar-artikel-2-3-onder-a] een omschrijving van de taken van het verantwoordelijke overheidsorgaan en van de daarbij behorende documenten.
 
-[^ar-artikel-2-3-onder-a]: Archiefregeling, artikel 2.3, onder a. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-2-3-onder-a]: Archiefregeling, artikel 2.3, onder a. De bronlink naar de Archiefregeling volgt na publicatie.
 
 #### Criteria
 
@@ -78,7 +77,7 @@ Het overzicht bevat[^ar-artikel-2-3-onder-a] een omschrijving van de taken van h
 
 Het overzicht bevat de vindplaats van (categorieën) documenten.[^ar-artikel-2-3-onder-c]
 
-[^ar-artikel-2-3-onder-c]: Archiefregeling, artikel 2.3, onder c. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-2-3-onder-c]: Archiefregeling, artikel 2.3, onder c. De bronlink naar de Archiefregeling volgt na publicatie.
 
 #### Criterium
 
@@ -109,7 +108,7 @@ Het overzicht geeft de samenhang tussen (categorieën) documenten weer.[^ar-arti
 
 Het overzicht bevat, in het geval het verantwoordelijke overheidsorgaan beschikt over meerdere [ordeningsstructuren](/normen/03-ordenen/), een beschrijving van deze ordeningsstructuren, de wijze waarop zij worden toegepast en een beschrijving van de onderlinge relaties tussen de toegepaste ordeningsstructuren.[^ar-artikel-2-3-onder-d]
 
-[^ar-artikel-2-3-onder-d]: Archiefregeling, artikel 2.3, onder d. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-artikel-2-3-onder-d]: Archiefregeling, artikel 2.3, onder d. De bronlink naar de Archiefregeling volgt na publicatie.
 
 #### Criteria
 
@@ -123,7 +122,7 @@ Het overzicht bevat, in het geval het verantwoordelijke overheidsorgaan beschikt
 
 De eisen voor overzicht gelden voor alle documenten van alle organisatieonderdelen van het verantwoordelijke overheidsorgaan, ongeacht de vorm (digitaal of papier), tijdelijk of blijvend te bewaren.[^ar-hoofdstuk-2-hoofdlijnen-p29] Ook voor documenten die op elk moment kunnen worden vernietigd.
 
-[^ar-hoofdstuk-2-hoofdlijnen-p29]: Archiefregeling, Hoofdstuk 2. Hoofdlijnen van de regeling, p.29. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
+[^ar-hoofdstuk-2-hoofdlijnen-p29]: Archiefregeling, Hoofdstuk 2. Hoofdlijnen van de regeling, p.29. De bronlink naar de Archiefregeling volgt na publicatie.
 
 ## Gerelateerde onderwerpen
 

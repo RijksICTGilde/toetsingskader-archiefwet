@@ -6,7 +6,7 @@ norm_id: "1"
 norm_titel: "Inbeheername en beheer"
 kern: "Een document is in beheer van het verantwoordelijke overheidsorgaan, zodat het duurzaam toegankelijk gemaakt en gehouden kan worden."
 kern_bron: "Archiefbesluit, artikel 2.1, eerste lid; Archiefwet, artikel 4.1, eerste lid."
-kern_bron_url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
+kern_bron_url: "https://zoek.officielebekendmakingen.nl/stb-2026-321.html"
 kern_kaart: "Een document bevindt zich in een beheerde omgeving, zodat de beheertaken kunnen worden uitgevoerd waarmee documenten duurzaam toegankelijk gemaakt worden en blijven."
 synoniemen:
   - "Opname (DUTO)"
@@ -21,7 +21,7 @@ synoniemen:
 Om een document duurzaam toegankelijk te maken en te houden[^aw-artikel-4-1-lid-1] moet een document in beheer zijn.[^ab-artikel-2-1-lid-1-2] Inbeheername is het opnemen van documenten in een omgeving waarin zij beheerd worden[^functies-nationaal-archief]. Beheer is geen eenmalige handeling, maar vraagt om een voortdurende zorg voor documenten[^deze-toelichting-ontleend-kennisbank-nationaal-a]. Hier sluit het toetsingskader aan bij de principes van archiveren by design.
 
 [^aw-artikel-4-1-lid-1]: Archiefwet, artikel 4.1 eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
-[^ab-artikel-2-1-lid-1-2]: Archiefbesluit, artikel 2.1, lid 1; Dit sluit aan bij de "Position Paper nieuwe Archiefwet", NEN commissie voor informatie- en archiefmanagement en de VNG Adviescommissie Archieven:, onder H2, Toelichting "in control zijn". [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-1-2]: Archiefbesluit, artikel 2.1, lid 1; Dit sluit aan bij de "Position Paper nieuwe Archiefwet", NEN commissie voor informatie- en archiefmanagement en de VNG Adviescommissie Archieven:, onder H2, Toelichting "in control zijn". [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 [^functies-nationaal-archief]: Functies | Nationaal Archief [Bekijk bron](https://www.nationaalarchief.nl/archiveren/kennisbank/functies-registreren#collapse-162601)
 [^deze-toelichting-ontleend-kennisbank-nationaal-a]: Deze toelichting is ontleend aan de kennisbank van het Nationaal Archief. De algemene archiefnorm NEN-ISO 15489-1:2016 gebruikt andere begrippen die uitdrukken aan welke kenmerken documenten moeten voldoen om als gezaghebbend bewijs te kunnen dienen: documenten dienen authentiek, betrouwbaar, integer en bruikbaar te zijn en daartoe worden beheerd in systemen die betrouwbaar, veilig, afdoende , uitgebreid en systematisch zijn.
 
@@ -31,8 +31,8 @@ Die voortdurende zorg vereist ook sturing op de informatiehuishouding. Een overh
 
 In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurzame toegankelijkheid van categorieën documenten borgt.[^aw-artikelen-4-1-4-2] Deze categorieën zijn gekoppeld aan de categorieën in het selectiebesluit.[^ab-nota-toelichting-passende-maatregelen]
 
-[^aw-artikelen-4-1-4-2]: Archiefwet, artikelen 4.1 en 4.2 en de toelichting in de Archiefregeling (Archiefregeling, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen - pagina 36)
-[^ab-nota-toelichting-passende-maatregelen]: Archiefbesluit, Nota van toelichting, 1 Algemeen deel, Inleiding, passende maatregelen. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^aw-artikelen-4-1-4-2]: Archiefwet, artikelen 4.1 en 4.2 en de toelichting in de Archiefregeling (Archiefregeling, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen - pagina 36). De bronlink naar de Archiefregeling volgt na publicatie.
+[^ab-nota-toelichting-passende-maatregelen]: Archiefbesluit, Nota van toelichting, 1 Algemeen deel, Inleiding, passende maatregelen. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](/onderwerpen/passende-maatregelen/), de [periodieke evaluatie](/normen/08-periodieke-evaluatie/) en eventueel ook op basis van een informatiebeheerplan invulling krijgen.[^aw-memorie-toelichting-4-3-beheerstrategie]
 
@@ -84,7 +84,7 @@ b) te [vernietigen](/normen/07-vernietigen/). [^aw-artikel-4-2-lid-2]
 
 - In een strategisch informatie overleg (SIO), of een soortgelijk overleg,[^ab-nota-toelichting-8] worden keuzes gemaakt over het ontwerp en de inrichting van de informatiehuishouding die van invloed zijn op de duurzame toegankelijkheid van documenten.[^ab-nota-toelichting-8]
 
-[^ab-nota-toelichting-8]: Archiefbesluit, Nota van Toelichting, 8. Implementatie, SIO. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-nota-toelichting-8]: Archiefbesluit, Nota van Toelichting, 8. Implementatie, SIO. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 #### Voorschrift
 
@@ -130,7 +130,7 @@ Het verantwoordelijke overheidsorgaan heeft de door hem vastgestelde beheerregel
 
 Het verantwoordelijke overheidsorgaan heeft inzichtelijk welke categorieën documenten gemigreerd, geconverteerd of vervangen moeten worden.[^ab-artikelen-2-2-2-3] **Alleen wanneer dergelijke categorieën bestaan**, heeft de organisatie in de beheerregels een omschrijving opgenomen van de passende maatregelen voor migratie, conversie en vervanging.
 
-[^ab-artikelen-2-2-2-3]: Archiefbesluit, artikelen 2.2, 2.3, 2.4. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikelen-2-2-2-3]: Archiefbesluit, artikelen 2.2, 2.3, 2.4. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 #### Criteria
 
@@ -159,7 +159,7 @@ Het verantwoordelijke overheidsorgaan heeft in de beheerregels[^aw-artikel-4-2-l
 - De beheerregels voor de beheertaken zijn volledig.
 
 [^kamerstukken-2021-22-35968-3]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 2.2, Zorgdrager of verantwoordelijke overheidsorgaan. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
-[^ar-toelichting-algemeen-deel-h1-eisen-2]: Archiefregeling, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten.
+[^ar-toelichting-algemeen-deel-h1-eisen-2]: Archiefregeling, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten. De bronlink naar de Archiefregeling volgt na publicatie.
 
 #### Indicatoren
 
@@ -187,7 +187,7 @@ Het verantwoordelijke overheidsorgaan heeft in de beheerregels een nadere omschr
 Het verantwoordelijke overheidsorgaan heeft alle[^aw-artikel-4-1-lid-2] opgemaakte en ontvangen documenten opgenomen in een beheerde[^hoeft-geen-systeem-zoals-documentmanagementsyste] omgeving[^ab-artikel-2-1-aw-4-1-4-2], waar zij duurzaam toegankelijk worden gemaakt en gehouden tot het moment van overbrenging of vernietiging.[^aw-artikel-4-1-ab-artikel]
 
 [^aw-artikel-4-1-lid-2]: Archiefwet, artikel 4.1, tweede lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
-[^ab-artikel-2-1-aw-4-1-4-2]: Archiefbesluit, artikel 2.1, Archiefwet, artikel 4.1 eerste lid en Archiefwet artikel 4.2 eerste lid sub b. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-aw-4-1-4-2]: Archiefbesluit, artikel 2.1, Archiefwet, artikel 4.1 eerste lid en Archiefwet artikel 4.2 eerste lid sub b. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 [^hoeft-geen-systeem-zoals-documentmanagementsyste]: Dit hoeft geen systeem te zijn zoals een documentmanagementsysteem. Een beheerde omgeving is een omgeving met functionaliteiten en voorzieningen waarmee een organisatie in staat is om documenten te beheren volgens de normen uit de archiefwet- en regelgeving.
 [^aw-artikel-4-1-ab-artikel]: Archiefwet artikel 4.1 en Archiefbesluit artikel 2.1; Kamerstukken 2022/23, 35968, nr. 8, Eerste nota van wijzigingen, Onderdeel C (artikel 4.1).
 
@@ -202,15 +202,15 @@ Het verantwoordelijke overheidsorgaan heeft alle[^aw-artikel-4-1-lid-2] opgemaak
   - [betrouwbaar](/normen/05-betrouwbaar/);[^ab-artikel-2-1-lid-1-7]
   - [gecontroleerd te vernietigen](/normen/07-vernietigen/) of over te brengen volgens een selectiebesluit. Dit geldt niet voor documenten die op elk moment mogen worden vernietigd.[^ab-art]
 
-[^ab-artikel-2-1-lid-1-3]: Archiefbesluit, artikel 2.1, eerste lid, sub a. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ab-artikel-2-1-lid-1-4]: Archiefbesluit, artikel 2.1, eerste lid, sub b. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ab-artikel-2-1-lid-1-5]: Archiefbesluit, artikel 2.1, eerste lid, sub c. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ar-artikel-2-3]: Archiefregeling, artikel 2.3. [Bekijk bron](https://www.internetconsultatie.nl/archiefregeling/b1)
-[^ab-artikel-2-1-sub-d]: Archiefbesluit, artikel 2.1, sub d en Archiefregeling, artikel 2.5. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ab-artikel-21-sub-d-ar]: Archiefbesluit, artikel 21, sub d en Archiefregeling, artikel 2.2. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ab-artikel-2-1-lid-1-6]: Archiefbesluit, artikel 2.1, eerste lid, sub f en artikelen 2.2, 2.3 en 2.4. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ab-artikel-2-1-lid-1-7]: Archiefbesluit, artikel 2.1, eerste lid, sub e. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ab-art]: Archiefbesluit, art. 4.1, derde lid. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-1-3]: Archiefbesluit, artikel 2.1, eerste lid, sub a. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ab-artikel-2-1-lid-1-4]: Archiefbesluit, artikel 2.1, eerste lid, sub b. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ab-artikel-2-1-lid-1-5]: Archiefbesluit, artikel 2.1, eerste lid, sub c. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ar-artikel-2-3]: Archiefregeling, artikel 2.3. De bronlink naar de Archiefregeling volgt na publicatie.
+[^ab-artikel-2-1-sub-d]: Archiefbesluit, artikel 2.1, sub d en Archiefregeling, artikel 2.5. De bronlink naar de Archiefregeling volgt na publicatie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ab-artikel-21-sub-d-ar]: Archiefbesluit, artikel 21, sub d en Archiefregeling, artikel 2.2. De bronlink naar de Archiefregeling volgt na publicatie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ab-artikel-2-1-lid-1-6]: Archiefbesluit, artikel 2.1, eerste lid, sub f en artikelen 2.2, 2.3 en 2.4. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ab-artikel-2-1-lid-1-7]: Archiefbesluit, artikel 2.1, eerste lid, sub e. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ab-art]: Archiefbesluit, art. 4.1, derde lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 #### Indicatoren
 
