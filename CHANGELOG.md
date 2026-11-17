@@ -13,6 +13,11 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Gewijzigd
 
+- Verwijzingen naar het Archiefbesluit linken naar de publicatie in het
+  Staatsblad (Stb. 2026, 321) in plaats van naar de internetconsultatie.
+  Verwijzingen naar de Archiefregeling hebben geen link meer, maar op die plek
+  cursief "(Bron beschikbaar na publicatie van de Archiefregeling.)". De
+  bronvermelding onder de kern rendert daarvoor nu markdown.
 - De voetlinks Privacy en Cookies blijven op deze site (`/privacy/` en
   `/cookies/`) in plaats van naar inspectie-oe.nl te springen. Beide teksten
   volgen de hoofdsite (versie 15 januari 2026) waar dat klopt en beschrijven

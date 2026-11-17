@@ -8,7 +8,7 @@ aliases:
   - /normen/05-vindbaarheid/
 kern: "Het verantwoordelijke overheidsorgaan zorgt ervoor dat documenten binnen een redelijke termijn gevonden kunnen worden."
 kern_bron: "Archiefbesluit, artikel 2.1, eerste lid, onder a."
-kern_bron_url: "https://www.internetconsultatie.nl/archiefbesluit20xx/b1"
+kern_bron_url: "https://zoek.officielebekendmakingen.nl/stb-2026-321.html"
 kern_kaart: "Een document moet binnen een redelijke termijn na creatie of ontvangst vindbaar zijn."
 synoniemen:
   - "Zoeken"
@@ -21,9 +21,9 @@ Het verantwoordelijke overheidsorgaan richt zijn informatiehuishouding zodanig i
 
 [Vindbaarheid](https://www.nationaalarchief.nl/archiveren/kennisbank/vindbaar) is een kenmerk van duurzame toegankelijkheid.[^ab-artikel-2-1-lid-1-onder-a] Documenten moeten binnen een redelijke termijn vindbaar zijn voor gebruikers die daar recht toe hebben en bevoegd zijn, bij voorkeur ongeacht tijd en systeem, en zodanig dat inzage, openbaarmaking en verantwoording binnen redelijke termijn mogelijk zijn.[^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar-p10]
 
-[^ab-artikel-2-1-lid-1-onder-a]: Archiefbesluit, artikel 2.1, eerste lid, onder a. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar-p10]: Archiefbesluit, artikel 2.1, eerste lid, onder a; Archiefbesluit, Nota van Toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p.10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
-[^ab-nota-van-toelichting-vindbaar-p10]: Archiefbesluit, Nota van Toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p.10 [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-1-onder-a]: Archiefbesluit, artikel 2.1, eerste lid, onder a. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar-p10]: Archiefbesluit, artikel 2.1, eerste lid, onder a; Archiefbesluit, Nota van Toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p.10. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ab-nota-van-toelichting-vindbaar-p10]: Archiefbesluit, Nota van Toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p.10 [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 De redelijke termijn voor categorieën documenten[^aw-artikel-5-1-lid-2-onderdeel-a] moet in de [passende maatregelen](/onderwerpen/passende-maatregelen/) geconcretiseerd worden.[^aw-artikel-4-1-lid-1] De invulling[^na-niveau-van-maatregelen] van de redelijke termijn gebeurt op basis van de [risicoanalyse](/onderwerpen/passende-maatregelen/).
 
@@ -39,7 +39,7 @@ De Inspectie kijkt bij vindbaarheid vooral naar hoe essentiële randvoorwaarden 
 
 Het verantwoordelijke overheidsorgaan heeft in de passende maatregelen opgenomen wat de redelijke termijn is voor de vindbaarheid van documenten.[^aw-artikel-4-1-4-2-ar-toelichting-vinden]
 
-[^aw-artikel-4-1-4-2-ar-toelichting-vinden]: Archiefwet, artikel 4.1 en 4.2; Archiefregeling, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen, p. 36. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^aw-artikel-4-1-4-2-ar-toelichting-vinden]: Archiefwet, artikel 4.1 en 4.2; Archiefregeling, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen, p. 36. *(Bron beschikbaar na publicatie van de Archiefregeling.)* [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
 #### Criteria
 
@@ -55,7 +55,7 @@ Het verantwoordelijke overheidsorgaan heeft in de passende maatregelen opgenomen
 
 Het verantwoordelijke overheidsorgaan kan documenten binnen een redelijke termijn vinden.[^ab-artikel-2-1-lid-a-nota-vindbaar]
 
-[^ab-artikel-2-1-lid-a-nota-vindbaar]: Archiefbesluit, artikel 2.1, lid a; Archiefbesluit, Nota van Toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p.10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-a-nota-vindbaar]: Archiefbesluit, artikel 2.1, lid a; Archiefbesluit, Nota van Toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p.10. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 #### Criterium
 
@@ -73,7 +73,7 @@ Het verantwoordelijke overheidsorgaan kan documenten binnen een redelijke termij
 
 Documenten kunnen door de organisatie, op basis van de eisen die gesteld worden aan metadata, de ordening en het overzicht, binnen een redelijke termijn worden gevonden.[^ab-artikel-2-1-ar-toelichting-p34-50-53]
 
-[^ab-artikel-2-1-ar-toelichting-p34-50-53]: Archiefbesluit, artikel 2.1, eerste lid; Archiefregeling, Toelichting, p. 34, artikel 2.2, 2.3 en 2.5; Archiefregeling, Toelichting, p.50 en 53. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-ar-toelichting-p34-50-53]: Archiefbesluit, artikel 2.1, eerste lid; Archiefregeling, Toelichting, p. 34, artikel 2.2, 2.3 en 2.5; Archiefregeling, Toelichting, p.50 en 53. *(Bron beschikbaar na publicatie van de Archiefregeling.)* [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 #### Criteria
 
@@ -87,7 +87,7 @@ Documenten kunnen door de organisatie, op basis van de eisen die gesteld worden 
 
 Documenten zijn binnen een redelijke termijn vindbaar voor gebruikers die daar recht op hebben.[^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar]
 
-[^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar]: Archiefbesluit, artikel 2.1, eerste lid, onder a; Archiefbesluit, Nota van Toelichting, Vindbaar, p.10. [Bekijk bron](https://www.internetconsultatie.nl/archiefbesluit20xx/b1)
+[^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar]: Archiefbesluit, artikel 2.1, eerste lid, onder a; Archiefbesluit, Nota van Toelichting, Vindbaar, p.10. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 #### Criterium
 
