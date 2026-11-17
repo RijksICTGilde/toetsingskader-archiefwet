@@ -7,7 +7,7 @@ norm_titel: "Vernietigen"
 aliases:
   - /normen/07-informatiebeveiliging/
 kern: "Het verantwoordelijke overheidsorgaan vernietigt documenten waarvan de bewaartermijn is verstreken. Om aan de eisen voor vernietiging te voldoen is een procesbeschrijving van vernietiging noodzakelijk. Ook moet er een verklaring van vernietiging worden opgesteld."
-kern_bron: "Archiefwet, artikel 5.3, eerste lid; Archiefbesluit, artikel 4.1; Archiefregeling, artikel 4.1; Archiefregeling, artikel 4.2. De bronlink naar de Archiefregeling volgt na publicatie."
+kern_bron: "Archiefwet, artikel 5.3, eerste lid; Archiefbesluit, artikel 4.1; Archiefregeling, artikel 4.1; Archiefregeling, artikel 4.2. *(Bron beschikbaar na publicatie van de Archiefregeling.)*"
 kern_bron_url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
 kern_kaart: "Documenten moeten gecontroleerd vernietigd worden."
 synoniemen:
@@ -81,11 +81,11 @@ Het verantwoordelijke overheidsorgaan beschrijft in de procesbeschrijving van ve
 - de rollen en verantwoordelijkheden in het vernietigingsproces;[^ar-artikel-4-1-lid-c]
 - de wijze waarop het verantwoordelijke overheidsorgaan zich ervan vergewist dat documenten zijn vernietigd.[^ar-artikel-4-1-lid-d]
 
-[^ar-artikel-4-1-eisen-procesbeschrijving]: Archiefregeling, Artikel 4.1 Eisen procesbeschrijving vernietiging. De bronlink naar de Archiefregeling volgt na publicatie.
-[^ar-artikel-4-1-lid-a]: Archiefregeling, artikel 4.1, lid a. De bronlink naar de Archiefregeling volgt na publicatie.
-[^ar-artikel-4-1-lid-b]: Archiefregeling, artikel 4.1, lid b. De bronlink naar de Archiefregeling volgt na publicatie.
-[^ar-artikel-4-1-lid-c]: Archiefregeling, artikel 4.1, lid c. De bronlink naar de Archiefregeling volgt na publicatie.
-[^ar-artikel-4-1-lid-d]: Archiefregeling, artikel 4.1 lid d. De bronlink naar de Archiefregeling volgt na publicatie.
+[^ar-artikel-4-1-eisen-procesbeschrijving]: Archiefregeling, Artikel 4.1 Eisen procesbeschrijving vernietiging. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
+[^ar-artikel-4-1-lid-a]: Archiefregeling, artikel 4.1, lid a. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
+[^ar-artikel-4-1-lid-b]: Archiefregeling, artikel 4.1, lid b. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
+[^ar-artikel-4-1-lid-c]: Archiefregeling, artikel 4.1, lid c. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
+[^ar-artikel-4-1-lid-d]: Archiefregeling, artikel 4.1 lid d. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
 #### Criteria
 
@@ -123,11 +123,11 @@ Bij vernietiging van documenten, uitgezonderd de documenten die op elk moment mo
 - een vermelding van de artikelen van het selectiebesluit op grond waarvan de documenten zijn vernietigd;[^ar-artikel-4-2-sub-c]
 - een beschrijving van de wijze waarop de documenten zijn vernietigd.[^ar-artikel-4-2-sub-d]
 
-[^ar-artikel-4-2]: Archiefregeling, artikel 4.2. De bronlink naar de Archiefregeling volgt na publicatie.
-[^ar-artikel-4-2-sub-a]: Archiefregeling, artikel 4.2, sub a. De bronlink naar de Archiefregeling volgt na publicatie.
-[^ar-artikel-4-2-sub-b]: Archiefregeling, artikel 4.2, sub b. De bronlink naar de Archiefregeling volgt na publicatie.
-[^ar-artikel-4-2-sub-c]: Archiefregeling, artikel 4.2, sub c. De bronlink naar de Archiefregeling volgt na publicatie.
-[^ar-artikel-4-2-sub-d]: Archiefregeling, artikel 4.2, sub d. De bronlink naar de Archiefregeling volgt na publicatie.
+[^ar-artikel-4-2]: Archiefregeling, artikel 4.2. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
+[^ar-artikel-4-2-sub-a]: Archiefregeling, artikel 4.2, sub a. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
+[^ar-artikel-4-2-sub-b]: Archiefregeling, artikel 4.2, sub b. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
+[^ar-artikel-4-2-sub-c]: Archiefregeling, artikel 4.2, sub c. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
+[^ar-artikel-4-2-sub-d]: Archiefregeling, artikel 4.2, sub d. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
 #### Criteria
 
@@ -141,7 +141,7 @@ Bij vernietiging van documenten, uitgezonderd de documenten die op elk moment mo
 
 De eisen voor vernietiging gelden voor alle tijdelijk te bewaren documenten van alle organisatieonderdelen van het verantwoordelijke overheidsorgaan, ongeacht de vorm (digitaal of papier).[^ar-hoofdstuk-2-hoofdlijnen-p30]
 
-[^ar-hoofdstuk-2-hoofdlijnen-p30]: Archiefregeling, Hoofdstuk 2. Hoofdlijnen van de regeling, p.30. De bronlink naar de Archiefregeling volgt na publicatie.
+[^ar-hoofdstuk-2-hoofdlijnen-p30]: Archiefregeling, Hoofdstuk 2. Hoofdlijnen van de regeling, p.30. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
 Voor documenten die op elk moment kunnen worden vernietigd gelden niet alle eisen voor vernietiging. Voor deze documenten geldt dat:
 

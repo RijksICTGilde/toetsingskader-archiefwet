@@ -31,7 +31,7 @@ Die voortdurende zorg vereist ook sturing op de informatiehuishouding. Een overh
 
 In de passende maatregelen wordt concreet beschreven hoe de organisatie de duurzame toegankelijkheid van categorieën documenten borgt.[^aw-artikelen-4-1-4-2] Deze categorieën zijn gekoppeld aan de categorieën in het selectiebesluit.[^ab-nota-toelichting-passende-maatregelen]
 
-[^aw-artikelen-4-1-4-2]: Archiefwet, artikelen 4.1 en 4.2 en de toelichting in de Archiefregeling (Archiefregeling, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen - pagina 36). De bronlink naar de Archiefregeling volgt na publicatie.
+[^aw-artikelen-4-1-4-2]: Archiefwet, artikelen 4.1 en 4.2 en de toelichting in de Archiefregeling (Archiefregeling, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen - pagina 36). *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 [^ab-nota-toelichting-passende-maatregelen]: Archiefbesluit, Nota van toelichting, 1 Algemeen deel, Inleiding, passende maatregelen. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 Een organisatie kan in beleid opnemen hoe de passende maatregelen vorm krijgen. Passende maatregelen kunnen op basis van een [risicoanalyse](/onderwerpen/passende-maatregelen/), de [periodieke evaluatie](/normen/08-periodieke-evaluatie/) en eventueel ook op basis van een informatiebeheerplan invulling krijgen.[^aw-memorie-toelichting-4-3-beheerstrategie]
@@ -159,7 +159,7 @@ Het verantwoordelijke overheidsorgaan heeft in de beheerregels[^aw-artikel-4-2-l
 - De beheerregels voor de beheertaken zijn volledig.
 
 [^kamerstukken-2021-22-35968-3]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 2.2, Zorgdrager of verantwoordelijke overheidsorgaan. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
-[^ar-toelichting-algemeen-deel-h1-eisen-2]: Archiefregeling, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten. De bronlink naar de Archiefregeling volgt na publicatie.
+[^ar-toelichting-algemeen-deel-h1-eisen-2]: Archiefregeling, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
 #### Indicatoren
 
@@ -205,9 +205,9 @@ Het verantwoordelijke overheidsorgaan heeft alle[^aw-artikel-4-1-lid-2] opgemaak
 [^ab-artikel-2-1-lid-1-3]: Archiefbesluit, artikel 2.1, eerste lid, sub a. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 [^ab-artikel-2-1-lid-1-4]: Archiefbesluit, artikel 2.1, eerste lid, sub b. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 [^ab-artikel-2-1-lid-1-5]: Archiefbesluit, artikel 2.1, eerste lid, sub c. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
-[^ar-artikel-2-3]: Archiefregeling, artikel 2.3. De bronlink naar de Archiefregeling volgt na publicatie.
-[^ab-artikel-2-1-sub-d]: Archiefbesluit, artikel 2.1, sub d en Archiefregeling, artikel 2.5. De bronlink naar de Archiefregeling volgt na publicatie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
-[^ab-artikel-21-sub-d-ar]: Archiefbesluit, artikel 21, sub d en Archiefregeling, artikel 2.2. De bronlink naar de Archiefregeling volgt na publicatie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ar-artikel-2-3]: Archiefregeling, artikel 2.3. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
+[^ab-artikel-2-1-sub-d]: Archiefbesluit, artikel 2.1, sub d en Archiefregeling, artikel 2.5. *(Bron beschikbaar na publicatie van de Archiefregeling.)* [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ab-artikel-21-sub-d-ar]: Archiefbesluit, artikel 21, sub d en Archiefregeling, artikel 2.2. *(Bron beschikbaar na publicatie van de Archiefregeling.)* [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 [^ab-artikel-2-1-lid-1-6]: Archiefbesluit, artikel 2.1, eerste lid, sub f en artikelen 2.2, 2.3 en 2.4. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 [^ab-artikel-2-1-lid-1-7]: Archiefbesluit, artikel 2.1, eerste lid, sub e. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 [^ab-art]: Archiefbesluit, art. 4.1, derde lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)

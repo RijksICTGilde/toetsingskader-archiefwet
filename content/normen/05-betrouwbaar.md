@@ -88,7 +88,7 @@ Beveiligingsmaatregelen zijn passend[^ab-artikel-2-1-lid-2] en afgestemd op de r
 
 Het verantwoordelijke overheidsorgaan kan de betrouwbaarheid en authenticiteit van een document gedurende de levensduur aantonen.[^ar-artikel-2-10-ab-artikel-2-1]
 
-[^ar-artikel-2-10-ab-artikel-2-1]: Archiefregeling, artikel 2.10; Archiefbesluit, artikel 2.1 eerste lid, onder e. De bronlink naar de Archiefregeling volgt na publicatie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ar-artikel-2-10-ab-artikel-2-1]: Archiefregeling, artikel 2.10; Archiefbesluit, artikel 2.1 eerste lid, onder e. *(Bron beschikbaar na publicatie van de Archiefregeling.)* [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 #### Criteria
 
@@ -96,8 +96,8 @@ Het verantwoordelijke overheidsorgaan kan de betrouwbaarheid en authenticiteit v
 - Met [metadata](/normen/04-metadateren/) kan worden aangetoond wanneer documenten zijn opgemaakt of ontvangen.[^ar-artikel-2-5-lid-2-sub-f]
 - Gegevens, zoals persoonsgegevens, zijn niet ongeoorloofd uit documenten gewist.[^ab-artikel-2-1-lid-1-sub-e-gewist]
 
-[^ar-artikel-2-5-lid-2]: Archiefregeling, artikel 2.5, tweede lid. De bronlink naar de Archiefregeling volgt na publicatie.
-[^ar-artikel-2-5-lid-2-sub-f]: Archiefregeling, artikel 2.5, tweede lid, sub f. De bronlink naar de Archiefregeling volgt na publicatie.
+[^ar-artikel-2-5-lid-2]: Archiefregeling, artikel 2.5, tweede lid. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
+[^ar-artikel-2-5-lid-2-sub-f]: Archiefregeling, artikel 2.5, tweede lid, sub f. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 [^ab-artikel-2-1-lid-1-sub-e-gewist]: Archiefbesluit, artikel 2.1, eerste lid, onderdeel e; Archiefbesluit, nota van toelichting, p.18 van document. Met ongeoorloofd wordt bedoeld anders dan op grond van een verplichting uit andere wetgeving. Deze verplichting mag echter niet in strijd zijn met de uitvoering van de Archiefwet. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 #### Indicatoren
@@ -106,7 +106,7 @@ Het verantwoordelijke overheidsorgaan kan de betrouwbaarheid en authenticiteit v
 - Er wordt gebruikgemaakt van een [hashfunctie](/onderwerpen/hashfunctie/)[^duto-modeleis-r15] voor de controleerbaarheid van de integriteit van digitale documenten.
 - Er is een [audittrail](/onderwerpen/audittrail/) waarin veranderingen in documenten en metadata worden vastgelegd.
 
-[^ar-artikel-2-8-onderdeel-b]: Archiefregeling, artikel 2.8, onderdeel b. De bronlink naar de Archiefregeling volgt na publicatie.
+[^ar-artikel-2-8-onderdeel-b]: Archiefregeling, artikel 2.8, onderdeel b. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 [^duto-modeleis-r15]: DUTO-modeleis R15 t.b.v. functie Validatie, NEN-ISO 16175-1:2020, R.1.1.4 [Bekijk bron](https://www.nationaalarchief.nl/archiveren/duto)
 
 ## Reikwijdte

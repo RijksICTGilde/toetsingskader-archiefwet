@@ -39,7 +39,7 @@ De Inspectie kijkt bij vindbaarheid vooral naar hoe essentiële randvoorwaarden 
 
 Het verantwoordelijke overheidsorgaan heeft in de passende maatregelen opgenomen wat de redelijke termijn is voor de vindbaarheid van documenten.[^aw-artikel-4-1-4-2-ar-toelichting-vinden]
 
-[^aw-artikel-4-1-4-2-ar-toelichting-vinden]: Archiefwet, artikel 4.1 en 4.2; Archiefregeling, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen, p. 36. De bronlink naar de Archiefregeling volgt na publicatie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
+[^aw-artikel-4-1-4-2-ar-toelichting-vinden]: Archiefwet, artikel 4.1 en 4.2; Archiefregeling, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen, p. 36. *(Bron beschikbaar na publicatie van de Archiefregeling.)* [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
 #### Criteria
 
@@ -73,7 +73,7 @@ Het verantwoordelijke overheidsorgaan kan documenten binnen een redelijke termij
 
 Documenten kunnen door de organisatie, op basis van de eisen die gesteld worden aan metadata, de ordening en het overzicht, binnen een redelijke termijn worden gevonden.[^ab-artikel-2-1-ar-toelichting-p34-50-53]
 
-[^ab-artikel-2-1-ar-toelichting-p34-50-53]: Archiefbesluit, artikel 2.1, eerste lid; Archiefregeling, Toelichting, p. 34, artikel 2.2, 2.3 en 2.5; Archiefregeling, Toelichting, p.50 en 53. De bronlink naar de Archiefregeling volgt na publicatie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
+[^ab-artikel-2-1-ar-toelichting-p34-50-53]: Archiefbesluit, artikel 2.1, eerste lid; Archiefregeling, Toelichting, p. 34, artikel 2.2, 2.3 en 2.5; Archiefregeling, Toelichting, p.50 en 53. *(Bron beschikbaar na publicatie van de Archiefregeling.)* [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 #### Criteria
 

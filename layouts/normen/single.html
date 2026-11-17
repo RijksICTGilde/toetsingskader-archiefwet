@@ -63,9 +63,9 @@
     {{/* Zelfde behandeling als een voetnootbron: afkortingen uitgeschreven
          (3.1.4) en een bronlink die in een linkoverzicht te onderscheiden is
          (2.4.9, bevinding 27). */}}
-    <p class="kern-bron">Bron: {{ partial "afkortingen.html" . | safeHTML }}
+    <p class="kern-bron">Bron: {{ partial "afkortingen.html" (. | markdownify | string) | safeHTML }}
       {{- with $page.Params.kern_bron_url }}
-      <a href="{{ . }}" aria-label="Bekijk bron: {{ $page.Params.kern_bron | plainify | strings.TrimRight " .;:" }}">Bekijk bron</a>
+      <a href="{{ . }}" aria-label="Bekijk bron: {{ $page.Params.kern_bron | markdownify | plainify | strings.TrimRight " .;:" }}">Bekijk bron</a>
       {{- end -}}
     </p>
     {{- end }}

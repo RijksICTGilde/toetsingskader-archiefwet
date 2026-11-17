@@ -9,7 +9,7 @@
      Aanroep: {{ partial "kern-bron-html.html" . }}
 */ -}}
 {{- with .Params.kern_bron -}}
-  {{- $tekst := partial "afkortingen.html" . -}}
+  {{- $tekst := partial "afkortingen.html" (. | markdownify | string) -}}
   {{- with $.Params.kern_bron_url -}}
     {{- printf `<p>Bron: %s <a href="%s">Bekijk bron</a></p>` $tekst . | safeHTML -}}
   {{- else -}}

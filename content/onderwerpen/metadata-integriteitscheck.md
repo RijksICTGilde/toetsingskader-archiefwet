@@ -12,7 +12,7 @@ toc: false
 
 Bij documenten die langer dan 10 jaar worden bewaard moet in de metadata een vermelding van de resultaten van uitgevoerde integriteitschecks zijn opgenomen.[^ar-artikel-2-8-sub-b] Deze metadata tonen aan dat documenten ongewijzigd en onbeschadigd zijn.[^ab-artikel-2-1-sub-e] Dit neemt niet weg dat alle documenten, ongeacht de bewaartermijn, betrouwbaar moeten zijn.
 
-[^ar-artikel-2-8-sub-b]: Archiefregeling, artikel 2.8, sub b. De bronlink naar de Archiefregeling volgt na publicatie.
+[^ar-artikel-2-8-sub-b]: Archiefregeling, artikel 2.8, sub b. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 [^ab-artikel-2-1-sub-e]: Archiefbesluit, artikel 2.1, sub e. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
 Welke metadata dienen te worden vastgelegd hangt af van de techniek die wordt gebruikt. De Archiefregeling, artikel 2.8 lid b, regelt dat nadrukkelijk rekening wordt gehouden met de mogelijkheid dat er meerdere technieken naast elkaar gebruikt worden om integriteitschecks uit te voeren, afhankelijk van het soort documenten.
