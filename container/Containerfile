@@ -1,4 +1,4 @@
-FROM golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb AS build
+FROM golang:1.27.3-alpine@sha256:fa3d596898d9f126af7c01d14ee7597bab3f39cccf392ef36b69fe77cd681f18 AS build
 ARG HUGO_VERSION=0.162.1
 ARG HUGO_SHA256=4bfcdb092d0306586f1b72e5687787ead053faab2d71f09951d3c5fecde66873
 RUN apk add --no-cache git wget tar nodejs npm \
