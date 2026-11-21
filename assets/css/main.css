@@ -162,33 +162,3 @@ abbr[title] {
   text-underline-offset: 0.15em;
   cursor: help;
 }
-
-/* Zoektermmarkering (1.4.3, bevinding 31): hier hoort géén projectregel. Een
-   eerdere `#main-content a mark { color: inherit }` gaf de markering in een link
-   de linkkleur, en die haalt 4,5:1 niet. Zonder die regel wint `mark` uit
-   base.css van het thema (11,4:1), ook binnen een link. */
-
-/* Het thema zet `.toc ul ul li { margin-bottom: 0 }`, waardoor de sublinks noch
-   24px hoog zijn noch 24px uit elkaar staan — beide routes van 2.5.8 falen. Als
-   block met verticale padding haalt de link zelf ruim 24px. */
-.toc nav a {
-  display: block;
-  padding-block: 0.25rem;
-}
-
-/* Reflow op 320px (1.4.10): een gesloten `.ref-tooltip` is absoluut gepositioneerd
-   met min-inline-size 14rem en rekt vanaf een term rechts in de regel de pagina
-   ~175px op. Daarom onder 480px uit de layout. `aria-describedby` blijft werken —
-   de naamberekening leest verborgen doelen. */
-@media (max-width: 480px) {
-  .ref-tooltip {
-    display: none;
-  }
-
-  .ref-wrapper:hover > .ref-tooltip,
-  .ref-wrapper:focus-within > .ref-tooltip {
-    display: block;
-    min-inline-size: 0;
-    max-inline-size: calc(100vw - 2rem);
-  }
-}
