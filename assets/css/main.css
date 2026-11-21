@@ -14,7 +14,7 @@
 
 /* Bronvermelding onder de kern-callout: kleiner dan de kerntekst, maar niet
    grijs — op het callout-vlak zou dat het contrast onder 4.5:1 duwen. */
-blockquote.callout .kern-bron {
+.callout .kern-bron {
   margin-block-start: 0.75rem;
   margin-block-end: 0;
   font-size: 0.875rem;
@@ -111,7 +111,7 @@ a.ref-term:hover {
    Tekstkleur uit het token en niet #fff: in donkere modus is --color-primary
    #80d5fc en haalt wit daarop 1,6:1 (scan 15 september 2026);
    --color-text-on-primary is daar #1e293b, 8,4:1. */
-.toc .pdf-download.button {
+.page-aside .pdf-download.button {
   width: 100%;
   margin-bottom: 1.25rem;
 }

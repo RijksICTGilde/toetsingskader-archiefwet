@@ -15,7 +15,7 @@ outputs:
   - pdfdata
 cascade:
   show_lastmod: true
-  show_referenties: true
+  show_references: true
   outputs:
     - HTML
     - pdfdata
