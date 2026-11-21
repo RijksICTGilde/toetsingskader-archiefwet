@@ -66,7 +66,7 @@ jobs:
         # Alleen een echte tag exporteren; geen tag → hugo.yaml-default (geen hash).
         run: |
           V="$(git describe --tags --abbrev=0 2>/dev/null || true)"
-          if [ -n "$V" ]; then echo "HUGO_PARAMS_VERSIE=$V" >> "$GITHUB_ENV"; fi
+          if [ -n "$V" ]; then echo "HUGO_PARAMS_VERSION=$V" >> "$GITHUB_ENV"; fi
 
       - name: Build site
         env:

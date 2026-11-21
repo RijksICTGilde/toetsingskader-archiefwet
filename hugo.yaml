@@ -57,9 +57,9 @@ markup:
     endLevel: 4
 
 params:
-  # Lokale default; in CI de git-release-tag via HUGO_PARAMS_VERSIE. Ook de bron
-  # voor de PDF-export.
-  versie: "v0.2.2"
+  # Lokale default; in CI de git-release-tag via HUGO_PARAMS_VERSION. Ook de bron
+  # voor de PDF-export. De voet toont hem niet (_partials/version-text.html).
+  version: "v0.2.2"
   pdf:
     # Adres achter "Bekijk voor de actuele versie …" in de PDF's en de
     # "Bron: …"-regel op de omslag. Leeg: de baseURL van de build, voor
