@@ -10,7 +10,7 @@ kern: "Het verantwoordelijke overheidsorgaan beheert de door hen opgemaakte of o
 kern_bron: "Archiefbesluit, artikel 2.1, eerste lid, sub e en f; Archiefbesluit, artikel 2.1, tweede lid."
 kern_bron_url: "https://zoek.officielebekendmakingen.nl/stb-2026-321.html"
 kern_kaart: "Een document moet aantoonbaar betrouwbaar zijn, dat wil zeggen dat het document is wat het zegt te zijn."
-synoniemen:
+synonyms:
   - "Oorspronkelijk (authentiek)"
   - "Origineel (authentiek)"
 ---

@@ -8,7 +8,7 @@ kern: "Een document is in beheer van het verantwoordelijke overheidsorgaan, zoda
 kern_bron: "Archiefbesluit, artikel 2.1, eerste lid; Archiefwet, artikel 4.1, eerste lid."
 kern_bron_url: "https://zoek.officielebekendmakingen.nl/stb-2026-321.html"
 kern_kaart: "Een document bevindt zich in een beheerde omgeving, zodat de beheertaken kunnen worden uitgevoerd waarmee documenten duurzaam toegankelijk gemaakt worden en blijven."
-synoniemen:
+synonyms:
   - "Opname (DUTO)"
   - "Duurzaam toegankelijk (DUTO)"
   - "Beheerstrategie"

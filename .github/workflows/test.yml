@@ -107,6 +107,10 @@ jobs:
           hugo --minify --quiet --baseURL / --destination .a11y/public
           npm run test:a11y:browser
 
+      - name: Zoeken in de browser
+        # Gebruikt de build en Chromium van de stap hiervoor.
+        run: npm run test:zoeken
+
       - name: PDF's genereren en de markers controleren
         # pdfkit in Node (scripts/pdf-tagged.mjs) — geen browser nodig.
         # pdf-ua-check meet daarna op de ruwe bytes of /StructTreeRoot,
