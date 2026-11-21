@@ -17,9 +17,9 @@ RUN npm ci --no-audit --no-fund
 COPY . .
 ARG BASE_URL=
 # Release-tag (git describe) doorgegeven vanuit de workflow; voedt de PDF-export
-# via HUGO_PARAMS_VERSIE → site.Params.versie. Leeg → Hugo-default uit hugo.yaml.
+# via HUGO_PARAMS_VERSION → site.Params.version. Leeg → Hugo-default uit hugo.yaml.
 ARG VERSIE=
-RUN if [ -n "$VERSIE" ]; then export HUGO_PARAMS_VERSIE="$VERSIE"; fi; \
+RUN if [ -n "$VERSIE" ]; then export HUGO_PARAMS_VERSION="$VERSIE"; fi; \
     if [ -n "$BASE_URL" ]; then \
       hugo --minify --baseURL "$BASE_URL"; \
     else \

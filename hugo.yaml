@@ -57,12 +57,10 @@ markup:
     endLevel: 4
 
 params:
-  # Lokale default; in CI de git-release-tag via HUGO_PARAMS_VERSIE. Ook de bron
-  # voor de PDF-export.
-  versie: "v0.2.2"
-  # Doel van het versienummer. Eén plek: de versiezin in de paginavoet
-  # (`_partials/lastmod.html`, uit `_partials/versie-zin.html`).
-  releases_url: "https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases"
+  # Lokale default; in CI de git-release-tag via HUGO_PARAMS_VERSION. Ook de bron
+  # voor de PDF-export. De voet toont hem via _partials/version-text.html.
+  version: "v0.2.2"
+  version_url: "https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases"
   pdf:
     # Adres achter "Bekijk voor de actuele versie …" in de PDF's. Leeg: de
     # baseURL van de build (in CI het ZAD-adres). Vul hier het publieke adres

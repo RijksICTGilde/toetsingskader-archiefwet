@@ -1,0 +1,5 @@
+{{- /* Hook van het theme: "Versie X van het toetsingskader." Nummer uit
+       params.version (lokaal hugo.yaml, in CI de release-tag). */ -}}
+{{- with site.Params.version -}}
+<strong>{{ partial "render-link.html" (dict "href" site.Params.version_url "text" (printf "Versie %v" .)) }}</strong> van het toetsingskader.
+{{- end -}}
