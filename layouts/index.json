@@ -9,14 +9,14 @@
        noemt. */ -}}
 {{- $allPages := site.RegularPages | append site.Sections | append site.Home -}}
 {{- range $allPages -}}
-  {{- $text := .Plain -}}
+  {{- $text := .Plain | htmlUnescape -}}
   {{- /* Verborgen nieuw-venster-melding van render-link hoort niet in de index. */ -}}
   {{- $text = replace $text " (opent in een nieuw venster)" "" -}}
   {{- $text = replace $text ", opent in een nieuw venster)" ")" -}}
-  {{- with .Params.kern }}{{ $text = printf "%s %s" $text (. | markdownify | plainify) }}{{ end -}}
+  {{- with .Params.kern }}{{ $text = printf "%s %s" $text (. | markdownify | plainify | htmlUnescape) }}{{ end -}}
   {{- $synoniemen := "" -}}
   {{- with .Params.synoniemen -}}
-    {{- $synoniemen = delimit . " " | markdownify | plainify -}}
+    {{- $synoniemen = delimit . " " | markdownify | plainify | htmlUnescape -}}
     {{- $text = printf "%s %s" $text $synoniemen -}}
   {{- end -}}
   {{- $title := .Title -}}

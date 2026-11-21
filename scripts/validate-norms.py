@@ -42,7 +42,7 @@ DEPRECATED_FIELDS = [
     "reikwijdte",
     "gerelateerde_onderwerpen",
     "wetsverwijzing",
-    "show_referenties",
+    "show_references",
 ]
 
 REQUIRED_SECTIONS = ["Toelichting", "Voorschriften"]

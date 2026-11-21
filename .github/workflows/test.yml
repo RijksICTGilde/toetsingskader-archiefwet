@@ -73,6 +73,14 @@ jobs:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
         run: hugo --gc --minify --logLevel warning
 
+      - name: Theme-pin onveranderd
+        # Zonder require in go.mod haalt Hugo stil de nieuwste theme-versie op.
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+        run: |
+          hugo mod verify
+          git diff --exit-code -- go.mod go.sum
+
       - name: Setup Node
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
