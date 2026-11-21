@@ -76,6 +76,7 @@ params:
       - over
       - home
   back_to_top: true
+  theme_menu: false
   tagline: "Normen voor duurzame toegankelijkheid"
   # Het Rijksoverheid-lint in de kop (thema, sinds v0.2.1): `wordmark` staat
   # ernaast zoals op inspectie-oe.nl, de organisatie vet met het ministerie
