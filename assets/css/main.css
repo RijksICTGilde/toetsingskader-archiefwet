@@ -14,7 +14,7 @@
 
 /* Bronvermelding onder de kern-callout: kleiner dan de kerntekst, maar niet
    grijs — op het callout-vlak zou dat het contrast onder 4.5:1 duwen. */
-blockquote.callout .kern-bron {
+.callout .kern-bron {
   margin-block-start: 0.75rem;
   margin-block-end: 0;
   font-size: 0.875rem;
@@ -111,9 +111,13 @@ a.ref-term:hover {
    Tekstkleur uit het token en niet #fff: in donkere modus is --color-primary
    #80d5fc en haalt wit daarop 1,6:1 (scan 15 september 2026);
    --color-text-on-primary is daar #1e293b, 8,4:1. */
-.toc .pdf-download.button {
+.page-aside .pdf-download.button {
   width: 100%;
-  margin-bottom: 1.25rem;
+}
+
+/* Vervangt de 1.5rem tussen de blokken van de rechterkolom (thema). */
+.page-aside > .pdf-download + * {
+  margin-top: 1.25rem;
 }
 
 .pdf-download.button {
@@ -157,34 +161,4 @@ abbr[title] {
   text-decoration: underline dotted;
   text-underline-offset: 0.15em;
   cursor: help;
-}
-
-/* Zoektermmarkering (1.4.3, bevinding 31): hier hoort géén projectregel. Een
-   eerdere `#main-content a mark { color: inherit }` gaf de markering in een link
-   de linkkleur, en die haalt 4,5:1 niet. Zonder die regel wint `mark` uit
-   base.css van het thema (11,4:1), ook binnen een link. */
-
-/* Het thema zet `.toc ul ul li { margin-bottom: 0 }`, waardoor de sublinks noch
-   24px hoog zijn noch 24px uit elkaar staan — beide routes van 2.5.8 falen. Als
-   block met verticale padding haalt de link zelf ruim 24px. */
-.toc nav a {
-  display: block;
-  padding-block: 0.25rem;
-}
-
-/* Reflow op 320px (1.4.10): een gesloten `.ref-tooltip` is absoluut gepositioneerd
-   met min-inline-size 14rem en rekt vanaf een term rechts in de regel de pagina
-   ~175px op. Daarom onder 480px uit de layout. `aria-describedby` blijft werken —
-   de naamberekening leest verborgen doelen. */
-@media (max-width: 480px) {
-  .ref-tooltip {
-    display: none;
-  }
-
-  .ref-wrapper:hover > .ref-tooltip,
-  .ref-wrapper:focus-within > .ref-tooltip {
-    display: block;
-    min-inline-size: 0;
-    max-inline-size: calc(100vw - 2rem);
-  }
 }

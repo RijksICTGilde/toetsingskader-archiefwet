@@ -10,7 +10,7 @@ kern: "Het verantwoordelijke overheidsorgaan zorgt ervoor dat documenten binnen 
 kern_bron: "Archiefbesluit, artikel 2.1, eerste lid, onder a."
 kern_bron_url: "https://zoek.officielebekendmakingen.nl/stb-2026-321.html"
 kern_kaart: "Een document moet binnen een redelijke termijn na creatie of ontvangst vindbaar zijn."
-synoniemen:
+synonyms:
   - "Zoeken"
   - "Vinden"
 ---

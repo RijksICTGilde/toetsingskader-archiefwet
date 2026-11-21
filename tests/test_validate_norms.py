@@ -21,7 +21,7 @@ weight: 2
 norm_id: "2"
 norm_titel: "Overzicht"
 kern: "De organisatie heeft een overzicht van haar documenten."
-synoniemen:
+synonyms:
   - "Overzicht"
 ---
 
@@ -75,19 +75,19 @@ class FrontMatterTests(unittest.TestCase):
         self.assertTrue(any("Verplicht veld 'kern' ontbreekt" in e for e in errors), errors)
 
     def test_deprecated_field_in_front_matter(self):
-        content = replace("synoniemen:\n", 'toelichting: "x"\nsynoniemen:\n')
+        content = replace("synonyms:\n", 'toelichting: "x"\nsynonyms:\n')
         errors = run(content)
         self.assertTrue(any("'toelichting' hoort niet meer in de front matter" in e for e in errors), errors)
 
-    def test_synoniemen_not_a_list(self):
-        content = replace('synoniemen:\n  - "Overzicht"\n', 'synoniemen: "Overzicht"\n')
+    def test_synonyms_not_a_list(self):
+        content = replace('synonyms:\n  - "Overzicht"\n', 'synonyms: "Overzicht"\n')
         errors = run(content)
-        self.assertTrue(any("'synoniemen' moet een lijst zijn" in e for e in errors), errors)
+        self.assertTrue(any("'synonyms' moet een lijst zijn" in e for e in errors), errors)
 
-    def test_synoniemen_with_footnote(self):
+    def test_synonyms_with_footnote(self):
         content = replace('  - "Overzicht"\n', '  - "Overzicht[^x]"\n')
         errors = run(content)
-        self.assertTrue(any("'synoniemen' mag geen voetnoten" in e for e in errors), errors)
+        self.assertTrue(any("'synonyms' mag geen voetnoten" in e for e in errors), errors)
 
     def test_kern_with_footnote(self):
         content = replace(
@@ -104,7 +104,7 @@ class FrontMatterTests(unittest.TestCase):
 
     def test_kern_kop_is_rejected(self):
         # De kern heeft geen kop; het veld mag er niet stilzwijgend een terugbrengen.
-        content = replace("synoniemen:\n", 'kern_kop: "Kern van Overzicht"\nsynoniemen:\n')
+        content = replace("synonyms:\n", 'kern_kop: "Kern van Overzicht"\nsynonyms:\n')
         errors = run(content)
         self.assertTrue(any("'kern_kop' bestaat niet meer: de kern heeft geen kop" in e for e in errors), errors)
 

@@ -9,7 +9,7 @@ aliases:
 kern: "Het verantwoordelijke overheidsorgaan beschikt over één of meerdere ordeningsstructuren, waarvan er ten minste één aansluit bij de taken en werkprocessen van het verantwoordelijke overheidsorgaan."
 kern_bron: "Archiefregeling, artikel 2.2, eerste lid. *(Bron beschikbaar na publicatie van de Archiefregeling.)*"
 kern_kaart: "Documenten zijn gekoppeld aan een ordening."
-synoniemen:
+synonyms:
   - "Structuur"
   - "Ordening"
   - "Classificatie"

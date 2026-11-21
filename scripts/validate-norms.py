@@ -4,8 +4,8 @@
 Contentformaat:
 
   - Front matter: alleen machinaal gebruikte velden (`title`, `weight`,
-    `norm_id`, `norm_titel`, `versie`, `kern`, `synoniemen`), zonder
-    voetnoten of markdown in `kern`/`synoniemen`. Optioneel: `kern_bron`
+    `norm_id`, `norm_titel`, `versie`, `kern`, `synonyms`), zonder
+    voetnoten of markdown in `kern`/`synonyms`. Optioneel: `kern_bron`
     en `kern_bron_url`, de bronvermelding onder de kern.
   - Body: vaste koppen `## Toelichting` en `## Voorschriften` (verplicht,
     met `#### Voorschrift` -> optioneel `#### Criteria`/`#### Criterium` en
@@ -31,7 +31,7 @@ except ImportError:
     sys.exit(1)
 
 # Front matter: alleen machinaal gebruikte velden.
-REQUIRED_FIELDS = ["title", "weight", "norm_id", "norm_titel", "versie", "kern", "synoniemen"]
+REQUIRED_FIELDS = ["title", "weight", "norm_id", "norm_titel", "versie", "kern", "synonyms"]
 
 # Stonden in het oude formaat in de front matter, horen nu in de body.
 # Aanwezigheid is een fout, zodat migraties niet half blijven.
@@ -42,7 +42,7 @@ DEPRECATED_FIELDS = [
     "reikwijdte",
     "gerelateerde_onderwerpen",
     "wetsverwijzing",
-    "show_referenties",
+    "show_references",
 ]
 
 REQUIRED_SECTIONS = ["Toelichting", "Voorschriften"]
@@ -142,15 +142,15 @@ def validate_front_matter(name, fm_text, errors):
                 line=find_field_line(fm_text, field),
             ))
 
-    if isinstance(fm.get("synoniemen"), list):
-        for syn in fm["synoniemen"]:
+    if isinstance(fm.get("synonyms"), list):
+        for syn in fm["synonyms"]:
             if isinstance(syn, str) and "[^" in syn:
-                errors.append(Error(name, "'synoniemen' mag geen voetnoten ([^...]) bevatten",
-                                    line=find_field_line(fm_text, "synoniemen")))
+                errors.append(Error(name, "'synonyms' mag geen voetnoten ([^...]) bevatten",
+                                    line=find_field_line(fm_text, "synonyms")))
                 break
-    elif "synoniemen" in fm and fm["synoniemen"] is not None:
-        errors.append(Error(name, "'synoniemen' moet een lijst zijn",
-                            line=find_field_line(fm_text, "synoniemen")))
+    elif "synonyms" in fm and fm["synonyms"] is not None:
+        errors.append(Error(name, "'synonyms' moet een lijst zijn",
+                            line=find_field_line(fm_text, "synonyms")))
 
     if isinstance(fm.get("kern"), str) and "[^" in fm["kern"]:
         errors.append(Error(name, "'kern' mag geen voetnoten ([^...]) bevatten",

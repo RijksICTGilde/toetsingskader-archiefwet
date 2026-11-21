@@ -9,7 +9,7 @@ aliases:
 kern: "Het verantwoordelijke overheidsorgaan stelt één of meerdere metadataschema's vast. Conform het metadataschema worden de juiste metadata aan documenten gekoppeld."
 kern_bron: "Archiefregeling, artikel 2.5, eerste en tweede lid. *(Bron beschikbaar na publicatie van de Archiefregeling.)*"
 kern_kaart: "Documenten zijn gemetadateerd zodat de inhoud, structuur en context van documenten en het beheer ervan door de tijd heen zijn beschreven en vastgelegd."
-synoniemen:
+synonyms:
   - "Metagegevens"
 ---
 

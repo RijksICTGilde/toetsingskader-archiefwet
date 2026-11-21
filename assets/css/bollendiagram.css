@@ -78,7 +78,7 @@
    er. Een CSS-regel zou dat attribuut overschrijven (en inline style mag niet
    van de CSP). */
 .bd-labels text {
-  font-family: "RO Sans", "Source Sans 3", system-ui, sans-serif;
+  font-family: var(--font-sans);
   dominant-baseline: middle;
 }
 

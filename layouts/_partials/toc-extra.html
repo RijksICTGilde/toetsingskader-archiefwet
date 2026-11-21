@@ -1,0 +1,5 @@
+{{- /* Hook van het theme: de voetnoten staan in de referentielijst van
+       voetnoot-tooltips.html (#referenties), niet onder #voetnoten. */ -}}
+{{- if strings.Contains .Content `class="footnotes"` -}}
+<li><a href="#referenties">Referenties</a></li>
+{{- end -}}
