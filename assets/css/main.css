@@ -113,7 +113,11 @@ a.ref-term:hover {
    --color-text-on-primary is daar #1e293b, 8,4:1. */
 .page-aside .pdf-download.button {
   width: 100%;
-  margin-bottom: 1.25rem;
+}
+
+/* Vervangt de 1.5rem tussen de blokken van de rechterkolom (thema). */
+.page-aside > .pdf-download + * {
+  margin-top: 1.25rem;
 }
 
 .pdf-download.button {
