@@ -73,6 +73,8 @@ params:
     email: toetsingskader@inspectie-oe.nl
   search:
     enable: true
+    extra_fields:
+      - kern
     priority_sections:
       - normen
       - onderwerpen

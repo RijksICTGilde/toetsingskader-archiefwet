@@ -1,6 +1,7 @@
 ---
 layout: hero
 show_lastmod: true
+search_index: false
 title: "Toetsingskader Archiefwet"
 description: "Hoe de Inspectie Overheidsinformatie en Erfgoed toezicht houdt op de naleving van de Archiefwet 2026."
 hero:

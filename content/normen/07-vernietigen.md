@@ -10,7 +10,7 @@ kern: "Het verantwoordelijke overheidsorgaan vernietigt documenten waarvan de be
 kern_bron: "Archiefwet, artikel 5.3, eerste lid; Archiefbesluit, artikel 4.1; Archiefregeling, artikel 4.1; Archiefregeling, artikel 4.2. *(Bron beschikbaar na publicatie van de Archiefregeling.)*"
 kern_bron_url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
 kern_kaart: "Documenten moeten gecontroleerd vernietigd worden."
-synoniemen:
+synonyms:
   - "Wissen"
   - "Verwijderen"
   - "Ontoegankelijk maken"

@@ -7,7 +7,7 @@ norm_titel: "Overzicht"
 kern: "Het verantwoordelijke overheidsorgaan beschikt over een actueel overzicht van de informatiehuishouding. Dit overzicht geeft aan welke (categorieën) documenten zich bij het overheidsorgaan bevinden en waar ze te vinden zijn."
 kern_bron: "Archiefregeling, artikel 2.3, aanhef; Archiefregeling, Toelichting, Algemene eisen, overzicht informatiehuishouding, p. 33-35. *(Bron beschikbaar na publicatie van de Archiefregeling.)*"
 kern_kaart: "De organisatie heeft een overzicht van welke documenten ze onder zich heeft en waar die zich bevinden."
-synoniemen:
+synonyms:
   - "Bestandsoverzicht"
 ---
 
