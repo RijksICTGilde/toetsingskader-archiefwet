@@ -1,5 +1,6 @@
 ---
 layout: hero
+show_lastmod: true
 title: "Toetsingskader Archiefwet"
 description: "Hoe de Inspectie Overheidsinformatie en Erfgoed toezicht houdt op de naleving van de Archiefwet 2026."
 hero:
@@ -18,5 +19,3 @@ tiles:
 ---
 
 {{< tiles columns="2" aria="Toetsingskader in het kort" >}}
-
-{{< versielabel >}}
