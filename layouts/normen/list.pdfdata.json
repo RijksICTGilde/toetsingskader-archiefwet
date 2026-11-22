@@ -15,6 +15,6 @@
   "site_url" (site.Params.pdf.site_url | default site.Home.Permalink)
   "versie" (site.Params.versie | default "")
   "site_titel" site.Title
-  "taal" (or site.Language.LanguageCode "nl-NL")
+  "taal" (or site.Language.Locale "nl-NL")
   "normen" $items
   | jsonify -}}
