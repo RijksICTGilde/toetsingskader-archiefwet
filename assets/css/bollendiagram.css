@@ -130,6 +130,13 @@
    nodig om leesbaar te blijven; hij scrollt dan horizontaal binnen de figure
    (uitzondering in WCAG 1.4.10 voor diagrammen). De normenlijst eronder blijft
    de tekstuele route. */
+.bollendiagram-scroll-hint {
+  display: none;
+  margin: 0.5rem 0 0;
+  font-size: var(--primitives-font-size-80);
+  color: var(--color-text-muted);
+}
+
 @media (max-width: 640px) {
   .bollendiagram-wrapper {
     margin: 1rem 0;
@@ -137,6 +144,27 @@
   }
   .bollendiagram {
     min-width: 600px;
+  }
+}
+
+/* Alleen als de plaat (600px plus de marge van de pagina) echt schuift; zelfde
+   aanwijzing als bij de platen van moza-site. */
+@media (max-width: 631px) {
+  .bollendiagram-scroll-hint {
+    display: block;
+  }
+}
+
+/* Papier schuift niet: de plaat schaalt mee met de pagina, ook op A5. */
+@media print {
+  .bollendiagram-wrapper {
+    overflow-x: visible;
+  }
+  .bollendiagram {
+    min-width: 0;
+  }
+  .bollendiagram-scroll-hint {
+    display: none;
   }
 }
 
