@@ -24,7 +24,7 @@
 //    `pageAdded`-event en de voetregel met de ondermarge tijdelijk op nul.
 //
 // Maten en kleuren komen uit de eerdere exports: A4, marges [48, 92, 48, 56]pt,
-// RO Sans, brand #007bc7.
+// brand #007bc7. Het lettertype is RijksSans, zoals op de site.
 import PDFDocument from 'pdfkit'
 import SVGtoPDF from 'svg-to-pdfkit'
 import fs from 'node:fs'
@@ -414,13 +414,14 @@ export class TaggedPdf {
   }
 }
 
-/** De drie RO Sans-snedes uit assets/fonts, als Buffers voor registerFont. */
+/** De drie RijksSans-snedes uit assets/fonts (`just pdf-fonts`), als Buffers
+    voor registerFont. */
 export function laadFonts(root = new URL('..', import.meta.url)) {
   const lees = (p) => fs.readFileSync(new URL(p, root))
   return {
-    normal: lees('assets/fonts/ro-sans-regular.ttf'),
-    bold: lees('assets/fonts/ro-sans-bold.ttf'),
-    italic: lees('assets/fonts/ro-sans-italic.ttf'),
+    normal: lees('assets/fonts/rijks-sans-regular.ttf'),
+    bold: lees('assets/fonts/rijks-sans-bold.ttf'),
+    italic: lees('assets/fonts/rijks-sans-italic.ttf'),
   }
 }
 

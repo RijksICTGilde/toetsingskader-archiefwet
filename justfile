@@ -47,6 +47,25 @@ pdf:
     npm run build:pdf
     npm run test:pdf-ua
 
+# Vaste RijksSans-snedes voor de PDF, uit het variabele font van het theme:
+# pdfkit sluit een variabel font niet per gewicht in. Opnieuw draaien als het
+# theme een nieuwe RijksSans meebrengt.
+pdf-fonts:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    thema=$(hugo config mounts | jq -s -r '.[] | select(.path | test("hugo-theme-rijksoverheid")) | .dir')
+    tmp=$(mktemp -d)
+    for snede in "Regular 400 regular" "Regular 700 bold" "Italic 400 italic"; do
+      read -r bron gewicht naam <<< "$snede"
+      uvx --quiet --from 'fonttools[woff]' fonttools varLib.instancer \
+        "${thema%/}/static/fonts/RijksSansWeb-${bron}.woff2" "wght=${gewicht}" \
+        --update-name-table -o "${tmp}/${naam}.woff2"
+      uvx --quiet --from 'fonttools[woff]' python -I -c \
+        'import sys; from fontTools.ttLib import TTFont; f = TTFont(sys.argv[1]); f.flavor = None; f.save(sys.argv[2])' \
+        "${tmp}/${naam}.woff2" "assets/fonts/rijks-sans-${naam}.ttf"
+    done
+    trash "${tmp}"
+
 # Bijwerken theme naar laatste versie
 update-theme:
     hugo mod get -u github.com/RijksICTGilde/hugo-theme-rijksoverheid
