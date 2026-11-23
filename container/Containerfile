@@ -38,12 +38,14 @@ FROM nginxinc/nginx-unprivileged:stable-alpine-slim@sha256:5d8bb9437d74a600ec5db
 # Werkt alleen als deze laag ook echt opnieuw draait: de workflow zet
 # `no-cache-filters: runtime`, anders komt de upgrade uit de GHA-cache en
 # blijft de oude openssl staan (CVE-2026-14456, 26 augustus 2026).
-# Let op: deze upgrade vervangt nginx door de Alpine-build, die prefix
-# /var/lib/nginx heeft. Die directory is 0750 en van uid 101, terwijl ZAD
-# de pod met een willekeurige UID draait — zonder chmod faalt nginx op het
-# default-logpad nog voordat hij nginx.conf (met expliciete logpaden) leest.
+# Het image pint nginx in /etc/apk/world (`nginx=<versie>`), dus `apk upgrade`
+# slaat nginx over; `apk add --upgrade nginx` haalt die pin weg.
+# /var/lib/nginx is 0750 en van uid 101, terwijl ZAD de pod met een
+# willekeurige UID draait: zonder chmod faalt nginx op het default-logpad nog
+# voordat hij nginx.conf (met expliciete logpaden) leest.
 USER root
 RUN apk upgrade --no-cache \
+  && apk add --no-cache --upgrade nginx \
   && if [ -d /var/lib/nginx ]; then chmod 755 /var/lib/nginx; fi
 USER 101
 COPY --from=build /src/public/ /usr/share/nginx/html/
