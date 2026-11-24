@@ -60,11 +60,10 @@ params:
   # beide uit `_partials/versie-zin.html`.
   releases_url: "https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases"
   pdf:
-    # Adres achter "Bekijk voor de actuele versie …" in de PDF's. Leeg: de
-    # baseURL van de build (in CI het ZAD-adres). Vul hier het publieke adres
-    # in zodra de site een eigen domein heeft; de PDF's volgen bij de volgende
-    # release.
-    site_url: ""
+    # Adres achter "Bekijk voor de actuele versie …" in de PDF's en de
+    # "Bron: …"-regel op de omslag: het publieke adres van de site. Leeg: de
+    # baseURL van de build (in CI het ZAD-adres).
+    site_url: "https://toetsingskader.inspectie-oe.nl/archiefwet/"
   feedback:
     email: toetsingskader@inspectie-oe.nl
   search:

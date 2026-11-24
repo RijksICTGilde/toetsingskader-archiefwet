@@ -11,6 +11,13 @@ changelog volgt [Semantic Versioning][semver].
 
 ## [Unreleased]
 
+### Opgelost
+
+- De PDF's noemen het publieke adres
+  (`https://toetsingskader.inspectie-oe.nl/archiefwet/`) in de "Bron: …"-regel
+  op de omslag en achter "Bekijk voor de actuele versie …", in plaats van het
+  ZAD-adres van de build (`params.pdf.site_url`).
+
 ### Gewijzigd
 
 - Verwijzingen naar het Archiefbesluit linken naar de publicatie in het
