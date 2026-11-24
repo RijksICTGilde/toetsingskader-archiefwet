@@ -9,7 +9,7 @@ manual_layout: true
 wide: true
 # PDF-data alleen hier: de acht normen en het hele kader worden als document
 # aangeboden, de rest van de site niet. Zie hugo.yaml en
-# docs/besluit-toegankelijke-pdf.md.
+# docs/pdr/0003-pdf-bij-de-build-genereren-met-tags.md.
 outputs:
   - HTML
   - pdfdata

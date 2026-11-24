@@ -1,10 +1,66 @@
-# Openstaande punten uit de feedbackrondes
+# 0009: Punten buiten de content-pull-requests op één lijst bijhouden
+
+Datum: 2026-08-25
+
+## Status
+
+Geaccepteerd. De lijst is voor het laatst bijgewerkt op 16 september 2026 en telt nog drie open punten.
+
+## Besluit
+
+Punten uit de feedbackrondes die niet in de content-pull-requests (76, 78 en 79) pasten, staan op één lijst: layout, script, PDF en nog te schrijven tekst. Per punt staat waar het zit. Een verwerkt punt wordt afgevinkt met de datum en de plek van de wijziging.
+
+## Achtergrond
+
+De drie feedbackrondes van augustus 2026 ([PDR 0006](0006-feedback-normbladen-3-4-5.md), [PDR 0007](0007-feedback-normbladen-6-7-8-en-kaderpaginas.md), [PDR 0008](0008-feedback-algemeen-normblad-1-2-onderwerpen.md)) bevatten punten die geen tekstwijziging zijn.
+
+## Overwegingen
+
+- De punten zijn geen tekstwijziging en pasten daarom niet in de content-pull-requests.
+- Per punt moet te zien zijn in welk bestand of onderdeel het zit.
+
+## Details
+
+Besloten en uitgevoerd:
+
+- De kern heeft geen kop meer (31 augustus 2026).
+- Onder "Gerelateerde onderwerpen" staan alleen gelinkte items.
+- De zin "De inhoud is nog in ontwikkeling en kan wijzigen." is weg, op de site en in de PDF. De versiezin komt uit één partial.
+- Op de onderwerpenindex staat geen regel tekst per onderwerp. De navigatie vorige en volgende is weg bij Onderwerpen en Over.
+- Elke onderwerpenpagina heeft een "Zie ook" met de normbladen waar het begrip speelt.
+- Het bollendiagram is kleiner en de inhoudsopgave staat standaard uitgeklapt.
+- In de PDF is "Belangrijke informatie" vervangen door de versieregel met een link naar de site.
+- Synoniemen wegen zwaarder in de zoekfunctie.
+
+Nog open:
+
+- De pagina Totstandkoming. Volgens de lijst van 16 september 2026 wacht de tekst op de Inspectie.
+- Lange woorden in koppen op 320 px (WCAG 1.4.10). Dit is een gebrek in het thema en staat als uitzondering in `scripts/a11y-browser.mjs`.
+- De contrasten in de figuren, waaronder de labels van het bollendiagram.
+
+## Impact
+
+### Ontwikkelteam
+
+Er is één plek waar staat wat nog moet gebeuren buiten de content.
+
+### Thema
+
+Het punt over lange woorden hoort als issue bij `hugo-theme-rijksoverheid`.
+
+## Alternatieven
+
+Het brondocument noemt geen alternatieven.
+
+## Uitwerking
+
+De volledige tekst van het oorspronkelijke bestand `docs/openstaande-punten.md`, dat met deze PDR is vervallen.
 
 Stand 25 augustus 2026. Punten uit de feedback die niet in de content-PR's
 (#76, #78, #79) zijn verwerkt: layout, script, PDF of nog te schrijven tekst.
 Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 
-## Normpagina's
+### Normpagina's
 
 - [x] **Nummer op "Kern van …"**, zodat de nummering van de voorschriften erop
       aansluit. Achterhaald: sinds 31 augustus 2026 heeft de kern-callout geen
@@ -13,7 +69,7 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
       kunnen weg. Volgende stap: kopje en hele lijst weg, want de gelinkte
       woorden staan al in de tekst. Content (alle acht normbladen) én
       `scripts/validate-norms.py` (sectie is daar optioneel toegestaan).
-- [x] **Hovers en links**: keuze 25 augustus 2026 "alles blauw" — hover en link
+- [x] **Hovers en links**: keuze 25 augustus 2026 "alles blauw", hover en link
       allebei in linkkleur; hover gestippeld, link doorgetrokken. `main.css`.
       Achterhaald sinds 15 september 2026: een term met hover én link is nu
       gestippeld en heeft de paginalink in de tooltip en in de bronnenlijst
@@ -21,7 +77,7 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 - [x] "Normanalyse" uit de paginatitel; titel gelijk aan de naam in het kader
       (ordeningsstructuur → ordenen). Gedaan in #76, #78 en #79.
 
-## Versiezin
+### Versiezin
 
 - [x] **"De inhoud is nog in ontwikkeling en kan wijzigen." weg**, op de site
       en in de PDF.
@@ -30,7 +86,7 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
       (`_partials/versie-zin.html`) voor voet en homepage, in de thema-opmaak
       voor `footer p` (gedempt, cursief); de homepage toont nu ook de datum.
 
-## Onderwerpen
+### Onderwerpen
 
 - [x] **Regel tekst per onderwerp op de indexpagina weg**: niet iedereen ziet
       dat je op het onderwerp moet klikken. `layouts/onderwerpen/list.html`
@@ -45,12 +101,12 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
       een partial (`_partials/voetnoot-tooltips.html`) en draait via de
       `article.html`-shadow op alle gewone pagina's. De voetnoot zelf zit in #78.
 
-## Samenhang
+### Samenhang
 
 - [x] **Bollendiagram kleiner.** `assets/css/bollendiagram.css`.
 - [x] **Menu'tje standaard uitgeklapt.** `toc_open: true` + shadow `article.html` + `assets/js/toc-open.js` (respecteert een eerder dichtgeklapte voorkeur).
 
-## Over
+### Over
 
 - [ ] **Pagina "Totstandkoming"**: stub staat er (`content/over/totstandkoming.md`,
       tegel 7). Tekst volgt van de Inspectie.
@@ -59,20 +115,20 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
       shortcode `callout-md` (inner rendert in de pagina-context; vereist
       `goldmark.renderer.unsafe: true`). De inleiding schakelt om in #78.
 
-## PDF
+### PDF
 
 - [x] **"Belangrijke informatie" kan weg.** `assets/js/pdf-export.js`.
 - [x] **Toevoegen: "Dit is versie 1.0.0, bekijk voor de actuele versie …"** met
       link naar de site. `assets/js/pdf-export.js`; versienummer uit
       `site.Params.versie`.
 
-## Zoeken
+### Zoeken
 
 - [x] **Synoniemen wegen niet mee** (norm 6 op "vinden" pas tweede): het
       thema-script weegt alleen `title` en `content`. Lokale override
       `assets/js/search.js` met een `synoniemen`-key en hoger gewicht.
 
-## Toegankelijkheid
+### Toegankelijkheid
 
 - [ ] **Lange woorden in koppen op 320 px** (`/onderwerpen/metadata-hardware-en-programmatuur/`,
       "toepassingsprogrammatuur"): het thema zet geen `overflow-wrap`/`hyphens`

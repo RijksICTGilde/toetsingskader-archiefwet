@@ -20,4 +20,4 @@
 /* Bevinding 19 (PDF-knop vraagt JavaScript) is vervallen: de download is een
    gewone link naar een bestand dat bij de build wordt gemaakt, dus er is geen
    `[hidden]`-knop meer die JavaScript zichtbaar moet maken. Zie
-   docs/besluit-toegankelijke-pdf.md. */
+   docs/pdr/0003-pdf-bij-de-build-genereren-met-tags.md. */

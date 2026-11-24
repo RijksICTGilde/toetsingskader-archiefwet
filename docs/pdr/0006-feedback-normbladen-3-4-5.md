@@ -1,4 +1,50 @@
-# Feedback op de normbladen ordenen, metadateren en informatiebeveiliging
+# 0006: Feedback op de normbladen ordenen, metadateren en informatiebeveiliging verwerkt
+
+Datum: 2026-08-21
+
+## Status
+
+Geaccepteerd. Alle punten zijn verwerkt; het laatste openstaande punt is opgelost op 31 augustus 2026.
+
+## Besluit
+
+De feedback van 21 augustus 2026 op norm 3, 4 en 5 is overgenomen zoals gevraagd. De feedback staat woord voor woord in het brondocument, zodat later na te lopen is wat er is gevraagd.
+
+## Achtergrond
+
+De feedback telde twaalf punten op drie normbladen: titels, voetnoten, tussenkopjes, een hover en de inspringing van indicatoren.
+
+## Overwegingen
+
+- Een review gaat voor de tekst van het normblad ([PDR 0004](0004-normtekst-woord-voor-woord-review-gaat-voor.md)).
+- De letterlijke feedback wordt bewaard, omdat de verwerking anders niet te controleren is.
+
+## Details
+
+- De titels van norm 3, 4 en 5 zijn aangepast naar ordenen, metadateren en informatiebeveiliging en betrouwbaar.
+- De voetnoot bij NEN-ISO 23081-1:2017 verwijst naar nen.nl in plaats van naar het documentmanagementsysteem van de Inspectie.
+- Drie inleidende zinnen in norm 4 zijn tussenkopjes geworden, op het niveau van "Feitelijk beheer" in norm 1.
+- De voetnoten bij voorschrift 4.3, 5.1 en 5.4 hebben de gevraagde tekst.
+- Twee indicatoren onder voorschrift 5.1 springen niet meer in.
+- Twee afwijkingen van de letterlijke tekst: de hover bij "informatiebeveiliging" is samengevoegd met de bronvoetnoot die er al stond, en in "(MFA),of" is de ontbrekende spatie toegevoegd.
+
+## Impact
+
+### Redactie
+
+De drie normpagina's volgen de review.
+
+### PDF
+
+Een voetnoot in een kop staat ook in de PDF als verwijzing naar de bronnenlijst.
+
+## Alternatieven
+
+- Twee voetnoten achter elkaar op hetzelfde woord. Niet gekozen, omdat dat één zwevend nummer oplevert.
+
+## Uitwerking
+
+De volledige tekst van het oorspronkelijke bestand `docs/feedback-normbladen-3-4-5.md`, dat met deze PDR is vervallen.
 
 Ontvangen 21 augustus 2026. Twaalf punten op drie normbladen: norm 3 (ordenen),
 norm 4 (metadateren) en norm 5 (informatiebeveiliging en betrouwbaar). Allemaal
@@ -6,9 +52,9 @@ verwerkt; zie "Verwerking" onderaan.
 
 De feedback staat hieronder woord voor woord, zodat later na te lopen is wat er
 precies gevraagd is. Wat er sitebreed geldt over afwijken van de normbladtekst
-staat in `afwijkingen-van-het-normblad.md`.
+staat in `0004-normtekst-woord-voor-woord-review-gaat-voor.md`.
 
-## De feedback, onbewerkt
+### De feedback, onbewerkt
 
 > **Normblad ordenen:**
 >
@@ -68,25 +114,45 @@ staat in `afwijkingen-van-het-normblad.md`.
 >   verplichting mag echter niet in strijd zijn met de uitvoering van de
 >   Archiefwet."
 
-## Verwerking
+### Verwerking
 
-| # | Punt | Verwerkt in |
-|---|---|---|
-| 1 | Titel norm 3 → "Normanalyse ordenen" | `content/normen/03-ordenen.md`, `title` |
-| 2 | Titel norm 4 → "Normanalyse metadateren" | `content/normen/04-metadateren.md`, `title` |
-| 3 | Voetnoot 7 naar nen.nl in plaats van het DMS | `04-metadateren.md`, `[^nen-iso-23081-1-2017]` → <https://www.nen.nl/nen-iso-23081-1-2017-nl-269387> |
-| 4 | Drie categorie-inleidingen als tussenkopje | `04-metadateren.md`, `###` — zelfde niveau als "Feitelijk beheer" in `01-beheer.md` |
-| 5 | Hover "structuur": "een bericht" | `04-metadateren.md`, `[^structuur]` |
-| 6 | Voetnoot permanent uniek identificatiekenmerk | `04-metadateren.md`, `[^ar-artikel-2-7-reikwijdte]` |
-| 7 | Titel norm 5 → "Normanalyse informatiebeveiliging en betrouwbaar" | `content/normen/05-betrouwbaar.md`, `title` |
-| 8 | Hover bij "informatiebeveiliging" met de voorbeelden | `05-betrouwbaar.md`, `[^ab-nota-van-toelichting-p11-12]` |
-| 9 | Voetnoot 5.1: puntkomma tussen de vindplaatsen | `05-betrouwbaar.md`, `[^ab-artikel-2-1-sub-e-en-lid-2]` |
-| 10 | Twee back-upindicatoren niet meer ingesprongen | `05-betrouwbaar.md`, indicatoren bij voorschrift 5.1 |
-| 11 | Voetnoot laatste criterium 5.4 | `05-betrouwbaar.md`, `[^ab-artikel-2-1-lid-1-sub-e-gewist]` |
+- Nr. 1
+  - Punt: Titel norm 3 → "Normanalyse ordenen"
+  - Verwerkt in: `content/normen/03-ordenen.md`, `title`
+- Nr. 2
+  - Punt: Titel norm 4 → "Normanalyse metadateren"
+  - Verwerkt in: `content/normen/04-metadateren.md`, `title`
+- Nr. 3
+  - Punt: Voetnoot 7 naar nen.nl in plaats van het DMS
+  - Verwerkt in: `04-metadateren.md`, `[^nen-iso-23081-1-2017]` → <https://www.nen.nl/nen-iso-23081-1-2017-nl-269387>
+- Nr. 4
+  - Punt: Drie categorie-inleidingen als tussenkopje
+  - Verwerkt in: `04-metadateren.md`, `###`: zelfde niveau als "Feitelijk beheer" in `01-beheer.md`
+- Nr. 5
+  - Punt: Hover "structuur": "een bericht"
+  - Verwerkt in: `04-metadateren.md`, `[^structuur]`
+- Nr. 6
+  - Punt: Voetnoot permanent uniek identificatiekenmerk
+  - Verwerkt in: `04-metadateren.md`, `[^ar-artikel-2-7-reikwijdte]`
+- Nr. 7
+  - Punt: Titel norm 5 → "Normanalyse informatiebeveiliging en betrouwbaar"
+  - Verwerkt in: `content/normen/05-betrouwbaar.md`, `title`
+- Nr. 8
+  - Punt: Hover bij "informatiebeveiliging" met de voorbeelden
+  - Verwerkt in: `05-betrouwbaar.md`, `[^ab-nota-van-toelichting-p11-12]`
+- Nr. 9
+  - Punt: Voetnoot 5.1: puntkomma tussen de vindplaatsen
+  - Verwerkt in: `05-betrouwbaar.md`, `[^ab-artikel-2-1-sub-e-en-lid-2]`
+- Nr. 10
+  - Punt: Twee back-upindicatoren niet meer ingesprongen
+  - Verwerkt in: `05-betrouwbaar.md`, indicatoren bij voorschrift 5.1
+- Nr. 11
+  - Punt: Voetnoot laatste criterium 5.4
+  - Verwerkt in: `05-betrouwbaar.md`, `[^ab-artikel-2-1-lid-1-sub-e-gewist]`
 
 Punt 4 telt in de tabel als één regel, maar raakt drie koppen.
 
-## Twee afwijkingen van de letterlijke tekst
+### Twee afwijkingen van de letterlijke tekst
 
 **De hover bij punt 8 is samengevoegd met de bronvoetnoot die er al stond.** Op
 het woord "informatiebeveiliging" hing al `[^ab-nota-van-toelichting-p11-12]`.
@@ -99,7 +165,7 @@ tooltip toont nu eerst de gevraagde voorbeelden en daarna de bron.
 "(MFA), of het patchen".** Alleen de ontbrekende spatie is toegevoegd, verder is
 de zin ongewijzigd.
 
-## Openstaand
+### Openstaand
 
 *Opgelost 31 augustus 2026: `html-to-pdfmake.js` rendert koppen nu via
 `inline()`, dus het voetnootnummer staat ook in de PDF als superscript met

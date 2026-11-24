@@ -6,8 +6,8 @@
 // Waarom dit los van de andere scans staat: axe en htmltest kijken naar HTML.
 // De PDF-export is een niet-webdocument en valt onder EN 301 549 §10; wat daar
 // misgaat is met geen enkele HTML-controle te zien. Zie bevinding 6 in
-// docs/toegankelijkheidsonderzoek-2026-08.md en het besluit in
-// docs/besluit-toegankelijke-pdf.md.
+// docs/pdr/0001-toegankelijkheid-toetsen-op-wcag-2-2-aa.md en het besluit in
+// docs/pdr/0003-pdf-bij-de-build-genereren-met-tags.md.
 //
 // De markers, en wat een gebruiker merkt als ze ontbreken:
 //
