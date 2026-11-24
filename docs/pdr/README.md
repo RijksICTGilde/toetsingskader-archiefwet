@@ -1,6 +1,6 @@
 # Product Decision Records (PDR's)
 
-Deze map bevat de besluiten over het Toetsingskader Archiefwet als site: wat is besloten, wanneer, waarom en met welke status.
+Deze map bevat de besluiten over het Toetsingskader Archiefwet als site: wat is besloten, wanneer, waarom en met welke status. De documenten die eerder los in `docs/` stonden (onderzoek, feedbackrondes, afwijkingen), zijn volledig in de PDR's opgenomen, onder de kop Uitwerking.
 
 ## Wat is een PDR?
 

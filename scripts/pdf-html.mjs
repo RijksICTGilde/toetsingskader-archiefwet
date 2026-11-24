@@ -221,7 +221,7 @@ export function schrijfNorm(pdf, data, opties) {
 
   // --- Kern -------------------------------------------------------------------
   // Zonder kop, net als op de site (keuze 31 augustus 2026, zie
-  // docs/afwijkingen-van-het-normblad.md): de kerntekst is de eerste alinea
+  // docs/pdr/0004-normtekst-woord-voor-woord-review-gaat-voor.md): de kerntekst is de eerste alinea
   // onder de titel. Wel een named destination, voor wie ernaar verwijst.
   if (data.kern_html) {
     // De bestemming aan het eerste blok mét tekst: een leeg eerste blok zou

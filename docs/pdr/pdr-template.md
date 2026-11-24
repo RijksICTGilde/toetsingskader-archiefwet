@@ -30,6 +30,6 @@ Datum: JJJJ-MM-DD
 
 [Welke alternatieven zijn overwogen en waarom ze niet zijn gekozen]
 
-## Bron
+## Uitwerking
 
-[Het document of de pull request waar het besluit op steunt]
+[Optioneel: de volledige onderbouwing, zoals een onderzoek, de letterlijke feedback of een lijst]

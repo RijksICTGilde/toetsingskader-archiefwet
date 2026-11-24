@@ -15,7 +15,7 @@
 // structuurboom via markStructureContent(). Anders dan daar draait dit bij de
 // build in Node in plaats van in de browser — de inhoud is statisch, dus de
 // downloadlink blijft een gewoon bestand en er is geen browser of Chromium
-// meer nodig. Zie docs/besluit-toegankelijke-pdf.md (§11).
+// meer nodig. Zie docs/pdr/0003-pdf-bij-de-build-genereren-met-tags.md (§11).
 //
 // Controle achteraf: npm run test:pdf-ua (markers + structuurelementen).
 import fs from 'node:fs'

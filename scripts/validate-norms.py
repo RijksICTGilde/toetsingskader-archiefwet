@@ -185,7 +185,7 @@ def validate_front_matter(name, fm_text, errors):
     # terugbrengen bij een volgende woord-voor-woord-ronde.
     # De paginatitel draagt zijn eigen nummer ("1. Inbeheername en beheer"); de
     # PDF-inhoudsopgave en de kaarten nummeren bewust niet zelf (zie
-    # docs/afwijkingen-van-het-normblad.md). Loopt het nummer uit de pas met
+    # docs/pdr/0004-normtekst-woord-voor-woord-review-gaat-voor.md). Loopt het nummer uit de pas met
     # norm_id, dan kloppen inhoudsopgave, bladwijzers en kaarten stilzwijgend
     # niet meer.
     titel = fm.get("title")
@@ -197,7 +197,7 @@ def validate_front_matter(name, fm_text, errors):
 
     if "kern_kop" in fm:
         errors.append(Error(name, "'kern_kop' bestaat niet meer: de kern heeft geen kop. Zie "
-                                  "docs/afwijkingen-van-het-normblad.md",
+                                  "docs/pdr/0004-normtekst-woord-voor-woord-review-gaat-voor.md",
                             line=find_field_line(fm_text, "kern_kop")))
 
     kern_bron_url = fm.get("kern_bron_url")

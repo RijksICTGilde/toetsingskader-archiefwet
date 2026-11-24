@@ -27,7 +27,7 @@ RUN if [ -n "$VERSIE" ]; then export HUGO_PARAMS_VERSIE="$VERSIE"; fi; \
     fi
 
 # De PDF's horen bij de site en worden hier gemaakt, niet meer in de browser van
-# de bezoeker. Zie docs/besluit-toegankelijke-pdf.md (§11): pdfkit in Node,
+# de bezoeker. Zie docs/pdr/0003-pdf-bij-de-build-genereren-met-tags.md (§11): pdfkit in Node,
 # zonder browser — dezelfde oplossing als de AI-verordening-beslishulp.
 RUN node scripts/pdf-build.mjs public \
     && node scripts/pdf-ua-check.mjs public/normen/index.pdf public/normen/*/index.pdf

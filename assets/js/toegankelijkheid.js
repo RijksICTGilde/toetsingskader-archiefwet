@@ -2,7 +2,7 @@
 // Toegankelijkheidspatches op het thema (hugo-theme-rijksoverheid v0.2.3)
 //
 // TIJDELIJK. Elk blok repareert een themadefect; analyse en bevindingsnummers in
-// docs/toegankelijkheidsonderzoek-2026-08.md. Blok weg zodra de fix upstream zit.
+// docs/pdr/0001-toegankelijkheid-toetsen-op-wcag-2-2-aa.md. Blok weg zodra de fix upstream zit.
 // Bevindingen 10, 16, 21, 23 en 24 zijn opgelost in v0.2.3.
 // Draait onderaan <body> (layouts/_partials/scripts.html), CSP-veilig.
 // ============================================================================
