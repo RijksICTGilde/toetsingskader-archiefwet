@@ -13,10 +13,12 @@ changelog volgt [Semantic Versioning][semver].
 
 ### Opgelost
 
-- De PDF's noemen het publieke adres
-  (`https://toetsingskader.inspectie-oe.nl/archiefwet/`) in de "Bron: …"-regel
-  op de omslag en achter "Bekijk voor de actuele versie …", in plaats van het
-  ZAD-adres van de build (`params.pdf.site_url`).
+- De site wordt gebouwd met het publieke adres als `baseURL`
+  (`https://toetsingskader.inspectie-oe.nl/archiefwet/`) in plaats van het
+  ZAD-adres. Interne links, CSS, JS en lettertypen dragen daardoor het
+  voorvoegsel `/archiefwet/`, zodat een bezoeker binnen dat pad blijft. De
+  canonieke link, de "Bron: …"-regel op de omslag van de PDF's en het adres
+  achter "Bekijk voor de actuele versie …" noemen het publieke adres.
 
 ### Gewijzigd
 

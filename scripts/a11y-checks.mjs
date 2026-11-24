@@ -53,10 +53,15 @@ export const zonderHash = src => {
   return s
 }
 
+// De site staat onder een subpad (baseURL eindigt op /archiefwet/), dus een src
+// is "/archiefwet/images/hero…". De sleutels in DECORATIEF blijven zonder dat
+// voorvoegsel; vergelijken op het eind van het pad.
+const isDecoratief = sleutel => [...DECORATIEF.keys()].some(k => sleutel.endsWith(k))
+
 export function legeAltFouten(document) {
   return [...document.querySelectorAll('img[alt=""]')]
     .map(img => zonderHash(img.getAttribute('src')))
-    .filter(sleutel => !DECORATIEF.has(sleutel))
+    .filter(sleutel => !isDecoratief(sleutel))
     .map(sleutel => sleutel || '(zonder src)')
 }
 

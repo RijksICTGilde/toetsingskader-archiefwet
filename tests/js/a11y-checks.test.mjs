@@ -55,6 +55,11 @@ test('lege alt: de hero staat op de decoratief-lijst', () => {
   assert.deepEqual(legeAltFouten(dom('<img src="/images/hero_hu_b08cab36f00ecf30.webp" alt="">')), [])
 })
 
+test('lege alt: de decoratief-lijst geldt ook onder een subpad', () => {
+  assert.deepEqual(legeAltFouten(dom('<img src="/archiefwet/images/hero_hu_b08cab36f00ecf30.webp" alt="">')), [])
+  assert.deepEqual(legeAltFouten(dom('<img src="/archiefwet/images/proef.png" alt="">')), ['/archiefwet/images/proef'])
+})
+
 test('lege alt: een gevulde alt is nooit een fout', () => {
   assert.deepEqual(legeAltFouten(dom('<img src="/images/proef.png" alt="Een proef">')), [])
 })
