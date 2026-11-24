@@ -10,7 +10,7 @@
     "test:a11y:browser": "node scripts/a11y-browser.mjs .a11y/public"
   },
   "devDependencies": {
-    "axe-core": "^4.10.2",
+    "axe-core": "^4.14.1",
     "jsdom": "^31.0.1",
     "linkedom": "^0.18.15",
     "pdf-lib": "^1.17.1",
