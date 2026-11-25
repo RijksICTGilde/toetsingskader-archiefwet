@@ -1,0 +1,8 @@
+/* Publicatiedatum onder de versiekop (shortcode `versies`): dezelfde gedempte,
+   cursieve opmaak als de versiezin in de voet (`:where(article, section) >
+   footer p` in het thema), maar onder de kop in plaats van in een footer. */
+
+.versie-datum {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
