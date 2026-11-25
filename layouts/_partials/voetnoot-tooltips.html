@@ -81,7 +81,13 @@
         {{ $doel = strings.TrimPrefix "www." (urls.Parse $href).Host }}
       {{ else }}
         {{/* Interne link: pad zonder fragment/query opzoeken, ook via alias. */}}
+        {{/* Het href draagt het pad van de baseURL (/archiefwet/), GetPage en
+             .Aliases niet. */}}
         {{ $pad := (urls.Parse $href).Path }}
+        {{ $basisPad := (urls.Parse site.BaseURL).Path }}
+        {{ if and (ne $basisPad "/") (hasPrefix $pad $basisPad) }}
+          {{ $pad = printf "/%s" (strings.TrimPrefix $basisPad $pad) }}
+        {{ end }}
         {{ $p := site.GetPage $pad }}
         {{ if not $p }}
           {{ range site.Pages }}{{ if in .Aliases $pad }}{{ $p = . }}{{ end }}{{ end }}
