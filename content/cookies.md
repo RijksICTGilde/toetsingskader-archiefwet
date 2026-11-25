@@ -8,8 +8,8 @@ description: "Deze website plaatst één technische cookie van het hostingplatfo
 # Feiten (13 oktober 2026, gemeten op productie en PR-preview): de router van
 # het ZAD-platform (OpenShift/HAProxy) zet op elke respons één sessiecookie
 # voor sessie-affiniteit, naam is een hash, HttpOnly, Secure, SameSite=None,
-# geen vervaldatum. Verder alleen localStorage `theme` en `toc-open`
-# (assets/js/toc-open.js en de thema-scripts base.js, toc.js).
+# geen vervaldatum. Geen localStorage: met `theme_menu: false` schrijft het
+# theme `theme` niet, en `toc-open` bestaat niet meer in v0.3.
 # Elke ZAD-component draait met één replica, dus de cookie heeft geen functie.
 # TODO vóór publicatie (vraag 1, zie ~/projects/zad-privacy-compliance-vragen-v13.md):
 # niet publiceren zolang de cookie aan staat zonder besluit van de Inspectie.
@@ -61,18 +61,6 @@ De cookie zelf bevat geen gegevens over u. Het hostingplatform legt wel technisc
 
 ## Wat bewaart deze website verder in uw browser?
 
-Deze website bewaart twee voorkeuren in de lokale opslag van uw browser (localStorage). Dit zijn geen cookies: de gegevens worden niet naar de server gestuurd en zijn niet naar u te herleiden. Ook hiervoor is geen toestemming nodig, omdat ze alleen een functie leveren waar u zelf om vraagt. Deze voorkeuren worden alleen bewaard als uw browser dat toestaat.
-
-### theme
-
-Bewaart of u de lichte of de donkere weergave heeft gekozen.
-
-De voorkeur blijft bewaard tot u uw browsergegevens wist.
-
-### toc-open
-
-Bewaart of u de inhoudsopgave heeft open- of dichtgeklapt.
-
-De voorkeur blijft bewaard tot u uw browsergegevens wist.
+Niets. Deze website bewaart geen voorkeuren of andere gegevens in de lokale opslag van uw browser.
 
 Bron voor de opzet: [Cookies, Inspectie Overheidsinformatie en Erfgoed](https://www.inspectie-oe.nl/service/cookies).
