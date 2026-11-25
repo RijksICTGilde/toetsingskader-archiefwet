@@ -14,9 +14,9 @@ gegenereerde PDF viel de tekst terug op DejaVu Sans, een derde breder dan
 Rijksoverheid Sans. Als contour hoeft er niets geladen te worden.
 
 Dat de tekst daarmee niet meer te selecteren is, kan hier: het briefhoofd is
-huisstijl, valt buiten de structuurboom van de PDF en herhaalt niets wat
-nergens anders staat. De documenttitel staat op de titelpagina en in de
-metadata.
+huisstijl en herhaalt niets wat nergens anders staat. Op pagina 1 is het een
+Figure met de <title> als /Alt, daarna valt het buiten de structuurboom. De
+documenttitel staat op de titelpagina en in de metadata.
 """
 from pathlib import Path
 import re

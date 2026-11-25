@@ -87,6 +87,47 @@ export function ankersVan(data) {
   return ankers
 }
 
+/**
+ * Per voetnoot-id ("fn:1") de platte brontekst, zoals de site hem in het
+ * aria-label van "Bekijk bron" zet (_partials/voetnoot-tooltips.html): zonder
+ * de bronlink en de terugspringpijl, leestekens aan het eind eraf, ingekort
+ * tot 90 tekens op een woordgrens. Een link naar de bronnenlijst toont in de
+ * PDF alleen het nummer; dit wordt zijn beschrijving.
+ */
+export function bronTeksten(html) {
+  const bronnen = new Map()
+  if (!html) return bronnen
+  const { document } = parseHTML(`<!DOCTYPE html><html><body>${html}</body></html>`)
+  for (const li of document.querySelectorAll('.footnotes ol > li[id]')) {
+    const kopie = li.cloneNode(true)
+    for (const a of kopie.querySelectorAll('a')) {
+      if ((a.getAttribute('class') || '').includes('footnote-backref') || a.textContent.trim() === 'Bekijk bron') a.remove()
+    }
+    const tekst = kopie.textContent.replace(/\s+/g, ' ').trim().replace(/[ .;:]+$/, '')
+    if (tekst) bronnen.set(li.getAttribute('id'), kort(tekst, 90))
+  }
+  return bronnen
+}
+
+/**
+ * "Bekijk bron" heet op de site "Bekijk bron: <brontekst>" (aria-label in
+ * _partials/voetnoot-tooltips.html en normen/single.html); runsVan neemt het
+ * label over als beschrijving van de link.
+ */
+function labelBronlinks(el, bron) {
+  if (!bron) return
+  for (const a of el.querySelectorAll('a')) {
+    if (a.textContent.trim() === 'Bekijk bron' && !a.hasAttribute('aria-label')) a.setAttribute('aria-label', `Bekijk bron: ${bron}`)
+  }
+}
+
+// Zoals Hugo's `truncate`: niet midden in een woord afbreken.
+function kort(tekst, max) {
+  if (tekst.length <= max) return tekst
+  const grens = tekst.lastIndexOf(' ', max)
+  return (grens > 0 ? tekst.slice(0, grens) : tekst.slice(0, max)).trimEnd() + '…'
+}
+
 /** `start` van een <ol>, met 0 als geldige waarde (Number(...) || 1 at hem op). */
 function olStart(el) {
   const s = Number(el.getAttribute('start'))
@@ -135,6 +176,8 @@ export function runsVan(el, ctx, basis = {}, top = true) {
         // Sprong naar de bronnenlijst, als superscript zoals op de site.
         run.sup = true
         run.goTo = ctx.prefix + href.replace(/^#/, '')
+        const bron = ctx.bronnen?.get(href.replace(/^#/, ''))
+        run.alt = bron ? `Bron ${run.text}: ${bron}` : `Bron ${run.text}`
       } else if (href.startsWith('#')) {
         // Alleen een sprong als het anker in déze PDF bestaat; een anker dat
         // de site-layout maakt (#toc, #referenties) wordt een link naar de
@@ -153,6 +196,7 @@ export function runsVan(el, ctx, basis = {}, top = true) {
           if (ctx.underlineLinks) run.underline = true
         }
       }
+      if (kind.getAttribute('aria-label') && !run.alt) run.alt = kind.getAttribute('aria-label')
       if (run.text) runs.push(run)
     } else runs.push(...runsVan(kind, ctx, basis, false))
   }
@@ -217,7 +261,7 @@ export function lijstItems(lijstEl, ctx) {
  */
 export function schrijfNorm(pdf, data, opties) {
   const { prefix = '', kopShift = 0, siteUrl, paginaUrl, sectie, bladwijzer, normDests } = opties
-  const ctx = { prefix, siteUrl, basisUrl: paginaUrl || siteUrl, normDests, eigenAnkers: ankersVan(data) }
+  const ctx = { prefix, siteUrl, basisUrl: paginaUrl || siteUrl, normDests, eigenAnkers: ankersVan(data), bronnen: bronTeksten(data.body_html) }
 
   // --- Kern -------------------------------------------------------------------
   // Zonder kop, net als op de site (keuze 31 augustus 2026, zie
@@ -239,6 +283,9 @@ export function schrijfNorm(pdf, data, opties) {
       kernId = undefined
     }
     for (const blok of blokken(data.kern_bron_html || '')) {
+      const kopie = blok.cloneNode(true)
+      for (const a of kopie.querySelectorAll('a')) a.remove()
+      labelBronlinks(blok, kopie.textContent.replace(/\s+/g, ' ').trim().replace(/^Bron:\s*/, '').replace(/[ .;:]+$/, ''))
       pdf.alinea(runsVan(blok, ctx), { stijl: 'bronnen', ouder: sectie })
     }
   }
@@ -384,6 +431,7 @@ export function schrijfNorm(pdf, data, opties) {
     // Via lijstItems, net als de lijsten in de body: alle alinea's van een
     // voetnoot komen mee, en een geneste lijst in een voetnoot blijft een
     // lijst in plaats van stilletjes te verdwijnen.
+    for (const li of voetnoten.children) labelBronlinks(li, ctx.bronnen.get(li.getAttribute('id')))
     const items = lijstItems(voetnoten, { ...ctx, underlineLinks: true })
     pdf.lijst(items, { stijl: 'bronnen', geordend: true, ouder: sectie })
   }

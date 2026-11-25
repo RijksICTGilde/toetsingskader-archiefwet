@@ -3,9 +3,9 @@
 // content-streams voor de BDC-tags). Draait zonder browser.
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { PDFDocument, PDFDict, PDFName } from 'pdf-lib'
-import { TaggedPdf, laadFonts, laadBriefhoofd } from '../../scripts/pdf-tagged.mjs'
-import { schrijfNorm, runsVan, lijstItems } from '../../scripts/pdf-html.mjs'
+import { PDFDocument, PDFDict, PDFName, decodePDFRawStream } from 'pdf-lib'
+import { TaggedPdf, laadFonts, laadBriefhoofd, linkBeschrijving } from '../../scripts/pdf-tagged.mjs'
+import { schrijfNorm, runsVan, lijstItems, bronTeksten } from '../../scripts/pdf-html.mjs'
 import { parseHTML } from 'linkedom'
 
 const fonts = laadFonts()
@@ -62,7 +62,7 @@ function structTelling(doc) {
 }
 
 // Dezelfde uitpakker als de CI-gate, zodat test en gate dezelfde bytes zien.
-import { metUitgepakteStreams as uitgepakt } from '../../scripts/pdf-ua-check.mjs'
+import { metUitgepakteStreams as uitgepakt, logoFouten, nootlinkFouten, structElementen } from '../../scripts/pdf-ua-check.mjs'
 
 test('structuurboom: koppen, alinea’s, echte (geneste) lijsten, geen kern-kop', async () => {
   const { doc } = await bouw()
@@ -136,9 +136,29 @@ test('briefhoofd staat op elke pagina, ook na een automatische paginaovergang', 
   const { bytes, doc } = await bouw(lang)
   assert.ok(doc.getPageCount() >= 3, `pagina's: ${doc.getPageCount()}`)
   const inhoud = uitgepakt(bytes)
-  // Per pagina twee Pagination-artifacts: briefhoofd en voetregel.
+  // Per pagina twee Pagination-artifacts: briefhoofd en voetregel. Behalve
+  // op pagina 1: daar is het briefhoofd een Figure.
   const artifacts = (inhoud.match(/\/Artifact\s*<<\s*\/Type\s*\/Pagination/g) || []).length
-  assert.equal(artifacts, doc.getPageCount() * 2, `artifacts: ${artifacts}`)
+  assert.equal(artifacts, doc.getPageCount() * 2 - 1, `artifacts: ${artifacts}`)
+  assert.deepEqual(logoFouten(doc), [])
+})
+
+test('briefhoofd op pagina 1 is een Figure met /Alt, daarna een Artifact (WCAG 1.1.1)', async () => {
+  const { doc } = await bouw()
+  assert.deepEqual(logoFouten(doc), [])
+  const figuren = structElementen(doc).filter((el) => el.S === 'Figure')
+  assert.equal(figuren.length, 1, `Figure-elementen: ${figuren.length}`)
+  assert.equal(figuren[0].dict.get(PDFName.of('Alt')).decodeText(),
+    'Inspectie Overheidsinformatie en Erfgoed, Ministerie van Onderwijs, Cultuur en Wetenschap')
+  assert.equal(figuren[0].mcids[0].pg, doc.getPages()[0].ref)
+  // Vóór de inhoud in de leesvolgorde: het eerste kind van Document.
+  const root = doc.context.lookup(doc.catalog.get(PDFName.of('StructTreeRoot')))
+  const documentEl = doc.context.lookup(doc.context.lookup(root.get(PDFName.of('K'))).get(0))
+  assert.equal(doc.context.lookup(doc.context.lookup(documentEl.get(PDFName.of('K'))).get(0)), figuren[0].dict)
+})
+
+test('briefhoofd-SVG zonder <title> is een bouwfout, geen logo zonder alt', () => {
+  assert.throws(() => new TaggedPdf({ titel: 'T', taal: 'nl', versie: 'v0', fonts, briefhoofdSvg: briefhoofdSvg.replace(/<title>[^<]*<\/title>/, '') }), /title/)
 })
 
 test('kader: verwijzing naar een andere norm wordt een sprong binnen het document', () => {
@@ -387,6 +407,39 @@ test('runsVan: voetnootmarkering wordt superscript-sprong, backref verdwijnt', (
   assert.ok(!runs.some((r) => r.text.includes('↩')), 'backref weg')
 })
 
+test('link naar de bronnenlijst heeft een beschrijving, niet alleen het nummer (WCAG 2.4.4)', async () => {
+  const { doc } = await bouw()
+  assert.deepEqual(nootlinkFouten(doc), [])
+  const beschrijvingen = []
+  for (const el of structElementen(doc)) {
+    if (el.S !== 'Link') continue
+    for (const annot of el.objrs) {
+      const doel = doc.context.lookup(annot.get(PDFName.of('A'))).get(PDFName.of('D'))?.decodeText() ?? ''
+      if (!doel.startsWith('fn:')) continue
+      beschrijvingen.push([doel, el.dict.get(PDFName.of('Alt')).decodeText(), annot.get(PDFName.of('Contents')).decodeText()])
+    }
+  }
+  assert.deepEqual(beschrijvingen, [
+    ['fn:1', 'Bron 1: Aw, artikel 4.1', 'Bron 1: Aw, artikel 4.1'],
+    ['fn:2', 'Bron 2: Ar, artikel 2.2', 'Bron 2: Ar, artikel 2.2'],
+  ])
+})
+
+test('runsVan: bronbeschrijving zoals het aria-label op de site, ingekort op een woordgrens', () => {
+  const lang = 'Besluit van 12 maart 2026 houdende regels over het beheer, de ordening en de vernietiging van archiefbescheiden van overheidsorganen.'
+  const { document } = parseHTML(`<body><p>a<sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup> b<sup id="fnref:2"><a href="#fn:2" class="footnote-ref">2</a></sup> c<sup id="fnref:3"><a href="#fn:3" class="footnote-ref">3</a></sup></p></body>`)
+  const bronnen = bronTeksten(`<div class="footnotes" role="doc-endnotes"><hr><ol>
+<li id="fn:1"><p>Aw, artikel 4.1. <a href="https://example.org">Bekijk bron</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#8617;&#65038;</a></p></li>
+<li id="fn:2"><p>${lang}&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#8617;&#65038;</a></p></li>
+</ol></div>`)
+  const runs = runsVan(document.querySelector('p'), { prefix: 'n3-', siteUrl: 'https://x.nl/', bronnen })
+  const alts = runs.filter((r) => r.sup).map((r) => r.alt)
+  assert.equal(alts[0], 'Bron 1: Aw, artikel 4.1')
+  assert.equal(alts[1], 'Bron 2: Besluit van 12 maart 2026 houdende regels over het beheer, de ordening en de vernietiging…')
+  // Voetnoot die niet in de lijst staat: toch meer dan het kale nummer.
+  assert.equal(alts[2], 'Bron 3')
+})
+
 test('runsVan: interne links worden sitelinks, externe blijven', () => {
   const { document } = parseHTML(`<body><p><a href="/onderwerpen/document/">begrip</a> en
     <a href="https://extern.example/">extern</a></p></body>`)
@@ -448,4 +501,83 @@ test('anderstalige term wordt een Span met /Lang (WCAG 3.1.2)', async () => {
   // De tekst eromheen blijft in de alinea en loopt niet mee in de Span.
   const runs = runsVan(parseHTML('<p>Principes van archiveren <span lang="en">by design</span> toepassen.</p>').document.querySelector('p'), {})
   assert.deepEqual(runs.map((r) => [r.text, r.lang]), [['Principes van archiveren ', undefined], ['by design', 'en'], [' toepassen.', undefined]])
+})
+
+test('elke link-annotatie heeft /Contents en het Link-element /Alt, ook weblinks en sprongen (PDF/UA-1 7.18.5)', async () => {
+  const data = {
+    ...DATA,
+    kern_bron_html: '<p>Bron: Ar, artikel 2.2. <a href="https://example.org/ar">Bekijk bron</a></p>',
+    body_html: BODY + '<p>Zie <a href="#voorschrift">het voorschrift</a>.</p>',
+  }
+  const { doc } = await bouw(data)
+  const links = []
+  for (const el of structElementen(doc)) {
+    if (el.S !== 'Link') continue
+    for (const annot of el.objrs) {
+      const actie = doc.context.lookup(annot.get(PDFName.of('A')))
+      const doel = actie.get(PDFName.of('URI'))?.decodeText() ?? actie.get(PDFName.of('D'))?.decodeText()
+      const alt = el.dict.get(PDFName.of('Alt'))?.decodeText()
+      const contents = annot.get(PDFName.of('Contents'))?.decodeText()
+      assert.equal(alt, contents, `Link naar ${doel}: /Alt en /Contents gelijk`)
+      links.push([doel, contents])
+    }
+  }
+  assert.deepEqual(links, [
+    ['https://example.org/onderwerpen/incidenten-voorkomen/', 'incidenten (example.org)'],
+    ['https://example.org/ar', 'Bekijk bron: Ar, artikel 2.2'],
+    ['fn:1', 'Bron 1: Aw, artikel 4.1'],
+    ['https://example.org/onderwerpen/document/', 'interne link (example.org)'],
+    ['fn:2', 'Bron 2: Ar, artikel 2.2'],
+    ['voorschrift', 'het voorschrift'],
+    ['https://example.org/', 'Bekijk bron: Aw, artikel 4.1'],
+  ])
+})
+
+test('linkBeschrijving: zichtbare tekst, host erbij bij een weblink, voetnoot-alt gaat voor', () => {
+  assert.equal(linkBeschrijving({ text: '3. Ordenen', goTo: 'norm-3' }), '3. Ordenen')
+  assert.equal(linkBeschrijving({ text: ' Archiefwet\n1995 ', link: 'https://wetten.overheid.nl/x' }), 'Archiefwet 1995 (wetten.overheid.nl)')
+  assert.equal(linkBeschrijving({ text: 'kennisbank', link: 'https://www.nationaalarchief.nl/k' }), 'kennisbank (nationaalarchief.nl)')
+  // De URL zelf als tekst: geen host er nog eens achter.
+  assert.equal(linkBeschrijving({ text: 'https://example.org/archiefwet/', link: 'https://example.org/archiefwet/' }), 'https://example.org/archiefwet/')
+  assert.equal(linkBeschrijving({ text: 'Bron: https://example.org/', link: 'https://example.org/' }), 'Bron: https://example.org/')
+  assert.equal(linkBeschrijving({ text: '1', goTo: 'fn:1', alt: 'Bron 1: Aw' }), 'Bron 1: Aw')
+  // Nooit leeg: een witruimte-run valt terug op het doel.
+  assert.equal(linkBeschrijving({ text: ' ', link: 'https://example.org/' }), 'https://example.org/')
+  assert.equal(linkBeschrijving({ text: ' ', goTo: 'norm-3' }), 'norm-3')
+})
+
+test('XMP-metadata draagt de PDF/UA-1-identificatie en de titel', async () => {
+  const { bytes, doc } = await bouw()
+  const xmp = Buffer.from(decodePDFRawStream(doc.context.lookup(doc.catalog.get(PDFName.of('Metadata')))).decode()).toString('utf8')
+  assert.match(xmp, /<pdfuaid:part>1<\/pdfuaid:part>/)
+  assert.match(xmp, /xmlns:pdfuaid="http:\/\/www\.aiim\.org\/pdfua\/ns\/id\/"/)
+  assert.match(xmp, /<dc:title>\s*<rdf:Alt>\s*<rdf:li xml:lang="x-default">Test<\/rdf:li>/)
+  // Geen /CIDSet: pdfkit's `subset: 'PDF/UA'` schrijft er een die niet klopt.
+  assert.ok(!uitgepakt(bytes).includes('/CIDSet'), '/CIDSet in de fontbeschrijving')
+})
+
+test('alinea over de paginagrens: elk MCID op de vervolgpagina staat in de ParentTree (PDF/UA-1 7.1)', async () => {
+  const lang = { ...DATA, kern_html: '', body_html: '<h2 id="t">Toelichting</h2>' + '<p>' + 'Woorden die doorlopen tot over de paginagrens. '.repeat(400) + '</p>' }
+  const { doc } = await bouw(lang)
+  assert.ok(doc.getPageCount() >= 3, `pagina's: ${doc.getPageCount()}`)
+  const ctx = doc.context
+  const parentTree = new Map()
+  const loop = (knoop) => {
+    const d = ctx.lookup(knoop)
+    const nums = ctx.lookup(d.get(PDFName.of('Nums')))?.asArray() || []
+    for (let i = 0; i < nums.length; i += 2) parentTree.set(nums[i].asNumber(), ctx.lookup(nums[i + 1]))
+    for (const kind of ctx.lookup(d.get(PDFName.of('Kids')))?.asArray() || []) loop(kind)
+  }
+  loop(ctx.lookup(doc.catalog.get(PDFName.of('StructTreeRoot'))).get(PDFName.of('ParentTree')))
+  const zonderOuder = []
+  doc.getPages().forEach((page, i) => {
+    const sleutel = page.node.get(PDFName.of('StructParents')).asNumber()
+    const ouders = parentTree.get(sleutel)?.asArray() || []
+    const c = ctx.lookup(page.node.get(PDFName.of('Contents')))
+    const inhoud = Buffer.from(decodePDFRawStream(c).decode()).toString('latin1')
+    for (const [, mcid] of inhoud.matchAll(/\/MCID\s+(\d+)/g)) {
+      if (!(ctx.lookup(ouders[Number(mcid)]) instanceof PDFDict)) zonderOuder.push(`pagina ${i + 1}, MCID ${mcid}`)
+    }
+  })
+  assert.deepEqual(zonderOuder, [])
 })

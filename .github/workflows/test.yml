@@ -121,6 +121,19 @@ jobs:
           npm run build:pdf
           npm run test:pdf-ua
 
+      - name: PDF/UA-1-validatie (veraPDF)
+        # De hele norm voor zover machinaal te toetsen, bovenop de markers
+        # hierboven; faalt bij elke mislukte controle in elk van de negen PDF's.
+        # Image op digest. Dependabot ziet geen image in een run-regel, dus
+        # tag en digest met de hand bijwerken (`podman manifest inspect`).
+        # De repo op hetzelfde pad in de container, zodat de bestandsnamen in
+        # het rapport kloppen.
+        env:
+          VERAPDF: >-
+            docker run --rm -v ${{ github.workspace }}:${{ github.workspace }}:ro -w ${{ github.workspace }}
+            docker.io/verapdf/cli:v1.30.4@sha256:c2ac9448973a56acd833c81441e38d2dca58ea26a2ce1621e9a32e85d3d2728f
+        run: npm run test:pdf-verapdf
+
       - name: PDF's bewaren
         # Vier markers is een ondergrens, geen conformiteitsverklaring: of de
         # tags de inhoud kloppend beschrijven vraagt een doorloop met PAC of

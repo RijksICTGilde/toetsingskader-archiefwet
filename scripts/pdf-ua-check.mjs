@@ -22,6 +22,10 @@
 //   /DisplayDocTitle de viewer toont de documenttitel in plaats van de
 //                    bestandsnaam — de PDF-tegenhanger van een paginatitel.
 //
+// Daarnaast de tags van wat getekend is: het briefhoofd op pagina 1 als Figure
+// met /Alt, de herhaling als Artifact (logoFouten). En links naar de
+// bronnenlijst hebben een beschrijving, niet alleen het nummer (nootlinkFouten).
+//
 // De markers staan in de catalogus. Die kan als los object in de PDF staan
 // (leesbaar in de ruwe bytes) of in een gecomprimeerde object-stream, dus
 // worden alle FlateDecode-streams uitgepakt en meegezocht. Een marker die
@@ -29,7 +33,7 @@
 import fs from 'node:fs'
 import zlib from 'node:zlib'
 import { pathToFileURL } from 'node:url'
-import { PDFDocument, PDFName } from 'pdf-lib'
+import { PDFDocument, PDFName, PDFDict, PDFArray, PDFNumber, PDFString, PDFHexString, PDFRawStream, decodePDFRawStream } from 'pdf-lib'
 
 const MARKERS = [
   ['/StructTreeRoot', 'structuurboom (koppen, lijsten, leesvolgorde)'],
@@ -60,6 +64,112 @@ export function metUitgepakteStreams(buf) {
     i = eind + 'endstream'.length
   }
   return delen.join('\n')
+}
+
+const tekstVan = (obj) => (obj instanceof PDFString || obj instanceof PDFHexString ? obj.decodeText() : '')
+// Alleen cijfers is wat een schermlezer bij een voetnootmarkering zou horen.
+const zegtIets = (t) => !!t && !/^[\s\d]*$/.test(t)
+
+/**
+ * Alle structuurelementen met hun inhoud: MCID's per pagina en OBJR's.
+ * pdfkit zet een kaal MCID in /K met de pagina in /Pg van het element; een
+ * MCR-woordenboek draagt zijn eigen /Pg.
+ */
+export function structElementen(doc) {
+  const ctx = doc.context
+  const uit = []
+  const bezocht = new Set()
+  const loop = (k) => {
+    const obj = ctx.lookup(k)
+    if (obj instanceof PDFArray) { for (const kind of obj.asArray()) loop(kind); return }
+    if (!(obj instanceof PDFDict) || bezocht.has(obj)) return
+    bezocht.add(obj)
+    const s = obj.get(PDFName.of('S'))
+    const kinderen = obj.get(PDFName.of('K'))
+    if (!s) { if (kinderen) loop(kinderen); return }
+    const el = { S: s.asString().slice(1), dict: obj, mcids: [], objrs: [] }
+    const pg = obj.get(PDFName.of('Pg'))
+    const lijst = kinderen === undefined ? [] : (ctx.lookup(kinderen) instanceof PDFArray ? ctx.lookup(kinderen).asArray() : [kinderen])
+    for (const kind of lijst) {
+      const o = ctx.lookup(kind)
+      if (o instanceof PDFNumber) el.mcids.push({ pg, mcid: o.asNumber() })
+      else if (o instanceof PDFDict && String(o.get(PDFName.of('Type'))) === '/MCR') {
+        el.mcids.push({ pg: o.get(PDFName.of('Pg')) || pg, mcid: o.get(PDFName.of('MCID')).asNumber() })
+      } else if (o instanceof PDFDict && String(o.get(PDFName.of('Type'))) === '/OBJR') {
+        el.objrs.push(ctx.lookup(o.get(PDFName.of('Obj'))))
+      } else loop(kind)
+    }
+    uit.push(el)
+  }
+  loop(doc.catalog.get(PDFName.of('StructTreeRoot')))
+  return uit
+}
+
+function inhoudVanPagina(page) {
+  const ctx = page.doc.context
+  const c = ctx.lookup(page.node.get(PDFName.of('Contents')))
+  const streams = c instanceof PDFArray ? c.asArray().map((r) => ctx.lookup(r)) : [c]
+  return streams.map((s) => (s instanceof PDFRawStream ? Buffer.from(decodePDFRawStream(s).decode()).toString('latin1') : '')).join('\n')
+}
+
+/**
+ * Het briefhoofd (beeldmerk met de namen van Inspectie en ministerie) is
+ * getekend, geen tekst. Op pagina 1 moet het een Figure met een niet-lege
+ * /Alt zijn (WCAG 1.1.1: wie het document stuurt); de herhaling op de andere
+ * pagina's een Artifact. Algemener: elke `Do` (beeld of Form XObject) staat in
+ * een Artifact of in een Figure met /Alt.
+ */
+export function logoFouten(doc) {
+  const fouten = []
+  const pages = doc.getPages()
+  const figuren = structElementen(doc).filter((el) => el.S === 'Figure')
+  const doRe = /\/([A-Za-z]+)\s*(<<(?:[^<>]|<<[^<>]*>>)*>>)?\s*BDC\s*\/([^\s/]+)\s+Do\b/g
+  const alleDo = /\/[^\s/]+\s+Do\b/g
+  let figuurOpEen = false
+  pages.forEach((page, i) => {
+    const inhoud = inhoudVanPagina(page)
+    const getagd = [...inhoud.matchAll(doRe)]
+    const kaal = (inhoud.match(alleDo) || []).length - getagd.length
+    if (kaal > 0) fouten.push(`pagina ${i + 1}: ${kaal} getekend object(en) buiten marked content (geen Figure, geen Artifact)`)
+    for (const [, tag, props, naam] of getagd) {
+      if (tag === 'Artifact') continue
+      if (tag !== 'Figure') {
+        fouten.push(`pagina ${i + 1}: /${naam} Do staat in /${tag}, niet in Figure of Artifact`)
+        continue
+      }
+      const mcid = Number(props?.match(/\/MCID\s+(\d+)/)?.[1])
+      const el = figuren.find((f) => f.mcids.some((m) => m.mcid === mcid && m.pg === page.ref))
+      const alt = el ? tekstVan(el.dict.get(PDFName.of('Alt'))).trim() : ''
+      if (!alt) fouten.push(`pagina ${i + 1}: Figure (/${naam}) zonder tekstalternatief (/Alt)`)
+      if (i === 0) figuurOpEen = true
+      else fouten.push(`pagina ${i + 1}: herhaald briefhoofd (/${naam}) is een Figure; hoort een Artifact te zijn`)
+    }
+  })
+  if (!figuurOpEen) fouten.push('pagina 1: briefhoofd is geen Figure met /Alt; een schermlezer zegt niet van wie het document is')
+  return fouten
+}
+
+/**
+ * Een link naar de bronnenlijst heeft als zichtbare tekst alleen het
+ * voetnootnummer. Zonder beschrijving staat er in een linklijst "1", "10"
+ * (WCAG 2.4.4). Eis: /Alt op het Link-element én /Contents op elke annotatie
+ * (PDF/UA-1 7.18.5), en geen van beide alleen cijfers.
+ */
+export function nootlinkFouten(doc) {
+  const fouten = []
+  for (const el of structElementen(doc)) {
+    if (el.S !== 'Link') continue
+    for (const annot of el.objrs) {
+      const actie = doc.context.lookup(annot?.get(PDFName.of('A')))
+      const doel = tekstVan(doc.context.lookup(actie?.get?.(PDFName.of('D'))))
+      if (!/(^|-)fn:[^:]+$/.test(doel)) continue
+      const alt = tekstVan(el.dict.get(PDFName.of('Alt')))
+      const contents = tekstVan(annot.get(PDFName.of('Contents')))
+      if (!zegtIets(alt)) fouten.push(`link naar ${doel}: /Alt van het Link-element is "${alt}"`)
+      if (!zegtIets(contents)) fouten.push(`link naar ${doel}: /Contents van de annotatie is "${contents}"`)
+    }
+  }
+  return fouten
 }
 
 // Als CLI: de controle draaien. Als module (de tests importeren de
@@ -94,8 +204,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     // false-groen laten passeren.
     let cat = null
     let ctx = null
+    let doc = null
     try {
-      const doc = await PDFDocument.load(buf, { updateMetadata: false })
+      doc = await PDFDocument.load(buf, { updateMetadata: false })
       cat = doc.catalog
       ctx = doc.context
     } catch (e) {
@@ -142,6 +253,14 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
       console.log(`    ontbreekt ${tag} in de structuurboom — de boom is (bijna) leeg terwijl de markers er staan`)
       ontbreekt++
     }
+    for (const f of logoFouten(doc)) {
+      console.log(`    ${f}`)
+      ontbreekt++
+    }
+    const noten = nootlinkFouten(doc)
+    for (const f of noten.slice(0, 3)) console.log(`    ${f}`)
+    if (noten.length > 3) console.log(`    … en nog ${noten.length - 3}`)
+    ontbreekt += noten.length
   }
 
   console.log(`\n${bestanden.length} PDF('s) gecontroleerd, ${ontbreekt} ontbrekende marker(s).`)

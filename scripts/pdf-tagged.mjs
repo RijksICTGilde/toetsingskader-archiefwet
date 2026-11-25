@@ -78,10 +78,19 @@ export class TaggedPdf {
         Creator: 'toetsingskader-archiefwet (pdfkit)',
       },
     })
+    // PDF/UA-1-identificatie in de XMP-metadata (ISO 14289-1 §5). Niet via
+    // pdfkit's `subset: 'PDF/UA'`: die schrijft ook een /CIDSet die niet elke
+    // glyph van de fontsubset noemt, en daar valt veraPDF over (7.21.4.2).
+    this.doc.appendXML('<rdf:Description rdf:about="" xmlns:pdfuaid="http://www.aiim.org/pdfua/ns/id/"><pdfuaid:part>1</pdfuaid:part></rdf:Description>')
     this.doc.registerFont('Body', opties.fonts.normal)
     this.doc.registerFont('BodyBold', opties.fonts.bold)
     this.doc.registerFont('BodyItalic', opties.fonts.italic)
     this.briefhoofdSvg = opties.briefhoofdSvg
+    if (this.briefhoofdSvg) {
+      // De namen staan als contouren in het SVG; de <title> is de enige tekst.
+      this.briefhoofdAlt = this.briefhoofdSvg.match(/<title>([^<]+)<\/title>/)?.[1].trim()
+      if (!this.briefhoofdAlt) throw new Error('briefhoofd-SVG zonder <title>: het logo zou zonder tekstalternatief in de PDF komen')
+    }
     // Op élke pagina, ook de pagina's die pdfkit zelf opent als een alinea
     // over de grens loopt (zie kop van dit bestand, punt 3).
     this.doc.on('pageAdded', () => this.#briefhoofd())
@@ -95,6 +104,7 @@ export class TaggedPdf {
   }
 
   #briefhoofdX = null
+  #logoGetagd = false
   #dests = new Set()
   #sprongen = new Set()
 
@@ -105,10 +115,11 @@ export class TaggedPdf {
   }
 
   /**
-   * Briefhoofd als artifact (buiten de leesvolgorde). Als Form XObject: de
-   * SVG-operatoren (±73 kB per pagina) worden één keer vastgelegd en per
-   * pagina met één `Do` hergebruikt — zonder dat was het kaderdocument voor
-   * ruim de helft herhaald briefhoofd.
+   * Briefhoofd: op pagina 1 een Figure met /Alt (van wie het document is),
+   * daarna een artifact (herhaling, buiten de leesvolgorde). Als Form
+   * XObject: de SVG-operatoren (±73 kB per pagina) worden één keer
+   * vastgelegd en per pagina met één `Do` hergebruikt; zonder dat was het
+   * kaderdocument voor ruim de helft herhaald briefhoofd.
    */
   #briefhoofd() {
     if (!this.briefhoofdSvg) return
@@ -153,9 +164,19 @@ export class TaggedPdf {
       this.#briefhoofdX = xobj
     }
     doc.page.xobjects['BH1'] = this.#briefhoofdX
-    doc.markContent('Artifact', { type: 'Pagination' })
-    doc.addContent('/BH1 Do')
-    doc.endMarkedContent()
+    if (!this.#logoGetagd) {
+      const figuur = doc.struct('Figure', { alt: this.briefhoofdAlt })
+      this.root.add(figuur)
+      figuur.add(doc.markStructureContent('Figure'))
+      doc.addContent('/BH1 Do')
+      doc.endMarkedContent()
+      figuur.end()
+      this.#logoGetagd = true
+    } else {
+      doc.markContent('Artifact', { type: 'Pagination' })
+      doc.addContent('/BH1 Do')
+      doc.endMarkedContent()
+    }
     doc._textOptions = tekstOpties
     doc.x = x
     doc.y = y
@@ -182,7 +203,7 @@ export class TaggedPdf {
     this.#blok('H' + niveau, runs, s, { id, ouder, uitlijning })
   }
 
-  /** Alinea; runs = [{text, bold, italics, sup, underline, color, link, goTo}]. */
+  /** Alinea; runs = [{text, bold, italics, sup, underline, color, link, goTo, alt}]. */
   alinea(runs, { stijl = 'para', ouder, id, uitlijning } = {}) {
     this.#blok('P', runs, STIJL[stijl], { id, ouder, uitlijning })
   }
@@ -286,9 +307,14 @@ export class TaggedPdf {
     const x = MARGE.left + inspring
     const breedte = A4.breed - MARGE.left - MARGE.right - inspring
 
-    let open = false
-    const openMC = () => { if (!open) { el.add(doc.markStructureContent(tagNaam)); open = true } }
-    const sluitMC = () => { if (open) { doc.endMarkedContent(); open = false } }
+    // De inhoud pas na het sluiten aan het element hangen: loopt de tekst
+    // over de paginagrens, dan opent pdfkit op de nieuwe pagina een nieuw
+    // MCID in dezelfde inhoud, maar add() zet alleen de MCID's die er op dat
+    // moment al zijn in de ParentTree. Het vervolgstuk was dan voor veraPDF
+    // ongetagde inhoud (PDF/UA-1 7.1).
+    let open = null
+    const openMC = () => { if (!open) open = doc.markStructureContent(tagNaam) }
+    const sluitMC = () => { if (open) { doc.endMarkedContent(); el.add(open); open = null } }
 
     runs.forEach((run, i) => {
       const dest = (i === 0 && id) || null
@@ -329,13 +355,21 @@ export class TaggedPdf {
         // dit Link-element, zodat link() er structParent van maakt. goTo()
         // doet dat niet uit zichzelf; tijdelijk bijgeleerd.
         const origGoTo = doc.goTo
-        doc.goTo = (gx, gy, gw, gh, naam, o) => origGoTo.call(doc, gx, gy, gw, gh, naam, { ...o, structParent: doc._currentStructureElement })
+        const origLink = doc.link
+        // Elke annotatie /Contents en het Link-element /Alt (WCAG 2.4.4,
+        // PDF/UA-1 7.18.1 en 7.18.5); pdfkit geeft link() een lege /Contents
+        // en goTo() geen.
+        const beschrijving = linkBeschrijving(run)
+        const contents = { Contents: new String(beschrijving) }
+        doc.goTo = (gx, gy, gw, gh, naam, o) => origGoTo.call(doc, gx, gy, gw, gh, naam, { ...o, ...contents, structParent: doc._currentStructureElement })
+        doc.link = (lx, ly, lw, lh, url, o) => origLink.call(doc, lx, ly, lw, lh, url, { ...o, ...contents })
         try {
-          const link = doc.struct('Link', [schrijf])
+          const link = doc.struct('Link', { alt: beschrijving }, [schrijf])
           el.add(link)
           link.end()
         } finally {
           doc.goTo = origGoTo
+          doc.link = origLink
         }
       } else if (run.lang) {
         // Anderstalige term (WCAG 3.1.2): eigen Span met /Lang, zodat
@@ -412,6 +446,27 @@ export class TaggedPdf {
     doc.end()
     return this.klaar
   }
+}
+
+/**
+ * Beschrijving van een link-run. Een voetnootmarkering draagt een eigen `alt`
+ * ("Bron 1: …"); anders de zichtbare tekst. Bij een weblink komt de host
+ * erbij als die nog niet in de tekst staat: "Archiefwet (wetten.overheid.nl)"
+ * zegt ook dat de link het document verlaat.
+ */
+export function linkBeschrijving(run) {
+  if (run.alt) return run.alt
+  const tekst = run.text.replace(/\s+/g, ' ').trim()
+  if (!run.link) return tekst || run.goTo
+  let host = ''
+  try {
+    host = new URL(run.link).hostname.replace(/^www\./, '')
+  } catch {
+    // geen absolute URL; dan alleen de tekst
+  }
+  if (!tekst) return run.link
+  if (!host || tekst.toLowerCase().includes(host.toLowerCase())) return tekst
+  return `${tekst} (${host})`
 }
 
 /** De drie RijksSans-snedes uit assets/fonts (`just pdf-fonts`), als Buffers
