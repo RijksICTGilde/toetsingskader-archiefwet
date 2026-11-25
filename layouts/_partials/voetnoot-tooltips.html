@@ -80,8 +80,14 @@
       {{ else if or (hasPrefix $href "http://") (hasPrefix $href "https://") }}
         {{ $doel = strings.TrimPrefix "www." (urls.Parse $href).Host }}
       {{ else }}
-        {{/* Interne link: pad zonder fragment/query opzoeken, ook via alias. */}}
+        {{/* Interne link: pad zonder fragment/query opzoeken, ook via alias.
+             De href bevat het basispad uit baseURL (/archiefwet/), GetPage
+             kent alleen het pad binnen de site. */}}
         {{ $pad := (urls.Parse $href).Path }}
+        {{ $basis := (urls.Parse site.BaseURL).Path }}
+        {{ if and (ne $basis "/") (hasPrefix $pad $basis) }}
+          {{ $pad = printf "/%s" (strings.TrimPrefix $basis $pad) }}
+        {{ end }}
         {{ $p := site.GetPage $pad }}
         {{ if not $p }}
           {{ range site.Pages }}{{ if in .Aliases $pad }}{{ $p = . }}{{ end }}{{ end }}
