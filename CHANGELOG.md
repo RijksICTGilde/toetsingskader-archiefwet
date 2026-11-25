@@ -17,6 +17,9 @@ changelog volgt [Semantic Versioning][semver].
   (`https://toetsingskader.inspectie-oe.nl/archiefwet/`) in de "Bron: …"-regel
   op de omslag en achter "Bekijk voor de actuele versie …", in plaats van het
   ZAD-adres van de build (`params.pdf.site_url`).
+- `canonical`, `og:url`, `og:image`, `sitemap.xml` en de RSS-feed wijzen naar
+  het publieke adres in plaats van het ZAD-adres (`baseURL`). Interne links
+  krijgen daarmee het pad `/archiefwet/`.
 
 ### Gewijzigd
 

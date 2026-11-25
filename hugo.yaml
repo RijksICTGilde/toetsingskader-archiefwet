@@ -1,4 +1,4 @@
-baseURL: https://frontend-production-toets-hn7.rig.prd1.gn2.quattro.rijksapps.nl/
+baseURL: https://toetsingskader.inspectie-oe.nl/archiefwet/
 locale: nl-NL
 defaultContentLanguage: nl
 title: Toetsingskader Archiefwet
@@ -62,7 +62,7 @@ params:
   pdf:
     # Adres achter "Bekijk voor de actuele versie …" in de PDF's en de
     # "Bron: …"-regel op de omslag: het publieke adres van de site. Leeg: de
-    # baseURL van de build (in CI het ZAD-adres).
+    # baseURL van de build.
     site_url: "https://toetsingskader.inspectie-oe.nl/archiefwet/"
   feedback:
     email: toetsingskader@inspectie-oe.nl
