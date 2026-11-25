@@ -1,0 +1,32 @@
+{{/* ---------------------------------------------------------------------
+     Versies - `{{< versies >}}`
+
+     Leest CHANGELOG.md uit de root van de repository: één bron voor de
+     changelog en deze pagina. Per release een kop met anker `v1-0-2`, waar de
+     versielink in `_partials/versie-zin.html` naartoe wijst. `[Unreleased]` en
+     de blokken `### Techniek` blijven weg; de linkdefinities onderaan ook.
+     De tussenkoppen staan hier als HTML: via markdown kreeg elke "Gewijzigd"
+     hetzelfde id.
+     --------------------------------------------------------------------- */}}
+{{- $md := os.ReadFile "CHANGELOG.md" | replaceRE `(?m)^\[[^\]]+\]: \S+[ \t]*$` "" -}}
+{{- range after 1 (split $md "\n## [") -}}
+  {{- $versie := index (split . "]") 0 -}}
+  {{- if ne $versie "Unreleased" -}}
+    {{- $datum := index (findRESubmatch `^[^\]]+\] - (\d{4}-\d{2}-\d{2})` . 1) 0 -}}
+    {{- $delen := split (replaceRE `^[^\n]*\n` "" .) "\n### " -}}
+    {{- $html := "" -}}
+    {{- with strings.TrimSpace (index $delen 0) -}}
+      {{- $html = . | $.Page.RenderString (dict "display" "block") -}}
+    {{- end -}}
+    {{- range after 1 $delen -}}
+      {{- $titel := strings.TrimSpace (index (split . "\n") 0) -}}
+      {{- if ne $titel "Techniek" -}}
+        {{- $lijst := replaceRE `^[^\n]*\n` "" . | $.Page.RenderString (dict "display" "block") -}}
+        {{- $html = printf "%s<h3>%s</h3>%s" $html $titel $lijst -}}
+      {{- end -}}
+    {{- end }}
+<h2 id="v{{ replace $versie "." "-" }}">Versie {{ $versie }}</h2>
+{{ with $datum }}<p>Gepubliceerd op <time datetime="{{ index . 1 }}">{{ index . 1 | time.AsTime | time.Format ":date_long" }}</time>.</p>{{ end }}
+{{ with $html }}{{ . | safeHTML }}{{ else }}<p>Alleen technisch onderhoud, geen wijzigingen in de inhoud of op de site.</p>{{ end }}
+  {{- end -}}
+{{- end -}}
