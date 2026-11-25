@@ -109,8 +109,8 @@ inhoudsopgave (geen regel voor de kern) en in de PDF. Eerder stond er "Kern van
   DUTO").
 - Een ballon die om een *hoover* vraagt wordt een hover, geen begrippenpagina.
   Zie `0005-hoover-ballon-wordt-hover.md`.
-- Enkelvoud/meervoud in `#### Criteria` / `#### Criterium` en `#### Indicatoren` /
-  `#### Indicator` wisselt in de normbladen zelf. De site volgt per voorschrift
+- Enkelvoud/meervoud in `##### Criteria` / `##### Criterium` en `##### Indicatoren` /
+  `##### Indicator` wisselt in de normbladen zelf. De site volgt per voorschrift
   het normblad. De validator staat beide toe.
 
 ### Nadruk (vet) in normblad 1

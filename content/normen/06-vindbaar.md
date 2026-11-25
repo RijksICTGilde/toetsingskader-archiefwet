@@ -41,13 +41,13 @@ Het verantwoordelijke overheidsorgaan heeft in de passende maatregelen opgenomen
 
 [^aw-artikel-4-1-4-2-ar-toelichting-vinden]: Archiefwet, artikel 4.1 en 4.2; Archiefregeling, Toelichting, Algemeen Deel, onder Vinden, weergeven, exporteren en raadplegen, p. 36. *(Bron beschikbaar na publicatie van de Archiefregeling.)* [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
-#### Criteria
+##### Criteria
 
 - Er zijn passende maatregelen met een concrete termijn voor de vindbaarheid van categorieën documenten.
 - Er is een risicoanalyse op basis waarvan de concrete termijn voor de vindbaarheid van categorieën documenten kan worden vastgesteld.
 - Er is een risicoanalyse op basis waarvan kan worden bepaald welke categorieën documenten een passende maatregel met een concrete invulling van de redelijke termijn moeten krijgen.
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 
@@ -57,11 +57,11 @@ Het verantwoordelijke overheidsorgaan kan documenten binnen een redelijke termij
 
 [^ab-artikel-2-1-lid-a-nota-vindbaar]: Archiefbesluit, artikel 2.1, lid a; Archiefbesluit, Nota van Toelichting, I Algemeen deel, 2. Duurzame toegankelijkheid, vindbaar, p.10. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
-#### Criterium
+##### Criterium
 
 - Er is een overzicht van passende maatregelen bij categorieën documenten met de redelijke termijn voor de vindbaarheid.
 
-#### Indicatoren
+##### Indicatoren
 
 - Documenten zijn vindbaar via een centrale plaats[^na-vindbaar], bijvoorbeeld een (organisatiebrede) zoekmachine.
 
@@ -75,11 +75,11 @@ Documenten kunnen door de organisatie, op basis van de eisen die gesteld worden 
 
 [^ab-artikel-2-1-ar-toelichting-p34-50-53]: Archiefbesluit, artikel 2.1, eerste lid; Archiefregeling, Toelichting, p. 34, artikel 2.2, 2.3 en 2.5; Archiefregeling, Toelichting, p.50 en 53. *(Bron beschikbaar na publicatie van de Archiefregeling.)* [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
-#### Criteria
+##### Criteria
 
 *Bij dit voorschrift zijn geen aanvullende criteria.*
 
-#### Indicator
+##### Indicator
 
 - De ordening en overzicht(en) van de informatiehuishouding sluiten aantoonbaar aan op de werkprocessen.
 
@@ -89,11 +89,11 @@ Documenten zijn binnen een redelijke termijn vindbaar voor gebruikers die daar r
 
 [^ab-artikel-2-1-lid-1-onder-a-nota-vindbaar]: Archiefbesluit, artikel 2.1, eerste lid, onder a; Archiefbesluit, Nota van Toelichting, Vindbaar, p.10. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
-#### Criterium
+##### Criterium
 
 - De organisatie hanteert interne normen of afspraken over de (maximale) tijd waarbinnen bevoegde gebruikers documenten moeten kunnen terugvinden.
 
-#### Indicatoren
+##### Indicatoren
 
 - Gebruikers met een vastgestelde bevoegdheid kunnen documenten (terug)vinden.
 - Document- en zoeksystemen passen deze bevoegdheden aantoonbaar toe, waardoor zoekresultaten verschillen per functie/rol.

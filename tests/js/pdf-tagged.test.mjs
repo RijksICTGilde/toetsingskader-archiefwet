@@ -18,7 +18,7 @@ En een <a href="/onderwerpen/document/">interne link</a> gevolgd door gewone tek
 <h2 id="voorschriften">Voorschriften</h2>
 <h4 id="voorschrift">Voorschrift 3.1<sup id="fnref:2"><a href="#fn:2" class="footnote-ref">2</a></sup></h4>
 <p>Het orgaan heeft <strong>regels</strong> vastgesteld.</p>
-<h4 id="criteria">Criteria</h4>
+<h5 id="criteria">Criteria</h5>
 <ul><li>Eerste criterium.</li><li>Tweede criterium met sublijst:<ul><li>sub een;</li><li>sub twee.</li></ul></li></ul>
 <div class="footnotes" role="doc-endnotes"><hr><ol>
 <li id="fn:1"><p>Aw, artikel 4.1. <a href="https://example.org">Bekijk bron</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#8617;&#65038;</a></p></li>
@@ -70,9 +70,10 @@ test('structuurboom: koppen, alinea’s, echte (geneste) lijsten, geen kern-kop'
   assert.equal(t['/Document'], 1)
   // Toelichting, Voorschriften, Bronnen — géén "Kern van de norm" (keuze 31 augustus 2026).
   assert.equal(t['/H2'], 3, JSON.stringify(t))
-  // Voorschrift/Criteria zijn h4 na h2 (het normblad slaat ### over) → H3.
-  assert.equal(t['/H3'], 2, JSON.stringify(t))
-  assert.equal(t['/H4'], undefined, JSON.stringify(t))
+  // Voorschrift is h4 na h2 (het normblad slaat ### over) → H3, Criteria (h5)
+  // eronder → H4.
+  assert.equal(t['/H3'], 1, JSON.stringify(t))
+  assert.equal(t['/H4'], 1, JSON.stringify(t))
   // Criteria (2 items) + sublijst (2) + bronnen (2): drie L's, zes LI's.
   assert.equal(t['/L'], 3, JSON.stringify(t))
   assert.equal(t['/LI'], 6, JSON.stringify(t))

@@ -257,8 +257,8 @@ export function schrijfNorm(pdf, data, opties) {
   // wordt genormaliseerd: H2 → H3 in plaats van H4. De opmaak volgt wél het
   // oorspronkelijke niveau, zodat "Voorschrift" er blijft uitzien als op de site.
   //
-  // Gelijke HTML-niveaus krijgen gelijke tags: na `## Voorschriften` wordt de
-  // eerste `#### Voorschrift` H3, en de `#### Criteria` erna óók H3 — niet H4.
+  // Gelijke HTML-niveaus krijgen gelijke tags: na `## Voorschriften` wordt elke
+  // `#### Voorschrift` H3 en elke `##### Criteria` eronder H4.
   // Daarvoor onthoudt `tagVoor` per HTML-niveau de gekozen tag; een kop op een
   // hoger niveau vergeet de diepere mappings, want daaronder begint de telling
   // opnieuw.

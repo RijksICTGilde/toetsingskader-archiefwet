@@ -39,12 +39,12 @@ Het verantwoordelijke overheidsorgaan heeft één of meerdere metadataschema's z
 [^nen-iso-23081-1-2017]: NEN-ISO 23081-1:2017 nl. [Bekijk bron](https://www.nen.nl/nen-iso-23081-1-2017-nl-269387)
 [^ar-artikel-2-5-lid-1]: Archiefregeling, artikel 2.5, eerste lid. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criteria
+##### Criteria
 
 - Het vastgestelde metadataschema is actueel.
 - Het vastgestelde metadataschema is volledig en voldoet aan alle eisen uit de Archiefregeling.
 
-#### Indicatoren
+##### Indicatoren
 
 - Er zijn procedures vastgelegd om het metadataschema te actualiseren bij wijzigingen in de informatiehuishouding.
 - Het metadataschema heeft betrekking op alle documenten van het verantwoordelijke overheidsorgaan.
@@ -96,11 +96,11 @@ Indien gebruik is gemaakt van een elektronische handtekening:
 [^ar-artikel-2-6-onder-b]: Archiefregeling, artikel 2.6, onder b. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 [^ar-artikel-2-6-onder-c]: Archiefregeling, artikel 2.6, onder c. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criterium
+##### Criterium
 
 - De vereiste metadata worden zo snel mogelijk na creatie of ontvangst vastgelegd bij documenten. Bij wijzigingen of creatie van nieuwe metadata moet deze ook zo snel mogelijk worden toegevoegd aan de documenten.
 
-#### Indicatoren
+##### Indicatoren
 
 - Er zijn instructies voor het toekennen van de vereiste metadata aan documenten.
 - Metadata wordt zoveel mogelijk automatisch toegekend aan documenten.
@@ -121,11 +121,11 @@ Van ieder document is in de metadata (bij het document, of op het niveau van zaa
 [^ar-artikel-2-8-onder-b]: Archiefregeling, artikel 2.8, onder b. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 [^ar-artikel-2-7-reikwijdte]: Archiefregeling, artikel 2.7; Archiefregeling, artikel 2.8; Archiefregeling, Toelichting, 2.2 Aanvullende eisen voor langdurig te bewaren documenten in digitale vorm, p.37. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criterium
+##### Criterium
 
 - De vereiste metadata worden zo snel mogelijk na creatie of ontvangst vastgelegd bij documenten. Bij wijzigingen of creatie van nieuwe metadata moet deze ook zo snel mogelijk worden toegevoegd aan de documenten.
 
-#### Indicatoren
+##### Indicatoren
 
 - Er zijn instructies voor het toekennen van de vereiste metadata aan documenten.
 - Metadata wordt zoveel mogelijk automatisch toegekend aan documenten.
@@ -146,11 +146,11 @@ Van ieder document kan in de metadata (bij het document, of op het niveau van za
 [^ar-artikel-2-12-onder-c]: Archiefregeling, artikel 2.12, onder c. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 [^ar-artikel-2-12-onder-d]: Archiefregeling, artikel 2.12, onder d. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criterium
+##### Criterium
 
 - De vereiste metadata wordt toegevoegd aan documenten, voordat die worden overgebracht naar een archiefbewaarplaats.
 
-#### Indicatoren
+##### Indicatoren
 
 - Er zijn instructies voor het toekennen van de vereiste metadata aan documenten.
 - Metadata wordt zoveel als mogelijk automatisch toegekend aan documenten.

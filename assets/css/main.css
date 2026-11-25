@@ -21,7 +21,7 @@
 }
 
 /* Norm page: project-specifieke decoratie op de markdown-body. De koppen zijn
-   gewone h2/h3/h4, dus scopen via .norm + heading-ids. */
+   gewone h2 t/m h5, dus scopen via .norm + heading-ids. */
 
 /* Voorschriften-kop met accentlijn. Het id volgt de koptekst, dus deze
    selector hoort bij '## Voorschriften' in content/normen/*.md. */
@@ -59,19 +59,19 @@
   padding-block-start: 0;
 }
 
-/* Criteria en Indicatoren zijn sub-items: kleiner en ingesprongen. Margin i.p.v.
-   padding, anders verspringen de lijst-bullets. De prefixen dekken zowel
+/* Criteria en Indicatoren zijn sub-items (h5): kleiner en ingesprongen. Margin
+   i.p.v. padding, anders verspringen de lijst-bullets. De prefixen dekken zowel
    enkelvoud als meervoud ("criterium"/"criteria", "indicator"/"indicatoren"),
    want de koppen volgen het normblad. */
-.norm h4[id^="criteri"],
-.norm h4[id^="indicator"] {
+.norm h5[id^="criteri"],
+.norm h5[id^="indicator"] {
   font-size: 1.15rem;
 }
 
-.norm h4[id^="criteri"],
-.norm h4[id^="indicator"],
-.norm h4[id^="criteri"] + *,
-.norm h4[id^="indicator"] + * {
+.norm h5[id^="criteri"],
+.norm h5[id^="indicator"],
+.norm h5[id^="criteri"] + *,
+.norm h5[id^="indicator"] + * {
   margin-inline-start: 1rem;
 }
 

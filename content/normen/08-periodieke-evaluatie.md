@@ -35,11 +35,11 @@ Op deze manier kunnen maatregelen voor duurzame toegankelijkheid, bescherming va
 
 Het verantwoordelijke overheidsorgaan heeft in de beheerregels beschreven op welke wijze het archiefbeheer periodiek wordt onderzocht, geëvalueerd en, indien nodig, bijgesteld.[^aw-artikel-4-2-lid-2-sub-c]
 
-#### Criterium
+##### Criterium
 
 - De organisatie heeft verantwoordelijkheden en bevoegdheden voor het uitvoeren van de kwaliteitszorg vastgelegd.
 
-#### Indicator
+##### Indicator
 
 - De organisatie heeft in beeld welke (juridische) kaders gelden voor de informatiehuishouding.
 
@@ -47,11 +47,11 @@ Het verantwoordelijke overheidsorgaan heeft in de beheerregels beschreven op wel
 
 Het verantwoordelijke overheidsorgaan evalueert het archiefbeheer periodiek (minimaal tweejaarlijks) met een [planning- en controlcyclus](/onderwerpen/planning-en-controlcyclus/).[^kamerstukken-35968-nr-3-beheerstrategie]
 
-#### Criteria
+##### Criteria
 
 *Bij dit voorschrift zijn geen aanvullende criteria.*
 
-#### Indicatoren
+##### Indicatoren
 
 - Bestuur en/of management is betrokken bij de periodieke evaluatie en bespreekt minimaal jaarlijks de stand van zaken en voortgang van de kwaliteitszorg voor de informatiehuishouding.
 - Het proces van periodieke kwaliteitszorg wordt minimaal tweejaarlijks geëvalueerd.
@@ -65,7 +65,7 @@ Het verantwoordelijke overheidsorgaan evalueert het archiefbeheer periodiek (min
 
 De periodieke evaluatie omvat de [passende maatregelen](/onderwerpen/passende-maatregelen/) ten behoeve van de duurzame toegankelijkheid van documenten.[^aw-artikel-4-2-lid-2-sub-c]
 
-#### Criterium
+##### Criterium
 
 - De evaluatie betreft in ieder geval de passende maatregelen voor voorschriften over:
   - [Inbeheername en beheer](/normen/01-beheer/)
@@ -76,7 +76,7 @@ De periodieke evaluatie omvat de [passende maatregelen](/onderwerpen/passende-ma
   - [Vindbaar](/normen/06-vindbaar/)
   - [Vernietigen](/normen/07-vernietigen/)
 
-#### Indicator
+##### Indicator
 
 - Het verantwoordelijke overheidsorgaan heeft toetsbare doelstellingen vastgelegd bij voorschriften over [Inbeheername en beheer](/normen/01-beheer/), [Overzicht](/normen/02-overzicht/), [Ordenen](/normen/03-ordenen/), [Metadateren](/normen/04-metadateren/), [Informatiebeveiliging en betrouwbaar](/normen/05-betrouwbaar/), [Vindbaar](/normen/06-vindbaar/) en [Vernietigen](/normen/07-vernietigen/).
 

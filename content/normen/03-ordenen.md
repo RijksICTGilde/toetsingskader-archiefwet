@@ -47,14 +47,14 @@ Het verantwoordelijke overheidsorgaan beschikt over één of meerdere ordeningss
 
 [^ar-artikel-2-2-lid-1]: Archiefregeling, artikel 2.2, eerste lid. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criteria
+##### Criteria
 
 - De ordeningsstructuur is actueel.
 - De ordeningsstructuur is volledig.
 - De ordeningsstructuur sluit aan bij het [overzicht](/normen/02-overzicht/) van de informatiehuishouding.
 - De feitelijke ordening (opslagstructuur) komt overeen met de beschreven ordeningsstructuur.
 
-#### Indicatoren
+##### Indicatoren
 
 - Er is een verantwoordelijke aangewezen voor het actualiseren van de ordeningsstructuur.
 - Er is een door de organisatie vastgestelde procedure voor het actualiseren van de ordeningsstructuur.
@@ -66,11 +66,11 @@ Alle documenten, op individueel of hoger [aggregatieniveau](/onderwerpen/classif
 
 [^ar-toelichting-h2-ordening-p33-34]: Archiefregeling, Toelichting, Hoofdstuk 2, Ordening, p 33-34. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criteria
+##### Criteria
 
 *Bij dit voorschrift zijn geen aanvullende criteria.*
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 
@@ -80,11 +80,11 @@ Documenten die zijn gekoppeld aan een aanvullende ordening zijn gewaardeerd met 
 
 [^ar-toelichting-h2-algemene-eisen-ordening-p34]: Archiefregeling, artikel 2.5, tweede lid, sub k; Archiefregeling, Toelichting, Hoofdstuk 2, Algemene Eisen ordening, p.34. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criterium
+##### Criterium
 
 - De bewaartermijnen van documenten die zijn gekoppeld aan een aanvullende ordening komen overeen met een categorie in het selectiebesluit.
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 

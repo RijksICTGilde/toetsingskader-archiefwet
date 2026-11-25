@@ -69,8 +69,9 @@
              `<a href="#"></a>`: een link zonder toegankelijke naam (WCAG 2.4.4,
              axe link-name). Norm 1 heeft nog wel h3's ("Besturing") en houdt zijn
              subregels. De kleinkinderen van zo'n lege knoop zijn hier
-             "Voorschrift"/"Criteria"/"Indicatoren" — als TOC-regel betekenisloos
-             en onderling niet te onderscheiden, dus die halen we niet naar boven. */}}
+             "Voorschrift", met "Criteria"/"Indicatoren" als h5 daaronder: als
+             TOC-regel betekenisloos en onderling niet te onderscheiden, dus die
+             halen we niet naar boven. */}}
         {{- with where .Headings "ID" "!=" "" -}}
         <ul>
           {{- range . -}}<li><a href="#{{ .ID }}">{{ .Title }}</a></li>{{- end -}}
