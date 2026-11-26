@@ -26,9 +26,9 @@ raakt, staat onder **Techniek**.
 
 - Onderaan elke pagina, ook de homepage, staat geen versienummer meer. Het
   nummer hoort bij de website en loopt bij elke kleine wijziging op; "Versie …
-  van het toetsingskader" suggereerde een nieuwe versie van het kader zelf. Na
-  de datum van de laatste aanpassing staat nu een link Ontwikkelgeschiedenis van
-  de website.
+  van het toetsingskader" suggereerde een nieuwe versie van het kader zelf. De
+  datum van de laatste aanpassing is nu een link naar de versies van de website
+  op de pagina Totstandkoming.
 - Het blok Versies op de pagina Totstandkoming heet nu Versies van de website.
 
 ### Opgelost
