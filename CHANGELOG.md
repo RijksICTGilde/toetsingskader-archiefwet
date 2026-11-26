@@ -17,10 +17,17 @@ raakt, staat onder **Techniek**.
 
 ### Toegevoegd
 
-- Onderaan de pagina Totstandkoming staat een uitklapbaar blok Versies. Daarin
-  staat per versie van het toetsingskader wat er is veranderd, de nieuwste
-  bovenaan. De versielink onderaan elke pagina gaat daarheen en klapt het blok
-  open bij die versie, in plaats van naar GitHub in een nieuw tabblad.
+- Onderaan de pagina Totstandkoming staat een uitklapbaar blok Versies van de
+  website. Daarin staat per versie van de website wat er is veranderd, de
+  nieuwste bovenaan. De datum in "Deze pagina is voor het laatst aangepast op
+  …" onderaan elke pagina linkt daarheen en klapt het blok open.
+
+### Gewijzigd
+
+- Onderaan elke pagina, ook de homepage, staat geen versienummer meer. Het
+  nummer hoort bij de website en loopt bij elke kleine wijziging op; "Versie …
+  van het toetsingskader" suggereerde een nieuwe versie van het kader zelf. Er
+  is daardoor ook geen link meer naar GitHub in een nieuw tabblad.
 
 ### Opgelost
 
@@ -39,9 +46,10 @@ raakt, staat onder **Techniek**.
   achter "Bekijk voor de actuele versie …" noemen het publieke adres.
 - Shortcode `versies` op `/over/totstandkoming/` leest dit bestand en toont
   per release een kop met anker (`#v1-0-2`) in een `.references`-blok;
-  `[Unreleased]` en `### Techniek` blijven weg. De versielink in
-  `_partials/versie-zin.html` wijst naar dat anker; `referenties.js` van het
-  thema klapt het blok open. `params.releases_url` is vervallen.
+  `[Unreleased]` en `### Techniek` blijven weg. De datum in
+  `_partials/versie-zin.html` linkt naar `#versies` (de kop van het blok);
+  `referenties.js` van het thema klapt het blok open. `params.releases_url` en
+  het versienummer in de paginavoet zijn vervallen.
 
 ## [1.0.2] - 2026-11-24
 
