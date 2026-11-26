@@ -4,8 +4,9 @@
     Deze pagina is voor het laatst aangepast op maandag 10 augustus 2026.
 
   De datum is een link naar het blok Versies van de website op
-  /over/totstandkoming/ (`#versies`, het <details> zelf, zodat het thema-script
-  referenties.js het openklapt).
+  /over/totstandkoming/ (`#versies`, de kop in het <details>, zodat het
+  thema-script referenties.js het openklapt). De link loopt via de
+  thema-partial render-link.
 
   Gedeeld door `_partials/lastmod.html` (voet van elke inhoudspagina) en de
   shortcode `versielabel` (homepage, die geen voet heeft). Eén bron, want los
@@ -23,4 +24,4 @@
   Aanroep: {{ partial "versie-zin.html" $page }} (een Page, geen shortcode)
 */}}
 {{- $datum := printf `<time datetime="%s">%s</time>` (.Lastmod.Format "2006-01-02") (.Lastmod | time.Format ":date_full") -}}
-Deze pagina is voor het laatst aangepast op {{ with site.GetPage "/over/totstandkoming" }}<a href="{{ .RelPermalink }}#versies">{{ $datum | safeHTML }}</a>{{ else }}{{ $datum | safeHTML }}{{ end }}.
+Deze pagina is voor het laatst aangepast op {{ with site.GetPage "/over/totstandkoming" }}{{ partial "render-link" (dict "href" (printf "%s#versies" .RelPermalink) "text" ($datum | safeHTML)) }}{{ else }}{{ $datum | safeHTML }}{{ end }}.
