@@ -1,13 +1,19 @@
 {{/* ---------------------------------------------------------------------
      Versies - `{{< versies >}}`
 
+     Een uitklapbaar blok "Versies" (op /over/totstandkoming/), in de opmaak
+     van het blok Referenties (`.references` uit het thema). Het thema-script
+     referenties.js klapt het blok open als het adres een anker erin noemt.
+
      Leest CHANGELOG.md uit de root van de repository: één bron voor de
-     changelog en deze pagina. Per release een kop met anker `v1-0-2`, waar de
+     changelog en dit blok. Per release een kop met anker `v1-0-2`, waar de
      versielink in `_partials/versie-zin.html` naartoe wijst. `[Unreleased]` en
      de blokken `### Techniek` blijven weg; de linkdefinities onderaan ook.
      De tussenkoppen staan hier als HTML: via markdown kreeg elke "Gewijzigd"
      hetzelfde id.
      --------------------------------------------------------------------- */}}
+<section id="versies" class="references" aria-label="Versies"><details><summary><h2>Versies</h2></summary>
+<p>Het toetsingskader krijgt bij elke publicatie een nieuw versienummer. Hieronder staat per versie wat er is veranderd, de nieuwste bovenaan.</p>
 {{- $md := os.ReadFile "CHANGELOG.md" | replaceRE `(?m)^\[[^\]]+\]: \S+[ \t]*$` "" -}}
 {{- range after 1 (split $md "\n## [") -}}
   {{- $versie := index (split . "]") 0 -}}
@@ -22,11 +28,12 @@
       {{- $titel := strings.TrimSpace (index (split . "\n") 0) -}}
       {{- if ne $titel "Techniek" -}}
         {{- $lijst := replaceRE `^[^\n]*\n` "" . | $.Page.RenderString (dict "display" "block") -}}
-        {{- $html = printf "%s<h3>%s</h3>%s" $html $titel $lijst -}}
+        {{- $html = printf "%s<h4>%s</h4>%s" $html $titel $lijst -}}
       {{- end -}}
     {{- end }}
-<h2 id="v{{ replace $versie "." "-" }}">Versie {{ $versie }}</h2>
+<h3 id="v{{ replace $versie "." "-" }}">Versie {{ $versie }}</h3>
 {{ with $datum }}<p class="versie-datum">Gepubliceerd op <time datetime="{{ index . 1 }}">{{ index . 1 | time.AsTime | time.Format ":date_long" }}</time></p>{{ end }}
 {{ with $html }}{{ . | safeHTML }}{{ else }}<p>Alleen technisch onderhoud, geen wijzigingen in de inhoud of op de site.</p>{{ end }}
   {{- end -}}
 {{- end -}}
+</details></section>
