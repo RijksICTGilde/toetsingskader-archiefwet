@@ -279,27 +279,40 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
     <li>het <strong>eerste</strong> getal bij grote, ingrijpende wijzigingen.</li>
   </ul>
   <p>Wat er per versie veranderde, staat in <code>CHANGELOG.md</code> in de
-  repository en op de <strong>Releases</strong>-pagina van GitHub
-  (<code>github.com/RijksICTGilde/toetsingskader-archiefwet/releases</code>).</p>
+  repository. Per versie staan daar eerst de wijzigingen die een bezoeker
+  merkt, in gewone taal, en onder <strong>Techniek</strong> wat alleen de bouw
+  van de site raakt. Het eerste deel staat ook op de site zelf, in het
+  uitklapbare blok <strong>Versies</strong> op de pagina Totstandkoming onder
+  Over (<code>/over/totstandkoming/#versies</code>); de versielink onderaan elke
+  pagina gaat daarheen.</p>
+  <p>Verandert je pull request iets aan de site of de inhoud, schrijf dan een
+  regel onder <code>[Unreleased]</code> in <code>CHANGELOG.md</code>. Hoe, staat
+  in <code>CONTRIBUTING.md</code> onder "Changelog".</p>
 
   <p><strong>Zelf een release aanmaken</strong> (in de GitHub UI):</p>
   <ol>
+    <li>Eerst een gewone pull request: zet in <code>CHANGELOG.md</code> de regels
+        onder <code>[Unreleased]</code> onder een nieuwe kop met het
+        versienummer en de datum (bijvoorbeeld
+        <code>## [1.0.3] - 2026-12-01</code>) en werk
+        <code>softwareVersion</code> en <code>releaseDate</code> in
+        <code>publiccode.yml</code> bij. Laat die pull request mergen.</li>
     <li>Open de repository op GitHub en klik rechts op <strong>"Releases"</strong>,
         daarna op <strong>"Draft a new release"</strong>.</li>
     <li>Bij <strong>"Choose a tag"</strong>: typ het nieuwe versienummer
         (bijvoorbeeld <code>v0.1.0</code>) en kies <strong>"Create new tag on
         publish"</strong>. Laat het doel op <code>main</code> staan.</li>
     <li>Vul een <strong>titel</strong> in (bijvoorbeeld <code>v0.1.0</code>) en
-        beschrijf in het tekstvak kort de wijzigingen. Met de knop
-        <strong>"Generate release notes"</strong> vult GitHub automatisch de
-        doorgevoerde pull requests sinds de vorige release in; vul ze zo nodig
-        aan vanuit <code>CHANGELOG.md</code>.</li>
-    <li>Klik <strong>"Publish release"</strong>.</li>
+        neem in het tekstvak de regels van deze versie uit
+        <code>CHANGELOG.md</code> over. De knop
+        <strong>"Generate release notes"</strong> zet er de lijst met pull
+        requests onder; dat mag, als technisch overzicht.</li>
+    <li>Klik <strong>"Publish release"</strong>. Daarmee gaat de site live met
+        dit versienummer.</li>
   </ol>
-  <div class="tip"><strong>Tip:</strong> werk het versienummer in
-  <code>CHANGELOG.md</code> (en zo nodig <code>publiccode.yml</code>) bij in een
-  gewone pull request <em>voordat</em> je de release publiceert, zodat de release
-  en de documentatie hetzelfde versienummer noemen.</div>
+  <div class="tip"><strong>Tip:</strong> het blok Versies op de site leest
+  <code>CHANGELOG.md</code>. Staat een versie daar niet, dan ontbreekt de kop
+  in de changelog (stap 1).</div>
   <p class="terug"><a href="#inhoud">↑ Terug naar de inhoud</a></p>
 </section>
 
@@ -359,18 +372,19 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
 
   <details id="oef-d">
     <summary>Oefening D: Een release lezen</summary>
-    <p><strong>Doel:</strong> de huidige versie vinden en de bijbehorende
-    release-notes lezen. Je maakt hierbij niets aan; je leest alleen.</p>
+    <p><strong>Doel:</strong> de huidige versie vinden en lezen wat erin
+    veranderde. Je maakt hierbij niets aan; je leest alleen.</p>
     <ol>
-      <li>Ga naar de repository op GitHub en klik rechts op
-          <strong>"Releases"</strong>.</li>
-      <li>Open de bovenste (meest recente) release en lees de notes: welk
-          versienummer is het, en wat is er in die versie veranderd?</li>
+      <li>Open een pagina van de site en zoek onderaan het versienummer. Klik
+          erop: je komt op de pagina Totstandkoming, en het blok
+          <strong>Versies</strong> klapt open bij die versie. Wat is er in
+          die versie veranderd?</li>
       <li>Open <code>CHANGELOG.md</code> in de repository en zoek hetzelfde
-          versienummer op. Komt de beschrijving overeen?</li>
+          versienummer op. Wat staat daar onder <strong>Techniek</strong> dat
+          niet op de site staat?</li>
     </ol>
     <p><strong>Klaar wanneer:</strong> je het huidige versienummer kunt noemen en
-    in eigen woorden kunt zeggen wat er in die release zat.</p>
+    in eigen woorden kunt zeggen wat er in die versie zat.</p>
   </details>
   <p class="terug"><a href="#inhoud">↑ Terug naar de inhoud</a></p>
 </section>

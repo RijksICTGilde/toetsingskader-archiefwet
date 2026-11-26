@@ -106,7 +106,7 @@ Elke PR die de site, de PDF's of de inhoud verandert, zet een regel onder
 - **Merkt een bezoeker of PDF-lezer het?** Dan een regel onder Toegevoegd,
   Gewijzigd, Verwijderd of Opgelost, in gewone taal: wat er voor de lezer
   verandert, zonder bestandsnamen, code of PR-nummers. Deze regels staan op
-  de versiepagina van de site.
+  de site, in het blok Versies op de pagina Totstandkoming.
 - **Raakt het alleen bouw, CI, configuratie of tests?** Dan onder
   `### Techniek`; daar mag het technisch.
 - **Allebei?** Dan een publieksregel én een regel onder Techniek.
