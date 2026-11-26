@@ -11,10 +11,10 @@ categories:
   - document-management
   - compliance-management
 
-developmentStatus: beta
+developmentStatus: stable
 
-softwareVersion: "0.1.0"
-releaseDate: "2026-06-17"
+softwareVersion: "1.0.2"
+releaseDate: "2026-11-24"
 
 softwareType: "standalone/web"
 
@@ -48,9 +48,6 @@ description:
       aan voorspelbaar, navolgbaar en uitlegbaar toezicht op het beheer
       van overheidsinformatie en het cultureel erfgoed dat daaruit
       voortkomt.
-
-      Deze versie (0.8) is nog in ontwikkeling; de inhoud kan wijzigen
-      tot publicatie van een definitieve versie.
     features:
       - Vertaling van open normen uit de Archiefwet 2026 naar concrete toetsbare criteria
       - Transparant toezichtinstrument voor de Inspectie Overheidsinformatie en Erfgoed

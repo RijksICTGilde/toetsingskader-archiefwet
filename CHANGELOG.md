@@ -9,9 +9,20 @@ changelog volgt [Semantic Versioning][semver].
 [kac]: https://keepachangelog.com/nl/1.1.0/
 [semver]: https://semver.org/lang/nl/
 
+Per versie staan eerst de wijzigingen die een bezoeker van de site of een lezer
+van de PDF's merkt, in gewone taal. Wat alleen de bouw en het beheer van de site
+raakt, staat onder **Techniek**.
+
 ## [Unreleased]
 
 ### Opgelost
+
+- Alle pagina's, links en opmaak komen van het publieke adres
+  toetsingskader.inspectie-oe.nl/archiefwet/, zodat je als bezoeker binnen dat
+  adres blijft. De PDF's noemen dat adres, en zoekmachines krijgen het als
+  vaste vindplaats van elke pagina.
+
+### Techniek
 
 - De site wordt gebouwd met het publieke adres als `baseURL`
   (`https://toetsingskader.inspectie-oe.nl/archiefwet/`) in plaats van het
@@ -20,57 +31,184 @@ changelog volgt [Semantic Versioning][semver].
   canonieke link, de "Bron: …"-regel op de omslag van de PDF's en het adres
   achter "Bekijk voor de actuele versie …" noemen het publieke adres.
 
+## [1.0.2] - 2026-11-24
+
+### Opgelost
+
+- De PDF's noemen op de omslag ("Bron: …") en achter "Bekijk voor de actuele
+  versie …" het publieke adres toetsingskader.inspectie-oe.nl/archiefwet/ in
+  plaats van het adres van het hostingplatform.
+
+### Techniek
+
+- De PDF's noemen het publieke adres
+  (`https://toetsingskader.inspectie-oe.nl/archiefwet/`) in de "Bron: …"-regel
+  op de omslag en achter "Bekijk voor de actuele versie …", in plaats van het
+  ZAD-adres van de build (`params.pdf.site_url`).
+
+## [1.0.1] - 2026-11-23
+
+### Techniek
+
+- nginx in het runtime-image mee in de `apk upgrade` (naar 1.30.7-r0): Trivy
+  blokkeerde de deploy op zes nginx-CVE's, waarvan vier kritiek. Elke GitHub
+  Action en de pre-commit-hooks gepind op een commit-SHA, de
+  htmltest-download gecontroleerd met sha256, Dependabot ook voor npm en
+  pre-commit.
+
+## [1.0.0] - 2026-11-23
+
 ### Gewijzigd
+
+- Versie 1.0: het toetsingskader staat op
+  toetsingskader.inspectie-oe.nl/archiefwet.
+
+## [0.3.1] - 2026-11-17
+
+### Gewijzigd
+
+- Verwijzingen naar het Archiefbesluit linken naar de publicatie in het
+  Staatsblad (Stb. 2026, 321) in plaats van naar de internetconsultatie.
+  Verwijzingen naar de Archiefregeling hebben geen link meer; daar staat
+  "(Bron beschikbaar na publicatie van de Archiefregeling.)".
+
+### Techniek
 
 - Verwijzingen naar het Archiefbesluit linken naar de publicatie in het
   Staatsblad (Stb. 2026, 321) in plaats van naar de internetconsultatie.
   Verwijzingen naar de Archiefregeling hebben geen link meer, maar op die plek
   cursief "(Bron beschikbaar na publicatie van de Archiefregeling.)". De
   bronvermelding onder de kern rendert daarvoor nu markdown.
-- De voetlinks Privacy en Cookies blijven op deze site (`/privacy/` en
-  `/cookies/`) in plaats van naar inspectie-oe.nl te springen. Beide teksten
-  volgen de hoofdsite (versie 15 januari 2026) waar dat klopt en beschrijven
-  verder wat deze site zelf doet: eigen privacyverklaring met de Inspectie als
-  verantwoordelijke, alleen e-mailcontact, hosting op ZAD; één technisch
-  noodzakelijk sessiecookie van het hostingplatform, geen webstatistieken, en
-  verder alleen de weergavevoorkeur en de stand van de inhoudsopgave in de
-  lokale opslag van de browser.
 
-- Het Rijksoverheid-lint in de kop staat er niet meer alleen: het woordmerk
-  staat rechts ernaast, zoals op het briefhoofd van de PDF's en op
-  inspectie-oe.nl: "Inspectie Overheidsinformatie en Erfgoed" vet, met
-  "Ministerie van Onderwijs, Cultuur en Wetenschap" eronder. Eerder stond
-  alleen het ministerie, waardoor de site van OCW leek in plaats van van de
-  Inspectie. Het lint staat in het midden van de kop (thema v0.2.3); het
-  woordmerk blijft ook op een smal scherm staan.
+## [0.2.9] - 2026-10-19
+
+### Gewijzigd
+
+- De links Privacy en Cookies onderaan de pagina openen eigen pagina's op deze
+  site in plaats van inspectie-oe.nl. De privacyverklaring noemt de Inspectie
+  als verantwoordelijke en alleen contact per e-mail. De cookiepagina noemt
+  één noodzakelijk sessiecookie van het hostingplatform, geen
+  webstatistieken, en verder alleen de weergavevoorkeur en de stand van de
+  inhoudsopgave die je browser zelf bewaart.
+
+### Opgelost
+
+- In norm 1 (Inbeheername en beheer), 5 (Informatiebeveiliging en
+  betrouwbaar), 7 (Vernietigen) en 8 (Periodieke evaluatie) linken de
+  verwijzingen naar de Memorie van Toelichting naar het juiste Kamerstuk
+  (35968, nr. 3). In norm 1 hadden die verwijzingen nog geen link.
+
+## [0.2.8] - 2026-10-11
+
+### Gewijzigd
+
+- Naast het Rijksoverheid-logo in de kop staat nu eerst, vet, "Inspectie
+  Overheidsinformatie en Erfgoed", met "Ministerie van Onderwijs, Cultuur en
+  Wetenschap" eronder, zoals op inspectie-oe.nl. Eerder stond er alleen het
+  ministerie, waardoor de site van OCW leek.
+
+### Techniek
+
+- `params.logo.woordmerk` in `hugo.yaml` is een lijst: de Inspectie (vet) en
+  het ministerie, elk op een eigen regel.
+- Training contentbeheer voor redacteuren
+  (`docs/training-contentbeheer.html`): deel 5 over samenwerken, en
+  navigatie door het document.
+
+## [0.2.7] - 2026-10-06
+
+### Toegevoegd
+
+- Anderstalige termen, zoals "by design", zijn op de site en in de PDF
+  gemarkeerd als Engels, zodat een schermlezer ze in het Engels uitspreekt.
+  De tekst van de normen verandert niet.
+
+### Gewijzigd
+
+- Naast het Rijksoverheid-logo, dat nu in het midden van de kop staat, staat
+  een woordmerk zoals op het briefhoofd van de PDF's: "Ministerie van
+  Onderwijs, Cultuur en Wetenschap". Het blijft ook op een smal scherm staan.
+- Het logo linkt naar de website van de Inspectie (www.inspectie-oe.nl) in
+  plaats van naar de homepage van deze site.
+- De sneltoets om te zoeken is Ctrl+K (Cmd+K op een Mac); de hint daarvoor
+  staat weer zichtbaar in de zoekbalk.
+
+### Techniek
 
 - Het logo linkt naar de hoofdsite van de Inspectie
   (https://www.inspectie-oe.nl/) in plaats van naar de homepage van deze site.
   Beide via `params.logo` in `hugo.yaml`, een optie van het thema sinds v0.2.1
   (hugo-theme-rijksoverheid#20); geen projectshadow of eigen CSS.
+- Anderstalige termen krijgen een taalmarkering (WCAG 3.1.2, issue #62 punt 2):
+  "by design" staat op de site in `<span lang="en">` en in de PDF als `Span`
+  met `/Lang (en)`, zodat een schermlezer het in het Engels uitspreekt. De
+  termen staan in `data/vreemde-termen.yaml` en worden bij het bouwen
+  gemarkeerd; de normtekst zelf verandert niet. Een voetnoot direct achter zo'n
+  term maakt de hele term tot tooltip-term.
+- Thema naar v0.2.3. Vijf toegankelijkheidspatches uit
+  `assets/js/toegankelijkheid.js` zijn weg, omdat het thema ze nu zelf
+  oplost: skip-link (bevinding 16), naam van de zoekknop (21), genest
+  landmark en Escape in het mobiele menu (24), de `/`-sneltoets (10) en de
+  melding "opent in een nieuw venster" (23). De zoeksneltoets is nu
+  Ctrl+K / Cmd+K, ook in onze `search.js`-override, en de hint in de balk
+  is weer zichtbaar. De zoekindex neemt de verborgen nieuw-venster-melding
+  niet op.
+
+## [0.2.6] - 2026-10-06
+
+### Gewijzigd
+
+- De afkortingen Aw, Ab en Ar zijn voluit geschreven: Archiefwet,
+  Archiefbesluit en Archiefregeling. DUTO en SIO blijven afkortingen.
+- Het bollendiagram op de samenhangpagina is blauw in plaats van groen. Een
+  label van meer dan één regel staat niet meer tegen zijn bol aan.
+- De link "Ga naar …" staat alleen nog in de tooltip van een term, niet meer
+  ook in de bronnenlijst onderaan de pagina: die lijst gaat over bronnen.
+
+### Opgelost
+
+- Een bron waar je naartoe springt in de bronnenlijst schuift niet meer naar
+  links; ze krijgt alleen een achtergrondkleur.
+- De inhoudsopgave "Op deze pagina" op de normpagina's markeert nu elke
+  sectie waar je bent, ook "Referenties" en de laatste secties onderaan.
+
+### Techniek
 
 - Afkortingen Aw, Ab en Ar worden voluit geschreven: "Archiefwet",
   "Archiefbesluit" en "Archiefregeling" (169 plekken in de content, inclusief
   de kern_bron in de front matter). Ze staan niet meer in
   `data/afkortingen.yaml`, dus er komt ook geen `<abbr>` meer omheen; DUTO en
   SIO blijven afkortingen.
-
 - Bollendiagram in blauw in plaats van groen: rijksblauw #154273 voor de hub,
   hemelblauw #007bc7 voor lijnen en bolranden, #80d5fc in donkere modus. Een
   label van meer dan één regel schuift verder naar buiten, zodat het evenveel
   ruimte tot zijn bol houdt als een label van één regel ("Informatiebeveiliging
   en betrouwbaar" stond tegen de bol aan).
-
 - De "Ga naar …"-link staat alleen nog in de tooltip (keuze 22 september
   2026), niet meer ook in de bronnenlijst onderaan: die lijst gaat over
   bronnen, niet over navigatie. De controle `ga-naar-ontbreekt` in
   `scripts/a11y-checks.mjs`, die de kopie in de lijst afdwong, vervalt
   daarmee.
-
 - De aangesprongen bron in de referentielijst verspringt niet meer: de
   thema-regel `.references li:target` schoof de regel (en dus het
   referentienummer) 0,5em naar links. De highlight is nu alleen een
   achtergrondkleur. Upstream-kandidaat op het thema.
+- De project-eigen scroll-spy voor "Op deze pagina" op de normpagina's
+  (`assets/js/toc-scrollspy.js`); thema naar v0.2.2. Het thema volgt nu zelf
+  alleen koppen met een TOC-link en markeert ook de laatste secties onderaan
+  een pagina (hugo-theme-rijksoverheid#8 en #22). Daardoor wordt elke sectie
+  in de inhoudsopgave gemarkeerd, ook "Referenties"; voorheen bleef op elke
+  normpagina minstens één sectie onderaan ongemarkeerd. Sluit #45.
+
+## [0.2.5] - 2026-09-16
+
+### Gewijzigd
+
+- Een term met een tooltip is gestippeld onderstreept en opent alleen de
+  tooltip. Verwijst de term ook naar een pagina, dan staat die link in de
+  tooltip als "Ga naar …". Zo is de bron ook op een touchscreen bereikbaar.
+
+### Techniek
 
 - Hover en link gescheiden (keuze 15 september 2026): elke term met een
   tooltip is gestippeld en opent alleen de tooltip; was de term ook een link
@@ -79,58 +217,70 @@ changelog volgt [Semantic Versioning][semver].
   leesteken direct achter zo'n term valt buiten de stippellijn en buiten de
   toegankelijke naam.
 
-- Feedback 15 september 2026: de tegel "Duurzame toegankelijkheid" onder Over
-  is vervallen; die tekst staat nu als kop "Duurzame toegankelijkheid" op de
-  samenhangpagina, in plaats van "Beschikbaar en leesbaar". Een alias houdt de
-  oude URL werkend. De tegel "Voor wie?" op de homepage verwijst naar die kop.
-  De kaarttekst van norm 1 op /normen/ is een zin korter.
+## [0.2.4] - 2026-09-15
 
 ### Toegevoegd
 
-- Anderstalige termen krijgen een taalmarkering (WCAG 3.1.2, issue #62 punt 2):
-  "by design" staat op de site in `<span lang="en">` en in de PDF als `Span`
-  met `/Lang (en)`, zodat een schermlezer het in het Engels uitspreekt. De
-  termen staan in `data/vreemde-termen.yaml` en worden bij het bouwen
-  gemarkeerd; de normtekst zelf verandert niet. Een voetnoot direct achter zo'n
-  term maakt de hele term tot tooltip-term.
+- De pagina Totstandkoming onder Over.
+
+### Gewijzigd
+
+- De tekst over duurzame toegankelijkheid is geen aparte tegel onder Over
+  meer, maar staat als kop "Duurzame toegankelijkheid" op de samenhangpagina
+  (in plaats van "Beschikbaar en leesbaar"). Het oude adres blijft werken, en
+  de tegel "Voor wie?" op de homepage verwijst naar die kop.
+- Teksten aangepast: de korte teksten op de tegels Wettelijk kader en
+  Doelgroep en die van norm 1 in het normenoverzicht. De inleiding heeft weer
+  een voetnoot naar het Position Paper, en het blok over DUTO heeft geen
+  titel meer en een bronvermelding bij "noodzakelijk".
+- Het bollendiagram op de samenhangpagina volgt de plaat van de Inspectie:
+  "Inbeheername en beheer" in het midden met zeven normen eromheen, elk met
+  een icoon, in Rijkshuisstijl-groen. De vervaagde toekomstbollen en de lijst
+  met normlinks onder het diagram zijn weg.
+- Het bollendiagram blijft klikbaar en met het toetsenbord te bedienen; op
+  een smal scherm scrolt het horizontaal.
+- De PDF's worden bij het bouwen van de site gemaakt in plaats van in je
+  browser, en zijn toegankelijk: met een schermlezer navigeer je door koppen,
+  lijsten en leesvolgorde, en elke PDF heeft bladwijzers, een taal en een
+  documenttitel. Eerder was het één doorlopende lap tekst.
+- In de PDF staat het briefhoofd op elke pagina, blijven geneste lijsten
+  behouden, staat de kern zonder kop en is de datum Nederlands.
+- De downloadknop is een gewone link naar het PDF-bestand en werkt ook
+  zonder JavaScript.
+- De pagina's onder Over en Onderwerpen gebruiken de volle breedte en hebben
+  geen eigen menu "Op deze pagina" meer.
+- Onderaan elke pagina staat dezelfde zin met het versienummer en de datum
+  van de laatste wijziging; de homepage toont nu ook die datum.
+- Op de normpagina's staat de kern direct onder de paginatitel, zonder eigen
+  kop. Ook in de inhoudsopgave en de PDF staat die kop niet meer.
+- Op alle pagina's toont een voetnoot de bron in een tooltip, niet alleen op
+  de normpagina's.
+- Termen met een tooltip hebben de kleur van een gewone link; de stippellijn
+  is het verschil.
+
+### Verwijderd
+
+- Normpagina's laden geen script van ruim anderhalve megabyte meer om de PDF
+  te maken, ook niet voor wie nooit iets downloadt.
+
+### Opgelost
+
+- De PDF-knop is in donkere modus weer leesbaar: de witte tekst op hemelblauw
+  had te weinig contrast.
+- Termen met een tooltip hebben genoeg contrast op het blauwe vlak van een
+  definitieblok.
+- In de PDF is een voetnoot in een kop (norm 4, "Digitale documenten met een
+  bewaartermijn …") geen kaal nummer achter de kop meer, maar een
+  superscript dat naar de bronnenlijst springt, zoals in de lopende tekst.
+
+### Techniek
 
 - `params.pdf.site_url` in `hugo.yaml`: het adres achter "Bekijk voor de
   actuele versie …" in de PDF's én de "Bron: …"-regel op de omslag. Leeg
   betekent de baseURL van de build.
-
-- Pagina "Totstandkoming" onder Over ingevuld, datum stub vervanging volgt.
 - Shortcode `callout-md`: een callout waarvan de inhoud in de pagina-context
   rendert, zodat een voetnoot erin een hover wordt. Daarvoor staat
   `markup.goldmark.renderer.unsafe` aan.
-- Pagina "Duurzame toegankelijkheid" onder Over, met de DUTO-definitie en de
-  duiding welke kenmerken als norm zijn uitgewerkt. Die tekst stond dubbel in
-  de inleiding en op de samenhangpagina.
-- Bronvoetnoten op de onderwerpenpagina's aangrijpingspunt, audittrail,
-  classificatie/aggregatie, document en samenhang/interpreteerbaar, uit het
-  brondocument "Onderwerpen en verwijzingen".
-- Normen 2 tot en met 8 gevuld met de teksten uit de normbladen (4e iteratie):
-  kern, synoniemen, toelichting, voorschriften met criteria en indicatoren,
-  reikwijdte en "Zie ook". De PLACEHOLDER-stubs zijn daarmee weg; norm 1 was
-  al eerder gemigreerd.
-- Begrippenpagina "Werkproces", met de definitie die als losse zin onder norm 3
-  stond. Het woord "werkproces" in de toelichting linkt ernaar — dezelfde
-  hover-oplossing als bij de begrippen hieronder.
-- Begrippenpagina's voor de termen waar de normbladen om een hover vroegen:
-  "Applicatie en systeem", "Structuur", "Verschijningsvorm" en "Strategisch
-  informatieoverleg (SIO)". De hover-opmerkingen zijn verwerkt als link naar
-  de begrippenindex of, bij een externe bron, als link naar de kennisbank van
-  het Nationaal Archief (niveau van maatregelen, overwegingen bij
-  implementatie, vindbaar, betrouwbaar, digitaal vernietigen,
-  overheidsinformatie binnen de informatiehuishouding).
-- Pagina "Samenhang van de normen" (`/samenhang/`) met het bollendiagram, de
-  uitleg over richten/verrichten en de relatie met DUTO.
-- Sectie "Onderwerpen en begrippen" (`/onderwerpen/`): alfabetische index met
-  een pagina per begrip, op basis van het document "Onderwerpen en
-  verwijzingen". Eigen A-Z-template, gegroepeerd per beginletter. Passende
-  maatregelen en risicobenadering staat hier als een van de onderwerpen.
-
-### Gewijzigd
-
 - PDF-generatie omgebouwd van Chromium-print naar pdfkit met een handgebouwde
   structuurboom (`markStructureContent`), dezelfde oplossing als de
   AI-verordening-beslishulp (MinBZK/ai-verordening-beslishulp#1047). Nog
@@ -149,17 +299,9 @@ changelog volgt [Semantic Versioning][semver].
   was (EN 301 549 §10, onderliggend WCAG 1.3.1 en 4.1.2, niveau A). De
   motivering en de afweging staan in `docs/besluit-toegankelijke-pdf.md`; de
   markers worden in CI gemeten met `scripts/pdf-ua-check.mjs`.
-- De downloadknop is een gewone link naar een bestand en werkt daarmee ook
-  zonder JavaScript.
-- Vijf punten uit de feedback op de kaderpagina's (#78) die bij het mergen van
-  #79 waren teruggedraaid, staan weer: kaartteksten "Wettelijk kader" en
-  "Doelgroep", de Position-Paper-voetnoot in de inleiding, en het DUTO-blok
-  zonder titel en met bron op "noodzakelijk" (nu op de pagina Duurzame
-  toegankelijkheid).
 - Over- en onderwerpenpagina's op volle breedte (`wide: true` via `cascade`
   in de sectie-index): ze hebben geen inhoudsopgave meer, dus de smalle
   tekstkolom liet rechts een lege strook.
-- Menu'tjes verwijderd op (`/samenhang/`) en (`/over/`) pagina's.
 - Versiezin op elke pagina gelijk: "Versie … van het toetsingskader. Deze
   pagina is voor het laatst aangepast op …", in de gedempte opmaak van de
   homepage. De homepage toont nu ook de datum; de voet van de andere pagina's
@@ -173,56 +315,68 @@ changelog volgt [Semantic Versioning][semver].
   alleen op de normpagina's: de transformatie is een partial
   (`_partials/voetnoot-tooltips.html`) die ook in de `article.html`-shadow
   draait.
-- Hover-termen in de linkkleur (was tekstkleur); de stippellijn blijft het
-  verschil met een gewone link.
 - De controle op de versiezin in de toegankelijkheidsscan is vervallen: de
   zin komt sitebreed uit één partial (`_partials/versie-zin.html`), en de
   controle kleurde elke build rood sinds het voorbehoud op verzoek is
   aangepast.
-- Derde feedbackronde verwerkt (`docs/feedback-algemeen-normblad-1-2-onderwerpen.md`):
-  - Paginatitels van de normen zijn de normnaam, bijvoorbeeld "Inbeheername
-    en beheer", in plaats van "Normanalyse …".
-  - Een link die ook een hover draagt is blauw met doorgetrokken lijn; een
-    pure hover blijft zwart met stippellijn. Versiezin en datum in de voet
-    kleiner en gedempt.
-  - Inleiding zonder "centrale"; DUTO-sectie verhuisd naar de nieuwe pagina.
-    Samenhangpagina zonder "Relatie met DUTO". Kopje "Invloed per onderwerp"
-    heet "De risicobenadering per norm".
-  - Norm 1: "omschrijving" (1.2) en "Alleen wanneer dergelijke categorieën
-    bestaan" (1.5) vet; het laatste criterium van 1.3 linkt naar "Feitelijk
-    beheer".
-  - Norm 2: zin over aggregatieniveau uit de kern; punt achter 2.1; hovers
-    bij applicatie en systeem met bronlink naar itpedia.nl.
-  - Norm 5: "incidenten" in de kern linkt naar het onderwerp Incidenten, dat
-    niet langer "(voorkomen van)" heet. Eerste zin van de onderwerpenindex weg.
+- Bollendiagram op de samenhangpagina naar de plaat van de Inspectie van
+  15 september 2026 (`docs/bollendiagram-inspectie-2026-09-15.png`): hub
+  "Inbeheername en beheer" met zeven normen eromheen, elk met een icoon en
+  het label buiten de bol, en een ring tussen de buurbollen; de vervaagde
+  toekomstbollen zijn weg. De plaat is data-gedreven: een norm toevoegen is
+  één regel in `layouts/shortcodes/bollendiagram.html`, de posities worden
+  berekend. De iconen komen uit het NLDD Design System; de kleuren zijn
+  Rijkshuisstijl-groen (donkergroen, groen, mintgroen). Blijft klikbaar en
+  toetsenbordbedienbaar; op een smal scherm scrollt hij horizontaal binnen de
+  figure. De lijst normlinks onder het diagram is weg.
+- De client-side PDF-generatie met pdfMake: de gevendorde bibliotheek (1,3 MB),
+  de base64-lettertypen (228 kB), de HTML→pdfMake-converter, de doc-definitie,
+  de `index.pdf.json`-endpoints en de bijbehorende tests. Dat scheelt een
+  blokkerend script van ruim anderhalve megabyte op elke normpagina, ook voor
+  wie nooit iets downloadt.
+- PDF-knop in donkere modus: witte tekst op hemelblauw haalde 1,6:1 (WCAG
+  1.4.3). Tekstkleur nu uit `--color-text-on-primary`.
+- Hover-termen kleuren met `--color-link` in plaats van `--color-primary`:
+  dezelfde kleur als gewone links, en op het blauwe callout-vlak voldoende
+  contrast (was 3,7:1, axe-fout op de bron-hover in het DUTO-blok).
 
-- Tweede feedbackronde verwerkt: normbladen vindbaar, vernietigen en periodieke
-  evaluatie, de sectie "Over het toetsingskader" en drie onderwerpenpagina's
-  (`docs/feedback-normbladen-6-7-8-en-kader.md`):
-  - Paginatitels "Normanalyse vindbaar" en "Normanalyse periodieke evaluatie"
-    (was "Normanalyse Vindbaarheid" en "Normanalyse Periodieke evaluatie");
-    norm 7 heet op de kaart en boven de kern "Vernietigen" in plaats van
-    "Gecontroleerd vernietigen".
-  - Kaartteksten van norm 6 en norm 8 ingekort; kaartteksten van "Wettelijk
-    kader", "Doelgroep" en "Passende maatregelen en risicobenadering"
-    aangepast.
-  - Norm 6: puntkomma's tussen de vindplaatsen in de bronnen bij 6.1 t/m 6.4;
-    tweede vindplaats bij de bron in de toelichting; nieuwe bron bij
-    "categorieën documenten"; hovers bij "invulling" en "centrale plaats" naar
-    de kennisbank van het Nationaal Archief; de twee links in het derde
-    criterium van 6.1 weg.
-  - Norm 7: bron onder de kern met puntkomma's en "Ar, artikel 4.1" erbij;
-    hover bij "bewijzen" (criteria 7.4) naar de kennisbank; haakje sluiten in
-    de reikwijdte.
-  - Inleiding: voetnoot naar de Position Paper nieuwe Archiefwet (KIA);
-    definitieblok zonder dubbele titel en met bron "De waarde van de duurzame
-    toegankelijkheid" (DUTO module 1).
-  - Wettelijk kader: voetnoot "In de Archiefwet 1995 waren dit
-    archiefbescheiden" bij "document". Opbouw en indeling: dubbele zin weg.
-    Doelgroep: komma voor "etc.".
-  - Onderwerpen: bronnen bij metadata hardware/programmatuur (Ar 2.8 sub a;
-    Ar Toelichting p. 38), metadata integriteitscheck (Ar 2.8 sub b; Ab 2.1
-    sub e) en passende maatregelen (Aw MvT 4.1; Aw 4.1 lid 2).
+## [0.2.3] - 2026-08-27
+
+### Toegevoegd
+
+- Pagina "Duurzame toegankelijkheid" onder Over, met de definitie van duurzame
+  toegankelijkheid en welke kenmerken daarvan als norm zijn uitgewerkt. Die
+  tekst stond eerder dubbel in de inleiding en op de pagina Samenhang.
+- Bronvermeldingen op de onderwerpenpagina's aangrijpingspunt, audittrail,
+  classificatie en aggregatie, document en samenhang en interpreteerbaarheid.
+
+### Gewijzigd
+
+- De paginatitel van elke norm is nu de normnaam, bijvoorbeeld "Inbeheername
+  en beheer", in plaats van "Normanalyse ...". Norm 7 heet op het overzicht en
+  boven de kern "Vernietigen" in plaats van "Gecontroleerd vernietigen".
+- Feedback op de normbladen verwerkt in normen 1, 2 en 4 tot en met 7: onder
+  meer nieuwe en verbeterde bronvermeldingen, woorden met een uitleg of een
+  link naar het betreffende onderwerp, vetgedrukte kernbegrippen bij norm 1,
+  tussenkopjes voor de categorieën documenten bij norm 4, een rechtgezette
+  inspringing van de back-upindicatoren bij norm 5 en kortere omschrijvingen
+  van norm 6 en 8 op het normenoverzicht.
+- De bron bij NEN-ISO 23081-1:2017 (norm 4) verwijst nu naar nen.nl in plaats
+  van naar een bestand dat buiten de organisatie niet te openen was.
+- Bij norm 5 noemt de uitleg bij "informatiebeveiliging" de onderwerpen waar
+  de Inspectie zich niet op richt, zoals firewalls, encryptie en patchen.
+- Over het toetsingskader: aangepaste kaartteksten, een bron bij de definitie
+  van duurzame toegankelijkheid in de inleiding, een voetnoot bij "document"
+  in Wettelijk kader en kleine tekstcorrecties. Het kopje "Invloed per
+  onderwerp" op de pagina Samenhang heet nu "De risicobenadering per norm".
+- Het onderwerp "Incidenten (voorkomen van)" heet nu "Incidenten"; extra
+  bronnen bij drie onderwerpen.
+- Woorden met een uitleg die ook een link zijn, zijn blauw en doorgetrokken
+  onderstreept; woorden met alleen een uitleg blijven zwart met een
+  stippellijn. Versie en datum onderaan elke pagina zijn kleiner en rustiger.
+
+### Techniek
+
 - Feedbackronde op de normbladen ordenen, metadateren en informatiebeveiliging
   verwerkt:
   - De paginatitels volgen het normblad: "Normanalyse ordenen", "Normanalyse
@@ -254,6 +408,36 @@ changelog volgt [Semantic Versioning][semver].
     scheidt de twee vindplaatsen met een puntkomma; de bron bij het laatste
     criterium van 5.4 legt uit wat "ongeoorloofd" betekent en is niet langer
     een half afgemaakte notitie.
+- De controle `draft-voorbehoud` in de toegankelijkheidsscan, die op elke
+  pagina de zin "in ontwikkeling en kan wijzigen" eiste. Die zin is op verzoek
+  weg (25 augustus), de controle maakte sindsdien elke build rood.
+- Containerbuild: de runtime-stage staat buiten de GHA-layercache
+  (`no-cache-filters: runtime`), zodat `apk upgrade` echt draait en de
+  Trivy-scan niet rood wordt op een al gefixte Alpine-CVE (CVE-2026-14456).
+
+## [0.2.2] - 2026-08-25
+
+### Gewijzigd
+
+- De kop boven de kern is genummerd, bijvoorbeeld "1. Kern van inbeheername en
+  beheer", zodat "Voorschrift 1.1" eronder aansluit. Ook in de inhoudsopgave
+  en de PDF.
+- Bij "Gerelateerde onderwerpen" staan alleen nog onderwerpen met een eigen
+  pagina; bij norm 7 vervalt het kopje daarmee helemaal.
+- Het onderwerpenoverzicht toont alleen de titel per begrip. "Zie ook" bij
+  Document noemt ook Overzicht, Ordenen en Metadateren.
+- De pagina's onder Over en Onderwerpen hebben geen vorige/volgende-knoppen
+  meer. Op de pagina Samenhang is het diagram kleiner en staat de
+  inhoudsopgave standaard open.
+- De PDF begint met één regel met het versienummer en een link naar de
+  actuele versie, in plaats van het blok "Belangrijke informatie".
+- De zin "De inhoud is nog in ontwikkeling en kan wijzigen." is weg, onderaan
+  elke pagina, op de homepage en in de PDF.
+- Zoeken op een synoniem zet de bijbehorende norm bovenaan.
+- Nieuwe, brede afbeelding bovenaan de homepage.
+
+### Techniek
+
 - Openstaande punten uit de feedbackrondes (`docs/openstaande-punten.md`):
   - Kop boven de kern genummerd: "1. Kern van inbeheername en beheer", zodat
     "Voorschrift 1.1" eronder aansluit. Ook in de inhoudsopgave en de PDF.
@@ -273,17 +457,55 @@ changelog volgt [Semantic Versioning][semver].
 - Nieuwe hero-afbeelding op de homepage: brede banner (4000×1056,
   `assets/images/hero.jpg`) in plaats van de 1000×600 png. Decoratief, alt
   blijft leeg.
+
+## [0.2.1] - 2026-08-20
+
+### Gewijzigd
+
+- De tekst van alle acht normen staat nu woord voor woord zoals in de
+  normbladen, inclusief spelling, afkortingen en bronvermeldingen. Eerdere
+  redactionele correcties door de site zijn teruggedraaid.
+- De kern van elke norm is de kerntekst uit het normblad, met bronvermelding.
+  Op het normenoverzicht blijft de kortere omschrijving staan. Waar dezelfde
+  tekst ook onder de toelichting stond, is die dubbeling weg.
+- De voorschriften zijn als eis geformuleerd ("Het verantwoordelijke
+  overheidsorgaan heeft ...") in plaats van als toetsvraag ("De Inspectie
+  toetst of ...").
+- De koppen op de normpagina's volgen het normblad: de paginatitel is de titel
+  van het normblad en de kop boven de kern noemt de norm, ook in de
+  inhoudsopgave en de PDF. "Normuitleg" heet nu "Voorschriften" en "Zie ook"
+  heet "Gerelateerde onderwerpen". Norm 1 heeft weer een sectie "Reikwijdte
+  inbeheername en beheer"; tussenkoppen die niet in het normblad staan zijn
+  weg.
+- Synoniemen en gerelateerde onderwerpen volgen de lijsten uit het normblad.
+  Norm 5 heeft daardoor geen gerelateerde onderwerpen meer.
+- Norm 3 (Ordenen): "overdragen" heet "overbrengen" in de toelichting en de
+  bronnen bij voorschrift 3.3 staan in de volgorde van het normblad. De
+  definitie van "werkproces" verschijnt bij het woord zelf, in plaats van als
+  losse zin onder de norm.
+- Het hoofdmenu bevat nu ook Onderwerpen en Samenhang: Home, Normen,
+  Onderwerpen, Samenhang, Over.
+- Een link naar een plek op dezelfde pagina springt er direct heen, zonder
+  schuifbeweging.
+
+### Verwijderd
+
+- Vier zinnen met links naar de kennisbank van het Nationaal Archief, die niet
+  in de normbladen staan.
+
+### Opgelost
+
+- Toegankelijkheid: duidelijker zichtbare focus in de zoekresultaten, het
+  zoekveld en de links onderaan de pagina, beter contrast van de
+  sneltoetshint, en de meldbalk dekt het element met focus niet meer af.
+
+### Techniek
+
 - Kop boven de kern noemt de norm: "Kern van ordenen" in plaats van "Kern van
   de norm", op de normpagina, in de inhoudsopgave en in de PDF. Uit
   `norm_titel`, dus voor alle acht normen tegelijk.
 - Sectiekop `## Normuitleg` heet `## Voorschriften`, in alle acht normbladen
   en in de validator, de training voor contentbeheer en de accentlijn-CSS.
-- Norm 3 (Ordenen) verwerkt naar het herziene normblad: de kern is de
-  kerntekst uit het normblad zelf, met bronvermelding (Ar, artikel 2.2,
-  eerste lid); de drie voorschriften staan als norm geformuleerd in plaats
-  van als toetsvraag ("De Inspectie toetst of …"); "overdragen" is
-  "overbrengen" in de toelichting; de twee bronnen bij voorschrift 3.3 staan
-  in de volgorde van het normblad (artikel vóór toelichting).
 - De kaart op `/normen/` houdt de kortere omschrijving uit het
   introductiedocument (front matter `kern_kaart`), zodat de normpagina de
   normbladtekst kan tonen zonder dat de index verandert.
@@ -334,36 +556,105 @@ changelog volgt [Semantic Versioning][semver].
   - De validator, de unittests, de PDF-export, de training en `CONTRIBUTING.md`
     zijn op het nieuwe formaat gezet. `### <thema>` is optioneel geworden en
     enkelvoudige subkoppen zijn niet langer een fout.
-
-  Buiten de regel blijft alleen "overbrengen" in norm 3 — die correctie vroeg
-  de reviewer zelf — en de `<<…>>`-markeringen, die een linkinstructie zijn en
-  geen tekst.
 - Thema bijgewerkt naar `hugo-theme-rijksoverheid` v0.2.0. Daarin zitten vijf
   toegankelijkheidsfixes die hier als tijdelijke overrides stonden
   (focusindicatoren in de zoekresultaten, het zoekveld en de footerlinks; het
   contrast van de sneltoetshint; de meldbalk die de focus kon afdekken) plus
   de "naar boven"-knop als theme-component.
-- Norm 1 (Inbeheername en beheer) bijgewerkt naar het herziene normblad
-  "1) Normanalyse beheer" (4e iteratie): toelichting aangevuld met archiveren
-  by design, de koppeling van categorieën aan het selectiebesluit en de
-  publicatie van de beheerregeling; criteria voor passende maatregelen
-  uitgebreid (alle opslagomgevingen, actueel, worden toegepast); het SIO is
-  verplaatst naar een indicator bij het voorschrift over de omschrijving van
-  passende maatregelen; het informatiebeheerplan is een indicator bij het
-  voorschrift over periodieke evaluatie geworden; migratie/conversie/
-  vervanging en vernietiging toegevoegd aan de beheertaken, en het opslaan en
-  verwerken binnen de Europese Unie daaruit verwijderd.
-- "Terug naar boven"-knop op elke pagina, zichtbaar zodra er meer dan een
-  schermhoogte is gescrold — bedoeld voor de lange normpagina's.
-- Versienummer van het toetsingskader staat nu ook als label in de paginavoet,
-  naast de laatst-gewijzigd-datum. Dat blijft staan wanneer de beta-banner
-  verdwijnt.
-- De "Over"-index toont dezelfde boxed card-grid als de normen-index.
-- Voetnootnummers in de PDF staan als superscript (kleiner en hoger), zoals op
-  de site.
-- De `kern` van de normen 1, 2, 3, 4 en 8 komt nu overeen met de
-  geactualiseerde inhoudsopgave uit "0) Introductie toetsingskader"; de
-  oudere formuleringen op de site zijn vervallen.
+- De project-eigen "naar boven"-knop (`layouts/baseof.html`,
+  `_partials/terug-naar-boven.html`, `js/back-to-top.js`,
+  `css/terug-naar-boven.css`). De knop komt nu uit het thema, aangezet met
+  `back_to_top: true`. Daarmee vervalt ook de baseof-shadow. Het thema zet
+  geen `scroll-behavior: smooth` meer, dus anchors springen direct.
+
+## [0.2.0] - 2026-08-10
+
+### Toegevoegd
+
+- De normen 2 tot en met 8 zijn volledig uitgewerkt: kern, synoniemen,
+  toelichting, voorschriften met criteria en indicatoren, reikwijdte en "Zie
+  ook". Tot nu toe stonden daar tijdelijke teksten.
+- Nieuwe pagina "Samenhang van de normen", met de uitleg over richten en
+  verrichten en de relatie met DUTO. Het diagram van de normen is opnieuw
+  ontworpen en staat nu op deze pagina, met de norm Inbeheername en beheer in
+  het midden.
+- Nieuwe sectie "Onderwerpen en begrippen": een alfabetische index, gegroepeerd
+  per beginletter, met een pagina per begrip. Ook passende maatregelen en
+  risicobenadering staat hier als onderwerp.
+- Begrippenpagina's voor "Applicatie en systeem", "Structuur",
+  "Verschijningsvorm" en "Strategisch informatieoverleg (SIO)". Waar de
+  normteksten een begrip gebruiken, linken ze naar de begrippenindex of, bij
+  een externe bron, naar de kennisbank van het Nationaal Archief.
+- PDF downloaden: per norm en voor het hele toetsingskader, in de
+  Rijkshuisstijl, met titelpagina, versie en downloaddatum. Elke pagina heeft
+  het logo van de Inspectie Overheidsinformatie en Erfgoed (Ministerie van
+  Onderwijs, Cultuur en Wetenschap) als briefhoofd; voetnootnummers staan, net
+  als op de site, klein en verhoogd.
+- Een knop "Terug naar boven" op elke pagina, zichtbaar zodra je meer dan een
+  schermhoogte naar beneden bent gescrold. Handig op de lange normpagina's.
+- Het versienummer van het toetsingskader staat onderaan elke pagina, naast de
+  datum van de laatste wijziging.
+
+### Gewijzigd
+
+- Norm 1 (Inbeheername en beheer) is herzien. De toelichting gaat nu ook in op
+  archiveren by design, de koppeling van categorieën aan het selectiebesluit
+  en de publicatie van de beheerregeling. De criteria voor passende maatregelen
+  gelden voor alle opslagomgevingen en vragen dat de maatregelen actueel zijn
+  en worden toegepast. Het strategisch informatieoverleg is een indicator bij
+  het voorschrift over de omschrijving van passende maatregelen, en het
+  informatiebeheerplan een indicator bij het voorschrift over periodieke
+  evaluatie. Migratie, conversie, vervanging en vernietiging horen nu bij de
+  beheertaken; opslaan en verwerken binnen de Europese Unie niet meer.
+- De kern van de normen 1, 2, 3, 4 en 8 sluit aan op de geactualiseerde
+  introductie van het toetsingskader; de oudere formuleringen zijn vervallen.
+- Norm 5 heet nu "Informatiebeveiliging en betrouwbaar". De webadressen van de
+  normen volgen de nummering en titels uit de introductie van het
+  toetsingskader; oude adressen blijven werken.
+- Voorschriften zijn per norm genummerd (1.1, 1.2 enzovoort), op de site en in
+  de PDF.
+- Bij een voorschrift zonder aanvullende criteria of indicatoren staat nu "Bij
+  dit voorschrift zijn geen aanvullende criteria" (of indicatoren) in plaats van
+  "Niet van toepassing". Dit is een voorlopige formulering.
+- De toelichting bij een norm is inklapbaar en staat standaard dicht.
+  Toelichting en Referenties zien er hetzelfde uit.
+- De koppen in de uitleg van een norm zijn duidelijker: elk voorschrift heeft
+  een opvallende kop en de overgang tussen thema's is beter zichtbaar.
+- "Over" bestaat nu uit losse pagina's per onderwerp (inleiding, doel,
+  wettelijk kader, opbouw en indeling, doelgroep) met de herziene teksten uit
+  de introductie. Het overzicht toont ze als tegels, net als het overzicht van
+  de normen.
+- De homepage heeft een aangepaste tekst over beheer en links naar de
+  samenhang van de normen, passende maatregelen en de index. Het diagram van
+  de normen staat niet meer op de homepage maar op de pagina over de samenhang.
+- De voettekst bevat alleen nog contact, privacy, cookies, toegankelijkheid,
+  kwetsbaarheid melden en terug naar de hoofdsite.
+
+### Verwijderd
+
+- Het feedbackblok op de normpagina's.
+- De blokken met links naar de secties op de homepage: die boden hetzelfde als
+  het hoofdmenu. De tegels "Wat is het?", "Voor wie?", "Wanneer?" en "Waar
+  beginnen?" blijven staan.
+- De leeswijzer op het overzicht van de normen. Wat een voorschrift, criterium
+  en indicator is, staat uitgelegd op de pagina "Opbouw en indeling".
+
+### Opgelost
+
+- Verwijzingen in de normteksten naar "(gecontroleerd) vernietigen" gingen naar
+  de norm Betrouwbaar en gaan nu naar de norm Gecontroleerd vernietigen.
+  Verwijzingen naar risicobenadering en risicoanalyse gaan naar de pagina
+  daarover in plaats van naar het overzicht.
+- Voetnoten werken nu ook na een spatie of leesteken en bij een link: de uitleg
+  hangt aan het juiste woord, niet meer aan een leeg stukje tekst of een
+  leesteken. Een woord dat zowel een link als een voetnoot heeft, is blauw met
+  een stippellijn eronder.
+- Bij het markeren van zoektermen in de paginatekst blijven links heel.
+- "Op deze pagina" laat nu steeds zien in welk deel van de pagina je bent. Bij
+  de voorschriften, criteria en indicatoren viel die markering eerder weg.
+
+### Techniek
+
 - Normen hernoemd zodat bestandsnaam, `norm_id` en `norm_titel` overeenkomen
   met de volgorde uit de introductie van het toetsingskader:
   `03-ordeningsstructuur` → `03-ordenen`, `04-metadatering` →
@@ -371,25 +662,10 @@ changelog volgt [Semantic Versioning][semver].
   "Informatiebeveiliging en betrouwbaar"), `05-vindbaarheid` →
   `06-vindbaar`, `07-informatiebeveiliging` → `07-vernietigen`. Oude URL's
   blijven werken via aliases.
-- "Over" is een sectie geworden met losse pagina's per onderwerp (inleiding,
-  doel, wettelijk kader, opbouw en indeling, doelgroep, passende maatregelen
-  en risicobenadering), met de herziene teksten uit de introductie.
-- Homepage: tekst over beheer aangepast aan de actuele introductie; het
-  bollendiagram staat niet meer op de homepage maar op de samenhang-pagina,
-  met links naar samenhang, passende maatregelen en de index.
-- "Niet van toepassing" bij criteria en indicatoren vervangen door
-  "Bij dit voorschrift zijn geen aanvullende criteria/indicatoren"
-  (voorlopige formulering).
-- Hoofdnavigatie uitgebreid met Onderwerpen en Samenhang; de volgorde is nu
-  Home, Normen, Onderwerpen, Samenhang, Over.
-- Bollendiagram herontworpen naar een hub-and-spoke-visualisatie.
-- Footer beperkt tot contact, privacy, cookies, toegankelijkheid,
-  kwetsbaarheid melden en terug naar hoofdsite.
-- Voorschriften worden genummerd (`<norm>.<n>`, bv. 1.1, 1.2).
-- Toelichting is inklapbaar (standaard dicht); Toelichting en Referenties
-  delen één (thema-)accordeonstijl.
-- Heading-hiërarchie in Normuitleg verduidelijkt (voorschrift als accent-kop,
-  duidelijke overgang tussen thema's).
+- Sectie "Onderwerpen en begrippen" (`/onderwerpen/`): alfabetische index met
+  een pagina per begrip, op basis van het document "Onderwerpen en
+  verwijzingen". Eigen A-Z-template, gegroepeerd per beginletter. Passende
+  maatregelen en risicobenadering staat hier als een van de onderwerpen.
 - PDF-export toegevoegd: downloadbare Rijkshuisstijl-PDF per normpagina en
   voor het hele toetsingskader, met titelpagina, release-tag en
   downloaddatum. Client-side gegenereerd met pdfMake; CSP-veilig. Als
@@ -397,78 +673,7 @@ changelog volgt [Semantic Versioning][semver].
   "Inspectie Overheidsinformatie en Erfgoed" en "Ministerie van Onderwijs,
   Cultuur en Wetenschap". Het lint staat horizontaal gecentreerd en loopt af
   aan de bovenrand van de pagina, zoals de huisstijl voorschrijft.
-- Bollendiagram op de samenhangpagina naar de plaat van de Inspectie van
-  15 september 2026 (`docs/bollendiagram-inspectie-2026-09-15.png`): hub
-  "Inbeheername en beheer" met zeven normen eromheen, elk met een icoon en
-  het label buiten de bol, en een ring tussen de buurbollen; de vervaagde
-  toekomstbollen zijn weg. De plaat is data-gedreven: een norm toevoegen is
-  één regel in `layouts/shortcodes/bollendiagram.html`, de posities worden
-  berekend. De iconen komen uit het NLDD Design System; de kleuren zijn
-  Rijkshuisstijl-groen (donkergroen, groen, mintgroen). Blijft klikbaar en
-  toetsenbordbedienbaar; op een smal scherm scrollt hij horizontaal binnen de
-  figure. De lijst normlinks onder het diagram is weg.
-
-
-### Verwijderd
-
-- Thema naar v0.2.3. Vijf toegankelijkheidspatches uit
-  `assets/js/toegankelijkheid.js` zijn weg, omdat het thema ze nu zelf
-  oplost: skip-link (bevinding 16), naam van de zoekknop (21), genest
-  landmark en Escape in het mobiele menu (24), de `/`-sneltoets (10) en de
-  melding "opent in een nieuw venster" (23). De zoeksneltoets is nu
-  Ctrl+K / Cmd+K, ook in onze `search.js`-override, en de hint in de balk
-  is weer zichtbaar. De zoekindex neemt de verborgen nieuw-venster-melding
-  niet op.
-- De project-eigen scroll-spy voor "Op deze pagina" op de normpagina's
-  (`assets/js/toc-scrollspy.js`); thema naar v0.2.2. Het thema volgt nu zelf
-  alleen koppen met een TOC-link en markeert ook de laatste secties onderaan
-  een pagina (hugo-theme-rijksoverheid#8 en #22). Daardoor wordt elke sectie
-  in de inhoudsopgave gemarkeerd, ook "Referenties"; voorheen bleef op elke
-  normpagina minstens één sectie onderaan ongemarkeerd. Sluit #45.
-- De client-side PDF-generatie met pdfMake: de gevendorde bibliotheek (1,3 MB),
-  de base64-lettertypen (228 kB), de HTML→pdfMake-converter, de doc-definitie,
-  de `index.pdf.json`-endpoints en de bijbehorende tests. Dat scheelt een
-  blokkerend script van ruim anderhalve megabyte op elke normpagina, ook voor
-  wie nooit iets downloadt.
-- De controle `draft-voorbehoud` in de toegankelijkheidsscan, die op elke
-  pagina de zin "in ontwikkeling en kan wijzigen" eiste. Die zin is op verzoek
-  weg (25 augustus), de controle maakte sindsdien elke build rood.
-- De project-eigen "naar boven"-knop (`layouts/baseof.html`,
-  `_partials/terug-naar-boven.html`, `js/back-to-top.js`,
-  `css/terug-naar-boven.css`). De knop komt nu uit het thema, aangezet met
-  `back_to_top: true`. Daarmee vervalt ook de baseof-shadow. Het thema zet
-  geen `scroll-behavior: smooth` meer, dus anchors springen direct.
 - Feedback-blok van de normpagina's (de `params.feedback`-config blijft).
-- De card-grid naar de secties op de homepage: die dupliceerde de
-  hoofdnavigatie. De tegels ("Wat is het?", "Voor wie?", "Wanneer?", "Waar
-  beginnen?") blijven.
-- De leeswijzer-callout op `/normen/`: voorschrift, criterium en indicator
-  staan al uitgelegd op [Opbouw en indeling](/over/opbouw-en-indeling/).
-
-### Opgelost
-
-- PDF-knop in donkere modus: witte tekst op hemelblauw haalde 1,6:1 (WCAG
-  1.4.3). Tekstkleur nu uit `--color-text-on-primary`.
-
-- Hover-termen kleuren met `--color-link` in plaats van `--color-primary`:
-  dezelfde kleur als gewone links, en op het blauwe callout-vlak voldoende
-  contrast (was 3,7:1, axe-fout op de bron-hover in het DUTO-blok).
-- PDF: een voetnoot in een kop (norm 4, "Digitale documenten met een
-  bewaartermijn …") las als kaal nummer achter de kop; nu superscript met
-  sprong naar de bronnenlijst, zoals in de lopende tekst.
-- Containerbuild: de runtime-stage staat buiten de GHA-layercache
-  (`no-cache-filters: runtime`), zodat `apk upgrade` echt draait en de
-  Trivy-scan niet rood wordt op een al gefixte Alpine-CVE (CVE-2026-14456).
-- Voorschriftnummering (`<norm>.<n>`) ontbrak in de PDF-export; de nummering
-  is nu gedeeld tussen webpagina en PDF, zowel per norm als in de kader-PDF.
-- Interne normverwijzingen gecorrigeerd: "(gecontroleerd) vernietigen" wees
-  naar de norm "Betrouwbaar" maar hoort naar "Gecontroleerd vernietigen"
-  (`07-informatiebeveiliging`); "risicobenadering"/"risicoanalyse" wezen naar
-  de sectie-index in plaats van de over-pagina.
-- Voetnoot-verwijzingen werken nu ook na een spatie of leesteken en op links
-  (geen lege of op-een-leesteken-geplaatste hover-term meer); een term die
-  tegelijk een interne link is, wordt blauw met de voetnoot-stippellijn.
-- Zoek-highlight knipt links in de paginatekst niet meer op.
 - "Op deze pagina"-TOC volgt de actieve sectie nu vloeiend mee; voorheen
   verdween de highlight in de voorschrift-/criteria-/indicator-blokken
   (project-scroll-spy; thema-fix als upstream-PR ingediend).
@@ -481,5 +686,19 @@ changelog volgt [Semantic Versioning][semver].
   (`docs/training-contentbeheer.html`).
 - Eerste versie van het Toetsingskader Archiefwet als publieke Hugo-site.
 
-[Unreleased]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v1.0.2
+[1.0.1]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v1.0.1
+[1.0.0]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v1.0.0
+[0.3.1]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.3.1
+[0.2.9]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.2.9
+[0.2.8]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.2.8
+[0.2.7]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.2.7
+[0.2.6]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.2.6
+[0.2.5]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.2.5
+[0.2.4]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.2.4
+[0.2.3]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.2.3
+[0.2.2]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.2.2
+[0.2.1]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.2.1
+[0.2.0]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.2.0
 [0.1.0]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v0.1.0
