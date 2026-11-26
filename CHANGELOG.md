@@ -28,6 +28,20 @@ raakt, staat onder **Techniek**.
   nummer hoort bij de website en loopt bij elke kleine wijziging op; "Versie …
   van het toetsingskader" suggereerde een nieuwe versie van het kader zelf. Er
   is daardoor ook geen link meer naar GitHub in een nieuw tabblad.
+- De site heeft de vormgeving van het NLDD Designsysteem van de Rijksoverheid:
+  kleuren, iconen en het lettertype RijksSans. De lopende tekst is iets kleiner
+  en de tekstkolom smaller, zodat de regels rustiger lezen.
+- De inhoudsopgave en de knop voor de PDF staan rechts naast de tekst. Op een
+  smal scherm klap je ze uit.
+- Er is geen keuze meer tussen licht en donker: de site volgt de instelling van
+  je apparaat.
+- Zoeken vindt ook synoniemen en kernbegrippen, en een resultaat brengt je naar
+  de kop waar het woord staat.
+- Links naar andere websites openen in hetzelfde venster.
+- Op een smal scherm staat onder het bollendiagram dat je het opzij kunt
+  schuiven om de hele plaat te zien.
+- De PDF's staan in RijksSans, net als de site.
+- De site bewaart niets meer in je browser; de pagina Cookies zegt dat ook.
 
 ### Opgelost
 
@@ -35,6 +49,12 @@ raakt, staat onder **Techniek**.
   toetsingskader.inspectie-oe.nl/archiefwet/, zodat je als bezoeker binnen dat
   adres blijft. De PDF's noemen dat adres, en zoekmachines krijgen het als
   vaste vindplaats van elke pagina.
+- Beter toegankelijk: Criteria en Indicatoren staan als kop onder het
+  voorschrift waar ze bij horen, er is geen tweede kop "Zie ook" meer, de
+  teruglinks bij voetnoten zijn groot genoeg om aan te tikken en een
+  bronvermelding die openstaat blijft bij inzoomen in beeld.
+- De PDF's voldoen aan PDF/UA-1: een schermlezer leest ook het briefhoofd, elke
+  link en tekst die over een paginagrens loopt.
 
 ### Techniek
 
@@ -50,6 +70,15 @@ raakt, staat onder **Techniek**.
   `_partials/versie-zin.html` linkt naar `#versies` (de kop van het blok);
   `referenties.js` van het thema klapt het blok open. `params.releases_url` en
   het versienummer in de paginavoet zijn vervallen.
+- Theme naar hugo-theme-rijksoverheid v0.3.0. Hooks van het theme
+  (`content-extra`, `toc-extra`, `version-text`, `lastmod-text`) vervangen de
+  kopieën van `article.html`, `page-aside.html`, `lastmod.html` en
+  `versie-zin.html`, en zoeken loopt via het theme (`synonyms`, was
+  `synoniemen`). `params.versie` heet `version`, in CI en de Containerfile
+  `HUGO_PARAMS_VERSION`.
+- `tools.go` houdt het theme in `go.mod`; Dependabot houdt het bij en CI faalt
+  als de build `go.mod` of `go.sum` verandert.
+- CI valideert de PDF's met veraPDF tegen PDF/UA-1.
 
 ## [1.0.2] - 2026-11-24
 
