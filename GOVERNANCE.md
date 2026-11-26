@@ -13,8 +13,12 @@ besluiten worden genomen.
   normen.
 - **Technisch onderhoud**: het **Rijks ICT Gilde** verzorgt het onderhoud
   van de Hugo-site, de CI/CD-pipeline, de infrastructuur en het
-  open-source-proces. Merge-rechten en review-routing zijn vastgelegd in
-  [`.github/CODEOWNERS`](.github/CODEOWNERS).
+  open-source-proces.
+- **Rechten op `main`**: een ruleset op de standaardbranch laat wijzigingen
+  alleen binnenkomen via een pull request met minstens één goedkeuring, en
+  blokkeert force-push en verwijderen. Eén beheerder mag die regel omzeilen.
+  Wie schrijfrechten heeft (en dus mag mergen en releasen), staat in de
+  instellingen van de repository.
 
 ## Besluitvorming over inhoud
 
@@ -23,7 +27,9 @@ toetsingskader-inhoud vallen onder de eindverantwoordelijkheid van de
 Inspectie OE&E. Concreet betekent dit:
 
 - Inhoudelijke PR's worden niet gemerged zonder review door
-  inspectie-personeel of een door de inspectie aangewezen reviewer.
+  inspectie-personeel of een door de inspectie aangewezen reviewer. Dit is
+  een afspraak: GitHub dwingt alleen af dat er één goedkeuring is, niet van
+  wie.
 - De inspectie heeft vetorecht over inhoudelijke wijzigingen.
 - Tekstuele verbeteringen (typo's, formulering) kunnen door
   tech-maintainers worden gemerged, mits ze de strekking van een norm
@@ -44,10 +50,23 @@ start.
 ## Release-proces
 
 - **Versiebeheer**: [Semantic Versioning](https://semver.org/lang/nl/)
-  (`MAJOR.MINOR.PATCH`). Releases worden gemarkeerd met een Git-tag.
-- **Deployment**: elke merge naar `main` triggert een automatische
-  deployment via de **ZAD-pipeline**. De productieomgeving weerspiegelt
-  dus altijd de laatste staat van `main`.
+  (`vMAJOR.MINOR.PATCH`, als Git-tag). PATCH bij kleine correcties, MINOR
+  bij nieuwe of uitgebreide inhoud, MAJOR bij grote, ingrijpende
+  wijzigingen.
+- **Pull request**: elke PR (behalve die van bots, zoals Dependabot) krijgt een
+  preview op ZAD, op `https://frontend-pr-<nummer>-toets-hn7.rig.prd1.gn2.quattro.rijksapps.nl/`.
+  De link staat als reactie in de PR; bij sluiten wordt de preview
+  opgeruimd.
+- **Merge naar `main`**: draait de tests, maar verandert de
+  productiesite niet. `main` kan dus voorlopen op wat live staat.
+- **Release**: pas het publiceren van een GitHub-release met een nieuwe
+  tag zet de site live op <https://toetsingskader.inspectie-oe.nl/archiefwet/>.
+  De pipeline (`.github/workflows/zad.yml`) bouwt dan een image met die
+  tag; het versienummer op de site en in de PDF's is de tag.
+- **Voor een release**: zet in een gewone PR de wijzigingen onder
+  `[Unreleased]` in `CHANGELOG.md` onder het nieuwe versienummer, zodat
+  release en changelog hetzelfde nummer noemen. Hoe je een release
+  aanmaakt staat in `docs/training-contentbeheer.html` (2.7).
 
 ## Vragen over governance
 

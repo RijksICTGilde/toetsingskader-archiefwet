@@ -98,6 +98,24 @@ pre-commit run --all-files
 5. Wacht op review. We streven naar een reactie binnen redelijke termijn.
 6. Na akkoord wordt de PR gemerged.
 
+## Changelog
+
+Elke PR die de site, de PDF's of de inhoud verandert, zet een regel onder
+`## [Unreleased]` in [`CHANGELOG.md`](CHANGELOG.md):
+
+- **Merkt een bezoeker of PDF-lezer het?** Dan een regel onder Toegevoegd,
+  Gewijzigd, Verwijderd of Opgelost, in gewone taal: wat er voor de lezer
+  verandert, zonder bestandsnamen, code of PR-nummers. Deze regels staan op
+  de versiepagina van de site.
+- **Raakt het alleen bouw, CI, configuratie of tests?** Dan onder
+  `### Techniek`; daar mag het technisch.
+- **Allebei?** Dan een publieksregel én een regel onder Techniek.
+- Updates van dependencies (Dependabot) krijgen geen regel.
+
+Bij een release komen de regels onder `[Unreleased]` in een nieuwe sectie
+met versienummer en datum; zie het release-proces in
+[`GOVERNANCE.md`](GOVERNANCE.md).
+
 ## Stijl
 
 - **Taal**: alle commit-messages, PR-beschrijvingen, issues en documentatie
