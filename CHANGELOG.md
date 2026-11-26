@@ -22,6 +22,15 @@ raakt, staat onder **Techniek**.
   bovenaan. De versielink onderaan elke pagina gaat daarheen en klapt het blok
   open bij die versie, in plaats van naar GitHub in een nieuw tabblad.
 
+### Gewijzigd
+
+- Onderaan elke pagina, ook de homepage, staat geen versienummer meer. Het
+  nummer hoort bij de website en loopt bij elke kleine wijziging op; "Versie …
+  van het toetsingskader" suggereerde een nieuwe versie van het kader zelf. Na
+  de datum van de laatste aanpassing staat nu een link Ontwikkelgeschiedenis van
+  de website.
+- Het blok Versies op de pagina Totstandkoming heet nu Versies van de website.
+
 ### Opgelost
 
 - Alle pagina's, links en opmaak komen van het publieke adres

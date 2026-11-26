@@ -1,28 +1,27 @@
 {{/*
-  De versiezin, op elke pagina dezelfde twee zinnen:
+  De datumzin, op elke pagina dezelfde twee delen:
 
-    Versie v0.2.2 van het toetsingskader. Deze pagina is voor het laatst
-    aangepast op maandag 10 augustus 2026.
+    Deze pagina is voor het laatst aangepast op maandag 10 augustus 2026.
+    Ontwikkelgeschiedenis van de website
+
+  Het tweede deel is een link naar het blok Versies van de website op
+  /over/totstandkoming/ (`#versies`, het <details> zelf, zodat het thema-script
+  referenties.js het openklapt).
 
   Gedeeld door `_partials/lastmod.html` (voet van elke inhoudspagina) en de
   shortcode `versielabel` (homepage, die geen voet heeft). Eén bron, want los
-  overgetikt liepen de twee uiteen: de homepage had alleen het versienummer en
-  de voet een andere opmaak (feedback 31 augustus 2026: overal dezelfde tekst
-  en opmaak). De opmaak zelf komt uit het thema (`footer p` in een article of
-  section: gedempt, cursief); dit project zet er geen CSS op. Het eerdere voorbehoud "nog in ontwikkeling" is op
-  verzoek weg (25 augustus 2026).
+  overgetikt liepen de twee uiteen (feedback 31 augustus 2026: overal dezelfde
+  tekst en opmaak). De opmaak zelf komt uit het thema (`footer p` in een
+  article of section: gedempt, cursief); dit project zet er geen CSS op.
 
-  Nummer uit site.Params.versie (lokaal hugo.yaml, in CI de release-tag),
-  gelinkt via render-link. Datum uit .Lastmod (enableGitInfo). Rendert niets
-  zonder versienummer valt alleen het versiedeel weg — de
-  laatst-aangepast-datum blijft (die verdween eerder mee, en daarmee elke
-  datering op elke pagina). Er is géén automatische controle meer op "van het
-  toetsingskader" op elke pagina.
+  Geen versienummer meer (feedback 26 november 2026): het nummer is de
+  release-tag van de site en loopt bij elke kleine wijziging op. "Versie … van
+  het toetsingskader" suggereerde dan een nieuwe versie van het kader zelf. De
+  versies van de website staan in het blok Versies van de website.
+
+  Datum uit .Lastmod (enableGitInfo).
 
   Aanroep: {{ partial "versie-zin.html" $page }} (een Page, geen shortcode)
 */}}
-{{- with site.Params.versie -}}
-{{- $anker := printf "v%s" (replace (strings.TrimPrefix "v" .) "." "-") -}}
-{{- $href := printf "%s#%s" (site.GetPage "/over/totstandkoming").RelPermalink $anker -}}
-<strong>{{ partial "render-link" (dict "href" $href "text" (printf "Versie %s" .)) }}</strong> van het toetsingskader. {{ end -}}
-Deze pagina is voor het laatst aangepast op <time datetime="{{ $.Lastmod.Format "2006-01-02" }}">{{ $.Lastmod | time.Format ":date_full" }}</time>.
+Deze pagina is voor het laatst aangepast op <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod | time.Format ":date_full" }}</time>.
+{{ with site.GetPage "/over/totstandkoming" }}{{ partial "render-link" (dict "href" (printf "%s#versies" .RelPermalink) "text" "Ontwikkelgeschiedenis van de website") }}{{ end }}
