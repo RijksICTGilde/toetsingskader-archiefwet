@@ -15,6 +15,13 @@ raakt, staat onder **Techniek**.
 
 ## [Unreleased]
 
+### Toegevoegd
+
+- Onderaan de pagina Totstandkoming staat een uitklapbaar blok Versies. Daarin
+  staat per versie van het toetsingskader wat er is veranderd, de nieuwste
+  bovenaan. De versielink onderaan elke pagina gaat daarheen en klapt het blok
+  open bij die versie, in plaats van naar GitHub in een nieuw tabblad.
+
 ### Opgelost
 
 - Alle pagina's, links en opmaak komen van het publieke adres
@@ -30,6 +37,11 @@ raakt, staat onder **Techniek**.
   voorvoegsel `/archiefwet/`, zodat een bezoeker binnen dat pad blijft. De
   canonieke link, de "Bron: …"-regel op de omslag van de PDF's en het adres
   achter "Bekijk voor de actuele versie …" noemen het publieke adres.
+- Shortcode `versies` op `/over/totstandkoming/` leest dit bestand en toont
+  per release een kop met anker (`#v1-0-2`) in een `.references`-blok;
+  `[Unreleased]` en `### Techniek` blijven weg. De versielink in
+  `_partials/versie-zin.html` wijst naar dat anker; `referenties.js` van het
+  thema klapt het blok open. `params.releases_url` is vervallen.
 
 ## [1.0.2] - 2026-11-24
 
