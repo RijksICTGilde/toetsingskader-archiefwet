@@ -49,7 +49,7 @@
          knop naar een 404 in de preview wekte verwarring. */ -}}
   {{- if and .Params.norm_id (ne hugo.Environment "development") -}}
   {{- with .OutputFormats.Get "pdfdata" -}}
-  <a class="button pdf-download" href="{{ $.RelPermalink }}index.pdf"
+  <a class="button button-primary pdf-download" href="{{ $.RelPermalink }}index.pdf"
      download="{{ $.File.ContentBaseName }}.pdf">
     {{- partial "icon.html" "download" -}}<span>Download als PDF</span>
   </a>

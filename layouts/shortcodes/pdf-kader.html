@@ -18,7 +18,7 @@
 {{- if ne hugo.Environment "development" -}}
 {{- with .Page.OutputFormats.Get "pdfdata" -}}
 <p class="pdf-kader">
-  <a class="button pdf-download" href="{{ $.Page.RelPermalink }}index.pdf"
+  <a class="button button-primary pdf-download" href="{{ $.Page.RelPermalink }}index.pdf"
      download="toetsingskader-archiefwet-2026.pdf">
     {{- partial "icon.html" "download" -}}<span>Download het volledige kader als PDF</span>
   </a>

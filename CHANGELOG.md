@@ -60,6 +60,7 @@ raakt, staat onder **Techniek**.
 - In "Op deze pagina" is de focusrand rondom te zien, en een schermlezer zegt
   bij welk deel van de pagina je bent.
 - De opsomming a) en b) bij norm 1 is een echte lijst, ook in de PDF.
+- De knop om een PDF te downloaden houdt genoeg contrast als je erop wijst.
 
 ### Techniek
 
@@ -91,6 +92,8 @@ raakt, staat onder **Techniek**.
   PDF-pijplijn nummert zo'n lijst ook met letters (`lijstLabel`). De
   a11y-scan telt `{type="a"}` in de bron tegen `<ol type="a">` in de pagina,
   zodat een Hugo-update het attribuut niet stil kan laten vallen.
+- Pdf-knop: `.button-primary` van het thema met `--color-primary-hover`, in
+  plaats van eigen kleuren en `filter: brightness()` (1.4.3).
 
 ## [1.0.2] - 2026-11-24
 
