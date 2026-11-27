@@ -122,9 +122,12 @@ menus:
     - name: Contact
       url: https://www.inspectie-oe.nl/service/contact
       weight: 1
+    - name: Versies van de website
+      url: /over/totstandkoming/#versies
+      weight: 2
     - name: Terug naar hoofdsite
       url: https://www.inspectie-oe.nl/
-      weight: 2
+      weight: 3
 
   footer-right:
     # Privacy en cookies staan op deze site zelf (content/privacy.md en

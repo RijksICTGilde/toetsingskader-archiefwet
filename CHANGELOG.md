@@ -24,6 +24,8 @@ raakt, staat onder **Techniek**.
 
 ### Gewijzigd
 
+- De datum onderaan elke pagina is geen link meer. Versies van de website staat
+  nu als link in de voet, onder Contact en meer.
 - Onderaan elke pagina, ook de homepage, staat geen versienummer meer. Het
   nummer hoort bij de website en loopt bij elke kleine wijziging op; "Versie …
   van het toetsingskader" suggereerde een nieuwe versie van het kader zelf. Er
@@ -94,6 +96,9 @@ raakt, staat onder **Techniek**.
   zodat een Hugo-update het attribuut niet stil kan laten vallen.
 - Pdf-knop: `.button-primary` van het thema met `--color-primary-hover`, in
   plaats van eigen kleuren en `filter: brightness()` (1.4.3).
+- `_partials/lastmod-text.html` linkt de datum niet meer; de link naar
+  `#versies` staat als "Versies van de website" in het menu `footer-left`
+  (2.4.4).
 
 ## [1.0.2] - 2026-11-24
 
