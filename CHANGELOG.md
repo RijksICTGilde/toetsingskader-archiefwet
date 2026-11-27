@@ -45,6 +45,10 @@ raakt, staat onder **Techniek**.
 
 ### Opgelost
 
+- toetsingskader.inspectie-oe.nl stuurt je door naar
+  toetsingskader.inspectie-oe.nl/archiefwet/, en een oud adres zonder
+  /archiefwet/ naar dezelfde pagina daaronder. De site staat nu nog maar op één
+  adres.
 - Alle pagina's, links en opmaak komen van het publieke adres
   toetsingskader.inspectie-oe.nl/archiefwet/, zodat je als bezoeker binnen dat
   adres blijft. De PDF's noemen dat adres, en zoekmachines krijgen het als
@@ -58,6 +62,11 @@ raakt, staat onder **Techniek**.
 
 ### Techniek
 
+- Het image zet de site onder `/archiefwet/`; nginx stuurt alles daarbuiten met
+  een 301 door naar `/archiefwet$request_uri` (`/robots.txt` en
+  `/.well-known/security.txt` blijven op de root). PR-previews bouwen ook met
+  `/archiefwet/` als pad. Vereist dat de route voor `/archiefwet` het pad niet
+  meer herschrijft naar `/`.
 - De site wordt gebouwd met het publieke adres als `baseURL`
   (`https://toetsingskader.inspectie-oe.nl/archiefwet/`) in plaats van het
   ZAD-adres. Interne links, CSS, JS en lettertypen dragen daardoor het
