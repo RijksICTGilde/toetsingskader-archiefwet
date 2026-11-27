@@ -33,7 +33,7 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             PR="${{ github.event.pull_request.number }}"
-            echo "value=https://frontend-pr-${PR}-toets-hn7.rig.prd1.gn2.quattro.rijksapps.nl/" >> "$GITHUB_OUTPUT"
+            echo "value=https://frontend-pr-${PR}-toets-hn7.rig.prd1.gn2.quattro.rijksapps.nl/archiefwet/" >> "$GITHUB_OUTPUT"
           else
             echo "value=" >> "$GITHUB_OUTPUT"
           fi
