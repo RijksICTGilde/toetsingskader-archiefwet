@@ -2,4 +2,4 @@ module github.com/RijksICTGilde/toetsingskader-archiefwet
 
 go 1.26.3
 
-require github.com/RijksICTGilde/hugo-theme-rijksoverheid v0.3.0
+require github.com/RijksICTGilde/hugo-theme-rijksoverheid v0.4.0

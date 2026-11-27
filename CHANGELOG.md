@@ -55,6 +55,10 @@ raakt, staat onder **Techniek**.
   bronvermelding die openstaat blijft bij inzoomen in beeld.
 - De PDF's voldoen aan PDF/UA-1: een schermlezer leest ook het briefhoofd, elke
   link en tekst die over een paginagrens loopt.
+- De focusrand van de knop om een PDF te downloaden is ook in het donkere
+  kleurenschema goed te zien.
+- In "Op deze pagina" is de focusrand rondom te zien, en een schermlezer zegt
+  bij welk deel van de pagina je bent.
 
 ### Techniek
 
@@ -79,6 +83,8 @@ raakt, staat onder **Techniek**.
 - `tools.go` houdt het theme in `go.mod`; Dependabot houdt het bij en CI faalt
   als de build `go.mod` of `go.sum` verandert.
 - CI valideert de PDF's met veraPDF tegen PDF/UA-1.
+- Theme naar hugo-theme-rijksoverheid v0.4.0: `.button-primary`, de
+  focusring in de rechterkolom en `aria-current` in de inhoudsopgave.
 
 ## [1.0.2] - 2026-11-24
 
