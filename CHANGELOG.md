@@ -15,19 +15,10 @@ raakt, staat onder **Techniek**.
 
 ## [Unreleased]
 
-### Toegevoegd
-
-- Onderaan de pagina Totstandkoming staat een uitklapbaar blok Versies van de
-  website. Daarin staat per versie van de website wat er is veranderd, de
-  nieuwste bovenaan. De datum in "Deze pagina is voor het laatst aangepast op
-  …" onderaan elke pagina linkt daarheen en klapt het blok open.
+## [1.1.0] - 2026-11-27
 
 ### Gewijzigd
 
-- Onderaan elke pagina, ook de homepage, staat geen versienummer meer. Het
-  nummer hoort bij de website en loopt bij elke kleine wijziging op; "Versie …
-  van het toetsingskader" suggereerde een nieuwe versie van het kader zelf. Er
-  is daardoor ook geen link meer naar GitHub in een nieuw tabblad.
 - De site heeft de vormgeving van het NLDD Designsysteem van de Rijksoverheid:
   kleuren, iconen en het lettertype RijksSans. De lopende tekst is iets kleiner
   en de tekstkolom smaller, zodat de regels rustiger lezen.
@@ -45,16 +36,49 @@ raakt, staat onder **Techniek**.
 
 ### Opgelost
 
-- Alle pagina's, links en opmaak komen van het publieke adres
-  toetsingskader.inspectie-oe.nl/archiefwet/, zodat je als bezoeker binnen dat
-  adres blijft. De PDF's noemen dat adres, en zoekmachines krijgen het als
-  vaste vindplaats van elke pagina.
 - Beter toegankelijk: Criteria en Indicatoren staan als kop onder het
   voorschrift waar ze bij horen, er is geen tweede kop "Zie ook" meer, de
   teruglinks bij voetnoten zijn groot genoeg om aan te tikken en een
   bronvermelding die openstaat blijft bij inzoomen in beeld.
 - De PDF's voldoen aan PDF/UA-1: een schermlezer leest ook het briefhoofd, elke
   link en tekst die over een paginagrens loopt.
+
+### Techniek
+
+- Theme naar hugo-theme-rijksoverheid v0.3.0. Hooks van het theme
+  (`content-extra`, `toc-extra`, `version-text`, `lastmod-text`) vervangen de
+  kopieën van `article.html`, `page-aside.html`, `lastmod.html` en
+  `versie-zin.html`, en zoeken loopt via het theme (`synonyms`, was
+  `synoniemen`). `params.versie` heet `version`, in CI en de Containerfile
+  `HUGO_PARAMS_VERSION`.
+- `tools.go` houdt het theme in `go.mod`; Dependabot houdt het bij en CI faalt
+  als de build `go.mod` of `go.sum` verandert.
+- CI valideert de PDF's met veraPDF tegen PDF/UA-1.
+
+## [1.0.4] - 2026-11-26
+
+### Gewijzigd
+
+- Onderaan elke pagina, ook de homepage, staat geen versienummer meer. Het
+  nummer hoort bij de website en loopt bij elke kleine wijziging op; "Versie …
+  van het toetsingskader" suggereerde een nieuwe versie van het kader zelf. Er
+  is daardoor ook geen link meer naar GitHub in een nieuw tabblad.
+
+## [1.0.3] - 2026-11-26
+
+### Toegevoegd
+
+- Onderaan de pagina Totstandkoming staat een uitklapbaar blok Versies van de
+  website. Daarin staat per versie van de website wat er is veranderd, de
+  nieuwste bovenaan. De datum in "Deze pagina is voor het laatst aangepast op
+  …" onderaan elke pagina linkt daarheen en klapt het blok open.
+
+### Opgelost
+
+- Alle pagina's, links en opmaak komen van het publieke adres
+  toetsingskader.inspectie-oe.nl/archiefwet/, zodat je als bezoeker binnen dat
+  adres blijft. De PDF's noemen dat adres, en zoekmachines krijgen het als
+  vaste vindplaats van elke pagina.
 
 ### Techniek
 
@@ -70,15 +94,6 @@ raakt, staat onder **Techniek**.
   `_partials/versie-zin.html` linkt naar `#versies` (de kop van het blok);
   `referenties.js` van het thema klapt het blok open. `params.releases_url` en
   het versienummer in de paginavoet zijn vervallen.
-- Theme naar hugo-theme-rijksoverheid v0.3.0. Hooks van het theme
-  (`content-extra`, `toc-extra`, `version-text`, `lastmod-text`) vervangen de
-  kopieën van `article.html`, `page-aside.html`, `lastmod.html` en
-  `versie-zin.html`, en zoeken loopt via het theme (`synonyms`, was
-  `synoniemen`). `params.versie` heet `version`, in CI en de Containerfile
-  `HUGO_PARAMS_VERSION`.
-- `tools.go` houdt het theme in `go.mod`; Dependabot houdt het bij en CI faalt
-  als de build `go.mod` of `go.sum` verandert.
-- CI valideert de PDF's met veraPDF tegen PDF/UA-1.
 
 ## [1.0.2] - 2026-11-24
 
@@ -735,7 +750,10 @@ raakt, staat onder **Techniek**.
   (`docs/training-contentbeheer.html`).
 - Eerste versie van het Toetsingskader Archiefwet als publieke Hugo-site.
 
-[Unreleased]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v1.1.0
+[1.0.4]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v1.0.4
+[1.0.3]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v1.0.3
 [1.0.2]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v1.0.2
 [1.0.1]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v1.0.1
 [1.0.0]: https://github.com/RijksICTGilde/toetsingskader-archiefwet/releases/tag/v1.0.0
