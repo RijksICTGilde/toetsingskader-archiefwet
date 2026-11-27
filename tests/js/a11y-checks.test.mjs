@@ -8,7 +8,7 @@ import assert from 'node:assert/strict'
 import { parseHTML } from 'linkedom'
 import {
   zwevendeVoetnootFouten, korteRefTermFouten,
-  legeAltFouten, zonderHash, kopvolgordeFouten, dubbeleIdFouten,
+  legeAltFouten, zonderHash, kopvolgordeFouten, dubbeleIdFouten, lijstTypeFouten,
 } from '../../scripts/a11y-checks.mjs'
 
 const dom = (body) => parseHTML(`<!DOCTYPE html><html><body>${body}</body></html>`).document
@@ -102,4 +102,13 @@ test('dubbele id: geprefixte ankers per norm botsen niet', () => {
 
 test('dubbele id: hetzelfde anker twee keer is een fout', () => {
   assert.deepEqual(dubbeleIdFouten(dom('<p id="fn:1">a</p><p id="fn:1">b</p>')), ['fn:1'])
+})
+
+test('lijstTypeFouten: elke {type="a"} uit de bron staat als <ol type="a"> in de HTML', () => {
+  const bron = '1. een\n2. twee\n{type="a"}\n\ntekst\n\n1. drie\n{type="a"}\n'
+  assert.deepEqual(lijstTypeFouten(dom('<ol type="a"><li>een</li></ol><ol type="a"><li>drie</li></ol>'), bron), [])
+  const fouten = lijstTypeFouten(dom('<ol><li>een</li></ol><ol type="a"><li>drie</li></ol>'), bron)
+  assert.equal(fouten.length, 1)
+  assert.match(fouten[0], /2 .*1 /)
+  assert.deepEqual(lijstTypeFouten(dom('<ol><li>x</li></ol>'), 'geen attributen'), [])
 })

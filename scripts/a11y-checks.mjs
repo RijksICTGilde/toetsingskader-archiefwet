@@ -112,3 +112,14 @@ export function dubbeleIdFouten(document) {
   }
   return [...dubbel]
 }
+
+// --- Lijsttype uit de bron ---------------------------------------------------
+// `{type="a"}` onder een lijst (goldmark-blokattribuut) maakt een a) b)-lijst.
+// Laat een Hugo-update het attribuut vallen, dan staat er stil weer 1. 2. in
+// een wettekst die "sub a" noemt. Telt de regels in de Markdown-bron tegen de
+// <ol type="a"> in de gebouwde pagina.
+export function lijstTypeFouten(document, bron) {
+  const verwacht = (bron.match(/^\{[^}\n]*\btype="a"[^}\n]*\}[ \t]*$/gm) || []).length
+  const gevonden = document.querySelectorAll('ol[type="a"]').length
+  return verwacht === gevonden ? [] : [`de bron heeft ${verwacht} lijst(en) met {type="a"}, de pagina ${gevonden} <ol type="a">`]
+}

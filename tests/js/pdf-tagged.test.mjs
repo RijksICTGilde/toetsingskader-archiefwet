@@ -4,7 +4,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { PDFDocument, PDFDict, PDFName, decodePDFRawStream } from 'pdf-lib'
-import { TaggedPdf, laadFonts, laadBriefhoofd, linkBeschrijving } from '../../scripts/pdf-tagged.mjs'
+import { TaggedPdf, laadFonts, laadBriefhoofd, linkBeschrijving, lijstLabel } from '../../scripts/pdf-tagged.mjs'
 import { schrijfNorm, runsVan, lijstItems, bronTeksten } from '../../scripts/pdf-html.mjs'
 import { parseHTML } from 'linkedom'
 
@@ -330,6 +330,23 @@ test('relatieve link lost op tegen de pagina-URL', () => {
   const runs = runsVan(document.querySelector('p'), { prefix: '', siteUrl: 'https://site.nl/', basisUrl: 'https://site.nl/normen/03-ordenen/' })
   assert.equal(runs.find((r) => r.text === 'doel').link, 'https://site.nl/normen/doel/')
   assert.equal(runs.find((r) => r.text === 'bijlage').link, 'https://site.nl/normen/03-ordenen/bijlage.pdf')
+})
+
+test('<ol type="a"> nummert in de PDF met letters, ook genest', () => {
+  const uit = []
+  const nep = { alinea: () => {}, kop: () => {}, bladwijzer: () => {}, citaat: () => {}, lijst: (items, o) => uit.push(o) }
+  schrijfNorm(nep, { ...DATA, kern_html: '', body_html: '<ol type="a"><li>eerste</li></ol>' }, { siteUrl: DATA.site_url })
+  assert.equal(uit[0].nummering, 'a')
+  const { document } = parseHTML('<body><ol><li>x<ol type="a"><li>y</li></ol></li></ol></body>')
+  const items = lijstItems(document.querySelector('ol'), { prefix: '', siteUrl: 'https://x.nl/' })
+  assert.equal(items[0].segmenten.find((s) => s.sub).sub.nummering, 'a')
+})
+
+test('lijstLabel: cijfers met punt, letters met haakje zoals in de wettekst', () => {
+  assert.equal(lijstLabel('1', 3), '3. ')
+  assert.equal(lijstLabel('a', 1), 'a) ')
+  assert.equal(lijstLabel('a', 2), 'b) ')
+  assert.equal(lijstLabel('a', 27), '27) ')
 })
 
 test('geneste <ol start="5"> houdt zijn beginwaarde', () => {

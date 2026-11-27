@@ -1,5 +1,8 @@
 :root {
   --color-primary: light-dark(#007bc7, #80d5fc);
+  /* .button-primary (thema) bij hover: 6,1:1 met wit en 10,9:1 met
+     --color-text-on-primary in donker. */
+  --color-primary-hover: light-dark(#01689b, #b3e6fe);
   --color-banner: #007bc7;
 }
 
@@ -106,11 +109,8 @@ a.ref-term:hover {
 }
 
 
-/* PDF-knop bouwt op de thema-.button; alleen brand-kleur en icoon-uitlijning
-   zijn project-specifiek. Border == achtergrond, dus geen randje op hover.
-   Tekstkleur uit het token en niet #fff: in donkere modus is --color-primary
-   #80d5fc en haalt wit daarop 1,6:1 (scan 15 september 2026);
-   --color-text-on-primary is daar #1e293b, 8,4:1. */
+/* PDF-knop: de .button-primary van het thema; hier alleen breedte en
+   icoon-uitlijning. */
 .page-aside .pdf-download.button {
   width: 100%;
 }
@@ -125,26 +125,6 @@ a.ref-term:hover {
   align-items: center;
   justify-content: center;
   gap: 0.5em;
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-text-on-primary);
-}
-
-.pdf-download.button:hover,
-.pdf-download.button:focus-visible {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-text-on-primary);
-  filter: brightness(0.9);
-}
-
-/* Hover alleen (brightness 0.9) haalt 1,19:1 tegen de rustkleur, en de
-   thema-.button zet `outline: none` (2.4.7, 1.4.11). --color-text contrasteert in
-   beide modi met knop én pagina. */
-.pdf-download.button:focus-visible {
-  outline: 3px solid var(--color-text);
-  outline-offset: 2px;
-  filter: none;
 }
 
 /* Toelichting hergebruikt de `.references`-accordeon van het thema; alleen de
@@ -161,4 +141,15 @@ abbr[title] {
   text-decoration: underline dotted;
   text-underline-offset: 0.15em;
   cursor: help;
+}
+
+/* `{type="a"}` onder een lijst in de content: a) b) zoals in de wettekst.
+   Geen `[type="a" s]`: Chromium kent die vlag niet en laat de regel vallen. */
+@counter-style alfabet-haakje {
+  system: extends lower-alpha;
+  suffix: ") ";
+}
+
+ol[type="a"] {
+  list-style-type: alfabet-haakje;
 }

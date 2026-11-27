@@ -24,6 +24,8 @@ raakt, staat onder **Techniek**.
 
 ### Gewijzigd
 
+- De datum onderaan elke pagina is geen link meer. Versies van de website staat
+  nu als link in de voet, onder Contact en meer.
 - Onderaan elke pagina, ook de homepage, staat geen versienummer meer. Het
   nummer hoort bij de website en loopt bij elke kleine wijziging op; "Versie …
   van het toetsingskader" suggereerde een nieuwe versie van het kader zelf. Er
@@ -55,6 +57,12 @@ raakt, staat onder **Techniek**.
   bronvermelding die openstaat blijft bij inzoomen in beeld.
 - De PDF's voldoen aan PDF/UA-1: een schermlezer leest ook het briefhoofd, elke
   link en tekst die over een paginagrens loopt.
+- De focusrand van de knop om een PDF te downloaden is ook in het donkere
+  kleurenschema goed te zien.
+- In "Op deze pagina" is de focusrand rondom te zien, en een schermlezer zegt
+  bij welk deel van de pagina je bent.
+- De opsomming a) en b) bij norm 1 is een echte lijst, ook in de PDF.
+- De knop om een PDF te downloaden houdt genoeg contrast als je erop wijst.
 
 ### Techniek
 
@@ -79,6 +87,18 @@ raakt, staat onder **Techniek**.
 - `tools.go` houdt het theme in `go.mod`; Dependabot houdt het bij en CI faalt
   als de build `go.mod` of `go.sum` verandert.
 - CI valideert de PDF's met veraPDF tegen PDF/UA-1.
+- Theme naar hugo-theme-rijksoverheid v0.4.0: `.button-primary`, de
+  focusring in de rechterkolom en `aria-current` in de inhoudsopgave.
+- `markup.goldmark.parser.attribute.block` staat aan: `{type="a"}` onder een
+  lijst geeft `<ol type="a">`, met a) b) via `@counter-style`. De
+  PDF-pijplijn nummert zo'n lijst ook met letters (`lijstLabel`). De
+  a11y-scan telt `{type="a"}` in de bron tegen `<ol type="a">` in de pagina,
+  zodat een Hugo-update het attribuut niet stil kan laten vallen.
+- Pdf-knop: `.button-primary` van het thema met `--color-primary-hover`, in
+  plaats van eigen kleuren en `filter: brightness()` (1.4.3).
+- `_partials/lastmod-text.html` linkt de datum niet meer; de link naar
+  `#versies` staat als "Versies van de website" in het menu `footer-left`
+  (2.4.4).
 
 ## [1.0.2] - 2026-11-24
 

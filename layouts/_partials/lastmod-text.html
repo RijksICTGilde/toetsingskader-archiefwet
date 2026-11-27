@@ -1,9 +1,7 @@
 {{- /* Hook van het theme. Anders dan het theme: op elke pagina met
        show_lastmod, ook lijstpagina's en de homepage, met "aangepast" en de
-       datum voluit. De datum linkt naar het blok Versies van de website op
-       /over/totstandkoming/ (`#versies`, de kop in het <details>, zodat het
-       thema-script references.js het openklapt). */ -}}
+       datum voluit. Geen link: "Versies van de website" staat in het voetmenu
+       (hugo.yaml), een link op de datum zei niet waar hij heen ging (2.4.4). */ -}}
 {{- if .Params.show_lastmod -}}
-{{- $datum := printf `<time datetime="%s">%s</time>` (.Lastmod.Format "2006-01-02") (.Lastmod | time.Format ":date_full") -}}
-Deze pagina is voor het laatst aangepast op {{ with site.GetPage "/over/totstandkoming" }}{{ partial "render-link.html" (dict "href" (printf "%s#versies" .RelPermalink) "text" ($datum | safeHTML)) }}{{ else }}{{ $datum | safeHTML }}{{ end }}.
+Deze pagina is voor het laatst aangepast op <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod | time.Format ":date_full" }}</time>.
 {{- end -}}

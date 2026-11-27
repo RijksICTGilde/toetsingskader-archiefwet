@@ -69,9 +69,9 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
 
 Het verantwoordelijke overheidsorgaan heeft in de beheerregels, in ieder geval per categorie[^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten, een **omschrijving** opgenomen van de passende maatregelen die het verantwoordelijke overheidsorgaan neemt om de documenten:[^aw-artikel-4-2-lid-2]
 
-a) duurzaam toegankelijk te maken en te houden;[^aw-artikel-4-2-lid-2]
-
-b) te [vernietigen](/normen/07-vernietigen/). [^aw-artikel-4-2-lid-2]
+1. duurzaam toegankelijk te maken en te houden;[^aw-artikel-4-2-lid-2]
+2. te [vernietigen](/normen/07-vernietigen/). [^aw-artikel-4-2-lid-2]
+{type="a"}
 
 [^categorie-vormvrij-maar-relatie-hebben-selectieb]: Categorie is vormvrij, maar moet wel een relatie hebben met het selectiebesluit.
 [^aw-artikel-4-2-lid-2]: Archiefwet, artikel 4.2, tweede lid, sub b. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
@@ -90,9 +90,9 @@ b) te [vernietigen](/normen/07-vernietigen/). [^aw-artikel-4-2-lid-2]
 
 Het verantwoordelijke overheidsorgaan heeft per categorie[^categorie-vormvrij-maar-relatie-hebben-selectieb] documenten passende maatregelen getroffen om documenten:[^aw-artikel-4-1-lid-1]
 
-a) duurzaam toegankelijk te maken en te houden;
-
-b) te [vernietigen](/normen/07-vernietigen/).
+1. duurzaam toegankelijk te maken en te houden;
+2. te [vernietigen](/normen/07-vernietigen/).
+{type="a"}
 
 ##### Criteria
 
