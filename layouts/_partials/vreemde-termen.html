@@ -14,7 +14,7 @@
      --------------------------------------------------------------------- */}}
 {{- $html := . -}}
 {{- $out := slice -}}
-{{- $data := index site.Data "vreemde-termen" | default dict -}}
+{{- $data := index hugo.Data "vreemde-termen" | default dict -}}
 {{- $termen := slice -}}
 {{- range $term, $taal := $data -}}
   {{- if not (findRE `^[\p{L}\p{N}]+( [\p{L}\p{N}]+)*$` $term) -}}

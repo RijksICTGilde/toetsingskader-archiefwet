@@ -10,7 +10,7 @@ kern: "Het verantwoordelijke overheidsorgaan beheert de door hen opgemaakte of o
 kern_bron: "Archiefbesluit, artikel 2.1, eerste lid, sub e en f; Archiefbesluit, artikel 2.1, tweede lid."
 kern_bron_url: "https://zoek.officielebekendmakingen.nl/stb-2026-321.html"
 kern_kaart: "Een document moet aantoonbaar betrouwbaar zijn, dat wil zeggen dat het document is wat het zegt te zijn."
-synoniemen:
+synonyms:
   - "Oorspronkelijk (authentiek)"
   - "Origineel (authentiek)"
 ---
@@ -38,13 +38,13 @@ De oorspronkelijke inhoud van documenten is betrouwbaar, volledig en beveiligd.[
 
 [^ab-artikel-2-1-sub-e-en-lid-2]: Archiefbesluit, artikel 2.1, sub e; Archiefbesluit, artikel 2.1, tweede lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
-#### Criterium
+##### Criterium
 
 - Het verantwoordelijke overheidsorgaan heeft op een aantoonbare en toetsbare manier vastgesteld dat passende maatregelen zijn getroffen conform de BIO[^ab-nota-van-toelichting-veilig-p11] of een vergelijkbaar normenkader, waarmee de beveiliging en betrouwbaarheid van documenten die onder de Archiefwet vallen wordt geborgd.
 
 [^ab-nota-van-toelichting-veilig-p11]: Archiefbesluit, nota van toelichting, Algemeen deel, inleiding, onder "veilig", p. 11. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
-#### Indicatoren
+##### Indicatoren
 
 - In periodieke interne of externe audits, risicoanalyses of beleidsdocumenten zijn beveiligingsmaatregelen opgenomen.[^inspectie-geen-diepgaande-technische-toets]
 - Bij het opstellen en uitvoeren van beleid vindt samenwerking plaats tussen relevante disciplines, zoals informatiebeveiliging, privacy, gegevensbeheer en ICT.[^kamerstukken-35968-nr-3-beheerstrategie]
@@ -61,11 +61,11 @@ Documenten zijn beschermd tegen ongeautoriseerde wijzigingen en verlies.[^kamers
 
 [^kamerstukken-35968-nr-3-archiveren-by-design]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen deel, onder 3.5 "Archiveren by Design". [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
-#### Criterium
+##### Criterium
 
 - Er is toegangsbeheer voor de aanwezige documenten.
 
-#### Indicator
+##### Indicator
 
 - Er is vastgelegd welke functionarissen wijzigingen mogen doorvoeren bij de aanwezige documenten.
 
@@ -76,11 +76,11 @@ Beveiligingsmaatregelen zijn passend[^ab-artikel-2-1-lid-2] en afgestemd op de r
 [^ab-artikel-2-1-lid-2]: Archiefbesluit, artikel 2.1, tweede lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 [^ab-nota-van-toelichting-veilig-bio-h8]: Archiefbesluit, Nota van toelichting, Algemeen deel, 1 Inleiding, onder "veilig"; BIO, Hoofdstuk 8, p. 11. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
-#### Criterium
+##### Criterium
 
 - Er is een risicomanagementsysteem gebruikt voor de [passende beveiligingsmaatregelen](/onderwerpen/passende-maatregelen/).
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 
@@ -90,7 +90,7 @@ Het verantwoordelijke overheidsorgaan kan de betrouwbaarheid en authenticiteit v
 
 [^ar-artikel-2-10-ab-artikel-2-1]: Archiefregeling, artikel 2.10; Archiefbesluit, artikel 2.1 eerste lid, onder e. *(Bron beschikbaar na publicatie van de Archiefregeling.)* [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
-#### Criteria
+##### Criteria
 
 - Met [metadata](/normen/04-metadateren/) kan worden aangetoond dat documenten volledig zijn.[^ar-artikel-2-5-lid-2]
 - Met [metadata](/normen/04-metadateren/) kan worden aangetoond wanneer documenten zijn opgemaakt of ontvangen.[^ar-artikel-2-5-lid-2-sub-f]
@@ -100,7 +100,7 @@ Het verantwoordelijke overheidsorgaan kan de betrouwbaarheid en authenticiteit v
 [^ar-artikel-2-5-lid-2-sub-f]: Archiefregeling, artikel 2.5, tweede lid, sub f. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 [^ab-artikel-2-1-lid-1-sub-e-gewist]: Archiefbesluit, artikel 2.1, eerste lid, onderdeel e; Archiefbesluit, nota van toelichting, p.18 van document. Met ongeoorloofd wordt bedoeld anders dan op grond van een verplichting uit andere wetgeving. Deze verplichting mag echter niet in strijd zijn met de uitvoering van de Archiefwet. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
-#### Indicatoren
+##### Indicatoren
 
 - In de [metadata](/normen/04-metadateren/) is de [integriteitscheck](/onderwerpen/metadata-integriteitscheck/) vastgelegd bij digitale documenten die langer dan tien jaar worden bewaard.[^ar-artikel-2-8-onderdeel-b]
 - Er wordt gebruikgemaakt van een [hashfunctie](/onderwerpen/hashfunctie/)[^duto-modeleis-r15] voor de controleerbaarheid van de integriteit van digitale documenten.

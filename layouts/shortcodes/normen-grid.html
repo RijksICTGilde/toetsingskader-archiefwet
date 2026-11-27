@@ -1,9 +1,9 @@
 {{- /* Boxed + clickable card-grid voor normen-section.
        Title prefix met norm_id, kern als kaart-body. */ -}}
 {{- with site.GetPage "/normen" -}}
-<div class="card-grid boxed clickable">
+<ul class="card-grid boxed clickable" role="list">
   {{- range .Pages.ByWeight }}
-  <article>
+  <li><article class="card">
     <header>
       <h2>
         <a href="{{ .RelPermalink }}">{{ .Params.norm_id }}. {{ .Params.norm_titel | default .Title }}</a>
@@ -16,7 +16,7 @@
     {{ with .Params.kern_kaart | default .Params.kern }}
     <p>{{ . }}</p>
     {{ end }}
-  </article>
+  </article></li>
   {{- end }}
-</div>
+</ul>
 {{- end -}}

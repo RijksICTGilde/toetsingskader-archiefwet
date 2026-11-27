@@ -9,11 +9,6 @@ weight: 3
 aliases:
   - /over/duurzame-toegankelijkheid/
 show_lastmod: true
-# Zelfde breedte als /normen/ en /over/.
-wide: true
-# Inhoudsopgave standaard uitgeklapt (feedback 25 augustus 2026); zie
-# layouts/_partials/article.html.
-toc_open: true
 ---
 
 Dat documenten in beheer moeten zijn, is het fundament van het toetsingskader. De norm [Inbeheername en beheer]({{< relref "/normen/01-beheer" >}}) staat daarom in het midden; de andere normen werken uit wat er ook in een beheerde omgeving geregeld moet zijn.

@@ -4,15 +4,15 @@
 Contentformaat:
 
   - Front matter: alleen machinaal gebruikte velden (`title`, `weight`,
-    `norm_id`, `norm_titel`, `versie`, `kern`, `synoniemen`), zonder
-    voetnoten of markdown in `kern`/`synoniemen`. Optioneel: `kern_bron`
+    `norm_id`, `norm_titel`, `versie`, `kern`, `synonyms`), zonder
+    voetnoten of markdown in `kern`/`synonyms`. Optioneel: `kern_bron`
     en `kern_bron_url`, de bronvermelding onder de kern.
   - Body: vaste koppen `## Toelichting` en `## Voorschriften` (verplicht,
-    met `#### Voorschrift` -> optioneel `#### Criteria`/`#### Criterium` en
-    `#### Indicatoren`/`#### Indicator`, eventueel gegroepeerd onder een
+    met `#### Voorschrift` -> optioneel `##### Criteria`/`##### Criterium`
+    en `##### Indicatoren`/`##### Indicator`, eventueel gegroepeerd onder een
     `### <thema>`), `## Reikwijdte` (mag een achtervoegsel hebben) en
     `## Gerelateerde onderwerpen` (optioneel). Geen `#`-kop, geen koppen
-    dieper dan h4. De koppen volgen het normblad woord voor woord.
+    dieper dan h5. De koppen volgen het normblad woord voor woord.
   - Bronnen zijn Goldmark-voetnoten: elke `[^id]` heeft een definitie en
     andersom; ids zijn kleine letters, cijfers en koppeltekens.
 
@@ -31,7 +31,7 @@ except ImportError:
     sys.exit(1)
 
 # Front matter: alleen machinaal gebruikte velden.
-REQUIRED_FIELDS = ["title", "weight", "norm_id", "norm_titel", "versie", "kern", "synoniemen"]
+REQUIRED_FIELDS = ["title", "weight", "norm_id", "norm_titel", "versie", "kern", "synonyms"]
 
 # Stonden in het oude formaat in de front matter, horen nu in de body.
 # Aanwezigheid is een fout, zodat migraties niet half blijven.
@@ -42,7 +42,7 @@ DEPRECATED_FIELDS = [
     "reikwijdte",
     "gerelateerde_onderwerpen",
     "wetsverwijzing",
-    "show_referenties",
+    "show_references",
 ]
 
 REQUIRED_SECTIONS = ["Toelichting", "Voorschriften"]
@@ -54,10 +54,13 @@ ALLOWED_SECTIONS = REQUIRED_SECTIONS + OPTIONAL_SECTIONS
 # is goed; de sectie telt mee als "Reikwijdte".
 SECTION_PREFIXES = ["Reikwijdte"]
 
-# h4-subkoppen. Enkelvoud én meervoud zijn goed: de normbladen gebruiken
-# "Criterium:"/"Indicator:" waar het er één is en "Criteria:"/"Indicatoren:"
-# waar het er meer zijn, en de site volgt dat.
-ALLOWED_SUBHEADINGS = ["Voorschrift", "Criteria", "Criterium", "Indicatoren", "Indicator"]
+# h4 is het voorschrift, h5 zijn de onderdelen ervan: als gelijke h4's hoorde
+# een screenreader drie nevengeschikte onderdelen (WCAG 1.3.1). Enkelvoud én
+# meervoud zijn goed: de normbladen gebruiken "Criterium:"/"Indicator:" waar het
+# er één is en "Criteria:"/"Indicatoren:" waar het er meer zijn, en de site
+# volgt dat.
+VOORSCHRIFT_HEADING = "Voorschrift"
+ALLOWED_SUBHEADINGS = ["Criteria", "Criterium", "Indicatoren", "Indicator"]
 
 ID_RE = re.compile(r"^[a-z0-9-]+$")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*$")
@@ -142,15 +145,15 @@ def validate_front_matter(name, fm_text, errors):
                 line=find_field_line(fm_text, field),
             ))
 
-    if isinstance(fm.get("synoniemen"), list):
-        for syn in fm["synoniemen"]:
+    if isinstance(fm.get("synonyms"), list):
+        for syn in fm["synonyms"]:
             if isinstance(syn, str) and "[^" in syn:
-                errors.append(Error(name, "'synoniemen' mag geen voetnoten ([^...]) bevatten",
-                                    line=find_field_line(fm_text, "synoniemen")))
+                errors.append(Error(name, "'synonyms' mag geen voetnoten ([^...]) bevatten",
+                                    line=find_field_line(fm_text, "synonyms")))
                 break
-    elif "synoniemen" in fm and fm["synoniemen"] is not None:
-        errors.append(Error(name, "'synoniemen' moet een lijst zijn",
-                            line=find_field_line(fm_text, "synoniemen")))
+    elif "synonyms" in fm and fm["synonyms"] is not None:
+        errors.append(Error(name, "'synonyms' moet een lijst zijn",
+                            line=find_field_line(fm_text, "synonyms")))
 
     if isinstance(fm.get("kern"), str) and "[^" in fm["kern"]:
         errors.append(Error(name, "'kern' mag geen voetnoten ([^...]) bevatten",
@@ -222,6 +225,7 @@ def validate_headings(name, body_lines, body_start, errors):
     current_theme_line = None  # regel van de actieve ### thema (binnen Voorschriften)
     theme_has_voorschrift = {}  # regel-van-thema -> bool
     voorschriften_has_h4 = False  # '#### Voorschrift' direct onder '## Voorschriften'
+    in_voorschrift = False  # een '#### Voorschrift' sinds de laatste h2/h3
 
     def section_name(title):
         """De sectienaam waaronder een h2 meetelt; vangt 'Reikwijdte <extra>'."""
@@ -250,9 +254,12 @@ def validate_headings(name, body_lines, body_start, errors):
             errors.append(Error(name, "Gebruik geen '#'-kop in de body; de titel komt uit de front matter", lineno))
             continue
 
-        if level >= 5:
-            errors.append(Error(name, f"Gebruik geen koppen dieper dan h4 (gevonden: h{level} '{title}')", lineno))
+        if level >= 6:
+            errors.append(Error(name, f"Gebruik geen koppen dieper dan h5 (gevonden: h{level} '{title}')", lineno))
             continue
+
+        if level in (2, 3):
+            in_voorschrift = False
 
         if level == 2:
             current_h2 = section_name(title)
@@ -275,14 +282,28 @@ def validate_headings(name, body_lines, body_start, errors):
             # voorschriften niet, en de koppen komen uit het normblad.
             if current_h2 != "Voorschriften":
                 errors.append(Error(name, f"'#### {title}' mag alleen binnen '## Voorschriften' staan", lineno))
-            if title not in ALLOWED_SUBHEADINGS:
-                allowed = ", ".join(f"'#### {s}'" for s in ALLOWED_SUBHEADINGS)
-                errors.append(Error(name, f"Onbekende subkop '#### {title}'. Toegestaan: {allowed}", lineno))
-            if title == "Voorschrift":
+            if title in ALLOWED_SUBHEADINGS:
+                errors.append(Error(name, f"'{title}' valt onder het voorschrift: gebruik '##### {title}'", lineno))
+            elif title != VOORSCHRIFT_HEADING:
+                errors.append(Error(name, f"Onbekende kop '#### {title}'. Toegestaan: '#### {VOORSCHRIFT_HEADING}'", lineno))
+            if title == VOORSCHRIFT_HEADING:
+                in_voorschrift = True
                 if current_theme_line is not None:
                     theme_has_voorschrift[current_theme_line] = True
                 elif current_h2 == "Voorschriften":
                     voorschriften_has_h4 = True
+
+        elif level == 5:
+            if current_h2 != "Voorschriften":
+                errors.append(Error(name, f"'##### {title}' mag alleen binnen '## Voorschriften' staan", lineno))
+            if title == VOORSCHRIFT_HEADING:
+                errors.append(Error(name, f"'{title}' is zelf het voorschrift: gebruik '#### {title}'", lineno))
+                continue
+            if title not in ALLOWED_SUBHEADINGS:
+                allowed = ", ".join(f"'##### {s}'" for s in ALLOWED_SUBHEADINGS)
+                errors.append(Error(name, f"Onbekende subkop '##### {title}'. Toegestaan: {allowed}", lineno))
+            elif current_h2 == "Voorschriften" and not in_voorschrift:
+                errors.append(Error(name, f"'##### {title}' staat niet onder een '#### {VOORSCHRIFT_HEADING}'", lineno))
 
     for section in REQUIRED_SECTIONS:
         if section not in seen_sections:

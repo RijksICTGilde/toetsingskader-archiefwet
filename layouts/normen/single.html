@@ -31,63 +31,12 @@
 <article class="norm{{ if .Params.wide }} wide{{ end }}">
   <header>
     <h1>{{ .Title }}</h1>
-    {{- if $hasToc -}}
-    {{/* De aside rendert met `is-open` (zie onder), dus de knop start in de
-         uitgeklapte toestand. Stond hier `aria-expanded="false"`, dan meldde de
-         knop permanent het omgekeerde van de werkelijkheid: de eerste klik zag
-         de aside als open, sloot hem en zette `false` opnieuw — de state `true`
-         werd nooit bereikt (WCAG 4.1.2). De thema-JS (toc.js) corrigeert de
-         attributen niet bij het laden; die roept alleen openToc() aan als
-         localStorage "true" zegt. */}}
-    <button class="toc-toggle" aria-expanded="true" aria-controls="toc">
-      {{- partial "icon.html" "toc-open" -}}
-      {{- partial "icon.html" "toc-close" -}}
-      <span class="visually-hidden">Inhoudsopgave verbergen</span>
-    </button>
-    {{- end -}}
   </header>
 
-  {{ with .Params.kern }}
-  {{/* Geen kop boven de kern (keuze 31 augustus 2026): de callout staat direct
-       onder de h1 en de tekst zelf zegt wat de kern is. Daarmee staat de kern
-       ook niet in de inhoudsopgave — een TOC-link hoort naar een kop te wijzen
-       (WCAG 2.4.6), en de kern staat toch bovenaan. De eerdere kop "N. Kern van
-       <norm>" (met `_partials/kern-kop.html`) is verwijderd; zie
-       docs/pdr/0004-normtekst-woord-voor-woord-review-gaat-voor.md. Het id blijft voor bestaande links. */}}
-  <blockquote id="kern" class="callout">
-    <div class="content">{{ . | markdownify }}</div>
-    {{/* De bron staat als los front-matter-veld en niet als voetnoot in
-         `kern`: die tekst gaat ook naar de zoekindex en naar de PDF, en een
-         voetnootmarker zonder definitie is daar ruis. */}}
-    {{- with $page.Params.kern_bron }}
-    {{/* Zelfde behandeling als een voetnootbron: afkortingen uitgeschreven
-         (3.1.4) en een bronlink die in een linkoverzicht te onderscheiden is
-         (2.4.9, bevinding 27). */}}
-    <p class="kern-bron">Bron: {{ partial "afkortingen.html" (. | markdownify | string) | safeHTML }}
-      {{- with $page.Params.kern_bron_url }}
-      <a href="{{ . }}" aria-label="Bekijk bron: {{ $page.Params.kern_bron | markdownify | plainify | strings.TrimRight " .;:" }}">Bekijk bron</a>
-      {{- end -}}
-    </p>
-    {{- end }}
-  </blockquote>
-  {{ end }}
-
-  {{ $content | safeHTML }}
-
-  {{ with $refs }}{{ . | safeHTML }}{{ end }}
-
-  {{- $pageNav := partial "page-nav.html" . -}}
-  {{- $lastmod := partial "lastmod.html" . -}}
-  {{- if or (trim $lastmod " \n\t") (trim $pageNav " \n\t") -}}
-  <footer>
-    {{- $lastmod -}}
-    {{- $pageNav -}}
-  </footer>
-  {{- end -}}
-</article>
-
-{{- if $hasAside -}}
-<aside id="toc" class="toc is-open" aria-label="Op deze pagina">
+  {{- if $hasAside }}
+  {{/* De rechterkolom van het thema (.page-aside binnen het article), met een
+       eigen inhoudsopgave en de PDF-knop. */}}
+  <aside class="page-aside">
   {{/* Een gewone link naar een bestaand bestand: de PDF wordt bij de build
        gemaakt (scripts/pdf-build.mjs, pdfkit) en staat als index.pdf naast de
        pagina. Werkt dus ook zonder JavaScript. Alleen waar het
@@ -107,8 +56,8 @@
   {{- end -}}
   {{- end -}}
   {{- if $hasToc -}}
-  <h2>Op deze pagina</h2>
-  <nav>
+  <nav id="toc" class="toc" aria-label="Inhoudsopgave">
+    <h2>Op deze pagina</h2>
     <ul>
       {{- range $headings -}}
       <li>
@@ -120,8 +69,9 @@
              `<a href="#"></a>`: een link zonder toegankelijke naam (WCAG 2.4.4,
              axe link-name). Norm 1 heeft nog wel h3's ("Besturing") en houdt zijn
              subregels. De kleinkinderen van zo'n lege knoop zijn hier
-             "Voorschrift"/"Criteria"/"Indicatoren" — als TOC-regel betekenisloos
-             en onderling niet te onderscheiden, dus die halen we niet naar boven. */}}
+             "Voorschrift", met "Criteria"/"Indicatoren" als h5 daaronder: als
+             TOC-regel betekenisloos en onderling niet te onderscheiden, dus die
+             halen we niet naar boven. */}}
         {{- with where .Headings "ID" "!=" "" -}}
         <ul>
           {{- range . -}}<li><a href="#{{ .ID }}">{{ .Title }}</a></li>{{- end -}}
@@ -133,7 +83,48 @@
     </ul>
   </nav>
   {{- end -}}
-</aside>
-{{- end -}}
+  {{- /* Chevron voor de uitklapknoppen op smal scherm (toc.js van het thema). */}}
+  <template id="page-aside-chevron">{{ partial "icon.html" "chevron-down" }}</template>
+  </aside>
+  {{- end }}
+
+  <div class="article-text">
+  {{ with .Params.kern }}
+  {{/* Geen kop boven de kern (keuze 31 augustus 2026): de callout staat direct
+       onder de h1 en de tekst zelf zegt wat de kern is. Daarmee staat de kern
+       ook niet in de inhoudsopgave — een TOC-link hoort naar een kop te wijzen
+       (WCAG 2.4.6), en de kern staat toch bovenaan. De eerdere kop "N. Kern van
+       <norm>" (met `_partials/kern-kop.html`) is verwijderd; zie
+       docs/pdr/0004-normtekst-woord-voor-woord-review-gaat-voor.md. Het id blijft voor bestaande links. */}}
+  <div id="kern" class="callout">
+    <div class="content"><p>{{ . | markdownify }}</p>
+    {{/* De bron staat als los front-matter-veld en niet als voetnoot in
+         `kern`: die tekst gaat ook naar de zoekindex en naar de PDF, en een
+         voetnootmarker zonder definitie is daar ruis. */}}
+    {{- with $page.Params.kern_bron }}
+    {{/* Zelfde behandeling als een voetnootbron: afkortingen uitgeschreven
+         (3.1.4) en een bronlink die in een linkoverzicht te onderscheiden is
+         (2.4.9, bevinding 27). */}}
+    <p class="kern-bron">Bron: {{ partial "afkortingen.html" (. | markdownify | string) | safeHTML }}
+      {{- with $page.Params.kern_bron_url }}
+      <a href="{{ . }}" aria-label="Bekijk bron: {{ $page.Params.kern_bron | markdownify | plainify | strings.TrimRight " .;:" }}">Bekijk bron</a>
+      {{- end -}}
+    </p>
+    {{- end }}
+    </div>
+  </div>
+  {{ end }}
+
+  {{ $content | safeHTML }}
+
+  {{ with $refs }}{{ . | safeHTML }}{{ end }}
+
+  {{- with partial "page-nav.html" . }}
+  <footer>
+    {{ . }}
+  </footer>
+  {{- end }}
+  </div>
+</article>
 
 {{ end }}

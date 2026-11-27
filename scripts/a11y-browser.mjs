@@ -176,9 +176,18 @@ function describeFocus() {
   // Midden plus vier hoeken. Bij een ronde link liggen de hoeken buiten de vorm
   // en raken ze de buren, dus: het midden telt, of twee hoeken met dezelfde dader.
   const center = [r.left + r.width / 2, r.top + r.height / 2]
+  // Bij een ronde hoek ligt het meetpunt op de diagonaal binnen de boog
+  // (0,3 x de straal); anders meet een pilvormige knop zijn achtergrond.
+  const short = Math.min(r.width, r.height)
+  const inset = prop => {
+    const v = cs[prop]
+    const radius = v.endsWith('%') ? parseFloat(v) / 100 * short : parseFloat(v) || 0
+    return 2 + 0.3 * Math.min(radius, short / 2)
+  }
+  const [tl, tr, bl, br] = ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomLeftRadius', 'borderBottomRightRadius'].map(inset)
   const corners = [
-    [r.left + 2, r.top + 2], [r.right - 2, r.top + 2],
-    [r.left + 2, r.bottom - 2], [r.right - 2, r.bottom - 2],
+    [r.left + tl, r.top + tl], [r.right - tr, r.top + tr],
+    [r.left + bl, r.bottom - bl], [r.right - br, r.bottom - br],
   ]
   const hitAt = ([x, y]) => {
     if (x < 0 || y < 0 || x > window.innerWidth || y > window.innerHeight) return null
@@ -218,6 +227,11 @@ async function tabWalk(page, url) {
   let first = null
   for (let i = 0; i < 150; i++) {
     await page.keyboard.press('Tab')
+    // Eerst de overgangen die de focus start laten aflopen: een tooltip die
+    // nog invliegt, ligt even over de term.
+    await page.evaluate(() => Promise.all(document.getAnimations()
+      .filter(a => a.effect?.getComputedTiming().endTime !== Infinity)
+      .map(a => a.finished.catch(() => {}))))
     const info = await page.evaluate(describeFocus)
     if (!info) break
     // Tabring is rond.

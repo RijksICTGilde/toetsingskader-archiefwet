@@ -66,12 +66,20 @@ jobs:
         # Alleen een echte tag exporteren; geen tag → hugo.yaml-default (geen hash).
         run: |
           V="$(git describe --tags --abbrev=0 2>/dev/null || true)"
-          if [ -n "$V" ]; then echo "HUGO_PARAMS_VERSIE=$V" >> "$GITHUB_ENV"; fi
+          if [ -n "$V" ]; then echo "HUGO_PARAMS_VERSION=$V" >> "$GITHUB_ENV"; fi
 
       - name: Build site
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
         run: hugo --gc --minify --logLevel warning
+
+      - name: Theme-pin onveranderd
+        # Zonder require in go.mod haalt Hugo stil de nieuwste theme-versie op.
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+        run: |
+          hugo mod verify
+          git diff --exit-code -- go.mod go.sum
 
       - name: Setup Node
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -99,6 +107,10 @@ jobs:
           hugo --minify --quiet --baseURL / --destination .a11y/public
           npm run test:a11y:browser
 
+      - name: Zoeken in de browser
+        # Gebruikt de build en Chromium van de stap hiervoor.
+        run: npm run test:zoeken
+
       - name: PDF's genereren en de markers controleren
         # pdfkit in Node (scripts/pdf-tagged.mjs) — geen browser nodig.
         # pdf-ua-check meet daarna op de ruwe bytes of /StructTreeRoot,
@@ -108,6 +120,19 @@ jobs:
         run: |
           npm run build:pdf
           npm run test:pdf-ua
+
+      - name: PDF/UA-1-validatie (veraPDF)
+        # De hele norm voor zover machinaal te toetsen, bovenop de markers
+        # hierboven; faalt bij elke mislukte controle in elk van de negen PDF's.
+        # Image op digest. Dependabot ziet geen image in een run-regel, dus
+        # tag en digest met de hand bijwerken (`podman manifest inspect`).
+        # De repo op hetzelfde pad in de container, zodat de bestandsnamen in
+        # het rapport kloppen.
+        env:
+          VERAPDF: >-
+            docker run --rm -v ${{ github.workspace }}:${{ github.workspace }}:ro -w ${{ github.workspace }}
+            docker.io/verapdf/cli:v1.30.4@sha256:c2ac9448973a56acd833c81441e38d2dca58ea26a2ce1621e9a32e85d3d2728f
+        run: npm run test:pdf-verapdf
 
       - name: PDF's bewaren
         # Vier markers is een ondergrens, geen conformiteitsverklaring: of de

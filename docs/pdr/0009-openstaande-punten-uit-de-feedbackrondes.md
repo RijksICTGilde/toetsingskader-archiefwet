@@ -26,7 +26,7 @@ Besloten en uitgevoerd:
 - De kern heeft geen kop meer (31 augustus 2026).
 - Onder "Gerelateerde onderwerpen" staan alleen gelinkte items.
 - De zin "De inhoud is nog in ontwikkeling en kan wijzigen." is weg, op de site en in de PDF. De versiezin komt uit één partial.
-- Op de onderwerpenindex staat geen regel tekst per onderwerp. De navigatie vorige en volgende is weg bij Onderwerpen en Over.
+- Op de onderwerpenindex staat geen regel tekst per onderwerp. De navigatie vorige en volgende ging weg bij Onderwerpen en Over (#80) en kwam daarna terug: bij Over op 26 augustus (#79) en bij Onderwerpen op 1 september (#82).
 - Elke onderwerpenpagina heeft een "Zie ook" met de normbladen waar het begrip speelt.
 - Het bollendiagram is kleiner en de inhoudsopgave staat standaard uitgeklapt.
 - In de PDF is "Belangrijke informatie" vervangen door de versieregel met een link naar de site.
@@ -96,7 +96,8 @@ Per punt staat waar het zit. Verwerkt = weghalen uit deze lijst.
 - [x] **Onderwerpen niet in een carousel.** Bedoeld was de vorige/volgende-
       navigatie; die is weg (zie hierboven).
 - [x] **Menu'tje (vorige/volgende) weg.** `prev_next` in
-      `content/onderwerpen/_index.md` en de page-nav in de layout.
+      `content/onderwerpen/_index.md` en de page-nav in de layout. Op
+      1 september teruggezet (#82), net als bij Over op 26 augustus (#79).
 - [x] **Hover op "document" (Wettelijk kader)**: de tooltip-transformatie is
       een partial (`_partials/voetnoot-tooltips.html`) en draait via de
       `article.html`-shadow op alle gewone pagina's. De voetnoot zelf zit in #78.

@@ -1,0 +1,5 @@
+{{- /* Hook van het theme: voetnoten worden tooltips met een referentielijst
+       (voetnoot-tooltips.html), en vreemde termen krijgen hun taal
+       (vreemde-termen.html). */ -}}
+{{- $vt := partial "voetnoot-tooltips.html" (dict "content" (partial "vreemde-termen.html" .)) -}}
+{{- return printf "%s%s" $vt.content ($vt.refs | default "") -}}

@@ -8,7 +8,7 @@ kern: "Een document is in beheer van het verantwoordelijke overheidsorgaan, zoda
 kern_bron: "Archiefbesluit, artikel 2.1, eerste lid; Archiefwet, artikel 4.1, eerste lid."
 kern_bron_url: "https://zoek.officielebekendmakingen.nl/stb-2026-321.html"
 kern_kaart: "Een document bevindt zich in een beheerde omgeving, zodat de beheertaken kunnen worden uitgevoerd waarmee documenten duurzaam toegankelijk gemaakt worden en blijven."
-synoniemen:
+synonyms:
   - "Opname (DUTO)"
   - "Duurzaam toegankelijk (DUTO)"
   - "Beheerstrategie"
@@ -54,12 +54,12 @@ Het verantwoordelijke overheidsorgaan heeft regels vastgesteld over het archiefb
 
 [^aw-artikel-4-2-lid-1]: Archiefwet, artikel 4.2, eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
-#### Criteria
+##### Criteria
 
 - De vastgestelde beheerregels zijn actueel.
 - De vastgestelde beheerregels zijn volledig.
 
-#### Indicatoren
+##### Indicatoren
 
 - De beschreven verantwoordelijken in de beheerregels komen overeen met het mandaatbesluit van de organisatie.
 - De beheerregels zijn van toepassing op alle organisatieonderdelen die onder de verantwoordelijkheid van de organisatie vallen.
@@ -76,11 +76,11 @@ b) te [vernietigen](/normen/07-vernietigen/). [^aw-artikel-4-2-lid-2]
 [^categorie-vormvrij-maar-relatie-hebben-selectieb]: Categorie is vormvrij, maar moet wel een relatie hebben met het selectiebesluit.
 [^aw-artikel-4-2-lid-2]: Archiefwet, artikel 4.2, tweede lid, sub b. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
-#### Criteria
+##### Criteria
 
 *Bij dit voorschrift zijn geen aanvullende criteria.*
 
-#### Indicator
+##### Indicator
 
 - In een strategisch informatie overleg (SIO), of een soortgelijk overleg,[^ab-nota-toelichting-8] worden keuzes gemaakt over het ontwerp en de inrichting van de informatiehuishouding die van invloed zijn op de duurzame toegankelijkheid van documenten.[^ab-nota-toelichting-8]
 
@@ -94,7 +94,7 @@ a) duurzaam toegankelijk te maken en te houden;
 
 b) te [vernietigen](/normen/07-vernietigen/).
 
-#### Criteria
+##### Criteria
 
 - In de passende maatregelen is beschreven dat documenten zich in een beheerde omgeving moeten bevinden.
 - De passende maatregelen zijn van toepassing op alle omgevingen waarin overheidsinformatie wordt opgeslagen. Denk hierbij aan bijvoorbeeld documentmanagementsystemen, maar ook back-ups[^kamerstukken-2021-22-35968-4-4-selectie], cloudomgevingen, samenwerkingsruimtes en e-mailapplicaties.
@@ -106,7 +106,7 @@ b) te [vernietigen](/normen/07-vernietigen/).
 
 [^kamerstukken-2021-22-35968-4-4-selectie]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, Algemeen Deel, 4.4 selectie. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
-#### Indicatoren
+##### Indicatoren
 
 - De organisatie heeft (de principes van) archiveren by design geïmplementeerd.
 - Er zijn werkinstructies, procedures en handboeken voor het duurzaam toegankelijk maken en houden van documenten. Deze worden door middel van de [periodieke evaluatie](/normen/08-periodieke-evaluatie/) verbeterd.
@@ -118,11 +118,11 @@ Het verantwoordelijke overheidsorgaan heeft de door hem vastgestelde beheerregel
 
 [^aw-artikel-4-2-lid-3]: Archiefwet, artikel 4.2, derde lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
-#### Criteria
+##### Criteria
 
 *Bij dit voorschrift zijn geen aanvullende criteria.*
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 
@@ -132,11 +132,11 @@ Het verantwoordelijke overheidsorgaan heeft inzichtelijk welke categorieën docu
 
 [^ab-artikelen-2-2-2-3]: Archiefbesluit, artikelen 2.2, 2.3, 2.4. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
-#### Criteria
+##### Criteria
 
 *Bij dit voorschrift zijn geen aanvullende criteria.*
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 
@@ -147,7 +147,7 @@ Het verantwoordelijke overheidsorgaan heeft in de beheerregels[^aw-artikel-4-2-l
 [^aw-artikel-4-2-lid-2-sub-a]: Archiefwet, artikel 4.2, tweede lid, sub a [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 [^kamerstukken-2021-22-35968-2]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 4.3, Duurzame toegankelijkheid, beheerstrategie, 2e alinea. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 
-#### Criteria
+##### Criteria
 
 - In ieder geval de volgende beheertaken zijn zowel op leidinggevend als uitvoerend niveau beschreven:
   - Het (doen) ontwerpen van selectiebesluiten;[^kamerstukken-2021-22-35968-3]
@@ -161,7 +161,7 @@ Het verantwoordelijke overheidsorgaan heeft in de beheerregels[^aw-artikel-4-2-l
 [^kamerstukken-2021-22-35968-3]: Archiefwet, Memorie van Toelichting, Kamerstukken II 2021/22, 35968, nr. 3, paragraaf 2.2, Zorgdrager of verantwoordelijke overheidsorgaan. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-3.html)
 [^ar-toelichting-algemeen-deel-h1-eisen-2]: Archiefregeling, Toelichting, Algemeen deel, H1 Eisen die van toepassing zijn op alle documenten. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Indicatoren
+##### Indicatoren
 
 - In de beheerregels staan de dienstonderdelen en de verantwoordelijke functies/rollen die belast zijn met de beheertaken op zowel sturingsniveau als uitvoeringsniveau.
 
@@ -172,11 +172,11 @@ Het verantwoordelijke overheidsorgaan heeft in de beheerregels een nadere omschr
 [^heet-aw1995-kwaliteitssyteem]: Dit heet in de AW1995 "kwaliteitssysteem".
 [^aw-artikel-4-2-lid-2-2]: Archiefwet, artikel 4.2, tweede lid, sub c. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
-#### Criteria
+##### Criteria
 
 *Bij dit voorschrift zijn geen aanvullende criteria.*
 
-#### Indicator
+##### Indicator
 
 - Er is een informatiebeheerplan dat toetsbare doelstellingen verbindt aan een voortdurende verbetercyclus.[^aw-memorie-toelichting-4-3-beheerstrategie]
 
@@ -191,7 +191,7 @@ Het verantwoordelijke overheidsorgaan heeft alle[^aw-artikel-4-1-lid-2] opgemaak
 [^hoeft-geen-systeem-zoals-documentmanagementsyste]: Dit hoeft geen systeem te zijn zoals een documentmanagementsysteem. Een beheerde omgeving is een omgeving met functionaliteiten en voorzieningen waarmee een organisatie in staat is om documenten te beheren volgens de normen uit de archiefwet- en regelgeving.
 [^aw-artikel-4-1-ab-artikel]: Archiefwet artikel 4.1 en Archiefbesluit artikel 2.1; Kamerstukken 2022/23, 35968, nr. 8, Eerste nota van wijzigingen, Onderdeel C (artikel 4.1).
 
-#### Criteria
+##### Criteria
 
 - Een document in beheer is:
   - binnen een redelijke termijn [vindbaar](/normen/06-vindbaar/)[^ab-artikel-2-1-lid-1-3], beschikbaar[^ab-artikel-2-1-lid-1-4] en leesbaar;[^ab-artikel-2-1-lid-1-5]
@@ -212,7 +212,7 @@ Het verantwoordelijke overheidsorgaan heeft alle[^aw-artikel-4-1-lid-2] opgemaak
 [^ab-artikel-2-1-lid-1-7]: Archiefbesluit, artikel 2.1, eerste lid, sub e. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 [^ab-art]: Archiefbesluit, art. 4.1, derde lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 

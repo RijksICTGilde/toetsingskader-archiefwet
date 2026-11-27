@@ -10,7 +10,7 @@ kern: "Het verantwoordelijke overheidsorgaan vernietigt documenten waarvan de be
 kern_bron: "Archiefwet, artikel 5.3, eerste lid; Archiefbesluit, artikel 4.1; Archiefregeling, artikel 4.1; Archiefregeling, artikel 4.2. *(Bron beschikbaar na publicatie van de Archiefregeling.)*"
 kern_bron_url: "https://zoek.officielebekendmakingen.nl/kst-35968-2.html"
 kern_kaart: "Documenten moeten gecontroleerd vernietigd worden."
-synoniemen:
+synonyms:
   - "Wissen"
   - "Verwijderen"
   - "Ontoegankelijk maken"
@@ -37,7 +37,7 @@ Het verantwoordelijke overheidsorgaan heeft in ieder geval één selectiebesluit
 
 [^aw-artikel-5-1-lid-1]: Archiefwet, artikel 5.1, eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
-#### Criterium
+##### Criterium
 
 - Het selectiebesluit:
   - voldoet aan de eisen voor reikwijdte, vorm en inhoud voor het selectiebesluit;[^ab-artikel-3-1]
@@ -50,7 +50,7 @@ Het verantwoordelijke overheidsorgaan heeft in ieder geval één selectiebesluit
 [^ab-nota-van-toelichting-aangrijpingspunt-p16]: Archiefbesluit, nota van toelichting, Algemeen deel, 3. Selectiebesluiten, Aangrijpingspunt voor start bewaartermijnen, p.16. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 [^aw-artikel-5-1-lid-4]: Archiefwet, artikel 5.1, vierde lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 
@@ -62,11 +62,11 @@ Het verantwoordelijke overheidsorgaan heeft [passende maatregelen](/onderwerpen/
 [^documenten-aw-artikel-5-1-lid-2-onderdeel-b]: Documenten als bedoeld in Archiefwet, artikel 5.1, tweede lid, onderdeel b.
 [^aw-artikel-5-3-lid-1]: Archiefwet, artikel 5.3, eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/kst-35968-2.html)
 
-#### Criterium
+##### Criterium
 
 - In de [beheerregels](/normen/01-beheer/) zijn passende maatregelen voor vernietiging vastgelegd.
 
-#### Indicator
+##### Indicator
 
 - De passende maatregelen zijn van toepassing op alle omgevingen waarin te vernietigen documenten worden opgeslagen. Denk hierbij bijvoorbeeld aan documentmanagementsystemen, maar ook back-ups,[^kamerstukken-35968-nr-3-selectie-backups] cloudomgevingen, samenwerkingsruimtes en e-mailapplicaties.
 
@@ -87,11 +87,11 @@ Het verantwoordelijke overheidsorgaan beschrijft in de procesbeschrijving van ve
 [^ar-artikel-4-1-lid-c]: Archiefregeling, artikel 4.1, lid c. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 [^ar-artikel-4-1-lid-d]: Archiefregeling, artikel 4.1 lid d. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criteria
+##### Criteria
 
 *Bij dit voorschrift zijn geen aanvullende criteria.*
 
-#### Indicatoren
+##### Indicatoren
 
 - Uit de beschrijving blijkt hoe het verantwoordelijke overheidsorgaan het proces van vernietiging heeft ingericht.
 - Uit de procesbeschrijving blijkt dat als onderdeel van het vernietigingsproces wordt geverifieerd dat de vernietiging plaatsvindt op basis van de juiste bewaartermijn.
@@ -102,7 +102,7 @@ Documenten worden na het verstrijken van de bewaartermijn gecontroleerd vernieti
 
 [^ab-artikel-4-1-lid-1]: Archiefbesluit, artikel 4.1, eerste lid. [Bekijk bron](https://zoek.officielebekendmakingen.nl/stb-2026-321.html)
 
-#### Criteria
+##### Criteria
 
 - Documenten worden alleen vernietigd als hiervoor een grondslag bestaat in een selectiebesluit van het verantwoordelijke overheidsorgaan;[^aw-artikel-5-1-lid-1]
 - Er is een verklaring van vernietiging opgesteld.
@@ -110,7 +110,7 @@ Documenten worden na het verstrijken van de bewaartermijn gecontroleerd vernieti
 
 [^na-digitaal-vernietigen]: Hoe kun je digitaal vernietigen? Nationaal Archief, kennisbank. [Bekijk bron](https://www.nationaalarchief.nl/archiveren/kennisbank/hoe-kun-je-digitaal-vernietigen#collapse-86789)
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 
@@ -129,11 +129,11 @@ Bij vernietiging van documenten, uitgezonderd de documenten die op elk moment mo
 [^ar-artikel-4-2-sub-c]: Archiefregeling, artikel 4.2, sub c. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 [^ar-artikel-4-2-sub-d]: Archiefregeling, artikel 4.2, sub d. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criteria
+##### Criteria
 
 *Bij dit voorschrift zijn geen aanvullende criteria.*
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 

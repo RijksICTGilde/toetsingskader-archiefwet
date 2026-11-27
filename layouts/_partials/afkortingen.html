@@ -18,7 +18,7 @@
      `\bart\.\b` matcht nooit "art. 5". Zo'n sleutel zou stilzwijgend niets doen,
      dus een harde controle in plaats van een belofte. */}}
 {{- $sleutels := slice -}}
-{{- range $afkorting, $voluit := site.Data.afkortingen -}}
+{{- range $afkorting, $voluit := hugo.Data.afkortingen -}}
   {{- if not (findRE `^[\p{L}\p{N}]+$` $afkorting) -}}
     {{- errorf "data/afkortingen.yaml: sleutel %q mag alleen letters en cijfers bevatten; met een leesteken erin matcht \\b…\\b nooit" $afkorting -}}
   {{- end -}}
@@ -64,7 +64,7 @@
          Een aanhalingsteken of ampersand in de YAML zou de <abbr>-tag anders
          openbreken, en dan is de uitleg die dit partial bestaansrecht geeft
          (WCAG 3.1.4) stilzwijgend weg — zonder buildfout en zonder scanmelding. */}}
-    {{- $voluit := index site.Data.afkortingen $afkorting -}}
+    {{- $voluit := index hugo.Data.afkortingen $afkorting -}}
     {{- $tekst = replace $tekst (printf "\x00%d\x01" $i) (printf `<abbr title="%s">%s</abbr>` (htmlEscape $voluit) $afkorting) -}}
   {{- end -}}
   {{- $out = $out | append (printf "%s%s" $tag $tekst) -}}

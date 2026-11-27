@@ -7,7 +7,7 @@ norm_titel: "Overzicht"
 kern: "Het verantwoordelijke overheidsorgaan beschikt over een actueel overzicht van de informatiehuishouding. Dit overzicht geeft aan welke (categorieën) documenten zich bij het overheidsorgaan bevinden en waar ze te vinden zijn."
 kern_bron: "Archiefregeling, artikel 2.3, aanhef; Archiefregeling, Toelichting, Algemene eisen, overzicht informatiehuishouding, p. 33-35. *(Bron beschikbaar na publicatie van de Archiefregeling.)*"
 kern_kaart: "De organisatie heeft een overzicht van welke documenten ze onder zich heeft en waar die zich bevinden."
-synoniemen:
+synonyms:
   - "Bestandsoverzicht"
 ---
 
@@ -41,11 +41,11 @@ Het verantwoordelijke overheidsorgaan heeft een actueel overzicht.[^ar-artikel-2
 
 [^ar-artikel-2-3-aanhef]: Archiefregeling, artikel 2.3, aanhef. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criteria
+##### Criteria
 
 *Bij dit voorschrift zijn geen aanvullende criteria.*
 
-#### Indicator
+##### Indicator
 
 - Er is een verantwoordelijke aangewezen voor de procedure om het overzicht actueel te houden.
 - Er is een procedure vastgelegd om het overzicht bij te werken bij wijzigingen in de informatiehuishouding. Voorbeelden van dit soort wijzigingen zijn de veranderingen van de organisatie, reorganisatie van taken, nieuwe of vervallen taken, overdracht, uitlening van archieven, nieuwe of uitgefaseerde cloudomgevingen, netwerkschijven, samenwerkingsruimtes of applicaties.
@@ -56,13 +56,13 @@ Het overzicht bevat[^ar-artikel-2-3-onder-a] een omschrijving van de taken van h
 
 [^ar-artikel-2-3-onder-a]: Archiefregeling, artikel 2.3, onder a. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criteria
+##### Criteria
 
 - Het overzicht is volledig.
 - De juiste definitie van overheidsinformatie (conform artikel 1.1 van de Archiefwet) wordt gebruikt voor het overzicht.
 - Het overzicht kan worden gemaakt op het moment dat er een vraag naar is.
 
-#### Indicatoren
+##### Indicatoren
 
 - Er is een verantwoordelijke aangewezen voor de procedure om het overzicht volledig te houden.
 - De taken, zoals beschreven in het selectiebesluit, komen terug in het overzicht, en omgekeerd komen de taken in het overzicht terug in het selectiebesluit.
@@ -79,7 +79,7 @@ Het overzicht bevat de vindplaats van (categorieën) documenten.[^ar-artikel-2-3
 
 [^ar-artikel-2-3-onder-c]: Archiefregeling, artikel 2.3, onder c. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criterium
+##### Criterium
 
 - Dit overzicht bevat, indien van toepassing, de vindplaats van:
   - aan derden uitgeleend materiaal;
@@ -88,7 +88,7 @@ Het overzicht bevat de vindplaats van (categorieën) documenten.[^ar-artikel-2-3
   - informatie van uitbestede taken;
   - informatie van de rechtsvoorgangers van de organisatie.
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 
@@ -96,11 +96,11 @@ Het overzicht bevat de vindplaats van (categorieën) documenten.[^ar-artikel-2-3
 
 Het overzicht geeft de samenhang tussen (categorieën) documenten weer.[^ar-artikel-2-3-onder-c]
 
-#### Criterium
+##### Criterium
 
 - Het overzicht geeft inzicht in de relaties tussen overheidsinformatie onderling en in de relatie met de werkprocessen.
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 
@@ -110,11 +110,11 @@ Het overzicht bevat, in het geval het verantwoordelijke overheidsorgaan beschikt
 
 [^ar-artikel-2-3-onder-d]: Archiefregeling, artikel 2.3, onder d. *(Bron beschikbaar na publicatie van de Archiefregeling.)*
 
-#### Criteria
+##### Criteria
 
 *Bij dit voorschrift zijn geen aanvullende criteria.*
 
-#### Indicatoren
+##### Indicatoren
 
 *Bij dit voorschrift zijn geen indicatoren.*
 

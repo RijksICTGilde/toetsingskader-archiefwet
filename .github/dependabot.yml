@@ -19,3 +19,9 @@ updates:
     directory: /
     schedule:
       interval: weekly
+
+  # Het theme als Hugo Module; tools.go houdt de require in go.mod.
+  - package-ecosystem: gomod
+    directory: /
+    schedule:
+      interval: weekly

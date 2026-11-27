@@ -44,8 +44,8 @@ geïnstalleerd te worden. Zie ook de training in
 | `## Voorschriften` | uitwerking (verplicht), met daarbinnen: |
 | `### <thema>` | optionele subkop, alleen als het normblad er een heeft (bijvoorbeeld "Besturing") |
 | `#### Voorschrift` | de norm zelf, als eis geformuleerd ("Het verantwoordelijke overheidsorgaan heeft …"), niet als toetsvraag |
-| `#### Criteria` / `#### Criterium` | waaraan getoetst wordt (lijst met `-`); enkelvoud als het normblad dat schrijft |
-| `#### Indicatoren` / `#### Indicator` | hoe vastgesteld wordt of aan het criterium is voldaan (lijst met `-`); enkelvoud als het normblad dat schrijft |
+| `##### Criteria` / `##### Criterium` | onder het voorschrift: waaraan getoetst wordt (lijst met `-`); enkelvoud als het normblad dat schrijft |
+| `##### Indicatoren` / `##### Indicator` | onder het voorschrift: hoe vastgesteld wordt of aan het criterium is voldaan (lijst met `-`); enkelvoud als het normblad dat schrijft |
 | `## Reikwijdte` | op welke documenten de norm van toepassing is (optioneel; mag een achtervoegsel hebben, zoals "Reikwijdte inbeheername en beheer") |
 | `## Gerelateerde onderwerpen` | verwijzingen naar andere normen of onderwerpen (optioneel) |
 

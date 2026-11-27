@@ -1,8 +1,8 @@
 {{- /* Callout waarvan de inhoud in de pagina-context rendert.
 
-  Gebruik met procent-haken: {{% callout-md titel="…" variant="…" %}}…{{% /callout-md %}}
+  Gebruik met procent-haken: {{% callout-md title="…" variant="…" %}}…{{% /callout-md %}}
 
-  Verschil met `callout` uit het thema: die doet `.Inner | markdownify`, een
+  Verschil met `callout` uit het thema: die rendert `.Inner` apart, een
   losse markdown-context. Een voetnoot `[^id]` in het blok vindt daar zijn
   definitie niet en blijft letterlijk staan. Hier gaat `.Inner` rauw terug naar
   goldmark (lege regels om de HTML heen, anders leest goldmark de inhoud als
@@ -11,14 +11,14 @@
   een hover, net als in de rest van de pagina (feedback 25 augustus 2026:
   bron op "noodzakelijk" in het definitieblok van de inleiding).
 
-  Zelfde markup en params als het thema: titel, variant (muted | warning |
-  success | danger), corner (bottom-right | bottom-left | upper-left).
-  Upstream-kandidaat.
+  Zelfde markup en params als het thema: title, variant (info | muted |
+  warning | success | danger), corner (bottom-right | bottom-left |
+  upper-left), heading-level (2 tot en met 6). Upstream-kandidaat.
 */ -}}
-{{- $titel := .Get "titel" -}}
+{{- $titel := .Get "title" -}}
 {{- $variant := .Get "variant" -}}
 {{- $corner := .Get "corner" -}}
-{{- $validVariant := slice "muted" "warning" "success" "danger" -}}
+{{- $validVariant := slice "info" "muted" "warning" "success" "danger" -}}
 {{- $validCorner := slice "bottom-right" "bottom-left" "upper-left" -}}
 {{- if and $variant (not (in $validVariant $variant)) -}}
   {{- errorf "callout-md: variant %q ongeldig (kies: %s)" $variant (delimit $validVariant ", ") -}}
@@ -26,13 +26,31 @@
 {{- if and $corner (not (in $validCorner $corner)) -}}
   {{- errorf "callout-md: corner %q ongeldig (kies: %s)" $corner (delimit $validCorner ", ") -}}
 {{- end -}}
-<blockquote class="callout{{ with $variant }} {{ . }}{{ end }}{{ with $corner }} corner-{{ . }}{{ end }}">
-{{- with $titel }}
-<header><span class="title">{{ . }}</span></header>
+{{- $niveau := 3 -}}
+{{- with site.Params.callout -}}
+  {{- with .heading_level -}}{{ $niveau = int . }}{{- end -}}
+{{- end -}}
+{{- with .Get "heading-level" -}}{{ $niveau = int . }}{{- end -}}
+{{- if or (lt $niveau 2) (gt $niveau 6) -}}
+  {{- errorf "callout-md: heading-level %d ongeldig (kies 2 tot en met 6)" $niveau -}}
+{{- end -}}
+{{- $icoon := index (dict "info" "info" "warning" "exclamation-triangle") ($variant | default "") -}}
+{{- /* Zonder titel draagt alleen de kleur het type (WCAG 1.4.1). De inhoud is
+       hier nog Markdown, dus de typenaam staat vóór de inhoud in plaats van in
+       de eerste alinea. */ -}}
+{{- $soort := index (dict "success" "tip" "warning" "warning" "danger" "caution") ($variant | default "") -}}
+{{- $typenaam := index (partial "callout-type-names.html" .) ($soort | default "") -}}
+<div class="callout{{ with $variant }} {{ . }}{{ end }}{{ with $corner }} corner-{{ . }}{{ end }}">
+{{- if or $icoon $titel }}
+<header>
+{{- with $icoon }}{{ partial "icon.html" . }}{{ end }}
+{{- with $titel }}<h{{ $niveau }} class="title">{{ . }}</h{{ $niveau }}>{{ end }}
+</header>
 {{- end }}
 <div class="content">
+{{- with and (not $titel) $typenaam }}<span class="visually-hidden">{{ . }}: </span>{{ end }}
 
 {{ .Inner | strings.TrimSpace }}
 
 </div>
-</blockquote>
+</div>

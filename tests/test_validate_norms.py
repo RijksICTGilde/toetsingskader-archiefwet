@@ -21,7 +21,7 @@ weight: 2
 norm_id: "2"
 norm_titel: "Overzicht"
 kern: "De organisatie heeft een overzicht van haar documenten."
-synoniemen:
+synonyms:
   - "Overzicht"
 ---
 
@@ -39,7 +39,7 @@ Een toelichting met een bron.[^aw-4-1-lid-1]
 
 Het verantwoordelijke overheidsorgaan heeft beheerregels vastgesteld.
 
-#### Criteria
+##### Criteria
 
 - De beheerregels zijn actueel.
 
@@ -75,19 +75,19 @@ class FrontMatterTests(unittest.TestCase):
         self.assertTrue(any("Verplicht veld 'kern' ontbreekt" in e for e in errors), errors)
 
     def test_deprecated_field_in_front_matter(self):
-        content = replace("synoniemen:\n", 'toelichting: "x"\nsynoniemen:\n')
+        content = replace("synonyms:\n", 'toelichting: "x"\nsynonyms:\n')
         errors = run(content)
         self.assertTrue(any("'toelichting' hoort niet meer in de front matter" in e for e in errors), errors)
 
-    def test_synoniemen_not_a_list(self):
-        content = replace('synoniemen:\n  - "Overzicht"\n', 'synoniemen: "Overzicht"\n')
+    def test_synonyms_not_a_list(self):
+        content = replace('synonyms:\n  - "Overzicht"\n', 'synonyms: "Overzicht"\n')
         errors = run(content)
-        self.assertTrue(any("'synoniemen' moet een lijst zijn" in e for e in errors), errors)
+        self.assertTrue(any("'synonyms' moet een lijst zijn" in e for e in errors), errors)
 
-    def test_synoniemen_with_footnote(self):
+    def test_synonyms_with_footnote(self):
         content = replace('  - "Overzicht"\n', '  - "Overzicht[^x]"\n')
         errors = run(content)
-        self.assertTrue(any("'synoniemen' mag geen voetnoten" in e for e in errors), errors)
+        self.assertTrue(any("'synonyms' mag geen voetnoten" in e for e in errors), errors)
 
     def test_kern_with_footnote(self):
         content = replace(
@@ -104,7 +104,7 @@ class FrontMatterTests(unittest.TestCase):
 
     def test_kern_kop_is_rejected(self):
         # De kern heeft geen kop; het veld mag er niet stilzwijgend een terugbrengen.
-        content = replace("synoniemen:\n", 'kern_kop: "Kern van Overzicht"\nsynoniemen:\n')
+        content = replace("synonyms:\n", 'kern_kop: "Kern van Overzicht"\nsynonyms:\n')
         errors = run(content)
         self.assertTrue(any("'kern_kop' bestaat niet meer: de kern heeft geen kop" in e for e in errors), errors)
 
@@ -172,19 +172,43 @@ class HeadingTests(unittest.TestCase):
         self.assertTrue(any("Gebruik geen '#'-kop" in e for e in errors), errors)
 
     def test_heading_too_deep(self):
-        content = replace("#### Voorschrift\n", "#### Voorschrift\n\n##### Te diep\n")
+        content = replace("##### Criteria\n", "##### Criteria\n\n###### Te diep\n")
         errors = run(content)
-        self.assertTrue(any("dieper dan h4" in e for e in errors), errors)
+        self.assertTrue(any("dieper dan h5" in e for e in errors), errors)
+
+    def test_criteria_as_h4_is_rejected(self):
+        # Criteria en Indicatoren vallen onder het voorschrift; als h4 hoort een
+        # screenreader drie gelijke onderdelen (WCAG 1.3.1).
+        content = replace("##### Criteria\n", "#### Criteria\n")
+        errors = run(content)
+        self.assertTrue(any("gebruik '##### Criteria'" in e for e in errors), errors)
+
+    def test_voorschrift_as_h5_is_rejected(self):
+        content = replace("#### Voorschrift\n", "##### Voorschrift\n")
+        errors = run(content)
+        self.assertTrue(any("gebruik '#### Voorschrift'" in e for e in errors), errors)
+
+    def test_criteria_without_voorschrift(self):
+        # Zonder '#### Voorschrift' erboven slaat de h5 een kopniveau over.
+        content = replace("#### Voorschrift\n\nHet verantwoordelijke overheidsorgaan heeft beheerregels vastgesteld.\n\n",
+                          "")
+        errors = run(content)
+        self.assertTrue(any("'##### Criteria' staat niet onder een '#### Voorschrift'" in e for e in errors), errors)
+
+    def test_criteria_after_new_theme_needs_own_voorschrift(self):
+        content = replace("##### Criteria\n", "### Nieuw thema\n\n##### Criteria\n")
+        errors = run(content)
+        self.assertTrue(any("'##### Criteria' staat niet onder een '#### Voorschrift'" in e for e in errors), errors)
 
     def test_criterium_singular_is_allowed(self):
         # De normbladen schrijven "Criterium:" als het er een is; de koppen
         # volgen het normblad woord voor woord.
-        content = replace("#### Criteria\n", "#### Criterium\n")
+        content = replace("##### Criteria\n", "##### Criterium\n")
         self.assertEqual(run(content), [])
 
     def test_indicator_singular_is_allowed(self):
-        content = replace("#### Criteria\n\n- De beheerregels zijn actueel.\n",
-                          "#### Indicator\n\n- Iets.\n")
+        content = replace("##### Criteria\n\n- De beheerregels zijn actueel.\n",
+                          "##### Indicator\n\n- Iets.\n")
         self.assertEqual(run(content), [])
 
     def test_reikwijdte_may_have_suffix(self):
@@ -209,9 +233,14 @@ class HeadingTests(unittest.TestCase):
         self.assertTrue(any("Onbekende sectie '## Zie ook'" in e for e in errors), errors)
 
     def test_unknown_subheading(self):
-        content = replace("#### Criteria\n", "#### Onbekend\n")
+        content = replace("##### Criteria\n", "##### Onbekend\n")
         errors = run(content)
-        self.assertTrue(any("Onbekende subkop '#### Onbekend'" in e for e in errors), errors)
+        self.assertTrue(any("Onbekende subkop '##### Onbekend'" in e for e in errors), errors)
+
+    def test_unknown_h4(self):
+        content = replace("#### Voorschrift\n", "#### Onbekend\n")
+        errors = run(content)
+        self.assertTrue(any("Onbekende kop '#### Onbekend'" in e for e in errors), errors)
 
     def test_theme_outside_voorschriften(self):
         content = replace("## Reikwijdte\n\nAlle documenten.\n",
@@ -282,7 +311,7 @@ class FootnoteTests(unittest.TestCase):
 
 class FormatTests(unittest.TestCase):
     def test_error_includes_line_number(self):
-        content = replace("#### Criteria\n", "#### Onbekend\n")
+        content = replace("##### Criteria\n", "##### Onbekend\n")
         errors = run(content)
         match = [e for e in errors if "Onbekende subkop" in e]
         self.assertTrue(match)
