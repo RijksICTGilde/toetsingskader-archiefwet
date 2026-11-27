@@ -23,6 +23,22 @@ jobs:
           python-version: "3.13"
       - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
 
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "26"
+      - name: Laatste release staat in CHANGELOG.md
+        run: |
+          tag="$(git tag --list 'v*' --sort=-v:refname | head -n 1)"
+          if [ -z "$tag" ]; then echo "Nog geen release-tag."; exit 0; fi
+          echo "Laatste release: ${tag}"
+          node scripts/release.mjs --notes "${tag#v}" > /dev/null
+
   build:
     runs-on: ubuntu-latest
     env:
@@ -84,7 +100,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: "22"
+          node-version: "26"
 
       - name: Unittests (projecteigen a11y-controles)
         run: |

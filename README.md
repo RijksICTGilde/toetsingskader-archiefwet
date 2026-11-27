@@ -9,7 +9,7 @@ overheidsorganisaties. Statische site, gebouwd met [Hugo].
 - [Hugo Extended] ≥ 0.162
 - [Go] ≥ 1.26 (voor Hugo Modules)
 - [just] voor de dev-recipes
-- [Node.js] ≥ 22 met npm (PDF-generatie en de testscripts; `just build` draait
+- [Node.js] ≥ 26 met npm (PDF-generatie en de testscripts; `just build` draait
   zelf `npm ci` als `node_modules` ontbreekt)
 - [pre-commit] voor lokale hooks (optioneel, draait ook in CI)
 
