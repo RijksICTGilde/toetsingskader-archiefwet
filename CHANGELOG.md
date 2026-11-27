@@ -15,6 +15,10 @@ raakt, staat onder **Techniek**.
 
 ## [Unreleased]
 
+### Techniek
+
+- CI en de README vragen Node 26 (actieve LTS) in plaats van 22.
+
 ## [1.1.0] - 2026-11-27
 
 ### Gewijzigd
