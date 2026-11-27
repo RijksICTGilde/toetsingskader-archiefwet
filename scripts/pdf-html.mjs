@@ -134,6 +134,11 @@ function olStart(el) {
   return el.hasAttribute('start') && Number.isFinite(s) ? s : 1
 }
 
+/** Nummering van een <ol>: 'a' bij type="a", anders '1'. */
+function olNummering(el) {
+  return el.getAttribute('type') === 'a' ? 'a' : '1'
+}
+
 /**
  * Inline-inhoud van een element naar runs voor TaggedPdf.
  * ctx: { prefix, siteUrl, underlineLinks }. Geneste lijsten binnen een <li>
@@ -237,6 +242,7 @@ export function lijstItems(lijstEl, ctx) {
           items: lijstItems(node, ctx),
           geordend: node.tagName.toLowerCase() === 'ol',
           start: olStart(node),
+          nummering: olNummering(node),
         } })
       } else {
         buffer = buffer || li.ownerDocument.createElement('span')
@@ -273,7 +279,7 @@ export function schrijfNorm(pdf, data, opties) {
     let kernId = prefix + 'kern'
     for (const blok of blokken(data.kern_html)) {
       if (isLijst(blok)) {
-        pdf.lijst(lijstItems(blok, ctx), { geordend: blok.tagName.toLowerCase() === 'ol', start: olStart(blok), ouder: sectie, id: kernId })
+        pdf.lijst(lijstItems(blok, ctx), { geordend: blok.tagName.toLowerCase() === 'ol', start: olStart(blok), nummering: olNummering(blok), ouder: sectie, id: kernId })
         kernId = undefined
         continue
       }
@@ -366,6 +372,7 @@ export function schrijfNorm(pdf, data, opties) {
         // `start` van de <ol> meenemen: een hervatte nummering ("3. 4.") mag
         // in de PDF niet stilletjes weer bij 1 beginnen.
         start: olStart(el),
+        nummering: olNummering(el),
         ouder: sectie,
       })
     } else if (tag === 'blockquote') {

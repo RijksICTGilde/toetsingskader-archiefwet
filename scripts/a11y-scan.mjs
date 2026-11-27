@@ -11,7 +11,7 @@ import path from 'node:path'
 import { createRequire } from 'node:module'
 import {
   zwevendeVoetnootFouten, korteRefTermFouten,
-  legeAltFouten,
+  legeAltFouten, lijstTypeFouten,
 } from './a11y-checks.mjs'
 
 const axeSrc = fs.readFileSync(createRequire(import.meta.url).resolve('axe-core'), 'utf8')
@@ -21,6 +21,14 @@ const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']
 // Alias-stubs bevatten geen inhoud; overslaan houdt de telling zuiver.
 // Zelfde filter als in a11y-browser.mjs.
 const isRedirect = p => /http-equiv=["']?refresh/i.test(fs.readFileSync(p, 'utf8'))
+
+// Markdown-bron van een pagina-url, of null (taxonomie, 404).
+const bronVan = url => {
+  const pad = url.replace(/^\/|\/$/g, '')
+  const kandidaten = pad ? [`${pad}.md`, `${pad}/index.md`, `${pad}/_index.md`] : ['_index.md']
+  const gevonden = kandidaten.map(k => path.join('content', k)).find(k => fs.existsSync(k))
+  return gevonden ? fs.readFileSync(gevonden, 'utf8') : null
+}
 
 function htmlFiles(dir, acc = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -65,6 +73,12 @@ for (const file of files) {
     total++
     console.log(`${url} — lege-alt [serious] 1x: alt="" op een afbeelding die niet als decoratief is aangemerkt`)
     console.log(`    ${src} — vul de alt, of zet het pad in DECORATIEF in scripts/a11y-checks.mjs`)
+  }
+  const bron = bronVan(url)
+  for (const fout of bron ? lijstTypeFouten(dom.window.document, bron) : []) {
+    total++
+    console.log(`${url} — lijsttype [serious] 1x: {type="a"} uit de bron staat niet in de HTML`)
+    console.log(`    ${fout}; controleer markup.goldmark.parser.attribute.block in hugo.yaml`)
   }
   dom.window.close()
 }

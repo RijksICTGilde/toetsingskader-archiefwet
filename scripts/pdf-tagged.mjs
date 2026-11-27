@@ -216,17 +216,17 @@ export class TaggedPdf {
    * lijsten krijgen het nummer in de tekst; pdfkit nummert niet zelf.
    * `label: false` voor items die al een nummer dragen (de inhoudsopgave).
    */
-  lijst(items, { stijl = 'para', geordend = false, start = 1, label = true, ouder, id } = {}) {
+  lijst(items, { stijl = 'para', geordend = false, start = 1, nummering = '1', label = true, ouder, id } = {}) {
     const s = STIJL[stijl]
     if (id) {
       if (this.doc.y + s.boven + s.size * REGEL > A4.hoog - MARGE.bottom) this.nieuwePagina()
       this.#registreerDest(id, this.doc.x, this.doc.y)
     }
-    this.#lijstIn(ouder || this.root, items, { s, geordend, start, label, inspring: 0 })
+    this.#lijstIn(ouder || this.root, items, { s, geordend, start, nummering, label, inspring: 0 })
     this.doc.y += s.onder
   }
 
-  #lijstIn(ouderEl, items, { s, geordend, start, label, inspring }) {
+  #lijstIn(ouderEl, items, { s, geordend, start, nummering, label, inspring }) {
     const l = this.doc.struct('L')
     ouderEl.add(l)
     items.forEach((item, i) => {
@@ -250,11 +250,11 @@ export class TaggedPdf {
       let eersteTekst = true
       for (const seg of segmenten) {
         if (seg.runs) {
-          const prefix = eersteTekst && label ? [{ text: geordend ? `${start + i}. ` : '•  ' }] : []
+          const prefix = eersteTekst && label ? [{ text: geordend ? lijstLabel(nummering, start + i) : '•  ' }] : []
           this.#tekstBlok(lbody, [...prefix, ...seg.runs], s, { inspring: inspring + INSPRING })
           eersteTekst = false
         } else if (seg.sub?.items?.length) {
-          this.#lijstIn(lbody, seg.sub.items, { s, geordend: !!seg.sub.geordend, start: seg.sub.start ?? 1, label: true, inspring: inspring + INSPRING })
+          this.#lijstIn(lbody, seg.sub.items, { s, geordend: !!seg.sub.geordend, start: seg.sub.start ?? 1, nummering: seg.sub.nummering ?? '1', label: true, inspring: inspring + INSPRING })
         }
       }
       lbody.end()
@@ -446,6 +446,11 @@ export class TaggedPdf {
     doc.end()
     return this.klaar
   }
+}
+
+/** Label van item n (vanaf 1): "3. ", of "b) " bij nummering 'a'. Na z weer cijfers. */
+export function lijstLabel(nummering, n) {
+  return nummering === 'a' && n >= 1 && n <= 26 ? `${String.fromCharCode(96 + n)}) ` : nummering === 'a' ? `${n}) ` : `${n}. `
 }
 
 /**

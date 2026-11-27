@@ -49,6 +49,10 @@ markup:
       # voetnoot erin (de shortcode-HTML gaat dan door goldmark en werd met
       # `false` weggegooid). Content blijft onder validate-norms.py.
       unsafe: true
+    parser:
+      attribute:
+        # `{type="a"}` onder een lijst: a) b) als echte <ol> (1.3.1).
+        block: true
     extensions:
       table: true
       footnote: true

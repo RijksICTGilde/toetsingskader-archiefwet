@@ -162,3 +162,14 @@ abbr[title] {
   text-underline-offset: 0.15em;
   cursor: help;
 }
+
+/* `{type="a"}` onder een lijst in de content: a) b) zoals in de wettekst.
+   Geen `[type="a" s]`: Chromium kent die vlag niet en laat de regel vallen. */
+@counter-style alfabet-haakje {
+  system: extends lower-alpha;
+  suffix: ") ";
+}
+
+ol[type="a"] {
+  list-style-type: alfabet-haakje;
+}
