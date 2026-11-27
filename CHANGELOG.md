@@ -79,6 +79,8 @@ raakt, staat onder **Techniek**.
 - `tools.go` houdt het theme in `go.mod`; Dependabot houdt het bij en CI faalt
   als de build `go.mod` of `go.sum` verandert.
 - CI valideert de PDF's met veraPDF tegen PDF/UA-1.
+- `tools.go` zonder `//go:build tools`: CodeQL (Go) vond anders geen code
+  om te bouwen en faalde.
 
 ## [1.0.2] - 2026-11-24
 
