@@ -63,10 +63,13 @@ start.
   tag zet de site live op <https://toetsingskader.inspectie-oe.nl/archiefwet/>.
   De pipeline (`.github/workflows/zad.yml`) bouwt dan een image met die
   tag; het versienummer op de site en in de PDF's is de tag.
-- **Voor een release**: zet in een gewone PR de wijzigingen onder
-  `[Unreleased]` in `CHANGELOG.md` onder het nieuwe versienummer, zodat
-  release en changelog hetzelfde nummer noemen. Hoe je een release
-  aanmaakt staat in `docs/training-contentbeheer.html` (2.7).
+- **Een release maken**: de workflow **Prepare release** opent een PR die
+  `[Unreleased]` in `CHANGELOG.md` onder het nieuwe versienummer zet; na de
+  merge publiceert de workflow **Release** de tag en de GitHub release. Zie
+  "Een release maken" in [`CONTRIBUTING.md`](CONTRIBUTING.md).
+- **Changelog afgedwongen**: een lege `[Unreleased]` geeft geen release, een
+  release zonder sectie `## [X.Y.Z]` in `CHANGELOG.md` gaat niet live, en de
+  tests falen zolang de laatste tag geen sectie heeft.
 
 ## Vragen over governance
 

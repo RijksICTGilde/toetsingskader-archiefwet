@@ -17,6 +17,10 @@ raakt, staat onder **Techniek**.
 
 ### Techniek
 
+- Releases via de workflow Prepare release: `scripts/release.mjs` zet
+  `[Unreleased]` onder de nieuwe versie en weigert een lege. Een release
+  zonder sectie in de changelog bouwt niet, en Test faalt als de laatste tag
+  er geen heeft.
 - CI en de README vragen Node 26 (actieve LTS) in plaats van 22.
 
 ## [1.1.0] - 2026-11-27

@@ -1,0 +1,108 @@
+# Publiceert de GitHub release vX.Y.Z na het mergen van een release-PR
+# (CONTRIBUTING.md, "Een release maken").
+#
+# `decide` herkent de merge aan de gemergde pull request van de gepushte commit
+# (branch release/vX.Y.Z van deze repository), niet aan de commitmelding.
+# `release` maakt tag en release met een token van de release-App: een release
+# van GITHUB_TOKEN start geen andere workflow, een release van de App start
+# zad.yml wel, en die zet de site live.
+
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  decide:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      # Voor commits/{sha}/pulls.
+      pull-requests: read
+    outputs:
+      version: ${{ steps.decide.outputs.version }}
+    steps:
+      - name: Herken een gemergde release-PR
+        id: decide
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # De koppeling commit -> PR kan even op zich laten wachten.
+          pulls='[]'
+          for _ in 1 2 3; do
+            pulls="$(gh api "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls")"
+            [ "$(jq length <<<"$pulls")" -gt 0 ] && break
+            sleep 5
+          done
+          ref="$(jq -r --arg sha "$GITHUB_SHA" --arg repo "$GITHUB_REPOSITORY" '
+            [.[] | select(
+              .merged_at != null
+              and .merge_commit_sha == $sha
+              and .base.ref == "main"
+              and .head.repo.full_name == $repo
+              and (.head.ref | test("^release/v(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"))
+            )] | first | .head.ref // empty' <<<"$pulls")"
+          if [ -z "$ref" ]; then
+            echo "Geen gemergde release-PR voor ${GITHUB_SHA}, niets te doen."
+            exit 0
+          fi
+          echo "version=${ref#release/v}" >> "$GITHUB_OUTPUT"
+
+  release:
+    needs: decide
+    if: needs.decide.outputs.version != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # De sleutel van de App staat in deze environment, alleen main mag hem gebruiken.
+    environment: release
+    permissions:
+      contents: read
+    env:
+      VERSION: ${{ needs.decide.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "26"
+
+      - name: Haal de tekst van de release uit CHANGELOG.md
+        run: node scripts/release.mjs --notes "$VERSION" > "$RUNNER_TEMP/release-notes.md"
+
+      - name: Haal een token van de release-App op
+        id: app
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          permission-contents: write
+
+      # Op een bestaande tag zou gh de release aan die tag hangen; die tag kan op
+      # een andere commit staan.
+      - name: Maak de tag en publiceer de release
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --tags origin "refs/tags/v${VERSION}" >/dev/null; then
+            echo "::error::Tag v${VERSION} bestaat al." >&2
+            exit 1
+          fi
+          gh release create "v${VERSION}" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "v${VERSION}" \
+            --notes-file "$RUNNER_TEMP/release-notes.md"
